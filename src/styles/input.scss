@@ -1,0 +1,147 @@
+.floating-form {
+  width: 320px;
+}
+
+.floating-label {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.floating-input,
+.floating-select {
+  font-size: 12px;
+  padding: 4px 4px;
+  display: block;
+  width: 100%;
+  height: 30px;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid $grayshadow;
+}
+
+.floating-input:focus,
+.floating-select:focus {
+  outline: none;
+  border-bottom: 2px solid $third ;
+}
+
+.floating-input label {
+  color: $grayborder;
+  font-size: 12px;
+  font-weight: normal;
+  position: absolute;
+  pointer-events: none;
+  left: 5px;
+  top: 5px;
+  transition: 0.2s ease all;
+  -moz-transition: 0.2s ease all;
+  -webkit-transition: 0.2s ease all;
+}
+
+.floating-input:focus~label,
+.floating-input:not(:placeholder-shown)~label {
+  top: -10px;
+  font-size: 10px;
+  color: $third ;
+}
+
+.floating-select:focus~label,
+.floating-select:not([value=""]):valid~label {
+  top: -10px;
+  font-size: 10px;
+  color: $third ;
+}
+
+
+/* active state */
+
+.floating-input:focus~.bar:before,
+.floating-input:focus~.bar:after,
+.floating-select:focus~.bar:before,
+.floating-select:focus~.bar:after {
+  width: 50%;
+}
+
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.floating-textarea {
+  min-height: 30px;
+  max-height: 260px;
+  overflow: hidden;
+  overflow-x: hidden;
+}
+
+
+/* highlighter */
+
+.highlight {
+  position: absolute;
+  height: 50%;
+  width: 100%;
+  top: 15%;
+  left: 0;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+
+/* active state */
+
+.floating-input:focus~.highlight,
+.floating-select:focus~.highlight {
+  -webkit-animation: inputHighlighter 0.3s ease;
+  -moz-animation: inputHighlighter 0.3s ease;
+  animation: inputHighlighter 0.3s ease;
+}
+
+
+/* animation */
+
+@-webkit-keyframes inputHighlighter {
+  from {
+    background: $third ;
+  }
+  to {
+    width: 0;
+    background: transparent;
+  }
+}
+
+@-moz-keyframes inputHighlighter {
+  from {
+    background: $third ;
+  }
+  to {
+    width: 0;
+    background: transparent;
+  }
+}
+
+@keyframes inputHighlighter {
+  from {
+    background: $third ;
+  }
+  to {
+    width: 0;
+    background: transparent;
+  }
+}
+
+.calendarinput
+{
+  width: 90%; /* fallback if needed */
+  width: calc(100% - 33px);
+  width: calc(100% - 25px);
+}
+
+@-moz-document url-prefix() {
+  .calendarinput{
+    width: calc(100% - 28px);
+}
+}

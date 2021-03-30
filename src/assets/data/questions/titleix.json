@@ -1,0 +1,71 @@
+{
+	"questions": {
+		"witnesses": [
+			"Are you aware of an incident that took place on %incidentdttm% that led to a need for this investigation? If yes, please provide details of what you know.",
+			"How were you made aware of the incident?",
+			"If you were present, did you in any way try to stop the incident from happening?",
+			"How and why do you believe this happened?",
+			"What was happening in the location of the incident at the time it occurred?",
+			"Do you know of any evidence that could help us determine what happened?",
+			"Have you had a conversation with anyone involved in the incident since %incidentdttm%?",
+			"Do you have any suggestions on how this incident could have been prevented?",
+			"Is there anyone else who you believe should be interviewed that may have additional information pertaining to this investigation?",
+			"Is there any other information you would like to provide?"
+
+		],
+		"respondents": [
+			"Please tell me what you know about the incident that took place on %incidentdttm% in as much detail as you can.",
+			"What was happening in the location of the incident at the time it occurred?",
+			"Who was present besides you at the time of the incident?",
+			"Have you discussed the incident or event with anyone else? If so, who?",
+			"How and why do you believe this happened?",
+			"How did you feel right after the incident?",
+			"Is there any evidence that would help us in getting a complete picture of what happened?",
+			"Are you aware of our policies regarding this incident or event?",
+			"Were you in any way responsible for a policy violation in this matter?",
+			"Do you have any suggestions on how this incident could have been prevented?",
+			"How would you suggest this issue be resolved?",
+			"Is there anyone else who you believe should be interviewed that may have additional information pertaining to this investigation?",
+			"Is there any other information you would like to provide?"
+
+
+
+		],
+		"reporters": [
+			"Can you provide a brief overview of the incident or events that have taken place that caused you to come forward today?",
+			"Did this incident involve just you or others as well?",
+			"Do you have any physical injuries? If yes, have you or will you obtain medical treatment?",
+			"Do you have someone that you can talk honestly about what happened? If no, would you like assistance in finding someone?",
+			"Have you reported this or would you like help to report this to the local police or protective services?",
+			"What was happening in the location of the incident at the time it occurred?",
+			"Do you know the person or persons who caused this incident?",
+			"Please walk me through the incident step-by-step.",
+			"Although this may be difficult, please provide details of physical assault. If you are more comfortable you may write down.",
+			"How did you feel immediately after this happened?",
+			"Is there any evidence that would help us in getting a complete picture of what happened?",
+			"Did you talk to anyone about the incident immediately after it happened? If so who?",
+			"Do you know of any incidents similar to this that happened in the past involving you or others?",
+			"Is there anyone else who you believe should be interviewed that may have additional information pertaining to this investigation?",
+			"Is there any other information you would like to provide?"
+
+
+		],
+		"victims": [
+			"Can you provide a brief overview of the incident or events that have taken place that caused you to come forward today?",
+			"Did this incident involve just you or others as well?",
+			"Do you have any physical injuries? If yes, have you or will you obtain medical treatment?",
+			"Do you have someone that you can talk honestly about what happened? If no, would you like assistance in finding someone?",
+			"Have you reported this or would you like help to report this to the local police or protective services?",
+			"What was happening in the location of the incident at the time it occurred?",
+			"Do you know the person or persons who caused this incident?",
+			"Please walk me through the incident step-by-step.",
+			"Although this may be difficult, please provide details of physical assault. If you are more comfortable you may write down.",
+			"How did you feel immediately after this happened?",
+			"Is there any evidence that would help us in getting a complete picture of what happened?",
+			"Did you talk to anyone about the incident immediately after it happened? If so who?",
+			"Do you know of any incidents similar to this that happened in the past involving you or others?",
+			"Is there anyone else who you believe should be interviewed that may have additional information pertaining to this investigation?",
+			"Is there any other information you would like to provide?"
+		]
+	}
+}

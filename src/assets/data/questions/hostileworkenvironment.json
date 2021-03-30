@@ -1,0 +1,69 @@
+{
+	"questions": {
+		"witnesses": [
+			"Are you aware of or have you observed any comments or interactions between %respondent% and %victim%, %reporter% that you believe in any way could have been perceived as Hostile or aggressive?",
+			"Have you directly seen or heard any hostile or aggressive behaviors or interactions between %respondent% and any employee or manager? If yes, please provide details.",
+			"Do you feel that %respondent% treats employees properly and respectfully in all circumstances?",
+			"If you have observed employees being treated in an aggressive or hostile manner, how do they look or respond while it is happening?",
+			"Do you know if %respondent% and %victim%, %reporter% ever socialize outside of work?",
+			"Are you aware of any emails, voicemails, social media comments, documents or recordings that could help us figure out what is happening?",
+			"Can you think of any other individuals who may have additional information pertaining to this investigation?",
+			"Is there anything else you would like to add, or you think may be useful information?"
+
+		],
+		"respondents": [
+			"Can you provide a complete, detailed review of any interaction or incident that has taken place between you and %victim%, %reporter%, where words or interactions may have been perceived as hostile or aggressive?",
+			"Has there been difficulty in the working relationship between you and %victim%, %reporter%?",
+			"It has been stated that %allegations%. What is your opinion on why these allegations were made?",
+			"Can you provide any detail as to what may be happening between you and %victim%, %reporter%?",
+			"Has %victim%, %reporter% or anyone else ever told you that your words or actions may be taken as hostile or aggressive? If yes, what was your response?",
+			"Are you aware of any reason why %reporter% or %victim% may have misunderstood your actions or comments?",
+			"Are you aware of any reason why %reporter% or %victim% may make up such allegations?",
+			"Do you now or have you in the past had any sort of social relationship with %victim%, %reporter% outside of the workplace?",
+			"Are you aware of any emails, voicemails, text messages, social media comments or documents that may be helpful in clarifying the details of why this situation was brought to our attention?",
+			"What is your opinion on how this problem should be resolved?",
+			"Is there anyone else who you believe should be interviewed that may have additional information pertaining to this investigation?",
+			"Is there any other information you would like to provide?"
+
+		],
+		"reporters": [
+			"Can you provide a complete, detailed review of the incidents that took place, including the location, date, time, actions and people present?",
+			"How do you respond when this happens?",
+			"How does this make you feel?",
+			"What happened that made you decide to report the incident(s) at this time?",
+			"Is this a single incident, or has it been happening for a period of time?",
+			"Have you observed %respondent% treating others in this or any other hostile way?",
+			"Please describe in detail what you heard, saw and/or felt while it was happening?",
+			"Have you discussed this matter with any other employees or managers?",
+			"Are you aware of any emails, voicemails, text messages, social media comments or other documents pertaining to this matter?",
+			"Do you now or have you in the past had any sort of social relationship outside of the workplace with %respondent%?",
+			"Is there any reason you are aware of that may cause %respondent% to act in the way you are describing?",
+			"Is there a certain time or incident that sets off this behavior?",
+			"Does this happen more often when others are around or when the two of you are alone?",
+			"If others are around, how do they respond when this happens?",
+			"What is your opinion on how this problem should be resolved?",
+			"Is there anyone else who you feel should be interviewed that may have additional information pertaining to this investigation?",
+			"Is there any other information you would like to provide?"
+
+		],
+		"victims": [
+			"Can you provide a complete, detailed review of the incidents that took place, including the location, date, time, actions and people present?",
+			"How do you respond when this happens?",
+			"How does this make you feel?",
+			"What happened that made you decide to report the incident(s) at this time?",
+			"Is this a single incident, or has it been happening for a period of time?",
+			"Have you observed %respondent% treating others in this or any other hostile way?",
+			"Please describe in detail what you heard, saw and/or felt while it was happening?",
+			"Have you discussed this matter with any other employees or managers?",
+			"Are you aware of any emails, voicemails, text messages, social media comments or other documents pertaining to this matter?",
+			"Do you now or have you in the past had any sort of social relationship outside of the workplace with %respondent%?",
+			"Is there any reason you are aware of that may cause %respondent% to act in the way you are describing?",
+			"Is there a certain time or incident that sets off this behavior?",
+			"Does this happen more often when others are around or when the two of you are alone?",
+			"If others are around, how do they respond when this happens?",
+			"What is your opinion on how this problem should be resolved?",
+			"Is there anyone else who you feel should be interviewed that may have additional information pertaining to this investigation?",
+			"Is there any other information you would like to provide?"
+		]
+	}
+}

@@ -1,0 +1,299 @@
+
+
+
+/*************** radio button ********************/
+.noticeRdoInline
+{
+
+}
+
+.noticeRdoInline .rdoitem
+{
+display:inline-block;
+margin-right:10px;
+
+}
+
+.noticeRdo [type="radio"]:checked,
+[type="radio"]:not(:checked) {
+    position: absolute;
+    left: -9999px;
+}
+.noticeRdo [type="radio"]:checked + label,
+.noticeRdo [type="radio"]:not(:checked) + label
+{
+    position: relative;
+    padding-left: 28px;
+    cursor: pointer;
+    line-height: 16px;
+    display: inline-block;
+    color: #000;
+	font-size:$font_small;
+}
+.noticeRdo [type="radio"]:checked + label:before,
+.noticeRdo [type="radio"]:not(:checked) + label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 20px;
+    height: 20px;
+    border: 1px solid $grayborder;
+    border-radius: 100%;
+    background: $text_light;
+}
+.noticeRdo [type="radio"]:checked + label:after,
+.noticeRdo [type="radio"]:not(:checked) + label:after {
+    content: '';
+    width: 12px;
+    height: 12px;
+    background: $third;
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    border-radius: 100%;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+}
+
+.noticeRdo [type="radio"]:disabled:checked + label:after,
+.noticeRdo [type="radio"]:disabled:not(:checked) + label:after {
+//  background-color: #e9ecef;
+}
+
+
+.noticeRdo [type="radio"]:not(:checked) + label:after {
+    opacity: 0;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+}
+.noticeRdo [type="radio"]:checked + label:after {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+}
+
+/**************** option radio ***************/
+
+.noticeRdoNew span
+{
+font-size:10pt;
+font-weight:bold;
+}
+
+.noticeRdoNew fieldset
+{
+display:inline-block !important;
+margin-right:10px  !important;
+}
+
+.noticeRdoNew [type="radio"]:checked,
+[type="radio"]:not(:checked) {
+    position: absolute;
+    left: -9999px;
+}
+.noticeRdoNew [type="radio"]:checked + label,
+.noticeRdoNew [type="radio"]:not(:checked) + label
+{
+    position: relative;
+    padding-left: 28px;
+    cursor: pointer;
+    line-height: 16px;
+    display: inline-block;
+    color: #000;
+	font-size:$font_small;
+}
+.noticeRdoNew [type="radio"]:checked + label:before,
+.noticeRdoNew [type="radio"]:not(:checked) + label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 20px;
+    height: 20px;
+    border: 1px solid $grayborder;
+    border-radius: 100%;
+    background: $text_light;
+}
+.noticeRdoNew [type="radio"]:checked + label:after,
+.noticeRdoNew [type="radio"]:not(:checked) + label:after {
+    content: '';
+    width: 12px;
+    height: 12px;
+    background: $third;
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    border-radius: 100%;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+}
+
+.noticeRdoNew [type="radio"]:disabled:checked + label:after,
+.noticeRdoNew [type="radio"]:disabled:not(:checked) + label:after {
+//  background-color: #e9ecef;
+}
+
+
+.noticeRdoNew [type="radio"]:not(:checked) + label:after {
+    opacity: 0;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+}
+.noticeRdoNew [type="radio"]:checked + label:after {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+}
+
+
+/******************* radio small *****************/
+
+
+
+.noticeRdo-sm span
+{
+font-size:9pt;
+}
+
+.noticeRdo-sm fieldset
+{
+display:inline-block !important;
+margin-right:10px  !important;
+}
+
+.noticeRdo-sm [type="radio"]:checked,
+[type="radio"]:not(:checked) {
+    position: absolute;
+    left: -9999px;
+}
+.noticeRdo-sm [type="radio"]:checked + label,
+.noticeRdo-sm [type="radio"]:not(:checked) + label
+{
+    position: relative;
+    padding-left: 22px;
+    cursor: pointer;
+    line-height: 15px;
+    display: inline-block;
+    color: #000;
+	font-size:$font_small;
+}
+.noticeRdo-sm [type="radio"]:checked + label:before,
+.noticeRdo-sm [type="radio"]:not(:checked) + label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 17px;
+    height: 17px;
+    border: 1px solid $grayborder;
+    border-radius: 100%;
+    background: $text_light;
+}
+.noticeRdo-sm [type="radio"]:checked + label:after,
+.noticeRdo-sm [type="radio"]:not(:checked) + label:after {
+    content: '';
+    width: 9px;
+    height: 9px;
+    background: $third;
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    border-radius: 100%;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+}
+
+.noticeRdo-sm [type="radio"]:disabled:checked + label:after,
+.noticeRdo-sm [type="radio"]:disabled:not(:checked) + label:after {
+//  background-color: #e9ecef;
+}
+
+
+.noticeRdo-sm [type="radio"]:not(:checked) + label:after {
+    opacity: 0;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+}
+.noticeRdo-sm [type="radio"]:checked + label:after {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+}
+
+
+
+
+
+/*********************************************/
+
+
+
+.containerrdo {
+  display: block;
+  position: relative;
+  padding-left: 25px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 12px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.containerrdo input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Create a custom radio button */
+.checkmarkrdo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: #eee;
+  border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+.containerrdo:hover input ~ .checkmarkrdo {
+  background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+.containerrdo input:checked ~ .checkmarkrdo, .containerrdo:hover input:checked ~ .checkmarkrdo {
+  background-color: $third;
+}
+
+/* When the radio button is checked, add a blue background */
+.containerrdo input:disabled:checked ~ .checkmarkrdo, .containerrdo:hover input:disabled:checked ~ .checkmarkrdo {
+  background-color: #e9ecef;
+}
+
+
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmarkrdo:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.containerrdo input:checked ~ .checkmarkrdo:after {
+  display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.containerrdo .checkmarkrdo:after, .containerrdo:hover .checkmarkrdo:after {
+ 	top: 5px;
+	left: 5px;
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	background: white;
+}

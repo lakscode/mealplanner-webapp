@@ -1,0 +1,82 @@
+<!-- <a routerLink="/registration">Go To Registration</a>
+  <a routerLink="/dashboard">Go to Dashboard</a> -->
+<div class="loginPanel">
+	<span class="form-logo">
+		<img src="assets/logo-dark.png" />
+	</span>
+	<span class="title">Account Login</span>
+	<div *ngIf="errorMessage">		
+		<div class="alert alert-warning alert-dismissible">
+			<a style="margin-top: -10px;" href="javascript:void(0)" (click)="closeerror()" class="close" data-dismiss="alert alert-warning" aria-label="close">&times;</a>
+			<strong>Invalid Email or Password.</strong> 
+		  </div>
+	</div>
+	<form [formGroup]="loginForm" (ngSubmit)="login()">		
+		<div class="form-group-others">
+
+			
+			<label class="form-label" for="username">Email <span
+					class="mandatory">&#42;</span></label>
+
+					<div class="inputWithIcon">
+							<input id="username" type="text" placeholder=""  formControlName="username" required #username>
+							<!--<i class="fa fa-envelope fa-lg fa-fw" aria-hidden="true"></i>-->
+							<img src="assets/envelope_black.png" />
+						  </div>
+
+<!--
+			<div class="fieldicon">
+			<div class="ficon">	<i class="fa  fa-envelope icon"></i></div>
+			<div class="ffield">	
+			<input type="text" id="username" class="form-control " placeholder="" formControlName="username" required email>
+		</div>
+			</div> -->
+			<div *ngIf="submitted && f.username.errors" class="alert alert-danger">
+				<div *ngIf="f.username.errors.required">Email is required</div>
+				<div *ngIf="f.username.errors.email">Enter Valid Email</div>
+			</div>
+		</div>
+		<div class="form-group-others">
+				<label class="form-label" for="passWord">Password <span class="mandatory">&#42;</span></label>
+			<!--	<div class="fieldicon">
+						<div class="ficon">	<i class="fa fa-key icon"></i></div>	
+						<div class="ffield">	<input type="password" id="passWord" placeholder="" formControlName="passWord" minlength="8" class="form-control ffield" required></div>
+				</div> -->
+				<div class="inputWithIcon">
+						<input id="passWord" type="password" placeholder=""  formControlName="passWord" minlength="8"  required #passWord>
+						<!--<i class="fa fa-key fa-lg fa-fw" aria-hidden="true"></i>-->
+						<img src="assets/inclined-key.png" />
+					  </div>
+			<div *ngIf="submitted && f.passWord.errors">
+				<div *ngIf="f.passWord.errors.required" class="alert alert-danger">Password is required</div>
+				<div *ngIf="f.passWord.errors.minlength" class="alert alert-danger">Password should be minimum 8 characters</div>
+			</div>
+		</div>
+		<div class="row paddinglr0" style="margin-top:15px;font-size:9pt">
+				<div class="col-12 col-lg-6 col-xl-6" style="padding-left:0;">
+					<input type="checkbox" id="remember" checked="rememberMe" (click)="isRememberChk($event)" required>
+					<label class="" for="remember">&nbsp;Remember me</label>
+				</div>
+				<div class="col-12  col-lg-6 col-xl-6" style="text-align:right; padding-right:0;">
+
+					<a href="javascript:void(0)" style="color:#000; font-size:9pt;" (click)="forgot()">Forgot Password?</a>
+				
+				</div>
+	    </div>
+
+		<div class="row paddinglr0" style="margin-top:10px; text-align:center;">
+			<div class="col-12 paddinglr0">
+				<button type="submit" class="loginButton">Login<!-- &nbsp;<i
+						class="fa fa-chevron-circle-right"></i>--></button>			
+			</div>
+		</div>
+		<hr>
+		<div class="row paddinglr0" style="margin-top:10px; text-align:center;">
+			<div class="col-12 paddinglr0">
+				New to MedWay?
+				<button (click)="signup()" type="button" class="loginButton">Signup<!-- &nbsp;<i
+						class="fa fa-chevron-circle-right"></i>--></button>			
+			</div>
+		</div>
+	</form>
+</div>

@@ -1,0 +1,297 @@
+@import "../_variables.scss";
+
+.page-header
+{
+	//color: $third !important;
+	font-size:$font-large-bg;
+	font-weight:bold;
+	display:inline;
+	//letter-spacing: 0.5px;
+	color: #000;
+    padding: 10px;
+    padding-top: 0px;
+}
+
+.section-notes
+{
+  //background: $third;
+  color:#000;
+  padding:10px;
+ font-size: $font-large-bg;
+  font-weight: bold;
+  padding-left:10px;
+  padding-top:0px;
+  
+}
+
+
+.page-sub-header
+{
+	color: $third !important;
+	font-size:$font-medium;
+	font-weight:bold;
+	display:inline;
+	//letter-spacing: 0.5px;
+}
+
+.pclass
+{
+  font-size:$font_small;
+  margin-bottom:10px;
+}
+
+
+/*@media only screen and (max-width: 992px) {
+
+
+  }
+  
+  @media only screen and  (min-width: 1200px) and (max-width: 1299px)  {
+  
+	.page-header
+	{
+		color: $third !important;
+		font-size:$font_extra_large;
+		font-weight:bold;
+		display:inline;
+	}
+	.page-sub-header
+	{
+		color: $third !important;
+		font-size:$font-large;
+		font-weight:bold;
+		display:inline;
+	}
+  
+  } */
+  
+  
+ /* @media only screen and (min-width: 1300px) {
+  
+	.page-header
+{
+	color: $third !important;
+	font-size:$font_extra_large;
+	font-weight:bold;
+	display:inline;
+}
+.page-sub-header
+{
+	color: $third !important;
+	font-size:$font-large;
+	font-weight:bold;
+	display:inline;
+}
+  }*/
+
+
+.page-header-gray
+{
+	font-size:$font-extra-large;	
+	color:$third ;
+	font-weight:bold;
+}
+
+.section-header
+{
+	margin-top:15px;
+	font-size:$font-medium;	
+	color:$third ;
+	font-weight:bold;
+	margin-bottom:15px;
+	padding-bottom:5px;
+	//letter-spacing: 0.5px;
+}
+
+.corange
+{
+  border-bottom:1px solid $third;
+}
+
+.bgray
+{
+	margin-top:5px;
+	padding-bottom:5px;
+  border-bottom:1px solid #D7D7D7;
+  width:100%;
+
+}
+.gdivider
+{
+	margin-top:5px;margin-bottom:5px; padding-top:0px;
+}
+
+.section-header-sub
+{
+//	margin-top:10px;
+	font-size:$font_small_medium;
+	color:$third ;
+	font-weight:bold;
+	margin-bottom:10px;
+	padding-bottom:5px;
+	//letter-spacing: 0.5px;
+}
+
+.p-justify
+{
+	text-align:justify;
+}
+
+.text-common
+{
+	font-size:$font_small;
+
+}
+.pagetopnotes
+{
+	padding:10px;
+	width:100%;
+	background:$grayshadow;
+	font-size:$font_small;
+
+}
+.section-subhead-value
+{
+	margin-bottom:10px;
+}
+.bgborder
+{
+//	margin-top:10px;
+	margin-bottom:20px;
+	padding:5px;
+	padding-bottom:15px;
+	box-shadow: 4px 4px 2px 0px #E4E4E4; 
+	border: 1px solid #E4E4E4;
+	background:$text_light;
+		 -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+	
+     -webkit-box-shadow: 0px 3px 0px #E4E4E4, 0px 3px 6px  #E4E4E4;
+    -moz-box-shadow: 0px 3px 0px  #E4E4E4, 0px 3px 6px  #E4E4E4;
+    box-shadow: 0px 3px 0px  #E4E4E4, 0px 3px 6px  #E4E4E4;
+	
+}
+
+
+.boxshadow
+{
+	margin-bottom:10px;
+	//padding-top:10px;
+	box-shadow: 10px 10px 5px 0px $grayshadow;
+    border: 1px solid $grayshadow;
+	
+	}
+	
+.boxshadow_2
+{
+	-webkit-box-shadow: 2px 2px 2px 2px $grayshadow;
+	-moz-box-shadow:    2px 2px 2px 2px $grayshadow;
+	box-shadow:         2px 2px 2px 2px $grayshadow;
+}
+
+.boxborder
+{
+	margin-top:5px;
+	padding:5px;
+	/*box-shadow: 4px 4px 2px 0px rgba(0, 0, 0, 0.75); */
+	border: 1px solid $grayshadow;
+	background:$half-white;
+}
+
+.alert-danger {
+    color: #AC4142 !important;
+    background-color: #E7E7E7  !important;
+	border-color: #AC4142  !important;
+	font-style:italic;
+	font-size: $font_small;
+}
+.errortitle
+{
+	font-size:$font_small;
+	font-style:bold;
+	color: #000 !important;
+}
+.errordesc
+{
+	font-size:$font_small;
+	font-style:italic;
+	color: #AC4142 !important;
+}
+
+.paddingl0
+{
+  padding-left:0 !important;
+}
+
+.paddingr0
+{
+  padding-right:0 !important;
+}
+
+.paddinglr0
+{
+  padding-left:0 !important;
+  padding-right:0 !important;
+}
+
+.paddingt0
+{
+	padding-top:0px  !important;
+}
+
+.paddingt10
+{
+  padding-top:10px   !important;
+}
+
+.text-muted
+{
+	color: $third !important;
+}
+.iconb
+{
+width:28px;
+margin-bottom:10px;
+
+}
+
+/*
+#toast-container>.toast-success {
+	background:$third !important;
+	}
+*/
+
+
+
+	#toast-container {
+
+   .toast-error {
+     background:red !important;
+   }
+
+   .toast-warning {
+      background:yellow !important;
+   }
+
+   .toast-success {
+	  background:$text_light !important;
+	  color: $third !important;
+   }
+
+   .toast-info {
+     background:blue !important;
+   }
+
+   .toast-message {
+	color: #FFF;
+ }
+
+}
+.toast-container .ngx-toastr {
+	box-shadow: 0 0 0 transparent !important;
+	border: 1px solid $grayshadow;
+}
+.toast-top-center{
+	top: 75px !important;
+}

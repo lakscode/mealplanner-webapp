@@ -1,0 +1,317 @@
+@import "../_variables.scss";
+.btna {
+   /* just for this demo. */
+   
+   margin-top: 10px;
+     height: 70px;
+    width: 200px;
+	margin-right:10px;
+}
+.btnorange
+{
+   color:$third;
+}
+.btnremovebutton
+{
+   margin-top:10px;
+}
+.btn-arrow-right,
+.btn-arrow-left {
+   position: relative;
+   padding-left: 36px;
+   padding-right: 36px;
+}
+
+.btn-arrow-right {
+   padding-left: 72px;
+}
+
+.btn-arrow-left {
+   padding-right: 72px;
+}
+
+.btn-arrow-right:before,
+.btn-arrow-right:after,
+.btn-arrow-left:before,
+.btn-arrow-left:after {
+   /* make two squares (before and after), looking similar to the button */
+   
+   content: "";
+   position: absolute;
+   top: 10px;
+   /* move it down because of rounded corners */
+   
+   width: 44px;
+   /* same as height */
+   
+   height: 44px;
+   /* button_outer_height / sqrt(2) */
+   
+   background: inherit;
+   /* use parent background */
+   
+   border: inherit;
+   /* use parent border */
+   
+   border-left-color: transparent;
+   /* hide left border */
+   
+   border-bottom-color: transparent;
+   /* hide bottom border */
+   
+   border-radius: 0px 8px 0px 0px;
+   /* round arrow corner, the shorthand property doesn't accept "inherit" so it is set to 4px */
+   
+   -webkit-border-radius: 0px 8px 0px 0px;
+   -moz-border-radius: 0px 8px 0px 0px;
+}
+
+.btn-arrow-right:before,
+.btn-arrow-right:after {
+   transform: rotate(45deg);
+   /* rotate right arrow squares 45 deg to point right */
+   
+   -webkit-transform: rotate(45deg);
+   -moz-transform: rotate(45deg);
+   -o-transform: rotate(45deg);
+   -ms-transform: rotate(45deg);
+}
+
+.btn-arrow-left:before,
+.btn-arrow-left:after {
+   transform: rotate(225deg);
+   /* rotate left arrow squares 225 deg to point left */
+   
+   -webkit-transform: rotate(225deg);
+   -moz-transform: rotate(225deg);
+   -o-transform: rotate(225deg);
+   -ms-transform: rotate(225deg);
+}
+
+.btn-arrow-right:before,
+.btn-arrow-left:before {
+   /* align the "before" square to the left */
+   
+   left: -22px;
+}
+
+.btn-arrow-right:after,
+.btn-arrow-left:after {
+   /* align the "after" square to the right */
+   
+   right: -22px;
+}
+
+.btn-arrow-right:after,
+.btn-arrow-left:before {
+   /* bring arrow pointers to front */
+   
+   z-index: 1;
+}
+
+.btn-arrow-right:before,
+.btn-arrow-left:after {
+   /* hide arrow tails background */
+   
+   background-color: $text_light ;
+}
+
+/***** outline button **********/
+
+
+.butn {
+  background: $text_light ;
+  border: 1px solid  $third  ;
+  font-family: Arial;
+  color: $third  ;
+  font-size: $font_extra_small;
+  padding: 8px 20px 8px 20px;
+  text-decoration: none;
+  margin-right:10px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+
+.butn:hover {
+  background: $third  ;
+    color: $text_light;
+      text-decoration: none;
+}
+
+.btnex
+{
+ background: $half-white;
+  border: 1px solid  $half-white ;
+  padding: 5px; 
+  padding-left:10px;
+  border-radius: 36px; 
+    color: $text-dark ;
+	margin-right:5px;
+	min-width:36px;
+}
+.btnex:hover
+{
+    color: $text-dark ;
+}
+.btnex i{
+font-size: $font_extra_large;
+margin-right:4px;
+}
+
+.btnex span {
+
+font-size:$font_small;
+color:$text-dark;
+  max-width: 0;
+    max-width: 7rem;
+  -webkit-transition: max-width 1s;
+  transition: max-width 1s;
+  display: inline-block;
+  vertical-align: top;
+  white-space: nowrap;
+  overflow: hidden;
+  margin-right:5px;
+}
+.btnex:hover span {
+  max-width: 7rem;
+}
+
+.btnOrgange
+{
+background:$third;
+color:$text_light;
+font-size:13pt;
+margin-top: 5px;
+padding:5px 8px;
+border-radius:50%;
+}
+
+.commonbtn
+{
+   background: transparent;
+   /*padding: 5px;  */
+   border-radius: 50%; 
+   color: $third;
+}
+
+.invbackbtn
+{
+  float:right;
+  background: $third;
+  color:$text_light;
+  padding:5px 10px;
+  border: 1px solid $third;
+  border-radius:5px;
+  font-size:$font_small;
+}
+
+.invbackbtn:hover
+{
+  text-decoration:none;
+   color:$text_light;
+ /*  -webkit-box-shadow: 3px 2px 2px 0px rgba(0,0,0,0.75);
+	-moz-box-shadow: 3px 2px 2px 0px rgba(0,0,0,0.75);
+	box-shadow: 3px 2px 2px 0px rgba(0,0,0,0.75); */
+}
+
+
+.successbtn
+{
+	background : $third;
+	padding:5px;
+   color:$text_light ;
+   border: 1px solid $third;
+}
+
+.pendingbtn
+{
+//	background : $third ;
+background : $third;
+	padding:5px;
+   color:$text_light ;
+   border: 1px solid $third;
+  
+}
+
+.successbtn, .pendingbtn
+{
+   padding-left:10px;
+   padding-right:10px;
+}
+.successbtn i, .pendingbtn i{
+   margin-right:3px;
+}
+
+
+.successbtn img, .pendingbtn img
+{
+ width:15px;
+ height:15px;
+ margin-right:2px;
+
+}
+.successbtn img.w_extra, .pendingbtn img.w_extra
+{
+ width:18px;
+ height:15px;
+ margin-right:2px;
+
+}
+
+
+
+.btn-ahref
+{
+   outline:0;
+   background:none;
+   border:0;
+   color:$third;
+}
+.btn-ahref i
+{
+   font-size:14pt;
+}
+.btn-ahref:hover
+{
+
+text-decoration:underline;
+}
+
+.btn-icon
+{
+display:inline-block;
+}
+.btn-icon img
+{
+   width:18px;
+   height:18px;
+}
+.btn-icon img.w_ex
+{
+   width:22px;
+   height:18px;
+}
+.spinning-circle
+{
+   animation-name: spinning-circle;
+   animation-duration: 5s;
+   animation-iteration-count: infinite;
+   width:24px;
+   height:24px;
+}
+
+@-webkit-keyframes spinning-circle {
+   0% {
+     -webkit-transform: rotate(0deg);
+     transform: rotate(0deg);
+     -webkit-transform-origin: 125% 125%;
+     transform-origin: 125% 125%;
+   }
+   100% {
+     -webkit-transform: rotate(360deg);
+     transform: rotate(360deg);
+     -webkit-transform-origin: 125% 125%;
+     transform-origin: 125% 125%;
+   }
+ }

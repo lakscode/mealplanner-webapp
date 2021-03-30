@@ -1,0 +1,34 @@
+<div id="page-container-custom">
+    <div id="content-wrap-custom">
+        <app-header></app-header>
+
+        <div style="margin-top:0px">
+        
+          <div class="content pagewidth" >
+            <router-outlet></router-outlet>
+          
+        
+          </div>
+        </div>
+       <!--  <div *ngIf= "chatwindowdisplay !== 'chatwindowdisplay' " id='chatbutton' (click)="togglechat()" class="chatbutton">
+          <img src="assets/chat_orange.png" /></div>
+         <div id="faqchat" class="chatwindow {{chatwindowdisplay}}">
+            <div class="chatheader">
+              Ask Help!!!
+           <input type="button" class='closebutton' (click)="togglechat()" value="X" />
+          </div>
+            <div style="max-height: 380px;">
+              <app-faq-chat id="chatDetails"
+               class="calclose" 
+              style="display:inline;"></app-faq-chat>
+            </div>
+          </div> -->
+    </div>
+    <footer  id="footer-custom">
+        <app-footer></app-footer>
+    </footer>
+  </div>
+
+
+
+

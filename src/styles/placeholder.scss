@@ -1,0 +1,224 @@
+@import "../_variables.scss";
+
+/********** for placeholder position ******************/
+
+.form-group-others {
+  margin-top:15px;
+  position: relative;
+  margin-bottom: 0px !important;
+  font-size:$font_small;
+}
+.form-group {
+  margin-top:30px;
+  position: relative;
+  margin-bottom: 0px !important;
+  font-size:$font_small;
+}
+
+.displayinline
+{
+  display:inline-block;
+}
+
+.infop
+{
+  margin-left:7px;
+  display:inline-block;
+  font-size:$font-large;
+}
+.infop_incident
+{
+  margin-left:10px;
+  display:inline-block;
+  font-size:$font-large;
+}
+
+.form-control-placeholder {
+  position: absolute;
+  top: 0;
+  padding:10px 0px 4px 1px;
+  transition: all 200ms;
+  opacity: 1;
+  margin-bottom:5px;
+}
+
+.form-control
+{
+  font-size: 0.8rem;
+ 
+}
+
+.form-control:-moz-read-only { /* For Firefox */
+  background-color: #FFF;
+}
+
+.form-control[readonly], .form-group-select[readonly], .form-group-others[readonly] {
+  background-color: #FFF !important;
+}
+.form-control[readonly]:disabled, .form-group-select[readonly]:disabled , .form-group-others[readonly]:disabled {
+  background-color: #e9ecef !important;
+}
+
+.form-control:focus + .form-control-placeholder,
+.form-control:valid + .form-control-placeholder,
+.form-control:active + .form-control-placeholder,
+.form-control:hover + .form-control-placeholder 
+ {
+  font-size: 100%;
+  transform: translate3d(0, -100%, 0);
+  opacity: 1;
+}
+
+textarea.fullwidth{
+  width:100%;
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  -webkit-text-fill-color: #000;
+  -webkit-box-shadow: 0 0 0px 1000px #FFF inset;
+  transition: background-color 5000s ease-in-out 0s;
+}
+.form-control:focus {
+  color: #495057;
+  background-color: #fff;
+  border-color: #ced4da;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem #ced4da;
+}
+
+
+.form-group-select {
+  margin-top:20px;
+  position: relative;
+  margin-bottom: 0px !important;
+  font-size:$font_small;
+}
+
+.form-group-select:disabled {
+  background:$grayshadow;
+}
+
+
+.form-control-select-placeholder {
+  position: absolute;
+  top: 0;
+  padding: 7px 0 0 13px;
+  transition: all 200ms;
+  opacity: 0.5;
+}
+.form-control-select:focus + .form-control-select-placeholder,
+.form-control-select:valid + .form-control-select-placeholder,
+.form-control-select:active + .form-control-select-placeholder,
+.form-control-select:hover + .form-control-select-placeholder {
+  font-size: 100%;
+  transform: translate3d(0, -100%, 0);
+  opacity: 1;
+  
+}
+
+.fcs
+{
+	  font-size: 100%;
+  transform: translate3d(0, -100%, 0);
+  opacity: 1;
+}
+
+.strikethrough
+{
+text-decoration: line-through;
+}
+.mandatory
+{
+	color:$third ;
+	font-weight:bold;
+}
+
+/*
+@media only screen and (max-width: 990px) {
+  .fcs
+  {
+      font-size: 90%;
+  }
+  .form-control, .form-group-select, .form-control-select, .form-control-placeholder, .form-control-select-placeholder, .form-group input[type="text"], .form-group input[type="email"], .form-group select
+  {
+    font-size: 100%;
+  }
+}
+@media only screen and  (min-width: 991px) and (max-width: 1299px)  {
+  .fcs
+  {
+      font-size: 90%;
+  }
+  .form-control, .form-group-select, .form-control-select, .form-control-placeholder, .form-control-select-placeholder, .form-group input[type="text"], .form-group input[type="email"], .form-group select
+  {
+    font-size: 100%;
+  }
+  }
+
+@media only screen and  (min-width: 1300px) and (max-width: 1399px)  {
+    .fcs
+    {
+        font-size: 110%;
+    }
+    .form-control, .form-group-select, .form-control-select, .form-control-placeholder, .form-control-select-placeholder, .form-group input[type="text"], .form-group input[type="email"], .form-group select
+    {
+      font-size: 120%;
+    }
+
+}
+
+@media only screen and (min-width: 1400px) {
+    .fcs
+    {
+        font-size: 120%;
+    }
+
+    .form-control, .form-group-select, .form-control-select, .form-control-placeholder, .form-control-select-placeholder, .form-group input[type="text"], .form-group input[type="email"], .form-group select
+    {
+      font-size: 130%;
+    }
+
+
+}
+
+*/
+.form-control-div
+{
+  display: block;
+    width: 100%;
+    min-height:32px;
+    padding: 0.375rem 0.75rem;
+    font-size:$font_small;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid $grayborder;
+    border-radius: 0.25rem;
+    -webkit-transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.form-control-div-disabled
+{
+  display: block;
+    width: 100%;
+    min-height:32px;
+    padding: 0.375rem 0.75rem;
+    font-size:$font_small;
+    line-height: 1.5;
+    color: #495057;
+    background-color: $grayshadow;
+    background-clip: padding-box;
+    border: 1px solid $grayborder;
+    border-radius: 0.25rem;
+    -webkit-transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}

@@ -1,0 +1,79 @@
+{
+  "data": [   
+		{
+			"companyid": "C100001",
+			"compayname": "ABC Company",
+			"createdby": "Lakshmi Ananthanarayana",
+			"locations": [
+					{ 
+						"locationid":"CL0001",
+						"locationname":"Bangalore, KA, IN",
+						"members": { "advisor" : [1, 3, 4], "interviewer" : [] }, 
+						"adminemail": "lakshmi@investipro.com"
+					},
+					{ 
+						"locationid":"CL0002",
+						"locationname":"Chennai, TN, IN",
+						"members": { "advisor" : [2, 3, 4], "interviewer" : [] }, 
+						"adminemail": "ujose@investipro.com"
+					},
+					{ 
+						"locationid":"CL0003",
+						"locationname":"Oregon, US",
+						"members": { "advisor" : [1, 2, 4], "interviewer" : [] }, 
+						"adminemail": "dana@investipro.com"
+					}
+				]
+		},
+		{
+			"companyid": "C100002",
+			"compayname": "Investipro Pvt Ltd",
+			"createdby": "Usha Jose",
+			"locations": [
+					{ 
+						"locationid":"CL00011",
+						"locationname":"Bangalore, KA, IN",
+						"members": { "advisor" : [1, 3, 4], "interviewer" : [] }, 
+						"adminemail": "lakshmi@investipro.com"
+					},
+					{ 
+						"locationid":"CL00021",
+						"locationname":"Chennai, TN, IN",
+						"members": { "advisor" : [1, 2, 4], "interviewer" : [] }, 
+						"adminemail": "ujose@investipro.com"
+					},
+					{ 
+						"locationid":"CL00031",
+						"locationname":"Oregon, US",
+						"members": { "advisor" : [2, 3, 4], "interviewer" : [] }, 
+						"adminemail": "dana@investipro.com"
+					}
+				]
+		},
+		{
+			"companyid": "C100003",
+			"compayname": "Investipro Solutions",
+			"createdby": "Dana Barbato",
+			"locations": [
+					{ 
+						"locationid":"CL00011",
+						"locationname":"Bangalore, KA, IN",
+						"members": { "advisor" : [1, 3, 4], "interviewer" : [] }, 
+						"adminemail": "lakshmi@investipro.com"
+					},
+					{ 
+						"locationid":"CL00012",
+						"locationname":"Chennai, TN, IN",
+						"members": { "advisor" : [1, 3, 4], "interviewer" : [] }, 
+						"adminemail": "ujose@investipro.com"
+					},
+					{ 
+						"locationid":"CL00013",
+						"locationname":"Oregon, US",
+						"members": { "advisor" : [1, 3, 4], "interviewer" : [] }, 
+						"adminemail": "dana@investipro.com"
+					}
+				]
+		}
+	]
+}

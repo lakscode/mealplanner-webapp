@@ -1,0 +1,161 @@
+
+@import "../_variables.scss";
+body
+{
+margin:0 !important;
+padding:0;	
+color:#373737;
+font-size:$font_medium;
+
+}
+
+#page-container-custom {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  background:#EFEFF5;
+  flex-direction: column;
+  justify-content: space-between
+}
+
+#content-wrap-custom {
+  padding-bottom: 40px;    /* Footer height */
+}
+
+#footer-custom {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 50px;            /* Footer height */
+}
+
+
+:host {
+
+width:100%;
+  margin:0;
+  padding:0;
+}
+
+.content {
+//  background: #FFF;
+  margin-bottom:0px;
+  //  margin-top:40px;
+ // padding:20px 0px 0px 0px;  
+
+background:#EFEFF5;
+}
+@media only screen and (min-width: 1200px) {
+
+}
+@media only screen and (min-width: 1300px) {
+
+}
+/* floating box style */
+.floating-form { /*contact form wrapper*/
+    max-width: 450px;
+    padding: 30px 30px 10px 30px;
+  
+    right: 10px;
+    position: fixed; /*Form position fixed*/
+	top:50%;
+	left:30px;
+	
+	}
+	.floating-panel
+	{
+		margin-top:-30%;
+		  border: 1px solid #ddd;
+		  background:#FFF;
+		  padding:10px;
+		  zindex:100100;
+	}
+.contact-opener { /*opener button*/
+    position: absolute;
+    left: -88px;
+    transform: rotate(-90deg); /* rotate button -90deg */
+    top: 0px;
+    padding: 9px;
+    color: #fff;
+	text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.43);
+    cursor: pointer;
+    border-radius: 5px 5px 0px 0px;
+	background:#FFF;
+	color:#000;
+}
+
+
+.chaticon
+{
+width:100%;
+height:100%;
+animation: rotation 2s infinite linear;
+}
+
+@keyframes rotation {
+  0% { transform: rotateY(0deg); }
+  100% { transform: rotateY(360deg); }
+}
+
+.chatbutton {
+  position: fixed;
+  bottom: 0px;
+  right: 0px; 
+  height:50px;
+  width:50px;
+  
+z-index:10000;
+}
+
+.chatbutton img{
+  width:30px;
+  height:30px;
+}
+.chatheader
+{
+  background:$third;
+  color:#FFF;
+  font-size:$font_medium;
+  height: 35px;
+  padding:5px;
+}
+.chatwindow
+{
+position: fixed;
+bottom: 0px;
+right: 0px; 
+height:450px;
+width:300px;
+background:#EFEFF5;
+border:1px solid #ccc;
+border-radius:3px;
+
+
+z-index:10000;
+}
+.chatwindowdisplay
+{
+display:block;
+}
+
+.chatwindownone
+{
+display:none;
+}
+
+.closebutton
+{
+float:right;
+font-size: 9pt;
+background:$third;
+color:#FFF;
+border-radius:5px;
+width: 30px;
+text-align: center;
+}
+.closebutton i
+{ 
+padding:0;
+margin:0;
+}
+

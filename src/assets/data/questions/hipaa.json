@@ -1,0 +1,69 @@
+﻿{
+	"questions": {
+		"witnesses": [
+			"Are you aware of a recent event that has potentially exposed a patient's protected health information (PHI) that may result in a HIPAA security breach?",
+			"How did you become aware of this potential breach?",
+			"Please provide exactly what you believe to have happened in as much detail as possible.",
+			"Are you aware of this breach included the PHI of a single person or multiple people?",
+			"Do you know what documents or verbal information were disclosed and when?",
+			"What do you believe to be the cause of this breach?",
+			"How do you believe this could be prevented from happening in the future?",
+			"Is it your opinion that this breach was intentional or unintentional access to the PHI?",
+			"Is there anyone else who you believe should be interviewed that may have additional information pertaining to this investigation?",
+			"Is there any other information you would like to provide?"
+
+
+		],
+		"respondents": [
+			"Are you aware of an event that has potentially exposed a patient's protected health information (PHI) in which you may have been involved that may result in a HIPAA security breach?",
+			"If yes, please provide the details of the potential breach.",
+			"Did this breach include the PHI of a single person or multiple people?",
+			"What documents or verbal information were disclosed and when?",
+			"How and why do you believe this happened?",
+			"Do you know who received the PHI and what they may have done with the information?",
+			"Do you believe the PHI was disclosed to another authorized employee or business partner?",
+			"If so, have you notified this person or their manager of the potential breach?",
+			"Is there any documentation that can help us clarify exactly what happened?",
+			"Has our Privacy Officer been notified of the incident?",
+			"How do you believe this incident could have been prevented?",
+			"Have you been provided and trained on the company HIPAA privacy policy?",
+			"Have you been trained on HIPAA procedures and legal requirements? If yes, when was the last training you received?",
+			"Was there a reason the company policy and procedures were not followed in this situation?",
+			"Is there anyone else we should talk with that may have additional information pertaining to this matter?",
+			"Is there any other information you would like to provide?"
+
+
+		],
+		"reporters": [
+			"What was the event that caused you to believe that a patient's protected health information (PHI) may have been shared or exposed resulting in a potential HIPAA security breach?",
+			"How did you become aware of this potential breach?",
+			"Did this breach include the PHI of a single person or multiple people?",
+			"What documents or verbal information were disclosed and when?",
+			"Please provide exactly what you believe to have happened in as much detail as possible.",
+			"Do you know who received the PHI and what they may have done with the information?",
+			"Do you believe the PHI was disclosed to another authorized employee or business partner?",
+			"If so, have you notified this person or their manager of the potential breach?",
+			"Has our Privacy Officer been notified of the incident?",
+			"Is it your opinion that this breach was intentional or unintentional access to the PHI?",
+			"Is there anyone else who you believe should be interviewed that may have additional information pertaining to this investigation?",
+			"Is there any other information you would like to provide?"
+
+		],
+		"victims": [
+			"What was the event that caused you to believe that a patient's protected health information (PHI) may have been shared or exposed resulting in a potential HIPAA security breach?",
+			"How did you become aware of this potential breach?",
+			"Did this breach include the PHI of a single person or multiple people?",
+			"What documents or verbal information were disclosed and when?",
+			"Please provide exactly what you believe to have happened in as much detail as possible.",
+			"Do you know who received the PHI and what they may have done with the information?",
+			"Do you believe the PHI was disclosed to another authorized employee or business partner?",
+			"If so, have you notified this person or their manager of the potential breach?",
+			"Has our Privacy Officer been notified of the incident?",
+			"Is it your opinion that this breach was intentional or unintentional access to the PHI?",
+			"Is there anyone else who you believe should be interviewed that may have additional information pertaining to this investigation?",
+			"Is there any other information you would like to provide?"
+
+
+		]
+	}
+}

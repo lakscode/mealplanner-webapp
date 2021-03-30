@@ -1,0 +1,23 @@
+{
+	"type":[
+		{ 
+			"type":"Interviewer",
+			"subject":"You have been assigned to conduct an interview on InvestiPro",
+			"content":"Hello <strong><interviewer></strong>,<br />As a user on the <strong><interviewloc></strong> workplace investigation platform, you have been assigned to conduct an interview as part of a current investigation on <strong><interviewdttm></strong> at <strong><interviewloc></strong>. Please flilow the steps below to ensure you know when and where the investigation is to be held, and familiarize yourself with the incident being investigated.<br><br><ul><li>Go to https://app.investipro.com/investigation/interview/<id>7/</li><li>Login using your email address and password</li><li>Click on the Incident report and read through the document.</li><li>At the scheduled time of the interview (<strong><interviewdttm></strong>), click on the interview and begin the process.</li></ul><br><br>You can find this and other investigations you are invlived in from <a href=\"http://localhost:4200\">your account page.</a><br><br>Questions? Contact the investigator <strong><investigator></strong>. "
+		},{ 
+			"type":"Interviewee",
+			"subject":"Investigation Notice to Interviewee <interviewee>",
+			"content":"<strong><interviewee> </strong> <br /> Attached you will find an important notice regarding an internal workplace investigation that requires your participation. Participation in this investigation is a required part of your employment and we appreciate your cooperation. Please print and sign the notice, and deliver it directly to me, or you may scan the signed copy and email it to <useremail>. <br /> <br />Do not reply to this email. Instead, if you have any questions, please address them directly to me, either in person or via phone or email using the contact information below.  <br />  <br />Respectfully, <username> <br /> ( Phone: <userphone>) <br /> Email: <useremail> "
+		},
+		{ 
+			"type":"conclusionnotice",
+			"subject":"Determination Notice to Interviewee <interviewee>",
+			"content":"<strong><interviewee> </strong> <br /> Thank you for your participation in the recent workplace investigation in which you were a party to the claim. Attached you will find a notice of the final determination made as a result of the investigation for your records. You will receive further contact from <username>, or your manager, as to the next step in the process, if any. Please note that the findings are final, based on the information that was presented throughout the investigation <br />  <br /> Do not reply to this email. Instead, if you have any questions, concerns, or if you do not understand the findings, please address them directly to <username>, either in person or via phone or email using the contact information below.<br />  <br />Respectfully, <username> <br /> ( Phone: <userphone>) <br /> Email: <useremail> "
+		},{ 
+			"type":"interviewsummary",
+			"subject":"Interview Summary For  <interviewee>",
+			"content":"<strong><interviewee> </strong> <br /> Attached you will find a summary of the questions asked of you in the recent investigation interview including your responses. Please print and review this document for accuracy, and sign and date the the bottom of the document to verify the summary represents the discussion that took place. This document must be returned to <username> no later than 48 hours from the time the document was received. If you are not comfortable signing the document, you may simply write, 'I refuse to sign', date the document and return it to <username> . You may note any discrepancies you find on the back of the document or on a separate page, but remember this is only for errors in what was said. You may not change your response. <br />  <br /> Do not reply to this email. Instead, if you have any questions, concerns, or if you do not understand the findings, please address them directly to<username>, either in person or via phone or email using the contact information below.<br />  <br />Respectfully, <username> <br /> ( Phone: <userphone>) <br /> Email: <useremail> "
+		}	
+	]		
+}
+

@@ -1,0 +1,78 @@
+{
+	"questions": {
+		"witnesses": [
+			"Please tell me what you know about the safety incident that took place in as much detail as you can.",
+			"How were you made aware of the incident?",
+			"If you were present, were you injured?",
+			"How and why do you believe this happened?",
+			"What was happening in the location of the incident at the time it occurred?",
+			"Do you know if the incident was due to the failure of equipment or tools?",
+			"Do you know of any evidence that could help us determine if this was caused by unsafe conditions that exist or if a procedure or safety rule was not followed or was not sufficient?",
+			"Do you know if personal protective equipment (PPE) was required for the work being performed at the time of the incident?",
+			"If required, do you know if everyone involved was wearing the proper PPE?",
+			"At the time of the incident, were you aware of any other person acting in a way that may have contributed to the safety incident?",
+			"Do you have any suggestions on how this incident could have been prevented?",
+			"Is there anyone else who you believe should be interviewed that may have additional information pertaining to this investigation?",
+			"Have you heard discussions in the workplace regarding the incident? If so, when and by whom?",
+			"Is there any other information you would like to provide?"
+
+
+		],
+		"respondents": [
+			"Please tell me what you know about the safety incident that took place in as much detail as you can.",
+			"Were you the only person involved?",
+			"Were you the only person present at the time?",
+			"How and why do you believe this happened?",
+			"What was happening in the location of the incident at the time it occurred?",
+			"Was this incident due to the failure of equipment or tools?",
+			"Were you or anyone else injured? If so, who was injured and what was the injury?",
+			"If there was no injury, did this safety incident result in a near-miss?",
+			"Is there any evidence that could help us determine if this was caused by unsafe conditions that exist or if a procedure or safety rule was not sufficient?",
+			"Did you follow all safety and procedural precautions for the work you were performing at the time?",
+			"Do you feel you were properly trained in safety precautions and procedures pertaining to the work you were performing when this happened?",
+			"Was personal protective equipment (PPE) required for the work you were performing at the time of the incident? If so, were you wearing all required PPE?",
+			"At the time of the incident, were you aware of any other person acting in a way that may have contributed to the safety incident?",
+			"Do you have any suggestions on how this incident could have been prevented?",
+			"Is there anyone else who you believe should be interviewed that may have additional information pertaining to this investigation?",
+			"Have you heard discussions in the workplace regarding the incident? If so, when and by whom?",
+			"Is there any other information you would like to provide?"
+
+
+		],
+		"reporters": [
+			"Can you provide a complete, detailed review of the incident that took place, including the location, date, time, actions and people present?",
+			"Did this incident involve one person or more than one?",
+			"What was happening in the location of the incident at the time it occurred?",
+			"Was this incident due to the failure of equipment or tools?",
+			"Was an injury involved in the incident? And if so, who was injured and what was the injury?",
+			"If there was no injury, did this safety incident result in a near-miss?",
+			"Is there any evidence that could help us determine if this was caused by unsafe conditions that exist or if a procedure or safety rule was not followed or was not sufficient?",
+			"In your opinion, how did this happen?",
+			"Have there been any previously reported incidents similar to this one?",
+			"Have you observed %respondent% acting in a way that was unsafe or against safety policies?",
+			"Do you have any suggestions on how this incident could have been prevented?",
+			"Is there anyone else who you believe should be interviewed that may have additional information pertaining to this investigation?",
+			"Have you heard discussions in the workplace regarding the incident? If so, when and by whom?",
+			"Is there any other information you would like to provide?"
+
+		],
+		"victims": [
+			"Can you provide a complete, detailed review of the incident that took place, including the location, date, time, actions and people present?",
+			"Did this incident involve one person or more than one?",
+			"What was happening in the location of the incident at the time it occurred?",
+			"Was this incident due to the failure of equipment or tools?",
+			"Was an injury involved in the incident? And if so, who was injured and what was the injury?",
+			"If there was no injury, did this safety incident result in a near-miss?",
+			"Is there any evidence that could help us determine if this was caused by unsafe conditions that exist or if a procedure or safety rule was not followed or was not sufficient?",
+			"In your opinion, how did this happen?",
+			"Have there been any previously reported incidents similar to this one?",
+			"Have you observed %respondent% acting in a way that was unsafe or against safety policies?",
+			"Do you have any suggestions on how this incident could have been prevented?",
+			"Is there anyone else who you believe should be interviewed that may have additional information pertaining to this investigation?",
+			"Have you heard discussions in the workplace regarding the incident? If so, when and by whom?",
+			"Is there any other information you would like to provide?"
+
+
+		]
+	}
+}

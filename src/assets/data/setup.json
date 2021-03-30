@@ -1,0 +1,14 @@
+{
+	"data":{
+			"company":"",
+			"logo":"",
+			
+			"chatbot":{
+						"title":"Chatbot Incident Reporting", 
+						"questions": [
+						{"question":"Will the chatbot incident Reporting System be used", "value":"no"},
+						{"question":"Will anonymous reporting be allowed", "value":"no"}
+						]
+					}
+			}
+}

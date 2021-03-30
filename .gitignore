@@ -1,0 +1,6 @@
+node_modules
+dist
+package-lock.json
+# boilerplate files
+**/src/environments/environment.prod.ts
+**/src/environments/environment.ts

@@ -1,0 +1,21 @@
+{
+	"types":
+		[
+			{"name": "Attendance/Tardiness", "value":"Attend"},
+			{"name": "Bullying", "value":"Bully"},
+			{"name": "Conduct/Policy Violation", "value":"Conduct/Pol"},
+			{"name": "Discrimination", "value":"Discrim"},
+			{"name": "HIPAA", "value":"HIPAA"},
+			{"name": "Hostile Work Environment", "value":"HWE"},
+			{"name": "Retaliation", "value":"Retal"},
+			{"name": "Safety/Injury Incident", "value":"Safety"},
+			{"name": "Sexual Harassment", "value":"Sex Harr"},
+			{"name": "Theft", "value":"Theft"},
+			{"name": "Title IX", "value":"Title IX"},
+			{"name": "Whistleblower", "value":"Whistle"},
+			{"name": "Other", "value":"Other"}
+		]
+}
+
+
+
