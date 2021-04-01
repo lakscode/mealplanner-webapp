@@ -202,3 +202,58 @@
 .rounded-circle {
     border-radius: 50%!important;
 }
+
+
+.tastebite-section {
+  padding: 70px 0
+}
+
+.tstbite-header {
+    padding: 16px 0
+  }
+  .tstbite-header .navbar-brand {
+    max-width: 110px
+  }
+  .tstbite-header .navbar-brand img {
+    max-width: 100%!important
+  }
+  .tstbite-footer ul {
+    display: none
+  }
+  .tstbite-footer [class*=col-]~[class*=col-]+[class*=col-] h6,
+  .tstbite-footer [class*=col-]~[class*=col-]+[class*=col-] .h6 {
+    border-top: 1px solid #e8e8e8;
+    padding-top: 20px;
+    margin-top: 3px
+  }
+  .tstbite-footer hr {
+    margin-top: 0
+  }
+  .tastebite-footer-contnet {
+    padding-bottom: 30px
+  }
+  .has-header-inner {
+    border: none!important;
+    padding: 0
+  }
+  .has-header-inner .navbar-collapse>ul.navbar-nav {
+    border-top: 1px solid rgba(0, 0, 0, .2);
+    margin-top: 8px!important
+  }
+  .rounded-sm-top-6 {
+    border-radius: 6px 6px 0 0
+  }
+  .tstbite-header-links a svg {
+    max-width: 20px
+  }
+  .tstbite-overlay .card-img-overlay .tstbite-container {
+    padding: 0;
+    bottom: 30px
+  }
+  .tstbite-overlay .card-img-overlay .tstbite-container h4.h1,
+  .tstbite-overlay .card-img-overlay .tstbite-container .h1.h4 {
+    font-size: 33px
+  }
+  .media-box {
+    padding: 30px 30px 10px
+  }
