@@ -435,4 +435,50 @@ body {
   width: 16.6666666667%
 }
 
+.tstbite-animation {
+  display: block;
+  overflow: hidden
+}
+
+.tstbite-animation img {
+  transform: scale(1);
+  transition: all ease .8s
+}
+
+.tstbite-animation:hover img {
+  transform: scale(1.1)
+}
+
+.tstbite-card {
+  position: relative
+}
+
+.tstbite-card:hover figcaption a {
+  color: #ff642f
+}
+
+.tstbite-card:hover .tstbite-animation img {
+  transform: scale(1.1)
+}
+
+.tstbite-delicious {
+  border: 1px solid #d8d8d8
+}
+
+.tstbite-delicious h6,
+.tstbite-delicious .h6 {
+  min-height: 50px
+}
+
+.tstbite-overlay .card-img-overlay .tstbite-container {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 60px
+}
+
+.tstbite-overlay .card-overlay-sm .card-img-overlay .tstbite-container {
+  bottom: 30px
+}
+
 
