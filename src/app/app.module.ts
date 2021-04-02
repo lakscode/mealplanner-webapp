@@ -47,6 +47,7 @@ import { HighchartsChartModule } from 'highcharts-angular';
 import { FaqChatModule } from './shared';
 
 import { HomeModule } from './home/home.module'; 
+import { LandingModule } from './landing/landing.module'; 
 
 @NgModule({
   declarations: [
@@ -62,6 +63,7 @@ import { HomeModule } from './home/home.module';
 	FlexLayoutModule,
 	LayoutModule,
     LoginModule,
+    LandingModule,
 	ToastrModule.forRoot({
 		timeOut: 1000,
 	}),
