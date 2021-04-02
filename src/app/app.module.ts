@@ -48,7 +48,7 @@ import { FaqChatModule } from './shared';
 
 import { HomeModule } from './home/home.module'; 
 import { LandingModule } from './landing/landing.module'; 
-
+import { Landing1Module } from './landing1/landing1.module'; 
 @NgModule({
   declarations: [
 		AppComponent
@@ -64,6 +64,7 @@ import { LandingModule } from './landing/landing.module';
 	LayoutModule,
     LoginModule,
     LandingModule,
+	Landing1Module,
 	ToastrModule.forRoot({
 		timeOut: 1000,
 	}),

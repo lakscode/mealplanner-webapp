@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "investipro": {
+    "mtcmealapp": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/investipro",
+            "outputPath": "dist/mtcmealapp",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -29,7 +29,8 @@
               "src/styles.scss",
               "node_modules/font-awesome/css/font-awesome.css"
             ],
-            "scripts": [ "./node_modules/crypto-js/crypto-js.js"]
+            "scripts": [ "./node_modules/crypto-js/crypto-js.js"
+              ]
           },
           "configurations": {
             "production": {
@@ -61,18 +62,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "investipro:build"
+            "browserTarget": "mtcmealapp:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "investipro:build:production"
+              "browserTarget": "mtcmealapp:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "investipro:build"
+            "browserTarget": "mtcmealapp:build"
           }
         },
         "test": {
@@ -110,16 +111,16 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "investipro:serve"
+            "devServerTarget": "mtcmealapp:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "investipro:serve:production"
+              "devServerTarget": "mtcmealapp:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "investipro"
+  "defaultProject": "mtcmealapp"
 }
