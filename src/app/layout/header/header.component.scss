@@ -2191,8 +2191,10 @@ h2.counter {
   left: 0;
   top: 100%;
   width: 200px;
+  padding-left: 0px;
 }
 .menu ul li ul.dropdown_menu, .menu ul li ul.dropdown_menu li ul.dropdown-submenu {
+
   border-bottom: 2px solid #e54c2a;
   border-top: 2px solid #e54c2a;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
