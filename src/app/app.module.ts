@@ -48,7 +48,12 @@ import { FaqChatModule } from './shared';
 
 import { HomeModule } from './home/home.module'; 
 import { LandingModule } from './landing/landing.module'; 
+
 import { Landing1Module } from './landing1/landing1.module'; 
+
+import { RecipesModule } from './recipes/recipes.module'; 
+
+
 @NgModule({
   declarations: [
 		AppComponent
@@ -79,7 +84,8 @@ import { Landing1Module } from './landing1/landing1.module';
 	HighchartsChartModule,
 
 	FaqChatModule,
-	HomeModule
+	HomeModule,
+	RecipesModule
   ],
   schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
   providers: [UserService],
