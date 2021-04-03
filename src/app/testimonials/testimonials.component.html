@@ -1,0 +1,21 @@
+<div class="pagewidth">
+	<div class="row  " style="margin-top:10px;">
+		<div class="col-12">
+			<div style="min-height:500px; margin:0 auto; width:100%;">
+
+				<ul>
+					<li *ngFor="let item of testimonials; let i = index">
+						<a href="javascript:void(0)">
+							<!--<p>"{{item.testimonial}}"</p>-->
+							<p>{{((item.testimonial ).length>160)?(((item.testimonial) | slice:0:157) )+'..':(item.testimonial)   }}
+						</p>
+							<p>{{item.subject}}</p>
+							<p style="text-align:right;margin-top:5px;font-style:italic;font-weight: bold">- {{item.name}}</p>
+						</a>
+					</li>
+				</ul>
+
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HelperService } from '../../services/common';
+import { HelpService } from '../../services/help.service';
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',
@@ -7,7 +7,7 @@ import { HelperService } from '../../services/common';
 })
 export class FooterComponent implements OnInit {
   labels: any;
-  constructor(private helpService:HelperService) {
+  constructor(private helpService:HelpService) {
     //console.log('Footer constructor called');
   }
 

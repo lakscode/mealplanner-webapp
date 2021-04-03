@@ -1,6 +1,6 @@
 
-<!--header-->
-<header>
+<!--header when not logged in -->
+<header *ngIf="!currentUser.loggedIn">
     <div class="header header-main header-var2 fade-load-down">
         <div class="container">
             <div class="row">
@@ -25,7 +25,81 @@
                         <div class="wrapper-main-nav ">
                             <nav class="nav-collapse responsive-menu">
                                 <ul class="main-menu">
-                                    <li><a href="index.html">Home</a>
+                                    <li *ngFor="let menu of menuItems; let m = index">
+                                        <a href="{{menu.link}}">{{menu.menu}}</a>
+                                        <ul *ngIf="menu.children && menu.children.length > 0">
+                                            <li *ngFor="let submenu of menu.children; let m = index">
+                                                <a href="{{submenu.link}}">{{submenu.menu}}</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <!--<li><a href="/recipes">Recipes</a></li>
+                                    <li><a href="/recipes">Planner</a></li>
+                                    <li>
+                                        <a href="recipe-listing.html">Recent Recipes</a>
+                                        <ul>
+                                            <li><a href="recipe-listing.html">recipe listing list view</a></li>
+                                            <li><a href="recipe-listing-grid.html">recipe listing grid view</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="recipe-listing.html">Recipe Detail</a>
+                                        <ul>
+                                            <li><a href="recipe-detail.html">recipe detail version 1</a></li>
+                                            <li><a href="recipe-detail2.html">recipe detail version 2</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="our-chefs.html">Chefs</a></li>
+                                    <li><a href="blog.html">blog</a>
+                                        <ul>
+                                            <li><a href="single.html">Single post</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="elements.html">elements</a></li>
+                                    <li><a href="contact.html">contact</a></li>-->
+                                    <li><a class="submit-recipe" href="/recipesubmit">Submit recipe</a></li>
+                                </ul>
+  
+                            </nav>
+  
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </header>
+  <!--header ends-->
+
+
+
+  
+<!--header when logged in -->
+<header *ngIf="currentUser.loggedIn">
+    <div class="header header-main header-var2 fade-load-down">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2">
+                    <div class="logo-wrapper">
+                        <a href="index.html"><img src="assets/images/logo1.png" alt="logo"/></a>
+                    </div>
+                </div>
+                <div class="col-lg-10">
+                    <div class="outer-nav">
+                        <div class="wrapper-links">
+                            <ul class="header-social-icons">
+                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                            </ul>
+                    <span class="sign-in-buttons">
+                        <a class="login" href="#">Logout</a>
+                    </span>
+                        </div>
+                        <div class="wrapper-main-nav ">
+                            <nav class="nav-collapse responsive-menu">
+                                <ul class="main-menu">
+                                    <li><a href="/home">Home</a>
                                         <ul>
                                             <li><a href="variation1.html">variation one</a></li>
                                             <li><a href="variation2.html">variation two</a></li>
@@ -36,6 +110,7 @@
                                         </ul>
                                     </li>
                                     <li><a href="/recipes">Recipes</a></li>
+                                    <li><a href="/recipes">Planner</a></li>
                                     <li>
                                         <a href="recipe-listing.html">Recent Recipes</a>
                                         <ul>

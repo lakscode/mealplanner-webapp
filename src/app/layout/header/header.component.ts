@@ -27,14 +27,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
 	loggedIn : any;
 	menuItems: any[];
 	menuItemsCustom: any[];
-	user : User;
+	currentUser : User;
 	userRoleDet: any;
-	mHome: any;
-	mLogin: any;
-	mRequest: any;
-	mContact: any;
-	mAbout: any;
-	mStore: any;
 	companyname: any;
 	subscribeCompanyService: any;
 	companylogo : any;
@@ -46,19 +40,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
 console.log(currentUrl);
 	var displayMenu =  true;
 
-		this.mHome= false;
-		this.mLogin = false;
-		this.mRequest = false;
-		this.mContact = false;
-		this.mAbout = false;
-		this.mStore = false;
-
-		this.user = new User();
+		this.currentUser = new User();
 		this.userName = "";
 		this.loggedIn = false;
 		this.userRole = "";
-		this.user.userName = "";
-		this.user.loggedIn = false;
+		this.currentUser.userName = "";
+		this.currentUser.loggedIn = false;
 
 		this.menuItemsCustom = [
 				{"id":"dashboard", "menu":"Dashboard", "display":displayMenu, "active": false},
@@ -66,11 +53,16 @@ console.log(currentUrl);
 				{"id":"login", "menu":"Login", "display":displayMenu, "active": false}
 			];
 		this.menuItems= [
-			{"id":"home", "menu":"Home", "link":"/home", "display":displayMenu, "active":false},
+			{"id":"home", "menu":"Home", "link":"/home", "display":displayMenu, "active":false,
+			"children":
+				[
+					{"id":"features", "menu":"Features", "link":"/features", "display":displayMenu, "active":false},
+					{"id":"howitworks", "menu":"How it works", "link":"/howitworks", "display":displayMenu, "active":false},
+					{"id":"aboutus", "menu":"About the Team", "link":"/aboutus", "display":displayMenu, "active":false},
+				]
+			},
 			{"id":"benefits", "menu":"Benefits", "link":"/benefits", "display":displayMenu, "active":false},
-			{"id":"features", "menu":"Features", "link":"/features", "display":displayMenu, "active":false},
-			{"id":"howitworks", "menu":"How it works", "link":"/howitworks", "display":displayMenu, "active":false},
-			{"id":"display", "menu":"FAQs", "link":"/faqs", "display":displayMenu, "active":false},
+		//	{"id":"display", "menu":"FAQs", "link":"/faqs", "display":displayMenu, "active":false},
 			{"id":"blogs", "menu":"Blogs", "link":"/blogs", "display":displayMenu, "active":false},
 			{"id":"contact", "menu":"Contact", "link":"/contact", "display":displayMenu, "active":false},
 			{"id":"schedule", "menu":"Schedule Demo", "link":"/scheduledemo", "display":displayMenu, "active":false},
@@ -90,56 +82,38 @@ console.log(currentUrl);
 			
 			if(typeof(userdata) !== "undefined" && userdata !== null)
 			{
-				this.user = userdata;
+				this.currentUser = userdata;
 				this.userName= "";
-				if(typeof(this.user["firstname"]) !== "undefined")
+				if(typeof(this.currentUser["firstname"]) !== "undefined")
 				{
-					this.userName = this.user["firstname"];
+					this.userName = this.currentUser["firstname"];
 					this.userName = this.userName.charAt(0).toUpperCase() + this.userName.slice(1);
 				}
 
-				if(typeof(this.user["lastname"]) !== "undefined")
+				if(typeof(this.currentUser["lastname"]) !== "undefined")
 				{
-					var lastname = this.user["lastname"].charAt(0).toUpperCase() + this.user["lastname"].slice(1);
+					var lastname = this.currentUser["lastname"].charAt(0).toUpperCase() + this.currentUser["lastname"].slice(1);
 				this.userName = this.userName + " " + lastname;
 				}
 
 				this.loggedIn = true;
-				this.userRole =  this.user["role"];
-				this.userRoleDet = this.user["role"];
-				if(this.user["role"] == "DM")
+				this.userRole =  this.currentUser["role"];
+				this.userRoleDet = this.currentUser["role"];
+				if(this.currentUser["role"] == "DM")
 				this.userRoleDet =  "Decision Maker";
 
-				if(this.user["role"] == "IV")
+				if(this.currentUser["role"] == "IV")
 				this.userRoleDet =  "Interviewer";
 
-				if(this.user["role"] == "IN")
+				if(this.currentUser["role"] == "IN")
 				this.userRoleDet =  "Investigator";
 
-				if(this.user["role"] == "ADMIN")
+				if(this.currentUser["role"] == "ADMIN")
 				this.userRoleDet =  "Administrator";
 				this.setIconMenu();
 
 				this.companylogo = 'assets/logo-dark.png';
 				this.companyname = "";
-				
-
-				if(typeof(this.user["company"]) !== "undefined" && this.user["company"] !== "")
-				{
-					
-					this.subscribeCompanyService = this.dbService.getData("company/"+ this.user["company"]).subscribe(companyData => setTimeout(() => {
-
-
-					//	if(companyData["companylogo"] !== "")
-					//	this.companylogo =  companyData["companylogo"];
-					//	console.log(this.companylogo);
-
-						if(companyData["company"] !== "")
-						this.companyname = companyData["company"];
-
-
-					}, 0));
-				}
 
 			}
 
@@ -149,17 +123,17 @@ console.log(currentUrl);
 	setIconMenu()
 	{
 		console.log("In setIconMenu");
-		this.mHome= false;
-		this.mLogin = false;
-		this.mRequest = false;
-		this.mContact = false;
-		this.mAbout = false;
-		this.mStore = false;
+		for(let i=0; i < this.menuItems.length; i++)
+		{
+			this.menuItems[i]["active"] = false;
 
-		if (this.router.url.indexOf("home") !== -1) {
-			this.mHome = true;
+			if (this.router.url.indexOf(this.menuItems[i]["id"]) !== -1) {
+				this.menuItems[i]["active"] = true;
+			}
+
 		}
-
+		
+/*
 		if (this.router.url.indexOf("request") !== -1) {
 			this.mRequest = true;
 		}
@@ -175,6 +149,7 @@ console.log(currentUrl);
 		if (this.router.url.indexOf("store") !== -1) {
 			this.mStore = true;
 		}
+		*/
 
 	}
 	

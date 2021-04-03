@@ -15,7 +15,7 @@ import { enc } from "crypto-js";
 import { ignorewordsArr } from '../jsonfiles/ignorewords.js';
 
 @Injectable({ providedIn: 'root' })
-export class HelperService {
+export class HelpService {
 	adalConfig: any;
 	private interviwerEmailContent: any;
 	private interviweeEmailContent: any;	

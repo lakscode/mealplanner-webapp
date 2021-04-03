@@ -54,6 +54,8 @@ import { Landing1Module } from './landing1/landing1.module';
 import { RecipesModule } from './recipes/recipes.module'; 
 import { RecipedetailsModule } from './recipedetails/recipedetails.module'; 
 import { RecipesubmitModule } from './recipesubmit/recipesubmit.module'; 
+import { TestimonialsModule } from './testimonials/testimonials.module'; 
+
 @NgModule({
   declarations: [
 		AppComponent
@@ -87,7 +89,8 @@ import { RecipesubmitModule } from './recipesubmit/recipesubmit.module';
 	HomeModule,
 	RecipesModule,
 	RecipedetailsModule,
-	RecipesubmitModule
+	RecipesubmitModule,
+	TestimonialsModule
   ],
   schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
   providers: [UserService],

@@ -1,6 +1,6 @@
 import { Component,  ElementRef, ViewChild, Input, Output, OnInit, OnDestroy,  EventEmitter, AfterViewChecked,AfterViewInit  } from '@angular/core';
 import { FaqChatService } from './faq-chat.service';
-import { HelperService } from '../../../services/common';
+import { HelpService } from '../../../services/help.service';
 import { HttpClient } from '@angular/common/http';
 import { HttpErrorResponse } from '@angular/common/http';
 import { DBService } from '../../../dbservices/db.service';
@@ -60,7 +60,7 @@ export class FaqChatComponent implements OnInit, OnDestroy, AfterViewChecked, Af
    createConcernArr : Array<any>=[];
 createReportStep:any = 0;
    @ViewChild('scrollMe', null) private myScrollContainer: ElementRef;
-    constructor(private faqChatService: FaqChatService, private router: Router, private route: ActivatedRoute, private userService: UserService, private el: ElementRef, private httpService: HttpClient, private dbService: DBService, private helpService: HelperService, private toastrservice: ToastrService) {
+    constructor(private faqChatService: FaqChatService, private router: Router, private route: ActivatedRoute, private userService: UserService, private el: ElementRef, private httpService: HttpClient, private dbService: DBService, private helpService: HelpService, private toastrservice: ToastrService) {
       this.replymessage = "";
       this.msgid = "0";
       this.element = el.nativeElement;

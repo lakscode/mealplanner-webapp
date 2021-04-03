@@ -5,7 +5,7 @@ import { UserService } from '../services/user.service';
 import { HttpClient } from '@angular/common/http';
 import { HttpErrorResponse } from '@angular/common/http';
 import { DBService } from '../dbservices/db.service';
-import { HelperService } from '../services/common';
+import { HelpService } from '../services/help.service';
 
 @Component({
   selector: 'app-home',
@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
 userName: any;
 labels:any;
 
-  constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private helpService: HelperService, private dbService: DBService) {
+  constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private helpService: HelpService, private dbService: DBService) {
 	this.labels={"companyName":this.helpService.getConstants("companyName")};
 	}
 
