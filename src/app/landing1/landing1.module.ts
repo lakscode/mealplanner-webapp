@@ -5,14 +5,15 @@ import { Landing1RoutingModule } from './landing1-routing.module';
 import { Landing1Component } from './landing1.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import {SearchbarModule } from "../shared/modules"
 @NgModule({
   imports: [
     CommonModule,
     Landing1RoutingModule,
     FlexLayoutModule,
 	FormsModule,
-	ReactiveFormsModule
+	ReactiveFormsModule,
+  SearchbarModule
   ],
   declarations: [Landing1Component]
 })
