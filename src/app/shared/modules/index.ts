@@ -5,3 +5,4 @@ export * from './searchbar/searchbar.module';
 export * from './sliderpanel/sliderpanel.module';
 export * from './popular/popular.module';
 export * from './sidebar/sidebar.module';
+export * from './listpanel/listpanel.module';
