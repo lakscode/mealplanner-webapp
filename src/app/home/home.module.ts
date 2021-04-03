@@ -6,14 +6,15 @@ import { HomeComponent } from './home.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import {SearchbarModule, SliderpanelModule } from "../shared/modules"
 @NgModule({
   imports: [
     CommonModule,
     HomeRoutingModule,
 	FormsModule,
   ReactiveFormsModule,
-  NgbModule
+  NgbModule,
+  SliderpanelModule
   ],
   declarations: [HomeComponent]
 })
