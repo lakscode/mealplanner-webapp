@@ -55,6 +55,8 @@ import { RecipesModule } from './recipes/recipes.module';
 import { RecipedetailsModule } from './recipedetails/recipedetails.module'; 
 import { RecipesubmitModule } from './recipesubmit/recipesubmit.module'; 
 import { TestimonialsModule } from './testimonials/testimonials.module'; 
+import { PlannerlistModule } from './planner/plannerlist/plannerlist.module'; 
+import { PlannercreateModule } from './planner/plannercreate/plannercreate.module'; 
 
 @NgModule({
   declarations: [
@@ -90,7 +92,9 @@ import { TestimonialsModule } from './testimonials/testimonials.module';
 	RecipesModule,
 	RecipedetailsModule,
 	RecipesubmitModule,
-	TestimonialsModule
+	TestimonialsModule,
+	PlannerlistModule,
+	PlannercreateModule
   ],
   schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
   providers: [UserService],
