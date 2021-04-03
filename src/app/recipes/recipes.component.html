@@ -1,113 +1,3 @@
-<div style="margin-top:50px">Recipes
-</div>
-
-
-        <div class="site-section">
-          <div class="container">
-<section class="tstbite-components my-4 my-md-5">
-<h5 class="py-3 mb-0">Latest Recipes</h5>
-<div class="row">
-<div class="col-lg-3 col-md-4 col-6">
-<figure class="my-3 my-md-4 tstbite-card">
-<a href="recipe-sidebar.html" class="tstbite-animation stretched-link rounded-6">
-<img src="assets/1.jpg" class="w-100" alt="Menu">
-</a>
-<figcaption class="mt-2">
-<a href="recipe-sidebar.html" class="text-black d-block mt-1 font-weight-semibold big">Caramel Strawberry Milkshake</a>
-</figcaption>
-</figure>
-</div>
-<div class="col-lg-3 col-md-4 col-6">
-<figure class="my-3 my-md-4 tstbite-card">
-<a href="recipe-sidebar.html" class="tstbite-animation stretched-link rounded-6">
-<img src="assets/4.jpg" class="w-100" alt="Menu">
-</a>
-<figcaption class="mt-2">
-<a href="recipe-sidebar.html" class="text-black d-block mt-1 font-weight-semibold big">Cashew Vegan Rice</a>
-</figcaption>
-</figure>
-</div>
-<div class="col-lg-3 col-md-4 col-6">
-<figure class="my-3 my-md-4 tstbite-card">
-<a href="recipe-sidebar.html" class="tstbite-animation stretched-link rounded-6">
-<img src="assets/8.jpg" class="w-100" alt="Menu">
-</a>
-<figcaption class="mt-2">
-<a href="recipe-sidebar.html" class="text-black d-block mt-1 font-weight-semibold big">Smoked Salmon Salad Sandwich</a>
-</figcaption>
-</figure>
-</div>
-<div class="col-lg-3 col-md-4 col-6">
-<figure class="my-3 my-md-4 tstbite-card">
-<a href="recipe-sidebar.html" class="tstbite-animation stretched-link rounded-6">
-<img src="assets/17.jpg" class="w-100" alt="Menu">
-</a>
-<figcaption class="mt-2">
-<a href="recipe-sidebar.html" class="text-black d-block mt-1 font-weight-semibold big">Salmon in Creamy Sun Dried Tomato Sauce</a>
-</figcaption>
-</figure>
-</div>
-<div class="col-lg-3 col-md-4 col-6">
-<figure class="my-3 my-md-4 tstbite-card">
-<a href="recipe-sidebar.html" class="tstbite-animation stretched-link rounded-6">
-<img src="assets/4.jpg" class="w-100" alt="Menu">
-</a>
-<figcaption class="mt-2">
-<a href="recipe-sidebar.html" class="text-black d-block mt-1 font-weight-semibold big">Healthy Jam Waffle Breakfast</a>
-</figcaption>
-</figure>
-</div>
-<div class="col-lg-3 col-md-4 col-6">
-<figure class="my-3 my-md-4 tstbite-card">
-<a href="recipe-sidebar.html" class="tstbite-animation stretched-link rounded-6">
-<img src="assets/8.jpg" class="w-100" alt="Menu">
-</a>
-<figcaption class="mt-2">
-<a href="recipe-sidebar.html" class="text-black d-block mt-1 font-weight-semibold big">Chocolate and Banana Jar Cake</a>
-</figcaption>
-</figure>
-</div>
-<div class="col-lg-3 col-md-4 col-6">
-<figure class="my-3 my-md-4 tstbite-card">
-<a href="recipe-sidebar.html" class="tstbite-animation stretched-link rounded-6">
-<img src="assets/3.jpg" class="w-100" alt="Menu">
-</a>
-<figcaption class="mt-2">
-<a href="recipe-sidebar.html" class="text-black d-block mt-1 font-weight-semibold big">Caramel Blueberry Scones</a>
-</figcaption>
-</figure>
-</div>
-<div class="col-lg-3 col-md-4 col-6">
-<figure class="my-3 my-md-4 tstbite-card">
-<a href="recipe-sidebar.html" class="tstbite-animation stretched-link rounded-6">
-<img src="assets/1.jpg" class="w-100" alt="Menu">
-</a>
-<figcaption class="mt-2">
-<a href="recipe-sidebar.html" class="text-black d-block mt-1 font-weight-semibold big">Blueberry Carrot Cake</a>
-</figcaption>
-</figure>
-</div>
-<div class="col-lg-3 col-md-4 col-6">
-<figure class="my-3 my-md-4 tstbite-card">
-<a href="recipe-sidebar.html" class="tstbite-animation stretched-link rounded-6">
-<img src="assets/17.jpg" class="w-100" alt="Menu">
-</a>
-<figcaption class="mt-2">
-<a href="recipe-sidebar.html" class="text-black d-block mt-1 font-weight-semibold big">Vegan Cauliflower Salad</a>
-</figcaption>
-</figure>
-</div>
-
-</div>
-<div class="text-center py-5">
-<a href="#0" class="btn btn-outline-dark px-4 px-md-5 py-1 py-md-2 big font-weight-medium">Load More</a>
-</div>
-</section>
-</div>
-</div>
-
-
- 
 
 
 
@@ -127,12 +17,12 @@
   
   <div class="listing" *ngFor="let recipe of recipesList; let i = index;">
       <div class="image">
-          <a href="#">
+          <a href="/recipedetails">
               <img class= "tstbite-animation" src="{{recipe.image}}" alt="image">
           </a>
       </div>
       <div class="detail">
-          <h4><a href="#">{{recipe.title}}</a></h4>
+          <h4><a href="/recipedetails">{{recipe.title}}</a></h4>
           <p innerHTML = "{{recipe.description}}">
               
           </p>
@@ -182,12 +72,12 @@
  
   <div class="listing" *ngFor="let recipe of recipesList; let i = index;">
     <div class="image">
-        <a href="#">
+        <a href="/recipedetails">
             <img src="{{recipe.image}}" alt="image">
         </a>
     </div>
     <div class="detail">
-        <h4><a href="#">{{recipe.title}}</a></h4>
+        <h4><a href="/recipedetails">{{recipe.title}}</a></h4>
         <p innerHTML = "{{recipe.description}}">
             
         </p>
@@ -314,151 +204,9 @@
       </div>
   </div>
   <!--recipes search widget ends-->
+  <app-sidebar></app-sidebar>
+ 
   
-  <!--popular recipes widget-->
-  <div class="widget latest-news-widget">
-      <h2>popular recipes</h2>
-      <ul>
-          <li>
-              <div class="thumb">
-                  <a href="#">
-                      <img src="assets/images/temp-images/widget-thumbnail.jpg" alt="thumbnail">
-                  </a>
-              </div>
-              <div class="detail">
-                  <a href="#">Pimento Cheese Potato Skins</a>
-                  <span class="post-date">March 21,2015</span>
-              </div>
-          </li>
-  
-          <li>
-              <div class="thumb">
-                  <a href="#">
-                      <img src="assets/images/temp-images/widget-thumbnail.jpg" alt="thumbnail">
-                  </a>
-              </div>
-              <div class="detail">
-                  <a href="#">Pimento Cheese Potato Skins</a>
-                  <span class="post-date">March 21,2015</span>
-              </div>
-          </li>
-  
-          <li>
-              <div class="thumb">
-                  <a href="#">
-                      <img src="assets/images/temp-images/widget-thumbnail.jpg" alt="thumbnail">
-                  </a>
-              </div>
-              <div class="detail">
-                  <a href="#">Pimento Cheese Potato Skins</a>
-                  <span class="post-date">March 21,2015</span>
-              </div>
-          </li>
-  
-          <li>
-              <div class="thumb">
-                  <a href="#">
-                      <img src="assets/images/temp-images/widget-thumbnail.jpg" alt="thumbnail">
-                  </a>
-              </div>
-              <div class="detail">
-                  <a href="#">Pimento Cheese Potato Skins</a>
-                  <span class="post-date">March 21,2015</span>
-              </div>
-          </li>
-  
-      </ul>
-  </div>
-  <!--popular recipes widget ends-->
-  <div class="widget">
-      <a href="#">
-          <img src="assets/images/temp-images/add-side.jpg" alt="Add">
-      </a>
-  </div>
-  <!--latest news widget-->
-  <div class="widget latest-news-widget">
-      <h2>Latest News</h2>
-      <ul>
-          <li>
-              <div class="thumb">
-                  <a href="#">
-                      <img src="assets/images/temp-images/widget-thumbnail.jpg" alt="thumbnail">
-                  </a>
-              </div>
-              <div class="detail">
-                  <a href="#">Pimento Cheese Potato Skins</a>
-                  <span class="post-date">March 21,2015</span>
-              </div>
-          </li>
-  
-          <li>
-              <div class="thumb">
-                  <a href="#">
-                      <img src="assets/images/temp-images/widget-thumbnail.jpg" alt="thumbnail">
-                  </a>
-              </div>
-              <div class="detail">
-                  <a href="#">Pimento Cheese Potato Skins</a>
-                  <span class="post-date">March 21,2015</span>
-              </div>
-          </li>
-  
-          <li>
-              <div class="thumb">
-                  <a href="#">
-                      <img src="assets/images/temp-images/widget-thumbnail.jpg" alt="thumbnail">
-                  </a>
-              </div>
-              <div class="detail">
-                  <a href="#">Pimento Cheese Potato Skins</a>
-                  <span class="post-date">March 21,2015</span>
-              </div>
-          </li>
-  
-          <li>
-              <div class="thumb">
-                  <a href="#">
-                      <img src="assets/images/temp-images/widget-thumbnail.jpg" alt="thumbnail">
-                  </a>
-              </div>
-              <div class="detail">
-                  <a href="#">Pimento Cheese Potato Skins</a>
-                  <span class="post-date">March 21,2015</span>
-              </div>
-          </li>
-  
-      </ul>
-  </div>
-  <!--latest news widget ends-->
-  <!--get social-->
-  <div class="widget widget-get-social">
-      <h2>get social</h2>
-      <ul>
-          <li class="facebook">
-              <a href="#">
-                  <i class="fa fa-facebook"></i>
-                  <span class="count">23.5K</span>
-                  <span class="count-type">Likes</span>
-              </a>
-          </li>
-          <li class="twitter">
-              <a href="#">
-                  <i class="fa fa-twitter"></i>
-                  <span class="count">23.5K</span>
-                  <span class="count-type">Likes</span>
-              </a>
-          </li>
-          <li class="google-plus">
-              <a href="#">
-                  <i class="fa fa-google-plus"></i>
-                  <span class="count">23.5K</span>
-                  <span class="count-type">Likes</span>
-              </a>
-          </li>
-  
-      </ul>
-  </div>
-  <!--get social ends-->
   </div>
   </aside>
   </div>
@@ -466,3 +214,116 @@
   
   </div>
   </div>
+
+
+  <div style="margin-top:50px">Recipes
+  </div>
+  
+  
+          <div class="site-section">
+            <div class="container">
+  <section class="tstbite-components my-4 my-md-5">
+  <h5 class="py-3 mb-0">Latest Recipes</h5>
+  <div class="row">
+  <div class="col-lg-3 col-md-4 col-6">
+  <figure class="my-3 my-md-4 tstbite-card">
+  <a href="recipe-sidebar.html" class="tstbite-animation stretched-link rounded-6">
+  <img src="assets/1.jpg" class="w-100" alt="Menu">
+  </a>
+  <figcaption class="mt-2">
+  <a href="recipe-sidebar.html" class="text-black d-block mt-1 font-weight-semibold big">Caramel Strawberry Milkshake</a>
+  </figcaption>
+  </figure>
+  </div>
+  <div class="col-lg-3 col-md-4 col-6">
+  <figure class="my-3 my-md-4 tstbite-card">
+  <a href="recipe-sidebar.html" class="tstbite-animation stretched-link rounded-6">
+  <img src="assets/4.jpg" class="w-100" alt="Menu">
+  </a>
+  <figcaption class="mt-2">
+  <a href="recipe-sidebar.html" class="text-black d-block mt-1 font-weight-semibold big">Cashew Vegan Rice</a>
+  </figcaption>
+  </figure>
+  </div>
+  <div class="col-lg-3 col-md-4 col-6">
+  <figure class="my-3 my-md-4 tstbite-card">
+  <a href="recipe-sidebar.html" class="tstbite-animation stretched-link rounded-6">
+  <img src="assets/8.jpg" class="w-100" alt="Menu">
+  </a>
+  <figcaption class="mt-2">
+  <a href="recipe-sidebar.html" class="text-black d-block mt-1 font-weight-semibold big">Smoked Salmon Salad Sandwich</a>
+  </figcaption>
+  </figure>
+  </div>
+  <div class="col-lg-3 col-md-4 col-6">
+  <figure class="my-3 my-md-4 tstbite-card">
+  <a href="recipe-sidebar.html" class="tstbite-animation stretched-link rounded-6">
+  <img src="assets/17.jpg" class="w-100" alt="Menu">
+  </a>
+  <figcaption class="mt-2">
+  <a href="recipe-sidebar.html" class="text-black d-block mt-1 font-weight-semibold big">Salmon in Creamy Sun Dried Tomato Sauce</a>
+  </figcaption>
+  </figure>
+  </div>
+  <div class="col-lg-3 col-md-4 col-6">
+  <figure class="my-3 my-md-4 tstbite-card">
+  <a href="recipe-sidebar.html" class="tstbite-animation stretched-link rounded-6">
+  <img src="assets/4.jpg" class="w-100" alt="Menu">
+  </a>
+  <figcaption class="mt-2">
+  <a href="recipe-sidebar.html" class="text-black d-block mt-1 font-weight-semibold big">Healthy Jam Waffle Breakfast</a>
+  </figcaption>
+  </figure>
+  </div>
+  <div class="col-lg-3 col-md-4 col-6">
+  <figure class="my-3 my-md-4 tstbite-card">
+  <a href="recipe-sidebar.html" class="tstbite-animation stretched-link rounded-6">
+  <img src="assets/8.jpg" class="w-100" alt="Menu">
+  </a>
+  <figcaption class="mt-2">
+  <a href="recipe-sidebar.html" class="text-black d-block mt-1 font-weight-semibold big">Chocolate and Banana Jar Cake</a>
+  </figcaption>
+  </figure>
+  </div>
+  <div class="col-lg-3 col-md-4 col-6">
+  <figure class="my-3 my-md-4 tstbite-card">
+  <a href="recipe-sidebar.html" class="tstbite-animation stretched-link rounded-6">
+  <img src="assets/3.jpg" class="w-100" alt="Menu">
+  </a>
+  <figcaption class="mt-2">
+  <a href="recipe-sidebar.html" class="text-black d-block mt-1 font-weight-semibold big">Caramel Blueberry Scones</a>
+  </figcaption>
+  </figure>
+  </div>
+  <div class="col-lg-3 col-md-4 col-6">
+  <figure class="my-3 my-md-4 tstbite-card">
+  <a href="recipe-sidebar.html" class="tstbite-animation stretched-link rounded-6">
+  <img src="assets/1.jpg" class="w-100" alt="Menu">
+  </a>
+  <figcaption class="mt-2">
+  <a href="recipe-sidebar.html" class="text-black d-block mt-1 font-weight-semibold big">Blueberry Carrot Cake</a>
+  </figcaption>
+  </figure>
+  </div>
+  <div class="col-lg-3 col-md-4 col-6">
+  <figure class="my-3 my-md-4 tstbite-card">
+  <a href="recipe-sidebar.html" class="tstbite-animation stretched-link rounded-6">
+  <img src="assets/17.jpg" class="w-100" alt="Menu">
+  </a>
+  <figcaption class="mt-2">
+  <a href="recipe-sidebar.html" class="text-black d-block mt-1 font-weight-semibold big">Vegan Cauliflower Salad</a>
+  </figcaption>
+  </figure>
+  </div>
+  
+  </div>
+  <div class="text-center py-5">
+  <a href="#0" class="btn btn-outline-dark px-4 px-md-5 py-1 py-md-2 big font-weight-medium">Load More</a>
+  </div>
+  </section>
+  </div>
+  </div>
+  
+  
+   
+  

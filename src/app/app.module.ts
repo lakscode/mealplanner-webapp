@@ -53,7 +53,7 @@ import { Landing1Module } from './landing1/landing1.module';
 
 import { RecipesModule } from './recipes/recipes.module'; 
 import { RecipedetailsModule } from './recipedetails/recipedetails.module'; 
-
+import { RecipesubmitModule } from './recipesubmit/recipesubmit.module'; 
 @NgModule({
   declarations: [
 		AppComponent
@@ -86,7 +86,8 @@ import { RecipedetailsModule } from './recipedetails/recipedetails.module';
 	FaqChatModule,
 	HomeModule,
 	RecipesModule,
-	RecipedetailsModule
+	RecipedetailsModule,
+	RecipesubmitModule
   ],
   schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
   providers: [UserService],
