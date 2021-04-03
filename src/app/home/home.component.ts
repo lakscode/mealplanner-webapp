@@ -16,13 +16,16 @@ export class HomeComponent implements OnInit {
 userName: any;
 labels:any;
 healthLabels: Array<any> = [];
+stepsList: Array<any> = [];
+
   constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private helpService: HelpService, private dbService: DBService) {
 	this.labels={"companyName":this.helpService.getConstants("companyName")};
 	}
 
-  ngOnInit() {
-	  this.loadHealthLabels();
-    this.userService.loggedinUser().subscribe(userdata => setTimeout(() => {
+  	ngOnInit() {
+	  	this.loadHealthLabels();
+		this.loadSteps(); 
+    	this.userService.loggedinUser().subscribe(userdata => setTimeout(() => {
 			if (userdata !== null && typeof (userdata['loggedIn']) !== "undefined") {
 				if (userdata['loggedIn'] == false) {
 				//	this.router.navigate(["login", { redirectUrl: encodeURI(this.router.url) }]);
@@ -36,19 +39,33 @@ healthLabels: Array<any> = [];
 			}
 		}, 0));
   
-}
-loadHealthLabels()
-{
-this.healthLabels = [];
+	}
 
-this.healthLabels.push({"label":"7 Week Meal Plan", "image":"assets/images/temp-images/listing-1.jpg"});
-this.healthLabels.push({"label":"Low-Carb", "image":"assets/images/temp-images/listing-2.jpg"});
-this.healthLabels.push({"label":"Gluten-Free", "image":"assets/images/temp-images/listing-3.jpg"});
-this.healthLabels.push({"label":"Pescatarian", "image":"assets/images/temp-images/listing-1.jpg"});
-this.healthLabels.push({"label":"Vegetarian", "image":"assets/images/temp-images/listing-2.jpg"});
-this.healthLabels.push({"label":"Vegan", "image":"assets/images/temp-images/listing-3.jpg"});
+	loadHealthLabels()
+	{
+		this.healthLabels = [];
 
-}
+		this.healthLabels.push({"label":"7 Week Meal Plan", "image":"assets/images/temp-images/listing-1.jpg"});
+		this.healthLabels.push({"label":"Low-Carb", "image":"assets/images/temp-images/listing-2.jpg"});
+		this.healthLabels.push({"label":"Gluten-Free", "image":"assets/images/temp-images/listing-3.jpg"});
+		this.healthLabels.push({"label":"Pescatarian", "image":"assets/images/temp-images/listing-1.jpg"});
+		this.healthLabels.push({"label":"Vegetarian", "image":"assets/images/temp-images/listing-2.jpg"});
+		this.healthLabels.push({"label":"Vegan", "image":"assets/images/temp-images/listing-3.jpg"});
+
+	}
+
+	loadSteps()
+	{
+		this.stepsList = [];
+
+		this.stepsList.push({"label":"Browse", "subtitle":"Healthy Recipes", "image":"assets/images/temp-images/listing-1.jpg", "description":"We've got hundreds of delicious recipes for every taste and dietary preference. Browse them all using our Search and Filter tools and choose the ones that are right for you."});
+
+		this.stepsList.push({"label":"Choose", "subtitle":"Meal Plan","image":"assets/images/temp-images/balance-meals-z.jpg", "description":"Use our Meal Planning tool to add recipes to your weekly meal plan. It's as simple as drag and drop (or select and place on mobile). You can add as many recipes as you want and keep track of your daily calorie intake."});
+
+		this.stepsList.push({"label":"Design", "subtitle":"Meal Plan","image":"assets/images/temp-images/Meal-Planning.jpg", "description":"Decide when you would like to eat your recipes by placing them on your calendar. Your meal plan is completely flexible to accommodate your schedule"});
+
+
+	}
 }
 
 

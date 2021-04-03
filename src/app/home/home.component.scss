@@ -559,3 +559,46 @@ img {
 .leanmore:hover{
   box-shadow: 0 0 15px 0 #77c14b;
 }
+
+
+.rowalt:nth-child(even) {
+  direction: rtl;
+}
+.rowalt:nth-child(odd) .image {
+  text-align: right
+}
+
+.title
+{
+  font-size: 2.5rem;
+  font-weight:bold;
+}
+.subtitle {
+  font-size: 2rem;
+  font-weight:bold;
+  color: #69C401 !important;
+}
+.description
+{
+  font-size: 1.5rem;
+}
+
+.getstarted
+{
+  font-size: 1.5rem;
+  font-weight:bold;
+  background: #69C401 !important; font-size: 2.5rem;
+  color:#FFF;
+
+  border-color: #5fa138;
+  box-shadow: 0 0 5px 0 #77c14b;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  border-radius: 1rem !important;
+
+  padding: 1rem 2rem !important;
+
+}
+.getstarted:hover
+{
+  box-shadow: 0 0 15px 0 #77c14b;
+}
