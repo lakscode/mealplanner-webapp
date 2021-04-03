@@ -23,9 +23,12 @@ export class LoginComponent implements OnInit {
 	userDatadetail: any = {};
 	loginForm: FormGroup;
 	submitted = false;
+	userObj:any;
 	users: any;
 	constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
 		this.userName = ""; this.passWord = "";
+
+		this.userObj={"username":"","password":""};
 	}
 
 	ngOnInit() {

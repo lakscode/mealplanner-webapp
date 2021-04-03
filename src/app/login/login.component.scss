@@ -1,264 +1,147 @@
 @import "../../_variables.scss";
-.site-footer
-{
-    position:fixed !important; 
-    bottom:0 !important;
+
+.clearfix:after,.clearfix:before{content:'';display:table}
+.clearfix:after{clear:both;display:block}
+a{color:inherit;text-decoration:none}
+
+.login-wrap{
+  width:100%;
+  margin:auto;
+  max-width:525px;
+  width:100%;
+  min-height:500px;
+  position:relative;
+  background:url(https://raw.githubusercontent.com/khadkamhn/day-01-login-form/master/img/bg.jpg) no-repeat center;
+  box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
 }
-
-
-:host {
-  padding: 0px;
-  display: flex;
-  flex-direction: column;
-  /* margin-top:-40px; */
-      width: 100%;
-    min-height: 90vh;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-   
-
-    position: relative;
-    z-index: 1;
-
+.login-html{
+  width:100%;
+  height:100%;
+  position:absolute;
+  //padding:90px 70px 50px 70px;
+  padding: 40px 30px 30px 30px;
+  //background:rgba(40,57,101,.9);
+  background: #f2eeec;
+  //color:#6EBE3B;
 }
-
-
-.loginPanel {
-    width: 450px;
-    border-radius: 10px;
-    overflow: hidden;
-    padding: 15px 30px 37px 30px;
-    background:#FFF;
- 
-
+.login-html .sign-in-htm,
+.login-html .sign-up-htm{
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  position:absolute;
+  transform:rotateY(180deg);
+  backface-visibility:hidden;
+  transition:all .4s linear;
 }
-
-.loginPanel .form-logo {
-    font-size: 60px;
-    color: #333333;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 160px;
-    height: 90px;
-    border-radius: 50%;
-
-    margin: 0 auto;
+.login-html .sign-in,
+.login-html .sign-up,
+.login-form .group .check{
+  display:none;
 }
-.loginPanel .form-logo  img{
-width:100%;
+.login-html .tab,
+.login-form .group .label,
+.login-form .group .button{
+  text-transform:uppercase;
 }
-.loginPanel  .title {
-    
-    font-size: 16px;
-    color: #000;
-    line-height: 1.2;
-    text-align: left;
-    text-transform: uppercase;
-    display: block;
-    font-weight:bold;
-}
-.form-label
-{
-  text-transform: uppercase;
-  font-size:$font_extra_small;
-}
-.fieldicon
-{
-  border:1px solid #000;
-}
-.ficon{
-
-    color: white;
-    min-width: 30px;
-    display:inline-block;
-
-}
-.ficon i{
-  color: #000;
-  background: white;
-  text-align: center;
-  padding: 10px;
-}
-.ffield
-{
+.login-html .tab{
+  font-size:22px;
+  margin-right:15px;
+  padding-bottom:5px;
+  margin:0 15px 10px 0;
   display:inline-block;
-  width: 335px;
+  border-bottom:2px solid transparent;
 }
-/*********************** new design ****************************/
-.form-control-placeholder-login {
-    position: absolute;
-    top: 0;
-    padding: 7px 0 0 43px;
-    transition: all 200ms;
-    opacity: 0.5;
-
-  }
-  .form-control-login
-  {
-  font-size: 0.8rem;
-  }
-  
-  .form-control-login:focus + .form-control-placeholder-login,
-  .form-control-login:valid + .form-control-placeholder-login {
-    font-size: 75%;
-    transform: translate3d(0, -100%, 0);
-    opacity: 1;
-    
-  }
-
-.input-container {
-    display: -ms-flexbox; /* IE10 */
-    display: flex;
-    width: 100%;
-    margin-bottom: 15px;
-    border-radius:20px;
-  }
-  
-  .icon {
-    padding: 10px;
-    background: dodgerblue;
-    color: #000;
-    min-width: 50px;
-    text-align: center;
-  }
-  
-  .input-field {
-    width: 100%;
-    padding: 10px;
-    outline: none;
-  }
-  
-  .input-field:focus {
-    border: 2px solid dodgerblue;
-  }
-  
-  /* Set a style for the submit button */
-  .btn {
-    background-color: dodgerblue;
-    color: #000;
-    padding: 15px 20px;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-    opacity: 0.9;
-  }
-  
-  .btn:hover {
-    opacity: 1;
-  }
-
-
-  
-.loginButton {
-	/*box-shadow: 0px 10px 14px -7px #c1661b;
-	background:linear-gradient(to bottom, #f47f20 5%, #f47f20 100%);
-	background-color:#f47f20;
-	border-radius:4px;
-	border:1px solid #ef8133;
-	display:inline-block;
-	cursor:pointer;
-	color:#ffffff;
-	font-family:Arial;
-	font-size:14px;
-	font-weight:bold;
-	padding:10px 28px;
-	text-decoration:none;
-  text-shadow:0px 1px 0px #f47f20;
-  */
-
-	background-color:#000;
-	border-radius:15px;
-	border:1px solid #000;
-	display:inline-block;
-	cursor:pointer;
-	color:#ffffff;
-	font-family:Arial;
-	font-size:14px;
-	font-weight:bold;
-	padding:4px 20px;
-  text-decoration:none;
-  
+.login-html .sign-in:checked + .tab,
+.login-html .sign-up:checked + .tab{
+  color:#8acd5f;
+  border-color:$primary;
 }
-.loginButton:hover, .loginButton:active {
-outline:0;
+.login-form{
+  min-height:345px;
+  position:relative;
+  perspective:1000px;
+  transform-style:preserve-3d;
 }
-/*
-.loginButton:hover {
-	background:linear-gradient(to bottom, #f47f20 5%, #d46306 100%);
-	background-color:#f47f20;
+.login-form .group{
+  margin-bottom:15px;
 }
-.loginButton:active {
-	position:relative;
-	top:1px;
+.login-form .group .label,
+.login-form .group .input,
+.login-form .group .button{
+  width:100%;
+  color:#000;
+  display:block;
 }
-*/
-     
-/************************* input icon ********/
-
-.inputWithIcon input[type="text"], .inputWithIcon input[type="password"] {
-  width: 100%;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  margin: 0px 0;
-  outline: none;
-  padding: 8px;
-  box-sizing: border-box;
-  transition: 0.3s;
+.login-form .group .input,
+.login-form .group .button{
+  border:none;
+  padding:5px 10px;
+  border-radius:25px;
+ // background:rgba(255,255,255,.1);
+}
+.login-form .group input[data-type="password"]{
+  text-security:circle;
+  -webkit-text-security:circle;
+}
+.login-form .group .label{
+  color:#000;
+  font-size:12px;
+}
+.login-form .group .button{
+  background:#8acd5f;
+}
+.login-form .group label .icon{
+  width:15px;
+  height:15px;
+  border-radius:2px;
+  position:relative;
+  display:inline-block;
+  background:rgba(255,255,255,.1);
+}
+.login-form .group label .icon:before,
+.login-form .group label .icon:after{
+  content:'';
+  width:10px;
+  height:2px;
+  background:#fff;
+  position:absolute;
+  transition:all .2s ease-in-out 0s;
+}
+.login-form .group label .icon:before{
+  left:3px;
+  width:5px;
+  bottom:6px;
+  transform:scale(0) rotate(0);
+}
+.login-form .group label .icon:after{
+  top:6px;
+  right:0;
+  transform:scale(0) rotate(0);
+}
+.login-form .group .check:checked + label{
+  color:#fff;
+}
+.login-form .group .check:checked + label .icon{
+  background:$primary;
+}
+.login-form .group .check:checked + label .icon:before{
+  transform:scale(1) rotate(45deg);
+}
+.login-form .group .check:checked + label .icon:after{
+  transform:scale(1) rotate(-45deg);
+}
+.login-html .sign-in:checked + .tab + .sign-up + .tab + .login-form .sign-in-htm{
+  transform:rotate(0);
+}
+.login-html .sign-up:checked + .tab + .login-form .sign-up-htm{
+  transform:rotate(0);
 }
 
-// .inputWithIcon input[type="text"]:focus, .inputWithIcon input[type="password"]:focus {
-//   border-color: dodgerBlue;
-//   box-shadow: 0 0 8px 0 dodgerBlue;
-// }
-
-.inputWithIcon input[type="text"], .inputWithIcon input[type="password"] {
-  padding-left: 40px;
-}
-
-.inputWithIcon {
-  position: relative;
-}
-
-.inputWithIcon i {
-  position: absolute;
-  left: 0;
-  top: 4px;
-  padding: 9px 11px;
-  color: #aaa;
-  transition: 0.3s;
-}
-.inputWithIcon img {
-  position: absolute;
-  left: 9px;
-  top: 11px;
-  transition: 0.3s;
-  width:16px;
-  height:14px;
-}
-
-// .inputWithIcon input[type="text"]:focus + i, .inputWithIcon input[type="password"]:focus + i {
-//   color: dodgerBlue;
-// }
-
-.inputWithIcon.inputIconBg i {
-  background-color: #aaa;
-  color: #fff;
-  padding: 9px 5px;
-  border-radius: 4px 0 0 4px;
-}
-
-.inputWithIcon.inputIconBg input[type="text"]:focus + i, .inputWithIcon.inputIconBg input[type="password"]:focus + i {
-  color: #fff;
-  background-color: dodgerBlue;
+.loginerror
+{
+  color:red;
+background: #D1d2d3;
+  padding: 5px;
 }
