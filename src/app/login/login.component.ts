@@ -118,6 +118,7 @@ export class LoginComponent implements OnInit {
 			{
 					this.router.navigateByUrl('/', {skipLocationChange: true}).then(() =>
 				this.router.navigate(['landing1']));
+			
 			}
 			else {
 				this.router.navigate([this.redirecturl]);;

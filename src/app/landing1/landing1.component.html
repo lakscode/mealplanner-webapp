@@ -1,7 +1,38 @@
 
 
-<app-sliderpanel></app-sliderpanel>
-
+<!--<app-sliderpanel></app-sliderpanel>-->
+<!--<app-searchbar></app-searchbar>
+<section class="wrapper-home-slider variation-two">
+    <div class="fluid-slider-var2">
+        <div *ngFor="let item of sliderList; let i=index">
+  
+            <img src="{{item.image}}" alt=""/>
+  
+            <div class="container custom-container-slide">
+                <div class="slide-detail text-center">
+                    <div class="slide-detail-inner">
+                        <h2><a href="#">{{item.title}}</a></h2>
+  
+                        <div class="short-separator"></div>
+                        <div class="rating-box" *ngIf="item.rating">
+                            <span class="rating-icons" *ngFor="let item of [1,2,3,4,5]">
+                              <i class="fa fa-star"></i>
+                            </span>
+                            <br>
+                            <span class="rating-figure">{{item.rating}}</span>
+                        </div>
+                        <p innerHTML = "{{item.description}}">
+                        </p>
+                        <a class="read-more-bordered" href="#">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+      
+        
+    </div>
+  </section>
+-->
 
 <section class="good-food" style="padding-bottom: 80px;
 background: #FFF; margin-bottom:0px;">
@@ -204,12 +235,13 @@ background: #FFF; margin-bottom:0px;">
                   <div class="graphic-box">
                       <div class="news-visuals">
                           <div class="latest-news-slider">
-                              <div>
+                            <a href="#"><img src="assets/images/temp-images/new-var2.jpg" alt="image"/></a>
+                              <!--<div>
                                   <a href="#"><img src="assets/images/temp-images/new-var2.jpg" alt="image"/></a>
                               </div>
                               <div>
                                   <a href="#"><img src="assets/images/temp-images/new-var2.jpg" alt="image"/></a>
-                              </div>
+                              </div>-->
                           </div>
                       </div>
                   </div>

@@ -101,17 +101,7 @@ console.log(currentUrl);
 				this.loggedIn = true;
 				this.userRole =  this.currentUser["role"];
 				this.userRoleDet = this.currentUser["role"];
-				if(this.currentUser["role"] == "DM")
-				this.userRoleDet =  "Decision Maker";
 
-				if(this.currentUser["role"] == "IV")
-				this.userRoleDet =  "Interviewer";
-
-				if(this.currentUser["role"] == "IN")
-				this.userRoleDet =  "Investigator";
-
-				if(this.currentUser["role"] == "ADMIN")
-				this.userRoleDet =  "Administrator";
 				this.setIconMenu();
 
 				this.companylogo = 'assets/logo-dark.png';
@@ -121,7 +111,7 @@ console.log(currentUrl);
 
 		}, 0));
 	}
-
+	
 	setIconMenu()
 	{
 		console.log("In setIconMenu");
@@ -134,25 +124,6 @@ console.log(currentUrl);
 			}
 
 		}
-		
-/*
-		if (this.router.url.indexOf("request") !== -1) {
-			this.mRequest = true;
-		}
-		console.log(this.mRequest);
-		if (this.router.url.indexOf("contact") !== -1) {
-			this.mContact = true;
-		}
-
-		if (this.router.url.indexOf("about") !== -1) {
-			this.mAbout = true;
-		}
-
-		if (this.router.url.indexOf("store") !== -1) {
-			this.mStore = true;
-		}
-		*/
-
 	}
 	
 	logout()
@@ -164,7 +135,7 @@ console.log(currentUrl);
 
 		sessionStorage.setItem('currentUser', "");
 		
-		this.router.navigate(['login']);
+	//	this.router.navigate(['login']);
 	}
 	
 	navbarOpen = false;
