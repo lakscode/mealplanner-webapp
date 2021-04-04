@@ -116,8 +116,10 @@ export class LoginComponent implements OnInit {
 			
 			if (this.redirecturl == "")
 			{
-					this.router.navigateByUrl('/', {skipLocationChange: true}).then(() =>
-				this.router.navigate(['landing1']));
+					/*this.router.navigateByUrl('/', {skipLocationChange: true}).then(() =>
+				this.router.navigate(['landing1'])); */
+				
+				window.location.href = "/landing1";
 			
 			}
 			else {
