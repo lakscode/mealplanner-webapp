@@ -66,6 +66,7 @@ console.log(currentUrl);
 				]
 			},
 			{"id":"features", "menu":"Features", "link":"/features", "display":displayMenu, "active":false},
+			{"id":"pricing", "menu":"Pricing", "link":"/pricing", "display":displayMenu, "active":false},
 			{"id":"contact", "menu":"Contact", "link":"/contact", "display":displayMenu, "active":false},
 			{"id":"schedule", "menu":"Schedule Demo", "link":"/scheduledemo", "display":displayMenu, "active":false},
 			

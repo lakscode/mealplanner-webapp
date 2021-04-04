@@ -1,0 +1,65 @@
+<div id="generic_price_table">   
+<section>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="price-heading clearfix">
+                        <h1>Pricing</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            
+            <!--BLOCK ROW START-->
+            <div class="row">
+
+
+                 
+                <div class="col-md-4"  *ngFor="let package of packages; let i = index;">
+                      <div class="generic_content active  clearfix packageitem"><!--active-->
+                          <div class="generic_head_price clearfix">
+                               <div class="generic_head_content clearfix">
+                                  <div class="head_bg"></div>
+                                  <div class="head">
+                                      <span>{{package.name}}</span>
+                                  </div>                                 
+                              </div>
+                              <div class="generic_price_tag clearfix">  
+                                  <span class="price">
+                                      <span *ngIf="package.payment !== 'FREE'" class="sign">$</span>
+                                      <span class="currency">{{package.payment}}</span>
+                                      <!--<span class="cent">.99</span>-->
+                                      <span *ngIf="package.payment !== 'FREE'" class="month">/MON</span>
+                                  </span>
+                              </div>
+                             
+                          </div>                            
+
+                          <div class="generic_feature_list">
+                            <ul>
+                              <!--  <li><span>2GB</span> Bandwidth</li>
+                                  <li><span>150GB</span> Storage</li>
+                                  <li><span>12</span> Accounts</li>
+                                  <li><span>7</span> Host Domain</li>
+                                  <li><span>24/7</span> Support</li>-->
+                                  <li *ngFor="let option of package.options; let j=index;">{{option}}</li>
+                              </ul>
+                          </div>
+
+                          <div class="generic_price_btn clearfix">
+                            <a class="" href="">Sign up</a>
+                          </div>
+
+                          
+                      </div>
+
+                          
+                  </div>
+
+            </div>  
+
+            
+        </div>
+    </section>             
+ </div>
