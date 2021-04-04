@@ -58,6 +58,7 @@ import { TestimonialsModule } from './testimonials/testimonials.module';
 import { PlannerlistModule } from './planner/plannerlist/plannerlist.module'; 
 import { PlannercreateModule } from './planner/plannercreate/plannercreate.module'; 
 import { PricingModule } from './pricing/pricing.module'; 
+import { OurteamModule } from './ourteam/ourteam.module'; 
 @NgModule({
   declarations: [
 		AppComponent
@@ -96,7 +97,8 @@ import { PricingModule } from './pricing/pricing.module';
 	TestimonialsModule,
 	PlannerlistModule,
 	PlannercreateModule,
-	PricingModule
+	PricingModule,
+	OurteamModule
   ],
   schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
   providers: [UserService],

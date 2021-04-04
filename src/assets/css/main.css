@@ -2506,7 +2506,7 @@ a.mean-expand {
 /* chefs banner
 /*--------------------*/
 .chefs-banner {
-  background-image: url("../images/temp-images/chefs-banner.jpg");
+  background-image: url("../assets/images/temp-images/chefs-banner.jpg");
   background-size: cover;
   background-position: center bottom;
   position: relative;
@@ -3001,10 +3001,10 @@ a.mean-expand {
   background: #000000;
 }
 .banner-blog {
-  background-image: url("../images/temp-images/banner-blog.jpg");
+  background-image: url("../assets/images/temp-images/banner-blog.jpg");
 }
 .banner-chef {
-  background-image: url("../images/temp-images/banner-chefs.jpg");
+  background-image: url("../assets/images/temp-images/banner-chefs.jpg");
 }
 /*-----------------------------------------------------------------------------------*/
 /* banner ends
@@ -4675,7 +4675,7 @@ div.widget-measurements .default-btn {
 .ingredients-checkbox .ingredients {
   padding: 0 25px;
   width: 58%;
-  background-image: url("../images/bg-ingredients.png");
+  background-image: url("../assets/images/bg-ingredients.png");
   background-repeat: no-repeat;
   background-position: right bottom;
 }
@@ -4714,7 +4714,7 @@ div.widget-measurements .default-btn {
   margin-top: -2px;
 }
 .ingredients-checkbox .nutritional {
-  background-image: url("../images/bg-nutritional.png");
+  background-image: url("../assets/images/bg-nutritional.png");
   background-repeat: no-repeat;
   background-position: right top;
   padding: 0 25px;
@@ -4759,7 +4759,7 @@ div.widget-measurements .default-btn {
   border: 1px solid #c9d6bf;
   background-color: #eff9e8;
   padding: 32px;
-  background-image: url("../images/bg-tips.png");
+  background-image: url("../assets/images/bg-tips.png");
   background-repeat: no-repeat;
   background-position: right bottom;
   margin-bottom: 44px;

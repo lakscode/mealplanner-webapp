@@ -26,6 +26,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 	userRole : string;
 	loggedIn : any;
 	menuItems: any[];
+	menuItems1: any[];
 	menuItemsCustom: any[];
 	currentUser : User;
 	userRoleDet: any;
@@ -58,7 +59,7 @@ console.log(currentUrl);
 				[
 
 					{"id":"howitworks", "menu":"How it works", "link":"/howitworks", "display":displayMenu, "active":false},
-					{"id":"aboutus", "menu":"About the Team", "link":"/aboutus", "display":displayMenu, "active":false},
+					{"id":"aboutus", "menu":"About the Team", "link":"/ourteam", "display":displayMenu, "active":false},
 					{"id":"benefits", "menu":"Benefits", "link":"/benefits", "display":displayMenu, "active":false},
 					{"id":"display", "menu":"FAQs", "link":"/faqs", "display":displayMenu, "active":false},
 					{"id":"blogs", "menu":"Blogs", "link":"/blogs", "display":displayMenu, "active":false},
@@ -69,6 +70,32 @@ console.log(currentUrl);
 			{"id":"pricing", "menu":"Pricing", "link":"/pricing", "display":displayMenu, "active":false},
 			{"id":"contact", "menu":"Contact", "link":"/contact", "display":displayMenu, "active":false},
 			{"id":"schedule", "menu":"Schedule Demo", "link":"/scheduledemo", "display":displayMenu, "active":false},
+			
+		];
+		this.menuItems1= [
+			{"id":"home", "menu":"Home", "link":"/landing1", "display":displayMenu, "active":false,
+				"children":
+				[
+
+					{"id":"howitworks", "menu":"How it works", "link":"/howitworks", "display":displayMenu, "active":false},
+					{"id":"aboutus", "menu":"Our Team", "link":"/ourteam", "display":displayMenu, "active":false},
+					{"id":"benefits", "menu":"Benefits", "link":"/benefits", "display":displayMenu, "active":false},
+					{"id":"display", "menu":"FAQs", "link":"/faqs", "display":displayMenu, "active":false},
+					{"id":"blogs", "menu":"Blogs", "link":"/blogs", "display":displayMenu, "active":false},
+					{"id":"testimonials", "menu":"Testimonials", "link":"/testimonials", "display":displayMenu, "active":false}
+				]
+			},
+			{"id":"recipes", "menu":"Recipes", "link":"/recipes", "display":displayMenu, "active":false},
+			{"id":"planner", "menu":"Planner", "link":"/plan-list", "display":displayMenu, "active":false,
+				"children":
+				[
+
+					{"id":"plan-list", "menu":"Plan List", "link":"/plan-list", "display":displayMenu, "active":false},
+					{"id":"plan-create", "menu":"Create Plan", "link":"/plan-create", "display":displayMenu, "active":false}
+				]
+			},
+			{"id":"contact", "menu":"Contact", "link":"/contact", "display":displayMenu, "active":false},
+			
 			
 		];
 
