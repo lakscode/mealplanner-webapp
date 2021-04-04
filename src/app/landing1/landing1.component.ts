@@ -82,7 +82,7 @@ export class Landing1Component implements OnInit {
    
 	}
 
-	loadHealthLabels()
+	loadHealthLabelsold()
 	{
 		this.healthLabels = [];
 
@@ -94,6 +94,92 @@ export class Landing1Component implements OnInit {
 		this.healthLabels.push({"label":"Vegan", "image":"assets/images/temp-images/listing-3.jpg"});
 
 	}
+
+
+
+	loadHealthLabels()
+	{
+	  this.healthLabels = [];
+	 // this.recipes = recipesList;
+	  var params = {};
+	  
+	  params["returnfields"]=" healthLabels ";
+	  // console.log(JSON.stringify(params));
+	  //params["instructions"] = "notempty";
+  
+	  var res =   this.dbService.getDatabyFields("recipes", params).subscribe(invData => setTimeout(() => {
+	 
+	  // console.log(invData);
+   
+	   if(invData !== null && typeof(invData["body"]) !== "undefined" && invData["body"] !== null && invData["body"]["length"] > 0)
+		 {
+		   this.healthLabels = [];
+		   for(let i=0; i < invData["body"]["length"] ; i++)
+		   {
+			 var temp =invData["body"][i];
+			 if(typeof(temp["healthLabels"]) !== "undefined")
+			 {
+			   var tempLabel = temp["healthLabels"];
+			   if(tempLabel !== "")
+			   {
+				 var arrLabel = tempLabel.split("~");
+				 if(arrLabel.length > 0)
+				 {
+				   for(let l=0; l < arrLabel.length; l++)
+				   {
+					//console.log(arrLabel[l].toString().toLowerCase());
+					 var indexLbl = this.healthLabels.findIndex(x=> x.label == arrLabel[l])
+			   
+					 if(indexLbl == -1)
+					 {
+						var img = "assets/menu/veg.png";
+						if(arrLabel[l].toString().toLowerCase().indexOf("vegetarian") !== -1)
+						{
+						  img = "assets/menu/vegetarian1.jpg";
+						}
+						else if(arrLabel[l].toString().toLowerCase().indexOf("vegan") !== -1)
+						{
+						  img = "assets/menu/vegan.png";
+						}
+						else if(arrLabel[l].toString().toLowerCase().indexOf("peanut-free") !== -1)
+						{
+						  img = "assets/menu/peanutfree.jpg";
+						}
+						else if(arrLabel[l].toString().toLowerCase().indexOf("sugar-conscious") !== -1)
+						{
+						  img = "assets/menu/sugarfree.jpg";
+						}
+						else if(arrLabel[l].toString().toLowerCase().indexOf("alcohol-free") !== -1)
+						{
+						  img = "assets/menu/alcoholfree.png";
+						}
+						else if(arrLabel[l].toString().toLowerCase().indexOf("balanced") !== -1)
+						{
+						  img = "assets/menu/balanced-diet.png";
+						}
+					 //   console.log(img);
+					  this.healthLabels.push({"label":arrLabel[l], "image":img, "count":1});
+					  
+					 }
+					 else
+					 {
+					  this.healthLabels[indexLbl]["count"]=this.healthLabels[indexLbl]["count"]+1;
+					 }
+				   }
+				 }
+			   }
+  
+			 }
+			 
+		   }
+		 }
+		 console.log(this.healthLabels);
+	   }
+   
+	  ));
+   
+	}
+
 	limitTo(str, num)
 	{
 		return this.helpService.limitTo(str, num) + "...";
