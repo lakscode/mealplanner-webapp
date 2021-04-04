@@ -15,15 +15,21 @@ import { environment } from './../../environments/environment';
 export class Landing1Component implements OnInit {
 	count: any = 0;
 	sliderList: Array<any> = [];
+	recommendedRecipes: Array<any> = [];
+	healthLabels: Array<any> = [];
 	constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
 	
 	}
 
 	ngOnInit() {
 		this.count++;
+
+
+		this.loadHealthLabels();
 		//if(this.count==0)
 		//window.location.reload();
 		this.loadSliders();
+		this.loadRecommendedRecipes();
 	
 	}
 
@@ -44,6 +50,54 @@ export class Landing1Component implements OnInit {
 
     }
 
+
+	loadRecommendedRecipes()
+	{
+	  this.recommendedRecipes = [];
+  
+	  var params = {"limit": "4"};
+	  params["query"]="select id, label, image, s_instructions, healthLabels from recipes where s_instructions != '' AND label != '' AND image != '' group by healthLabels limit 0, 4";
+  
+	  //select rc.id, rc.label, rc.image, rc.s_instructions, rc.healthLabels, count(rt.rating) as totalcount, sum(rt.rating) as totalrating from recipes rc join rating rt where rt.recipeid = rc.id AND s_instructions != '' AND label != '' AND image != '' group by healthLabels limit 0, 5
+  
+	  var res =   this.dbService.getDatabyQuery("recipes", params).subscribe(invData => setTimeout(() => {
+   
+	  console.log(invData);
+   
+	   if(invData !== null && typeof(invData["body"]) !== "undefined" && invData["body"] !== null && invData["body"]["length"] > 0)
+		 {
+		   this.recommendedRecipes = [];
+		   for(let i=0; i < invData["body"]["length"] ; i++)
+		   {
+			 this.recommendedRecipes.push(invData["body"][i]);
+			// this.ratingIds += invData["body"][i]["id"] + ",";
+		   }
+		 //  this.recipesLoaded++;
+		 //  this.loadRatings();
+		 }
+		 console.log(this.recommendedRecipes);
+	   }
+	 
+	  ));
+   
+	}
+
+	loadHealthLabels()
+	{
+		this.healthLabels = [];
+
+		this.healthLabels.push({"label":"7 Days Meal Plan", "image":"assets/images/temp-images/listing-1.jpg"});
+		this.healthLabels.push({"label":"Low-Carb", "image":"assets/images/temp-images/listing-2.jpg"});
+		this.healthLabels.push({"label":"Gluten-Free", "image":"assets/images/temp-images/listing-3.jpg"});
+		this.healthLabels.push({"label":"Pescatarian", "image":"assets/images/temp-images/listing-1.jpg"});
+		this.healthLabels.push({"label":"Vegetarian", "image":"assets/images/temp-images/listing-2.jpg"});
+		this.healthLabels.push({"label":"Vegan", "image":"assets/images/temp-images/listing-3.jpg"});
+
+	}
+	limitTo(str, num)
+	{
+		return this.helpService.limitTo(str, num) + "...";
+	}
 }
 
 	

@@ -15,7 +15,7 @@ import { HelpService } from '../services/help.service';
 export class HomeComponent implements OnInit {
 userName: any;
 labels:any;
-healthLabels: Array<any> = [];
+
 stepsList: Array<any> = [];
 
   constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private helpService: HelpService, private dbService: DBService) {
@@ -23,7 +23,7 @@ stepsList: Array<any> = [];
 	}
 
   	ngOnInit() {
-	  	this.loadHealthLabels();
+
 		this.loadSteps(); 
     	this.userService.loggedinUser().subscribe(userdata => setTimeout(() => {
 			if (userdata !== null && typeof (userdata['loggedIn']) !== "undefined") {
@@ -41,18 +41,6 @@ stepsList: Array<any> = [];
   
 	}
 
-	loadHealthLabels()
-	{
-		this.healthLabels = [];
-
-		this.healthLabels.push({"label":"7 Week Meal Plan", "image":"assets/images/temp-images/listing-1.jpg"});
-		this.healthLabels.push({"label":"Low-Carb", "image":"assets/images/temp-images/listing-2.jpg"});
-		this.healthLabels.push({"label":"Gluten-Free", "image":"assets/images/temp-images/listing-3.jpg"});
-		this.healthLabels.push({"label":"Pescatarian", "image":"assets/images/temp-images/listing-1.jpg"});
-		this.healthLabels.push({"label":"Vegetarian", "image":"assets/images/temp-images/listing-2.jpg"});
-		this.healthLabels.push({"label":"Vegan", "image":"assets/images/temp-images/listing-3.jpg"});
-
-	}
 
 	loadSteps()
 	{
