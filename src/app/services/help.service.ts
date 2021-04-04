@@ -37,7 +37,27 @@ export class HelpService {
  
 	 
    }
+   getCurrentUser()
+   {
+	  var currentUser = null;
+	  var temp = localStorage.getItem("user");
+	  if(typeof(temp) !== "undefined")
+	   currentUser =JSON.parse(temp);
+   return currentUser;
+  
+   }
 
+   limitTo(str, num=30)
+   {
+	   var retStr =str;
+	   if(num !== null)
+	   retStr = str.substr(0, num);
+	   else
+	   retStr = str.substr(0, 3);
+
+	   return retStr;
+   }
+   
 	getConstants(str)
 	{
 		return constants[str];

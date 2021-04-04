@@ -110,28 +110,32 @@
   <div class="recipe-listing listing-list">
   
   
-  <div class="listing" *ngFor="let recipe of recipesList; let i = index;">
+  <div class="listing" *ngFor="let recipe1 of recipesList1; let i = index;">
       <div class="image">
           <a href="/recipedetails">
-              <img class= "tstbite-animation" src="{{recipe.image}}" alt="image">
+              <img class= "tstbite-animation" src="{{recipe1.image}}" alt="image">
           </a>
       </div>
       <div class="detail">
-          <h4><a href="/recipedetails">{{recipe.title}}</a></h4>
-          <p innerHTML = "{{recipe.description}}">
+          <h4><a href="/recipedetails;id={{recipe1.id}}">{{recipe1.label}}</a></h4>
+          <p innerHTML = "{{limitTo(recipe1.s_instructions, 200)}}">
               
           </p>
-          <div class="meta-listing">
-              <ul class="post-meta">
-                  <li class="author"><a href="#">{{recipe.author}}</a></li>
-                  <li class="calendar">{{recipe.created_at}}</li>
-              </ul>
+            <div class="meta-listing">
+                <div style="display:inline-block;color: #5e676b;">
+                    Calories: {{recipe1.calories}} Kcal
+                </div>
+              <!--<ul class="post-meta">
+                  <li>Calories: {{recipe1.calories}}</li>
+                 <li class="calendar">{{recipe1.created_at}}</li>
+              </ul>-->
               <div class="rating-box">
                 <span class="rating-icons" *ngFor="let item of [1,2,3,4,5]">
                   <i class="fa fa-star"></i>
                 </span>
-                  <span class="rating-figure">{{recipe.rating}}</span>
-              </div>            </div>
+                  <span class="rating-figure">{{recipe1.displayrating}}</span>
+              </div>            
+            </div>
       </div>
   </div>
   
@@ -165,27 +169,30 @@
   
   
  
-  <div class="listing" *ngFor="let recipe of recipesList; let i = index;">
+  <div class="listing" *ngFor="let recipe2 of recipesList2; let i = index;">
     <div class="image">
         <a href="/recipedetails">
-            <img src="{{recipe.image}}" alt="image">
+            <img src="{{recipe2.image}}" alt="image">
         </a>
     </div>
     <div class="detail">
-        <h4><a href="/recipedetails">{{recipe.title}}</a></h4>
-        <p innerHTML = "{{recipe.description}}">
+        <h4><a href="/recipedetails">{{recipe2.label}}</a></h4>
+        <p innerHTML = "{{limitTo(recipe2.s_instructions, 200)}}">
             
         </p>
         <div class="meta-listing">
-            <ul class="post-meta">
-                <li class="author"><a href="#">{{recipe.author}}</a></li>
-                <li class="calendar">{{recipe.created_at}}</li>
-            </ul>
+            <div style="display:inline-block;color: #5e676b;">
+                Calories: {{recipe2.calories}} Kcal
+            </div>
+            <!--<ul class="post-meta">
+                <li class="author"><a href="#">{{recipe2.author}}</a></li>
+                <li class="calendar">{{recipe2.created_at}}</li>
+            </ul>-->
             <div class="rating-box">
               <span class="rating-icons" *ngFor="let item of [1,2,3,4,5]">
                 <i class="fa fa-star"></i>
               </span>
-                <span class="rating-figure">{{recipe.rating}}</span>
+                <span class="rating-figure">{{recipe2.displayrating}}</span>
             </div>            </div>
     </div>
 </div>
