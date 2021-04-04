@@ -1,4 +1,5 @@
 import { Component, ElementRef, Input, Output, OnInit, OnDestroy, EventEmitter } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 import { SliderpanelService } from './sliderpanel.service';
 
 @Component({
@@ -30,7 +31,20 @@ export class SliderpanelComponent implements OnInit, OnDestroy {
    elementId : any;
    date: any; 
    
-    constructor(private sliderpanelService: SliderpanelService, private el: ElementRef) {
+    constructor(private router: Router, private sliderpanelService: SliderpanelService, private el: ElementRef) {
+      this.router.routeReuseStrategy.shouldReuseRoute = function(){
+        return false;
+     }
+
+     this.router.events.subscribe((evt) => {
+        if (evt instanceof NavigationEnd) {
+           // trick the Router into believing it's last link wasn't previously loaded
+           this.router.navigated = false;
+           // if you need to scroll back to top, here is the right place
+           window.scrollTo(0, 0);
+        }
+    });
+
     this.element = el.nativeElement;
     //this.showhideTime = true;  
     this.id = "";
@@ -56,6 +70,7 @@ export class SliderpanelComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
+      
      this.loadSliders();
    this.elementId= this.element.id;
 if(this.showhidetime == false)

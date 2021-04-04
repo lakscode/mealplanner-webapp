@@ -49,6 +49,7 @@ export class AppComponent implements OnInit {
   user: any;
   chatwindowdisplay: any;
   ngOnInit() {
+    this.loggedIn = false;
     this.chatwindowdisplay = "chatwindownone";
     localStorage.setItem('currentUser', "");
     this.router.events.subscribe(event => {
@@ -59,6 +60,7 @@ export class AppComponent implements OnInit {
       }
     });
     this.userService.loggedinUser().subscribe(userdata => setTimeout(() => {
+      console.log(userdata);
       this.loggedIn = false;
       if (typeof (userdata) !== "undefined" && userdata !== null) {
         this.user = userdata;
