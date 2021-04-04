@@ -691,3 +691,15 @@ section {
 }
 
 
+.simple p {
+  border-top:0px !important;
+  border-bottom: 0px !important;
+  color: #212529 !important;
+  font-size:1em !important;
+}
+
+.simple cite, .simple cite a{
+font-size: 0.9em !important;
+  color: #212529 !important;
+}
+
