@@ -34,7 +34,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { LoginModule } from './login/login.module';
 
-
+import { SignupModule } from './signup/signup.module'; 
 
 import { UserService } from './services/user.service';
 
@@ -72,6 +72,7 @@ import { PricingModule } from './pricing/pricing.module';
 	FlexLayoutModule,
 	LayoutModule,
     LoginModule,
+	SignupModule,
     LandingModule,
 	Landing1Module,
 	ToastrModule.forRoot({

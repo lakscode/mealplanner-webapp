@@ -1,0 +1,203 @@
+import { Component, OnInit, } from '@angular/core';
+import {HelpService} from "../services/help.service"
+
+import { ActivatedRoute, Router } from '@angular/router';
+
+
+import {DBService} from "../dbservices/db.service";
+import { takeUntil } from 'rxjs/operators';
+@Component({
+  selector: 'app-signup',
+  templateUrl: './signup.component.html',
+  styleUrls: ['./signup.component.scss'],
+})
+export class SignupComponent implements OnInit {
+ 
+screenwidth: any;
+screenheight: any;
+shakeitcls: any;
+username: any;
+pass: any;
+routeParams: any; 
+emailphone: any;
+errorMessage: any;
+userObj: any = {};
+role: any;
+sub: any;
+
+  constructor(private router: Router, private route: ActivatedRoute, private helpService: HelpService, private dbService: DBService) { 
+    this.role = "FREE";
+    this.errorMessage = "";
+    this.shakeitcls = "";
+    this.username = "";
+    this.pass = "";
+    
+ } 
+
+
+  ngOnInit() {
+    console.log("login ngOnInit");
+    this.loadDefaults();
+  }
+
+  ionViewDidEnter() {
+    console.log("login ionViewDidEnter");
+   this.loadDefaults();
+
+  }
+ 
+  loadDefaults()
+  {
+    this.username = "";
+    this.pass = "";
+  
+    this.userObj = {"username":"", "emailphone":"", "pass":"", "confirmpass":""}
+
+    this.routeParams = {};
+    this.sub = this.route.params.subscribe(params => {
+    //  console.log(params);   
+      this.routeParams = params;     
+      if (typeof (this.routeParams.plan) !== "undefined" && this.routeParams.plan !== "") {
+        this.role = this.routeParams.plan.toUpperCase();
+        this.userObj['role'] = this.routeParams.plan.toUpperCase();
+      }   
+   });  
+  }
+
+signup()
+{
+  console.log(this.userObj);
+  var validEmail = true;
+  if(this.userObj.emailphone !== "")
+  validEmail = this.ValidateEmail(this.userObj.emailphone);
+
+  console.log(validEmail);
+if(this.userObj.pass == "" ||  this.userObj.confirmpass == "" || this.userObj.emailphone == "" || this.userObj.username == "")
+{
+  this.errorMessage = "All the fields are mandatory.";
+}
+else if(this.userObj.pass == "" ||  this.userObj.confirmpass == "")
+{
+  this.errorMessage = "Passwords are empty.";
+}
+else if(this.userObj.pass !== "" && this.userObj.pass == this.userObj.confirmpass)
+{
+  if(this.userObj.username == "")
+  {
+    this.errorMessage = "Username is empty.";
+  }
+  else if(this.userObj.emailphone == "")
+  {
+    this.errorMessage = "Email is empty.";
+  }
+  else if(!validEmail)
+  {
+    this.errorMessage = "Email is not valid.";
+  }
+  else
+  {
+  var params  = {'username': this.userObj.username, 'emailphone':this.userObj.emailphone}
+  console.log(JSON.stringify(params));
+  var res =   this.dbService.checkIfExists("users", params).subscribe(invData => setTimeout(() => 
+  {
+   this.errorMessage = "";
+   console.log(invData);
+ 
+   if(invData !== null)  
+   {
+     if(typeof(invData["body"]) !== "undefined" && invData["body"] !== null)
+     {
+
+      if(invData["body"]["length"] > 0)
+      {
+        var temp = invData["body"];
+  
+        this.errorMessage = "User already exists.";
+        var record = invData["body"][0];
+        var found = 0;
+        if(record["username"].toLowerCase() == this.userObj.username.toLowerCase())
+        {
+          this.errorMessage = "Username already exists.";
+          found = 1;
+        } 
+        else if(record["email"].toLowerCase() == this.userObj.emailphone.toLowerCase()  || record["phone"] == this.userObj.emailphone)
+        {
+          this.errorMessage = "Email already exists.";
+          found = 2;
+        }
+          console.log("found " + found);
+      }
+      else
+      {
+        console.log("All values are fine");
+        console.log(validEmail);
+        var encryptedPass = this.helpService.encryptPass(this.userObj["pass"]);
+        console.log(encryptedPass );
+
+        var dcryptedPass = this.helpService.decryptPass(encryptedPass);
+        console.log(dcryptedPass );
+        var params = {
+          "username":this.userObj["username"],
+          "email":this.userObj["emailphone"],
+          "password":encryptedPass,
+          "role":this.role,
+          "status":1
+        }
+        console.log(params);
+        var res =   this.dbService.postData("users", params).subscribe(invData => setTimeout(() => 
+        {
+          console.log(invData);
+          if(invData !== null)
+          {
+            if(typeof(invData["result"]) !== "undefined" && invData["result"] == "success")
+            {
+              this.errorMessage = "User has been created. ";
+              var parent = this;
+                setTimeout(function(){ 
+                  parent.gotologin();
+                }, 3000);
+            }
+          }
+        }));
+
+      }
+    }
+     
+   }  
+   console.log(this.errorMessage);
+  }));
+
+  }
+}
+else
+{
+  this.errorMessage = "Passwords doesn't match.";
+}
+
+console.log(this.errorMessage);
+ 
+}
+ValidateEmail(inputText)
+{
+  var mailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+  if(inputText.match(mailformat))
+  {
+  return true;
+  }
+  else
+  {
+  return false;
+  }
+}
+resetAll()
+{
+  this.shakeitcls = "";
+}
+gotologin()
+{
+  console.log("in gotologin");
+
+  this.router.navigate(["login"]);
+  
+}
+}
