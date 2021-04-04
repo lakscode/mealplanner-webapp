@@ -15,10 +15,10 @@
             </div>
         </div>
     
-        <!-- <div class="slider-recipe-detail2">
+       <div class="slider-recipe-detail2">
             <div class="wrapper-slider-detail">
                 <img src="{{searchRes.image}}" alt="slide" style='width:100%; max-height:410px;'>
-               <div class="recipe-slider">
+              <!--   <div class="recipe-slider">
                     <div class="slider-detail2 slick-initialized slick-slider">
                         <div aria-live="polite" class="slick-list draggable"><div class="slick-track" role="listbox" style="opacity: 1; width: 5929px; transform: translate3d(-5082px, 0px, 0px); transition: transform 500ms ease 0s;"><div class="slick-slide slick-cloned" data-slick-index="-1" aria-hidden="true" tabindex="-1" style="width: 847px;">
                             <a href="assets/images/temp-images/slide-recipe2-detail.jpg" class="swipebox" rel="recipe-gallery" tabindex="-1"><img src="assets/images/temp-images/slide-recipe2-detail.jpg" alt="slide"></a>
@@ -52,10 +52,10 @@
                     <li><span>Prep Time : </span>30m</li>
                     <li><span>Cook Time : </span>40m</li>
                     <li><span>Ready In : </span>1:40h</li>
-                </ul>
+                </ul>-->
             </div>
             <a href="https://vimeo.com/15306847" class="swipebox slider-video-button">Watch Video</a>
-        </div>-->
+        </div>
     </div>
     
     
@@ -190,8 +190,8 @@
     <div class="recipe-steps">
         <h3 class="lined">Step by Step method</h3>
 
-                <div class="row" *ngFor="let instr of searchRes['instructions']; let j=index">
-                    <div class="col-sm-7">
+                <div class="row" *ngFor="let instr of searchRes['instructions']; let j=index; let even = even;">
+                    <div class="col-sm-9">
                         <p>
                             {{instr}}
                         </p>
@@ -200,8 +200,8 @@
                             Toss the chicken inside the bag to cover evenly with the marinade and refrigerate for 12 hours or as long as overnight.
                         </p> -->
                     </div>
-                    <div class="col-sm-5">
-                        <img src="{{searchRes['image']}}" alt="image">
+                    <div class="col-sm-3">
+                        <img  style="    max-height: 150px;" *ngIf="searchRes['ingredients'][j]['image']" src="{{searchRes['ingredients'][j]['image']}}" alt="image">
                     </div>
                 </div>
           
