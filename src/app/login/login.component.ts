@@ -70,30 +70,36 @@ export class LoginComponent implements OnInit {
 	}
 
 	login() {
+		console.log("in login");
 		this.submitted = true;
 		// stop here if form is invalid
-		if (this.loginForm.invalid) {
-			return;
-		}
+	//	if (this.loginForm.invalid) {
+	//		return;
+	//	}
 		if (this.rememberMe === true) {
 			localStorage.setItem('rememberEmail', this.loginForm.value.username);
 		} else {
 			localStorage.setItem('rememberEmail', "");
 			this.rememberMe = false;
 		}
-		var params = { "email": this.loginForm.value.username};
-		
+	
+		var params = {'username':  this.userObj.username, 'emailphone':this.userObj.username}
 		console.log(params);
-		this.dbService.getDatabyParam("users", params).subscribe(userData => setTimeout(() => {
-			console.log(userData);
-			if (userData['length'] > 0) {
-			var pass;
-				//var pass = this.helpService.decrypt(userData[0]["password"]);  //this.loginForm.value.passWord 
+		this.dbService.checkIfExists("users", params).subscribe(userDataObj => setTimeout(() => {
+			
+			console.log(userDataObj);
+			if (userDataObj['body']['length'] > 0) {
+				var userData = userDataObj['body'][0];
+				console.log(userData);
+				var pass = this.helpService.decryptPass(userData["password"]);  //this.loginForm.value.passWord 
 				console.log(pass);
-				if(pass == this.loginForm.value.passWord.trim() || userData[0]["password"] == this.loginForm.value.passWord.trim() )
+				console.log( userData["password"]);
+				console.log(this.userObj.password.trim() );
+				if(pass == this.userObj.password.trim() || userData["password"] == this.userObj.password.trim() )
 				{
-					sessionStorage.setItem("currentUser", JSON.stringify(userData[0]));
-					let username = this.userService.setUser(userData[0]);
+					delete userData["password"];
+					sessionStorage.setItem("currentUser", JSON.stringify(userData));
+					let username = this.userService.setUser(userData);
 				}	
 				else 
 				{
@@ -110,14 +116,10 @@ export class LoginComponent implements OnInit {
 			
 			if (this.redirecturl == "")
 			{
-				if(typeof(userData[0]["role"]) !== "undefined" && userData[0]["role"] == "DM")
-				this.router.navigate(['request']);
-				else
-				this.router.navigate(['home']);
+				this.router.navigate(['landing1']);
 			}
 			else {
-				if(typeof(userData[0]["role"]) !== "undefined" && userData[0]["role"] == "DM")
-				this.router.navigate(['request']);;
+				this.router.navigate([this.redirecturl]);;
 			}
 		}));
 		

@@ -56,17 +56,19 @@ console.log(currentUrl);
 			{"id":"home", "menu":"Home", "link":"/home", "display":displayMenu, "active":false,
 			"children":
 				[
-					{"id":"features", "menu":"Features", "link":"/features", "display":displayMenu, "active":false},
+
 					{"id":"howitworks", "menu":"How it works", "link":"/howitworks", "display":displayMenu, "active":false},
 					{"id":"aboutus", "menu":"About the Team", "link":"/aboutus", "display":displayMenu, "active":false},
+					{"id":"benefits", "menu":"Benefits", "link":"/benefits", "display":displayMenu, "active":false},
+					{"id":"display", "menu":"FAQs", "link":"/faqs", "display":displayMenu, "active":false},
+					{"id":"blogs", "menu":"Blogs", "link":"/blogs", "display":displayMenu, "active":false},
+					{"id":"testimonials", "menu":"Testimonials", "link":"/testimonials", "display":displayMenu, "active":false}
 				]
 			},
-			{"id":"benefits", "menu":"Benefits", "link":"/benefits", "display":displayMenu, "active":false},
-		//	{"id":"display", "menu":"FAQs", "link":"/faqs", "display":displayMenu, "active":false},
-			{"id":"blogs", "menu":"Blogs", "link":"/blogs", "display":displayMenu, "active":false},
+			{"id":"features", "menu":"Features", "link":"/features", "display":displayMenu, "active":false},
 			{"id":"contact", "menu":"Contact", "link":"/contact", "display":displayMenu, "active":false},
 			{"id":"schedule", "menu":"Schedule Demo", "link":"/scheduledemo", "display":displayMenu, "active":false},
-			{"id":"testimonials", "menu":"Testimonials", "link":"/testimonials", "display":displayMenu, "active":false}
+			
 		];
 
 	}

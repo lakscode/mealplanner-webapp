@@ -41,15 +41,15 @@ export class SliderpanelComponent implements OnInit, OnDestroy {
 
     loadSliders()
     {
+      /*
       this.sliderList.push({"title":"pasto pizza with cheesey dip", "image":"assets/images/temp-images/full-slide-1.jpg","rating":"(4.1 / 5)", "description":"Nam ornare arcu turpis, nec congues with us     <br/>Curabitur quis euismod mauris. Nulls<br/>eget semper vulputate."});
-
       this.sliderList.push({"title":"pasto pizza with juicy dip", "image":"assets/images/temp-images/full-slide-2.jpg","rating":"(4.1 / 5)", "description":"Nam ornare arcu turpis, nec congues with us     <br/>Curabitur quis euismod mauris. Nulls<br/>eget semper vulputate."});
-
-
-
       this.sliderList.push({"title":"pasto pizza with extra topping", "image":"assets/images/temp-images/full-slide-3.jpg","rating":"(4.1 / 5)", "description":"Nam ornare arcu turpis, nec congues with us     <br/>Curabitur quis euismod mauris. Nulls<br/>eget semper vulputate."});
+      */
 
-
+      this.sliderList.push({"title":"More than 50 thousand recipes.", "image":"assets/images/temp-images/full-slide-1.jpg","rating":"", "description":"By providing tools that streamline the meal planning process we equip households to eat better food, eat together, save money at the grocery store, and have a less stressful cooking experience in the kitchen."});
+      this.sliderList.push({"title":"Meal Planning tool to add recipes to your weekly plan", "image":"assets/images/temp-images/full-slide-4.jpg","rating":"", "description":" recipes that fit your lifestyle and customized meal plan to accommodate your schedule,"});
+    //  this.sliderList.push({"title":"pasto pizza with extra topping", "image":"assets/images/temp-images/full-slide-3.jpg","rating":"", "description":"Nam ornare arcu turpis, nec congues with us     <br/>Curabitur quis euismod mauris. Nulls<br/>eget semper vulputate."});
 
 
 

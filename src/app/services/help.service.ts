@@ -9,11 +9,11 @@ import { environment } from '../../environments/environment';
 import { map } from 'rxjs/operators';
 import { share } from 'rxjs/operators';
 import { constants } from '../jsonfiles/constants.js';
-//import * as CryptoJS from 'crypto-js';
-import { AES } from "crypto-js";
-import { enc } from "crypto-js";
-import { ignorewordsArr } from '../jsonfiles/ignorewords.js';
 
+
+import { ignorewordsArr } from '../jsonfiles/ignorewords.js';
+import * as CryptoJS from 'crypto-js';
+import { AES, enc } from "crypto-js";
 @Injectable({ providedIn: 'root' })
 export class HelpService {
 	adalConfig: any;
@@ -22,9 +22,22 @@ export class HelpService {
 	constants: any;	
 	accesstoken = environment.accessToken;
 	emailContents: any;
+	secretCode : any = "MTC_2021"
 	constructor(private httpService: HttpClient, private router: Router, private route: ActivatedRoute, private dbService: DBService, private userService: UserService, private modalservice: ModalService) {
 
 	}
+	encryptPass(str) {  
+	 
+		return CryptoJS.AES.encrypt(str.trim(), this.secretCode).toString();  
+	   
+   }  
+   decryptPass(str) {  
+   
+	   return CryptoJS.AES.decrypt(str.trim(), this.secretCode).toString(CryptoJS.enc.Utf8);  
+ 
+	 
+   }
+
 	getConstants(str)
 	{
 		return constants[str];
