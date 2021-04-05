@@ -3,11 +3,11 @@ import { CommonModule } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { FaqChatComponent } from './faq-chat.component';
+import { TabspanelComponent } from './tabspanel.component';
 
 @NgModule({
     imports: [CommonModule, NgbModule,  FormsModule, ReactiveFormsModule],
-    declarations: [FaqChatComponent],
-    exports: [FaqChatComponent]
+    declarations: [TabspanelComponent],
+    exports: [TabspanelComponent]
 })
-export class FaqChatModule { }
+export class TabspanelModule { }

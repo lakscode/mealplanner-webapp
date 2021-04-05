@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({ providedIn: 'root' })
-export class FaqChatService {
+export class TabspanelService {
     private modals: any[] = [];
 	//console.log("In ModalService");
 	

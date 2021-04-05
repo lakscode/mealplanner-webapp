@@ -5,7 +5,7 @@ import { Landing1RoutingModule } from './landing1-routing.module';
 import { Landing1Component } from './landing1.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {SearchbarModule, SliderpanelModule } from "../shared/modules"
+import {SearchbarModule, SliderpanelModule, TabspanelModule } from "../shared/modules"
 @NgModule({
   imports: [
     CommonModule,
@@ -14,7 +14,8 @@ import {SearchbarModule, SliderpanelModule } from "../shared/modules"
 	FormsModule,
 	ReactiveFormsModule,
   SearchbarModule,
-  SliderpanelModule
+  SliderpanelModule,
+  TabspanelModule
   ],
   declarations: [Landing1Component]
 })

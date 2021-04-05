@@ -643,6 +643,10 @@ span.sign-in-buttons .login {
   text-align: left;
   padding: 20px 35px;
 }
+.nav-collapse ul li:hover ul {
+  display: block;
+}
+
 .nav-collapse ul li ul li {
   margin-left: 0;
   display: block;
@@ -663,6 +667,7 @@ span.sign-in-buttons .login {
 }
 .nav-collapse ul li ul li:hover ul {
   top: -20px;
+  
 }
 .nav-collapse ul li ul li:last-child {
   border-bottom: transparent;
@@ -2506,7 +2511,7 @@ a.mean-expand {
 /* chefs banner
 /*--------------------*/
 .chefs-banner {
-  background-image: url("../assets/images/temp-images/chefs-banner.jpg");
+  background-image: url("../images/temp-images/chefs-banner.jpg");
   background-size: cover;
   background-position: center bottom;
   position: relative;

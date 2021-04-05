@@ -1,5 +1,5 @@
 import { Component,  ElementRef, ViewChild, Input, Output, OnInit, OnDestroy,  EventEmitter, AfterViewChecked,AfterViewInit  } from '@angular/core';
-import { FaqChatService } from './faq-chat.service';
+import { TabspanelService } from './tabspanel.service';
 import { HelpService } from '../../../services/help.service';
 import { HttpClient } from '@angular/common/http';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -10,11 +10,11 @@ import { UserService } from '../../../services/user.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
-  selector: 'app-faq-chat',
-  templateUrl: './faq-chat.component.html',
-  styleUrls: ['./faq-chat.component.scss']
+  selector: 'app-tabspanel',
+  templateUrl: './tabspanel.component.html',
+  styleUrls: ['./tabspanel.component.scss']
 })
-export class FaqChatComponent implements OnInit, OnDestroy, AfterViewChecked, AfterViewInit   {
+export class TabspanelComponent implements OnInit, OnDestroy, AfterViewChecked, AfterViewInit   {
   
     @Input() item: any;
     @Input() id: string;
@@ -60,7 +60,7 @@ export class FaqChatComponent implements OnInit, OnDestroy, AfterViewChecked, Af
    createConcernArr : Array<any>=[];
 createReportStep:any = 0;
    @ViewChild('scrollMe', null) private myScrollContainer: ElementRef;
-    constructor(private faqChatService: FaqChatService, private router: Router, private route: ActivatedRoute, private userService: UserService, private el: ElementRef, private httpService: HttpClient, private dbService: DBService, private helpService: HelpService, private toastrservice: ToastrService) {
+    constructor(private tabspanelService: TabspanelService, private router: Router, private route: ActivatedRoute, private userService: UserService, private el: ElementRef, private httpService: HttpClient, private dbService: DBService, private helpService: HelpService, private toastrservice: ToastrService) {
       this.replymessage = "";
       this.msgid = "0";
       this.element = el.nativeElement;
@@ -142,7 +142,7 @@ createReportStep:any = 0;
 
     // remove self from modal service when component is destroyed
     ngOnDestroy(): void {
-        this.faqChatService.remove(this.id);
+        this.tabspanelService.remove(this.id);
         this.element.remove();
     }
 
@@ -158,7 +158,7 @@ createReportStep:any = 0;
 		
 		this.dt = {"date":this.tempDt, "time":this.tempTm};
 		this.returnData.emit(this.dt);
-    this.faqChatService.add(this);
+    this.tabspanelService.add(this);
     }
 
  

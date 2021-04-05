@@ -38,13 +38,7 @@ import { SignupModule } from './signup/signup.module';
 
 import { UserService } from './services/user.service';
 
-
-
-
-
 import { HighchartsChartModule } from 'highcharts-angular';
-
-import { FaqChatModule } from './shared';
 
 import { HomeModule } from './home/home.module'; 
 import { LandingModule } from './landing/landing.module'; 
@@ -88,8 +82,6 @@ import { OurteamModule } from './ourteam/ourteam.module';
 	CollapseModule.forRoot(),
 	NgMultiSelectDropDownModule.forRoot(),
 	HighchartsChartModule,
-
-	FaqChatModule,
 	HomeModule,
 	RecipesModule,
 	RecipedetailsModule,
