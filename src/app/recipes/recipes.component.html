@@ -111,7 +111,7 @@
   
   <div class="listing" *ngFor="let recipe1 of recipesList1; let i = index;">
       <div class="image">
-          <a href="/recipedetails">
+          <a href="/recipedetails;id={{recipe1.id}}">
               <img class= "tstbite-animation" src="{{recipe1.image}}" alt="image">
           </a>
       </div>
