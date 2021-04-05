@@ -27,10 +27,11 @@
                             <nav class="nav-collapse responsive-menu">
                                 <ul class="main-menu">
                                     <li *ngFor="let menu of menuItems; let m = index">
-                                        <a href="{{menu.link}}">{{menu.menu}}</a>
+                                        <a *ngIf="menu.link !== 'landing1'" routerLink="/{{menu.link}}" href="javascript:void(0)">{{menu.menu}}</a>
+                                        <a *ngIf="menu.link == 'landing1'" href="/landing1">{{menu.menu}}</a>
                                         <ul *ngIf="menu.children && menu.children.length > 0">
                                             <li *ngFor="let submenu of menu.children; let m = index">
-                                                <a href="{{submenu.link}}">{{submenu.menu}}</a>
+                                                <a routerLink="/{{submenu.link}}" href="javascript:void(0)">{{submenu.menu}}</a>
                                             </li>
                                         </ul>
                                     </li>
@@ -102,15 +103,15 @@
                             <nav class="nav-collapse responsive-menu">
                                 <ul class="main-menu">
                                     <li *ngFor="let menu1 of menuItems1; let m = index">
-                                        <a href="{{menu1.link}}">{{menu1.menu}}</a>
+                                        <a  routerLink="/{{menu1.link}}" href="javascript:void(0)">{{menu1.menu}}</a>
                                         <ul *ngIf="menu1.children && menu1.children.length > 0">
                                             <li *ngFor="let submenu1 of menu1.children; let m = index">
-                                                <a href="{{submenu1.link}}">{{submenu1.menu}}</a>
+                                                <a routerLink="/{{submenu1.link}}" href="javascript:void(0)">{{submenu1.menu}}</a>
                                             </li>
                                         </ul>
                                     </li>
                                  
-                                    <li><a class="submit-recipe" href="/recipesubmit">Submit recipe</a></li>
+                                    <li><a class="submit-recipe"  routerLink="/recipesubmit" href="javascript:void(0)">Submit recipe</a></li>
                                 </ul>
   
                             </nav>

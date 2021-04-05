@@ -53,13 +53,13 @@
 
                     <fieldset class="ingredient-set">
                         <label for="nutrients">Nutrients</label>
-                        <ul class="list-sortable ingredients-list ui-sortable">
+                        <ul class="list-sortable nutrients-list ui-sortable">
                             <li style="">
                                 <div class="add-fields">
                                     <span class="handler-list ui-sortable-handle"><i class="fa fa-arrows"></i></span>                                   
                                     <div style="width:40%" class="selectric-wrapper selectric-advance-selectable"><div class="selectric-select"><select name="cuisine" id="cuisine" class="advance-selectable" tabindex="0">
                                         <option value="" selected="selected">Select Nutrient</option>
-                                        <option *ngFor="let nutrient of nutrientsList; let n = index"; value="{{nutrient}}">{{nutrient}}</option>
+                                        <option *ngFor="let nutrient of nutrientsList; let n = index" value="{{nutrient}}">{{nutrient}}</option>
                   
                                     </select></div></div>
 
@@ -67,11 +67,11 @@
                                     <span class="del-list"><i class="fa fa-trash"></i></span>
                                 </div>
                             </li>
-                            <li style=""><div class="add-fields"> <span class="handler-list"><i class="fa fa-arrows"></i></span>  <input type="text" name="nutrients[]" id="nutrients">  <input type="text" name="nutrients[]" id="nutrients"> <span class="del-list"><i class="fa fa-trash"></i></span></div></li>
-                            <li style=""><div class="add-fields"> <span class="handler-list"><i class="fa fa-arrows"></i></span> <input type="text" name="nutrients[]" id="ingredients"> <input type="text" name="nutrients[]" id="ingredients"> <span class="del-list"><i class="fa fa-trash"></i></span></div></li>
+                            <!--<li style=""><div class="add-fields"> <span class="handler-list"><i class="fa fa-arrows"></i></span>  <input type="text" name="nutrients[]" id="nutrients">  <input type="text" name="nutrients[]" id="nutrients"> <span class="del-list"><i class="fa fa-trash"></i></span></div></li>
+                            <li style=""><div class="add-fields"> <span class="handler-list"><i class="fa fa-arrows"></i></span> <input type="text" name="nutrients[]" id="ingredients"> <input type="text" name="nutrients[]" id="ingredients"> <span class="del-list"><i class="fa fa-trash"></i></span></div></li>-->
                     
                         </ul>
-                                             <span class="add-button add-ing">
+                                             <span class="add-button add-nutrient">
                                                 <i class="fa fa-plus"></i>
                                             </span>
                     </fieldset>
