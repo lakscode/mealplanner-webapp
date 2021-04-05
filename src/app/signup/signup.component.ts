@@ -24,11 +24,13 @@ errorMessage: any;
 userObj: any = {};
 role: any;
 sub: any;
+  errorPassMatch: any;
 
   constructor(private router: Router, private route: ActivatedRoute, private helpService: HelpService, private dbService: DBService) { 
     this.role = "FREE";
     this.errorMessage = "";
     this.shakeitcls = "";
+      this.errorPassMatch = "";
     this.username = "";
     this.pass = "";
     
@@ -200,4 +202,22 @@ gotologin()
   this.router.navigate(["login"]);
   
 }
+
+  matchPass()
+{
+
+  if(this.userObj.password !== this.userObj.confirmpass)
+  {
+  this.errorPassMatch = "Passwords doesn't match";
+  }
+
+}
+  clearError(type)
+  {
+
+    //if(type == "signup")
+    //this.errorSignup = "";
+  }
+
+
 }

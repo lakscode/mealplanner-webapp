@@ -25,8 +25,12 @@ export class LoginComponent implements OnInit {
 	submitted = false;
 	userObj:any;
 	users: any;
+	errorPassMatch: any;
+	errorSignup: any;
+	errorLogin: any;
 	constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
 		this.userName = ""; this.passWord = "";
+			this.errorPassMatch = "";
 
 		this.userObj={"username":"","password":""};
 	}
@@ -133,12 +137,29 @@ export class LoginComponent implements OnInit {
 		this.errorMessage = "";
 		this.loginForm.patchValue({ passWord: ""});
 	}
+
+	matchPass()
+{
+
+	if(this.userObj.password !== this.userObj.confirmpass)
+	{
+	this.errorPassMatch = "Passwords doesn't match";
+	}
+
+}
+	clearError(type)
+	{
+
+		if(type == "signup")
+		this.errorSignup = "";
+	}
 	forgot() {
 		this.router.navigate(['forgot-password']);
 
 	}
 	signup()
 	{
-		this.router.navigate(['register']);
+		//this.router.navigate(['register']);
 	}
+
 }
