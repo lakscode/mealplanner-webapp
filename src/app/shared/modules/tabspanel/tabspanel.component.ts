@@ -44,45 +44,17 @@ export class TabspanelComponent implements OnInit, OnDestroy, AfterViewChecked, 
    currentUser: any;
    selectedMsg: any;
 
-   destUser: any;
-   newMessage: any;
-   usersList: any;
-   subscribeUsersService: any;
-   messagetext: any;
-   chatData: Array<any> = [];
-   selectedItem: any;
-   replymessage: any;
-   profileimage: any;
-   profileimageTo: any;
-   profileimageFrom: any;
-   msgid  : any = "0";
-   userMessage = {"id":"", "message":"", "details":"", "items":[],"source":"", "createdat":"", "username":""}
-   createConcernArr : Array<any>=[];
-createReportStep:any = 0;
-   @ViewChild('scrollMe', null) private myScrollContainer: ElementRef;
+   recipesList1 :Array<any> = [];
+   recipesList2 :Array<any> = [];
+   recipesList3 :Array<any> = [];
+   ratingIds: any;
     constructor(private tabspanelService: TabspanelService, private router: Router, private route: ActivatedRoute, private userService: UserService, private el: ElementRef, private httpService: HttpClient, private dbService: DBService, private helpService: HelpService, private toastrservice: ToastrService) {
-      this.replymessage = "";
-      this.msgid = "0";
+    
       this.element = el.nativeElement;
-      this.profileimage = "assets/user-icon.png";
-      this.profileimageFrom = "assets/user-icon.png";
-      this.profileimageTo = "assets/user-icon.png";
+ 
       this.id = "";
       this.dt = {"date":"", "time":""};
-      this.meridian = true;
-      this.showhideTimeFlag = true;
-      this.createConcernArr = [];
-      this.createReportStep = 0;
-      this.createConcernArr.push({"id":1, "question":"Please let me know your firstname", "answer":""});
-      this.createConcernArr.push({"id":2, "question":"Please let me know your lastname", "answer":""});
-      this.createConcernArr.push({"id":3, "question":"Please let me know your email", "answer":""});
-      this.createConcernArr.push({"id":4, "question":"Please let me know your location", "answer":""});  
-      this.createConcernArr.push({"id":5, "question":"Where did the incident happened?", "answer":""});  
-      this.createConcernArr.push({"id":6, "question":"When did the incident happened? (Ex: mm/dd/yyyy)", "answer":""});   
-      this.createConcernArr.push({"id":7, "question":"Can you please explain the incident.", "answer":""});   
-      this.createConcernArr.push({"id":8, "question":"Who is the Respondent?", "answer":""});   
-      this.createConcernArr.push({"id":9, "question":"What is the Respondent's email?", "answer":""});   
-
+   
     }
     ngOnChanges() {
     //  this.LoadData();
@@ -92,12 +64,12 @@ createReportStep:any = 0;
   
     ngAfterViewChecked() {
       // Called every time the view changes        
-      this.scrollToBottom();        
+   
     } 
 
     ngAfterViewInit() {
         // Only called ONCE => upon initialization
-        this.scrollToBottom();
+   
     }
    
 
@@ -136,7 +108,7 @@ createReportStep:any = 0;
     
    
         }, 0));
-        this.showmessages();
+        this.loadRecipes();
     }
  
 
@@ -170,24 +142,7 @@ createReportStep:any = 0;
 	
 	save()
 	{
-
-  if(this.dt.date == null || this.dt.date == "")
-  {
-    var d = new Date();
-		this.tempDt = {year: d.getFullYear(), month: d.getMonth()+1, day: d.getDate()};
-		this.dt["date"] = this.tempDt; //, "time":this.tempTm};
-  }
-
-  if(this.dt.time == null || this.dt.time == "")
-  {
-    var d = new Date();	
-    this.tempTm = {hour: d.getHours(), minute: d.getMinutes(), second: d.getSeconds()};
-		this.dt["time"] = this.tempTm;
-  }
-
-
     this.returnData.emit(this.dt);
-
 	}	
 	
 	closeCal()
@@ -196,268 +151,135 @@ createReportStep:any = 0;
 		this.closeDT.emit(this.dt);
 	}	
 	
-    
-  comp(a, b) {
-	return new Date(a.createdat).getTime() - new Date(b.createdat).getTime();
-}
-
   
-showmessages()
-{
-
-this.msgid = (parseInt(this.msgid) + 1).toString();
-this.userMessage = {"id":this.msgid, "message":"Hi, I am Rang Realtors Help!", "details":"Welcome to Rang Realtors. How I can help you?", "items":[], "source":"bot", "createdat":"", "username":"Guest User"};
-this.chatData.push(this.userMessage);
-
-var tempItems = [];
-tempItems.push({"item":"Login", "link":"login"});
-tempItems.push({"item":"Reset Password", "link":"resetpass"});
-tempItems.push({"item":"Request Quotation", "link":"createcase"});
-tempItems.push({"item":"View Status", "link":"viewcases"});
-tempItems.push({"item":"Reports", "link":"reports"});
-tempItems.push({"item":"Create Report", "link":"createreport"});
-tempItems = [];
-this.msgid = (parseInt(this.msgid) + 1).toString();
-this.userMessage = {"id":this.msgid, "message":"Also, I can help you with things like:", "details":"", "items":tempItems, "source":"bot", "createdat":"", "username":"Guest User"};
-this.chatData.push(this.userMessage);
-
-
-//  this.userMessage = {"id":"3", "message":"message 1", "details":"", "items":[], "source":"user", "createdat":"", "username":"Anna"};
- // this.chatData.push(this.userMessage);
-
- 
-
-
-}
-menuitemopt(menuitem)
-{
-  
-  this.msgid = (parseInt(this.msgid) + 1).toString();
-  if(this.chatData["length"] > 0)
-  {
-    var len = this.chatData["length"];
-    var temp = this.chatData[len-1];
-
-    this.msgid =  (parseInt(temp["id"]) + 1).toString();
-  }
-  var tempItems = [];
-  
-  if(menuitem.link == "login")
-  {
-    tempItems.push({"item":"Login Now", "link":"loginnow", "details":"please click link to login"});
-  }
-
-  if(menuitem.link == "createcase")
-  {
-    tempItems.push({"item":"Create Case", "link":"createcase1"});
-    tempItems.push({"item":"Dashboard", "link":"dashboard"});
-    tempItems.push({"item":"Attach Files", "link":"Attachfiles"});
-
-  }
-  if(menuitem.link == "createreport")
-  {
-    this.createreport();
-  }
-  if(tempItems.length >0)
-  {
-  this.userMessage = {"id":this.msgid, "message":"Please select option: ", "details":"", "items":tempItems, "source":"bot", "createdat":"", "username":"Guest User"};
-  this.chatData.push(this.userMessage);
-  }
-
-  // this.scrolltoBotto1();
-  this.scrollToBottom();
-  //this.chatreply();
-
-}
-onSubmit(form)
-{
- // console.log(this.replymessage);
-  if(this.replymessage !== "")
-  {
-    this.chatreply();
-  }
-}
-createreport()
-{
-//  console.log(this.createReportStep);
-//  console.log(this.createConcernArr);
-  
- if(this.createReportStep < this.createConcernArr.length)
- {
-  var tempItems = [];
-  if(typeof(this.createConcernArr[this.createReportStep]) !== "undefined" && this.createConcernArr[this.createReportStep] !== null)
-  {
-    if(typeof(this.createConcernArr[this.createReportStep]["question"]) !== "undefined")
-    {
-      tempItems.push({"item":this.createConcernArr[this.createReportStep]["question"], "link":"loginnow", "details":"please click link to login"});
-    }
-  }
-
-  if(tempItems.length >0)
-  {
-    var userMessage1 = {"id":this.msgid, "message":"", "details":"", "items":tempItems, "source":"bot", "createdat":"", "username":"Guest User", "parent":"createreport"};
-    this.chatData.push(userMessage1);
-  }
-
-  this.createReportStep++;
-}
-else
-{
-  var tempItems = [];
- // console.log("in else");
-    
- // if(tempItems.length >0)
- // {
-    var userMessage1 = {"id":this.msgid, "message":"Thank you for contacting us. We shall get back to you soon. Have a good day.", "details":"", "items":tempItems, "source":"bot", "createdat":"", "username":"Guest User", "parent":""};
-    this.chatData.push(userMessage1);
-    this.createReportStep = 0;
- // }
-
-}
-}
-scrollToBottom(): void {
-  // console.log("In scrollToBottom");
-     try {
-         this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
-         
-     } catch(err) { }                 
- }
-
-
-scrolltoBotto1()
-{
- /// console.log("scrolltoBotto1");
-  setTimeout(() => {  
-    var obj =  document.getElementById('scrollMe');
-    obj.scrollTop = 9999999;
-    console.log(obj.clientHeight);
-    console.log(obj);
-  }, 1000);
-}
-chatreply()
-{
-  console.log(this.chatData);
-  if(this.replymessage !== "")
-  {
-    if(this.chatData["length"] > 0)
-    {
-      var len = this.chatData["length"];
-      var temp = this.chatData[len-1];
-
-      this.msgid =  (parseInt(this.msgid) + 1).toString();
-    }
-
-    this.userMessage = {"id":this.msgid, "message":this.replymessage , "details":"", "items":[], "source":"user", "createdat":"", "username":"Guest User"};
-    this.chatData.push(this.userMessage);
-    
-    var msg = this.replymessage.toLowerCase();
-
-    var flagreport = 0;
-    if(this.chatData.length>0)
-    {
-      if(typeof(this.createConcernArr[this.createReportStep-1]) !== "undefined")
-      {
-        if(typeof(this.createConcernArr[this.createReportStep-1]["answer"]) !== "undefined")
-        {
-          this.createConcernArr[this.createReportStep-1]["answer"] = this.replymessage;
-          if(this.chatData.length> 2)
-          var te = this.chatData[this.chatData.length -2]
-          if(te["parent"]== "createreport")
-          {
-            this.createreport();
-            flagreport = 1;
-          }
-        }
-      }
-    }
-    
-    if(flagreport == 0)
-    {
-      if(msg.indexOf("hi") !== -1 || msg.indexOf("hello") !== -1)
-      {
-        this.showmessages();
-      }
-      else if(msg.indexOf("bye") !== -1 || msg.indexOf("thanks") !== -1)
-      {
-        var exitMessage  = "Thank you for using Rang Realtors Chatbot. Hope it was useful. Have a good day.";
-        this.msgid =  (parseInt(this.msgid) + 1).toString();
-        this.userMessage = {"id":this.msgid, "message":exitMessage , "details":"", "items":[], "source":"bot", "createdat":"", "username":"Bot"};
-        this.chatData.push(this.userMessage);
-      }
-      else
-      {
-        var exitMessage  = "I didnt understand your question. Please can you explain again. ";
-        this.msgid =  (parseInt(this.msgid) + 1).toString();
-        this.userMessage = {"id":this.msgid, "message":exitMessage , "details":"", "items":[], "source":"bot", "createdat":"", "username":"Bot"};
-        this.chatData.push(this.userMessage);
-      }
-    }
-  //  console.log(this.chatData);
-    this.replymessage = "";
-  }
-
-}
-
-loadProfileImg()
+  loadRecipes()
 	{
-	  var param = {"userid": this.currentUser["_id"]};
+	  this.recipesList1 = [];
+	  this.recipesList2 = [];
+    this.recipesList3 = [];
+	// this.recipes = recipesList;
+	 var params = {"limit": "9"};
 
-	  this.dbService.getDatabyParam("userprofiles", param).subscribe(oinvData => setTimeout(() => {
-		  
-		  if(oinvData["length"] > 0)
-		  {
-        if(oinvData[0]["profileimg"] !== "")
-		    this.profileimage = oinvData[0]["profileimg"];
-		  }
-	  }));
-
-  }
+	  
+	  params["instructions"] = "notempty";
   
-  LoadProfileImages()
-  {
+	  console.log(JSON.stringify(params));
+	 var res =   this.dbService.getDatabyFields("recipes", params).subscribe(invData => setTimeout(() => {
+  
+	  console.log(invData);
+    this.ratingIds ="";
+	  if(invData !== null && typeof(invData["body"]) !== "undefined" && invData["body"] !== null && invData["body"]["length"] > 0)
+		{
+      this.recipesList1 = [];
+      this.recipesList2 = [];
+      this.recipesList3 = [];
 
-    this.profileimageFrom = "assets/user-icon.png";
-this.profileimageTo = "assets/user-icon.png";
-
-
-var arrUniqueIDs = [];
-
-				arrUniqueIDs.push({"userid":this.currentUser["_id"]});
-        arrUniqueIDs.push({"userid":this.item["_id"]});
-
-
-
-			var params = {"userids": arrUniqueIDs};
-
-			this.dbService.postData("userprofiles/forProfilePics", params).subscribe(profilepicsArr => setTimeout(() => {
-
-
-				if(profilepicsArr["length"] > 0)
+		  for(let i=0; i < invData["body"]["length"] ; i++)
+		  {
+			  if(i < 3)
+			this.recipesList1.push(invData["body"][i]);
+			else if (i < 6)
+			this.recipesList2.push(invData["body"][i]);
+      else
+      this.recipesList3.push(invData["body"][i]);
+      this.ratingIds += invData["body"][i]["id"] + ",";
+		
+		  }
+		  console.log(this.recipesList1);
+		  console.log(this.recipesList2);
+		  console.log(this.recipesList3);
+      this.loadRatings();
+		}
+	  }
+	
+	 ));
+  
+	}
+  
+	loadRatings()
+	{
+	  if(this.ratingIds !== "")
+	  {			
+	   this.ratingIds = this.ratingIds.substring(0, this.ratingIds.length-1);
+	  }
+	 
+		var params = {"limit": 100};
+	   
+		params["query"] = "SELECT count(rating) as totalcount, sum(rating) as totalrating, recipeid FROM `rating` where recipeid in (" + this.ratingIds + ") group by recipeid";
+		var res =   this.dbService.getDatabyTablebyQuery("rating", params).subscribe(invData => setTimeout(() => {
+		console.log(invData);
+		  if(invData !== null)
+		  {
+			if(typeof(invData["body"]) !== "undefined" && invData["body"] !== null && invData["body"]["length"] > 0)
+			{
+			  var temp = invData["body"];
+			  if(temp["length"] > 0)
+			  {
+		
+				for(let i=0; i< temp["length"] ; i++)
 				{
-					for(let ip=0; ip < profilepicsArr["length"]; ip++)
+				 
+				  console.log(temp[i]);
+				  var recIndex = this.recipesList1.findIndex(x1 => (x1.id === temp[i]["recipeid"]));
+				  console.log(recIndex);
+				  if(recIndex > -1)
+				  {
+					this.recipesList1[recIndex]["totalcount"] = temp[i]["totalcount"];
+					this.recipesList1[recIndex]["totalrating"] = temp[i]["totalrating"];
+  
+					if( temp[i]["totalrating"] > 0 &&  temp[i]["totalcount"] > 0 )
 					{
-			
-            if(profilepicsArr[ip]["userid"] == this.currentUser["_id"])
-            {
-              if(profilepicsArr[ip]["profileimg"] !== "")
-              this.profileimageFrom = profilepicsArr[ip]["profileimg"]
-            }
+					  this.recipesList1[recIndex]["displayrating"] = Math.ceil((temp[i]["totalrating"]/ temp[i]["totalcount"]));
+					 }
+           if(this.recipesList1[recIndex]["displayrating"] == "" ||this.recipesList1[recIndex]["displayrating"] == 0)
+            this.recipesList1[recIndex]["displayrating"] = 3;
+				  }
+  
+				  var rec1Index = this.recipesList2.findIndex(x1 => (x1.id === temp[i]["recipeid"]));
+				  console.log(rec1Index);
+				  if(rec1Index > -1)
+				  {
+					this.recipesList2[rec1Index]["totalcount"] = temp[i]["totalcount"];
+					this.recipesList2[rec1Index]["totalrating"] = temp[i]["totalrating"];
+  
+					if( temp[i]["totalrating"] > 0 &&  temp[i]["totalcount"] > 0 )
+					{
+					  this.recipesList2[rec1Index]["displayrating"] = Math.ceil((temp[i]["totalrating"]/ temp[i]["totalcount"]));
 
-            if(profilepicsArr[ip]["userid"] == this.item["_id"])
-            {
-              if(profilepicsArr[ip]["profileimg"] !== "")
-              this.profileimageTo = profilepicsArr[ip]["profileimg"]
+            if(this.recipesList2[rec1Index]["displayrating"] == "" ||this.recipesList2[rec1Index]["displayrating"] == 0)
+            this.recipesList2[rec1Index]["displayrating"] = 3;
+					 }
+  
+				  }
 
-            }
+          var rec3Index = this.recipesList3.findIndex(x3 => (x3.id === temp[i]["recipeid"]));
+				  console.log(rec1Index);
+				  if(rec3Index > -1)
+				  {
+					this.recipesList3[rec3Index]["totalcount"] = temp[i]["totalcount"];
+					this.recipesList3[rec3Index]["totalrating"] = temp[i]["totalrating"];
+  
+					if( temp[i]["totalrating"] > 0 &&  temp[i]["totalcount"] > 0 )
+					{
+					  this.recipesList3[rec3Index]["displayrating"] = Math.ceil((temp[i]["totalrating"]/ temp[i]["totalcount"]));
 
-					}
-					
+            if(this.recipesList3[rec3Index]["displayrating"] == "" ||this.recipesList3[rec3Index]["displayrating"] == 0)
+            this.recipesList3[rec3Index]["displayrating"] = 3;
+					 }
+  
+				  }
 
+  
 				}
-			
-			}));
-
-    
-    
-  }
+		
+				console.log(  this.recipesList2);
+			  }
+			}
+	
+		  }
+		}));
+	 
+	  
+	  
+	}
 }

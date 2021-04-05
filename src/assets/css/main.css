@@ -807,7 +807,7 @@ a.mean-expand {
   background: transparent !important;
   font-weight: 700;
   padding: 0 !important;
-  border-bottom: 2px inset #6ebe3b;
+ /* border-bottom: 2px inset #6ebe3b;*/
 }
 .header-main.header-var2 .submit-recipe:hover {
   border-color: #000000;
