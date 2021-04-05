@@ -1,5 +1,7 @@
 import { Component, ElementRef, Input, Output, OnInit, OnDestroy, EventEmitter } from '@angular/core';
 import { SidebarService } from './sidebar.service';
+import { DBService } from './../../../dbservices/db.service';
+import { HelpService } from './../../../services/help.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -7,7 +9,7 @@ import { SidebarService } from './sidebar.service';
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit, OnDestroy {
-	
+	recipesList: Array<any> = [];
     @Input() id: string;
     @Input() setDate: any;
     @Input() minDate: any;
@@ -30,7 +32,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
    elementId : any;
    date: any; 
    
-    constructor(private sidebarService: SidebarService, private el: ElementRef) {
+    constructor(private sidebarService: SidebarService, private el: ElementRef, private dbService: DBService, private helpService: HelpService) {
     this.element = el.nativeElement;
     //this.showhideTime = true;  
     this.id = "";
@@ -39,24 +41,9 @@ export class SidebarComponent implements OnInit, OnDestroy {
     this.showhideTimeFlag = true;
     }
 
-    loadSliders()
-    {
-      this.sliderList.push({"title":"pasto pizza with cheesey dip", "image":"assets/images/temp-images/full-slide-1.jpg","rating":"(4.1 / 5)", "description":"Nam ornare arcu turpis, nec congues with us     <br/>Curabitur quis euismod mauris. Nulls<br/>eget semper vulputate."});
-
-      this.sliderList.push({"title":"pasto pizza with juicy dip", "image":"assets/images/temp-images/full-slide-2.jpg","rating":"(4.1 / 5)", "description":"Nam ornare arcu turpis, nec congues with us     <br/>Curabitur quis euismod mauris. Nulls<br/>eget semper vulputate."});
-
-
-
-      this.sliderList.push({"title":"pasto pizza with extra topping", "image":"assets/images/temp-images/full-slide-3.jpg","rating":"(4.1 / 5)", "description":"Nam ornare arcu turpis, nec congues with us     <br/>Curabitur quis euismod mauris. Nulls<br/>eget semper vulputate."});
-
-
-
-
-
-    }
 
     ngOnInit(): void {
-     this.loadSliders();
+     this.loadRecipes();
    this.elementId= this.element.id;
 if(this.showhidetime == false)
 this.showhideTimeFlag = false;
@@ -148,6 +135,47 @@ this.showhideTimeFlag = false;
 
 		this.closeDT.emit(this.dt);
 	}	
-	
-		
+  loadRecipes()
+	{
+	  this.recipesList = [];
+	  var params = {};
+    params["query"] = "select * from recipes where s_instructions != '' order by rand() limit 4";
+
+	 var res =   this.dbService.getDatabyTablebyQuery("recipes", params).subscribe(invData => setTimeout(() => {
+   
+	  if(invData !== null && typeof(invData["body"]) !== "undefined" && invData["body"] !== null && invData["body"]["length"] > 0)
+		{
+      this.recipesList = [];
+   		for(let i=0; i < invData["body"]["length"] ; i++)
+		  {			
+			  this.recipesList.push(invData["body"][i]);		
+		  }
+      console.log(this.recipesList);
+		}
+	 }));
+  
+	}
+  formatLabels(str)
+  {
+    
+    var retStr = str;
+    if(str !== "")
+    {
+      retStr= str.toString().replace(/~/g, ', ');
+      retStr = retStr.trim();
+    }
+  
+    return retStr;
+  }
+  formatImage(image, type)
+  {
+    console.log(image);
+    var retImage = image;
+    if(image !== "" && type !== "")
+    {
+      retImage = this.helpService.formatImage(image, type);
+      
+    }
+    return retImage;
+  }
 }

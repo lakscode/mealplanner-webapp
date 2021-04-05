@@ -164,5 +164,16 @@ this.showhideTimeFlag = false;
 		this.closeDT.emit(this.dt);
 	}	
 	
-		
+  formatImage(image)
+  {
+    var retImage = image;
+    if(image !== "")
+    {
+      var img = image.split(".");
+      retImage = img[0] + "_s" + "." + img[1];
+
+    }
+
+    return retImage;
+  }
 }

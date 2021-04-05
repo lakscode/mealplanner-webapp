@@ -1,6 +1,7 @@
 import { Component, ElementRef, Input, Output, OnInit, OnDestroy, EventEmitter } from '@angular/core';
 import { PopularService } from './popular.service';
-
+import { DBService } from '../../../dbservices/db.service';
+import { HelpService } from '../../../services/help.service';
 @Component({
   selector: 'app-popular',
   templateUrl: './popular.component.html',
@@ -29,8 +30,8 @@ export class PopularComponent implements OnInit, OnDestroy {
    tempTm : any;
    elementId : any;
    date: any; 
-   
-    constructor(private popularService: PopularService, private el: ElementRef) {
+   recipesList: Array<any> = [];
+    constructor(private popularService: PopularService, private el: ElementRef, private dbService: DBService, private helpService: HelpService) {
     this.element = el.nativeElement;
     //this.showhideTime = true;  
     this.id = "";
@@ -39,24 +40,9 @@ export class PopularComponent implements OnInit, OnDestroy {
     this.showhideTimeFlag = true;
     }
 
-    loadSliders()
-    {
-      this.sliderList.push({"title":"pasto pizza with cheesey dip", "image":"assets/images/temp-images/full-slide-1.jpg","rating":"(4.1 / 5)", "description":"Nam ornare arcu turpis, nec congues with us     <br/>Curabitur quis euismod mauris. Nulls<br/>eget semper vulputate."});
-
-      this.sliderList.push({"title":"pasto pizza with juicy dip", "image":"assets/images/temp-images/full-slide-2.jpg","rating":"(4.1 / 5)", "description":"Nam ornare arcu turpis, nec congues with us     <br/>Curabitur quis euismod mauris. Nulls<br/>eget semper vulputate."});
-
-
-
-      this.sliderList.push({"title":"pasto pizza with extra topping", "image":"assets/images/temp-images/full-slide-3.jpg","rating":"(4.1 / 5)", "description":"Nam ornare arcu turpis, nec congues with us     <br/>Curabitur quis euismod mauris. Nulls<br/>eget semper vulputate."});
-
-
-
-
-
-    }
-
+   
     ngOnInit(): void {
-     this.loadSliders();
+     this.loadRecipes();
    this.elementId= this.element.id;
 if(this.showhidetime == false)
 this.showhideTimeFlag = false;
@@ -123,22 +109,6 @@ this.showhideTimeFlag = false;
 	
 	save()
 	{
-
-  if(this.dt.date == null || this.dt.date == "")
-  {
-    var d = new Date();
-		this.tempDt = {year: d.getFullYear(), month: d.getMonth()+1, day: d.getDate()};
-		this.dt["date"] = this.tempDt; //, "time":this.tempTm};
-  }
-
-  if(this.dt.time == null || this.dt.time == "")
-  {
-    var d = new Date();	
-    this.tempTm = {hour: d.getHours(), minute: d.getMinutes(), second: d.getSeconds()};
-		this.dt["time"] = this.tempTm;
-  }
-
-
     this.returnData.emit(this.dt);
 
 	}	
@@ -149,5 +119,48 @@ this.showhideTimeFlag = false;
 		this.closeDT.emit(this.dt);
 	}	
 	
-		
+  loadRecipes()
+	{
+	  this.recipesList = [];
+	  var params = {};
+    params["query"] = "select * from recipes where s_instructions != '' order by rand() limit 4";
+
+	 var res =   this.dbService.getDatabyTablebyQuery("recipes", params).subscribe(invData => setTimeout(() => {
+   
+	  if(invData !== null && typeof(invData["body"]) !== "undefined" && invData["body"] !== null && invData["body"]["length"] > 0)
+		{
+      this.recipesList = [];
+   		for(let i=0; i < invData["body"]["length"] ; i++)
+		  {			
+			  this.recipesList.push(invData["body"][i]);		
+		  }
+		}
+    console.log(this.recipesList);
+	 }));
+  
+	}
+  formatLabels(str)
+  {
+    
+    var retStr = str;
+    if(str !== "")
+    {
+      retStr= str.toString().replace(/~/g, ', ');
+      retStr = retStr.trim();
+    }
+  
+    return retStr;
+  }
+
+  formatImage(image, type)
+  {
+    var retImage = image;
+    if(image !== "" && type !== "")
+    {
+      retImage = this.helpService.formatImage(image, type);
+      
+    }
+    return retImage;
+  }
+
 }

@@ -2,54 +2,19 @@
  <div class="widget latest-news-widget">
     <h2>popular recipes</h2>
     <ul>
-        <li>
+        <li *ngFor="let recipe of recipesList; let r = index;">
             <div class="thumb">
                 <a href="javascript:void(0)">
-                    <img src="assets/images/temp-images/widget-thumbnail.jpg" alt="thumbnail">
+                    <img src="{{formatImage(recipe.image, 's')}}" alt="thumbnail">
                 </a>
             </div>
             <div class="detail">
-                <a href="javascript:void(0)">Pimento Cheese Potato Skins</a>
-                <span class="post-date">March 21,2015</span>
+                <a href="javascript:void(0)">{{recipe.label}}</a>
+                <span class="post-date">{{formatLabels(recipe.dietLabels)}}</span>
             </div>
         </li>
 
-        <li>
-            <div class="thumb">
-                <a href="javascript:void(0)">
-                    <img src="assets/images/temp-images/widget-thumbnail.jpg" alt="thumbnail">
-                </a>
-            </div>
-            <div class="detail">
-                <a href="javascript:void(0)">Pimento Cheese Potato Skins</a>
-                <span class="post-date">March 21,2015</span>
-            </div>
-        </li>
-
-        <li>
-            <div class="thumb">
-                <a href="javascript:void(0)">
-                    <img src="assets/images/temp-images/widget-thumbnail.jpg" alt="thumbnail">
-                </a>
-            </div>
-            <div class="detail">
-                <a href="javascript:void(0)">Pimento Cheese Potato Skins</a>
-                <span class="post-date">March 21,2015</span>
-            </div>
-        </li>
-
-        <li>
-            <div class="thumb">
-                <a href="javascript:void(0)">
-                    <img src="assets/images/temp-images/widget-thumbnail.jpg" alt="thumbnail">
-                </a>
-            </div>
-            <div class="detail">
-                <a href="javascript:void(0)">Pimento Cheese Potato Skins</a>
-                <span class="post-date">March 21,2015</span>
-            </div>
-        </li>
-
+   
     </ul>
 </div>
 <!--popular recipes widget ends-->
