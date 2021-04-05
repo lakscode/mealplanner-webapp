@@ -22,6 +22,7 @@ export class RecipesubmitComponent implements OnInit {
 	ngOnInit() {
 
 		this.nutrientsList =  constants.minerals;
+		console.log(this.nutrientsList);
 	}
 }
 

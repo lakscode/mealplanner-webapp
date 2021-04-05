@@ -322,7 +322,27 @@
         event.preventDefault();
     });
 
+$('.add-button.add-nutrient').on("click",function(event){
 
+        var newMajesticItem= '<li style="">'+
+                                '<div class="add-fields">'+
+                                    '<span class="handler-list ui-sortable-handle"><i class="fa fa-arrows"></i></span>             '+                      
+                                    '<div style="width:40%" class="selectric-wrapper selectric-advance-selectable"><div class="selectric-select"><select name="cuisine" id="cuisine" class="advance-selectable" tabindex="0">'+
+                                       ' <option value="" selected="selected">Select Nutrient</option>'+
+                                        '<option *ngFor="let nutrient of nutrientsList; let n = index" value="{{nutrient}}">{{nutrient}}</option>'+
+                  
+                                    '</select></div></div>'+
+
+                                    '<input type="text" name="nutrients[]" id="nutrients">'+
+                                   ' <span class="del-list"><i class="fa fa-trash"></i></span>'+
+                                '</div>'+
+                           ' </li>';
+        $( '.list-sortable.nutrients-list').append( newMajesticItem );
+        $( '.list-sortable.nutrients-list').children("li").slideDown();
+        bindMajesticItem();
+
+        event.preventDefault();
+    });
 
     $('.add-button.add-steps').on("click",function(event){
         event.preventDefault();
