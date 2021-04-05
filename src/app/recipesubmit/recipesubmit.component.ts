@@ -6,8 +6,7 @@ import { DBService } from '../dbservices/db.service';
 import { HelpService } from '../services/help.service';
 
 import { environment } from './../../environments/environment';
-declare var $: any;
-
+import { constants } from './../jsonfiles/constants';
 @Component({
 	selector: 'app-recipesubmit',
 	templateUrl: './recipesubmit.component.html',
@@ -15,13 +14,14 @@ declare var $: any;
 })
 export class RecipesubmitComponent implements OnInit {
 	
+	nutrientsList: Array<any> =[];
 	constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
 	
 	}
 
 	ngOnInit() {
 
-	
+		this.nutrientsList =  constants.minerals;
 	}
 }
 

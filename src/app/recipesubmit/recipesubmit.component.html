@@ -14,8 +14,8 @@
                     <br>
                     <label for="short-description">Short Description</label>
                     <textarea class="short-text" name="short-des" id="short-description" cols="30" rows="10"></textarea>
-                    <label for="recipe-content">Recipe Contents</label>
-                    <textarea name="content" id="recipe-content" cols="30" rows="10"></textarea>
+                    <!--<label for="recipe-content">Recipe Contents</label>
+                    <textarea name="content" id="recipe-content" cols="30" rows="10"></textarea>-->
                     <label for="upload-image">Upload Images</label>
                     <input type="file" name="fileUpload" id="upload-image">
                     <fieldset class="ingredient-set">
@@ -50,6 +50,32 @@
                                             </span>
                     </fieldset>
     
+
+                    <fieldset class="ingredient-set">
+                        <label for="nutrients">Nutrients</label>
+                        <ul class="list-sortable ingredients-list ui-sortable">
+                            <li style="">
+                                <div class="add-fields">
+                                    <span class="handler-list ui-sortable-handle"><i class="fa fa-arrows"></i></span>                                   
+                                    <div style="width:40%" class="selectric-wrapper selectric-advance-selectable"><div class="selectric-select"><select name="cuisine" id="cuisine" class="advance-selectable" tabindex="0">
+                                        <option value="" selected="selected">Select Nutrient</option>
+                                        <option *ngFor="let nutrient of nutrientsList; let n = index"; value="{{nutrient}}">{{nutrient}}</option>
+                  
+                                    </select></div></div>
+
+                                    <input type="text" name="nutrients[]" id="nutrients">
+                                    <span class="del-list"><i class="fa fa-trash"></i></span>
+                                </div>
+                            </li>
+                            <li style=""><div class="add-fields"> <span class="handler-list"><i class="fa fa-arrows"></i></span>  <input type="text" name="nutrients[]" id="nutrients">  <input type="text" name="nutrients[]" id="nutrients"> <span class="del-list"><i class="fa fa-trash"></i></span></div></li>
+                            <li style=""><div class="add-fields"> <span class="handler-list"><i class="fa fa-arrows"></i></span> <input type="text" name="nutrients[]" id="ingredients"> <input type="text" name="nutrients[]" id="ingredients"> <span class="del-list"><i class="fa fa-trash"></i></span></div></li>
+                    
+                        </ul>
+                                             <span class="add-button add-ing">
+                                                <i class="fa fa-plus"></i>
+                                            </span>
+                    </fieldset>
+
                     <label class="video-based-recipe">Video Based Recipe</label>
                     <br>
                     <label for="radio-yes">
@@ -62,7 +88,7 @@
                     <br>
                     <label for="video-embed">Video Embed Code</label>
                     <textarea class="short-text" name="embed-code" id="video-embed" cols="30" rows="10"></textarea>
-    
+                    
                     <div class="row">
                         <div class="col-sm-6">
                             <label for="yield">Yield</label>
@@ -70,11 +96,11 @@
                         </div>
                         <div class="col-sm-6">
                             <label for="servings">Servings</label>
-                            <input type="text" name="servings" id="servings">
+                            <input type="text" name="s_servings" id="s_servings">
                         </div>
                     </div>
     
-                    <div class="row">
+                    <!--<div class="row">
                         <div class="col-sm-4">
                             <label for="prep-time">Preparation Time</label>
                             <input type="text" name="prep-time" id="prep-time">
@@ -87,12 +113,15 @@
                             <label for="ready-in">Ready In</label>
                             <input type="text" name="ready-in" id="ready-in">
                         </div>
-                    </div>
+                    </div>-->
     
-                    <label for="tags">Tags</label>
-                    <input type="text" name="tags" id="tags">
+                    <label for="dietLabels">Diet Labels <em>Comma separated</em></label>
+                    <input type="text" name="dietLabels" id="dietLabels">
     
-                    <div class="row">
+                    <label for="healthtags">Health Labels <em>Comma separated</em></label>
+                    <input type="text" name="healthLabels" id="healthLabels">
+
+                    <!--<div class="row">
                         <div class="col-sm-6">
                             <label for="recipe-type">Recipe Type</label>
                             <div class="selectric-wrapper selectric-advance-selectable"><div class="selectric-hide-select"><select name="recipe-type" id="recipe-type" class="advance-selectable" tabindex="0">
@@ -133,7 +162,7 @@
                                 <option value="s4">type 4</option>
                             </select></div><div class="selectric"><p class="label">None</p><b class="button"></b></div><div class="selectric-items" tabindex="-1"><div class="selectric-scroll"><ul><li data-index="0" class="selected">None</li><li data-index="1" class="">type 1</li><li data-index="2" class="">type 2</li><li data-index="3" class="">type 3</li><li data-index="4" class="last">type 4</li></ul></div></div><input class="selectric-input" tabindex="0"></div>
                         </div>
-                    </div>
+                    </div>-->
                     <div class="text-center">
                         <button type="submit" class="recipe-submit-btn">Submit Your Recipe</button>
                     </div>
