@@ -28,7 +28,9 @@ export class PlannercreateComponent implements OnInit {
 
 	ngOnInit() {
 		this.searchparam['q'] = "";
-		this.addRecipeImage = "assets/images/placement_addrecipes@2x.png"
+//		this.addRecipeImage = "assets/images/placement_addrecipes@2x.png"
+this.addRecipeImage = "assets/images/add-recipe.png"
+
 		this.draggable = "assets/images/icon_draggable_grey.png"
 this.loadRecipes()
 this.loadWeekDays();
@@ -59,14 +61,14 @@ this.loadWeekDays();
 		var daysM= [];
 		this.plan = [];
 		
-		for(let j=0; j< 5; j++)
+		for(let j=0; j< 7; j++)
 		{
 			daysM= [];
-			for(let i=0; i < 7; i++)
+			for(let i=0; i < 5; i++)
 			{
-				daysM.push({"id":(i+1), "name":this.weekDays[i], "recipe":null});
+				daysM.push({"id":(i+1), "name":this.mealsList[i], "recipe":null});
 			}
-			this.plan.push({"id":"row" + (j+1), "name":this.mealsList[j]["name"], "days":daysM})
+			this.plan.push({"id":"row" + (j+1), "name":this.weekDays[j]["name"], "days":daysM})
 		}
 	
 		console.log(this.plan);
@@ -130,8 +132,8 @@ this.loadWeekDays();
 			this.recipesList.push(invData["body"][i]);
 			if(count < 6)
 			{
-			var rIndex = Math.floor(Math.random() * 5);  
-			var cIndex = Math.floor(Math.random() * 7);  
+			var rIndex = Math.floor(Math.random() * 7);  
+			var cIndex = Math.floor(Math.random() * 5);  
 			this.plan[rIndex]["days"][cIndex]["recipe"] = invData["body"][i];
 			count++;
 			}
@@ -288,6 +290,29 @@ this.plan[r]["days"][c]["recipe"] =  recipeItem;
 		ev.dataTransfer.setData("text", ev.target.id);
 	  }
 
+	  calculateCalory(mealtype, index)
+	  {
+		  var totalCalories = 0;
+		  console.log(index);
+		  if(mealtype !== "")
+		  {
+			  //console.log(this.plan);
+			  for(let r =0; r < this.plan.length; r++)
+			  {
+				  var item = this.plan[r]["days"][index];
+				  console.log(item);
+				  if(typeof(item['recipe']) !== 'undefined' && item["recipe"] !== null)
+				  {
+					if(typeof(item['recipe']["calories"]) !== 'undefined' && item["recipe"]["calories"] !== null && item["recipe"]["calories"] !== "")
+					{
+						totalCalories += parseInt(item["recipe"]["calories"]);
+					}
+				  }
+			  }
+		  }
+
+		  return totalCalories  + " calories";
+	  }
 }
 
 	

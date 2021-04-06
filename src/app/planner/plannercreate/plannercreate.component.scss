@@ -644,7 +644,7 @@ mark, .mark {
 }
 .recipe-mb--draggable .recipe-mb-info {
 
-    width: calc(100% - 100px) !important;
+    width: calc(100% - 70px) !important;
 
 }
 
@@ -1177,3 +1177,14 @@ button, html [type="button"], [type="reset"], [type="submit"] {
 }
 
 
+
+
+.text-vertical
+{
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  width: 10px;
+  margin-left: 20px;
+  /* border-right: 1px solid #CCC; */
+  margin-right: 10px;
+}

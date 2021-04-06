@@ -3,7 +3,7 @@
 
 
 
-    <div class="col-12 col-lg-3">
+    <div class="col-12 col-lg-4">
 <!--- Left bar start -->
 
 <div class="recipe-browse-side" style="max-height: 2700px;">
@@ -321,12 +321,12 @@
                     <div id="Drag{{k}}" (drop)="drop($event)" 
                     (dragover)="allowDrop($event)">
                         <div class="recipe-mb mb-3 recipe-mb--draggable  card">
-                            <div class="draggable-bar" id="draggable-bar_{{k}}"><img
+                            <!--<div class="draggable-bar" id="draggable-bar_{{k}}"><img
                                     id="nutritional-toggle-6050d5d15ddc1c00294df92a" class="toggle-icon"
                                     src="{{draggable}}"
                                     alt="Draggable icon" draggable="true" 
-                                    (dragstart)="drag($event, k)"></div>
-                                    <div style='width:calc(100% - 35px)'><a class="hmp-link--no-style"
+                                    (dragstart)="drag($event, k)"></div>-->
+                                    <div style='width:calc(100%)'><a class="hmp-link--no-style"
                                 href="{{recipe.uri}}">
                                 <div class="recipe-content recipe-content--draggable card-body">
                                     <div class="recipe-image-container mobile" id="imagep_{{k}}"><img class="recipe-image"
@@ -337,8 +337,9 @@
                                     <div class="recipe-mb-info">
                                         <h2 class="title overflow-text" id="recipe-6050d5d15ddc1c00294df92a">{{recipe.label}}</h2>
                                         <div class="calories" id="calories-6050d5d15ddc1c00294df92a">{{recipe.calories}} calories</div>
-                                    </div><img id="favorite-button-side-favorite-button-6050d5d15ddc1c00294df92a"
-                                        class="side-favorite-button" src="assets/images/heart.png" alt="Heart icon">
+                                    </div>
+                                    <!--<img id="favorite-button-side-favorite-button-6050d5d15ddc1c00294df92a"
+                                        class="side-favorite-button" src="assets/images/heart.png" alt="Heart icon">-->
                                 </div>
                             </a>
                                 </div>
@@ -369,7 +370,7 @@
 
 <!-- Left bar ends -->
     </div>
-    <div class="col-12 col-lg-9">
+    <div class="col-12 col-lg-8">
         <div  id="div1" 
         (drop)="drop($event)" 
         (dragover)="allowDrop($event)">
@@ -392,8 +393,8 @@
             <div class="meal-row-wrapper meal-row__week-days">
                 <div class="meal-name"></div>
                 <div class="meal-plan-row row">
-                    <div class="meal-plan-col col" *ngFor="let day of weekDays; let d =index;" style="width:14%;">
-                        <div class="meal-day"><span>{{day.name}}</span></div>
+                    <div class="meal-plan-col col " *ngFor="let mealtype of mealsList; let d =index;" style="width:18%;">
+                        <div class="meal-day"><span>{{mealtype.name}}</span></div>
                     </div>
                    
                 </div>
@@ -401,10 +402,11 @@
            
                 <ng-container *ngFor="let item of plan; let r = index;">
                     <div class="meal-row-wrapper">
-                    <div class="meal-name"><span>{{item.name}}</span></div>
+                   <div class="meal-name" style="min-height:130px"><span>{{item.name}}</span></div>
                     <div class="meal-plan-column-container">
                         <div class="meal-plan-row">
-                            <div class="meal-plan-slot" style="width: 14%;"  *ngFor="let day of item.days; let c= index;">
+                         
+                            <div class="meal-plan-slot" style="width: 18%;"  *ngFor="let day of item.days; let c= index;">
                                 <div *ngIf="day.recipe">
                                     <div draggable="true">
                                         <div class="recipe-image-wrapper ">
@@ -423,7 +425,7 @@
                                     </div>
                                     <div class="calories-slot-sum">{{day.recipe.calories}} Calories</div>
                                 </div>
-                                <div *ngIf="!day.recipe" id="drop-{{r}}-{{c}}"  (drop)="drop($event, r, c)" (dragover)="allowDrop($event)">                             
+                                <div style="min-height:130px" *ngIf="!day.recipe" id="drop-{{r}}-{{c}}"  (drop)="drop($event, r, c)" (dragover)="allowDrop($event)">                             
                                     <div id="image-placeholder-{{r}}-{{c}}" class="recipe-image-placeholder card">
                                     <div  class="recipe-image-card-content  card-body"><img id="target-{{r}}-{{c}}"
                                             class="recipe-card-placeholder-image" src="{{addRecipeImage}}"
@@ -443,27 +445,11 @@
             <div class="meal-row-wrapper meal-row__calories">
                 <div class="meal-name"></div>
                 <div id="total-calories-row" class="meal-plan-row" style="flex-wrap: nowrap;">
-                    <div class="meal-plan-col col" style="width: 132px; min-width: 132px;">
-                        <div>909 calories</div>
+                    <div class="meal-plan-col col" style="width: 132px; min-width: 132px;"  *ngFor="let mealtype of mealsList; let d =index;">
+                        <div style="font-size: 16px;font-weight: bold; color: orange; ">
+                            {{calculateCalory(mealtype, d)}}</div>
                     </div>
-                    <div class="meal-plan-col col" style="width: 132px; min-width: 132px;">
-                        <div>750 calories</div>
-                    </div>
-                    <div class="meal-plan-col col" style="width: 132px; min-width: 132px;">
-                        <div>0 calories</div>
-                    </div>
-                    <div class="meal-plan-col col" style="width: 132px; min-width: 132px;">
-                        <div>0 calories</div>
-                    </div>
-                    <div class="meal-plan-col col" style="width: 132px; min-width: 132px;">
-                        <div>0 calories</div>
-                    </div>
-                    <div class="meal-plan-col col" style="width: 132px; min-width: 132px;">
-                        <div>0 calories</div>
-                    </div>
-                    <div class="meal-plan-col col" style="width: 132px; min-width: 132px;">
-                        <div>0 calories</div>
-                    </div>
+                  
                 </div>
             </div>
         </div>
