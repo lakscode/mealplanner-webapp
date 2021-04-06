@@ -24,10 +24,16 @@ h2,p{
 	-moz-transition:-moz-transform .15s linear;
 	-o-transition:-o-transform .15s linear;
 	-webkit-transition:-webkit-transform .15s linear;
+	width: 100%;
+    min-height: 200px;
+    padding: 1em;
+    font-size: 20px;
   }
   ul li{
 	margin:1em;
 	float:left;
+	min-height: 200px;
+    width: 22%;
   }
   ul li h2{
 	font-size:120%;

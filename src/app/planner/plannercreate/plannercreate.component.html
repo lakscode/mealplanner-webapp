@@ -277,7 +277,7 @@
         <div class="content">
             <div class="recipes card-group">
                 <div class="recipe-wrapper" *ngFor="let recipe of recipesList; let k=index;">
-                    <div id="Drag{{k}}" (drop)="drop($event)" 
+                    <div id="Drag{{k}}" 
                     (dragover)="allowDrop($event)">
                         <div class="recipe-mb mb-3 recipe-mb--draggable  card">
                             <!--<div class="draggable-bar" id="draggable-bar_{{k}}"><img
