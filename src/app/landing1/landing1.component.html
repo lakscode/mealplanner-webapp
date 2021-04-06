@@ -138,7 +138,7 @@
                   <div class="split-images-var2 col-size text-center" *ngFor="let rRecipe of recommendedRecipes; let r=index;">
                       <div class="image-first inner-split">
                           <div class="image common-split animated wow flipInY animation-delay{{r+1*100}}ms">
-                              <a href="/recipedetails;id={{rRecipe.id}}"><img src="{{rRecipe.image}}" alt="image"/></a>
+                              <a href="/recipedetails;id={{rRecipe.id}}"><img src="{{formatImage(rRecipe.image, 'm')}}" alt="image"/></a>
                           </div>
                           <div class="intro common-split animated wow flipInY animation-delay{{r+2*100}}ms">
                               <div class="intro-inner ">

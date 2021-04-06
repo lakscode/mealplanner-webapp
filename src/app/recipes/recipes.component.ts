@@ -1,5 +1,5 @@
 import { Component, OnInit,OnDestroy  } from '@angular/core';
-import { Router, ActivatedRoute } from "@angular/router";
+import { Router, ActivatedRoute, NavigationEnd } from "@angular/router";
 import { UserService } from '../services/user.service';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DBService } from '../dbservices/db.service';
@@ -31,6 +31,14 @@ export class RecipesComponent implements OnInit {
 	}
 
 	ngOnInit() {
+
+		this.router.events.subscribe((evt) => {
+            if (!(evt instanceof NavigationEnd)) {
+                return;
+            }
+            window.scrollTo(0, 0)
+        });
+		
 
 		this.currentUser =this.helpService.getCurrentUser();
 		if(this.currentUser !== null)
@@ -202,6 +210,20 @@ export class RecipesComponent implements OnInit {
 	{
 		return this.helpService.limitTo(str, num) + "...";
 	}
+
+	formatImage(image, type)
+	{
+	//  console.log(image);
+	  var retImage = image;
+	  if(image !== "" && type !== "")
+	  {
+		retImage = this.helpService.formatImage(image, type);
+		
+	  }
+	//  console.log(retImage);
+	  return retImage;
+	}
+
 }
 
 	

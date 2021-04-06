@@ -111,12 +111,12 @@
   
   <div class="listing" *ngFor="let recipe1 of recipesList1; let i = index;">
       <div class="image">
-          <a href="/recipedetails;id={{recipe1.id}}">
-              <img class= "tstbite-animation" src="{{recipe1.image}}" alt="image">
+          <a routerLink="/recipedetails;id={{recipe1.id}}">
+              <img class= "tstbite-animation" src="{{formatImage(recipe1.image, 'm')}}" alt="image">
           </a>
       </div>
       <div class="detail">
-          <h4><a href="/recipedetails;id={{recipe1.id}}">{{recipe1.label}}</a></h4>
+          <h4><a routerLink="/recipedetails;id={{recipe1.id}}">{{recipe1.label}}</a></h4>
           <p innerHTML = "{{limitTo(recipe1.s_instructions, 200)}}">
               
           </p>
@@ -170,12 +170,12 @@
  
   <div class="listing" *ngFor="let recipe2 of recipesList2; let i = index;">
     <div class="image">
-        <a href="/recipedetails">
-            <img src="{{recipe2.image}}" alt="image">
+        <a routerLink="/recipedetails;id={{recipe2.id}}">
+            <img src="{{formatImage(recipe2.image, 'm')}}" alt="image">
         </a>
     </div>
     <div class="detail">
-        <h4><a href="/recipedetails">{{recipe2.label}}</a></h4>
+        <h4><a href="/recipedetails;id={{recipe2.id}}">{{recipe2.label}}</a></h4>
         <p innerHTML = "{{limitTo(recipe2.s_instructions, 200)}}">
             
         </p>

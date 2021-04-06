@@ -1,4 +1,8 @@
 <div class="row w-1200" style="text-align:center; margin:0 auto;">
+
+
+
+
     <div class="col-12 col-lg-3">
 <!--- Left bar start -->
 
@@ -7,15 +11,15 @@
         <div>
             <div class="filter-bar--side-version">
                 <div class="filter-bar__search-container">
-                    <form class="recipe-search false">
+                    <form class="recipe-search false" onsubmit ="loadRecipes()">
                         <div class="form-group">
                             <div class="input-group">
                                 <div class="hm-typeahead " data-test="typeahead-input">
                                     <div class="rbt clearfix open" style="position: relative;" tabindex="-1">
                                         <div class="rbt-input-hint-container" style="position: relative;"><input
                                                 aria-autocomplete="both" aria-expanded="false" aria-haspopup="listbox"
-                                                autocomplete="nope" role="combobox" type="text"
-                                                class="rbt-input-main form-control rbt-input " value="" placeholder="SEARCH">
+                                                autocomplete="nope" role="combobox" name="searchq" id="searchq" [(ngModel)]="searchparam.q" type="text"
+                                                class="rbt-input-main form-control rbt-input " (keyup)="searchParam()" value="" placeholder="SEARCH">
                                             <div class="rbt-input-hint"
                                                 style="left: 0px; pointer-events: none; position: absolute; top: 0px; display: none;">
                                                 <input aria-hidden="true" readonly=""
@@ -30,7 +34,7 @@
                                             selections</div>
                                     </div>
                                 </div>
-                                <div class="input-group-append"><button type="submit" class="btn btn-secondary"><i
+                                <div class="input-group-append"><button type="submit" (click)="loadRecipes()" class="btn btn-secondary"><i
                                             class="fa fa-search" aria-hidden="true"></i></button></div>
                             </div>
                         </div>
@@ -313,27 +317,31 @@
         </div>
         <div class="content">
             <div class="recipes card-group">
-                <div class="recipe-wrapper">
-                    <div draggable="true">
+                <div class="recipe-wrapper" *ngFor="let recipe of recipesList; let k=index;">
+                    <div id="Drag{{k}}" (drop)="drop($event)" 
+                    (dragover)="allowDrop($event)">
                         <div class="recipe-mb mb-3 recipe-mb--draggable  card">
-                            <div class="draggable-bar" id="draggable-bar-6050d5d15ddc1c00294df92a"><img
+                            <div class="draggable-bar" id="draggable-bar_{{k}}"><img
                                     id="nutritional-toggle-6050d5d15ddc1c00294df92a" class="toggle-icon"
                                     src="{{draggable}}"
-                                    alt="Draggable icon"></div><a class="hmp-link--no-style"
-                                href="/recipe-details/shrimp-fried-rice">
+                                    alt="Draggable icon" draggable="true" 
+                                    (dragstart)="drag($event, k)"></div>
+                                    <div style='width:calc(100% - 35px)'><a class="hmp-link--no-style"
+                                href="{{recipe.uri}}">
                                 <div class="recipe-content recipe-content--draggable card-body">
-                                    <div class="recipe-image-container mobile"><img class="recipe-image"
-                                            id="picture-6050d5d15ddc1c00294df92a"
-                                            src="https://cdn-prd.healthymealplans.com/recipe/2e479ef974c6c0e3589bf4a3afbb7434-Shrimp-Fried-Rice_1x1_400_Healthy-Meal-Plans.jpg"
-                                            alt="Recipe image"></div>
+                                    <div class="recipe-image-container mobile" id="imagep_{{k}}"><img class="recipe-image"
+                                            id="picture_{{k}}"
+                                            src="{{formatImage(recipe.image, 's')}}"
+                                            alt="Recipe image"  draggable="true" 
+                                            (dragstart)="drag($event, k)" ></div>
                                     <div class="recipe-mb-info">
-                                        <h2 class="title overflow-text" id="recipe-6050d5d15ddc1c00294df92a">Shrimp
-                                            Fried Rice</h2>
-                                        <div class="calories" id="calories-6050d5d15ddc1c00294df92a">330 calories</div>
+                                        <h2 class="title overflow-text" id="recipe-6050d5d15ddc1c00294df92a">{{recipe.label}}</h2>
+                                        <div class="calories" id="calories-6050d5d15ddc1c00294df92a">{{recipe.calories}} calories</div>
                                     </div><img id="favorite-button-side-favorite-button-6050d5d15ddc1c00294df92a"
                                         class="side-favorite-button" src="assets/images/heart.png" alt="Heart icon">
                                 </div>
                             </a>
+                                </div>
                             <div class="recipe-footer card-footer">
                                 <div class="row recipe-icons justify-content-md-center">
                                     <div data-test="add-to-meal-plan-modal-button">
@@ -343,729 +351,8 @@
                                             class="add-to-meal-plan-modal-button" src="/static/images/plus.png"
                                             alt="Add recipe icon" href="#">
                                     </div>
-                                    <div data-test="share-modal"><img id="share-modal-button-6050d5d15ddc1c00294df92a"
-                                            class="share-modal-button" src="/static/images/share.png" alt="Share icon">
+                                    <div data-test="share-modal"><i class="fa fa-share-alt" aria-hidden="true"></i>
                                     </div><img id="favorite-button-share-modal-button-6050d5d15ddc1c00294df92a"
-                                        class="share-modal-button" src="assets/images/heart.png" alt="Heart icon">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="recipe-wrapper">
-                    <div draggable="true">
-                        <div class="recipe-mb mb-3 recipe-mb--draggable  card">
-                            <div class="draggable-bar" id="draggable-bar-6019af35b84a6e002a151e73"><img
-                                    id="nutritional-toggle-6019af35b84a6e002a151e73" class="toggle-icon"
-                                    src="{{draggable}}"
-                                  
-                                    alt="Draggable icon"></div><a class="hmp-link--no-style"
-                                href="/recipe-details/honey-garlic-salmon">
-                                <div class="recipe-content recipe-content--draggable card-body">
-                                    <div class="recipe-image-container mobile"><img class="recipe-image"
-                                            id="picture-6019af35b84a6e002a151e73"
-                                            src="https://cdn-prd.healthymealplans.com/recipe/4632d6302caedab88c8e06da8750f053-Honey-Garlic-Salmon_1x1_400_Healthy-Meal-Plans.jpg"
-                                            alt="Recipe image"></div>
-                                    <div class="recipe-mb-info">
-                                        <h2 class="title overflow-text" id="recipe-6019af35b84a6e002a151e73">Honey
-                                            Garlic Salmon</h2>
-                                        <div class="calories" id="calories-6019af35b84a6e002a151e73">340 calories</div>
-                                    </div><img id="favorite-button-side-favorite-button-6019af35b84a6e002a151e73"
-                                        class="side-favorite-button" src="assets/images/heart.png" alt="Heart icon">
-                                </div>
-                            </a>
-                            <div class="recipe-footer card-footer">
-                                <div class="row recipe-icons justify-content-md-center">
-                                    <div data-test="add-to-meal-plan-modal-button">
-                                        <div class="container-fluid create-meal-plan-modal-container"
-                                            data-test="container"></div><img
-                                            id="add-to-meal-plan-modal-6019af35b84a6e002a151e73"
-                                            class="add-to-meal-plan-modal-button" src="/static/images/plus.png"
-                                            alt="Add recipe icon" href="#">
-                                    </div>
-                                    <div data-test="share-modal"><img id="share-modal-button-6019af35b84a6e002a151e73"
-                                            class="share-modal-button" src="/static/images/share.png" alt="Share icon">
-                                    </div><img id="favorite-button-share-modal-button-6019af35b84a6e002a151e73"
-                                        class="share-modal-button" src="assets/images/heart.png" alt="Heart icon">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="recipe-wrapper">
-                    <div draggable="true">
-                        <div class="recipe-mb mb-3 recipe-mb--draggable  card">
-                            <div class="draggable-bar" id="draggable-bar-60121d96d7adc3002924d368"><img
-                                    id="nutritional-toggle-60121d96d7adc3002924d368" class="toggle-icon"
-                                    src="{{draggable}}"
-                                    
-                                    alt="Draggable icon"></div><a class="hmp-link--no-style"
-                                href="/recipe-details/lemon-shrimp-risotto">
-                                <div class="recipe-content recipe-content--draggable card-body">
-                                    <div class="recipe-image-container mobile"><img class="recipe-image"
-                                            id="picture-60121d96d7adc3002924d368"
-                                            src="https://cdn-prd.healthymealplans.com/recipe/217268c16e738dc06bc5902a089566d9-Lemon-Shrimp-Risotto_1x1_400_Healthy-Meal-Plans.jpg"
-                                            alt="Recipe image"></div>
-                                    <div class="recipe-mb-info">
-                                        <h2 class="title overflow-text" id="recipe-60121d96d7adc3002924d368">Lemon
-                                            Shrimp Risotto</h2>
-                                        <div class="calories" id="calories-60121d96d7adc3002924d368">330 calories</div>
-                                    </div><img id="favorite-button-side-favorite-button-60121d96d7adc3002924d368"
-                                        class="side-favorite-button" src="assets/images/heart.png" alt="Heart icon">
-                                </div>
-                            </a>
-                            <div class="recipe-footer card-footer">
-                                <div class="row recipe-icons justify-content-md-center">
-                                    <div data-test="add-to-meal-plan-modal-button">
-                                        <div class="container-fluid create-meal-plan-modal-container"
-                                            data-test="container"></div><img
-                                            id="add-to-meal-plan-modal-60121d96d7adc3002924d368"
-                                            class="add-to-meal-plan-modal-button" src="/static/images/plus.png"
-                                            alt="Add recipe icon" href="#">
-                                    </div>
-                                    <div data-test="share-modal"><img id="share-modal-button-60121d96d7adc3002924d368"
-                                            class="share-modal-button" src="/static/images/share.png" alt="Share icon">
-                                    </div><img id="favorite-button-share-modal-button-60121d96d7adc3002924d368"
-                                        class="share-modal-button" src="assets/images/heart.png" alt="Heart icon">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="recipe-wrapper">
-                    <div draggable="true">
-                        <div class="recipe-mb mb-3 recipe-mb--draggable  card">
-                            <div class="draggable-bar" id="draggable-bar-600234e38390800030ac82e0"><img
-                                    id="nutritional-toggle-600234e38390800030ac82e0" class="toggle-icon"
-                                    src="{{draggable}}"
-                                    
-                                    alt="Draggable icon"></div><a class="hmp-link--no-style"
-                                href="/recipe-details/easy-mexican-chicken-rice-skillet">
-                                <div class="recipe-content recipe-content--draggable card-body">
-                                    <div class="recipe-image-container mobile"><img class="recipe-image"
-                                            id="picture-600234e38390800030ac82e0"
-                                            src="https://cdn-prd.healthymealplans.com/recipe/815b8657b0b61183d58bc94fcbf491af-Mexican-Rice-Skillet_1x1_400_Healthy-Meal-Plans.jpg"
-                                            alt="Recipe image"></div>
-                                    <div class="recipe-mb-info">
-                                        <h2 class="title overflow-text" id="recipe-600234e38390800030ac82e0">Easy
-                                            Mexican Chicken &amp; Rice Skillet</h2>
-                                        <div class="calories" id="calories-600234e38390800030ac82e0">460 calories</div>
-                                    </div><img id="favorite-button-side-favorite-button-600234e38390800030ac82e0"
-                                        class="side-favorite-button" src="assets/images/heart.png" alt="Heart icon">
-                                </div>
-                            </a>
-                            <div class="recipe-footer card-footer">
-                                <div class="row recipe-icons justify-content-md-center">
-                                    <div data-test="add-to-meal-plan-modal-button">
-                                        <div class="container-fluid create-meal-plan-modal-container"
-                                            data-test="container"></div><img
-                                            id="add-to-meal-plan-modal-600234e38390800030ac82e0"
-                                            class="add-to-meal-plan-modal-button" src="/static/images/plus.png"
-                                            alt="Add recipe icon" href="#">
-                                    </div>
-                                    <div data-test="share-modal"><img id="share-modal-button-600234e38390800030ac82e0"
-                                            class="share-modal-button" src="/static/images/share.png" alt="Share icon">
-                                    </div><img id="favorite-button-share-modal-button-600234e38390800030ac82e0"
-                                        class="share-modal-button" src="assets/images/heart.png" alt="Heart icon">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="recipe-wrapper">
-                    <div draggable="true">
-                        <div class="recipe-mb mb-3 recipe-mb--draggable  card">
-                            <div class="draggable-bar" id="draggable-bar-5ffbab59d7adc30029248e76"><img
-                                    id="nutritional-toggle-5ffbab59d7adc30029248e76" class="toggle-icon"
-                                    src="{{draggable}}"
-                                    
-                                    alt="Draggable icon"></div><a class="hmp-link--no-style"
-                                href="/recipe-details/asian-chicken-lettuce-wraps">
-                                <div class="recipe-content recipe-content--draggable card-body">
-                                    <div class="recipe-image-container mobile"><img class="recipe-image"
-                                            id="picture-5ffbab59d7adc30029248e76"
-                                            src="https://cdn-prd.healthymealplans.com/recipe/75d006aee78e185a55139e46cd7dc323-Asian-Chicken-Lettuce-Wraps_1x1_400_Healthy-Meal-Plans.jpg"
-                                            alt="Recipe image"></div>
-                                    <div class="recipe-mb-info">
-                                        <h2 class="title overflow-text" id="recipe-5ffbab59d7adc30029248e76">Asian
-                                            Chicken Lettuce Wraps</h2>
-                                        <div class="calories" id="calories-5ffbab59d7adc30029248e76">230 calories</div>
-                                    </div><img id="favorite-button-side-favorite-button-5ffbab59d7adc30029248e76"
-                                        class="side-favorite-button" src="assets/images/heart.png" alt="Heart icon">
-                                </div>
-                            </a>
-                            <div class="recipe-footer card-footer">
-                                <div class="row recipe-icons justify-content-md-center">
-                                    <div data-test="add-to-meal-plan-modal-button">
-                                        <div class="container-fluid create-meal-plan-modal-container"
-                                            data-test="container"></div><img
-                                            id="add-to-meal-plan-modal-5ffbab59d7adc30029248e76"
-                                            class="add-to-meal-plan-modal-button" src="/static/images/plus.png"
-                                            alt="Add recipe icon" href="#">
-                                    </div>
-                                    <div data-test="share-modal"><img id="share-modal-button-5ffbab59d7adc30029248e76"
-                                            class="share-modal-button" src="/static/images/share.png" alt="Share icon">
-                                    </div><img id="favorite-button-share-modal-button-5ffbab59d7adc30029248e76"
-                                        class="share-modal-button" src="assets/images/heart.png" alt="Heart icon">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="recipe-wrapper">
-                    <div draggable="true">
-                        <div class="recipe-mb mb-3 recipe-mb--draggable  card">
-                            <div class="draggable-bar" id="draggable-bar-5fb45c8b724d0a002f0845ee"><img
-                                    id="nutritional-toggle-5fb45c8b724d0a002f0845ee" class="toggle-icon"
-                                    src="{{draggable}}"
-                                    
-                                    alt="Draggable icon"></div><a class="hmp-link--no-style"
-                                href="/recipe-details/easy-stuffed-pepper-soup">
-                                <div class="recipe-content recipe-content--draggable card-body">
-                                    <div class="recipe-image-container mobile"><img class="recipe-image"
-                                            id="picture-5fb45c8b724d0a002f0845ee"
-                                            src="https://cdn-prd.healthymealplans.com/recipe/b51c908aceb80c6aa5c203d569e25df3-Stuffed-Pepper-Soup_1x1_400_Healthy-Meal-Plans.jpg"
-                                            alt="Recipe image"></div>
-                                    <div class="recipe-mb-info">
-                                        <h2 class="title overflow-text" id="recipe-5fb45c8b724d0a002f0845ee">Easy
-                                            Stuffed Pepper Soup</h2>
-                                        <div class="calories" id="calories-5fb45c8b724d0a002f0845ee">460 calories</div>
-                                    </div><img id="favorite-button-side-favorite-button-5fb45c8b724d0a002f0845ee"
-                                        class="side-favorite-button" src="assets/images/heart.png" alt="Heart icon">
-                                </div>
-                            </a>
-                            <div class="recipe-footer card-footer">
-                                <div class="row recipe-icons justify-content-md-center">
-                                    <div data-test="add-to-meal-plan-modal-button">
-                                        <div class="container-fluid create-meal-plan-modal-container"
-                                            data-test="container"></div><img
-                                            id="add-to-meal-plan-modal-5fb45c8b724d0a002f0845ee"
-                                            class="add-to-meal-plan-modal-button" src="/static/images/plus.png"
-                                            alt="Add recipe icon" href="#">
-                                    </div>
-                                    <div data-test="share-modal"><img id="share-modal-button-5fb45c8b724d0a002f0845ee"
-                                            class="share-modal-button" src="/static/images/share.png" alt="Share icon">
-                                    </div><img id="favorite-button-share-modal-button-5fb45c8b724d0a002f0845ee"
-                                        class="share-modal-button" src="assets/images/heart.png" alt="Heart icon">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="recipe-wrapper">
-                    <div draggable="true">
-                        <div class="recipe-mb mb-3 recipe-mb--draggable  card">
-                            <div class="draggable-bar" id="draggable-bar-5f7390a338eb4a0031eed3c8"><img
-                                    id="nutritional-toggle-5f7390a338eb4a0031eed3c8" class="toggle-icon"
-                                    src="{{draggable}}"
-                                    
-                                    alt="Draggable icon"></div><a class="hmp-link--no-style"
-                                href="/recipe-details/italian-sausage-pepper-and-rice-skillet">
-                                <div class="recipe-content recipe-content--draggable card-body">
-                                    <div class="recipe-image-container mobile"><img class="recipe-image"
-                                            id="picture-5f7390a338eb4a0031eed3c8"
-                                            src="https://cdn-prd.healthymealplans.com/recipe/b83feea9a17083c5932d2a8cdf0e1f36-Italian-Sausage-Rice-Skillet_1x1_400_Healthy-Meal-Plans.jpg"
-                                            alt="Recipe image"></div>
-                                    <div class="recipe-mb-info">
-                                        <h2 class="title overflow-text" id="recipe-5f7390a338eb4a0031eed3c8">Italian
-                                            Sausage, Pepper &amp; Rice Skillet</h2>
-                                        <div class="calories" id="calories-5f7390a338eb4a0031eed3c8">510 calories</div>
-                                    </div><img id="favorite-button-side-favorite-button-5f7390a338eb4a0031eed3c8"
-                                        class="side-favorite-button" src="assets/images/heart.png" alt="Heart icon">
-                                </div>
-                            </a>
-                            <div class="recipe-footer card-footer">
-                                <div class="row recipe-icons justify-content-md-center">
-                                    <div data-test="add-to-meal-plan-modal-button">
-                                        <div class="container-fluid create-meal-plan-modal-container"
-                                            data-test="container"></div><img
-                                            id="add-to-meal-plan-modal-5f7390a338eb4a0031eed3c8"
-                                            class="add-to-meal-plan-modal-button" src="/static/images/plus.png"
-                                            alt="Add recipe icon" href="#">
-                                    </div>
-                                    <div data-test="share-modal"><img id="share-modal-button-5f7390a338eb4a0031eed3c8"
-                                            class="share-modal-button" src="/static/images/share.png" alt="Share icon">
-                                    </div><img id="favorite-button-share-modal-button-5f7390a338eb4a0031eed3c8"
-                                        class="share-modal-button" src="assets/images/heart.png" alt="Heart icon">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="recipe-wrapper">
-                    <div draggable="true">
-                        <div class="recipe-mb mb-3 recipe-mb--draggable  card">
-                            <div class="draggable-bar" id="draggable-bar-5f245787ab88e60027a25961"><img
-                                    id="nutritional-toggle-5f245787ab88e60027a25961" class="toggle-icon"
-                                    src="{{draggable}}"
-                                    
-                                    alt="Draggable icon"></div><a class="hmp-link--no-style"
-                                href="/recipe-details/rainbow-fried-rice">
-                                <div class="recipe-content recipe-content--draggable card-body">
-                                    <div class="recipe-image-container mobile"><img class="recipe-image"
-                                            id="picture-5f245787ab88e60027a25961"
-                                            src="https://cdn-prd.healthymealplans.com/recipe/4ad1f5ddc80b895f988fc2992e0b07ab-Rainbow-Fried-Rice_1x1_400_Healthy-Meal-Plans.jpg"
-                                            alt="Recipe image"></div>
-                                    <div class="recipe-mb-info">
-                                        <h2 class="title overflow-text" id="recipe-5f245787ab88e60027a25961">Rainbow
-                                            Fried Rice</h2>
-                                        <div class="calories" id="calories-5f245787ab88e60027a25961">310 calories</div>
-                                    </div><img id="favorite-button-side-favorite-button-5f245787ab88e60027a25961"
-                                        class="side-favorite-button" src="assets/images/heart.png" alt="Heart icon">
-                                </div>
-                            </a>
-                            <div class="recipe-footer card-footer">
-                                <div class="row recipe-icons justify-content-md-center">
-                                    <div data-test="add-to-meal-plan-modal-button">
-                                        <div class="container-fluid create-meal-plan-modal-container"
-                                            data-test="container"></div><img
-                                            id="add-to-meal-plan-modal-5f245787ab88e60027a25961"
-                                            class="add-to-meal-plan-modal-button" src="/static/images/plus.png"
-                                            alt="Add recipe icon" href="#">
-                                    </div>
-                                    <div data-test="share-modal"><img id="share-modal-button-5f245787ab88e60027a25961"
-                                            class="share-modal-button" src="/static/images/share.png" alt="Share icon">
-                                    </div><img id="favorite-button-share-modal-button-5f245787ab88e60027a25961"
-                                        class="share-modal-button" src="assets/images/heart.png" alt="Heart icon">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="recipe-wrapper">
-                    <div draggable="true">
-                        <div class="recipe-mb mb-3 recipe-mb--draggable  card">
-                            <div class="draggable-bar" id="draggable-bar-5f1a1b73ab88e60027a21559"><img
-                                    id="nutritional-toggle-5f1a1b73ab88e60027a21559" class="toggle-icon"
-                                    src="{{draggable}}"
-                                    
-                                    alt="Draggable icon"></div><a class="hmp-link--no-style"
-                                href="/recipe-details/chipotle-chicken-lunch-bowl">
-                                <div class="recipe-content recipe-content--draggable card-body">
-                                    <div class="recipe-image-container mobile"><img class="recipe-image"
-                                            id="picture-5f1a1b73ab88e60027a21559"
-                                            src="https://cdn-prd.healthymealplans.com/recipe/90e7c9924e3d044068cad99dee1b57f1-Chipotle-Chicken-Burrito-Bowl_1x1_400_Healthy-Meal-Plans.jpg"
-                                            alt="Recipe image"></div>
-                                    <div class="recipe-mb-info">
-                                        <h2 class="title overflow-text" id="recipe-5f1a1b73ab88e60027a21559">Chipotle
-                                            Chicken Lunch Bowl</h2>
-                                        <div class="calories" id="calories-5f1a1b73ab88e60027a21559">660 calories</div>
-                                    </div><img id="favorite-button-side-favorite-button-5f1a1b73ab88e60027a21559"
-                                        class="side-favorite-button" src="assets/images/heart.png" alt="Heart icon">
-                                </div>
-                            </a>
-                            <div class="recipe-footer card-footer">
-                                <div class="row recipe-icons justify-content-md-center">
-                                    <div data-test="add-to-meal-plan-modal-button">
-                                        <div class="container-fluid create-meal-plan-modal-container"
-                                            data-test="container"></div><img
-                                            id="add-to-meal-plan-modal-5f1a1b73ab88e60027a21559"
-                                            class="add-to-meal-plan-modal-button" src="/static/images/plus.png"
-                                            alt="Add recipe icon" href="#">
-                                    </div>
-                                    <div data-test="share-modal"><img id="share-modal-button-5f1a1b73ab88e60027a21559"
-                                            class="share-modal-button" src="/static/images/share.png" alt="Share icon">
-                                    </div><img id="favorite-button-share-modal-button-5f1a1b73ab88e60027a21559"
-                                        class="share-modal-button" src="assets/images/heart.png" alt="Heart icon">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="recipe-wrapper">
-                    <div draggable="true">
-                        <div class="recipe-mb mb-3 recipe-mb--draggable  card">
-                            <div class="draggable-bar" id="draggable-bar-5efb91809816430025d73058"><img
-                                    id="nutritional-toggle-5efb91809816430025d73058" class="toggle-icon"
-                                    src="{{draggable}}"
-                                    
-                                    alt="Draggable icon"></div><a class="hmp-link--no-style"
-                                href="/recipe-details/crispy-fried-rice">
-                                <div class="recipe-content recipe-content--draggable card-body">
-                                    <div class="recipe-image-container mobile"><img class="recipe-image"
-                                            id="picture-5efb91809816430025d73058"
-                                            src="https://cdn-prd.healthymealplans.com/recipe/91b3f88d9ad64a8851fd1a8c89332e92-Crispy-Fried-Rice-Alt_1x1_400_The-Domestic-Geek.jpg"
-                                            alt="Recipe image"></div>
-                                    <div class="recipe-mb-info">
-                                        <h2 class="title overflow-text" id="recipe-5efb91809816430025d73058">Crispy
-                                            Fried Rice</h2>
-                                        <div class="calories" id="calories-5efb91809816430025d73058">400 calories</div>
-                                    </div><img id="favorite-button-side-favorite-button-5efb91809816430025d73058"
-                                        class="side-favorite-button" src="assets/images/heart.png" alt="Heart icon">
-                                </div>
-                            </a>
-                            <div class="recipe-footer card-footer">
-                                <div class="row recipe-icons justify-content-md-center">
-                                    <div data-test="add-to-meal-plan-modal-button">
-                                        <div class="container-fluid create-meal-plan-modal-container"
-                                            data-test="container"></div><img
-                                            id="add-to-meal-plan-modal-5efb91809816430025d73058"
-                                            class="add-to-meal-plan-modal-button" src="/static/images/plus.png"
-                                            alt="Add recipe icon" href="#">
-                                    </div>
-                                    <div data-test="share-modal"><img id="share-modal-button-5efb91809816430025d73058"
-                                            class="share-modal-button" src="/static/images/share.png" alt="Share icon">
-                                    </div><img id="favorite-button-share-modal-button-5efb91809816430025d73058"
-                                        class="share-modal-button" src="assets/images/heart.png" alt="Heart icon">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="recipe-wrapper">
-                    <div draggable="true">
-                        <div class="recipe-mb mb-3 recipe-mb--draggable  card">
-                            <div class="draggable-bar" id="draggable-bar-5efb88c29816430025d73056"><img
-                                    id="nutritional-toggle-5efb88c29816430025d73056" class="toggle-icon"
-                                    src="{{draggable}}"
-                                    
-                                    alt="Draggable icon"></div><a class="hmp-link--no-style"
-                                href="/recipe-details/bbq-lime-chicken">
-                                <div class="recipe-content recipe-content--draggable card-body">
-                                    <div class="recipe-image-container mobile"><img class="recipe-image"
-                                            id="picture-5efb88c29816430025d73056"
-                                            src="https://cdn-prd.healthymealplans.com/recipe/cd230d679cc99f7d11139d2d7d7eccd5-BBQ-Lime-Chicken_1x1_400_Healthy-Meal-Plans.jpg"
-                                            alt="Recipe image"></div>
-                                    <div class="recipe-mb-info">
-                                        <h2 class="title overflow-text" id="recipe-5efb88c29816430025d73056">BBQ Lime
-                                            Chicken </h2>
-                                        <div class="calories" id="calories-5efb88c29816430025d73056">550 calories</div>
-                                    </div><img id="favorite-button-side-favorite-button-5efb88c29816430025d73056"
-                                        class="side-favorite-button" src="assets/images/heart.png" alt="Heart icon">
-                                </div>
-                            </a>
-                            <div class="recipe-footer card-footer">
-                                <div class="row recipe-icons justify-content-md-center">
-                                    <div data-test="add-to-meal-plan-modal-button">
-                                        <div class="container-fluid create-meal-plan-modal-container"
-                                            data-test="container"></div><img
-                                            id="add-to-meal-plan-modal-5efb88c29816430025d73056"
-                                            class="add-to-meal-plan-modal-button" src="/static/images/plus.png"
-                                            alt="Add recipe icon" href="#">
-                                    </div>
-                                    <div data-test="share-modal"><img id="share-modal-button-5efb88c29816430025d73056"
-                                            class="share-modal-button" src="/static/images/share.png" alt="Share icon">
-                                    </div><img id="favorite-button-share-modal-button-5efb88c29816430025d73056"
-                                        class="share-modal-button" src="assets/images/heart.png" alt="Heart icon">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="recipe-wrapper">
-                    <div draggable="true">
-                        <div class="recipe-mb mb-3 recipe-mb--draggable  card">
-                            <div class="draggable-bar" id="draggable-bar-5ea1be4d4b04c8001d51ca36"><img
-                                    id="nutritional-toggle-5ea1be4d4b04c8001d51ca36" class="toggle-icon"
-                                    src="{{draggable}}"
-                                    
-                                    alt="Draggable icon"></div><a class="hmp-link--no-style"
-                                href="/recipe-details/creamy-mushroom-rice">
-                                <div class="recipe-content recipe-content--draggable card-body">
-                                    <div class="recipe-image-container mobile"><img class="recipe-image"
-                                            id="picture-5ea1be4d4b04c8001d51ca36"
-                                            src="https://cdn-prd.healthymealplans.com/recipe/79f7f9df82078d14be03e2bddd53f928-Creamy-Mushroom-Rice_1x1_400_Healthy-Meal-Plans.jpg"
-                                            alt="Recipe image"></div>
-                                    <div class="recipe-mb-info">
-                                        <h2 class="title overflow-text" id="recipe-5ea1be4d4b04c8001d51ca36">Creamy
-                                            Mushroom Rice</h2>
-                                        <div class="calories" id="calories-5ea1be4d4b04c8001d51ca36">315 calories</div>
-                                    </div><img id="favorite-button-side-favorite-button-5ea1be4d4b04c8001d51ca36"
-                                        class="side-favorite-button" src="assets/images/heart.png" alt="Heart icon">
-                                </div>
-                            </a>
-                            <div class="recipe-footer card-footer">
-                                <div class="row recipe-icons justify-content-md-center">
-                                    <div data-test="add-to-meal-plan-modal-button">
-                                        <div class="container-fluid create-meal-plan-modal-container"
-                                            data-test="container"></div><img
-                                            id="add-to-meal-plan-modal-5ea1be4d4b04c8001d51ca36"
-                                            class="add-to-meal-plan-modal-button" src="/static/images/plus.png"
-                                            alt="Add recipe icon" href="#">
-                                    </div>
-                                    <div data-test="share-modal"><img id="share-modal-button-5ea1be4d4b04c8001d51ca36"
-                                            class="share-modal-button" src="/static/images/share.png" alt="Share icon">
-                                    </div><img id="favorite-button-share-modal-button-5ea1be4d4b04c8001d51ca36"
-                                        class="share-modal-button" src="assets/images/heart.png" alt="Heart icon">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="recipe-wrapper">
-                    <div draggable="true">
-                        <div class="recipe-mb mb-3 recipe-mb--draggable  card">
-                            <div class="draggable-bar" id="draggable-bar-5ea1b4e24b04c8001d51ca34"><img
-                                    id="nutritional-toggle-5ea1b4e24b04c8001d51ca34" class="toggle-icon"
-                                    src="{{draggable}}"
-                                    
-                                    alt="Draggable icon"></div><a class="hmp-link--no-style"
-                                href="/recipe-details/roast-chicken-with-creamy-mushroom-rice">
-                                <div class="recipe-content recipe-content--draggable card-body">
-                                    <div class="recipe-image-container mobile"><img class="recipe-image"
-                                            id="picture-5ea1b4e24b04c8001d51ca34"
-                                            src="https://cdn-prd.healthymealplans.com/recipe/9d2ee0cbc6b1ebc46d1ee2ec0a26e63d-Roasted-Chicken-Creamy-Mushroom-Rice_1x1_400_Healthy-Meal-Plans.jpg"
-                                            alt="Recipe image"></div>
-                                    <div class="recipe-mb-info">
-                                        <h2 class="title overflow-text" id="recipe-5ea1b4e24b04c8001d51ca34">Roast
-                                            Chicken with Creamy Mushroom Rice</h2>
-                                        <div class="calories" id="calories-5ea1b4e24b04c8001d51ca34">519 calories</div>
-                                    </div><img id="favorite-button-side-favorite-button-5ea1b4e24b04c8001d51ca34"
-                                        class="side-favorite-button" src="assets/images/heart.png" alt="Heart icon">
-                                </div>
-                            </a>
-                            <div class="recipe-footer card-footer">
-                                <div class="row recipe-icons justify-content-md-center">
-                                    <div data-test="add-to-meal-plan-modal-button">
-                                        <div class="container-fluid create-meal-plan-modal-container"
-                                            data-test="container"></div><img
-                                            id="add-to-meal-plan-modal-5ea1b4e24b04c8001d51ca34"
-                                            class="add-to-meal-plan-modal-button" src="/static/images/plus.png"
-                                            alt="Add recipe icon" href="#">
-                                    </div>
-                                    <div data-test="share-modal"><img id="share-modal-button-5ea1b4e24b04c8001d51ca34"
-                                            class="share-modal-button" src="/static/images/share.png" alt="Share icon">
-                                    </div><img id="favorite-button-share-modal-button-5ea1b4e24b04c8001d51ca34"
-                                        class="share-modal-button" src="assets/images/heart.png" alt="Heart icon">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="recipe-wrapper">
-                    <div draggable="true">
-                        <div class="recipe-mb mb-3 recipe-mb--draggable  card">
-                            <div class="draggable-bar" id="draggable-bar-5e820d1c3e27a50024d271f3"><img
-                                    id="nutritional-toggle-5e820d1c3e27a50024d271f3" class="toggle-icon"
-                                    src="{{draggable}}"
-                                    
-                                    alt="Draggable icon"></div><a class="hmp-link--no-style"
-                                href="/recipe-details/veggie-fried-rice">
-                                <div class="recipe-content recipe-content--draggable card-body">
-                                    <div class="recipe-image-container mobile"><img class="recipe-image"
-                                            id="picture-5e820d1c3e27a50024d271f3"
-                                            src="https://cdn-prd.healthymealplans.com/recipe/600127f8ca757251e840321483c1c6b1-Easy-Fried-Rice-Alt_1x1_400_Healthy-Meal-Plans.jpg"
-                                            alt="Recipe image"></div>
-                                    <div class="recipe-mb-info">
-                                        <h2 class="title overflow-text" id="recipe-5e820d1c3e27a50024d271f3">Veggie
-                                            Fried Rice</h2>
-                                        <div class="calories" id="calories-5e820d1c3e27a50024d271f3">310 calories</div>
-                                    </div><img id="favorite-button-side-favorite-button-5e820d1c3e27a50024d271f3"
-                                        class="side-favorite-button" src="assets/images/heart.png" alt="Heart icon">
-                                </div>
-                            </a>
-                            <div class="recipe-footer card-footer">
-                                <div class="row recipe-icons justify-content-md-center">
-                                    <div data-test="add-to-meal-plan-modal-button">
-                                        <div class="container-fluid create-meal-plan-modal-container"
-                                            data-test="container"></div><img
-                                            id="add-to-meal-plan-modal-5e820d1c3e27a50024d271f3"
-                                            class="add-to-meal-plan-modal-button" src="/static/images/plus.png"
-                                            alt="Add recipe icon" href="#">
-                                    </div>
-                                    <div data-test="share-modal"><img id="share-modal-button-5e820d1c3e27a50024d271f3"
-                                            class="share-modal-button" src="/static/images/share.png" alt="Share icon">
-                                    </div><img id="favorite-button-share-modal-button-5e820d1c3e27a50024d271f3"
-                                        class="share-modal-button" src="assets/images/heart.png" alt="Heart icon">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="recipe-wrapper">
-                    <div draggable="true">
-                        <div class="recipe-mb mb-3 recipe-mb--draggable  card">
-                            <div class="draggable-bar" id="draggable-bar-5e71401f20cf78002445da7d"><img
-                                    id="nutritional-toggle-5e71401f20cf78002445da7d" class="toggle-icon"
-                                    src="{{draggable}}"
-                                    
-                                    alt="Draggable icon"></div><a class="hmp-link--no-style"
-                                href="/recipe-details/asian-style-green-bean-salad">
-                                <div class="recipe-content recipe-content--draggable card-body">
-                                    <div class="recipe-image-container mobile"><img class="recipe-image"
-                                            id="picture-5e71401f20cf78002445da7d"
-                                            src="https://cdn-prd.healthymealplans.com/recipe/9454e185bb5b7d8b582f3e4ae1ea5f03-Asian-Style-Green-Bean-Salad_1x1_400_Healthy-Meal-Plans.jpg"
-                                            alt="Recipe image"></div>
-                                    <div class="recipe-mb-info">
-                                        <h2 class="title overflow-text" id="recipe-5e71401f20cf78002445da7d">Asian Style
-                                            Green Bean Salad</h2>
-                                        <div class="calories" id="calories-5e71401f20cf78002445da7d">100 calories</div>
-                                    </div><img id="favorite-button-side-favorite-button-5e71401f20cf78002445da7d"
-                                        class="side-favorite-button" src="assets/images/heart.png" alt="Heart icon">
-                                </div>
-                            </a>
-                            <div class="recipe-footer card-footer">
-                                <div class="row recipe-icons justify-content-md-center">
-                                    <div data-test="add-to-meal-plan-modal-button">
-                                        <div class="container-fluid create-meal-plan-modal-container"
-                                            data-test="container"></div><img
-                                            id="add-to-meal-plan-modal-5e71401f20cf78002445da7d"
-                                            class="add-to-meal-plan-modal-button" src="/static/images/plus.png"
-                                            alt="Add recipe icon" href="#">
-                                    </div>
-                                    <div data-test="share-modal"><img id="share-modal-button-5e71401f20cf78002445da7d"
-                                            class="share-modal-button" src="/static/images/share.png" alt="Share icon">
-                                    </div><img id="favorite-button-share-modal-button-5e71401f20cf78002445da7d"
-                                        class="share-modal-button" src="assets/images/heart.png" alt="Heart icon">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="recipe-wrapper">
-                    <div draggable="true">
-                        <div class="recipe-mb mb-3 recipe-mb--draggable  card">
-                            <div class="draggable-bar" id="draggable-bar-5e693ad23b7185001d40335e"><img
-                                    id="nutritional-toggle-5e693ad23b7185001d40335e" class="toggle-icon"
-                                    src="{{draggable}}"
-                                    
-                                    alt="Draggable icon"></div><a class="hmp-link--no-style"
-                                href="/recipe-details/sweet-and-tangy-asian-inspired-meatballs">
-                                <div class="recipe-content recipe-content--draggable card-body">
-                                    <div class="recipe-image-container mobile"><img class="recipe-image"
-                                            id="picture-5e693ad23b7185001d40335e"
-                                            src="https://cdn-prd.healthymealplans.com/recipe/34d4964c323ab68246dafb15d8596f6a-Sweet-Tangy-Asian-Meatballs_1x1_400_Healthy-Meal-Plans.jpg"
-                                            alt="Recipe image"></div>
-                                    <div class="recipe-mb-info">
-                                        <h2 class="title overflow-text" id="recipe-5e693ad23b7185001d40335e">Sweet &amp;
-                                            Tangy Asian Inspired Meatballs</h2>
-                                        <div class="calories" id="calories-5e693ad23b7185001d40335e">220 calories</div>
-                                    </div><img id="favorite-button-side-favorite-button-5e693ad23b7185001d40335e"
-                                        class="side-favorite-button" src="assets/images/heart.png" alt="Heart icon">
-                                </div>
-                            </a>
-                            <div class="recipe-footer card-footer">
-                                <div class="row recipe-icons justify-content-md-center">
-                                    <div data-test="add-to-meal-plan-modal-button">
-                                        <div class="container-fluid create-meal-plan-modal-container"
-                                            data-test="container"></div><img
-                                            id="add-to-meal-plan-modal-5e693ad23b7185001d40335e"
-                                            class="add-to-meal-plan-modal-button" src="/static/images/plus.png"
-                                            alt="Add recipe icon" href="#">
-                                    </div>
-                                    <div data-test="share-modal"><img id="share-modal-button-5e693ad23b7185001d40335e"
-                                            class="share-modal-button" src="/static/images/share.png" alt="Share icon">
-                                    </div><img id="favorite-button-share-modal-button-5e693ad23b7185001d40335e"
-                                        class="share-modal-button" src="assets/images/heart.png" alt="Heart icon">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="recipe-wrapper">
-                    <div draggable="true">
-                        <div class="recipe-mb mb-3 recipe-mb--draggable  card">
-                            <div class="draggable-bar" id="draggable-bar-5e580e94072b5e002b4ed76e"><img
-                                    id="nutritional-toggle-5e580e94072b5e002b4ed76e" class="toggle-icon"
-                                    src="{{draggable}}"
-                                    
-                                    alt="Draggable icon"></div><a class="hmp-link--no-style"
-                                href="/recipe-details/asian-greens">
-                                <div class="recipe-content recipe-content--draggable card-body">
-                                    <div class="recipe-image-container mobile"><img class="recipe-image"
-                                            id="picture-5e580e94072b5e002b4ed76e"
-                                            src="https://cdn-prd.healthymealplans.com/recipe/d830d155977d5e126ce1725ab63e2586-Asian-Greens_1x1_400_Healthy-Meal-Plans.jpg"
-                                            alt="Recipe image"></div>
-                                    <div class="recipe-mb-info">
-                                        <h2 class="title overflow-text" id="recipe-5e580e94072b5e002b4ed76e">Asian
-                                            Greens</h2>
-                                        <div class="calories" id="calories-5e580e94072b5e002b4ed76e">100 calories</div>
-                                    </div><img id="favorite-button-side-favorite-button-5e580e94072b5e002b4ed76e"
-                                        class="side-favorite-button" src="assets/images/heart.png" alt="Heart icon">
-                                </div>
-                            </a>
-                            <div class="recipe-footer card-footer">
-                                <div class="row recipe-icons justify-content-md-center">
-                                    <div data-test="add-to-meal-plan-modal-button">
-                                        <div class="container-fluid create-meal-plan-modal-container"
-                                            data-test="container"></div><img
-                                            id="add-to-meal-plan-modal-5e580e94072b5e002b4ed76e"
-                                            class="add-to-meal-plan-modal-button" src="/static/images/plus.png"
-                                            alt="Add recipe icon" href="#">
-                                    </div>
-                                    <div data-test="share-modal"><img id="share-modal-button-5e580e94072b5e002b4ed76e"
-                                            class="share-modal-button" src="/static/images/share.png" alt="Share icon">
-                                    </div><img id="favorite-button-share-modal-button-5e580e94072b5e002b4ed76e"
-                                        class="share-modal-button" src="assets/images/heart.png" alt="Heart icon">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="recipe-wrapper">
-                    <div draggable="true">
-                        <div class="recipe-mb mb-3 recipe-mb--draggable  card">
-                            <div class="draggable-bar" id="draggable-bar-5e34c802d89f2c00290fbf40"><img
-                                    id="nutritional-toggle-5e34c802d89f2c00290fbf40" class="toggle-icon"
-                                    src="{{draggable}}"
-                                    
-                                    alt="Draggable icon"></div><a class="hmp-link--no-style"
-                                href="/recipe-details/vegan-jambalaya">
-                                <div class="recipe-content recipe-content--draggable card-body">
-                                    <div class="recipe-image-container mobile"><img class="recipe-image"
-                                            id="picture-5e34c802d89f2c00290fbf40"
-                                            src="https://cdn-prd.healthymealplans.com/recipe/e29b3b8a7fdad71135c69ec7a2874835-Vegan-Jambalaya_1x1_400_Healthy-Meal-Plans.jpg"
-                                            alt="Recipe image"></div>
-                                    <div class="recipe-mb-info">
-                                        <h2 class="title overflow-text" id="recipe-5e34c802d89f2c00290fbf40">Vegan
-                                            Jambalaya</h2>
-                                        <div class="calories" id="calories-5e34c802d89f2c00290fbf40">670 calories</div>
-                                    </div><img id="favorite-button-side-favorite-button-5e34c802d89f2c00290fbf40"
-                                        class="side-favorite-button" src="assets/images/heart.png" alt="Heart icon">
-                                </div>
-                            </a>
-                            <div class="recipe-footer card-footer">
-                                <div class="row recipe-icons justify-content-md-center">
-                                    <div data-test="add-to-meal-plan-modal-button">
-                                        <div class="container-fluid create-meal-plan-modal-container"
-                                            data-test="container"></div><img
-                                            id="add-to-meal-plan-modal-5e34c802d89f2c00290fbf40"
-                                            class="add-to-meal-plan-modal-button" src="/static/images/plus.png"
-                                            alt="Add recipe icon" href="#">
-                                    </div>
-                                    <div data-test="share-modal"><img id="share-modal-button-5e34c802d89f2c00290fbf40"
-                                            class="share-modal-button" src="/static/images/share.png" alt="Share icon">
-                                    </div><img id="favorite-button-share-modal-button-5e34c802d89f2c00290fbf40"
-                                        class="share-modal-button" src="assets/images/heart.png" alt="Heart icon">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="recipe-wrapper">
-                    <div draggable="true">
-                        <div class="recipe-mb mb-3 recipe-mb--draggable  card">
-                            <div class="draggable-bar" id="draggable-bar-5e34c1d8d89f2c00290fbf3f"><img
-                                    id="nutritional-toggle-5e34c1d8d89f2c00290fbf3f" class="toggle-icon"
-                                    src="{{draggable}}"
-                                    
-                                    alt="Draggable icon"></div><a class="hmp-link--no-style"
-                                href="/recipe-details/stuffed-pepper-rice-skillet">
-                                <div class="recipe-content recipe-content--draggable card-body">
-                                    <div class="recipe-image-container mobile"><img class="recipe-image"
-                                            id="picture-5e34c1d8d89f2c00290fbf3f"
-                                            src="https://cdn-prd.healthymealplans.com/recipe/f24f0eab1bdd877b07450612cf9c9bd7-Stuffed-Pepper-Rice-Skillet_1x1_400_Healthy-Meal-Plans.jpg"
-                                            alt="Recipe image"></div>
-                                    <div class="recipe-mb-info">
-                                        <h2 class="title overflow-text" id="recipe-5e34c1d8d89f2c00290fbf3f">Stuffed
-                                            Pepper Rice Skillet</h2>
-                                        <div class="calories" id="calories-5e34c1d8d89f2c00290fbf3f">590 calories</div>
-                                    </div><img id="favorite-button-side-favorite-button-5e34c1d8d89f2c00290fbf3f"
-                                        class="side-favorite-button" src="assets/images/heart.png" alt="Heart icon">
-                                </div>
-                            </a>
-                            <div class="recipe-footer card-footer">
-                                <div class="row recipe-icons justify-content-md-center">
-                                    <div data-test="add-to-meal-plan-modal-button">
-                                        <div class="container-fluid create-meal-plan-modal-container"
-                                            data-test="container"></div><img
-                                            id="add-to-meal-plan-modal-5e34c1d8d89f2c00290fbf3f"
-                                            class="add-to-meal-plan-modal-button" src="/static/images/plus.png"
-                                            alt="Add recipe icon" href="#">
-                                    </div>
-                                    <div data-test="share-modal"><img id="share-modal-button-5e34c1d8d89f2c00290fbf3f"
-                                            class="share-modal-button" src="/static/images/share.png" alt="Share icon">
-                                    </div><img id="favorite-button-share-modal-button-5e34c1d8d89f2c00290fbf3f"
                                         class="share-modal-button" src="assets/images/heart.png" alt="Heart icon">
                                 </div>
                             </div>
@@ -1083,7 +370,23 @@
 <!-- Left bar ends -->
     </div>
     <div class="col-12 col-lg-9">
-
+        <div  id="div1" 
+        (drop)="drop($event)" 
+        (dragover)="allowDrop($event)">
+  
+        <img 
+        src="https://images.pexels.com/photos/658687/pexels-photo-658687.jpeg?auto=compress&cs=tinysrgb&h=350" 
+        draggable="true" 
+        (dragstart)="drag($event)" 
+        id="drag1"
+        width="88" 
+        height="31">
+  </div>
+  
+  <div id="div2" 
+    (drop)="drop($event)" 
+    (dragover)="allowDrop($event)">
+  </div>
 
         <div class="meal-plans-content">
             <div class="meal-row-wrapper meal-row__week-days">
@@ -1140,17 +443,19 @@
                             </div>
                         </div>
                         <div class="meal-plan-slot" style="width: 14%;">
-                            <div>
-                                <div id="image-placeholder-0-2" class="recipe-image-placeholder card">
-                                    <div class="recipe-image-card-content  card-body"><img
+                            <div id="drop1"  (drop)="drop($event)" 
+                            (dragover)="allowDrop($event)">                             
+                                    <div id="image-placeholder-0-2" class="recipe-image-placeholder card">
+                                    <div  class="recipe-image-card-content  card-body"><img id="target-0-2"
                                             class="recipe-card-placeholder-image" src="{{addRecipeImage}}"
                                             alt="Recipe Image Card"></div>
                                 </div>
                                 <div class="calories-slot-sum">0 Calories</div>
                             </div>
                         </div>
-                        <div class="meal-plan-slot" style="width: 14%;">
-                            <div>
+                        <div class="meal-plan-slot" style="width: 14%;" (drop)="drop($event)" 
+                        (dragover)="allowDrop($event)">>
+                            <div d="drop2">
                                 <div id="image-placeholder-0-3" class="recipe-image-placeholder card">
                                     <div class="recipe-image-card-content  card-body"><img
                                             class="recipe-card-placeholder-image" src="{{addRecipeImage}}"

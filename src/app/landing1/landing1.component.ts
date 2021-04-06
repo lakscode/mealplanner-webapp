@@ -184,6 +184,19 @@ export class Landing1Component implements OnInit {
 	{
 		return this.helpService.limitTo(str, num) + "...";
 	}
+
+	formatImage(image, type)
+	{
+	//  console.log(image);
+	  var retImage = image;
+	  if(image !== "" && type !== "")
+	  {
+		retImage = this.helpService.formatImage(image, type);
+		
+	  }
+	//  console.log(retImage);
+	  return retImage;
+	}
 }
 
 	

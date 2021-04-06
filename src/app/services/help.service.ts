@@ -417,7 +417,7 @@ export class HelpService {
 		retImage = image;
 	  }
   	
-	  console.log(retImage);
+	//  console.log(retImage);
 
 	  return retImage;
 	}
