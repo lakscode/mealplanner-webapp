@@ -58,9 +58,9 @@ console.log(currentUrl);
 			"children":
 				[
 
-					{"id":"howitworks", "menu":"How it works", "link":"/howitworks", "display":displayMenu, "active":false},
+				//	{"id":"howitworks", "menu":"How it works", "link":"/howitworks", "display":displayMenu, "active":false},
 					{"id":"aboutus", "menu":"About the Team", "link":"/ourteam", "display":displayMenu, "active":false},
-					{"id":"benefits", "menu":"Benefits", "link":"/benefits", "display":displayMenu, "active":false},
+				//	{"id":"benefits", "menu":"Benefits", "link":"/benefits", "display":displayMenu, "active":false},
 					{"id":"display", "menu":"FAQs", "link":"/faqs", "display":displayMenu, "active":false},
 					{"id":"blogs", "menu":"Blogs", "link":"/blogs", "display":displayMenu, "active":false},
 					{"id":"testimonials", "menu":"Testimonials", "link":"/testimonials", "display":displayMenu, "active":false}

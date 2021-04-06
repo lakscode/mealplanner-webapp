@@ -53,6 +53,10 @@ import { PlannerlistModule } from './planner/plannerlist/plannerlist.module';
 import { PlannercreateModule } from './planner/plannercreate/plannercreate.module'; 
 import { PricingModule } from './pricing/pricing.module'; 
 import { OurteamModule } from './ourteam/ourteam.module'; 
+
+
+import { NgxSpinnerModule } from "ngx-spinner";
+
 @NgModule({
   declarations: [
 		AppComponent
@@ -77,7 +81,7 @@ import { OurteamModule } from './ourteam/ourteam.module';
 	AngularFontAwesomeModule,
 	HttpClientModule,
 	NgbModule.forRoot(),	
-	
+	NgxSpinnerModule,
 	DragDropModule,
 	CollapseModule.forRoot(),
 	NgMultiSelectDropDownModule.forRoot(),

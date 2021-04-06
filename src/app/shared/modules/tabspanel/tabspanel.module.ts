@@ -4,9 +4,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TabspanelComponent } from './tabspanel.component';
-
+import { NgxSpinnerModule } from "ngx-spinner";
 @NgModule({
-    imports: [CommonModule, NgbModule,  FormsModule, ReactiveFormsModule],
+    imports: [CommonModule, NgbModule,  FormsModule, ReactiveFormsModule, NgxSpinnerModule],
     declarations: [TabspanelComponent],
     exports: [TabspanelComponent]
 })

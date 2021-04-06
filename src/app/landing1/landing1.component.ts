@@ -56,7 +56,7 @@ export class Landing1Component implements OnInit {
 	  this.recommendedRecipes = [];
   
 	  var params = {"limit": "4"};
-	  params["query"]="select id, label, image, s_instructions, healthLabels from recipes where s_instructions != '' AND label != '' AND image != '' group by healthLabels limit 0, 4";
+	  params["query"]="select id, label, image, s_instructions, healthLabels from recipes where s_instructions != '' AND label != '' AND image != '' group by healthLabels order by rand() limit 0, 4";
   
 	  //select rc.id, rc.label, rc.image, rc.s_instructions, rc.healthLabels, count(rt.rating) as totalcount, sum(rt.rating) as totalrating from recipes rc join rating rt where rt.recipeid = rc.id AND s_instructions != '' AND label != '' AND image != '' group by healthLabels limit 0, 5
   

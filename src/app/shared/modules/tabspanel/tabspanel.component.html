@@ -1,4 +1,4 @@
-<div class="tab-container">
+<!--<div class="tab-container">
     <ul class="tabs-nav clearfix">
         <li class="active"><a href="">Most rated</a></li>
         <li><a href="">popular</a></li>
@@ -13,7 +13,7 @@
             <div class="right-side">
                 <h3><a href="javascript:void(0)">{{recipe1.label}}</a></h3>
                 <div class="rating-box">
-                    <span class="rating-icons"><!-- *ngFor="let item of [1,2,3,4,5]"-->
+                    <span class="rating-icons"> *ngFor="let item of [1,2,3,4,5]"
                         <i *ngIf="recipe1.displayrating >=1" class="fa fa-star"></i>
                         <i *ngIf="recipe1.displayrating >=2" class="fa fa-star"></i>
                         <i *ngIf="recipe1.displayrating >=3" class="fa fa-star"></i>
@@ -79,3 +79,39 @@
 
     </div>
     </div>
+
+-->
+
+<div class="tabcontainer">
+    <div class="tabs-heading">
+        <div [ngClass]="selectedTab == 1?'tab active':'tab'" (click)="setData(1)"><a  href="javascript:void(0)">Most rated</a></div>
+        <div [ngClass]="selectedTab == 2?'tab active':'tab'" (click)="setData(2)"><a   href="javascript:void(0)">popular</a></div>
+        <div [ngClass]="selectedTab == 3?'tab active':'tab'" (click)="setData(3)"><a  href="javascript:void(0)">random</a></div>
+    </div>
+    <div class="tabs-container">
+    <div class="tab-content">
+        <div class="content-inner" style="min-height:100px;" *ngFor="let recipe of recipesList; let i1= index;">
+            <div class="left-side">
+                <a href="javascript:void(0)"><img style="width:84px; height:64px" src="{{recipe.image}}" alt="image for {{recipe.label}}"/></a>
+            </div>
+            <div class="right-side">
+                <h3><a href="javascript:void(0)">{{recipe.label}}</a></h3>
+                <div class="rating-box" *ngIf="recipe.displayrating">
+                    <span class="rating-icons" >
+                        <i *ngIf="recipe.displayrating >=1" class="fa fa-star"></i>
+                        <i *ngIf="recipe.displayrating >=2" class="fa fa-star"></i>
+                        <i *ngIf="recipe.displayrating >=3" class="fa fa-star"></i>
+                        <i *ngIf="recipe.displayrating >=4" class="fa fa-star"></i>
+                        <i *ngIf="recipe.displayrating >=5" class="fa fa-star"></i>
+
+                      </span>
+                    <span *ngIf="recipe.displayrating" class="rating-figure">{{recipe.displayrating}}</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    </div>
+    </div>
+    <!--<ngx-spinner></ngx-spinner>-->

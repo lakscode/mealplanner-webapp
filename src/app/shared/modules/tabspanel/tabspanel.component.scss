@@ -1,2 +1,45 @@
 @import "../../../../_variables.scss";
 /*******************88 chat panel*/
+:host{
+    width:100%;
+}
+.tabcontainer
+{
+    background: #ffffff;
+    width:100%;
+
+}
+.tabs-heading
+{
+    width:100%;
+}
+.tab
+{    transition: 0.2s all ease-in-out;
+cursor: pointer;
+display: inline-block;
+width: 33.33%;
+background: #e6e0dd;
+border-right: 1px solid #f2eeec;
+text-align: center;
+padding-top: 9px;
+padding-bottom: 9px;
+padding:15px;
+}
+.tab a
+{ 
+    font-weight: 900;
+    color: #000000;
+    text-decoration:none;
+    padding-bottom:10px;
+    text-transform: capitalize;
+}
+.tab:hover, .active{
+    background: #ffffff;
+
+}
+.tab:hover a, .active a{
+  
+    border-color: #6ebe3b;
+
+    border-bottom: 2px solid #6ebe3b;
+}

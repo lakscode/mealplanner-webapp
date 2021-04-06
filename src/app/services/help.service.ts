@@ -383,23 +383,32 @@ export class HelpService {
 
 	formatImage(image, type)
 	{
-		console.log(image);
+	//	console.log(image);
 	  var retImage = image;
-	/*  if(image !== "" && typeof(type) !== "undefined" && type !== "")
+	  /*
+	  if(image !== "" && typeof(type) !== "undefined" && type !== "")
 	  {
 	
 		var fIndex = image.lastIndexOf(".");
+		if(image.lastIndexOf("."))
+		{
 		var img1 = image.substr(0, fIndex);
-		var img2 = image.substr(fIndex+1, image.length - fIndex+1);
+		var img2 = image.substr(fIndex+1, image.length - fIndex);
 		retImage = img1 + "-" + type + "." + img2;
+		}
+		else
+		{
+			retImage = image;
+		}
   
 	  }
 	  else if(image !==  "" && typeof(type) == "undefined")
 	  {
 		retImage = image;
 	  }
-  	*/
-	  console.log(retImage);
+  	
+	  console.log(retImage);*/
+
 	  return retImage;
 	}
 

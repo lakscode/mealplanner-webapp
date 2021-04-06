@@ -138,11 +138,11 @@
                   <div class="split-images-var2 col-size text-center" *ngFor="let rRecipe of recommendedRecipes; let r=index;">
                       <div class="image-first inner-split">
                           <div class="image common-split animated wow flipInY animation-delay{{r+1*100}}ms">
-                              <a href="javascript:void(0)"><img src="{{rRecipe.image}}" alt="image"/></a>
+                              <a href="/recipedetails;id={{rRecipe.id}}"><img src="{{rRecipe.image}}" alt="image"/></a>
                           </div>
                           <div class="intro common-split animated wow flipInY animation-delay{{r+2*100}}ms">
                               <div class="intro-inner ">
-                                  <h3><a href="javascript:void(0)">{{rRecipe.label}}</a></h3>
+                                  <h3><a href="/recipedetails;id={{rRecipe.id}}">{{rRecipe.label}}</a></h3>
                                   <div class="short-separator"></div>
                                   <p>
                                       {{limitTo(rRecipe.s_instructions, 150)}}
@@ -230,7 +230,7 @@
                   Curabitur quis euismod mauris. Nulls <br/>
                   eget semper vulputate.
               </p>
-              <a class="read-more-bordered" href="javascript:void(0)">Our Chefs</a>
+              <a class="read-more-bordered" href="javascript:void(0)">Read More</a>
           </div>
       </div>
   </div>
@@ -239,6 +239,7 @@
 <!--our chefs banner ends-->
 
 <!--latest news-->
+<!--
 <section class="homo-4-col news-variation2 common-mb">
   <div class="container">
       <div class="heading-var1 text-center animated wow fadeInUp">
@@ -284,12 +285,7 @@
                       <div class="news-visuals">
                           <div class="latest-news-slider">
                             <a href="javascript:void(0)"><img src="assets/images/temp-images/new-var2.jpg" alt="image"/></a>
-                              <!--<div>
-                                  <a href="javascript:void(0)"><img src="assets/images/temp-images/new-var2.jpg" alt="image"/></a>
-                              </div>
-                              <div>
-                                  <a href="javascript:void(0)"><img src="assets/images/temp-images/new-var2.jpg" alt="image"/></a>
-                              </div>-->
+   
                           </div>
                       </div>
                   </div>
@@ -356,4 +352,5 @@
       </div>
   </div>
 </section>
+-->
 <!--latest news ends-->

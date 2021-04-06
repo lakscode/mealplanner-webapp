@@ -135,7 +135,7 @@ this.showhideTimeFlag = false;
 			  this.recipesList.push(invData["body"][i]);		
 		  }
 		}
-    console.log(this.recipesList);
+  //  console.log(this.recipesList);
 	 }));
   
 	}
@@ -154,12 +154,14 @@ this.showhideTimeFlag = false;
 
   formatImage(image, type)
   {
+  //  console.log(image);
     var retImage = image;
     if(image !== "" && type !== "")
     {
       retImage = this.helpService.formatImage(image, type);
       
     }
+  //  console.log(retImage);
     return retImage;
   }
 

@@ -1,16 +1,16 @@
-import { Component, ElementRef, Input, Output, OnInit, OnDestroy, EventEmitter } from '@angular/core';
+import { Component, ElementRef, Input, Output, OnInit, OnDestroy, EventEmitter, OnChanges } from '@angular/core';
 import { ListpanelService } from './listpanel.service';
-
+import { DBService } from './../../../dbservices/db.service';
 @Component({
   selector: 'app-listpanel',
   templateUrl: './listpanel.component.html',
   styleUrls: ['./listpanel.component.scss']
 })
-export class ListpanelComponent implements OnInit, OnDestroy {
+export class ListpanelComponent implements OnInit, OnChanges, OnDestroy {
 	
     @Input() id: string;
-    @Input() setDate: any;
-    @Input() minDate: any;
+    @Input() params: any;
+    @Input() updated: any;
     @Input() showhidetime: any = true;
 
     sliderList: Array<any> = [];
@@ -29,8 +29,8 @@ export class ListpanelComponent implements OnInit, OnDestroy {
    tempTm : any;
    elementId : any;
    date: any; 
-   
-    constructor(private listpanelService: ListpanelService, private el: ElementRef) {
+   relatedrecipesList: Array<any> = [];
+    constructor(private listpanelService: ListpanelService, private el: ElementRef, private dbService: DBService) {
     this.element = el.nativeElement;
     //this.showhideTime = true;  
     this.id = "";
@@ -55,37 +55,23 @@ export class ListpanelComponent implements OnInit, OnDestroy {
 
     }
 
+    ngOnChanges(): void{
+      console.log("ngOnchanges");
+        console.log(this.params);
+        this.setDefaults();
+    }
     ngOnInit(): void {
-     this.loadSliders();
-   this.elementId= this.element.id;
-if(this.showhidetime == false)
-this.showhideTimeFlag = false;
-
-//console.log(this.showhidetime);
-//console.log(this.showhideTimeFlag);
-
-    var d = new Date();
-    if(this.elementId == "interviewDate" || this.elementId == "hearingSchedule"){
-      this.tempDt = "";
-      this.maxDt=""
-      this.minDt = {year: d.getFullYear(), month: d.getMonth()+1, day: d.getDate()};     
-      this.tempTm = {hour: d.getHours(), minute: d.getMinutes(), second: d.getSeconds()};
+      console.log(this.params);
+        this.setDefaults();  
     }
-    else if(this.elementId == "incidentDate" || this.elementId == "complaintDate") {
-      this.tempDt = "";
-      this.maxDt={year: d.getFullYear(), month: d.getMonth()+1, day: d.getDate()};
-      this.minDt = '';
-      this.tempTm = {hour: d.getHours(), minute: d.getMinutes(), second: d.getSeconds()};
-    }
-    else {
-      this.maxDt = "";
-      this.minDt = '';
-      this.tempDt = {year: d.getFullYear(), month: d.getMonth()+1, day: d.getDate()};
-		  this.tempTm = {hour: d.getHours(), minute: d.getMinutes(), second: d.getSeconds()};
-    }	
-    this.dt = {"date":this.tempDt, "time":this.tempTm};
-    if(this.minDate == "")
-    this.minDate = "";        
+
+    setDefaults()
+    {
+ 
+      this.loadRelatedRecipes();
+      this.elementId= this.element.id;
+  
+      
     }
 
     ngAfterViewInit()
@@ -104,12 +90,6 @@ this.showhideTimeFlag = false;
         this.element.style.display = 'block';
         document.body.classList.add('dt-modal-open');
 
-		var d = new Date();
-		
-		this.tempDt = {year: d.getFullYear(), month: d.getMonth()+1, day: d.getDate()};
-		this.tempTm = {hour: d.getHours(), minute: d.getMinutes(), second: d.getSeconds()};
-		
-		this.dt = {"date":this.tempDt, "time":this.tempTm};
 		this.returnData.emit(this.dt);
     this.listpanelService.add(this);
     }
@@ -124,22 +104,7 @@ this.showhideTimeFlag = false;
 	save()
 	{
 
-  if(this.dt.date == null || this.dt.date == "")
-  {
-    var d = new Date();
-		this.tempDt = {year: d.getFullYear(), month: d.getMonth()+1, day: d.getDate()};
-		this.dt["date"] = this.tempDt; //, "time":this.tempTm};
-  }
-
-  if(this.dt.time == null || this.dt.time == "")
-  {
-    var d = new Date();	
-    this.tempTm = {hour: d.getHours(), minute: d.getMinutes(), second: d.getSeconds()};
-		this.dt["time"] = this.tempTm;
-  }
-
-
-    this.returnData.emit(this.dt);
+      this.returnData.emit(this.dt);
 
 	}	
 	
@@ -149,5 +114,56 @@ this.showhideTimeFlag = false;
 		this.closeDT.emit(this.dt);
 	}	
 	
-		
+	
+loadRelatedRecipes()
+{
+  console.log(this.params);
+  this.relatedrecipesList = [];
+  var params = {};
+  var dietLabels = "(";
+  if(typeof(this.params['dietLabels']) !== "undefined" && this.params['dietLabels'] !== '')
+  {
+    var temp = this.params['dietLabels'].split("~");
+    for(let i=0; i < temp.length; i++)
+    {
+    dietLabels  += "dietLabels LIKE '%" + temp[i] + "%' ";
+    if(i < temp.length-1)
+    dietLabels +=" OR ";
+    }
+  console.log(dietLabels);
+  }
+  var query = "select * from recipes where s_instructions != ''";
+if(dietLabels !== "(")
+query += " AND " + dietLabels + ") ";
+query += " order by rand() limit 6";
+ params["query"] = query;
+ console.log(params);
+ var res =   this.dbService.getDatabyTablebyQuery("recipes", params).subscribe(invData => setTimeout(() => {
+ 
+  if(invData !== null && typeof(invData["body"]) !== "undefined" && invData["body"] !== null && invData["body"]["length"] > 0)
+  {
+    this.relatedrecipesList = [];
+     for(let i=0; i < invData["body"]["length"] ; i++)
+    {			
+      this.relatedrecipesList.push(invData["body"][i]);		
+    }
+  }
+  console.log(this.relatedrecipesList);
+ }));
+
 }
+
+formatLabels(str)
+{
+  
+  var retStr = str;
+  if(str !== "")
+  {
+    retStr= str.toString().replace(/~/g, ', ');
+    retStr = retStr.trim();
+  }
+
+  return retStr;
+}
+}
+

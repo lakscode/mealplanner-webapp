@@ -33,11 +33,15 @@ export class RecipedetailsComponent implements OnInit {
  searchRes;
  paramMicro: Array<any> = [];
  mineralsList: Array<any> = [];
+listParams: any;
+updated: any;
 	constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
 	
 	}
 
 	ngOnInit() {
+		this.listParams = null;
+		this.updated = 0;
 		this.mineralsList = constants.minerals;
 		this.colors = ["#E0E0E0", "#76FF03", "#FFCA28", "#DD2C00"];
 		this.rating= 0;
@@ -197,7 +201,10 @@ loadRecipe(id)
 	  }
 //	console.log(this.searchRes);
 //	console.log(this.paramMicro);
-	
+this.updated++;
+this.listParams= {};
+this.listParams["dietLabels"] = this.searchRes['dietLabels'];
+	  console.log(this.listParams);
 	}
   }));
   }
@@ -415,7 +422,7 @@ formatObj(obj)
 }
 formatDietLabels()
 {
-	console.log('format dietlabels');
+//	console.log('format dietlabels');
 	var arr = [];
 	arr.push(this.searchRes.dietLabels);
 	if(typeof(this.searchRes.dietLabels) !== "undefined" && this.searchRes.dietLabels !== "")
@@ -425,7 +432,7 @@ formatDietLabels()
 		arr = temp;
 
 	}
-	console.log(arr);
+//	console.log(arr);
 	return arr;
 }
 }

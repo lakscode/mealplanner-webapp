@@ -8,7 +8,7 @@ import { ActivatedRoute } from "@angular/router";
 import { Router } from '@angular/router';
 import { UserService } from '../../../services/user.service';
 import { ToastrService } from 'ngx-toastr';
-
+import { NgxSpinnerService } from "ngx-spinner";
 @Component({
   selector: 'app-tabspanel',
   templateUrl: './tabspanel.component.html',
@@ -47,8 +47,10 @@ export class TabspanelComponent implements OnInit, OnDestroy, AfterViewChecked, 
    recipesList1 :Array<any> = [];
    recipesList2 :Array<any> = [];
    recipesList3 :Array<any> = [];
+   recipesList: Array<any> = [];
    ratingIds: any;
-    constructor(private tabspanelService: TabspanelService, private router: Router, private route: ActivatedRoute, private userService: UserService, private el: ElementRef, private httpService: HttpClient, private dbService: DBService, private helpService: HelpService, private toastrservice: ToastrService) {
+   selectedTab: any;
+    constructor(private tabspanelService: TabspanelService, private spinner: NgxSpinnerService, private router: Router, private route: ActivatedRoute, private userService: UserService, private el: ElementRef, private httpService: HttpClient, private dbService: DBService, private helpService: HelpService, private toastrservice: ToastrService) {
     
       this.element = el.nativeElement;
  
@@ -79,7 +81,9 @@ export class TabspanelComponent implements OnInit, OnDestroy, AfterViewChecked, 
 
     LoadData()
     {
-
+      this.selectedTab = 1;
+      console.log("Show spinner");
+    //  this.spinner.show();
       this.userService.loggedinUser().subscribe(userdata => setTimeout(() => {
         if(typeof(userdata) !=="undefined" && userdata !== null)
         {
@@ -173,7 +177,7 @@ export class TabspanelComponent implements OnInit, OnDestroy, AfterViewChecked, 
       this.recipesList1 = [];
       this.recipesList2 = [];
       this.recipesList3 = [];
-
+      this.recipesList  = [];
 		  for(let i=0; i < invData["body"]["length"] ; i++)
 		  {
 			  if(i < 3)
@@ -188,14 +192,25 @@ export class TabspanelComponent implements OnInit, OnDestroy, AfterViewChecked, 
 		  console.log(this.recipesList1);
 		  console.log(this.recipesList2);
 		  console.log(this.recipesList3);
+      this.recipesList = this.recipesList1;
       this.loadRatings();
 		}
-	  }
-	
-	 ));
+  //  this.spinner.hide();
+	  }));
   
 	}
-  
+  setData(index)
+  {
+    this.selectedTab = index;
+    switch(index)
+    {
+      case 1: this.recipesList = this.recipesList1; break;
+      case 2: this.recipesList = this.recipesList2; break;
+      case 3: this.recipesList = this.recipesList3; break;
+      default: this.recipesList = this.recipesList1; break;
+    }
+    
+  }
 	loadRatings()
 	{
 	  if(this.ratingIds !== "")
