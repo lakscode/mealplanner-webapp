@@ -88,7 +88,7 @@ loadRecipe(id)
 
 //  console.log(this.searchparam);
  console.log(params);
- this.searchRes["image"]="assets/images/temp-images/slide-recipe2-detail.jpg";
+ //this.searchRes["image"]="assets/images/temp-images/slide-recipe2-detail.jpg";
  if(this.loading ==1)
   {
   var res =   this.dbService.getDatabyParam("recipes", params).subscribe(recipeData => setTimeout(() => {
