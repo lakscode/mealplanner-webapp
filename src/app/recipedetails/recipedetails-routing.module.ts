@@ -4,7 +4,7 @@ import { RecipedetailsComponent } from './recipedetails.component';
 
 const routes: Routes = [
   { 
-    path: 'recipedetails', 
+    path: 'recipedetails/:id', 
     component: RecipedetailsComponent,
     data: { showSidebar: false } 
   }
