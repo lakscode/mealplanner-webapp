@@ -1,4 +1,36 @@
 <!--slider main-->
+
+<ngb-carousel *ngIf="images" style="width:100%">
+    <ng-template ngbSlide *ngFor="let item of sliderList; let i=index">
+      <div class="picsum-img-wrapper">
+        <img [src]="item.image" alt="Random first slide"  style="width:100%">
+      </div>
+      <div class="carousel-caption">
+        <div class="container custom-container-slide">
+            <div class="slide-detail text-center">
+                <div class="slide-detail-inner wrapper-home-slider variation-two slide-detail-inner">
+                    <h2><a href="javascript:void(0)">{{item.title}}</a></h2>
+
+                    <div class="short-separator"></div>
+                    <div class="rating-box" *ngIf="item.rating">
+                        <span class="rating-icons" *ngFor="let item of [1,2,3,4,5]">
+                          <i class="fa fa-star"></i>
+                        </span>
+                        <br>
+                        <span class="rating-figure">{{item.rating}}</span>
+                    </div>
+                    <p style="color:#000" innerHTML = "{{item.description}}">
+                    </p>
+                    <a class="read-more-bordered" href="javascript:void(0)">Learn More</a>
+                </div>
+            </div>
+        </div>
+      </div>
+    </ng-template>
+
+  </ngb-carousel>
+
+ <!-- 
 <section class="wrapper-home-slider variation-two">
     <div class="fluid-slider-var2">
         <div *ngFor="let item of sliderList; let i=index">
@@ -28,6 +60,6 @@
       
         
     </div>
-  </section>
+  </section>-->
   <!--slider main ends-->
   

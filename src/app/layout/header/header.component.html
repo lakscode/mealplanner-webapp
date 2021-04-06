@@ -27,8 +27,8 @@
                             <nav class="nav-collapse responsive-menu">
                                 <ul class="main-menu">
                                     <li *ngFor="let menu of menuItems; let m = index">
-                                        <a *ngIf="menu.link !== 'landing1'" routerLink="/{{menu.link}}" href="javascript:void(0)">{{menu.menu}}</a>
-                                        <a *ngIf="menu.link == 'landing1'" href="/landing1">{{menu.menu}}</a>
+                                        <a *ngIf="menu.link !== 'home'" routerLink="/{{menu.link}}" href="javascript:void(0)">{{menu.menu}}</a>
+                                        <a *ngIf="menu.link == 'home'" href="/home">{{menu.menu}}</a>
                                         <ul *ngIf="menu.children && menu.children.length > 0">
                                             <li *ngFor="let submenu of menu.children; let m = index">
                                                 <a routerLink="/{{submenu.link}}" href="javascript:void(0)">{{submenu.menu}}</a>

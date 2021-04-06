@@ -1,5 +1,6 @@
 import { Component, ElementRef, Input, Output, OnInit, OnDestroy, EventEmitter } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
+import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 import { SliderpanelService } from './sliderpanel.service';
 
 @Component({
@@ -30,11 +31,15 @@ export class SliderpanelComponent implements OnInit, OnDestroy {
    tempTm : any;
    elementId : any;
    date: any; 
-   
-    constructor(private router: Router, private sliderpanelService: SliderpanelService, private el: ElementRef) {
+   images: any;
+    constructor(config: NgbCarouselConfig, private router: Router, private sliderpanelService: SliderpanelService, private el: ElementRef) {
       this.router.routeReuseStrategy.shouldReuseRoute = function(){
         return false;
      }
+     config.interval = 3000;
+   //  config.showNavigationArrows = true;
+     config.showNavigationIndicators = true;
+     
 
      this.router.events.subscribe((evt) => {
         if (evt instanceof NavigationEnd) {
@@ -70,7 +75,12 @@ export class SliderpanelComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-      
+   
+        // customize default values of carousels used by this component tree
+     
+    
+
+     this.images = [944, 1011, 984].map((n) => `https://picsum.photos/id/${n}/900/500`);
      this.loadSliders();
    this.elementId= this.element.id;
 if(this.showhidetime == false)
