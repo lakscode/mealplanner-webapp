@@ -29,9 +29,20 @@
 
 
 .meal-name {
-  min-width: 60px;
-  width: 60px;
+  //min-width: 60px;
+  //width: 60px;
+   min-width: 25px;
+  width: 25px;
   position: relative;
+}
+
+
+.meal-name span {
+  top: 60px !important;
+  left:30px !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  padding-left:10px;
 }
 
 .meal-name::before {
