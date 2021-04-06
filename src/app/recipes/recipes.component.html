@@ -170,12 +170,12 @@
  
   <div class="listing" *ngFor="let recipe2 of recipesList2; let i = index;">
     <div class="image">
-        <a href="/recipedetails">
+        <a href="/recipedetails;id={{recipe2.id}}">
             <img src="{{recipe2.image}}" alt="image">
         </a>
     </div>
     <div class="detail">
-        <h4><a href="/recipedetails">{{recipe2.label}}</a></h4>
+        <h4><a href="/recipedetails;id={{recipe2.id}}">{{recipe2.label}}</a></h4>
         <p innerHTML = "{{limitTo(recipe2.s_instructions, 200)}}">
             
         </p>
