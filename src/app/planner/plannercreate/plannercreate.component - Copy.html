@@ -392,54 +392,372 @@
             <div class="meal-row-wrapper meal-row__week-days">
                 <div class="meal-name"></div>
                 <div class="meal-plan-row row">
-                    <div class="meal-plan-col col" *ngFor="let day of weekDays; let d =index;" style="width:14%;">
+                    <div class="meal-plan-col col" *ngFor="let day of weekDays; let i =index;" style="width:14%;">
                         <div class="meal-day"><span>{{day.name}}</span></div>
                     </div>
                    
                 </div>
             </div>
-           
-                <ng-container *ngFor="let item of plan; let r = index;">
-                    <div class="meal-row-wrapper">
-                    <div class="meal-name"><span>{{item.name}}</span></div>
-                    <div class="meal-plan-column-container">
-                        <div class="meal-plan-row">
-                            <div class="meal-plan-slot" style="width: 14%;"  *ngFor="let day of item.days; let c= index;">
-                                <div *ngIf="day.recipe">
-                                    <div draggable="true">
-                                        <div class="recipe-image-wrapper ">
-                                            <div class="recipe-image-card card">
-                                                <div class="recipe-image-card-content card-body">
-                                                    <div class="image-card-container">
-                                                        <div class="recipe-name-box">{{day.recipe.label}}</div><img
-                                                            class="recipe-image-card recipe-image-card__img open-fist-cursor"
-                                                            style="opacity: 1;" id="picture-5c252abdb834861eec5388f3"
-                                                            src="{{day.recipe.image}}"
-                                                            alt="Recipe image">
-                                                    </div>
+            <div class="meal-row-wrapper">
+                <div class="meal-name"><span>Breakfast</span></div>
+                <div class="meal-plan-column-container">
+                    <div class="meal-plan-row">
+                        <div class="meal-plan-slot" style="width: 14%;">
+                            <div>
+                                <div draggable="true">
+                                    <div class="recipe-image-wrapper ">
+                                        <div class="recipe-image-card card">
+                                            <div class="recipe-image-card-content card-body">
+                                                <div class="image-card-container">
+                                                    <div class="recipe-name-box">Antipasto Snack Cups</div><img
+                                                        class="recipe-image-card recipe-image-card__img open-fist-cursor"
+                                                        style="opacity: 1;" id="picture-5c252abdb834861eec5388f3"
+                                                        src="https://cdn-prd.healthymealplans.com/recipe/Antipasto-Snack-Cups_16x9_Healthy-Meal-Plans-Thumb.jpg"
+                                                        alt="Recipe image">
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="calories-slot-sum">{{day.recipe.calories}} Calories</div>
                                 </div>
-                                <div *ngIf="!day.recipe" id="drop-{{r}}-{{c}}"  (drop)="drop($event, r, c)" (dragover)="allowDrop($event)">                             
-                                    <div id="image-placeholder-{{r}}-{{c}}" class="recipe-image-placeholder card">
-                                    <div  class="recipe-image-card-content  card-body"><img id="target-{{r}}-{{c}}"
+                                <div class="calories-slot-sum">209 Calories</div>
+                            </div>
+                        </div>
+                        <div class="meal-plan-slot" style="width: 14%;">
+                            <div>
+                                <div draggable="true">
+                                    <div class="recipe-image-wrapper ">
+                                        <div class="recipe-image-card card">
+                                            <div class="recipe-image-card-content card-body">
+                                                <div class="image-card-container">
+                                                    <div class="recipe-name-box">Tortellini Soup</div><img
+                                                        class="recipe-image-card recipe-image-card__img open-fist-cursor"
+                                                        style="opacity: 1;" id="picture-5fab02b130c84a002ab50866"
+                                                        src="https://cdn-prd.healthymealplans.com/recipe/9e15983aacca0cb6d4174499f2bcaec9-Tortellini-Soup_16x9_400_Healthy-Meal-Plans.jpg"
+                                                        alt="Recipe image">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="calories-slot-sum">420 Calories</div>
+                            </div>
+                        </div>
+                        <div class="meal-plan-slot" style="width: 14%;">
+                            <div id="drop1"  (drop)="drop($event)" 
+                            (dragover)="allowDrop($event)">                             
+                                    <div id="image-placeholder-0-2" class="recipe-image-placeholder card">
+                                    <div  class="recipe-image-card-content  card-body"><img id="target-0-2"
                                             class="recipe-card-placeholder-image" src="{{addRecipeImage}}"
                                             alt="Recipe Image Card"></div>
                                 </div>
                                 <div class="calories-slot-sum">0 Calories</div>
                             </div>
+                        </div>
+                        <div class="meal-plan-slot" style="width: 14%;" (drop)="drop($event)" 
+                        (dragover)="allowDrop($event)">>
+                            <div d="drop2">
+                                <div id="image-placeholder-0-3" class="recipe-image-placeholder card">
+                                    <div class="recipe-image-card-content  card-body"><img
+                                            class="recipe-card-placeholder-image" src="{{addRecipeImage}}"
+                                            alt="Recipe Image Card"></div>
+                                </div>
+                                <div class="calories-slot-sum">0 Calories</div>
                             </div>
-                       </div>
+                        </div>
+                        <div class="meal-plan-slot" style="width: 14%;">
+                            <div>
+                                <div id="image-placeholder-0-4" class="recipe-image-placeholder card">
+                                    <div class="recipe-image-card-content  card-body"><img
+                                            class="recipe-card-placeholder-image" src="{{addRecipeImage}}"
+                                            alt="Recipe Image Card"></div>
+                                </div>
+                                <div class="calories-slot-sum">0 Calories</div>
+                            </div>
+                        </div>
+                        <div class="meal-plan-slot" style="width: 14%;">
+                            <div>
+                                <div id="image-placeholder-0-5" class="recipe-image-placeholder card">
+                                    <div class="recipe-image-card-content  card-body"><img
+                                            class="recipe-card-placeholder-image" src="{{addRecipeImage}}"
+                                            alt="Recipe Image Card"></div>
+                                </div>
+                                <div class="calories-slot-sum">0 Calories</div>
+                            </div>
+                        </div>
+                        <div class="meal-plan-slot" style="width: 14%;">
+                            <div>
+                                <div id="image-placeholder-0-6" class="recipe-image-placeholder card">
+                                    <div class="recipe-image-card-content  card-body"><img
+                                            class="recipe-card-placeholder-image" src="{{addRecipeImage}}"
+                                            alt="Recipe Image Card"></div>
+                                </div>
+                                <div class="calories-slot-sum">0 Calories</div>
+                            </div>
+                        </div>
                     </div>
-
+                </div>
+            </div>
+            <div class="meal-row-wrapper">
+                <div class="meal-name"><span>Lunch</span></div>
+                <div class="meal-plan-column-container">
+                    <div class="meal-plan-row">
+                        <div class="meal-plan-slot" style="width: 14%;">
+                            <div>
+                                <div draggable="true">
+                                    <div class="recipe-image-wrapper ">
+                                        <div class="recipe-image-card card">
+                                            <div class="recipe-image-card-content card-body">
+                                                <div class="image-card-container">
+                                                    <div class="recipe-name-box">Spinach &amp; Artichoke Gnocchi</div>
+                                                    <img class="recipe-image-card recipe-image-card__img open-fist-cursor"
+                                                        style="opacity: 1;" id="picture-5f875ba5724d0a002f07fa29"
+                                                        src="https://cdn-prd.healthymealplans.com/recipe/ba6929a204d48b41e808b1db3982474a-Spinach-Artichoke-Gnocchi_16x9_400copy.jpg"
+                                                        alt="Recipe image">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="calories-slot-sum">280 Calories</div>
+                            </div>
+                        </div>
+                        <div class="meal-plan-slot" style="width: 14%;">
+                            <div>
+                                <div draggable="true">
+                                    <div class="recipe-image-wrapper ">
+                                        <div class="recipe-image-card card">
+                                            <div class="recipe-image-card-content card-body">
+                                                <div class="image-card-container">
+                                                    <div class="recipe-name-box">Shrimp Fried Rice</div><img
+                                                        class="recipe-image-card recipe-image-card__img open-fist-cursor"
+                                                        style="opacity: 1;" id="picture-6050d5d15ddc1c00294df92a"
+                                                        src="https://cdn-prd.healthymealplans.com/recipe/300f44e8d4a6a9793997a0350bd25d65-Shrimp-Fried-Rice_16x9_400_Healthy-Meal-Plans.jpg"
+                                                        alt="Recipe image">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="calories-slot-sum">330 Calories</div>
+                            </div>
+                        </div>
+                        <div class="meal-plan-slot" style="width: 14%;">
+                            <div>
+                                <div id="image-placeholder-1-2" class="recipe-image-placeholder card">
+                                    <div class="recipe-image-card-content  card-body"><img
+                                            class="recipe-card-placeholder-image" src="{{addRecipeImage}}"
+                                            alt="Recipe Image Card"></div>
+                                </div>
+                                <div class="calories-slot-sum">0 Calories</div>
+                            </div>
+                        </div>
+                        <div class="meal-plan-slot" style="width: 14%;">
+                            <div>
+                                <div id="image-placeholder-1-3" class="recipe-image-placeholder card">
+                                    <div class="recipe-image-card-content  card-body"><img
+                                            class="recipe-card-placeholder-image" src="{{addRecipeImage}}"
+                                            alt="Recipe Image Card"></div>
+                                </div>
+                                <div class="calories-slot-sum">0 Calories</div>
+                            </div>
+                        </div>
+                        <div class="meal-plan-slot" style="width: 14%;">
+                            <div>
+                                <div id="image-placeholder-1-4" class="recipe-image-placeholder card">
+                                    <div class="recipe-image-card-content  card-body"><img
+                                            class="recipe-card-placeholder-image" src="{{addRecipeImage}}"
+                                            alt="Recipe Image Card"></div>
+                                </div>
+                                <div class="calories-slot-sum">0 Calories</div>
+                            </div>
+                        </div>
+                        <div class="meal-plan-slot" style="width: 14%;">
+                            <div>
+                                <div id="image-placeholder-1-5" class="recipe-image-placeholder card">
+                                    <div class="recipe-image-card-content  card-body"><img
+                                            class="recipe-card-placeholder-image" src="{{addRecipeImage}}"
+                                            alt="Recipe Image Card"></div>
+                                </div>
+                                <div class="calories-slot-sum">0 Calories</div>
+                            </div>
+                        </div>
+                        <div class="meal-plan-slot" style="width: 14%;">
+                            <div>
+                                <div id="image-placeholder-1-6" class="recipe-image-placeholder card">
+                                    <div class="recipe-image-card-content  card-body"><img
+                                            class="recipe-card-placeholder-image" src="{{addRecipeImage}}"
+                                            alt="Recipe Image Card"></div>
+                                </div>
+                                <div class="calories-slot-sum">0 Calories</div>
+                            </div>
+                        </div>
                     </div>
-
-                    
-                </ng-container>
-                
+                </div>
+            </div>
+            <div class="meal-row-wrapper">
+                <div class="meal-name"><span>Snack</span></div>
+                <div class="meal-plan-column-container">
+                    <div class="meal-plan-row">
+                        <div class="meal-plan-slot" style="width: 14%;">
+                            <div>
+                                <div draggable="true">
+                                    <div class="recipe-image-wrapper ">
+                                        <div class="recipe-image-card card">
+                                            <div class="recipe-image-card-content card-body">
+                                                <div class="image-card-container">
+                                                    <div class="recipe-name-box">Tortellini Soup</div><img
+                                                        class="recipe-image-card recipe-image-card__img open-fist-cursor"
+                                                        style="opacity: 1;" id="picture-5fab02b130c84a002ab50866"
+                                                        src="https://cdn-prd.healthymealplans.com/recipe/9e15983aacca0cb6d4174499f2bcaec9-Tortellini-Soup_16x9_400_Healthy-Meal-Plans.jpg"
+                                                        alt="Recipe image">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="calories-slot-sum">420 Calories</div>
+                            </div>
+                        </div>
+                        <div class="meal-plan-slot" style="width: 14%;">
+                            <div>
+                                <div id="image-placeholder-2-1" class="recipe-image-placeholder card">
+                                    <div class="recipe-image-card-content  card-body"><img
+                                            class="recipe-card-placeholder-image" src="{{addRecipeImage}}"
+                                            alt="Recipe Image Card"></div>
+                                </div>
+                                <div class="calories-slot-sum">0 Calories</div>
+                            </div>
+                        </div>
+                        <div class="meal-plan-slot" style="width: 14%;">
+                            <div>
+                                <div id="image-placeholder-2-2" class="recipe-image-placeholder card">
+                                    <div class="recipe-image-card-content  card-body"><img
+                                            class="recipe-card-placeholder-image" src="{{addRecipeImage}}"
+                                            alt="Recipe Image Card"></div>
+                                </div>
+                                <div class="calories-slot-sum">0 Calories</div>
+                            </div>
+                        </div>
+                        <div class="meal-plan-slot" style="width: 14%;">
+                            <div>
+                                <div id="image-placeholder-2-3" class="recipe-image-placeholder card">
+                                    <div class="recipe-image-card-content  card-body"><img
+                                            class="recipe-card-placeholder-image" src="{{addRecipeImage}}"
+                                            alt="Recipe Image Card"></div>
+                                </div>
+                                <div class="calories-slot-sum">0 Calories</div>
+                            </div>
+                        </div>
+                        <div class="meal-plan-slot" style="width: 14%;">
+                            <div>
+                                <div id="image-placeholder-2-4" class="recipe-image-placeholder card">
+                                    <div class="recipe-image-card-content  card-body"><img
+                                            class="recipe-card-placeholder-image" src="{{addRecipeImage}}"
+                                            alt="Recipe Image Card"></div>
+                                </div>
+                                <div class="calories-slot-sum">0 Calories</div>
+                            </div>
+                        </div>
+                        <div class="meal-plan-slot" style="width: 14%;">
+                            <div>
+                                <div id="image-placeholder-2-5" class="recipe-image-placeholder card">
+                                    <div class="recipe-image-card-content  card-body"><img
+                                            class="recipe-card-placeholder-image" src="{{addRecipeImage}}"
+                                            alt="Recipe Image Card"></div>
+                                </div>
+                                <div class="calories-slot-sum">0 Calories</div>
+                            </div>
+                        </div>
+                        <div class="meal-plan-slot" style="width: 14%;">
+                            <div>
+                                <div id="image-placeholder-2-6" class="recipe-image-placeholder card">
+                                    <div class="recipe-image-card-content  card-body"><img
+                                            class="recipe-card-placeholder-image" src="{{addRecipeImage}}"
+                                            alt="Recipe Image Card"></div>
+                                </div>
+                                <div class="calories-slot-sum">0 Calories</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="meal-row-wrapper">
+                <div class="meal-name"><span>Dinner</span></div>
+                <div class="meal-plan-column-container">
+                    <div class="meal-plan-row">
+                        <div class="meal-plan-slot" style="width: 14%;">
+                            <div>
+                                <div id="image-placeholder-3-0" class="recipe-image-placeholder card">
+                                    <div class="recipe-image-card-content  card-body"><img
+                                            class="recipe-card-placeholder-image" src="{{addRecipeImage}}"
+                                            alt="Recipe Image Card"></div>
+                                </div>
+                                <div class="calories-slot-sum">0 Calories</div>
+                            </div>
+                        </div>
+                        <div class="meal-plan-slot" style="width: 14%;">
+                            <div>
+                                <div id="image-placeholder-3-1" class="recipe-image-placeholder card">
+                                    <div class="recipe-image-card-content  card-body"><img
+                                            class="recipe-card-placeholder-image" src="{{addRecipeImage}}"
+                                            alt="Recipe Image Card"></div>
+                                </div>
+                                <div class="calories-slot-sum">0 Calories</div>
+                            </div>
+                        </div>
+                        <div class="meal-plan-slot" style="width: 14%;">
+                            <div>
+                                <div id="image-placeholder-3-2" class="recipe-image-placeholder card">
+                                    <div class="recipe-image-card-content  card-body"><img
+                                            class="recipe-card-placeholder-image" src="{{addRecipeImage}}"
+                                            alt="Recipe Image Card"></div>
+                                </div>
+                                <div class="calories-slot-sum">0 Calories</div>
+                            </div>
+                        </div>
+                        <div class="meal-plan-slot" style="width: 14%;">
+                            <div>
+                                <div id="image-placeholder-3-3" class="recipe-image-placeholder card">
+                                    <div class="recipe-image-card-content  card-body"><img
+                                            class="recipe-card-placeholder-image" src="{{addRecipeImage}}"
+                                            alt="Recipe Image Card"></div>
+                                </div>
+                                <div class="calories-slot-sum">0 Calories</div>
+                            </div>
+                        </div>
+                        <div class="meal-plan-slot" style="width: 14%;">
+                            <div>
+                                <div id="image-placeholder-3-4" class="recipe-image-placeholder card">
+                                    <div class="recipe-image-card-content  card-body"><img
+                                            class="recipe-card-placeholder-image" src="{{addRecipeImage}}"
+                                            alt="Recipe Image Card"></div>
+                                </div>
+                                <div class="calories-slot-sum">0 Calories</div>
+                            </div>
+                        </div>
+                        <div class="meal-plan-slot" style="width: 14%;">
+                            <div>
+                                <div id="image-placeholder-3-5" class="recipe-image-placeholder card">
+                                    <div class="recipe-image-card-content  card-body"><img
+                                            class="recipe-card-placeholder-image" src="{{addRecipeImage}}"
+                                            alt="Recipe Image Card"></div>
+                                </div>
+                                <div class="calories-slot-sum">0 Calories</div>
+                            </div>
+                        </div>
+                        <div class="meal-plan-slot" style="width: 14%;">
+                            <div>
+                                <div id="image-placeholder-3-6" class="recipe-image-placeholder card">
+                                    <div class="recipe-image-card-content  card-body"><img
+                                            class="recipe-card-placeholder-image" src="{{addRecipeImage}}"
+                                            alt="Recipe Image Card"></div>
+                                </div>
+                                <div class="calories-slot-sum">0 Calories</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="meal-row-wrapper meal-row__calories">
                 <div class="meal-name"></div>
                 <div id="total-calories-row" class="meal-plan-row" style="flex-wrap: nowrap;">

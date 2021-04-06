@@ -20,6 +20,8 @@ export class PlannercreateComponent implements OnInit {
 	ratingsArr: Array<any> = [];
 	ratingIds: any;
 	searchparam: any = {};
+	mealsList: Array<any> = [];
+	plan: Array<any> = [];
 	constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
 	
 	}
@@ -34,6 +36,14 @@ this.loadWeekDays();
 
 	loadWeekDays()
 	{
+		this.mealsList = [];
+		this.mealsList.push({"name":"BreakFast"})
+		this.mealsList.push({"name":"Snack 1"})
+		this.mealsList.push({"name":"Lunch"})
+		this.mealsList.push({"name":"Snack 2"})
+		this.mealsList.push({"name":"Dinner"})
+
+
 		this.weekDays = [];
 		this.weekDays.push({"name":"Sunday"})
 		this.weekDays.push({"name":"Monday"})
@@ -42,6 +52,24 @@ this.loadWeekDays();
 		this.weekDays.push({"name":"Thursday"})
 		this.weekDays.push({"name":"Friday"})
 		this.weekDays.push({"name":"Saturday"})
+		this.loadPlan();
+	}
+	loadPlan()
+	{
+		var daysM= [];
+		this.plan = [];
+		
+		for(let j=0; j< 5; j++)
+		{
+			daysM= [];
+			for(let i=0; i < 7; i++)
+			{
+				daysM.push({"id":(i+1), "name":this.weekDays[i], "recipe":null});
+			}
+			this.plan.push({"id":"row" + (j+1), "name":this.mealsList[j]["name"], "days":daysM})
+		}
+	
+		console.log(this.plan);
 	}
 	loadRecipesOld()
     {
@@ -90,6 +118,7 @@ this.loadWeekDays();
   
 	  console.log(invData);
   
+	  var count = 0;
 	  if(invData !== null && typeof(invData["body"]) !== "undefined" && invData["body"] !== null && invData["body"]["length"] > 0)
 		{
 		  this.recipesList = [];
@@ -99,13 +128,22 @@ this.loadWeekDays();
 		  {
 	
 			this.recipesList.push(invData["body"][i]);
-		
-
+			if(count < 6)
+			{
+			var rIndex = Math.floor(Math.random() * 5);  
+			var cIndex = Math.floor(Math.random() * 7);  
+			this.plan[rIndex]["days"][cIndex]["recipe"] = invData["body"][i];
+			count++;
+			}
 			this.ratingIds += invData["body"][i]["id"] + ",";
 		  }
 		  console.log(this.recipesList);
 	
+		  console.log(this.plan);
+
 		  this.loadRatings();
+	
+	
 		}
 	  }
 	
@@ -178,15 +216,19 @@ this.loadWeekDays();
 	  return retImage;
 	}
 
-	drop(ev) {
+	drop(ev, r, c) {
 		console.log(ev);
-
+		console.log(r);
+		console.log(c);
 		ev.preventDefault();
 		var index = sessionStorage.getItem("dragstartindex");
 		var recipeItem = this.recipesList[index];
 
 		var data = ev.dataTransfer.getData("text");
-
+this.plan[r]["days"][c]["recipe"] =  recipeItem;
+		/*
+		var objPR = document.getElementById("image-placeholder-"+ r  + "-" + c);
+		objPR.innerHTML = "";
 		var cardBodyDiv1 = document.createElement("div");
 		cardBodyDiv1.setAttribute("class","recipe-image-card-content  card-body");
 
@@ -212,10 +254,11 @@ this.loadWeekDays();
 
 			cardBodyDiv1.appendChild(cardBodyDiv)
 
-			ev.target.offsetParent.appendChild(cardBodyDiv1);
-		ev.target.appendChild(img1);
-
-		ev.target.setAtribute("src", this.formatImage(recipeItem["image"], 's'))
+			objPR.appendChild(cardBodyDiv1);
+		
+		//ev.target.appendChild(img1);
+*/
+		//ev.target.setAtribute("src", this.formatImage(recipeItem["image"], 's'))
 		var panelObj = document.getElementById("imagep_" + index);
 		console.log(panelObj);
 		var img = document.createElement('img');
