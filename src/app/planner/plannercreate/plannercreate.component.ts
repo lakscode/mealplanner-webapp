@@ -22,6 +22,7 @@ export class PlannercreateComponent implements OnInit {
 	searchparam: any = {};
 	mealsList: Array<any> = [];
 	plan: Array<any> = [];
+	favouritesList: Array<any> = [];
 	constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
 	
 	}
@@ -97,7 +98,7 @@ this.loadWeekDays();
 		console.log(this.searchparam);
 	
 	}
-	loadRecipes()
+	loadRecipes(idslist = "")
 	{
 	  this.recipesList = [];
 		this.ratingIds = "";
@@ -106,9 +107,13 @@ this.loadWeekDays();
    //  params["caloriesfrom"] = this.searchparam.range.lower;
 	// params["caloriesto"] = this.searchparam.range.upper;
 	 console.log(this.searchparam);
-	
-  
-	  if(typeof(this.searchparam["q"]) !== "undefined" && this.searchparam["q"] !== null && this.searchparam["q"] !== "")
+
+		if(idslist !== "")
+		{
+		params["idslist"] = idslist;
+
+		}
+		else if(typeof(this.searchparam["q"]) !== "undefined" && this.searchparam["q"] !== null && this.searchparam["q"] !== "")
 	  {
 		params["content"] = this.searchparam["q"];
 	  }
@@ -293,14 +298,11 @@ this.plan[r]["days"][c]["recipe"] =  recipeItem;
 	  calculateCalory(mealtype, index)
 	  {
 		  var totalCalories = 0;
-		  console.log(index);
 		  if(mealtype !== "")
 		  {
-			  //console.log(this.plan);
-			  for(let r =0; r < this.plan.length; r++)
+				  for(let r =0; r < this.plan.length; r++)
 			  {
 				  var item = this.plan[r]["days"][index];
-				  console.log(item);
 				  if(typeof(item['recipe']) !== 'undefined' && item["recipe"] !== null)
 				  {
 					if(typeof(item['recipe']["calories"]) !== 'undefined' && item["recipe"]["calories"] !== null && item["recipe"]["calories"] !== "")
@@ -312,6 +314,34 @@ this.plan[r]["days"][c]["recipe"] =  recipeItem;
 		  }
 
 		  return totalCalories  + " calories";
+	  }
+
+	  getFavourites()
+	  {
+		this.favouritesList = [];
+		var params = {"limit": 100};
+		console.log(params);
+		var res =   this.dbService.getDataByTable("favourites", params).subscribe(invData => setTimeout(() => {
+	
+		  console.log(invData);
+		  if(invData !== null)
+		  {
+			var obj = invData["body"]["length"];
+			this.favouritesList = invData["body"];
+			var idslist = "";
+			for(let i=0; i < this.favouritesList.length; i++)
+			{
+			  idslist += this.favouritesList[i]["recipeid"] + ",";
+			  this.favouritesList[i]["recipe"]= null;
+			}
+			if(idslist !== "")
+			{			
+			  idslist = idslist.substring(0, idslist.length-1);
+			  this.loadRecipes(idslist);
+			}
+		  }
+	
+		}));
 	  }
 }
 

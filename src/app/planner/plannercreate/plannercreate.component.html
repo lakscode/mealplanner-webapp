@@ -42,57 +42,11 @@
                 </div>
                 <p style='display:none' class="browse-recipes-text">Browse recipes</p>
                 <div class="filters-mb">
+                    
                     <div id="meal-type"
                         class="meal-types-container btn-filter btn-filter-mb meal-type-filter-btn   btn-group btn-group-sm"><button
-                            type="button" aria-haspopup="true" aria-expanded="false" class="btn btn-secondary"><i
-                                class="fa fa-cutlery" aria-hidden="true"></i>Meal Type</button>
-                        <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu">
-                            <div class="meal-types">
-                                <form>
-                                    <div class="form-group">
-                                        <p class="filter-title">MEAL TYPES</p>
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <div class="">
-                                                    <div class="hm-checkbox" data-test="checkboxInput"><span
-                                                            data-test="test-label-Breakfast">Breakfast</span><input type="checkbox"
-                                                            id="5c252abab834861eec53847f" name="5c252abab834861eec53847f"
-                                                            value=""><span class="hm-checkbox-mark"></span></div>
-                                                </div>
-                                            </div>
-                                            <div class="col-6">
-                                                <div class="">
-                                                    <div class="hm-checkbox" data-test="checkboxInput"><span
-                                                            data-test="test-label-Dinner">Dinner</span><input type="checkbox"
-                                                            id="5c252abab834861eec53847b" name="5c252abab834861eec53847b"
-                                                            value=""><span class="hm-checkbox-mark"></span></div>
-                                                </div>
-                                            </div>
-                                            <div class="col-6">
-                                                <div class="">
-                                                    <div class="hm-checkbox" data-test="checkboxInput"><span
-                                                            data-test="test-label-Lunch">Lunch</span><input type="checkbox"
-                                                            id="5c252abab834861eec53847a" name="5c252abab834861eec53847a"
-                                                            value=""><span class="hm-checkbox-mark"></span></div>
-                                                </div>
-                                            </div>
-                                            <div class="col-6">
-                                                <div class="">
-                                                    <div class="hm-checkbox" data-test="checkboxInput"><span
-                                                            data-test="test-label-Snack">Snack</span><input type="checkbox"
-                                                            id="5c252abab834861eec538471" name="5c252abab834861eec538471"
-                                                            value=""><span class="hm-checkbox-mark"></span></div>
-                                                </div>
-                                            </div>
-                                        </div><a class="show-more"><span>Show more</span></a>
-                                    </div>
-                                    <hr>
-                                    <div class="submit-area"><button type="button"
-                                            class="btn-cancel outline-cancel-btn btn btn-link btn-sm">Cancel</button><button
-                                            type="submit" class="btn-apply btn btn-primary btn-sm">APPLY</button></div>
-                                </form>
-                            </div>
-                        </div>
+                            type="button" (click)="getFavourites()" aria-haspopup="true" aria-expanded="false" class="btn btn-secondary"><i
+                                class="fa fa-heart" aria-hidden="true"></i>Favourites</button>
                     </div>
                     <div id="advanced-filters"
                         class="advanced-filters btn-filter btn-filter-mb other-filters-btn   btn-group btn-group-sm"><button
@@ -312,6 +266,11 @@
                             </div>
                         </div>
                     </div>
+                    <div id="clear-all" style="margin-left:5px !important"
+                    class="meal-types-container btn-filter btn-filter-mb meal-type-filter-btn   btn-group btn-group-sm"><button
+                        type="button" (click)="loadRecipes()" aria-haspopup="true" aria-expanded="false" class="btn btn-secondary"><i
+                            class="fa fa-trash" aria-hidden="true"></i>Clear</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -371,27 +330,11 @@
 <!-- Left bar ends -->
     </div>
     <div class="col-12 col-lg-8">
-        <div  id="div1" 
-        (drop)="drop($event)" 
-        (dragover)="allowDrop($event)">
-  
-        <img 
-        src="https://images.pexels.com/photos/658687/pexels-photo-658687.jpeg?auto=compress&cs=tinysrgb&h=350" 
-        draggable="true" 
-        (dragstart)="drag($event)" 
-        id="drag1"
-        width="88" 
-        height="31">
-  </div>
-  
-  <div id="div2" 
-    (drop)="drop($event)" 
-    (dragover)="allowDrop($event)">
-  </div>
+       
 
         <div class="meal-plans-content">
             <div class="meal-row-wrapper meal-row__week-days">
-                <div class="meal-name"></div>
+                <div class="meal-name" style="border-bottom:0px"></div>
                 <div class="meal-plan-row row">
                     <div class="meal-plan-col col " *ngFor="let mealtype of mealsList; let d =index;" style="width:18%;">
                         <div class="meal-day"><span>{{mealtype.name}}</span></div>
@@ -446,8 +389,8 @@
                 <div class="meal-name"></div>
                 <div id="total-calories-row" class="meal-plan-row" style="flex-wrap: nowrap;">
                     <div class="meal-plan-col col" style="width: 132px; min-width: 132px;"  *ngFor="let mealtype of mealsList; let d =index;">
-                        <div style="font-size: 16px;font-weight: bold; color: orange; ">
-                            {{calculateCalory(mealtype, d)}}</div>
+                        <div class="totalcalories">
+                        {{calculateCalory(mealtype, d)}}</div>
                     </div>
                   
                 </div>

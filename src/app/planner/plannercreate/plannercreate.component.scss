@@ -1,9 +1,10 @@
+@import "../../../_variables.scss";
 .meal-plan-desktop__container {
-  border: 2px solid #ADADAD;
-      border-bottom-color: rgb(173, 173, 173);
+  border: 2px solid $gray;
+      border-bottom-color: $gray;
       border-bottom-style: solid;
       border-bottom-width: 2px;
-      border-left-color: rgb(173, 173, 173);
+      border-left-color: $gray;
       border-left-style: solid;
       border-left-width: 2px;
   border-left: none;
@@ -39,7 +40,7 @@
   display: block;
   margin: 0 0 0 28px;
   width: 55%;
-  border-bottom: 1px solid #ADADAD;
+  border-bottom: 1px solid $gray;
 
 }
 
@@ -60,8 +61,8 @@
   width: 100%;
 }
 .meal-plan-row {
-  border-top: #ADADAD solid 1px;
-  border-left: #ADADAD solid 1px;
+  border-top: $gray solid 1px;
+  border-left: $gray solid 1px;
   padding-top: 5px;
   padding-bottom: 5px;
   margin: 0;
@@ -236,7 +237,7 @@ img {
 }
 
 .calories-slot-sum {
-  color: #78C04A;
+  color: $orange;
   position: absolute;
   font-size: 12px;
   text-align: center;
@@ -245,7 +246,10 @@ img {
   left: 0;
 }
 
-
+.totalcalories
+{
+  font-size: 16px;font-weight: bold; color: $orange; 
+}
 
 /********** Side container */
 
@@ -265,11 +269,11 @@ img {
   width: 85px;
   max-width: 85px;
   min-height: 100%;
-  border: 2px solid #ADADAD;
-      border-bottom-color: rgb(173, 173, 173);
+  border: 2px solid $gray;
+      border-bottom-color: $gray;
       border-bottom-style: solid;
       border-bottom-width: 2px;
-      border-left-color: rgb(173, 173, 173);
+      border-left-color: $gray;
       border-left-style: solid;
       border-left-width: 2px;
   border-left: none;
@@ -359,7 +363,7 @@ img {
 .recipe-search .form-group .rbt-input-main {
   border-top-right-radius: 0 !important;
   border-bottom-right-radius: 0 !important;
-  border: 1px solid #adadad;
+  border: 1px solid $gray;
 }
 .side-recipes .hm-typeahead .rbt-input-main, .side-recipes .recipe-search .form-group .btn-secondary {
   height: 30px;
@@ -375,7 +379,7 @@ img {
   letter-spacing: 1px;
 }
 input.form-control {
-  border-color: #77c14b;
+  border-color: $green;
 }
 .form-control {
   display: block;
@@ -384,10 +388,10 @@ input.form-control {
   padding: 0.475rem 1.35rem;
   font-size: 1rem;
   line-height: 1.5;
-  color: #495057;
-  background-color: #fff;
+  color: $gray-dark;
+  background-color: $white;
   background-clip: padding-box;
-  border: 1px solid #ced4da;
+  border: 1px solid $gray-border;
   border-radius: 0.25rem;
       border-top-right-radius: 0.25rem;
       border-bottom-right-radius: 0.25rem;
@@ -448,23 +452,23 @@ input.form-control {
   padding: 0.5rem 0;
   margin: 0.125rem 0 0;
   font-size: 1rem;
-  color: #727272;
+  color: $gray-dark1;
   text-align: left;
   list-style: none;
-  background-color: #fff;
+  background-color: $white;
   background-clip: padding-box;
   border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 0.25rem;
 }
 .dropdown-menu {
-  border: 1px solid #78C04A;
+  border: 1px solid $green;
   border-radius: 5px;
-  background-color: #FFFFFF;
-  box-shadow: 0 2px 11px 0 #78C04A;
+  background-color: $white;
+  box-shadow: 0 2px 11px 0 $green;
 }
 .dropdown-menu {
   font-size: 1rem;
-  color: #727272;
+  color: $gray-dark1;
   text-align: left;
   list-style: none;
 }
@@ -551,7 +555,7 @@ mark, .mark {
 }
 
 .recipe-mb .draggable-bar {
-  background-color: #f5f5f5;
+  background-color: $white-half;
   height: 80px;
   width: 35px;
   display: flex;
@@ -572,7 +576,7 @@ mark, .mark {
   flex-direction: column;
   min-width: 0;
   word-wrap: break-word;
-  background-color: #fff;
+  background-color: $white;
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 0.25rem;
@@ -621,7 +625,7 @@ mark, .mark {
 
 .recipe-mb .calories {
   line-height: 1;
-  color: #77c14b;
+  color: $green;
   text-align:left;
 }
 
@@ -656,7 +660,7 @@ mark, .mark {
   border-radius: 0 0 calc(0.25rem - 1px) calc(0.25rem - 1px);
 }
 .recipe-mb .recipe-footer {
-  background-color: #fff;
+  background-color: $white;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
   padding: 0.35rem 1.25rem;
@@ -772,7 +776,7 @@ mark, .mark {
 .recipe-search .form-group .rbt-input-main {
   border-top-right-radius: 0 !important;
   border-bottom-right-radius: 0 !important;
-  border: 1px solid #adadad;
+  border: 1px solid $gray;
 }
 .side-recipes .hm-typeahead .rbt-input-main, .side-recipes .recipe-search .form-group .btn-secondary {
   height: 30px;
@@ -788,7 +792,7 @@ mark, .mark {
   letter-spacing: 1px;
 }
 input.form-control {
-  border-color: #77c14b;
+  border-color: $green;
 }
 .form-control {
   display: block;
@@ -798,9 +802,9 @@ input.form-control {
   font-size: 1rem;
   line-height: 1.5;
   color: #495057;
-  background-color: #fff;
+  background-color: $white;
   background-clip: padding-box;
-  border: 1px solid #ced4da;
+  border: 1px solid $gray-border;
   border-radius: 0.25rem;
       border-top-right-radius: 0.25rem;
       border-bottom-right-radius: 0.25rem;
@@ -831,7 +835,7 @@ input.form-control {
   height: 30px;
 }
 .filter-bar--side-version .recipe-search .input-group-append button {
-  border-right: 2px solid #adadad;
+  border-right: 2px solid $gray;
 }
 .input-group > .input-group-append > .btn, .input-group > .input-group-append > .input-group-text, .input-group > .input-group-prepend:not(:first-child) > .btn, .input-group > .input-group-prepend:not(:first-child) > .input-group-text, .input-group > .input-group-prepend:first-child > .btn:not(:first-child), .input-group > .input-group-prepend:first-child > .input-group-text:not(:first-child) {
   border-top-left-radius: 0;
@@ -843,11 +847,11 @@ input.form-control {
 .recipe-search .form-group .btn-secondary {
   height: 35px;
   line-height: 20px;
-  background-color: #adadad;
+  background-color: $gray;
   border-left: none;
       border-left-color: currentcolor;
-  border-color: #adadad;
-      border-right-color: rgb(173, 173, 173);
+  border-color: $gray;
+      border-right-color: $gray;
 }
 .input-group-prepend .btn, .input-group-append .btn {
   position: relative;
@@ -855,8 +859,8 @@ input.form-control {
 }
 .btn-secondary {
   color: #fff;
-  background-color: #6c757d;
-  border-color: #6c757d;
+  background-color: $gray-dark2;
+  border-color: $gray-dark2;
 }
 .btn {
   display: inline-block;
@@ -973,10 +977,10 @@ input.form-control {
 }
 .filter-bar--side-version .btn-filter .btn-secondary {
   border-radius: 2rem !important;
-  color: #6c757d;
+  color: $gray-dark2;
   background-color: transparent;
   background-image: none;
-  border-color: #6c757d;
+  border-color: $gray-dark2;
 }
 .filter-bar--side-version .btn-filter-mb .btn-secondary {
   width: 100%;
@@ -985,10 +989,10 @@ input.form-control {
 }
 .filter-bar .btn-filter .btn-secondary, .filter-bar--side-version .btn-filter .btn-secondary {
   border-radius: 2rem !important;
-  color: #6c757d;
+  color: $gray-dark2;
   background-color: transparent;
   background-image: none;
-  border-color: #6c757d;
+  border-color: $gray-dark2;
   color: #8D8D8F;
   font-family: Lato;
   font-size: 14px;
@@ -1040,10 +1044,10 @@ button, html [type="button"], [type="reset"], [type="submit"] {
   padding: 0.5rem 0;
   margin: 0.125rem 0 0;
   font-size: 1rem;
-  color: #727272;
+  color: $gray-dark1;
   text-align: left;
   list-style: none;
-  background-color: #fff;
+  background-color: $white;
   background-clip: padding-box;
   border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 0.25rem;
@@ -1188,3 +1192,4 @@ button, html [type="button"], [type="reset"], [type="submit"] {
   /* border-right: 1px solid #CCC; */
   margin-right: 10px;
 }
+
