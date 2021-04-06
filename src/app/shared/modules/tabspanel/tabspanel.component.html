@@ -92,7 +92,7 @@
     <div class="tab-content">
         <div class="content-inner" style="min-height:100px;" *ngFor="let recipe of recipesList; let i1= index;">
             <div class="left-side">
-                <a href="javascript:void(0)"><img style="width:84px; height:64px" src="{{recipe.image}}" alt="image for {{recipe.label}}"/></a>
+                <a href="javascript:void(0)"><img style="width:84px; height:64px" src="{{formatImage(recipe.image)}}" alt="image for {{recipe.label}}"/></a>
             </div>
             <div class="right-side">
                 <h3><a href="javascript:void(0)">{{recipe.label}}</a></h3>

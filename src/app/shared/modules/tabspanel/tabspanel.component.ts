@@ -297,4 +297,17 @@ export class TabspanelComponent implements OnInit, OnDestroy, AfterViewChecked, 
 	  
 	  
 	}
+
+  formatImage(image, type)
+  {
+  //  console.log(image);
+    var retImage = image;
+    if(image !== "" && type !== "")
+    {
+      retImage = this.helpService.formatImage(image, type);
+      
+    }
+  //  console.log(retImage);
+    return retImage;
+  }
 }

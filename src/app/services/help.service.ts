@@ -385,16 +385,26 @@ export class HelpService {
 	{
 	//	console.log(image);
 	  var retImage = image;
-	  /*
+	 
 	  if(image !== "" && typeof(type) !== "undefined" && type !== "")
 	  {
 	
 		var fIndex = image.lastIndexOf(".");
-		if(image.lastIndexOf("."))
+		if(image.lastIndexOf(".jpg"))
 		{
-		var img1 = image.substr(0, fIndex);
-		var img2 = image.substr(fIndex+1, image.length - fIndex);
-		retImage = img1 + "-" + type + "." + img2;
+			retImage = image.replace(".jpg", "-" + type + ".jpg");
+		}
+		else if(image.lastIndexOf(".png"))
+		{
+			retImage = image.replace(".png", "-" + type + ".png");
+		}
+		else if(image.lastIndexOf(".jpeg"))
+		{
+			retImage = image.replace(".jpeg", "-" + type + ".jpeg");
+		}
+		else if(image.lastIndexOf(".webp"))
+		{
+			retImage = image.replace(".webp", "-" + type + ".webp");
 		}
 		else
 		{
@@ -407,7 +417,7 @@ export class HelpService {
 		retImage = image;
 	  }
   	
-	  console.log(retImage);*/
+	  console.log(retImage);
 
 	  return retImage;
 	}
