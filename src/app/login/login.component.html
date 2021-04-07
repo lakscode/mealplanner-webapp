@@ -20,9 +20,9 @@
 						<input id="check" type="checkbox"checked>
 						<label for="check">&nbsp;Keep me Signed in</label>
 					</div>
-					<!-- <div *ngIf="errorLogin !== ''" class="group">
-					<p class="loginerror">{{errorLogin}}</p>
-					</div> -->
+					<div *ngIf="errorMessage !== ''" class="group">
+					<p class="loginerror">{{errorMessage}}</p>
+					</div>
 					<div class="group">
 						<input type="button" (click)="login()" class="button" value="Sign In">
 					</div>

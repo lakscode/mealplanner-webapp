@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
 	rememberName: string;
 	passWord: string;
 	redirecturl: any;
-	errorMessage: any = false;
+	errorMessage: any;
 	routeParams: any = {};
 	userDatadetail: any = {};
 	loginForm: FormGroup;
@@ -36,6 +36,7 @@ export class LoginComponent implements OnInit {
 	}
 
 	ngOnInit() {
+	this.errorMessage = "";
 		this.rememberMe = true;
 		this.users = JSON.parse(sessionStorage.getItem("user"));
 		this.redirecturl = "";
