@@ -85,17 +85,17 @@
 <div class="tabcontainer">
     <div class="tabs-heading">
         <div [ngClass]="selectedTab == 1?'tab active':'tab'" (click)="setData(1)"><a  href="javascript:void(0)">Most rated</a></div>
-        <div [ngClass]="selectedTab == 2?'tab active':'tab'" (click)="setData(2)"><a   href="javascript:void(0)">popular</a></div>
-        <div [ngClass]="selectedTab == 3?'tab active':'tab'" (click)="setData(3)"><a  href="javascript:void(0)">random</a></div>
+        <div [ngClass]="selectedTab == 2?'tab active':'tab'" (click)="setData(2)"><a   href="javascript:void(0)">Popular</a></div>
+        <div [ngClass]="selectedTab == 3?'tab active':'tab'" (click)="setData(3)"><a  href="javascript:void(0)">Random</a></div>
     </div>
     <div class="tabs-container">
     <div class="tab-content">
         <div class="content-inner" style="min-height:100px;" *ngFor="let recipe of recipesList; let i1= index;">
             <div class="left-side">
-                <a href="javascript:void(0)"><img style="width:84px; height:64px" src="{{formatImage(recipe.image, 's')}}" alt="image for {{recipe.label}}"/></a>
+                <a [routerLink]="['/recipedetails', recipe.id]"><img style="width:84px; height:64px" src="{{formatImage(recipe.image, 's')}}" alt="image for {{recipe.label}}"/></a>
             </div>
             <div class="right-side">
-                <h3><a href="javascript:void(0)">{{recipe.label}}</a></h3>
+                <h3><a [routerLink]="['/recipedetails', recipe.id]">{{recipe.label}}</a></h3>
                 <div class="rating-box" *ngIf="recipe.displayrating">
                     <span class="rating-icons" >
                         <i *ngIf="recipe.displayrating >=1" class="fa fa-star"></i>
