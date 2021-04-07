@@ -7,6 +7,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {SearchbarModule, SliderpanelModule } from "../shared/modules"
+
 @NgModule({
   imports: [
     CommonModule,

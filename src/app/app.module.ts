@@ -57,6 +57,7 @@ import { OurteamModule } from './ourteam/ourteam.module';
 
 import { NgxSpinnerModule } from "ngx-spinner";
 
+
 @NgModule({
   declarations: [
 		AppComponent
