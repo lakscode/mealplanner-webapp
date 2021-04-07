@@ -2,6 +2,8 @@ import { Component, ElementRef, Input, Output, OnInit, OnDestroy, EventEmitter }
 import { PopularService } from './popular.service';
 import { DBService } from '../../../dbservices/db.service';
 import { HelpService } from '../../../services/help.service';
+ import { Router, ActivatedRoute, NavigationEnd } from "@angular/router";
+
 @Component({
   selector: 'app-popular',
   templateUrl: './popular.component.html',
@@ -31,7 +33,7 @@ export class PopularComponent implements OnInit, OnDestroy {
    elementId : any;
    date: any; 
    recipesList: Array<any> = [];
-    constructor(private popularService: PopularService, private el: ElementRef, private dbService: DBService, private helpService: HelpService) {
+    constructor(private popularService: PopularService, private el: ElementRef, private dbService: DBService, private helpService: HelpService, private router: Router, private route: ActivatedRoute) {
     this.element = el.nativeElement;
     //this.showhideTime = true;  
     this.id = "";

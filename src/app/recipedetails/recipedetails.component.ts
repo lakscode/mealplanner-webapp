@@ -77,8 +77,8 @@ loadRecipe(id)
   console.log("In load Recipe");
   this.loading++;
   console.log(this.loading);
-  if(this.loading ==1)
-  {
+ // if(this.loading ==1)
+  //{
   this.searchRes = [];
  var params = {}
  if(id)
@@ -89,7 +89,7 @@ loadRecipe(id)
 //  console.log(this.searchparam);
  console.log(params);
  //this.searchRes["image"]="assets/images/temp-images/slide-recipe2-detail.jpg";
- if(this.loading ==1)
+ if(this.loading)
   {
   var res =   this.dbService.getDatabyParam("recipes", params).subscribe(recipeData => setTimeout(() => {
 
@@ -199,7 +199,7 @@ loadRecipe(id)
 		  }
 		}
 	  }
-//	console.log(this.searchRes);
+	console.log(this.searchRes);
 //	console.log(this.paramMicro);
 this.updated++;
 this.listParams= {};
@@ -208,7 +208,7 @@ this.listParams["dietLabels"] = this.searchRes['dietLabels'];
 	}
   }));
   }
-}
+//}
 }
 getFavouriteStatus()
 {

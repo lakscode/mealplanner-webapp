@@ -1,4 +1,5 @@
 import { Component, ElementRef, Input, Output, OnInit, OnDestroy, EventEmitter, OnChanges } from '@angular/core';
+import { Router, ActivatedRoute, NavigationEnd } from "@angular/router";
 import { ListpanelService } from './listpanel.service';
 import { DBService } from './../../../dbservices/db.service';
 @Component({
@@ -30,7 +31,7 @@ export class ListpanelComponent implements OnInit, OnChanges, OnDestroy {
    elementId : any;
    date: any; 
    relatedrecipesList: Array<any> = [];
-    constructor(private listpanelService: ListpanelService, private el: ElementRef, private dbService: DBService) {
+    constructor(private listpanelService: ListpanelService, private el: ElementRef, private dbService: DBService, private router: Router, private route: ActivatedRoute) {
     this.element = el.nativeElement;
     //this.showhideTime = true;  
     this.id = "";

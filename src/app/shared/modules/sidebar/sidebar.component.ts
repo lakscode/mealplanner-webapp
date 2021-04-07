@@ -1,4 +1,5 @@
 import { Component, ElementRef, Input, Output, OnInit, OnDestroy, EventEmitter } from '@angular/core';
+import { Router, ActivatedRoute, NavigationEnd } from "@angular/router";
 import { SidebarService } from './sidebar.service';
 import { DBService } from './../../../dbservices/db.service';
 import { HelpService } from './../../../services/help.service';
@@ -32,7 +33,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
    elementId : any;
    date: any; 
    
-    constructor(private sidebarService: SidebarService, private el: ElementRef, private dbService: DBService, private helpService: HelpService) {
+    constructor(private sidebarService: SidebarService, private el: ElementRef, private dbService: DBService, private helpService: HelpService, private router: Router, private route: ActivatedRoute) {
     this.element = el.nativeElement;
     //this.showhideTime = true;  
     this.id = "";
