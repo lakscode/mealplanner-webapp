@@ -1,4 +1,4 @@
-<div class="contentpage" style='width:100%'>
+<div class="" style='width:100%'>
 	<div >
 		<div class="row" >
 		
@@ -138,13 +138,13 @@ background: #FFF; margin-bottom:0px;">
 
 
 <!--- testimonial slider-->
-
+<div class="contentpage">
 <ngb-carousel *ngIf="testimonialsList" [interval]="4000" >
-	<div class="row" style="height: 200px;">
+	<div class="row" style="height:200px;">
 	  <div class="related_product_slide">
   
 		<ng-template ngbSlide *ngFor="let item of testimonialsList; let i= index" class="slider slide-in">
-		  <div class="item col-md-4 active" *ngFor="let item1 of item.child; let i1= index;">
+		  <div class="item col-md-4 active" *ngFor="let item1 of item.child; let i1= index;" style="margin-bottom:30px;">
 			<div class="testimonial-item">
 				<div class="testmonial-title">
 				{{item1.name}} {{i}}
@@ -165,6 +165,7 @@ background: #FFF; margin-bottom:0px;">
 	  </div>
 	</div>
   </ngb-carousel>
+</div>  
 <!--
   <div class="site-section" >
           <div class="container" style="margin-top:30px">
