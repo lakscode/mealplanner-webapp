@@ -53,7 +53,7 @@ sub: any;
     this.username = "";
     this.pass = "";
   
-    this.userObj = {"username":"", "emailphone":"", "pass":"", "confirmpass":""}
+    this.userObj = {"username":"", "email":"", "password":"", "confirmpass":""}
 
     this.routeParams = {};
     this.sub = this.route.params.subscribe(params => {
@@ -70,25 +70,25 @@ signup()
 {
   console.log(this.userObj);
   var validEmail = true;
-  if(this.userObj.emailphone !== "")
-  validEmail = this.ValidateEmail(this.userObj.emailphone);
+  if(this.userObj.email !== "")
+  validEmail = this.ValidateEmail(this.userObj.email);
 
   console.log(validEmail);
-if(this.userObj.pass == "" ||  this.userObj.confirmpass == "" || this.userObj.emailphone == "" || this.userObj.username == "")
+if(this.userObj.username == "" ||  this.userObj.confirmpass == "" || this.userObj.password == "" || this.userObj.email == "")
 {
   this.errorMessage = "All the fields are mandatory.";
 }
-else if(this.userObj.pass == "" ||  this.userObj.confirmpass == "")
+else if(this.userObj.password == "" ||  this.userObj.confirmpass == "")
 {
   this.errorMessage = "Passwords are empty.";
 }
-else if(this.userObj.pass !== "" && this.userObj.pass == this.userObj.confirmpass)
+else if(this.userObj.password !== "" && this.userObj.password == this.userObj.confirmpass)
 {
   if(this.userObj.username == "")
   {
     this.errorMessage = "Username is empty.";
   }
-  else if(this.userObj.emailphone == "")
+  else if(this.userObj.email == "")
   {
     this.errorMessage = "Email is empty.";
   }
@@ -98,7 +98,7 @@ else if(this.userObj.pass !== "" && this.userObj.pass == this.userObj.confirmpas
   }
   else
   {
-  var params  = {'username': this.userObj.username, 'emailphone':this.userObj.emailphone}
+  var params  = {'username': this.userObj.username, 'email':this.userObj.email}
   console.log(JSON.stringify(params));
   var res =   this.dbService.checkIfExists("users", params).subscribe(invData => setTimeout(() => 
   {
@@ -122,7 +122,7 @@ else if(this.userObj.pass !== "" && this.userObj.pass == this.userObj.confirmpas
           this.errorMessage = "Username already exists.";
           found = 1;
         } 
-        else if(record["email"].toLowerCase() == this.userObj.emailphone.toLowerCase()  || record["phone"] == this.userObj.emailphone)
+        else if(record["email"].toLowerCase() == this.userObj.email.toLowerCase())
         {
           this.errorMessage = "Email already exists.";
           found = 2;
@@ -133,17 +133,15 @@ else if(this.userObj.pass !== "" && this.userObj.pass == this.userObj.confirmpas
       {
         console.log("All values are fine");
         console.log(validEmail);
-        var encryptedPass = this.helpService.encryptPass(this.userObj["pass"]);
+        var encryptedPass = this.helpService.encryptPass(this.userObj["password"]);
         console.log(encryptedPass );
 
-        var dcryptedPass = this.helpService.decryptPass(encryptedPass);
+        var dcryptedPass = this.helspService.decryptPass(encryptedPass);
         console.log(dcryptedPass );
         var params = {
           "username":this.userObj["username"],
-          "email":this.userObj["emailphone"],
-          "password":encryptedPass,
-          "role":this.role,
-          "status":1
+          "email":this.userObj["email"],
+          "password":encryptedPass
         }
         console.log(params);
         var res =   this.dbService.postData("users", params).subscribe(invData => setTimeout(() => 
