@@ -73,7 +73,7 @@
     </ul>-->
     <div class="separator-post"></div>
     <p>
-        Rinse the chicken pieces in cold water and pat dry. Place the chicken in a large, resealable zip-top bag and pour in the marinade. Toss the chicken inside the bag to cover evenly with the marinade and refrigerate for 12 hours or as long as overnight icken pieces in cold water and pat dry.
+      <!--  Rinse the chicken pieces in cold water and pat dry. Place the chicken in a large, resealable zip-top bag and pour in the marinade. Toss the chicken inside the bag to cover evenly with the marinade and refrigerate for 12 hours or as long as overnight icken pieces in cold water and pat dry.-->
     </p>
     <br>
     <div class="ingredients-checkbox">
@@ -89,44 +89,7 @@
                     </label>
                 </li>
             </ng-container>
-             <!--   <li>
-                    <label>
-                        <input type="checkbox">
-                        60 ml extra virgin olive oil
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input type="checkbox">
-                        230 g bacon, diced into 1/4 -inch pieces
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input type="checkbox">
-                        120 ml dry white wine
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input type="checkbox">
-                        3 large eggs
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input type="checkbox">
-                        180 ml grated parmesan cheese
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input type="checkbox">
-                        1 Spoon Salt
-                    </label>
-                </li>
-            -->
-            </ul>
+             </ul>
         </div>
         <div class="nutritional">
             <h3>Nutritional</h3>
@@ -145,48 +108,46 @@
                 </div>
                 <div *ngIf="even" class="separator-post"></div>
             </ng-container>
-            <!--<div class="nutrition-detail">
-                <div class="left-box">
-                    Deitary Fiber
-                    <br>
-                    <span>50g</span>
-                </div>
-                <div class="right-box">
-                    Sodium
-                    <br>
-                    <span>10g</span>
-                </div>
-            </div>
-            <div class="separator-post"></div>
-            <div class="nutrition-detail">
-                <div class="left-box">
-                    Fat Total
-                    <br>
-                    <span>60g</span>
-                </div>
-                <div class="right-box">
-                    Carbohydrate
-                    <br>
-                    <span>0</span>
-                </div>
-            </div>
-            <div class="separator-post"></div>
-            <div class="nutrition-detail">
-                <div class="left-box">
-                    Energy
-                    <br>
-                    <span>900mg</span>
-                </div>
-                <div class="right-box">
-                    Cholesterol
-                    <br>
-                    <span>80g</span>
-                </div>
-            </div>-->
-    
         </div>
     </div>
     
+
+    <div class="ingredients-checkbox">
+        <div class="ingredients">
+            <h3>Ingredients</h3>
+            <ul *ngIf="searchRes && searchRes.ingredients && searchRes.ingredients.length> 0">
+                <ng-container *ngFor="let ingr of searchRes['ingredients']; let j=index">
+                <li>
+ 
+                    <label>
+                        <input type="checkbox">
+                        {{ingr.text}}
+                    </label>
+                </li>
+            </ng-container>
+             </ul>
+        </div>
+        <div class="nutritional newitems">
+            <h3>Nutritional</h3>
+            <ng-container *ngFor="let macro of paramMicro; let m=index; ">
+                <div class="nutrition-detail newitem">
+                    <div class="left-box">
+                        {{paramMicro[m].label}}
+                        <br>
+                        <span>{{paramMicro[m].totalP}}{{paramMicro[m].unit}}</span>
+                    </div>
+                    <!--<div class="right-box" *ngIf="paramMicro[m+1]">
+                        {{paramMicro[m+1].label}}
+                        <br>
+                        <span> {{paramMicro[m+1].totalP}}{{paramMicro[m+1].unit}}</span>
+                    </div>-->
+                </div>
+                <div *ngIf="even" class="separator-post"></div>
+            </ng-container>
+        </div>
+    </div>
+
+
     <div class="recipe-steps">
         <h3 class="lined">Step by Step method</h3>
 
