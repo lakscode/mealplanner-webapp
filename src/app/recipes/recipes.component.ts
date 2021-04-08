@@ -31,6 +31,21 @@ export class RecipesComponent implements OnInit {
 	}
 
 	ngOnInit() {
+	 $('.listing-buttons span').on("click",function(){
+        $('.listing-buttons span').removeClass("current");
+        if( $(this).hasClass("grid")){
+            $(this).addClass("current");
+            if($(".recipe-listing").hasClass("listing-list")){
+                $(".recipe-listing").removeClass("listing-list").addClass("listing-grid");
+            }
+
+        }
+        if( $(this).hasClass("list")){
+            $(this).addClass("current");
+            $(".recipe-listing").removeClass("listing-grid").addClass("listing-list");
+
+        }
+    });
 
 		this.router.events.subscribe((evt) => {
             if (!(evt instanceof NavigationEnd)) {

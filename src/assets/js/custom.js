@@ -395,7 +395,7 @@ $('.add-button.add-nutrient').on("click",function(event){
     /* Listing list end grid buttons
     /*-----------------------------------------------------------------------------------*/
 
-    $('.listing-buttons span').on("click",function(){
+/*    $('.listing-buttons span').on("click",function(){
         $('.listing-buttons span').removeClass("current");
         if( $(this).hasClass("grid")){
             $(this).addClass("current");
@@ -409,7 +409,7 @@ $('.add-button.add-nutrient').on("click",function(event){
             $(".recipe-listing").removeClass("listing-grid").addClass("listing-list");
 
         }
-    });
+    });*/
 
 
     /*-----------------------------------------------------------------------------------*/
