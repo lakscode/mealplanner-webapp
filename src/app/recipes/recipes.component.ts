@@ -47,6 +47,25 @@ export class RecipesComponent implements OnInit {
         }
     });
 
+
+      $('.advance-search .tag-inner').on("click",function(){
+        if ($(".advance-search").hasClass("open")){
+            $(".advance-search").removeClass("open");
+            $(".outer-advance-search").slideUp();
+        }
+        else{
+            $(".advance-search").addClass("open");
+            $(".outer-advance-search").slideDown();
+        }
+
+
+    });
+
+
+    if (jQuery().selectric) {
+        $( ".advance-selectable" ).selectric();
+    }
+
 		this.router.events.subscribe((evt) => {
             if (!(evt instanceof NavigationEnd)) {
                 return;
