@@ -79,6 +79,15 @@ a:hover {
   position: relative;
 }
 
+@keyframes load {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 .newitem
 {
   position:absolute;
@@ -91,6 +100,7 @@ a:hover {
   padding-top: 10px;
   border-radius: 50%;
   color:#FFF;
+  transition: 0.5s;
 }
 
 .newitem:nth-child(1)
@@ -98,7 +108,12 @@ a:hover {
   top:29px;
   left: 95px;
   background: $bgcolor1;
- 
+  transition: 0.9s;
+  background-size: 200% auto;
+  box-shadow: 0 0 20px #eee;
+background-image: linear-gradient(to right, #1A2980 0%, #26D0CE  51%, #1A2980  100%);
+//-webkit-animation: load 5s infinite;
+//animation: load 5s infinite;
 } 
 
 .newitem:nth-child(2)
@@ -106,7 +121,8 @@ a:hover {
   top: 30px;
   left: 170px;
   background: $bgcolor2;
-  
+//  -webkit-animation: load 5s infinite 0.5s;
+ // animation: load 5s infinite 0.5s;
 } 
 
 
@@ -115,6 +131,9 @@ a:hover {
   top: 100px;
     left: 40px;
     background: $bgcolor3;
+  //  -webkit-animation: load 5s infinite 1.5s;
+  //  animation: load 5s infinite 1.5s;
+
 } 
 
 .newitem:nth-child(4)
@@ -122,6 +141,8 @@ a:hover {
   top: 110px;
   left: 110px;
   background: $bgcolor4;
+ // -webkit-animation: load 5s infinite 1.7s;
+ // animation: load 5s infinite 1.7s;
 } 
 
 .newitem:nth-child(5)
@@ -129,6 +150,8 @@ a:hover {
   top: 100px;
   left: 220px;
   background: $bgcolor5;
+ // -webkit-animation: load 5s infinite 1.9s;
+ // animation: load 5s infinite 1.9s;
 } 
 
 .newitem:nth-child(6)
@@ -136,6 +159,8 @@ a:hover {
   top: 170px;
   left: 10px;
   background: $bgcolor6;
+// -webkit-animation: load 5s infinite 0.7s;
+ // animation: load 5s infinite 0.7s;
 } 
 
 .newitem:nth-child(7)
@@ -143,6 +168,8 @@ a:hover {
   top:175px;
   left: 90px;
   background: $bgcolor7;
+//  -webkit-animation: load 5s infinite 1.2s;
+//  animation: load 5s infinite 1.2s;
 } 
 
 .newitem:nth-child(8)
@@ -150,6 +177,8 @@ a:hover {
   top: 180px;
     left: 150px;
     background: $bgcolor8;
+  //  -webkit-animation: load 5s infinite 1.4s;
+  //  animation: load 5s infinite 1.4s;
 } 
 
 

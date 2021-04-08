@@ -4733,7 +4733,7 @@ div.widget-measurements .default-btn {
   display: flex;
   font-family: 'Lato', sans-serif;
   font-weight: 400;
-    text-shadow: 0 0 4px #28A745;
+    /*text-shadow: 0 0 4px #28A745; */
 }
 .nutrition-detail span {
   font-weight: 700;
