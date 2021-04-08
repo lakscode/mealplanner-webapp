@@ -8,7 +8,8 @@ import { HelpService } from '../services/help.service';
 import { environment } from './../../environments/environment';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-declare var $: any;
+import * as $ from 'jquery';
+//declare var $: any;
 
 @Component({
 	selector: 'app-recipes',

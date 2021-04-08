@@ -686,11 +686,6 @@ font-family: 'Karla', sans-serif;
   top: 100px !important;
 }
 
-.prev-slide.slick-disabled,
-.next-slide.slick-disabled {
-  pointer-events: none;
-  opacity: 0.2;
-}
 
 .prev-slide {
   background: url(../../assets/images/plus.png) no-repeat scroll 0 0;

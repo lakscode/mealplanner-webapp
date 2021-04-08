@@ -98,10 +98,7 @@
   font-weight: 700;
   color: #514b49;
 }
-.slick-slide,
-.slick-current {
-  outline: none;
-}
+
 /*--------------------*/
 /* heading bottom line
 /*--------------------*/
@@ -976,8 +973,7 @@ a.mean-expand {
 /*-----------------------------------------------------------------------------------*/
 /* slider
 /*-----------------------------------------------------------------------------------*/
-.slick-slider {
-  margin-bottom: 0;
+.margin-bottom: 0;
 }
 .custom-margin {
   margin-bottom: 0;
@@ -1216,29 +1212,7 @@ a.mean-expand {
   fill: #6ebe3b;
 }
 /*--------------------*/
-/* Slider variation two
-/*--------------------*/
-.wrapper-home-slider .slick-dots {
-  bottom: 20px;
-}
-.wrapper-home-slider .slick-dots li {
-  margin: 0 2px;
-}
-.wrapper-home-slider .slick-dots li button:before {
-  font-size: 12px;
-  opacity: 1;
-  color: #ffffff;
-  border: 2px solid transparent;
-  line-height: 14px;
-  width: 15px;
-  height: 16px;
-  border-radius: 50%;
-}
-.wrapper-home-slider .slick-dots li.slick-active button:before {
-  color: #000000;
-  border-color: #ffffff;
-  background-color: #ffffff;
-}
+
 .wrapper-home-slider.variation-two {
   margin-bottom: 0;
 }
@@ -1285,9 +1259,7 @@ a.mean-expand {
   margin-top: 12px;
   margin-left: 0;
 }
-.wrapper-home-slider.variation-two .slick-slide img {
-  width: 100%;
-}
+
 .wrapper-home-slider.variation-two .short-separator {
   margin-bottom: 10px;
 }
@@ -2664,31 +2636,7 @@ a.mean-expand {
 .homo-4-col h3 a:hover {
   color: #6ebe3b;
 }
-.news-single .slick-dots,
-.homo-4-col .slick-dots {
-  bottom: 0;
-}
-.news-single .slick-dots li,
-.homo-4-col .slick-dots li {
-  margin: 0 2px;
-}
-.news-single .slick-dots li button:before,
-.homo-4-col .slick-dots li button:before {
-  font-size: 12px;
-  opacity: 1;
-  color: #ffffff;
-  border: 2px solid transparent;
-  line-height: 14px;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-}
-.news-single .slick-dots li.slick-active button:before,
-.homo-4-col .slick-dots li.slick-active button:before {
-  color: #000000;
-  border-color: #ffffff;
-  background-color: #ffffff;
-}
+
 .news-visuals iframe {
   width: 100%;
   height: 100%;
@@ -4610,9 +4558,7 @@ div.widget-measurements .default-btn {
   padding: 14px 59px;
   background: rgba(0, 0, 0, 0.83);
 }
-.wrapper-slider-nav .slider-nav .slick-slide {
-  padding: 15px;
-}
+
 .single-recipe-detail {
   margin-bottom: 30px;
 }
@@ -5059,10 +5005,7 @@ div.widget-measurements .default-btn {
   color: #000000;
   cursor: pointer;
 }
-.steps-tabs .slick-current {
-  color: #6ebe3b;
-  border-bottom: 3px solid #6ebe3b;
-}
+
 .buttons-steps {
   display: inline-block;
   border: 1px solid #e4d9d1;

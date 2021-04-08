@@ -17,42 +17,7 @@
     
        <div class="slider-recipe-detail2">
             <div class="wrapper-slider-detail" *ngIf="searchRes.image">
-                <img src="{{searchRes.image}}" alt="slide" style='width:100%; max-height:410px;'>
-              <!--   <div class="recipe-slider">
-                    <div class="slider-detail2 slick-initialized slick-slider">
-                        <div aria-live="polite" class="slick-list draggable"><div class="slick-track" role="listbox" style="opacity: 1; width: 5929px; transform: translate3d(-5082px, 0px, 0px); transition: transform 500ms ease 0s;"><div class="slick-slide slick-cloned" data-slick-index="-1" aria-hidden="true" tabindex="-1" style="width: 847px;">
-                            <a href="assets/images/temp-images/slide-recipe2-detail.jpg" class="swipebox" rel="recipe-gallery" tabindex="-1"><img src="assets/images/temp-images/slide-recipe2-detail.jpg" alt="slide"></a>
-                        </div><div class="slick-slide slick-current slick-active" data-slick-index="0" aria-hidden="false" tabindex="-1" role="option" aria-describedby="slick-slide00" style="width: 847px;">
-                            <a href="assets/images/temp-images/slide-recipe2-detail.jpg" class="swipebox" rel="recipe-gallery" tabindex="-1"><img src="assets/images/temp-images/slide-recipe2-detail.jpg" alt="slide"></a>
-                        </div><div class="slick-slide" data-slick-index="1" aria-hidden="true" tabindex="-1" role="option" aria-describedby="slick-slide01" style="width: 847px;">
-                            <a href="assets/images/temp-images/slide-recipe2-detail.jpg" class="swipebox" rel="recipe-gallery" tabindex="-1"><img src="assets/images/temp-images/slide-recipe2-detail.jpg" alt="slide"></a>
-                        </div><div class="slick-slide" data-slick-index="2" aria-hidden="true" tabindex="-1" role="option" aria-describedby="slick-slide02" style="width: 847px;">
-                            <a href="assets/images/temp-images/slide-recipe2-detail.jpg" class="swipebox" rel="recipe-gallery" tabindex="-1"><img src="assets/images/temp-images/slide-recipe2-detail.jpg" alt="slide"></a>
-                        </div><div class="slick-slide" data-slick-index="3" aria-hidden="true" tabindex="-1" role="option" aria-describedby="slick-slide03" style="width: 847px;">
-                            <a href="assets/images/temp-images/slide-recipe2-detail.jpg" class="swipebox" rel="recipe-gallery" tabindex="-1"><img src="assets/images/temp-images/slide-recipe2-detail.jpg" alt="slide"></a>
-                        </div><div class="slick-slide" data-slick-index="4" aria-hidden="true" tabindex="0" role="option" aria-describedby="slick-slide04" style="width: 847px;">
-                            <a href="assets/images/temp-images/slide-recipe2-detail.jpg" class="swipebox" rel="recipe-gallery" tabindex="0"><img src="assets/images/temp-images/slide-recipe2-detail.jpg" alt="slide"></a>
-                        </div><div class="slick-slide slick-cloned" data-slick-index="5" aria-hidden="true" tabindex="-1" style="width: 847px;">
-                            <a href="assets/images/temp-images/slide-recipe2-detail.jpg" class="swipebox" rel="recipe-gallery" tabindex="-1"><img src="assets/images/temp-images/slide-recipe2-detail.jpg" alt="slide"></a>
-                        </div></div></div>
-                        
-                        
-
-                        
-                    </div>
-                    <span class="custom-arrows wider">
-                        <span class="left-arrow slick-arrow" data-direction="prev" style="display: block;"><i class="fa fa-arrow-left"></i></span>
-                        <span class="right-arrow slick-arrow" data-direction="next" style="display: block;"><i class="fa fa-arrow-right"></i></span>
-                    </span>
-                </div>
-    
-                <ul class="recipe-specs-2">
-                    <li><span>Yield : </span>5 Grills</li>
-                    <li><span>Servings : </span>5</li>
-                    <li><span>Prep Time : </span>30m</li>
-                    <li><span>Cook Time : </span>40m</li>
-                    <li><span>Ready In : </span>1:40h</li>
-                </ul>-->
+                <img src="{{searchRes.image}}" alt="slide" style='width:100%; max-height:410px;'>            
             </div>
             <!--<a href="https://vimeo.com/15306847" class="swipebox slider-video-button">Watch Video</a>-->
         </div>
@@ -76,23 +41,10 @@
       <!--  Rinse the chicken pieces in cold water and pat dry. Place the chicken in a large, resealable zip-top bag and pour in the marinade. Toss the chicken inside the bag to cover evenly with the marinade and refrigerate for 12 hours or as long as overnight icken pieces in cold water and pat dry.-->
     </p>
     <br>
-    <div class="ingredients-checkbox">
-        <div class="ingredients">
-            <h3>Ingredients</h3>
-            <ul *ngIf="searchRes && searchRes.ingredients && searchRes.ingredients.length> 0">
-                <ng-container *ngFor="let ingr of searchRes['ingredients']; let j=index">
-                <li>
- 
-                    <label>
-                        <input type="checkbox">
-                        {{ingr.text}}
-                    </label>
-                </li>
-            </ng-container>
-             </ul>
-        </div>
+   <!--  <div class="ingredients-checkbox">
+       
         <div class="nutritional">
-            <h3>Nutritional</h3>
+            <h3>Nutritional 12</h3>
             <ng-container *ngFor="let macro of paramMicro; let m=index; let even = even">
                 <div *ngIf="even" class="nutrition-detail">
                     <div class="left-box">
@@ -109,7 +61,7 @@
                 <div *ngIf="even" class="separator-post"></div>
             </ng-container>
         </div>
-    </div>
+    </div> -->
     
 
     <div class="ingredients-checkbox" style="min-height:400px">
@@ -157,88 +109,11 @@
                             {{instr}}
                         </p>
                         <br>
-                       <!-- <p>
-                            Toss the chicken inside the bag to cover evenly with the marinade and refrigerate for 12 hours or as long as overnight.
-                        </p> -->
                     </div>
                     <div class="col-sm-3">
                         <img style="max-height: 150px;" *ngIf="searchRes['ingredients'][j]['image']" src="{{searchRes['ingredients'][j]['image']}}" alt="image">
                     </div>
                 </div>
-          
-
-               <!-- <div class="row">
-                    <div class="col-sm-7">
-                        <p>
-                            Rinse the chicken pieces in cold resealable zip-top bag and pour in the marinade.
-                        </p>
-                        <br>
-                        <p>
-                            Toss the chicken inside the bag to cover evenly with the marinade and refrigerate for 12 hours or as long as overnight.
-                        </p>
-                    </div>
-                    <div class="col-sm-5">
-                        <img src="assets/images/temp-images/steps-tab1.jpg" alt="image">
-                    </div>
-                </div>
-  
-                <div class="row">
-                    <div class="col-sm-7">
-                        <p>
-                            Rinse the chicken pieces in cold  and pour in the marinade.
-                        </p>
-                        <br>
-                        <p>
-                            Toss the chicken inside the bag to cover evenly with the marinade and refrigerate for 12 hours or as long as overnight.
-                        </p>
-                    </div>
-                    <div class="col-sm-5">
-                        <img src="assets/images/temp-images/steps-tab1.jpg" alt="image">
-                    </div>
-                </div>
-           
-                <div class="row">
-                    <div class="col-sm-7">
-                        <p>
-                            Rinse the chicken pieces in cold water and pat dry.
-                        </p>
-                        <br>
-                        <p>
-                            Toss the chicken inside the bag to cover evenly with the marinade and refrigerate for 12 hours or as long as overnight.
-                        </p>
-                    </div>
-                    <div class="col-sm-5">
-                        <img src="assets/images/temp-images/steps-tab1.jpg" alt="image">
-                    </div>
-                </div>
-      
-                <div class="row">
-                    <div class="col-sm-7">
-                        <p>
-                            Toss the chicken inside the bag to cover evenly with the marinade and refrigerate for 12 hours or as long as overnight.
-                        </p>
-                    </div>
-                    <div class="col-sm-5">
-                        <img src="assets/images/temp-images/steps-tab1.jpg" alt="image">
-                    </div>
-                </div>
-     
-    
-        
-                <div class="row">
-                    <div class="col-sm-7">
-                        <p>
-                            Rinse the chicken pieces in cold water and pat dry. Place the chicken in a large, resealable zip-top bag and pour in the marinade.
-                        </p>
-                        <br>
-                        <p>
-                            Toss the chicken inside the bag to cover evenly with the marinade and refrigerate for 12 hours or as long as overnight.
-                        </p>
-                    </div>
-                    <div class="col-sm-5">
-                        <img src="assets/images/temp-images/steps-tab1.jpg" alt="image">
-                    </div>
-                </div>-->
          
     
     </div>
@@ -252,18 +127,6 @@
                    {{instr}}
                 </p>
             </li>
-            <!--<li>
-                <p>
-                    Rinse the chicken pieces in cold water and pat dry. Place the chicken in a large, resealable zip-top bag
-                    and pour in the marinade.
-                </p>
-            </li>
-            <li>
-                <p>
-                    Rinse the chicken pieces in cold water and pat dry. Place the chicken in a large, resealable zip-top bag
-                    and pour in the marinade. Toss the chicken inside the bag to cover.
-                </p>
-            </li>-->
         </ul>
     </div>
     
@@ -274,9 +137,6 @@
                 <div class="details-tags">
                     <ul>
                         <li *ngFor="let tag of formatDietLabels(); let t= index;"><a href="javascript:void(0)">{{tag}}</a></li>
-                        <!--<li><a href="javascript:void(0)">pizza</a></li>
-                        <li><a href="javascript:void(0)">potato</a></li>
-                        <li><a href="javascript:void(0)">roasted</a></li>-->
                     </ul>
                 </div>
             </div>
@@ -295,37 +155,7 @@
     </div>
     </div>
     
-   <!-- <div class="about-chef">
-        <h3 class="lined">About Chef</h3>
-        <div class="listing">
-            <div class="image">
-                <div class="image-inner">
-                    <a href="javascript:void(0)"><img src="assets/images/temp-images/about-chef-detail.jpg" alt="chef"></a>
-                </div>
-            </div>
-            <div class="detail">
-                <div class="row">
-                    <div class="col-sm-8">
-                        <h4><a href="javascript:void(0)">james anderson</a></h4>
-    
-                    </div>
-                    <div class="col-sm-4">
-                        <ul class="chef-social-links">
-                            <li><a href="javascript:void(0)"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="javascript:void(0)"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="javascript:void(0)"><i class="fa fa-google-plus"></i></a></li>
-                        </ul>
-                    </div>
-                </div>
-                <p>
-                    Rinse the chicken pieces in cold water and pat dry. Place the chicken in a large,
-                    resealable zip-top bag and pour in the marinade. Toss the chicken inside the
-                    bag to cover evenly with the marinade and refrigerate.
-                </p>
-                <a href="javascript:void(0)" class="read-more-angle">Read More</a>
-            </div>
-        </div>
-    </div>-->
+   
     <div class="related-recipes" *ngIf="listParams">
         <h3 class="lined">Related Recipes</h3>
     <app-listpanel [updated] = "updated" [params] = "listParams"></app-listpanel>
@@ -348,21 +178,6 @@
                     <!--<a href="javascript:void(0)" class="reply-button">Reply</a>-->
                 </div>
     
-                <!--<ul>
-                    <li>
-                        <div class="avatar">
-                            <a href="javascript:void(0)"><img src="assets/images/temp-images/recipe-comment2.jpg" alt="avatar"></a>
-                        </div>
-                        <div class="comment">
-                            <h5><a href="javascript:void(0)">John Doe</a></h5>
-                            <span class="time">(2hours ago)</span>
-                            <p>
-                                Rinse the chicken pieces in cold water and pat dry. Place the chicken
-                            </p>
-                            <a href="javascript:void(0)" class="reply-button">Reply</a>
-                        </div>
-                    </li>
-                </ul>-->
             </li>
     
             <li>
