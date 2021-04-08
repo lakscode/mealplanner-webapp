@@ -136,7 +136,7 @@ else if(this.userObj.password !== "" && this.userObj.password == this.userObj.co
         var encryptedPass = this.helpService.encryptPass(this.userObj["password"]);
         console.log(encryptedPass );
 
-        var dcryptedPass = this.helspService.decryptPass(encryptedPass);
+        var dcryptedPass = this.helpService.decryptPass(encryptedPass);
         console.log(dcryptedPass );
         var params = {
           "username":this.userObj["username"],
