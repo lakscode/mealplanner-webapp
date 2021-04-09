@@ -29,36 +29,41 @@
                         </p>
                         <div class="short-separator" style="margin-top:10px"></div>
                         <div class="recipe-details-group">
-                            <div class="recipe-details">
+                            <div class="recipe-details" *ngIf="searchRes.totalWeight">
                             <p>Total Weight:</p>
                             <p style="display:block;">
                                 <a href="javascript:void(0);"  class="hlabel">{{formatValue(searchRes.totalWeight)}} g</a> 
                             </p>
                             </div>
                             <p style="clear:both"></p>
-                            
+                            <div class="recipe-details" *ngIf="searchRes.calories">
                             <p>Calories:</p>
                             <p style="display:block;">
                                 <a href="javascript:void(0);"  class="hlabel">{{formatValue(searchRes.calories)}} kcal</a> 
                             </p>
+                        </div>
                             <p style="clear:both"></p>
-
+                            <div class="recipe-details" *ngIf="searchRes.yield">
                             <p>Servings:  </p>
                             <p style="display:block;">
                                 <a href="javascript:void(0);"  class="hlabel">{{searchRes.yield}}</a> 
                             </p>
+                        </div>
                             <p style="clear:both"></p>
-
+                            <div class="recipe-details" *ngIf="searchRes.dietLabels">
                             <p>Diet Labels:</p>
                             <p style="display:block;">
                                 <a href="recipes;diet={{dlabel}}"  class="hlabel" *ngFor="let dlabel of formatLabels(searchRes.dietLabels)">{{dlabel}}</a> 
                             </p>
+                        </div>
                             <p style="clear:both"></p>
                             
+                            <div class="recipe-details" *ngIf="searchRes.healthLabels">
                             <p>Health Labels:</p>
                             <p style="display:inline-block;">
                                 <a href="recipes;health={{hlabel}}" class="hlabel" *ngFor="let hlabel of formatLabels(searchRes.healthLabels)">{{hlabel}}</a> 
                             </p>
+                        </div>
                             <p style="clear:both; padding-bottom:10px;"></p>
                         </div>
                     </div>
