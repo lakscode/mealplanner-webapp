@@ -1,7 +1,4 @@
 
-
-
-
 <div class="recipes-home-body inner-page">
 
 
@@ -20,8 +17,158 @@
           </div>
           <div class="outer-advance-search" style="display: block;">
 
+            <div style="margin:0 auto; width:100%; ">
+        <div class="row searchpanel bgborder paddinglr0" >
+            <div class='col-12'>
+                <div class="row">
+                    <div class="col-6">
+
+                         <div class="form-group">
+                            <label class="form-control-placeholder fcs">Ingredients</label>
+                            <input type="text" autocomplete="off" id="respondent" name="respondent" class="form-control"
+                                >
+                        </div>
+                    </div>
+                    
+                    <div class="col-6">
+                        <div class="form-group">
+
+                            <label class="form-control-placeholder fcs" for="minerals">Minerals </label>
+                            <div class="select">
+                                <select id="minerals" name="minerals" 
+                                     required >
+                                    <option value="" disabled selected hidden>{{chooseOption}}</option>
+                                    <option *ngFor="let recipe1 of recipesList1; let iT = index">
+                                        {{recipe1.label }}
+                                        <!--{{item.email}}-->
+                                    </option>
+                                </select>
+                            </div>
+
+                        </div>
+                    </div>
+
+                  <!--   <div class="col-6">
+                        <div class="form-group">
+
+                            <label class="form-control-placeholder fcs" for="investigatoritem">Health Labels </label>
+                             <div class="dbgOuter">
+    <div class="round" style="">
+        <input type="checkbox" id="dbgTrace" class="" />
+        <label for="dbgTrace"></label> <span class="checkboxText">Vegan</span>
+    </div> 
+    <div class="round">
+        <input type="checkbox" id="dbgDebug" class="" />
+        <label for="dbgDebug"></label> <span class="checkboxText">Debug</span>
+    </div>
+    <div class="round">
+        <input type="checkbox" id="dbgInfo" class="" checked="checked" />
+        <label for="dbgInfo"></label> <span class="checkboxText">Debug</span>
+    </div>
+    <div class="round">
+        <input type="checkbox" id="dbgWarn"  class="" />
+        <label for="dbgWarn"></label><span class="checkboxText"> Debug</span>
+    </div>
+    <div class="round">
+        <input type="checkbox" id="dbgErr"  class="" />
+        <label for="dbgErr"></label><span class="checkboxText"> Debug</span>
+    </div>
+   </div>
+                    </div>
+                  </div>
+ -->
+
+                    <div class="col-12">
+                        <div class="form-group">
+
+                            <label class="form-control-placeholder fcs">Diet Labels </label>
+                             <div class="listSection" style="display:inline-block;">
+                              <span class="checkboxText">Vegan</span>
+    <span class="round" style="">
+        <input type="checkbox" id="diet1" class="" />
+        <label for="diet1"></label> 
+    </span> 
+    <span class="checkboxText">Vegan</span>
+    <span class="round">
+        <input type="checkbox" id="diet2" class="" />
+        <label for="diet2"></label>
+    </span>
+    <span class="checkboxText">Vegan</span>
+    <span class="round">
+        <input type="checkbox" id="diet3" class="" checked="checked" />
+        <label for="diet3"></label>
+    </span>
+    <span class="checkboxText">Vegan</span>
+    <span class="round">
+        <input type="checkbox" id="diet4"  class="" />
+        <label for="diet4"></label>
+    </span>
+    <span class="checkboxText">Vegan</span>
+    <span class="round">
+        <input type="checkbox" id="diet5"  class="" />
+        <label for="diet5"></label>
+    </span>
+   </div>
+                    </div>
+                  </div>
+
+            <div class="col-12">
+                        <div class="form-group">
+
+                            <label class="form-control-placeholder fcs">Health Labels </label>
+                             <div class="listSection" id="healthLabels" style="display:inline-block;">
+                              <span class="checkboxText">Vegan</span>
+    <span class="round" style="">
+        <input type="checkbox" id="hlabel1" class="" />
+        <label for="hlabel1"></label> 
+    </span> 
+    <span class="checkboxText">Vegan</span>
+    <span class="round">
+        <input type="checkbox" id="hlabel2" class="" />
+        <label for="hlabel2"></label>
+    </span>
+    <span class="checkboxText">Vegan</span>
+    <span class="round">
+        <input type="checkbox" id="hlabel3" class="" checked="checked" />
+        <label for="hlabel3"></label>
+    </span>
+    <span class="checkboxText">Vegan</span>
+    <span class="round">
+        <input type="checkbox" id="hlabel4"  class="" />
+        <label for="hlabel4"></label>
+    </span>
+    <span class="checkboxText">Vegan</span>
+    <span class="round">
+        <input type="checkbox" id="hlabel5"  class="" />
+        <label for="hlabel5"></label>
+    </span>
+   </div>
+                    </div>
+                  </div>
+                  </div>
+
+                    <div class="col-12" style="margin-bottom:20px;padding-bottom:10px;">
+                        <div class="form-group-others" style="margin-bottom:20px;">
+                            <div style="float:right; margin-right:5px;">
+                                <button [disabled]="isdisabled" (click)="CheckParameters(queryparam)" class="btnadd"><i
+                                        class="fa fa-search" aria-hidden="true"></i>&nbsp;Apply</button>
+                            </div>
+                            <div style="float:right; margin-right:5px;">
+                                <button [disabled]="isdisabled" (click)="ResetParameters()" class="btnadd"><i class="fa fa-undo"
+                                        aria-hidden="true"></i>&nbsp;Reset</button>
+                            </div>
+                        </div>
+                    </div>
+                   
+                  </div>
+
+                </div>
+              </div>
+
+
+
               <form action="#" id="advance-search">
-                  <fieldset>
+                  <fieldset style="display:none">
                       <div class="inner-advance-search">
 
 
