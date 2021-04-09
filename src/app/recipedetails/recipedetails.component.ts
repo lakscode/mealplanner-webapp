@@ -188,7 +188,7 @@ loadRecipe(id)
 				}
 			  }
 
-			  if(tempNutrients)
+			 /* if(tempNutrients)
 			  {
 				//console.log(tempNutrients);
 				for (let x in tempNutrients) {
@@ -202,7 +202,7 @@ loadRecipe(id)
 					}
 				  }
 		
-			  }
+			  } */
 
 		  }
 		}
