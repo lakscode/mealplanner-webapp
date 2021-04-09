@@ -425,7 +425,7 @@ setRating()
 }
 formatObj(obj)
 {
-	console.log(obj);
+//	console.log(obj);
 	return JSON.stringify(obj);
 }
 formatDietLabels()
@@ -446,18 +446,18 @@ formatDietLabels()
 
 formatValue(str)
 {
-	console.log(str);
+//	console.log(str);
 	var retValue = str;
 	if(str !== "")
 	{
 		retValue = parseFloat(str).toFixed(2);
 	}
-	console.log(retValue);
+//	console.log(retValue);
 	return retValue;
 }
 formatLabels(str)
 {
-	console.log(str);
+//	console.log(str);
 	var retArr = [];
 	retArr.push(str);
 	if(str !== "")

@@ -28,6 +28,8 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 import {ToastrModule } from 'ngx-toastr';
 
+
+
 import { LayoutModule } from './layout/layout.module';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -57,6 +59,7 @@ import { OurteamModule } from './ourteam/ourteam.module';
 
 import { NgxSpinnerModule } from "ngx-spinner";
 
+import { ModalModule } from './shared/modules'; 
 
 @NgModule({
   declarations: [
@@ -95,7 +98,8 @@ import { NgxSpinnerModule } from "ngx-spinner";
 	PlannerlistModule,
 	PlannercreateModule,
 	PricingModule,
-	OurteamModule
+	OurteamModule,
+	ModalModule
   ],
   schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
   providers: [UserService],

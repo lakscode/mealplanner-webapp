@@ -1,7 +1,7 @@
 import { Component, OnInit, Injectable } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { UserService } from './services/user.service';
-
+import { ModalService } from './shared/modules/modal/modal.service';
 import {
   trigger,
   state,
@@ -42,15 +42,26 @@ export class AppComponent implements OnInit {
   showSidebar = false;
   showFooter = false;
   showBookDemo = false;
-  constructor(private router: Router, private activatedRoute: ActivatedRoute, private userService: UserService) {
-  }
+  subscribeParam:any = {};
   loggedIn: any;
   userName: any;
   user: any;
   chatwindowdisplay: any;
+
+
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, private modalService: ModalService, private userService: UserService) {
+    
+  }
+ 
+
   ngOnInit() {
+    this.subscribeParam["email"] = "";
     this.loggedIn = false;
     this.chatwindowdisplay = "chatwindownone";
+    var parent = this;
+  
+    setTimeout(function(){  parent.openModal(); }, 3000);
+
     localStorage.setItem('currentUser', "");
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
@@ -87,5 +98,13 @@ export class AppComponent implements OnInit {
     this.chatwindowdisplay = "chatwindowdisplay";
 
   }
- 
+
+  openModal()
+  {
+    this.modalService.open('popupformessage');
+  }
+  closeModal(id)
+  {
+this.modalService.close(id);
+  }
 }

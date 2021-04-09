@@ -22,23 +22,27 @@ jw-modal {
         left: 0;
 
         /* z-index must be higher than .jw-modal-background */
-        z-index: 1000;
+        z-index: 100000;
         
         /* enables scrolling for tall modals */
         overflow: auto;
 
         .jw-modal-body {
-            padding: 20px;
+           // padding: 20px;
             background: $text_light;
 
             /* margin exposes part of the modal background */
 			margin:70px auto;
 			width:60%;
 			min-width:300px;
-			border:3px solid $grayshadow;
+		//	border:3px solid $grayshadow;
 			border-radius:3px;
 			
 			
+        }
+        .jw-modal-close .close
+        {
+            font-size: 30px;
         }
         
 		 .jw-modal-body  h3
@@ -117,7 +121,7 @@ body.jw-modal-open {
         .jw-modal-body   {
             background: $third !important;
             color:#FFF !important;
-            border:3px solid $grayshadow;
+          //  border:3px solid $grayshadow;
 
             .infoModal
             {
