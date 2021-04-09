@@ -443,6 +443,31 @@ formatDietLabels()
 //	console.log(arr);
 	return arr;
 }
+
+formatValue(str)
+{
+	console.log(str);
+	var retValue = str;
+	if(str !== "")
+	{
+		retValue = parseFloat(str).toFixed(2);
+	}
+	console.log(retValue);
+	return retValue;
+}
+formatLabels(str)
+{
+	console.log(str);
+	var retArr = [];
+	retArr.push(str);
+	if(str !== "")
+	{
+		retArr = [];
+		retArr = str.split("~");
+	}
+	return retArr;
+}
+
 }
 
 

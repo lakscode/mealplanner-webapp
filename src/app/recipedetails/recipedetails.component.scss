@@ -254,3 +254,104 @@ background-image: linear-gradient(to right, #1A2980 0%, #26D0CE  51%, #1A2980  1
   display: flex;
   align-items: center;
 }
+
+.outerbox
+{
+  background: #ffffff;
+ width:100%;
+ height:100%;
+  padding: 10px;
+
+}
+
+.innerbox
+{
+  padding: 15px 20px;
+    border: 1px solid #e4d9d1;
+    height: 100%;
+}
+.innerbox .tag
+{
+  margin:0 auto;
+  padding: 5px 10px; 
+  border-radius:5px;
+  background-color: $green;
+  color:#FFF;
+  width:150px;
+  font-family: 'Lora', serif;
+    font-style: italic;
+    font-weight: 700;
+    text-align:center;
+}
+
+.innerbox .label
+{
+  padding: 5px 10px; 
+  border-radius:5px;
+  background-color: $green;
+  color:#FFF;
+  font-family: 'Lato', sans-serif;
+    font-weight: 900;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    text-transform: uppercase;
+    font-style: normal;
+    line-height: 30px;
+}
+
+.innerbox .label:hover
+{
+  color: $green;
+}
+
+.newanim
+{
+  -webkit-animation: slide 0.5s forwards;
+  -webkit-animation-delay: 2s;
+  animation: slide 0.5s forwards;
+  animation-delay: 2s;
+}
+@-webkit-keyframes slide {
+  100% { left: 0; }
+}
+
+@keyframes slide {
+  100% { left: 0; }
+}
+
+.recipe-details-group
+{
+
+}
+.recipe-details
+{
+  display: block;
+  margin-top: 20px;
+}
+
+.recipe-details-group p{
+  margin-bottom:10px;
+  float: left;
+  margin-right: 10px;
+}
+.recipe-details-group .hlabel
+{
+float:left;
+padding:2px 5px;
+margin-bottom: 8px; 
+margin-right:8px;
+border-radius:4px;
+background : $white-half;
+border:1px solid $gray-border;
+color:#000;
+min-width:30px;
+text-align:center;
+}
+
+.recipe-details-group .hlabel:hover
+{
+  //color:$green;
+  font-weight:bold;
+
+}

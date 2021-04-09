@@ -8,15 +8,65 @@
     <div class="single-recipe-detail">
         <div class="wrapper-recipe-heading">
             <div class="heading">
-                <h2>{{searchRes.label}}</h2>
+                <!--<h2>{{searchRes.label}}</h2>-->
+                <h2>Recipe Details</h2>
     
             </div>
             <div class="recipe-media">
                 <a class="print-button" href="javascript:void(0)"><i class="fa fa-print"></i> Print Recipe</a>
             </div>
         </div>
+        <div class="row fadeInLeft animated newanim" *ngIf='searchRes'>
+            <div class="col-12 col-lg-6" style="padding-left:0px; padding-right:0px;">
+                <img src="{{searchRes.image}}" alt="slide" style='width:100%;max-height:400px'>       
+            </div>
+            <div class="col-12 col-lg-6"  style="padding-left:0px; padding-right:0px; background: #ffffff;">
+                <div class="outerbox">
+                    <div class="innerbox">
+                        <!--<p class="tag">Recipe Details</p>-->
+                        <p style="text-align:center;margin:10px 0px;">
+                            <a  class="label" href="javascript:void(0)">{{searchRes.label}}</a>
+                        </p>
+                        <div class="short-separator" style="margin-top:10px"></div>
+                        <div class="recipe-details-group">
+                            <div class="recipe-details">
+                            <p>Total Weight:</p>
+                            <p style="display:block;">
+                                <a href="javascript:void(0);"  class="hlabel">{{formatValue(searchRes.totalWeight)}} g</a> 
+                            </p>
+                            </div>
+                            <p style="clear:both"></p>
+                            
+                            <p>Calories:</p>
+                            <p style="display:block;">
+                                <a href="javascript:void(0);"  class="hlabel">{{formatValue(searchRes.calories)}} kcal</a> 
+                            </p>
+                            <p style="clear:both"></p>
+
+                            <p>Servings:  </p>
+                            <p style="display:block;">
+                                <a href="javascript:void(0);"  class="hlabel">{{searchRes.yield}}</a> 
+                            </p>
+                            <p style="clear:both"></p>
+
+                            <p>Diet Labels:</p>
+                            <p style="display:block;">
+                                <a href="recipes;diet={{dlabel}}"  class="hlabel" *ngFor="let dlabel of formatLabels(searchRes.dietLabels)">{{dlabel}}</a> 
+                            </p>
+                            <p style="clear:both"></p>
+                            
+                            <p>Health Labels:</p>
+                            <p style="display:inline-block;">
+                                <a href="recipes;health={{hlabel}}" class="hlabel" *ngFor="let hlabel of formatLabels(searchRes.healthLabels)">{{hlabel}}</a> 
+                            </p>
+                            <p style="clear:both; padding-bottom:10px;"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     
-       <div class="slider-recipe-detail2 recipe-of-day animated wow fadeInLeft">
+       <div class="slider-recipe-detail2 recipe-of-day animated wow fadeInLeft" style="display:none">
 
             <div class="wrapper-slider-detail" *ngIf="searchRes.image">
                 <img src="{{searchRes.image}}" alt="slide" style='width:400px;height:400px'>            
