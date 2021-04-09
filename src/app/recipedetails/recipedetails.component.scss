@@ -103,6 +103,15 @@ a:hover {
   transition: 0.5s;
 }
 
+.ingredients ul li::before{
+  font-family: FontAwesome;
+  content: "\f00c";
+  display: inline-block;
+  font-size: 15px;
+  position: absolute;
+  left: 0;
+  line-height: 26px;
+}
 .newitem:nth-child(1)
 {
   top:29px;
