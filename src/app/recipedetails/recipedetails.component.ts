@@ -136,7 +136,15 @@ loadRecipe(id)
 			  }
 			  this.searchRes["digestArr"]  = tempDigest;
 			  this.searchRes['nutrientsArr'] = tempNutrients;
-			  this.searchRes["ingredients"] = JSON.parse(this.searchRes["ingredients"]);
+			  try{
+				  console.log(this.searchRes["ingredients"]);
+				this.searchRes["ingredients"] = JSON.parse(this.searchRes["ingredients"]);
+			  }
+			  catch(error)
+			  {
+				this.searchRes["ingredients"] = this.searchRes["ingredients"].split("~");
+			  }
+			
 			  this.searchRes["instructions"] = this.searchRes["s_instructions"];
 			 // console.log(this.searchRes["s_instructions"]);
 			  if(typeof(this.searchRes["s_instructions"]) !== "undefined" && this.searchRes["s_instructions"] !== "")
