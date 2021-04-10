@@ -25,13 +25,14 @@ export class RecipesComponent implements OnInit {
 	searchparam: any ; 
 	ratingIds: any;
 	ratingsArr: Array<any> = [];
-
+	listorgrid: any = {};
 	private onDestroy$: Subject<void> = new Subject<void>();
 	constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
 	
 	}
 
 	ngOnInit() {
+		this.listorgrid = {"menu":"list", "panel":"listing-list"}
 	 $('.listing-buttons span').on("click",function(){
         $('.listing-buttons span').removeClass("current");
         if( $(this).hasClass("grid")){
@@ -62,10 +63,11 @@ export class RecipesComponent implements OnInit {
 
     });
 
-
+/*
     if (jQuery().selectric) {
         $( ".advance-selectable" ).selectric();
     }
+	*/
 
 		this.router.events.subscribe((evt) => {
             if (!(evt instanceof NavigationEnd)) {
@@ -259,6 +261,13 @@ export class RecipesComponent implements OnInit {
 	  return retImage;
 	}
 
+	setListorGrid(opt)
+	{
+		//		this.listorgrid = {"menu":"", "panel":"listing-grid"}
+		console.log(this.listorgrid);
+		this.listorgrid["menu"] = opt;
+		this.listorgrid["panel"] = "listing-" + opt;
+	}
 }
 
 	

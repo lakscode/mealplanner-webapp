@@ -1,13 +1,7 @@
 import {Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-
-import { HttpClient, HttpHeaders, HttpErrorResponse  } from '@angular/common/http';
-
-import {BehaviorSubject, Observable } from 'rxjs';
+import { HttpClient, HttpHeaders  } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-
 import { environment } from '../../environments/environment';
-
 import { share } from 'rxjs/operators';
 
 
@@ -19,7 +13,6 @@ accesstoken = environment.accessToken;
 localPath: any;  
 localFile: any;
    constructor (private httpService: HttpClient) {  
- //  console.log(this.apiUrl);
 	this.localPath = false;
 	this.localFile  = false;
    }
@@ -95,7 +88,7 @@ checkIfExists(path, params){
 }
 
    postData(path, input){
-	//   console.log(input);
+
 	   var tempUrl = this.apiUrl + '/' + path + "/create.php"; 
 	   
 
@@ -111,7 +104,7 @@ checkIfExists(path, params){
    putData(path, input){
 
 	   var tempUrl = this.apiUrl + '/' + path + "/update.php"; 
-	//	  console.log(tempUrl);
+
 	   var options = {
 		   headers : new HttpHeaders({"Content-Type": "application/json"})
 		   };
@@ -128,18 +121,11 @@ checkIfExists(path, params){
 		var APPKEY = "5e97880c99ac48af5a876ccd6595fea2";
 		var APPID="b4ed857b";
 		var tempUrl = "https://api.edamam.com/search?app_id=" + APPID + "&app_key=" + APPKEY + "&q=" + input; 
-	//	console.log(tempUrl);
-		//curl "https://api.edamam.com/search?q=chicken&app_id=${YOUR_APP_ID}&app_key=${YOUR_APP_KEY}&from=0&to=3&calories=591-722&health=alcohol-free"
 
-	
 		var options = {
 			//headers : new HttpHeaders({"Content-Type": "application/json"})
             };
-	  /*
-		return this.httpService.post(tempUrl, JSON.stringify(input), options).pipe(
-			map((res) => res)).pipe(share());
-		}*/
-
+	
 		return this.httpService.get(tempUrl, options).pipe(
 			map((res) => res)).pipe(share());
 		

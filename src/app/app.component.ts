@@ -41,12 +41,12 @@ export class AppComponent implements OnInit {
   showHeader = false;
   showSidebar = false;
   showFooter = false;
-  showBookDemo = false;
+
   subscribeParam:any = {};
   loggedIn: any;
   userName: any;
   user: any;
-  chatwindowdisplay: any;
+
 
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private modalService: ModalService, private userService: UserService) {
@@ -57,7 +57,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.subscribeParam["email"] = "";
     this.loggedIn = false;
-    this.chatwindowdisplay = "chatwindownone";
+
     var parent = this;
   
     setTimeout(function(){  parent.openModal(); }, 3000);
@@ -81,22 +81,6 @@ export class AppComponent implements OnInit {
 
       }
     }, 0));
-  }
-  togglebookdemo() {
-    this.showBookDemo = !this.showBookDemo;
-  }
-  openchat() {
-    window.open("https://www.myincidentreport.com/");
-  }
-
-  
-  togglechat()
-  {
-      if(this.chatwindowdisplay == "chatwindowdisplay")
-     this.chatwindowdisplay = "chatwindownone";
-    else
-    this.chatwindowdisplay = "chatwindowdisplay";
-
   }
 
   openModal()

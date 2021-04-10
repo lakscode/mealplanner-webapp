@@ -138,13 +138,13 @@
   <div class="col-md-8 col-lg-9">
   <div class="recipe-set">
   <div class="listing-buttons">
-      <span class="grid "><i class="fa fa-th-large"></i></span>
-      <span class="list current"><i class="fa fa-bars"></i></span>
+      <span (click)="setListorGrid('grid')" [ngClass]="listorgrid.menu == 'grid'?'grid current':'grid' "><i class="fa fa-th-large"></i></span>
+      <span (click)="setListorGrid('grid')" [ngClass]="listorgrid.menu == 'list'?'list current':'list'"><i class="fa fa-bars"></i></span>
   </div>
   <h2>Recipes</h2>
   
 
-  <div class="recipe-listing listing-list">
+  <div class="recipe-listing {{listorgrid.panel}}">
   
   
   <div class="listing" *ngFor="let recipe1 of recipesList1; let i = index;">
