@@ -1,4 +1,6 @@
 
+@import "../variables.scss";
+
 .leftPanelWidth
 {
   //margin-left:10px;
@@ -493,4 +495,12 @@ color:$third;
 {
 	min-height:230px;
 	margin-top:0px !important;
+}
+
+
+.bg-orange
+{
+  background:$orange1;
+background: linear-gradient(17deg, $orange1 0%, $orange 100%);
+color:#FFF;
 }

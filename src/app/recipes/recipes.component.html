@@ -1,530 +1,357 @@
-
 <div class="recipes-home-body inner-page">
-
-
-
-  <!--advance search form-->
-
-<div class="advance-search">
-  
-  <div class="container">
-      <div class="wrapper-search">
-          <div class="container-tags">
-          <span class="tag">
-              <span class="tag-inner" (click)="searchPanelDisplay();">Find Recipes <i class="fa fa-angle-down"></i></span>
-          </span>
-
-          </div>
-          <div class="outer-advance-search" style="display: none;" id="searchPanel">
-
-            <div style="margin:0 auto; width:100%; ">
-        <div class="row searchpanel bgborder paddinglr0" >
-            <div class='col-12'>
-                <div class="row">
-                    <div class="col-3">
-
-                         <div class="form-group">
-                            <label class="form-control-placeholder fcs">Ingredients</label>
-                            <input type="text" autocomplete="off" id="ingredients" 
-                            name="ingredients" class="form-control">
-                        </div>
-                    </div>
-                    
-                    <div class="col-3">
-                        <div class="form-group">
-
-                            <label class="form-control-placeholder fcs" for="minerals">Minerals </label>
-                            <div class="select">
-                                <select id="minerals" name="minerals" 
-                                     required >
-                                    <option value="" disabled selected hidden>{{chooseOption}}</option>
-                                    <option *ngFor="let recipe1 of recipesList1; let iT = index">
-                                        {{recipe1.label }}
-                                        <!--{{item.email}}-->
-                                    </option>
-                                </select>
-                            </div>
-
-                        </div>
-                    </div>
-
-                  <!--   <div class="col-6">
-                        <div class="form-group">
-
-                            <label class="form-control-placeholder fcs" for="investigatoritem">Health Labels </label>
-                             <div class="dbgOuter">
-    <div class="round" style="">
-        <input type="checkbox" id="dbgTrace" class="" />
-        <label for="dbgTrace"></label> <span class="checkboxText">Vegan</span>
-    </div> 
-    <div class="round">
-        <input type="checkbox" id="dbgDebug" class="" />
-        <label for="dbgDebug"></label> <span class="checkboxText">Debug</span>
-    </div>
-    <div class="round">
-        <input type="checkbox" id="dbgInfo" class="" checked="checked" />
-        <label for="dbgInfo"></label> <span class="checkboxText">Debug</span>
-    </div>
-    <div class="round">
-        <input type="checkbox" id="dbgWarn"  class="" />
-        <label for="dbgWarn"></label><span class="checkboxText"> Debug</span>
-    </div>
-    <div class="round">
-        <input type="checkbox" id="dbgErr"  class="" />
-        <label for="dbgErr"></label><span class="checkboxText"> Debug</span>
-    </div>
-   </div>
-                    </div>
-                  </div>
- -->
-
-                    <div class="col-3">
-                        <div class="form-group">
-
-                            <label class="form-control-placeholder fcs">Diet Labels </label>
-                             <div class="listSection" style="display:inline-block;">
-                                <ng-container *ngFor="let dlabel of dietLabelsList; let d = index">
-                                    <label class="container" style="font-size:12px">{{dlabel}}
-                                      <input type="checkbox" [checked]="d == 0?'checked':''">
-                                      <span class="checkmark"></span>
-                                    </label>
-                                  </ng-container>  
-   </div>
-                    </div>
-                  </div>
-
-            <div class="col-3">
-                        <div class="form-group">
-
-                            <label class="form-control-placeholder fcs">Health Labels </label>
-                             <div class="listSection" id="healthLabels" style="display:inline-block;">
-                             <!-- <span class="checkboxText">Vegan</span>
-    <span class="round" style="">
-        <input type="checkbox" id="hlabel1" class="" />
-        <label for="hlabel1"></label> 
-    </span> 
-    <span class="checkboxText">Vegan</span>
-    <span class="round">
-        <input type="checkbox" id="hlabel2" class="" />
-        <label for="hlabel2"></label>
-    </span>
-    <span class="checkboxText">Vegan</span>
-    <span class="round">
-        <input type="checkbox" id="hlabel3" class="" checked="checked" />
-        <label for="hlabel3"></label>
-    </span>
-    <span class="checkboxText">Vegan</span>
-    <span class="round">
-        <input type="checkbox" id="hlabel4"  class="" />
-        <label for="hlabel4"></label>
-    </span>
-    <span class="checkboxText">Vegan</span>
-    <span class="round">
-        <input type="checkbox" id="hlabel5"  class="" />
-        <label for="hlabel5"></label>
-    </span>
-
+    
     <div class="container">
-        <div class="checkboxText" style="float:left;">Vegan</div>
-        <div class="round"  style="float:left;">
-          <input type="checkbox" id="checkbox1" />
-          <label for="checkbox1"></label>
-        </div>
-        <div style='clear:both'></div>
-      </div>
-
-    -->
-    <ng-container *ngFor="let hlabel of healthlabelsList; let h = index">
-      <label class="container" style="font-size:12px">{{hlabel}}
-        <input type="checkbox" [checked]="h == 0?'checked':''">
-        <span class="checkmark"></span>
-      </label>
-    </ng-container>
-    <!--
-      <label class="container">Two
-        <input type="checkbox">
-        <span class="checkmark"></span>
-      </label>
-      <label class="container">Three
-        <input type="checkbox">
-        <span class="checkmark"></span>
-      </label>
-      <label class="container">Four
-        <input type="checkbox">
-        <span class="checkmark"></span>
-      </label>
-    -->
-
-   </div>
+        <div class="row">
+            <div class="col-md-8 col-lg-9">
+                <div class="wrapper-search">
+                    <div class="container-tags">
+                        <span class="tag">
+                            <span class="tag-inner" (click)="searchPanelDisplay();">Find Recipes <i
+                                    class="fa fa-angle-down"></i></span>
+                        </span>
+    
                     </div>
-                  </div>
-                  </div>
-
-                    <div class="col-12" style="padding-bottom:10px;">
-                        <div class="form-group-others">
-                            <div style="float:right; margin-right:5px;">
-                                <button [disabled]="isdisabled" (click)="CheckParameters(queryparam)" class="btnadd"><i
-                                        class="fa fa-search" aria-hidden="true"></i></button>
-                            </div>
-                            <div style="float:right; margin-right:5px;">
-                                <button [disabled]="isdisabled" (click)="ResetParameters()" class="btnadd"><i class="fa fa-undo"
-                                        aria-hidden="true"></i></button>
-                            </div>
+                <div class="row" >
+                    <div class="col-12 "  style="margin:0; padding-left:0px; padding-right:0px;">
+                        <div style="background:#FFF;  padding-left: 10px; padding-right: 10px;">
+                            <label class="searchicon ">
+                                <i class="fa fa-search" aria-hidden="true"></i>
+                            </label>
+                            <input type="text" class="inputbox" placeholder="Search Recipes..." />
+                            <input  type="button" (click)="searchProps()" style="margin-bottom:10px;" 
+                            [ngClass]="searchmorebar?'defaultbtn searchbtn hideonmobile bg-orange' :' defaultbtn searchbtn  bg-orange'" id="header-submit-search-pro" name="submit" value="Search">
                         </div>
-                    </div>
-                   
-                  </div>
-
-                </div>
-              </div>
-
-
-
-              <form action="#" id="advance-search">
-                  <fieldset style="display:none">
-                      <div class="inner-advance-search">
-
-
-
-                          <div class="form-field">
-                             <label for="ingredient">Ingredient</label>  <select name="ingredient" id="ingredient" class="advance-selectable" tabindex="0">
-                             <option value="t0" selected="selected">Any Ingredient</option>
-                            <option value="t1">Butter</option>
-                            <option value="t2">Cheese</option>
-                             <option value="t3">Cream</option>
-                             <option value="t4">Yeast</option>
-                            </select>      
                 
-                             <!--  <label for="ingredient">Ingredient</label>
-                              <div class="selectric-wrapper selectric-advance-selectable"><div class="selectric-hide-select"><select name="ingredient" id="ingredient" class="advance-selectable" tabindex="0">
-                                  <option value="ing1" selected="selected">Any Ingredient</option>
-                                  <option value="ing2">Butter</option>
-                                  <option value="ing3">Cheese</option>
-                                  <option value="ing4">Cream</option>
-                                  <option value="ing5">Yeast</option>
-                              </select></div><div class="selectric"><p class="label">Any Ingredient</p><b class="button"></b></div><div class="selectric-items" tabindex="-1"><div class="selectric-scroll"><ul><li data-index="0" class="selected">Any Ingredient</li><li data-index="1" class="">Butter</li><li data-index="2" class="">Cheese</li><li data-index="3" class="">Cream</li><li data-index="4" class="last">Yeast</li></ul></div></div><input class="selectric-input" tabindex="0"></div> -->
-                          </div>
+                        <div *ngIf="searchmorebar" class="searchmorebar {{animClass}}">
+                            <div class="row">
+                                <div class="col-12 col-lg-3 paddingl0">
+                                    <div class="form-group">
 
-                          <div class="form-field">
-                             <label for="ingredient">Minerals</label>  <select name="ingredient" id="ingredient" class="advance-selectable" tabindex="0">
-                             <option value="m0" selected="selected">Any Minerals</option>
-                            <option value="m1">Butter</option>
-                            <option value="m2">Cheese</option>
-                             <option value="m3">Cream</option>
-                             <option value="m4">Yeast</option>
-                            </select>  
-                              <!-- <label for="course">minerals</label>
-                              <div class="selectric-wrapper selectric-advance-selectable"><div class="selectric-hide-select"><select name="course" id="course" class="advance-selectable" tabindex="0">
-                                  <option value="ing1" selected="selected">Any Minerals</option>
-                                  <option value="ing2">Butter</option>
-                                  <option value="ing3">Cheese</option>
-                                  <option value="ing4">Cream</option>
-                                  <option value="ing5">Yeast</option>
-                              </select></div><div class="selectric"><p class="label">Any Minerals</p><b class="button"></b></div><div class="selectric-items" tabindex="-1"><div class="selectric-scroll"><ul><li data-index="0" class="selected">Any Course</li><li data-index="1" class="">Butter</li><li data-index="2" class="">Cheese</li><li data-index="3" class="">Cream</li><li data-index="4" class="last">Yeast</li></ul></div></div><input class="selectric-input" tabindex="0"></div> -->
-                          </div>
+                                        <label class="form-control-placeholder fcs">Health Labels </label>
+                                        <div class="listSection" id="healthLabels" style="display:inline-block;">
 
-                          <div class="form-field">
-                             <label for="ingredient">Health Labels</label>  <select name="ingredient" id="ingredient" class="advance-selectable" tabindex="0">
-                             <option value="h0" selected="selected">Any Health Labels</option>
-                            <option value="h1">Butter</option>
-                            <option value="h2">Cheese</option>
-                             <option value="h3">Cream</option>
-                             <option value="h4">Yeast</option>
-                            </select>  
-                              <!-- <label for="cuisine">health labels</label>
-                              <div class="selectric-wrapper selectric-advance-selectable"><div class="selectric-hide-select"><select name="cuisine" id="cuisine" class="advance-selectable" tabindex="0">
-                                  <option value="ing1" selected="selected">Any Health Labels</option>
-                                  <option value="ing2">Butter</option>
-                                  <option value="ing3">Cheese</option>
-                                  <option value="ing4">Cream</option>
-                                  <option value="ing5">Yeast</option>
-                              </select></div><div class="selectric"><p class="label">Any Health Labels</p><b class="button"></b></div><div class="selectric-items" tabindex="-1"><div class="selectric-scroll"><ul><li data-index="0" class="selected">Any Cuisine</li><li data-index="1" class="">Butter</li><li data-index="2" class="">Cheese</li><li data-index="3" class="">Cream</li><li data-index="4" class="last">Yeast</li></ul></div></div><input class="selectric-input" tabindex="0"></div> -->
-                          </div>
+                                            <ng-container *ngFor="let hlabel of healthlabelsList; let h = index">
+                                                <label class="container" style="font-size:12px">{{hlabel}}
+                                                    <input type="checkbox" [checked]="h == 0?'checked':''">
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                            </ng-container>
 
-                          <div class="form-field">
-                             <label for="ingredient">Diet Labels</label>  <select name="ingredient" id="ingredient" class="advance-selectable" tabindex="0">
-                             <option value="d0" selected="selected">Any Diet Labels</option>
-                            <option value="d1">Butter</option>
-                            <option value="d2">Cheese</option>
-                             <option value="d3">Cream</option>
-                             <option value="d4">Yeast</option>
-                            </select>  
-                              <!-- <label for="time">diet labels</label>
-                              <div class="selectric-wrapper selectric-advance-selectable"><div class="selectric-hide-select"><select name="time" id="time" class="advance-selectable" tabindex="0">
-                                  <option value="ing1" selected="selected">Any Diet Labels</option>
-                                  <option value="ing2">Butter</option>
-                                  <option value="ing3">Cheese</option>
-                                  <option value="ing4">Cream</option>
-                                  <option value="ing5">Yeast</option>
-                              </select></div><div class="selectric"><p class="label">Any Diet Labels</p><b class="button"></b></div><div class="selectric-items" tabindex="-1"><div class="selectric-scroll"><ul><li data-index="0" class="selected">Any Cooking Time</li><li data-index="1" class="">Butter</li><li data-index="2" class="">Cheese</li><li data-index="3" class="">Cream</li><li data-index="4" class="last">Yeast</li></ul></div></div><input class="selectric-input" tabindex="0"></div> -->
-                          </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-3 paddingl0">
+                                    <div class="form-group">
+                                        <label class="form-control-placeholder fcs">Diet Labels</label> 
+                                        <div class="listSection" id="diethLabels" style="display:inline-block;">
+                                           
+                                            <ng-container *ngFor="let hlabel of healthlabelsList; let h = index">
+                                                <label class="container" style="font-size:12px">{{hlabel}}
+                                                    <input type="checkbox" [checked]="h == 0?'checked':''">
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                            </ng-container>
 
-                          <div class="form-field">
-                             <label for="ingredient">Calories</label>  <select name="ingredient" id="ingredient" class="advance-selectable" tabindex="0">
-                             <option value="t0" selected="selected">Any Calories</option>
-                            <option value="t1">Butter</option>
-                            <option value="t2">Cheese</option>
-                             <option value="t3">Cream</option>
-                             <option value="t4">Yeast</option>
-                            </select>  
-                             <!--  <label for="calories">calories</label>
-                              <div class="selectric-wrapper selectric-advance-selectable"><div class="selectric-hide-select"><select name="calories" id="calories" class="advance-selectable" tabindex="0">
-                                  <option value="ing1" selected="selected">Any Calories</option>
-                                  <option value="ing2">Butter</option>
-                                  <option value="ing3">Cheese</option>
-                                  <option value="ing4">Cream</option>
-                                  <option value="ing5">Yeast</option>
-                              </select></div><div class="selectric"><p class="label">Any Calories</p><b class="button"></b></div><div class="selectric-items" tabindex="-1"><div class="selectric-scroll"><ul><li data-index="0" class="selected">Any Calories</li><li data-index="1" class="">Butter</li><li data-index="2" class="">Cheese</li><li data-index="3" class="">Cream</li><li data-index="4" class="last">Yeast</li></ul></div></div><input class="selectric-input" tabindex="0"></div> -->
-                          </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-3">
+                                    <div class="form-group">
+                                        <label class="form-control-placeholder fcs">Calories</label> 
+                                        <div class="listSection"  style="display:inline-block;">
+                                            <span>Max calories</span>
+                                          <input type="text" class="inputbox-fullwidth" />
 
-                          <button type="submit"><i class="fa fa-search"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                  <div class="col-12  col-lg-3">
+                                    <div class="form-group">
+                                        <label class="form-control-placeholder fcs">Nutrients</label> 
+                                        <div class="listSection"  style="display:inline-block; height:145px; max-height:145px; overflow:auto;">
+                                            <ng-container *ngFor="let mlabel of mineralsLabelsList; let m = index">
+                                                <label class="container" style="font-size:12px">{{setFLU(mlabel)}}
+                                                    <input type="checkbox" [checked]="m == 0?'checked':''">
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                            </ng-container>
 
-                      </div>
-                  </fieldset>
+                                        </div>
+                                    </div>
+                                  </div>
 
-              </form>
-          </div>
-      </div>
-  </div>
-
-
-</div>
-
-  <!--advance search form ends-->
-
-
-  <div class="container">
-  <div class="row">
-  <div class="col-md-8 col-lg-9">
-  <div class="recipe-set">
-  <div class="listing-buttons">
-      <span (click)="setListorGrid('grid')" [ngClass]="listorgrid.menu == 'grid'?'grid current':'grid' "><i class="fa fa-th-large"></i></span>
-      <span (click)="setListorGrid('grid')" [ngClass]="listorgrid.menu == 'list'?'list current':'list'"><i class="fa fa-bars"></i></span>
-  </div>
-  <h2>Recipes</h2>
-  
-
-  <div class="recipe-listing {{listorgrid.panel}}">
-  
-  
-  <div class="listing" *ngFor="let recipe1 of recipesList1; let i = index;">
-      <div class="image">
-          <a [routerLink]="['/recipedetails', recipe1.id]">
-              <img class= "tstbite-animation" src="{{formatImage(recipe1.image, 'm')}}" alt="image">
-          </a>
-      </div>
-      <div class="detail">
-          <h4><a [routerLink]="['/recipedetails', recipe1.id]">{{recipe1.label}}</a></h4>
-          <p innerHTML = "{{limitTo(recipe1.s_instructions, 200)}}">
-              
-          </p>
-            <div class="meta-listing">
-                <div style="display:inline-block;color: #5e676b;">
-                    Calories: {{recipe1.calories}} Kcal
+       
+                
+                                <div class="col-12 showonmobile">
+                                    <input type="button" (click)="searchProps()" style="margin-bottom:10px;" class="defaultbtn searchbtn" id="header-submit-search-pro" name="submit" value="Search">
+                
+                                </div>
+                
+                            </div>
+                            
+                              
+                        
+                        </div>
+                
+                        <div class="header-more-search-btn" (click)="toggleMore()">
+                            <i *ngIf="!searchmorebar" class="fa fa-chevron-down" aria-hidden="true"></i>
+                            <i *ngIf="searchmorebar" class="fa fa-chevron-up" aria-hidden="true"></i>
+                        </div>
+                
+                
+                    </div>
+                        
+                        
+                
                 </div>
-              <!--<ul class="post-meta">
+    
+                </div>
+                <div style='height:20px; width:100%'></div>
+                <div class="recipe-set">
+                    <div class="listing-buttons">
+                        <span (click)="setListorGrid('grid')"
+                            [ngClass]="listorgrid.menu == 'grid'?'grid current':'grid' "><i
+                                class="fa fa-th-large"></i></span>
+                        <span (click)="setListorGrid('grid')"
+                            [ngClass]="listorgrid.menu == 'list'?'list current':'list'"><i
+                                class="fa fa-bars"></i></span>
+                    </div>
+                    <h2>Recipes</h2>
+
+
+                    <div class="recipe-listing {{listorgrid.panel}}">
+
+
+                        <div class="listing" *ngFor="let recipe1 of recipesList1; let i = index;">
+                            <div class="image">
+                                <a [routerLink]="['/recipedetails', recipe1.id]">
+                                    <img class="tstbite-animation" src="{{formatImage(recipe1.image, 'm')}}"
+                                        alt="image">
+                                </a>
+                            </div>
+                            <div class="detail">
+                                <h4><a [routerLink]="['/recipedetails', recipe1.id]">{{recipe1.label}}</a></h4>
+                                <p innerHTML="{{limitTo(recipe1.s_instructions, 200)}}">
+
+                                </p>
+                                <div class="meta-listing">
+                                    <div style="display:inline-block;color: #5e676b;">
+                                        Calories: {{recipe1.calories}} Kcal
+                                    </div>
+                                    <!--<ul class="post-meta">
                   <li>Calories: {{recipe1.calories}}</li>
                  <li class="calendar">{{recipe1.created_at}}</li>
               </ul>-->
-              <div class="rating-box">
-                <span class="rating-icons" *ngFor="let item of [1,2,3,4,5]">
-                  <i class="fa fa-star"></i>
-                </span>
-                  <span class="rating-figure">{{recipe1.displayrating}}</span>
-              </div>            
-            </div>
-      </div>
-  </div>
-  
-  
-  
-  <!--recipe of the day-->
-  <div class="recipe-of-day">
-      <img src="assets/images/temp-images/recipe-of-the-day.jpg" alt="Recipe of the day">
-      <div class="recipe-contents-outer">
-          <div class="recipe-contents text-center">
-              <div class="recipe-content-inner">
-                  <span class="tag">Recipe of the Day</span>
-                  <h2><a href="javascript:void(0)">Pasto Pizza With Fillas Cheese Topping</a></h2>
-                  <div class="short-separator"></div>
-                  <p>
-                      Nam ornare arcu turpis, nec congu
-                      Curabitur quis euismod...
-                  </p>
-                  <a class="read-more" href="javascript:void(0)">read more</a>
-              </div>
-          </div>
-      </div>
-  </div>
-  <!--recipe of the day ends-->
-  
-  <div class="banner-header text-center">
-      <a href="javascript:void(0)">
-          <img src="assets/images/temp-images/header-banner.jpg" alt="banner">
-      </a>
-  </div>
-  
-  
- 
-  <div class="listing" *ngFor="let recipe2 of recipesList2; let i = index;">
-    <div class="image">
-        <a [routerLink]="['/recipedetails', recipe2.id]">
-            <img src="{{formatImage(recipe2.image, 'm')}}" alt="image">
-        </a>
-    </div>
-    <div class="detail">
-        <h4><a [routerLink]="['/recipedetails', recipe2.id]">{{recipe2.label}}</a></h4>
-        <p innerHTML = "{{limitTo(recipe2.s_instructions, 200)}}">
-            
-        </p>
-        <div class="meta-listing">
-            <div style="display:inline-block;color: #5e676b;">
-                Calories: {{recipe2.calories}} Kcal
-            </div>
-            <!--<ul class="post-meta">
+                                    <div class="rating-box">
+                                        <span class="rating-icons" *ngFor="let item of [1,2,3,4,5]">
+                                            <i class="fa fa-star"></i>
+                                        </span>
+                                        <span class="rating-figure">{{recipe1.displayrating}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <!--recipe of the day-->
+                        <div class="recipe-of-day">
+                            <img src="assets/images/temp-images/recipe-of-the-day.jpg" alt="Recipe of the day">
+                            <div class="recipe-contents-outer">
+                                <div class="recipe-contents text-center">
+                                    <div class="recipe-content-inner">
+                                        <span class="tag">Recipe of the Day</span>
+                                        <h2><a href="javascript:void(0)">Pasto Pizza With Fillas Cheese Topping</a></h2>
+                                        <div class="short-separator"></div>
+                                        <p>
+                                            Nam ornare arcu turpis, nec congu
+                                            Curabitur quis euismod...
+                                        </p>
+                                        <a class="read-more" href="javascript:void(0)">read more</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--recipe of the day ends-->
+
+                        <div class="banner-header text-center">
+                            <a href="javascript:void(0)">
+                                <img src="assets/images/temp-images/header-banner.jpg" alt="banner">
+                            </a>
+                        </div>
+
+
+
+                        <div class="listing" *ngFor="let recipe2 of recipesList2; let i = index;">
+                            <div class="image">
+                                <a [routerLink]="['/recipedetails', recipe2.id]">
+                                    <img src="{{formatImage(recipe2.image, 'm')}}" alt="image">
+                                </a>
+                            </div>
+                            <div class="detail">
+                                <h4><a [routerLink]="['/recipedetails', recipe2.id]">{{recipe2.label}}</a></h4>
+                                <p innerHTML="{{limitTo(recipe2.s_instructions, 200)}}">
+
+                                </p>
+                                <div class="meta-listing">
+                                    <div style="display:inline-block;color: #5e676b;">
+                                        Calories: {{recipe2.calories}} Kcal
+                                    </div>
+                                    <!--<ul class="post-meta">
                 <li class="author"><a href="javascript:void(0)">{{recipe2.author}}</a></li>
                 <li class="calendar">{{recipe2.created_at}}</li>
             </ul>-->
-            <div class="rating-box">
-              <span class="rating-icons" *ngFor="let item of [1,2,3,4,5]">
-                <i class="fa fa-star"></i>
-              </span>
-                <span class="rating-figure">{{recipe2.displayrating}}</span>
-            </div>            </div>
+                                    <div class="rating-box">
+                                        <span class="rating-icons" *ngFor="let item of [1,2,3,4,5]">
+                                            <i class="fa fa-star"></i>
+                                        </span>
+                                        <span class="rating-figure">{{recipe2.displayrating}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <ul class="page-nav">
+                            <li class="current"><a href="javascript:void(0)">1</a></li>
+                            <li><a href="javascript:void(0)">2</a></li>
+                            <li><a href="javascript:void(0)">3</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-lg-3">
+                <aside>
+                    <div class="side-bar">
+
+                        <app-sidebar></app-sidebar>
+
+
+                    </div>
+                </aside>
+            </div>
+        </div>
+
     </div>
 </div>
 
-  
-  
-  <ul class="page-nav">
-      <li class="current"><a href="javascript:void(0)">1</a></li>
-      <li><a href="javascript:void(0)">2</a></li>
-      <li><a href="javascript:void(0)">3</a></li>
-  </ul>
-  </div>
-  </div>
-  </div>
-  <div class="col-md-4 col-lg-3">
-  <aside>
-  <div class="side-bar">
-  
-  <app-sidebar></app-sidebar>
- 
-  
-  </div>
-  </aside>
-  </div>
-  </div>
-  
-  </div>
-  </div>
 
-  
-  
-          <div class="site-section" style="display:none">
-            <div class="container">
-  <section class="tstbite-components my-4 my-md-5">
-  <h5 class="py-3 mb-0">Latest Recipes</h5>
-  <div class="row">
-  <div class="col-lg-3 col-md-4 col-6">
-  <figure class="my-3 my-md-4 tstbite-card">
-  <a href="recipe-sidebar.html" class="tstbite-animation stretched-link rounded-6">
-  <img src="assets/1.jpg" class="w-100" alt="Menu">
-  </a>
-  <figcaption class="mt-2">
-  <a href="recipe-sidebar.html" class="text-black d-block mt-1 font-weight-semibold big">Caramel Strawberry Milkshake</a>
-  </figcaption>
-  </figure>
-  </div>
-  <div class="col-lg-3 col-md-4 col-6">
-  <figure class="my-3 my-md-4 tstbite-card">
-  <a href="recipe-sidebar.html" class="tstbite-animation stretched-link rounded-6">
-  <img src="assets/4.jpg" class="w-100" alt="Menu">
-  </a>
-  <figcaption class="mt-2">
-  <a href="recipe-sidebar.html" class="text-black d-block mt-1 font-weight-semibold big">Cashew Vegan Rice</a>
-  </figcaption>
-  </figure>
-  </div>
-  <div class="col-lg-3 col-md-4 col-6">
-  <figure class="my-3 my-md-4 tstbite-card">
-  <a href="recipe-sidebar.html" class="tstbite-animation stretched-link rounded-6">
-  <img src="assets/8.jpg" class="w-100" alt="Menu">
-  </a>
-  <figcaption class="mt-2">
-  <a href="recipe-sidebar.html" class="text-black d-block mt-1 font-weight-semibold big">Smoked Salmon Salad Sandwich</a>
-  </figcaption>
-  </figure>
-  </div>
-  <div class="col-lg-3 col-md-4 col-6">
-  <figure class="my-3 my-md-4 tstbite-card">
-  <a href="recipe-sidebar.html" class="tstbite-animation stretched-link rounded-6">
-  <img src="assets/17.jpg" class="w-100" alt="Menu">
-  </a>
-  <figcaption class="mt-2">
-  <a href="recipe-sidebar.html" class="text-black d-block mt-1 font-weight-semibold big">Salmon in Creamy Sun Dried Tomato Sauce</a>
-  </figcaption>
-  </figure>
-  </div>
-  <div class="col-lg-3 col-md-4 col-6">
-  <figure class="my-3 my-md-4 tstbite-card">
-  <a href="recipe-sidebar.html" class="tstbite-animation stretched-link rounded-6">
-  <img src="assets/4.jpg" class="w-100" alt="Menu">
-  </a>
-  <figcaption class="mt-2">
-  <a href="recipe-sidebar.html" class="text-black d-block mt-1 font-weight-semibold big">Healthy Jam Waffle Breakfast</a>
-  </figcaption>
-  </figure>
-  </div>
-  <div class="col-lg-3 col-md-4 col-6">
-  <figure class="my-3 my-md-4 tstbite-card">
-  <a href="recipe-sidebar.html" class="tstbite-animation stretched-link rounded-6">
-  <img src="assets/8.jpg" class="w-100" alt="Menu">
-  </a>
-  <figcaption class="mt-2">
-  <a href="recipe-sidebar.html" class="text-black d-block mt-1 font-weight-semibold big">Chocolate and Banana Jar Cake</a>
-  </figcaption>
-  </figure>
-  </div>
-  <div class="col-lg-3 col-md-4 col-6">
-  <figure class="my-3 my-md-4 tstbite-card">
-  <a href="recipe-sidebar.html" class="tstbite-animation stretched-link rounded-6">
-  <img src="assets/3.jpg" class="w-100" alt="Menu">
-  </a>
-  <figcaption class="mt-2">
-  <a href="recipe-sidebar.html" class="text-black d-block mt-1 font-weight-semibold big">Caramel Blueberry Scones</a>
-  </figcaption>
-  </figure>
-  </div>
-  <div class="col-lg-3 col-md-4 col-6">
-  <figure class="my-3 my-md-4 tstbite-card">
-  <a href="recipe-sidebar.html" class="tstbite-animation stretched-link rounded-6">
-  <img src="assets/1.jpg" class="w-100" alt="Menu">
-  </a>
-  <figcaption class="mt-2">
-  <a href="recipe-sidebar.html" class="text-black d-block mt-1 font-weight-semibold big">Blueberry Carrot Cake</a>
-  </figcaption>
-  </figure>
-  </div>
-  <div class="col-lg-3 col-md-4 col-6">
-  <figure class="my-3 my-md-4 tstbite-card">
-  <a href="recipe-sidebar.html" class="tstbite-animation stretched-link rounded-6">
-  <img src="assets/17.jpg" class="w-100" alt="Menu">
-  </a>
-  <figcaption class="mt-2">
-  <a href="recipe-sidebar.html" class="text-black d-block mt-1 font-weight-semibold big">Vegan Cauliflower Salad</a>
-  </figcaption>
-  </figure>
-  </div>
-  
-  </div>
-  <div class="text-center py-5">
-  <a href="#0" class="btn btn-outline-dark px-4 px-md-5 py-1 py-md-2 big font-weight-medium">Load More</a>
-  </div>
-  </section>
-  </div>
-  </div>
-  
-  
-   
-  
+
+<div class="site-section" style="display:none">
+    <div class="container">
+        <section class="tstbite-components my-4 my-md-5">
+            <h5 class="py-3 mb-0">Latest Recipes</h5>
+            <div class="row">
+                <div class="col-lg-3 col-md-4 col-6">
+                    <figure class="my-3 my-md-4 tstbite-card">
+                        <a href="recipe-sidebar.html" class="tstbite-animation stretched-link rounded-6">
+                            <img src="assets/1.jpg" class="w-100" alt="Menu">
+                        </a>
+                        <figcaption class="mt-2">
+                            <a href="recipe-sidebar.html"
+                                class="text-black d-block mt-1 font-weight-semibold big">Caramel Strawberry
+                                Milkshake</a>
+                        </figcaption>
+                    </figure>
+                </div>
+                <div class="col-lg-3 col-md-4 col-6">
+                    <figure class="my-3 my-md-4 tstbite-card">
+                        <a href="recipe-sidebar.html" class="tstbite-animation stretched-link rounded-6">
+                            <img src="assets/4.jpg" class="w-100" alt="Menu">
+                        </a>
+                        <figcaption class="mt-2">
+                            <a href="recipe-sidebar.html"
+                                class="text-black d-block mt-1 font-weight-semibold big">Cashew Vegan Rice</a>
+                        </figcaption>
+                    </figure>
+                </div>
+                <div class="col-lg-3 col-md-4 col-6">
+                    <figure class="my-3 my-md-4 tstbite-card">
+                        <a href="recipe-sidebar.html" class="tstbite-animation stretched-link rounded-6">
+                            <img src="assets/8.jpg" class="w-100" alt="Menu">
+                        </a>
+                        <figcaption class="mt-2">
+                            <a href="recipe-sidebar.html"
+                                class="text-black d-block mt-1 font-weight-semibold big">Smoked Salmon Salad
+                                Sandwich</a>
+                        </figcaption>
+                    </figure>
+                </div>
+                <div class="col-lg-3 col-md-4 col-6">
+                    <figure class="my-3 my-md-4 tstbite-card">
+                        <a href="recipe-sidebar.html" class="tstbite-animation stretched-link rounded-6">
+                            <img src="assets/17.jpg" class="w-100" alt="Menu">
+                        </a>
+                        <figcaption class="mt-2">
+                            <a href="recipe-sidebar.html"
+                                class="text-black d-block mt-1 font-weight-semibold big">Salmon in Creamy Sun Dried
+                                Tomato Sauce</a>
+                        </figcaption>
+                    </figure>
+                </div>
+                <div class="col-lg-3 col-md-4 col-6">
+                    <figure class="my-3 my-md-4 tstbite-card">
+                        <a href="recipe-sidebar.html" class="tstbite-animation stretched-link rounded-6">
+                            <img src="assets/4.jpg" class="w-100" alt="Menu">
+                        </a>
+                        <figcaption class="mt-2">
+                            <a href="recipe-sidebar.html"
+                                class="text-black d-block mt-1 font-weight-semibold big">Healthy Jam Waffle
+                                Breakfast</a>
+                        </figcaption>
+                    </figure>
+                </div>
+                <div class="col-lg-3 col-md-4 col-6">
+                    <figure class="my-3 my-md-4 tstbite-card">
+                        <a href="recipe-sidebar.html" class="tstbite-animation stretched-link rounded-6">
+                            <img src="assets/8.jpg" class="w-100" alt="Menu">
+                        </a>
+                        <figcaption class="mt-2">
+                            <a href="recipe-sidebar.html"
+                                class="text-black d-block mt-1 font-weight-semibold big">Chocolate and Banana Jar
+                                Cake</a>
+                        </figcaption>
+                    </figure>
+                </div>
+                <div class="col-lg-3 col-md-4 col-6">
+                    <figure class="my-3 my-md-4 tstbite-card">
+                        <a href="recipe-sidebar.html" class="tstbite-animation stretched-link rounded-6">
+                            <img src="assets/3.jpg" class="w-100" alt="Menu">
+                        </a>
+                        <figcaption class="mt-2">
+                            <a href="recipe-sidebar.html"
+                                class="text-black d-block mt-1 font-weight-semibold big">Caramel Blueberry Scones</a>
+                        </figcaption>
+                    </figure>
+                </div>
+                <div class="col-lg-3 col-md-4 col-6">
+                    <figure class="my-3 my-md-4 tstbite-card">
+                        <a href="recipe-sidebar.html" class="tstbite-animation stretched-link rounded-6">
+                            <img src="assets/1.jpg" class="w-100" alt="Menu">
+                        </a>
+                        <figcaption class="mt-2">
+                            <a href="recipe-sidebar.html"
+                                class="text-black d-block mt-1 font-weight-semibold big">Blueberry Carrot Cake</a>
+                        </figcaption>
+                    </figure>
+                </div>
+                <div class="col-lg-3 col-md-4 col-6">
+                    <figure class="my-3 my-md-4 tstbite-card">
+                        <a href="recipe-sidebar.html" class="tstbite-animation stretched-link rounded-6">
+                            <img src="assets/17.jpg" class="w-100" alt="Menu">
+                        </a>
+                        <figcaption class="mt-2">
+                            <a href="recipe-sidebar.html" class="text-black d-block mt-1 font-weight-semibold big">Vegan
+                                Cauliflower Salad</a>
+                        </figcaption>
+                    </figure>
+                </div>
+
+            </div>
+            <div class="text-center py-5">
+                <a href="#0" class="btn btn-outline-dark px-4 px-md-5 py-1 py-md-2 big font-weight-medium">Load More</a>
+            </div>
+        </section>
+    </div>
+</div>

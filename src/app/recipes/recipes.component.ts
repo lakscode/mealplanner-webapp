@@ -30,14 +30,22 @@ export class RecipesComponent implements OnInit {
 	private onDestroy$: Subject<void> = new Subject<void>();
 	dietLabelsList: Array<any> = [];
 	healthlabelsList: Array<any> = [];
+	mineralsLabelsList: Array<any> = [];
+	searchmorebar: boolean = false;
+	animClass: any = "";
 	constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
 	
 	}
-
+	toggleMore() {
+		this.searchmorebar = !this.searchmorebar;
+		if (this.searchmorebar)
+			this.animClass = "searchbaranim";
+	}
 	ngOnInit() {
-
+		this.searchmorebar = false;
 		this.dietLabelsList = constants.dietLabels;
 		this.healthlabelsList = constants.healthLabels;
+		this.mineralsLabelsList = constants.minerals;
 		this.listorgrid = {"menu":"list", "panel":"listing-list"}
 	 $('.listing-buttons span').on("click",function(){
         $('.listing-buttons span').removeClass("current");
@@ -262,6 +270,15 @@ export class RecipesComponent implements OnInit {
           searchId.style.display = 'none';
        else
           searchId.style.display = 'block';
+	}
+	setFLU(str)
+	{
+		var retValue = str;
+		if(str !== "")
+		{
+			retValue = this.helpService.setInputFirstToUppercase(str);
+		}
+		return retValue;
 	}
 }
 
