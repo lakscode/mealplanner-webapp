@@ -4077,7 +4077,7 @@ div.widget-measurements .default-btn {
 /* advance search form
 /*-----------------------------------------------------------------------------------*/
 .advance-search {
-  border-bottom: 1px solid #e4d9d1;
+  //border-bottom: 1px solid #e4d9d1;
 }
 .advance-search.open .wrapper-search .tag-inner {
   background: #c1452b;
@@ -4140,7 +4140,7 @@ div.widget-measurements .default-btn {
   font-weight: 400;
 }
 .outer-advance-search {
-  padding: 22px 0;
+  padding-top:22px;
   display: none;
 }
 .wrapper-search {

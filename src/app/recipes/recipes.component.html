@@ -84,7 +84,7 @@
                             <label class="form-control-placeholder fcs">Diet Labels </label>
                              <div class="listSection" style="display:inline-block;">
                                 <ng-container *ngFor="let dlabel of dietLabelsList; let d = index">
-                                    <label class="container">{{dlabel}}
+                                    <label class="container" style="font-size:12px">{{dlabel}}
                                       <input type="checkbox" [checked]="d == 0?'checked':''">
                                       <span class="checkmark"></span>
                                     </label>
@@ -135,7 +135,7 @@
 
     -->
     <ng-container *ngFor="let hlabel of healthlabelsList; let h = index">
-      <label class="container">{{hlabel}}
+      <label class="container" style="font-size:12px">{{hlabel}}
         <input type="checkbox" [checked]="h == 0?'checked':''">
         <span class="checkmark"></span>
       </label>
@@ -160,15 +160,15 @@
                   </div>
                   </div>
 
-                    <div class="col-12" style="margin-bottom:20px;padding-bottom:10px;">
-                        <div class="form-group-others" style="margin-bottom:20px;">
+                    <div class="col-12" style="padding-bottom:10px;">
+                        <div class="form-group-others">
                             <div style="float:right; margin-right:5px;">
                                 <button [disabled]="isdisabled" (click)="CheckParameters(queryparam)" class="btnadd"><i
-                                        class="fa fa-search" aria-hidden="true"></i>&nbsp;Apply</button>
+                                        class="fa fa-search" aria-hidden="true"></i></button>
                             </div>
                             <div style="float:right; margin-right:5px;">
                                 <button [disabled]="isdisabled" (click)="ResetParameters()" class="btnadd"><i class="fa fa-undo"
-                                        aria-hidden="true"></i>&nbsp;Reset</button>
+                                        aria-hidden="true"></i></button>
                             </div>
                         </div>
                     </div>
