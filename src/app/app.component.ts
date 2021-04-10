@@ -60,7 +60,7 @@ export class AppComponent implements OnInit {
 
     var parent = this;
   
-    setTimeout(function(){  parent.openModal(); }, 3000);
+   // setTimeout(function(){  parent.openModal(); }, 3000);
 
     localStorage.setItem('currentUser', "");
     this.router.events.subscribe(event => {

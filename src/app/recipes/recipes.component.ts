@@ -9,6 +9,7 @@ import { environment } from './../../environments/environment';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import * as $ from 'jquery';
+import { constants } from '../jsonfiles/constants';
 //declare var $: any;
 
 @Component({
@@ -27,11 +28,16 @@ export class RecipesComponent implements OnInit {
 	ratingsArr: Array<any> = [];
 	listorgrid: any = {};
 	private onDestroy$: Subject<void> = new Subject<void>();
+	dietLabelsList: Array<any> = [];
+	healthlabelsList: Array<any> = [];
 	constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
 	
 	}
 
 	ngOnInit() {
+
+		this.dietLabelsList = constants.dietLabels;
+		this.healthlabelsList = constants.healthLabels;
 		this.listorgrid = {"menu":"list", "panel":"listing-list"}
 	 $('.listing-buttons span').on("click",function(){
         $('.listing-buttons span').removeClass("current");

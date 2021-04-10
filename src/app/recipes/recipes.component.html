@@ -78,46 +78,27 @@
                   </div>
  -->
 
-                    <div class="col-12">
+                    <div class="col-3">
                         <div class="form-group">
 
                             <label class="form-control-placeholder fcs">Diet Labels </label>
                              <div class="listSection" style="display:inline-block;">
-                              <span class="checkboxText">Vegan</span>
-    <span class="round" style="">
-        <input type="checkbox" id="diet1" class="" />
-        <label for="diet1"></label> 
-    </span> 
-    <span class="checkboxText">Vegan</span>
-    <span class="round">
-        <input type="checkbox" id="diet2" class="" />
-        <label for="diet2"></label>
-    </span>
-    <span class="checkboxText">Vegan</span>
-    <span class="round">
-        <input type="checkbox" id="diet3" class="" checked="checked" />
-        <label for="diet3"></label>
-    </span>
-    <span class="checkboxText">Vegan</span>
-    <span class="round">
-        <input type="checkbox" id="diet4"  class="" />
-        <label for="diet4"></label>
-    </span>
-    <span class="checkboxText">Vegan</span>
-    <span class="round">
-        <input type="checkbox" id="diet5"  class="" />
-        <label for="diet5"></label>
-    </span>
+                                <ng-container *ngFor="let dlabel of dietLabelsList; let d = index">
+                                    <label class="container">{{dlabel}}
+                                      <input type="checkbox" [checked]="d == 0?'checked':''">
+                                      <span class="checkmark"></span>
+                                    </label>
+                                  </ng-container>  
    </div>
                     </div>
                   </div>
 
-            <div class="col-12">
+            <div class="col-3">
                         <div class="form-group">
 
                             <label class="form-control-placeholder fcs">Health Labels </label>
                              <div class="listSection" id="healthLabels" style="display:inline-block;">
-                              <span class="checkboxText">Vegan</span>
+                             <!-- <span class="checkboxText">Vegan</span>
     <span class="round" style="">
         <input type="checkbox" id="hlabel1" class="" />
         <label for="hlabel1"></label> 
@@ -142,6 +123,38 @@
         <input type="checkbox" id="hlabel5"  class="" />
         <label for="hlabel5"></label>
     </span>
+
+    <div class="container">
+        <div class="checkboxText" style="float:left;">Vegan</div>
+        <div class="round"  style="float:left;">
+          <input type="checkbox" id="checkbox1" />
+          <label for="checkbox1"></label>
+        </div>
+        <div style='clear:both'></div>
+      </div>
+
+    -->
+    <ng-container *ngFor="let hlabel of healthlabelsList; let h = index">
+      <label class="container">{{hlabel}}
+        <input type="checkbox" [checked]="h == 0?'checked':''">
+        <span class="checkmark"></span>
+      </label>
+    </ng-container>
+    <!--
+      <label class="container">Two
+        <input type="checkbox">
+        <span class="checkmark"></span>
+      </label>
+      <label class="container">Three
+        <input type="checkbox">
+        <span class="checkmark"></span>
+      </label>
+      <label class="container">Four
+        <input type="checkbox">
+        <span class="checkmark"></span>
+      </label>
+    -->
+
    </div>
                     </div>
                   </div>
