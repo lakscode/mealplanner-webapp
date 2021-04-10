@@ -1833,8 +1833,8 @@ a.mean-expand {
 /* hot recipes variation two
 /*--------------------*/
 .hot-recipes-var2 {
-  padding-top: 40px;
-  padding-bottom: 110px;
+  //padding-top: 40px;
+  padding-bottom: 50px;
   background: #f8f6f5;
 }
 .hot-recipes-var2 h1,
@@ -3432,8 +3432,8 @@ div.widget-measurements .default-btn {
 /*-----------------------------------------------------------------------------------*/
 .food-tabs {
   background: #f2eeec;
-  padding-top: 80px;
-  padding-bottom: 80px;
+  padding-top: 30px;
+  padding-bottom: 30px;
 }
 .food-tabs.var1 {
   background: transparent;
