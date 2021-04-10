@@ -7,3 +7,199 @@
    margin:0 auto;
  
  }
+/*-----------------------------------------------------------------------------------*/
+/* footer
+/*-----------------------------------------------------------------------------------*/
+.footer a {
+  color: #ffffff;
+  transition: 0.2s all ease-in-out;
+  opacity: .8;
+}
+.footer a:hover {
+  opacity: 1;
+}
+.footer .footer-copyright a {
+  color: #ffffff !important;
+}
+.footer .footer-copyright a:hover {
+  opacity: 1;
+}
+.footer-boxed .footer-inner {
+  //background-image: url("../images/temp-images/footer-bg.jpg");
+}
+.footer-fluid {
+ // background-image: url("../images/temp-images/footer-bg-full.jpg");
+ // background-size: cover;
+ background-color: #000;
+}
+.footer-inner {
+  padding-top: 55px;
+  position: relative;
+  background-size: cover;
+}
+.footer-inner .logo-footer {
+  display: inline-block;
+  margin-bottom: 35px;
+}
+.footer-inner p {
+  color: #bbbbbb;
+  opacity: 0.8;
+  margin-bottom: 35px;
+}
+.footer-inner .corner-image {
+  bottom: 0;
+  right: -415px;
+}
+.footer-variant-one .footer-inner {
+  padding-left: 140px;
+  padding-right: 140px;
+}
+.subs-social-options {
+  border-top: 1px solid #2e2a26;
+}
+.subs-social-options .custom-col-options {
+  border-width: 0px 1px 0px 0;
+  border-style: solid;
+  border-image: linear-gradient(to bottom, #2e2a26 80%, rgba(0, 0, 0, 0)) 1 100%;
+}
+.subs-social-options .left-side {
+  padding-right: 30px;
+  padding-bottom: 30px;
+}
+.widget-footer h2 {
+  font-family: 'Lora', serif;
+  font-style: italic;
+  font-size: 21px;
+  color: #ffffff;
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+.email-field {
+  position: relative;
+}
+.email-field ::-webkit-input-placeholder {
+  color: #736e6b;
+}
+.email-field :-moz-placeholder {
+  /* Firefox 18- */
+  color: #736e6b;
+}
+.email-field ::-moz-placeholder {
+  /* Firefox 19+ */
+  color: #736e6b;
+}
+.email-field :-ms-input-placeholder {
+  color: #736e6b;
+}
+.email-field input {
+  width: 100%;
+  height: 40px;
+  background: transparent;
+  border: 1px solid #bbbbbb;
+  padding-left: 15px;
+  padding-right: 40px;
+  font-size: 16px;
+  font-family: 'Lora', serif;
+  font-style: italic;
+  font-weight: 400;
+  color: #cccccc;
+  outline: none;
+  transition: 0.2s all ease-in-out;
+}
+.email-field input:focus {
+  border-color: #ffffff;
+  color: #bbbbbb;
+}
+.email-field button {
+  display: inline-block;
+  position: absolute;
+  right: 0;
+  top: 0;
+  line-height: 38px;
+  padding-right: 15px;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  color: #bbbbbb;
+  transition: 0.2s all ease-in-out;
+}
+.email-field button:hover {
+  color: #ffffff;
+}
+.social-icons ul {
+  overflow: hidden;
+  margin-top: -4px;
+}
+.social-icons ul li {
+  display: inline-block;
+  margin-right: 12px;
+  margin-bottom: 12px;
+}
+.social-icons ul li a {
+  display: inline-block;
+  height: 47px;
+  width: 47px;
+  line-height: 47px;
+  border-radius: 50%;
+  border: 1px solid #bbbbbb;
+  text-align: center;
+  font-size: 18px;
+  color: #bbbbbb;
+  transition: 0.2s all ease-in-out;
+}
+.social-icons ul li a:hover {
+  border-color: #ffffff;
+  color: #ffffff;
+}
+.right-side {
+  padding-left: 30px;
+}
+.footer-copyright {
+  padding-top: 35px;
+  padding-bottom: 30px;
+}
+.footer-copyright p {
+  opacity: 1;
+  font-size: 14px;
+  color: #999999;
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+  margin-bottom: 0;
+}
+.footer-copyright.var1 {
+  border-top: 1px solid #2e2a26;
+}
+/*--------------------*/
+/* footer var1
+/*--------------------*/
+.footer.footer-variant-two .wrapper-logo-detail {
+  padding-bottom: 15px;
+}
+.footer.footer-variant-two .wrapper-logo-detail .right-side {
+  padding-top: 30px;
+  padding-left: 0;
+}
+.footer.footer-variant-two .footer-inner {
+  padding-top: 40px;
+}
+.footer.footer-variant-two .widget h2 {
+  margin-top: 48px;
+}
+.footer-social-icons {
+  text-align: right;
+}
+.footer-social-icons ul li {
+  display: inline-block;
+  margin-left: 25px;
+}
+.footer-social-icons ul li a {
+  display: inline-block;
+  color: #736e6b;
+  font-size: 18px;
+}
+.footer-social-icons ul li a:hover {
+  color: #ffffff;
+}
+/*-----------------------------------------------------------------------------------*/
+/* footer ends
+/*-----------------------------------------------------------------------------------*/

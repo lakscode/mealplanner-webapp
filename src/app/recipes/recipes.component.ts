@@ -56,25 +56,6 @@ export class RecipesComponent implements OnInit {
     });
 
 
-      $('.advance-search .tag-inner').on("click",function(){
-        if ($(".advance-search").hasClass("open")){
-            $(".advance-search").removeClass("open");
-            $(".outer-advance-search").slideUp();
-        }
-        else{
-            $(".advance-search").addClass("open");
-            $(".outer-advance-search").slideDown();
-        }
-
-
-    });
-
-/*
-    if (jQuery().selectric) {
-        $( ".advance-selectable" ).selectric();
-    }
-	*/
-
 		this.router.events.subscribe((evt) => {
             if (!(evt instanceof NavigationEnd)) {
                 return;
@@ -273,6 +254,14 @@ export class RecipesComponent implements OnInit {
 		console.log(this.listorgrid);
 		this.listorgrid["menu"] = opt;
 		this.listorgrid["panel"] = "listing-" + opt;
+	}
+
+	searchPanelDisplay(){
+	 var searchId = document.getElementById('searchPanel');
+       if(searchId.style.display == 'block')
+          searchId.style.display = 'none';
+       else
+          searchId.style.display = 'block';
 	}
 }
 
