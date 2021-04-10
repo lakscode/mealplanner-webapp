@@ -11,11 +11,11 @@
       <div class="wrapper-search">
           <div class="container-tags">
           <span class="tag">
-              <span class="tag-inner">Find Recipes <i class="fa fa-angle-down"></i></span>
+              <span class="tag-inner" (click)="searchPanelDisplay();">Find Recipes <i class="fa fa-angle-down"></i></span>
           </span>
 
           </div>
-          <div class="outer-advance-search" style="display: block;">
+          <div class="outer-advance-search" style="display: none;" id="searchPanel">
 
             <div style="margin:0 auto; width:100%; ">
         <div class="row searchpanel bgborder paddinglr0" >
@@ -25,8 +25,8 @@
 
                          <div class="form-group">
                             <label class="form-control-placeholder fcs">Ingredients</label>
-                            <input type="text" autocomplete="off" id="respondent" name="respondent" class="form-control"
-                                >
+                            <input type="text" autocomplete="off" id="ingredients" 
+                            name="ingredients" class="form-control">
                         </div>
                     </div>
                     
