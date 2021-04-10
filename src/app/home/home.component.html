@@ -1,21 +1,17 @@
-<div class="" style='width:100%'>
-	<div >
-		<div class="row" >
-		
-<div class="col-12">
-	<app-sliderpanel></app-sliderpanel>
-</div>
-<section class="good-food" style="padding-bottom: 80px;
-background: #FFF; margin-bottom:0px;">
-  <div class="container">
-      <div class="good-food-box">
-          <div class="text-side">
-              <div class="good-food-intro">
-
-                  <span class="heading-small">Its all about</span>
+<div style='width:100%'>
+<div class="row">
+	<div class="col-12">
+     <app-sliderpanel></app-sliderpanel>
+   </div>
+   <section class="home-sec" style="padding-bottom: 80px;background: #FFF; margin-bottom:0px;">
+   <div class="container col-12">
+      <div class="home-sec-box">
+         <div class="text-side">
+            <div class="home-sec-intro">
+               <span class="heading-small">Its all about</span>
                   <h2>Easy customized nutrition</h2>
-                  <span class="emphasis">The diet was developed with customers' needs in mind. Without the hassle, build healthy meal plans and attractive facilities. Get more done in one place for one low price as a health professional.</span>
-                  <ul class="good-food-list">
+                  <span class="desc">The diet was developed with customers' needs in mind. Without the hassle, build healthy meal plans and attractive facilities. Get more done in one place for one low price as a health professional.</span>
+                  <ul class="home-sec-list">
                       <li><span><img src="assets/images/burger-icon.png" alt="icon"></span><a href="javascript:void(0)">Nam ornare arcu turpis, nec congue nibh tempores</a></li>
                       <li><span><img src="assets/images/grapes-icon.png" alt="icon"></span><a href="javascript:void(0)">Quis euismod mauris. Nulla porttitor orcirisk</a></li>
                       <li><span><img src="assets/images/salt-pot-icon.png" alt="icon"></span><a href="javascript:void(0)">We are hugeseget semper vulputate. </a></li>
@@ -23,119 +19,46 @@ background: #FFF; margin-bottom:0px;">
                   <a class="button-default theme-filled video-button swipebox" href="https://vimeo.com/15306847">Watch our Video</a>
                   <a class="button-default hollow-button" href="javascript:void(0)">Know more About Us</a>
               </div>
-          </div>
-          <div class="image-side  wow zoomIn animated" style="visibility: visible; animation-name: zoomIn;">
-              <div class="good-food-image">
-                  <img src="assets/images/temp-images/good-food.jpg" alt="image">
-              </div>
-          </div>
+         </div>
+         <div class="image-side  wow zoomIn animated" style="visibility: visible; animation-name: zoomIn;">
+            <div class="home-sec-image">
+               <img src="assets/images/temp-images/good-food.jpg" alt="image">
+            </div>
+         </div>
       </div>
-  </div>
-</section>
+   </div>
+   </section>
 
-
-
-<!-- steps section starts -->
-
-
-
-<div class="col-12">
-	<div class=" w-1000" style="padding-top:30px;">
-	<div class="row rowalt" *ngFor="let step of stepsList; let i = index;">
-		<div class="col-12 col-lg-6">
-			<h1 class="text-lg-left mb-4 title">{{step.label}}</h1>
-			<h3 class="subtitle">{{step.subtitle}}</h3>
-			<p class="text-justify mb-5 description"  style=" direction: ltr;">{{step.description}}</p>
-			<div *ngIf="i %2 ==0" style="text-align:right;">
-			<img style=" height: 150px" src="assets/images/temp-images/arrow-right.svg" />
-			</div>
-			<div *ngIf="i %2 ==1" style="text-align:left">
-			<img style=" height: 150px" src="assets/images/temp-images/arrow-left.svg" />
-			</div>
-		</div>
-		<div class="col-12 col-lg-6" style="text-align:center;">
-				<img src="{{step.image}}" style=" height: 250px" class="rounded-bg specialty-image w-80">
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-12" style="text-align:center;margin-top:20px;">
-			<a href="javascript:void(0);" class="getstarted">Get Started</a>
-		</div>
-	</div>
+   <section class="home-sec">
+      <div class="container">
+         <div class="col-12">
+	        <div class=" w-1000" style="padding-top:30px;">
+	           <div class="row secL" *ngFor="let step of stepsList; let i = index;">
+		            <div class="col-12 col-lg-6">
+			            <h1 class="text-lg-left mb-4 title">{{step.label}}</h1>
+			            <h3 class="subtitle">{{step.subtitle}}</h3>
+			            <p class="text-justify mb-5 description"  style=" direction: ltr;">{{step.description}}</p>
+			            <div *ngIf="i %2 ==0" style="text-align:right;">
+			               <img style=" height: 150px" src="assets/images/temp-images/arrow-right.svg" />
+			            </div>
+			            <div *ngIf="i %2 ==1" style="text-align:left">
+			               <img style=" height: 150px" src="assets/images/temp-images/arrow-left.svg" />
+			            </div>
+		            </div>
+		            <div class="col-12 col-lg-6" style="text-align:center;">
+				         <img src="{{step.image}}" style=" height: 250px" class="rounded-bg specialty-image w-80">
+		             </div>
+	            </div>
+	            <div class="row">
+		            <div class="col-12" style="text-align:center;margin-top:20px;">
+			            <a href="javascript:void(0);" class="getstarted">Get Started</a>
+		            </div>
+	            </div>
+            </div>
+         </div>
+      </div>
+   </section>
 </div>
-
-<!-- Steps section ends -->
-<div class="col-12" style="margin-top:30px;display:none" >
-
-
-	<div class="site-section">
-					<div class="container">
-
-
-
-					  
-					
-
-
- 
-
-
-
-					
-								  
-							<div class="col-12 col-md-12 col-lg-3 col-xl-3">
-							  <blockquote>
-								<!--<img src="assets/person_1.jpg" alt="Image" class="img-fluid w-25 mb-4 rounded-circle">-->
-								<p>&ldquo;Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo omnis voluptatem consectetur quam tempore obcaecati maiores voluptate aspernatur iusto eveniet, placeat ab quod tenetur ducimus. Minus ratione sit quaerat unde.&rdquo;</p>
-							  </blockquote>
-			  
-							  <p style="float:right">&mdash; Kelly Holmes</p>
-							</div>
-					  
-							<div class="col-12 col-md-12 col-lg-3 col-xl-3">
-							  <blockquote>
-								<!--<img src="assets/person_2.jpg" alt="Image" class="img-fluid w-25 mb-4 rounded-circle">-->
-								<p>&ldquo;Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo omnis voluptatem consectetur quam tempore
-								  obcaecati maiores voluptate aspernatur iusto eveniet, placeat ab quod tenetur ducimus. Minus ratione sit quaerat
-								  unde.&rdquo;</p>
-							  </blockquote>
-							
-							  <p style="float:right">&mdash; Rebecca Morando</p>
-							</div>
-					  
-							<div class="col-12 col-md-12 col-lg-3 col-xl-3">
-							  <blockquote>
-								<!--<img src="assets/person_3.jpg" alt="Image" class="img-fluid w-25 mb-4 rounded-circle">-->
-								<p>&ldquo;Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo omnis voluptatem consectetur quam tempore
-								  obcaecati maiores voluptate aspernatur iusto eveniet, placeat ab quod tenetur ducimus. Minus ratione sit quaerat
-								  unde.&rdquo;</p>
-							  </blockquote>
-							
-							  <p style="float:right">&mdash; Lucas Gallone</p>
-							</div>
-					  
-							<div class="col-12 col-md-12 col-lg-3 col-xl-3">
-							  <blockquote>
-								<!--<img src="assets/person_4.jpg" alt="Image" class="img-fluid w-25 mb-4 rounded-circle">-->
-								<p>&ldquo;Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo omnis voluptatem consectetur quam tempore
-								  obcaecati maiores voluptate aspernatur iusto eveniet, placeat ab quod tenetur ducimus. Minus ratione sit quaerat
-								  unde.&rdquo;</p>
-							  </blockquote>
-							
-							  <p style="float:right">&mdash; Andrew Neel</p>
-							</div>
-					  
-						
-					
-					</div>
-				  </div>
-
-			</div>
-	
-	</div>
-</div>
-</div>
-
 
 <!--- testimonial slider-->
 <div class="contentpage" style="width:1000px">
@@ -166,73 +89,3 @@ background: #FFF; margin-bottom:0px;">
 	</div>
   </ngb-carousel>
 </div>  
-<!--
-  <div class="site-section" >
-          <div class="container" style="margin-top:30px">
-
-<section role="complementary" class="simple white-back quotes no-fouc" style="width:100%">
-
-	<blockquote>
-	  <p><strong>Test</strong>: Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo omnis voluptatem consectetur quam tempore</p>
-	  <cite>Andrew Neel<br />
-	  <a href="javascript:void(0)">Bangalore</a></cite> </blockquote>
-	<blockquote>
-	  <p><strong>citation (noun)</strong>: a properly formatted line of text that indicates the source for a quote, idea, fact etc. that you use.</p>
-	  <cite>Someone Said<br />
-	  <a href="javascript:void(0)">Said it Here</a></cite> </blockquote>
-	<blockquote>
-	  <p>If you are repeating a section of the article for emphasis, use an aside element.</p>
-	  <cite>Someone Said<br />
-	  <a href="javascript:void(0)">Said it Here</a></cite> </blockquote>
-	<blockquote>
-	  <p> A blockquote element cannot be inside a paragraph, and since HTML4 actually needs to contain paragraphs.</p>
-	  <cite>Someone Said<br />
-	  <a href="javascript:void(0)">Said it Here</a></cite> </blockquote>
-	<blockquote>
-	  <p><strong>to cite (verb)</strong>: to acknowledge (give credit to) the original author or artist by providing a reference.</p>
-	  <cite>Someone Said<br />
-	  <a href="javascript:void(0)">Said it Here</a></cite> </blockquote>
-	<blockquote>
-	  <p><strong>citation (noun)</strong>: a properly formatted line of text that indicates the source for a quote, idea, fact etc. that you use.</p>
-	  <cite>Someone Said<br />
-	  <a href="javascript:void(0)">Said it Here</a></cite> </blockquote>
-	<blockquote>
-	  <p>If you are repeating a section of the article for emphasis, use an aside element.</p>
-	  <cite>Someone Said<br />
-	  <a href="javascript:void(0)">Said it Here</a></cite> </blockquote>
-	<blockquote>
-	  <p> A blockquote element cannot be inside a paragraph, and since HTML4 actually needs to contain paragraphs.</p>
-	  <cite>Someone Said<br />
-	  <a href="javascript:void(0)">Said it Here</a></cite> </blockquote>
-  </section>
-  </div>
-</div>
-
-
-  
-  <section class="quotes" style="display:none">
-	<div class="bubble">
-	  <blockquote>I refuse to accept the view that mankind is so tragically bound to the starless midnight of racism and war that the bright daybreak of peace and brotherhood can never become a reality... I believe that unarmed truth and unconditional love will have the final word.
-   </blockquote>
-	  <div></div>
-	  <cite> Martin Luther King, Jr.</cite> </div>
-	<div class="bubble">
-	  <blockquote> Peace is not a relationship of nations. It is a condition of mind brought about by a serenity of soul. Peace is not merely the absence of war. It is also a state of mind. Lasting peace can come only to peaceful people.
-  </blockquote>
-	  <div></div>
-	  <cite> Jawaharlal Nehru</cite> </div>
-	<div class="bubble">
-	  <blockquote> Forgiveness is not always easy. At times, it feels more painful than the wound we suffered, to forgive the one that inflicted it. And yet, there is no peace without forgiveness.
-  </blockquote>
-	  <div></div>
-	  <cite> Marianne Williamson</cite> </div>
-	<div class="bubble">
-	  <blockquote>Of all our dreams today there is none more important - or so hard to realise - than that of peace in the world. May we never lose our faith in it or our resolve to do everything that can be done to convert it one day into reality. </blockquote>
-	  <div></div>
-	  <cite> Lester B. Pearson</cite> </div>
-  </section>
-  <br><br><br>
-
-</div>
-
--->
