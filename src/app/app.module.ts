@@ -55,8 +55,8 @@ import { PlannerlistModule } from './planner/plannerlist/plannerlist.module';
 import { PlannercreateModule } from './planner/plannercreate/plannercreate.module'; 
 import { PricingModule } from './pricing/pricing.module'; 
 import { OurteamModule } from './ourteam/ourteam.module'; 
-
-
+import { MyinfoModule } from './myinfo/myinfo.module'; 
+import { AutherizeModule } from './autherize/autherize.module'; 
 import { NgxSpinnerModule } from "ngx-spinner";
 
 import { ModalModule } from './shared/modules'; 
@@ -99,7 +99,9 @@ import { ModalModule } from './shared/modules';
 	PlannercreateModule,
 	PricingModule,
 	OurteamModule,
-	ModalModule
+	ModalModule,
+	MyinfoModule,
+	AutherizeModule
   ],
   schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
   providers: [UserService],
