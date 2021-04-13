@@ -280,6 +280,10 @@ export class RecipesComponent implements OnInit {
 		}
 		return retValue;
 	}
+	searchProps()
+	{
+		
+	}
 }
 
 	

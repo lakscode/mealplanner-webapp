@@ -24,7 +24,7 @@ export class AutherizeComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		this.loadData();
+		this.loadDataCode();
 	}
 
 	loadData()
@@ -36,10 +36,20 @@ export class AutherizeComponent implements OnInit {
 		var userId = url.split("#")[1].split("=")[2].split("&")[0]; 
 		console.log(access_token); 
 		console.log(userId);
-		this.refreshToken(access_token, userId)
+		this.refreshToken(access_token)
 	}
-
-	refreshToken(access_token, userId)
+	loadDataCode()
+	{
+		var url = window.location.href;
+		//getting the access token from url 
+		var access_token = url.split("?")[1].split("=")[1].split("&")[0]; 
+		// get the userid 
+	//	var userId = url.split("#")[1].split("=")[2].split("&")[0]; 
+		console.log(access_token); 
+	//	console.log(userId);
+		this.refreshToken(access_token)
+	}
+	refreshToken(access_token)
 	{
 		var url = "https://api.fitbit.com/oauth2/token";
 
@@ -50,7 +60,7 @@ export class AutherizeComponent implements OnInit {
             method: "POST",
             body: strBody,
             headers: {
-            'Authorization': 'Basic ' + "c8AhmFUJdwxHqKQ69nEK1MSyVw3K2l1RWQLt4NYh9MsAkaq7Z96IcA==",
+            'Authorization': 'Basic ' + "MjJDRDNDOjdhNjU4OWFhY2Y1OWQ0MGU3ZGZiYjY0NDJlNTczMzZi",
             "Content-Type": "application/x-www-form-urlencoded"
             }
         })

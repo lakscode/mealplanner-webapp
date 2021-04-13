@@ -91,4 +91,8 @@ export class AppComponent implements OnInit {
   {
 this.modalService.close(id);
   }
+  subscribeEmail()
+  {
+
+  }
 }
