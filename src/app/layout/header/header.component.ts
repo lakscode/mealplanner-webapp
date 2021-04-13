@@ -126,6 +126,10 @@ console.log(currentUrl);
 				this.userName = this.userName + " " + lastname;
 				}
 
+				 if(typeof(this.currentUser["username"]) !== "undefined") {
+                this.userName = this.currentUser["username"];
+                }
+
 				this.loggedIn = true;
 				this.userRole =  this.currentUser["role"];
 				this.userRoleDet = this.currentUser["role"];
