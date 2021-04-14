@@ -1,26 +1,28 @@
-<div class="contentpage">
+<div class="contentpage" style="max-width: 500px; margin:0 auto;">
 
 	<div class="centertext"> 
 		Lost your password? 
 	</div>
 	<hr>
-	<div *ngIf="result == 0">	
-		<div class="centertext" style="font-size:14pt"> 
-				Lost your password? Please enter your email address. You will receive a link to create a new password via email.
+	<div class="login-form" >
+		<div class="sign-in-htm"  *ngIf="result == 0">
+			<div class="centertext" style="font-size:12pt"> 
+				Lost your password? Please enter your email address to receive a link to create a new password via email.
 		</div>
 
-		<div style="width:40%;min-width: 200px;margin:0 auto;">
-			<div class="form-group">
-				<input  type="text" id="userName" class="form-control" required [(ngModel)]="userName">
-				<label class="form-control-placeholder fcs" for="userName">Email <span class="mandatory">&#42;</span></label>
-			</div>	
-		</div>
-		<div class="row" style="margin:20px auto; height: 150px;">
-			<div class="col-12" class="group">
-				<button class="button" (click)="resetpass()">RESET PASSWORD &nbsp;<i class="fa fa-chevron-circle-right"></i> </button>
+			<div class="group">
+				<label for="userl" class="label">Email</label>
+				<input id="userl" name = "userl" [(ngModel)]="userName"  type="text" class="input" required>
 			</div>
+
+			<div class="group">
+				<input type="button" style="max-width:300px;margin-top:20px;" (click)="login()" class="button" value="Reset Password">
+			</div>
+
+
 		</div>
-	</div> 
+	</div>
+ 
 	<div style="width:80%; margin:0 auto; min-height: 365px;" *ngIf="result == 1">	
 		<p class='res-success'><i class="fa fa-check-circle"></i> Password reset email has been sent.</p>
 		<p>A password reset email has been sent to the email address for your account, but may take several minutes to show up in your inbox. Please wait atleast 10 minutes before attempting another reset.</p>
