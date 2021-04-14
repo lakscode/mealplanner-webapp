@@ -17,8 +17,8 @@
                             <label class="searchicon ">
                                 <i class="fa fa-search" aria-hidden="true"></i>
                             </label>
-                            <input type="text" class="inputbox" placeholder="Search Recipes..." />
-                            <input  type="button" (click)="searchProps()" style="margin-bottom:10px;" 
+                            <input type="text" [(ngModel)]="searchparam.q" class="inputbox" placeholder="Search Recipes..." />
+                            <input  type="button"  (click)="searchProps()" style="margin-bottom:10px;" 
                             [ngClass]="searchmorebar?'defaultbtn searchbtn hideonmobile bg-orange' :' defaultbtn searchbtn  bg-orange'" id="header-submit-search-pro" name="submit" value="Search">
                         </div>
                 
