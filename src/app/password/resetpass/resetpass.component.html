@@ -1,51 +1,28 @@
-<div class="contentpage">
+<div class="contentpage"  style="max-width: 500px; margin:0 auto;">
 
 	<div class="centertext">
-		Reset password
+		Change Password
 	</div>
-	<hr>
-	<form name="form" (ngSubmit)="onSubmit(f)" #f="ngForm" novalidate>
-		<div *ngIf="result == 0">
-			<div style="width:90%;min-width: 200px;margin:0 auto;">
-				<div class="row">
-					<div class="col-12 col-lg-6 col-xl-6">
-						<div class="form-group">
-							<input type="password" id="password" name="password" class="form-control" required
-								[(ngModel)]="password" minlength="8">
-							<label class="form-control-placeholder fcs" for="password">Password <span
-									class="mandatory">&#42;</span></label>
-						</div>
-						<div *ngIf="f.submitted && !password " class="alert alert-danger">
-							Password is required
-						</div>
-						<div *ngIf="password && password.length < 8" class="alert alert-danger"> Password should be
-							minimum 8 characters</div>
-					</div>
-
-					<div class="col-12 col-lg-6 col-xl-6">
-						<div class="form-group">
-							<input type="password" id="confirmpassword" name="confirmpassword" class="form-control"
-								required [(ngModel)]="confirmpassword" minlength="8">
-							<label class="form-control-placeholder fcs" for="confirmpassword">Confirm Password <span
-									class="mandatory">&#42;</span></label>
-						</div>
-						<div *ngIf="f.submitted && !confirmpassword " class="alert alert-danger">
-							Confirm Password is required
-						</div>
-						<div *ngIf="confirmpassword && confirmpassword.length < 8" class="alert alert-danger"> Confirm
-							Password should be minimum 8 characters</div>
-
-					</div>
+		<div class="login-form">
+			<div class="sign-in-htm"  *ngIf="result == 0">
+	
+				<div class="group">
+					<label for="userl" class="label">Password</label>
+					<input id="userl" name = "userl" [(ngModel)]="password"  type="password" class="input" required>
 				</div>
-			</div>
-			<div class="row" style="margin:20px auto; height: 150px;">
-				<div class="col-12" class="group">
-					<button class="button">RESET PASSWORD &nbsp;<i class="fa fa-chevron-circle-right"></i>
-					</button>
+				<div class="group">
+					<label for="userl" class="label">Confirm password</label>
+					<input id="confirmpassword" name = "confirmpassword" [(ngModel)]="confirmpassword"  type="password" class="input" required>
 				</div>
+				<div class="group">
+					<input type="button" style="max-width:300px; margin-top:20px;" (click)="resetpass()" class="button" value="Reset Password">
+				</div>
+	
+	
 			</div>
 		</div>
-	</form>
+	
+
 	<div style="width:80%; margin:0 auto; min-height: 365px;" *ngIf="result == 1">
 		<p class='res-success'><i class="fa fa-check-circle fasuccess"></i> &nbsp;&nbsp;Your {{displaymessage}}<a
 				*ngIf="result == 1" href="javascript:void(0)" (click)="trylogin()">Login</a></p>
