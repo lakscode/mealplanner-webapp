@@ -93,6 +93,11 @@ testimonialsList: Array<any> = [];
 		}
 		console.log(this.testimonialsList);
 	}
+
+	gotopage(page)
+	{
+		this.router.navigate([page]);	
+	}
 }
 
 

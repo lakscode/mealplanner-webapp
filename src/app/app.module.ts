@@ -57,6 +57,12 @@ import { PricingModule } from './pricing/pricing.module';
 import { OurteamModule } from './ourteam/ourteam.module'; 
 import { MyinfoModule } from './myinfo/myinfo.module'; 
 import { AutherizeModule } from './autherize/autherize.module'; 
+
+
+import { PasslostModule } from './password/passlost/passlost.module';
+
+import { ResetpassModule } from './password/resetpass/resetpass.module';
+
 import { NgxSpinnerModule } from "ngx-spinner";
 
 import { ModalModule } from './shared/modules'; 
@@ -101,7 +107,9 @@ import { ModalModule } from './shared/modules';
 	OurteamModule,
 	ModalModule,
 	MyinfoModule,
-	AutherizeModule
+	AutherizeModule,
+	PasslostModule, 
+	ResetpassModule
   ],
   schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
   providers: [UserService],
