@@ -280,8 +280,74 @@ export class RecipesComponent implements OnInit {
 		}
 		return retValue;
 	}
+
+
+  /******** recipes api serach */
+
 	searchProps()
 	{
+
+	console.log(this.searchparam);
+
+
+	this.searchRes = [];
+ 
+
+   var params = {}
+   if(this.searchparam.q)
+   {
+   params["content"] = this.searchparam.q;
+   }
+   if(typeof(this.searchparam.range) !== "undefined")
+   {
+    if(typeof(this.searchparam.range.lower) !== "undefined")
+    {
+      params["caloriesfrom"] = this.searchparam.range.lower;
+    }
+    if(typeof(this.searchparam.range.upper) !== "undefined")
+    {
+      params["caloriesto"] = this.searchparam.range.upper;
+    }
+    params["instructions"]="notempty";
+   }
+    this.searchparam.range.lower
+   console.log(this.searchparam);
+   console.log(params);
+    var res =   this.dbService.getDatabyFields("recipes", params).subscribe(invData => setTimeout(() => {
+
+      console.log(invData);
+
+      if(invData !== null)
+      {
+        if(typeof(invData["body"]) !== "undefined" && invData["body"] !== null && invData["body"]["length"] > 0)
+        {
+          this.recipesList1 = [];
+           this.recipesList2 = [];
+          var temp = invData["body"];
+          if(temp["length"] > 0)
+          {
+            for(let i=0; i< temp["length"] ; i++)
+            {
+             if(i < temp["length"]/2)
+              //this.searchRes.push(temp[i]["recipe"])
+              this.recipesList1.push(temp[i]);
+              else 
+              this.recipesList2.push(temp[i]);
+
+            }
+          }
+         
+        }
+       
+        console.log(this.recipesList1);
+         console.log(this.recipesList2);
+
+      }
+
+    
+
+    }));
+
 		
 	}
 }
