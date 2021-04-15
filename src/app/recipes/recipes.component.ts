@@ -33,6 +33,9 @@ export class RecipesComponent implements OnInit {
 	mineralsLabelsList: Array<any> = [];
 	searchmorebar: boolean = false;
 	animClass: any = "";
+	page_num: any = 0;
+	totalPage: any = 0;
+	displayList: Array<any> = [];
 	constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
 	
 	}
@@ -81,8 +84,8 @@ export class RecipesComponent implements OnInit {
 		  this.currentUser["displayname"] = this.currentUser["username"];
 		  console.log( this.currentUser["displayname"]);
 		}
-	  
-	 
+	  this.totalPage = 1;
+	 this.page_num = 0;
 	  this.searchparam = {"q":"", "range":{}}
 	
   
@@ -153,15 +156,18 @@ export class RecipesComponent implements OnInit {
 
 		  for(let i=0; i < invData["body"]["length"] ; i++)
 		  {
-			  if(i < invData["body"]["length"]/2)
+		//	  if(i < invData["body"]["length"]/2)
 			this.recipesList1.push(invData["body"][i]);
-			else 
-			this.recipesList2.push(invData["body"][i]);
+		//	else 
+		//	this.recipesList2.push(invData["body"][i]);
 
 			this.ratingIds += invData["body"][i]["id"] + ",";
 		  }
+		  this.totalPage = this.recipesList1["length"] /10;
 		  console.log(this.recipesList1);
+		 
 		  console.log(this.recipesList2);
+		  this.getDisplayList();
 		  this.loadRatings();
 		}
 	  }
@@ -169,8 +175,57 @@ export class RecipesComponent implements OnInit {
 	 ));
   
 	}
+	counter(i: number) {
+		return new Array(i);
+	}
+	prevPage()
+	{
+		if(this.page_num > 0)
+		{
+			this.page_num -= 1;
+		}
+		this.getDisplayList();
+	}
+	nextPage()
+	{
+		
+		if(this.page_num > 0 && this.page_num < this.totalPage-1)
+		{
+			this.page_num += 1;
+		}
+		this.getDisplayList();
+	}
+	currentPage(pagenum)
+	{
+		console.log(pagenum);
+		this.page_num = parseInt(pagenum);
+		this.getDisplayList();
+	}
 
+	getDisplayList()
+	{
+		console.log(this.recipesList1);
+		console.log(this.page_num);
+		this.displayList=[];
+		var startIndex= this.page_num*10;
+		var endIndex = 10;
 
+		if(startIndex + endIndex > this.recipesList1["length"])
+		{
+			endIndex = this.recipesList1["length"]-startIndex;
+		}
+
+		console.log(startIndex);
+		console.log(endIndex);
+endIndex = startIndex+ endIndex;
+		for(let i=startIndex; i < endIndex; i++)
+		{
+		this.displayList.push(this.recipesList1[i]);
+		
+		}
+		console.log(this.displayList);
+		window.scrollTo(0, 0);
+	}
 
 	loadRatings()
 	{

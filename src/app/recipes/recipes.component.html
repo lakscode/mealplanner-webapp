@@ -118,11 +118,36 @@
                     </div>
                     <h2>Recipes</h2>
 
-
+                    <ul class="page-nav">
+                        <li (click)="currentPage(0)" class="">
+                            <a href="javascript:void(0)">
+                                <i class="fa fa-angle-double-left"></i>
+                            </a>
+                        </li>
+                        <li (click)="prevPage()" class="">
+                            <a href="javascript:void(0)">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        </li>
+                        
+                        <li (click)="currentPage(i)" [ngClass]="i == page_num?'current':''" *ngFor='let in of counter(totalPage) ;let i = index'>
+                            <a href="javascript:void(0)">{{i+1}}</a>
+                        </li>
+                        <li (click)="nextPage()" class="">
+                            <a href="javascript:void(0)">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </li>
+                        <li (click)="currentPage(totalPage-1)" class="">
+                            <a href="javascript:void(0)">
+                                <i class="fa fa-angle-double-right"></i>
+                            </a>
+                        </li>   
+                    </ul>
                     <div class="recipe-listing {{listorgrid.panel}}">
 
 
-                        <div class="listing" *ngFor="let recipe1 of recipesList1; let i = index;">
+                        <div class="listing" *ngFor="let recipe1 of displayList; let i = index;">
                             <div class="image">
                                 <a [routerLink]="['/recipedetails', recipe1.id]">
                                     <img class="tstbite-animation" src="{{formatImage(recipe1.image, 'm')}}"
@@ -155,7 +180,7 @@
 
 
                         <!--recipe of the day-->
-                        <div class="recipe-of-day">
+                       <!-- <div class="recipe-of-day">
                             <img src="assets/images/temp-images/recipe-of-the-day.jpg" alt="Recipe of the day">
                             <div class="recipe-contents-outer">
                                 <div class="recipe-contents text-center">
@@ -171,7 +196,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div>-->
                         <!--recipe of the day ends-->
 
                         <div class="banner-header text-center">
@@ -214,9 +239,30 @@
 
 
                         <ul class="page-nav">
-                            <li class="current"><a href="javascript:void(0)">1</a></li>
-                            <li><a href="javascript:void(0)">2</a></li>
-                            <li><a href="javascript:void(0)">3</a></li>
+                            <li (click)="currentPage(0)" class="">
+                                <a href="javascript:void(0)">
+                                    <i class="fa fa-angle-double-left"></i>
+                                </a>
+                            </li>
+                            <li (click)="prevPage()" class="">
+                                <a href="javascript:void(0)">
+                                    <i class="fa fa-angle-left"></i>
+                                </a>
+                            </li>
+                            
+                            <li (click)="currentPage(i)" [ngClass]="i == page_num?'current':''" *ngFor='let in of counter(totalPage) ;let i = index'>
+                                <a href="javascript:void(0)">{{i+1}}</a>
+                            </li>
+                            <li (click)="nextPage()" class="">
+                                <a href="javascript:void(0)">
+                                    <i class="fa fa-angle-right"></i>
+                                </a>
+                            </li>
+                            <li (click)="currentPage(totalPage-1)" class="">
+                                <a href="javascript:void(0)">
+                                    <i class="fa fa-angle-double-right"></i>
+                                </a>
+                            </li>   
                         </ul>
                     </div>
                 </div>
