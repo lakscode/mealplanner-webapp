@@ -57,6 +57,14 @@ this.loadPlans()
   
         }));
     }
+
+    gotopage(page)
+    {
+        console.log("in gotopage");
+
+        this.router.navigate([page]);
+    
+    }
 }
 
 	

@@ -28,8 +28,8 @@ export class PasslostComponent implements OnInit, OnDestroy {
 
   var hasMatch = false;
   var iemail = { "email": this.userName};
-  this.dbService.getDatabyParam("users", iemail).subscribe((userData: any[]) => setTimeout(() => {
-    if(userData.length > 0)
+  this.dbService.getDatabyParam("users", iemail).subscribe(userData => setTimeout(() => {
+    if(userData["length"] > 0)
     {
       if (userData[0].email == this.userName) {
         //console.log("email exists" + userData[0].email);
