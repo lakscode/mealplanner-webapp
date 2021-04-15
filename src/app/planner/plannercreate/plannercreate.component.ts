@@ -5,7 +5,9 @@ import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } 
 import { DBService } from '../../dbservices/db.service';
 import { HelpService } from '../../services/help.service';
 
-
+import { constants } from '../../jsonfiles/constants';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 @Component({
 	selector: 'app-plannercreate',
 	templateUrl: './plannercreate.component.html',
@@ -21,8 +23,16 @@ export class PlannercreateComponent implements OnInit {
 	ratingIds: any;
 	searchparam: any = {};
 	mealsList: Array<any> = [];
-	plan: Array<any> = [];
+	plan:any={};
 	favouritesList: Array<any> = [];
+	routeParams: any;
+	private onDestroy$: Subject<void> = new Subject<void>();
+	sub: any;
+	mealTypeList: Array<any> = [];
+	mineralsList: Array<any> = [];
+	currentUser: any;
+	oldName: any;
+	calculateCaloryFlag: boolean = false;
 	constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
 	
 	}
@@ -33,8 +43,36 @@ export class PlannercreateComponent implements OnInit {
 this.addRecipeImage = "assets/images/add-recipe.png"
 
 		this.draggable = "assets/images/icon_draggable_grey.png"
+
+		this.mineralsList= constants.minerals;
+		this.currentUser =this.helpService.getCurrentUser();
+		if(this.currentUser !== null)
+		{
+		  if( this.currentUser["firstname"] !== "")
+		  this.currentUser["displayname"] = this.currentUser["firstname"];
+		  else if( this.currentUser["username"] !== "")
+		  this.currentUser["displayname"] = this.currentUser["username"];
+		  console.log(this.currentUser["displayname"]);
+		}
+	
+		this.mealTypeList = ["breakfast", "snack1", "lunch", "snack2", "dinner"];
+
+		this.routeParams = {};
+		this.sub = this.route.params.pipe(takeUntil(this.onDestroy$)).subscribe(params => {
+		//  console.log(params);   
+		  this.routeParams = params;     
+		  if (typeof (this.routeParams.id) !== "undefined") {
+			console.log(this.routeParams.id);
+			this.plan["mealplanid"] =this.routeParams.id;
+			//this.loadRecipe(this.routeParams.id);
+		  }   
+		 
+	   });  
+
+
 this.loadRecipes()
 this.loadWeekDays();
+
 	}
 
 	loadWeekDays()
@@ -60,7 +98,7 @@ this.loadWeekDays();
 	loadPlan()
 	{
 		var daysM= [];
-		this.plan = [];
+		this.plan = {"id":"", "name":"", "tags":"", "days":[], "created_by":"", "created_at":""};
 		
 		for(let j=0; j< 7; j++)
 		{
@@ -69,29 +107,43 @@ this.loadWeekDays();
 			{
 				daysM.push({"id":(i+1), "name":this.mealsList[i], "recipe":null});
 			}
-			this.plan.push({"id":"row" + (j+1), "name":this.weekDays[j]["name"], "days":daysM})
+			this.plan["days"].push({"id":"row" + (j+1), "name":this.weekDays[j]["name"], "meals":daysM})
 		}
 	
 		console.log(this.plan);
+	
+		this.setDefaults();
 	}
-	loadRecipesOld()
+	setDefaults()
+  {
+	if(typeof(this.routeParams.id) !== "undefined" && this.routeParams.id !== "")
     {
-      this.recipesList.push({"title":"pasto pizza with cheesey dip", "image":"assets/images/temp-images/listing-1.jpg","rating":"(4.1 / 5)", "description":"Nam ornare arcu turpis, nec congues with us     <br/>Curabitur quis euismod mauris. Nulls<br/>eget semper vulputate.", "author":"Peter Stiles", "created_at":"23/10/2015"});
+      var params = {};
+      params["id"] = this.routeParams.id;
+      
+      var res =   this.dbService.getDataByTable("mealplan", params).subscribe(mpData => setTimeout(() => {
 
-      this.recipesList.push({"title":"pasto pizza with juicy dip", "image":"assets/images/temp-images/listing-2.jpg","rating":"(4.1 / 5)", "description":"Nam ornare arcu turpis, nec congues with us     <br/>Curabitur quis euismod mauris. Nulls<br/>eget semper vulputate.", "author":"Peter Stiles", "created_at":"23/10/2015"});
+        console.log(mpData);
+        if(mpData !== null)
+        {
+          if(mpData["body"] !== null && mpData["body"]['length'] > 0)
+          {
+            this.plan["id"] = mpData["body"][0]["id"];
+            this.plan["name"] = mpData["body"][0]["name"];
+            this.plan["tags"] = mpData["body"][0]["tags"];
+            this.plan["status"] = mpData["body"][0]["status"];
+            this.plan["totalweeks"] = mpData["body"][0]["totalweeks"];
+            this.plan["mealplanid"] = mpData["body"][0]["id"];
+            this.oldName =  this.plan["name"];
+            this.loadDaysData();
+          }
+        }
 
-
-
-      this.recipesList.push({"title":"pasto pizza with extra topping", "image":"assets/images/temp-images/listing-3.jpg","rating":"(4.1 / 5)", "description":"Nam ornare arcu turpis, nec congues with us     <br/>Curabitur quis euismod mauris. Nulls<br/>eget semper vulputate.", "author":"Peter Stiles", "created_at":"23/10/2015"});
-
-
-	  this.recipesList.push({"title":"pasto pizza with extra topping", "image":"assets/images/temp-images/listing-4.jpg","rating":"(4.1 / 5)", "description":"Nam ornare arcu turpis, nec congues with us     <br/>Curabitur quis euismod mauris. Nulls<br/>eget semper vulputate.", "author":"Peter Stiles", "created_at":"23/10/2015"});
-
-	  this.recipesList.push({"title":"pasto pizza with juicy dip", "image":"assets/images/temp-images/listing-2.jpg","rating":"(4.1 / 5)", "description":"Nam ornare arcu turpis, nec congues with us     <br/>Curabitur quis euismod mauris. Nulls<br/>eget semper vulputate.", "author":"Peter Stiles", "created_at":"23/10/2015"});
-
-      this.recipesList.push({"title":"pasto pizza with extra topping", "image":"assets/images/temp-images/listing-3.jpg","rating":"(4.1 / 5)", "description":"Nam ornare arcu turpis, nec congues with us     <br/>Curabitur quis euismod mauris. Nulls<br/>eget semper vulputate.", "author":"Peter Stiles", "created_at":"23/10/2015"});
-
+      }))
     }
+ 
+  }
+
 
 	searchParam()
 	{
@@ -121,6 +173,7 @@ this.loadWeekDays();
 	  params["instructions"] = "notempty";
   
 	  console.log(JSON.stringify(params));
+	  this.calculateCaloryFlag = false;
 	 var res =   this.dbService.getDatabyFields("recipes", params).subscribe(invData => setTimeout(() => {
   
 	  console.log(invData);
@@ -135,20 +188,39 @@ this.loadWeekDays();
 		  {
 	
 			this.recipesList.push(invData["body"][i]);
-			if(count < 6)
+
+
+		//	if(count < 6)
+		//	{
+		//	var rIndex = Math.floor(Math.random() * 7);  
+		//	var cIndex = Math.floor(Math.random() * 5);  
+		//	this.plan["days"][rIndex]["meals"][cIndex]["recipe"] = invData["body"][i];
+		//	count++;
+		//	}
+		//	this.ratingIds += invData["body"][i]["id"] + ",";
+		  }
+		  for(let p =0 ; p < this.plan['days']['length']; p++)
+		  {
+			for(let q =0 ; q < this.plan['days'][p]['meals']['length']; q++)
 			{
-			var rIndex = Math.floor(Math.random() * 7);  
-			var cIndex = Math.floor(Math.random() * 5);  
-			this.plan[rIndex]["days"][cIndex]["recipe"] = invData["body"][i];
-			count++;
+			//	console.log(this.plan['days'][p]['meals'][q])
+				var pItem = this.plan['days'][p]['meals'][q];
+				if(pItem["recipe"] !== null  && pItem["recipe"]["id"] !== null)
+				{
+					var recIndex = this.recipesList.findIndex(x1 => (x1.id === pItem["recipe"]["id"]));
+				//	console.log(recIndex);
+					if(recIndex > -1)
+					{
+						this.plan['days'][p]['meals'][q]["recipe"] = this.recipesList[recIndex];
+					}
+				}
 			}
-			this.ratingIds += invData["body"][i]["id"] + ",";
 		  }
 		  console.log(this.recipesList);
 	
 		  console.log(this.plan);
-
-		  this.loadRatings();
+		  this.calculateCaloryFlag = true;
+		 // this.loadRatings();
 	
 	
 		}
@@ -157,6 +229,7 @@ this.loadWeekDays();
 	 ));
   
 	}
+
 	loadRatings()
 	{
 	  if(this.ratingIds !== "")
@@ -232,40 +305,8 @@ this.loadWeekDays();
 		var recipeItem = this.recipesList[index];
 
 		var data = ev.dataTransfer.getData("text");
-this.plan[r]["days"][c]["recipe"] =  recipeItem;
-		/*
-		var objPR = document.getElementById("image-placeholder-"+ r  + "-" + c);
-		objPR.innerHTML = "";
-		var cardBodyDiv1 = document.createElement("div");
-		cardBodyDiv1.setAttribute("class","recipe-image-card-content  card-body");
-
-		var cardBodyDiv = document.createElement("div");
-		cardBodyDiv.setAttribute("class","image-card-container");
-
-			var r_title = document.createElement('div');
-			r_title.innerHTML = recipeItem["label"];
-			r_title.setAttribute("class","recipe-name-box");
-			cardBodyDiv.appendChild(r_title);
-
-		var img1 = document.createElement('img');
-            img1.src = this.formatImage(recipeItem["image"], 's');
-			img1.style.width = "70px";
-			img1.style.height = "70px";
-			img1.style.position = "absolute";
-			img1.id = "picture_" + index;
-			img1.style.top = "0";
-			img1.style.left = "0";
-			img1.setAttribute("class","recipe-image recipe-image-card recipe-image-card__img open-fist-cursor");
-			img1.setAttribute("draggable","true");
-			cardBodyDiv.appendChild(img1);
-
-			cardBodyDiv1.appendChild(cardBodyDiv)
-
-			objPR.appendChild(cardBodyDiv1);
-		
-		//ev.target.appendChild(img1);
-*/
-		//ev.target.setAtribute("src", this.formatImage(recipeItem["image"], 's'))
+this.plan["days"][r]["meals"][c]["recipe"] =  recipeItem;
+	
 		var panelObj = document.getElementById("imagep_" + index);
 		console.log(panelObj);
 		var img = document.createElement('img');
@@ -297,12 +338,14 @@ this.plan[r]["days"][c]["recipe"] =  recipeItem;
 
 	  calculateCalory(mealtype, index)
 	  {
+		
 		  var totalCalories = 0;
 		  if(mealtype !== "")
 		  {
-				  for(let r =0; r < this.plan.length; r++)
+				  for(let r =0; r < this.plan['days'].length; r++)
 			  {
-				  var item = this.plan[r]["days"][index];
+				  var item = this.plan["days"][r]["meals"][index];
+				
 				  if(typeof(item['recipe']) !== 'undefined' && item["recipe"] !== null)
 				  {
 					if(typeof(item['recipe']["calories"]) !== 'undefined' && item["recipe"]["calories"] !== null && item["recipe"]["calories"] !== "")
@@ -323,7 +366,7 @@ this.plan[r]["days"][c]["recipe"] =  recipeItem;
 		console.log(params);
 		var res =   this.dbService.getDataByTable("favourites", params).subscribe(invData => setTimeout(() => {
 	
-		  console.log(invData);
+		//  console.log(invData);
 		  if(invData !== null)
 		  {
 			var obj = invData["body"]["length"];
@@ -343,6 +386,98 @@ this.plan[r]["days"][c]["recipe"] =  recipeItem;
 	
 		}));
 	  }
+
+
+	  /************************ from app  */
+
+	  loadDaysData()
+  {
+  //  console.log("in loadDaysData");
+//	console.log(this.plan);
+    if(typeof(this.plan["id"]) !== "undefined" && this.plan["id"] !== "")
+    {
+      var params = {};
+       
+        params["meal_plan_id"] = this.plan["id"];
+
+      var res =   this.dbService.getDataByTable("days", params).subscribe(dData => setTimeout(() => {
+
+   		//	 console.log(dData);
+        if(dData !== null)
+        {
+			var idslist = ""; 
+          if(dData["body"] !== null && dData["body"]['length'] > 0)
+          {
+            for(let i=0; i < dData["body"]['length'] ; i++)
+            {
+				var item = dData['body'][i];
+				if(typeof(item["breakfast"]) !== "undefined" && item["breakfast"] !== null && item["breakfast"] !== "")
+				{
+					this.plan["days"][item["day_num"]]["meals"][0]["recipe"] = {};
+				this.plan["days"][item["day_num"]]["meals"][0]["recipe"]["id"] = item["breakfast"];
+				console.log(item["breakfast"]);
+				idslist += item["breakfast"] + ",";
+				}
+
+				if(typeof(item["snack1"]) !== "undefined" && item["snack1"] !== null && item["snack1"] !== "")
+				{
+					this.plan["days"][item["day_num"]]["meals"][1]["recipe"] = {};
+				this.plan["days"][item["day_num"]]["meals"][1]["recipe"]["id"] = item["snack1"];
+				idslist += item["snack1"] + ",";
+				}
+
+				if(typeof(item["lunch"]) !== "undefined" && item["lunch"] !== null && item["lunch"] !== "")
+				{
+					this.plan["days"][item["day_num"]]["meals"][2]["recipe"] = {};
+				this.plan["days"][item["day_num"]]["meals"][2]["recipe"]["id"] = item["lunch"];
+				idslist += item["lunch"] + ",";
+				}
+
+				if(typeof(item["snack2"]) !== "undefined" && item["snack2"] !== null && item["snack2"] !== "")
+				{
+					this.plan["days"][item["day_num"]]["meals"][3]["recipe"] = {};
+				this.plan["days"][item["day_num"]]["meals"][3]["recipe"]["id"] = item["snack2"];
+				idslist += item["snack2"] + ",";
+				}
+
+				if(typeof(item["dinner"]) !== "undefined" && item["dinner"] !== null && item["dinner"] !== "")
+				{
+					this.plan["days"][item["day_num"]]["meals"][4]["recipe"] = {};
+				this.plan["days"][item["day_num"]]["meals"][4]["recipe"]["id"] = item["dinner"];
+				idslist += item["dinner"] + ",";
+				}
+
+
+				
+            //  this.plan["days"][i]= dData["body"][i];
+            }
+         //   console.log(this.selDay['day_num']);
+         //   this.planDay = this.plan['days'][this.selDay['day_num']];
+         ////   this.planDay['forall']= {};
+          //  console.log(this.planDay);
+          //  this.selDay = this.plan["days"][0];
+          }
+          else{
+          //  this.initializeDays();
+          //  this.createDay();
+          }
+        }
+        else{
+        //  this.initializeDays();
+        //  this.createDay();
+        }
+        console.log(this.plan);
+		if(idslist !== "")
+		{			
+		  idslist = idslist.substring(0, idslist.length-1);
+		  this.loadRecipes(idslist);
+		}
+       // this.loadRecipesToDays();
+      }))
+    }
+ 
+  }
+
 }
 
 	

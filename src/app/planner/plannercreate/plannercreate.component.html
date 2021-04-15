@@ -343,32 +343,32 @@
                 </div>
             </div>
            
-                <ng-container *ngFor="let item of plan; let r = index;">
+                <ng-container *ngFor="let item of plan['days']; let r = index;">
                     <div class="meal-row-wrapper">
                    <div class="meal-name" style="min-height:130px"><span>{{item.name}}</span></div>
                     <div class="meal-plan-column-container">
                         <div class="meal-plan-row">
                          
-                            <div class="meal-plan-slot" style="width: 18%;"  *ngFor="let day of item.days; let c= index;">
-                                <div *ngIf="day.recipe">
+                            <div class="meal-plan-slot" style="width: 18%;"  *ngFor="let meal of item.meals; let c= index;">
+                                <div *ngIf="meal.recipe">
                                     <div draggable="true">
                                         <div class="recipe-image-wrapper ">
                                             <div class="recipe-image-card card">
                                                 <div class="recipe-image-card-content card-body">
                                                     <div class="image-card-container">
-                                                        <div class="recipe-name-box">{{day.recipe.label}}</div><img
+                                                        <div class="recipe-name-box">{{meal.recipe.label}}</div><img
                                                             class="recipe-image-card recipe-image-card__img open-fist-cursor"
                                                             style="opacity: 1;" id="picture-5c252abdb834861eec5388f3"
-                                                            src="{{day.recipe.image}}"
+                                                            src="{{meal.recipe.image}}"
                                                             alt="Recipe image">
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="calories-slot-sum">{{day.recipe.calories}} Calories</div>
+                                    <div class="calories-slot-sum">{{meal.recipe.calories}} Calories</div>
                                 </div>
-                                <div style="min-height:130px" *ngIf="!day.recipe" id="drop-{{r}}-{{c}}"  (drop)="drop($event, r, c)" (dragover)="allowDrop($event)">                             
+                                <div style="min-height:130px" *ngIf="!meal.recipe" id="drop-{{r}}-{{c}}"  (drop)="drop($event, r, c)" (dragover)="allowDrop($event)">                             
                                     <div id="image-placeholder-{{r}}-{{c}}" class="recipe-image-placeholder card">
                                     <div  class="recipe-image-card-content  card-body"><img id="target-{{r}}-{{c}}"
                                             class="recipe-card-placeholder-image" src="{{addRecipeImage}}"
@@ -385,7 +385,7 @@
                     
                 </ng-container>
                 
-            <div class="meal-row-wrapper meal-row__calories">
+            <div class="meal-row-wrapper meal-row__calories" *ngIf="calculateCaloryFlag">
                 <div class="meal-name"></div>
                 <div id="total-calories-row" class="meal-plan-row" style="flex-wrap: nowrap;">
                     <div class="meal-plan-col col" style="width: 132px; min-width: 132px;"  *ngFor="let mealtype of mealsList; let d =index;">

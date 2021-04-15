@@ -104,41 +104,28 @@
       <span class="grid "><i class="fa fa-th-large"></i></span>
       <span class="list current"><i class="fa fa-bars"></i></span>
   </div>
-  <h2>Recent Recipes</h2>
+  <h2>Your Meal Plans</h2>
   
 
-  <div class="recipe-listing listing-list">
+  <div class="recipe-listing listing-list" style="background:#FFF;padding-top:15px;">
   
   
-  <div class="listing" *ngFor="let recipe of recipesList; let i = index;">
-      <div class="image">
-          <a href="/recipedetails">
-              <img class= "tstbite-animation" src="{{recipe.image}}" alt="image">
-          </a>
-      </div>
-      <div class="detail">
-          <h4><a href="/recipedetails">{{recipe.title}}</a></h4>
-          <p innerHTML = "{{recipe.description}}">
+  <div class="listing col-12 col-lg-6 " *ngFor="let mplan of mealPlans; let i = index;">
+     
+      <div class="detail" style="width:100%">
+          <h4><a href="/plan-create;id={{mplan.id}}">{{mplan.name}}</a></h4>
+          <p innerHTML = "{{mplan.tags}}">
               
           </p>
-          <div class="meta-listing">
-              <ul class="post-meta">
-                  <li class="author"><a href="#">{{recipe.author}}</a></li>
-                  <li class="calendar">{{recipe.created_at}}</li>
-              </ul>
-              <div class="rating-box">
-                <span class="rating-icons" *ngFor="let item of [1,2,3,4,5]">
-                  <i class="fa fa-star"></i>
-                </span>
-                  <span class="rating-figure">{{recipe.rating}}</span>
-              </div>            </div>
+          
       </div>
+     
   </div>
   
   
   
   <!--recipe of the day-->
-  <div class="recipe-of-day">
+  <!--<div class="recipe-of-day">
       <img src="assets/images/temp-images/recipe-of-the-day.jpg" alt="Recipe of the day">
       <div class="recipe-contents-outer">
           <div class="recipe-contents text-center">
@@ -154,7 +141,7 @@
               </div>
           </div>
       </div>
-  </div>
+  </div>-->
   <!--recipe of the day ends-->
   
   <div class="banner-header text-center">
@@ -165,38 +152,15 @@
   
   
  
-  <div class="listing" *ngFor="let recipe of recipesList; let i = index;">
-    <div class="image">
-        <a href="/recipedetails">
-            <img src="{{recipe.image}}" alt="image">
-        </a>
-    </div>
-    <div class="detail">
-        <h4><a href="/recipedetails">{{recipe.title}}</a></h4>
-        <p innerHTML = "{{recipe.description}}">
-            
-        </p>
-        <div class="meta-listing">
-            <ul class="post-meta">
-                <li class="author"><a href="#">{{recipe.author}}</a></li>
-                <li class="calendar">{{recipe.created_at}}</li>
-            </ul>
-            <div class="rating-box">
-              <span class="rating-icons" *ngFor="let item of [1,2,3,4,5]">
-                <i class="fa fa-star"></i>
-              </span>
-                <span class="rating-figure">{{recipe.rating}}</span>
-            </div>            </div>
-    </div>
-</div>
+
 
   
   
-  <ul class="page-nav">
+  <!--<ul class="page-nav">
       <li class="current"><a href="#">1</a></li>
       <li><a href="#">2</a></li>
       <li><a href="#">3</a></li>
-  </ul>
+  </ul>-->
   </div>
   </div>
   </div>
