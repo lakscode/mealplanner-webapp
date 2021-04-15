@@ -68,7 +68,7 @@ console.log(currentUrl);
 			},
 			{"id":"features", "menu":"Features", "link":"/features", "display":displayMenu, "active":false},
 			{"id":"pricing", "menu":"Pricing", "link":"/pricing", "display":displayMenu, "active":false},
-			{"id":"contact", "menu":"Contact", "link":"/contact", "display":displayMenu, "active":false},
+			/*{"id":"contact", "menu":"Contact", "link":"/contact", "display":displayMenu, "active":false},*/
 			{"id":"schedule", "menu":"Schedule Demo", "link":"/scheduledemo", "display":displayMenu, "active":false},
 			
 		];
@@ -93,8 +93,9 @@ console.log(currentUrl);
 					{"id":"plan-list", "menu":"Plan List", "link":"/plan-list", "display":displayMenu, "active":false},
 					{"id":"plan-create", "menu":"Create Plan", "link":"/plan-create", "display":displayMenu, "active":false}
 				]
-			},
-			{"id":"contact", "menu":"Contact", "link":"/contact", "display":displayMenu, "active":false},
+			}
+			/*,
+			{"id":"contact", "menu":"Contact", "link":"/contact", "display":displayMenu, "active":false},*/
 			
 			
 		];
