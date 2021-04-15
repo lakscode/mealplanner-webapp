@@ -13,6 +13,24 @@
   cursor: pointer;
 }
 
+.detail .linkview
+{
+  visibility: hidden;
+
+  padding:5px 10px;
+  border-radius:5px;
+  background-color: $orange;
+  color:#FFF;
+  text-align:center;
+  width:75px;
+ 
+}
+.detail:hover .linkview
+{
+visibility: visible;
+
+
+}
 .listing-list .listing:nth-child(1n) .detail {
   background-image: url(../../../assets/images/cherry-icon-small.png);
 }

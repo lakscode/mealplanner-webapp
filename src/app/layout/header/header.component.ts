@@ -158,7 +158,10 @@ console.log(currentUrl);
 
 		}
 	}
-	
+		gotopage(page)
+		{
+			this.router.navigate([page]);
+		}
 	logout()
 	{
 
