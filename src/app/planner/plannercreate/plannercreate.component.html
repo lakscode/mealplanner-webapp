@@ -333,6 +333,22 @@
        
 
         <div class="meal-plans-content">
+            <div class="submit-recipe-form" style="text-align:left; padding-bottom:10px;">
+                <label for="title">Meal Plan Name</label>
+                <input type="text" name="tiplannametle" id="planname" [(ngModel)] ="plan.name" (blur)="saveMealPlan()">
+                <br>
+                <label for="short-description">Tags</label>
+                <textarea style="margin-bottom:0px" class="short-text" name="plantags" id="plantags" cols="30" rows="3" [(ngModel)] ="plan.tags" (blur)="saveMealPlan()"></textarea>
+    
+                <div>
+                    <div >
+                        <div style='float:left; padding:5px; margin-right:5px;display:flex; align-items: center;' *ngFor="let ccode of colorCodes | keyvalue;"> <div [ngStyle] ="{'background-color':ccode.value}" style="display:inline-block; width:20px; height:20px;  margin-right:5px; "></div> {{setFLU(ccode.key)}} 
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="clear:both"></div>
             <div class="meal-row-wrapper meal-row__week-days">
                 <div class="meal-name" style="border-bottom:0px"></div>
                 <div class="meal-plan-row row">
@@ -367,6 +383,19 @@
                                         </div>
                                     </div>
                                     <div class="calories-slot-sum">{{meal.recipe.calories}} Calories</div>
+                                    <div class="minerals">
+                                        <div style='float:left; padding:5px; margin-right:5px;display:flex; align-items: center;' *ngFor="let paramM of meal.recipe.paramMicro"> <div [ngStyle] ="{'background-color':getColorCode(paramM)}" style="display:inline-block; width:10px; height:10px;  margin-right:5px; "></div>
+                                        <a href="javascript:void(0)" title="{{setFLU(paramM.label)}} {{paramM.totalP}} {{paramM.unit}}">{{paramM.totalP}} {{paramM.unit}} </a>
+                           
+                                        </div>
+                                        <ng-container *ngFor="let paramN of meal.recipe.minerals">
+                                       
+                                            <div *ngIf='paramN.value > 0' style='float:left; padding:5px; margin-right:5px;display:flex; align-items: center;' > <div [ngStyle] ="{'background-color':getColorCode(paramN)}" style="display:inline-block; width:10px; height:10px;  margin-right:5px; "></div>
+                                            <a href="javascript:void(0)" title="{{setFLU(paramN.name)}} {{paramN.value}} {{paramN.unit}}">{{paramN.value}} {{paramN.unit}} </a>
+                            
+                                        </div>
+                                        </ng-container>
+                                    </div>
                                 </div>
                                 <div style="min-height:130px" *ngIf="!meal.recipe" id="drop-{{r}}-{{c}}"  (drop)="drop($event, r, c)" (dragover)="allowDrop($event)">                             
                                     <div id="image-placeholder-{{r}}-{{c}}" class="recipe-image-placeholder card">

@@ -58,11 +58,13 @@ this.loadPlans()
         }));
     }
 
-    gotopage(page)
+    gotopage(page , params = null)
     {
         console.log("in gotopage");
-
-        this.router.navigate([page]);
+        var param = {};
+        if(params !== null)
+        param = params;
+        this.router.navigate([page, param]);
     
     }
 }

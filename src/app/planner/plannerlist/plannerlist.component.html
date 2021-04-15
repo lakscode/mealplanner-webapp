@@ -113,8 +113,8 @@
   
   <div class="listing col-12 col-lg-6 " *ngFor="let mplan of mealPlans; let i = index;">
      
-      <div class="detail" style="width:100%">
-          <h4><a href="/plan-create;id={{mplan.id}}">{{mplan.name}}</a></h4>
+      <div class="detail" (click)="gotopage('plan-create', {'id':mplan.id});"  style="width:100%">
+          <h4><a href="javascript:void(0)">{{mplan.name}}</a></h4>
           <p innerHTML = "{{mplan.tags}}">
               
           </p>

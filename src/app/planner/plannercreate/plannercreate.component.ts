@@ -33,6 +33,7 @@ export class PlannercreateComponent implements OnInit {
 	currentUser: any;
 	oldName: any;
 	calculateCaloryFlag: boolean = false;
+	colorCodes : any = {};
 	constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
 	
 	}
@@ -72,7 +73,7 @@ this.addRecipeImage = "assets/images/add-recipe.png"
 
 this.loadRecipes()
 this.loadWeekDays();
-
+this.loadColorCodes();
 	}
 
 	loadWeekDays()
@@ -215,7 +216,7 @@ this.loadWeekDays();
 				//	console.log(recIndex);
 					if(recIndex > -1)
 					{
-						this.plan['days'][p]['meals'][q]["recipe"] = this.recipesList[recIndex];
+						this.plan['days'][p]['meals'][q]["recipe"] = this.formatRecipe(this.recipesList[recIndex]);
 					}
 				}
 			}
@@ -287,6 +288,113 @@ this.loadWeekDays();
 	  
 	}
 
+	totalCats: any = [];
+	formatRecipe(recipe)
+  {
+    var oRecipe;
+   // console.log(recipe);
+    if(recipe !== "")
+    {
+    oRecipe = recipe;
+
+    if(typeof(oRecipe["digest"]) !== "undefined" && oRecipe["digest"] !== "")
+    {
+      
+    oRecipe["digestArr"]  = JSON.parse(oRecipe["digest"]);
+      if(oRecipe["digestArr"]["length"] > 0)
+      {
+        var paramMicro = [];
+        for(let j=0; j< oRecipe["digestArr"]["length"] ; j++)
+        {
+          var mmicro = oRecipe["digestArr"][j];
+          switch(mmicro.label.toLowerCase())
+          {
+            case "fat": 
+            case "carbs":
+            case "protein":
+              if(typeof(mmicro.total) !== "undefined")
+              {
+                mmicro.totalP = mmicro.total.toFixed(1);
+                 paramMicro.push(mmicro);
+               }
+             
+               break
+
+          }
+                        
+        }
+        oRecipe["paramMicro"] = paramMicro;
+      }
+    }
+  
+    oRecipe["totalDailyArr"] = [];
+    if(typeof(oRecipe["totalDaily"]) !== "undefined" && oRecipe["totalDaily"] !== "")
+    {
+  
+      var temptotalDaily  = [];
+    //  var tempObjN = JSON.parse(oRecipe["totalDaily"]);
+      Object.keys(oRecipe["totalDaily"]).forEach(function(k){
+        temptotalDaily.push({"name": k, "value":oRecipe["totalDaily"][k]})
+  
+      });
+      oRecipe["totalDailyArr"]  = temptotalDaily;
+    
+    }
+  
+    oRecipe["totalNutrientsArr"] = [];
+    if(typeof(oRecipe["totalNutrients"]) !== "undefined" && oRecipe["totalNutrients"] !== "")
+    {
+      var temptotalNutrients  = [];
+      var tempObj = JSON.parse(oRecipe["totalNutrients"]);
+      Object.keys(tempObj).forEach(function(k){
+        temptotalNutrients.push({"name": k, "value":tempObj[k]})
+  
+      });
+      oRecipe["totalNutrientsArr"]  = temptotalNutrients;
+      if(typeof(temptotalNutrients) !== "undefined" && temptotalNutrients !== null)
+      {
+        var resArr = [];
+  this.totalCats = [];
+  for(let j=0; j < oRecipe["totalNutrientsArr"]["length"] ; j++)
+  {
+    var temp = oRecipe["totalNutrientsArr"][j];
+   // console.log(temp["value"]);
+    for(let k=0; k < this.mineralsList["length"] ; k++)
+    {
+      if(temp["value"]["label"].toUpperCase().indexOf(this.mineralsList[k].toUpperCase()) !== -1)
+      {
+        if(temp["value"]["quantity"] > 0)
+        {
+          if(temp["value"]["unit"].indexOf("u00b5") !== -1)
+          {
+            temp["value"]["unit"] = temp["value"]["unit"].replace("u00b5", "µ");
+          }
+          var cIndex = this.totalCats.findIndex(x => (x.name  === this.mineralsList[k]));
+
+          if(cIndex > -1)
+          {
+            this.totalCats[cIndex]={"name":this.mineralsList[k], 'value' :  (parseInt(this.totalCats[cIndex]["value"]) + parseInt(temp["value"]["quantity"])), "unit":temp["value"]["unit"]}
+          }
+          else
+          {
+            this.totalCats.push({"name": this.mineralsList[k], 'value' :  parseInt( temp["value"]["quantity"]), "unit":temp["value"]["unit"]});
+          }
+        }
+      }
+    }
+  
+  }
+  resArr = this.totalCats;
+
+        oRecipe['minerals'] =this.totalCats;
+      }
+    }
+  }
+ // console.log(oRecipe);
+    return oRecipe;
+  }
+
+
 	formatImage(image, type)
 	{
 	//  console.log(image);
@@ -310,7 +418,7 @@ this.loadWeekDays();
 		var recipeItem = this.recipesList[index];
 
 		var data = ev.dataTransfer.getData("text");
-this.plan["days"][r]["meals"][c]["recipe"] =  recipeItem;
+this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 	
 		var panelObj = document.getElementById("imagep_" + index);
 		console.log(panelObj);
@@ -326,7 +434,18 @@ this.plan["days"][r]["meals"][c]["recipe"] =  recipeItem;
 			img.setAttribute("draggable","true");
 			panelObj.appendChild(img);
 		
-			this.SavePlanData(r, c);
+			if(this.plan["id"] !== "" )
+			{
+				this.SavePlanData(r, c);
+			}
+			else
+			{
+				this.saveMealPlan();
+				setTimeout(() => {
+					this.SavePlanData(r, c);
+				}, 1000);
+			}
+			
 		
 	  }
 	
@@ -487,6 +606,59 @@ this.plan["days"][r]["meals"][c]["recipe"] =  recipeItem;
     }
  
   }
+ 
+  saveMealPlan()
+  {
+	  console.log(this.plan);
+  //  console.log(this.plan)
+    var params = {};
+    if(this.plan["name"] !== "")
+    params["name"] = this.plan["name"];
+    if(this.plan["tags"] !== "")
+    params["tags"] = this.plan["tags"];
+
+    if(this.plan["totalweeks"] !== "")
+    params["totalweeks"] = this.plan["totalweeks"];
+    params["status"] = this.plan["status"];
+    params["created_by"] = this.currentUser["id"];
+    if(typeof(this.plan["mealplanid"]) !== "undefined" && this.plan["mealplanid"] !== "")
+    {
+      params["id"]  =  this.plan["mealplanid"] 
+
+     console.log(JSON.stringify(params));
+      var res =   this.dbService.updateDataByTable("mealplan", params).subscribe(invData => setTimeout(() => {
+
+     //   console.log(invData);
+
+        if(invData !== null)
+        {
+        
+        }
+     //   console.log(this.plan)
+      }));
+    }
+    else
+    {
+   //   console.log(params);
+      var res =   this.dbService.postDataByTable("mealplan", params).subscribe(invData => setTimeout(() => {
+
+   //     console.log(invData);
+
+        if(invData !== null)
+        {
+        if(typeof(invData["inserted_id"]) !== "undefined") 
+        {
+			this.routeParams["id"] = invData['inserted_id'];
+			this.plan["id"]=invData['inserted_id'];
+            this.plan["mealplanid"]=invData['inserted_id'];
+			
+       //   console.log(this.plan);
+        }
+        }
+      }));
+    }
+
+  }
   SavePlanData(r, c)
   {
 	  console.log("in save plan data");
@@ -576,6 +748,57 @@ this.plan["days"][r]["meals"][c]["recipe"] =  recipeItem;
       }
     }  
   }
+  loadColorCodes()
+  {
+	this.colorCodes ={};
+	this.colorCodes["calcium"] ="#488e4f"; //light gray
+	this.colorCodes["magnesium"] ="#D1d2d3"; //pink
+	this.colorCodes["iron"] ="#ff6700"; //orange
+	this.colorCodes["sodium"] ="#fa5a73"; //dark blue
+	this.colorCodes["potassium"] ="#cb410b"; //violet
+	this.colorCodes["phosphorus"] ="#2887c8";
+	this.colorCodes["chloride"] ="#1e90ff";
+	this.colorCodes["zinc"] ="#76d7ea";
+	this.colorCodes["iodine"] ="#010b13";
+	this.colorCodes["manganese"] ="#3f00ff";
+	this.colorCodes["fat"] ="#a6a6a6";
+	this.colorCodes["protein"] ="#02075d";
+	this.colorCodes["carbs"] ="#778ba5";
+
+
+
+  }
+  getColorCode(param)
+  {
+	//  console.log("getColorCode")
+	//  console.log(param);
+	  var retVal = "#778ba5";
+	  if(param !== null)
+	  {
+		  if(typeof(param['label']) !== "undefined" && param['label'] !== "")
+		  {
+		  var te = param['label'].toLowerCase();
+		  retVal = this.colorCodes[te];
+		  }
+
+		  if(typeof(param['name']) !== "undefined" && param['name'] !== "")
+		  {
+		  var te = param['name'].toLowerCase();
+		  retVal = this.colorCodes[te];
+		  }
+
+	  }
+	  return retVal;
+  }
+  setFLU(str)
+	{
+		var retValue = str;
+		if(str !== "")
+		{
+			retValue = this.helpService.setInputFirstToUppercase(str);
+		}
+		return retValue;
+	}
 }
 
 	
