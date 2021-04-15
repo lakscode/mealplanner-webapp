@@ -131,7 +131,7 @@ export class RecipesComponent implements OnInit {
 	  this.recipesList1 = [];
 	  this.recipesList2 = [];
 	// this.recipes = recipesList;
-	 var params = {"limit": "30"};
+	 var params = {"limit": "100"};
    //  params["caloriesfrom"] = this.searchparam.range.lower;
 	// params["caloriesto"] = this.searchparam.range.upper;
 	 console.log(this.searchparam);
@@ -143,7 +143,7 @@ export class RecipesComponent implements OnInit {
 	  }
   
 	  params["instructions"] = "notempty";
-  
+	  params["returnfields"] = " id, label, image, healthLabels, dietLabels, calories,s_instructions ";
 	  console.log(JSON.stringify(params));
 	 var res =   this.dbService.getDatabyFields("recipes", params).subscribe(invData => setTimeout(() => {
   
