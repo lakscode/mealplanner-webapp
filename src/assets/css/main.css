@@ -503,10 +503,12 @@ ul {
   padding: 0 15px;
   text-transform: capitalize;
   border: 1px solid #000000;
+  color:#77C14B;
 }
 .read-more-bordered:hover {
   background: #000000;
   color: #ffffff;
+  text-decoration: none;
 }
 .button-dark {
   background: #000000;
