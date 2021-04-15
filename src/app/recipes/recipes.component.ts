@@ -290,7 +290,7 @@ export class RecipesComponent implements OnInit {
 	console.log(this.searchparam);
 
 
-	this.searchRes = [];
+	//this.searchRes = [];
  
 
    var params = {}
