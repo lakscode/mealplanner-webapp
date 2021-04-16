@@ -51,7 +51,7 @@
                      <div class="row">
                         <div class="mb-5 col-sm-4" *ngFor="let hLabel of healthLabels; let h=index;"> 
                            <div class="px-5 px-sm-0" *ngIf="h < 6">
-                              <a href="/recipes;dietLabels={{hLabel.label}}"
+                              <a (click)="gotoRecipes(hLabel.label)"
                                  class="specialty"><img src="{{hLabel.image}}"
                                  srcset="{{hLabel.image}}"
                                  class="rounded-bg specialty-image w-100">

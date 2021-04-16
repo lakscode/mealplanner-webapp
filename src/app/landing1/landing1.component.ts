@@ -201,6 +201,10 @@ export class Landing1Component implements OnInit {
 	gotoRecipeDetails(id){
 	this.router.navigate(['recipedetails', id]);
 	}
+
+	gotoRecipes(id) {
+		this.router.navigate(['recipes', {dietLabels:id}]);
+	}
 }
 
 	
