@@ -6,7 +6,12 @@ export const environment = {
   production: false,
 //  apiUrl:"http://localhost/mobileapp/api",
  apiUrl:"https://www.dentavacation.com/mobileapp/api",
-  accessToken:""
+  accessToken:"",
+  fromname: "Team MTC",
+  fromemail:"<contact@medicaltourismco.com>",
+  companyname: "MTC",
+   contactToName:"Admin",
+  contactEmail: "contact@medicaltourismco.com"
 };
 
 /*
