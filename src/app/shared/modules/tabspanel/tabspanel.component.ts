@@ -310,4 +310,8 @@ export class TabspanelComponent implements OnInit, OnDestroy, AfterViewChecked, 
   //  console.log(retImage);
     return retImage;
   }
+
+  gotoRecipeDetails(id){
+    this.router.navigate(['recipedetails', id]);
+  }
 }

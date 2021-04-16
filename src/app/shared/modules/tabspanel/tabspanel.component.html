@@ -92,10 +92,10 @@
     <div class="tab-content">
         <div class="content-inner" style="min-height:100px;" *ngFor="let recipe of recipesList; let i1= index;">
             <div class="left-side">
-                <a [routerLink]="['/recipedetails', recipe.id]"><img style="width:84px; height:64px" src="{{formatImage(recipe.image, 's')}}" alt="image for {{recipe.label}}"/></a>
+                <a (click)="gotoRecipeDetails(recipe.id)"><img style="width:84px; height:64px" src="{{formatImage(recipe.image, 's')}}" alt="image for {{recipe.label}}"/></a>
             </div>
             <div class="right-side">
-                <h3><a [routerLink]="['/recipedetails', recipe.id]">{{recipe.label}}</a></h3>
+                <h3><a  (click)="gotoRecipeDetails(recipe.id)">{{recipe.label}}</a></h3>
                 <div class="rating-box" *ngIf="recipe.displayrating">
                     <span class="rating-icons" >
                         <i *ngIf="recipe.displayrating >=1" class="fa fa-star"></i>
