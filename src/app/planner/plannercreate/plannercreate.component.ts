@@ -157,11 +157,16 @@ this.loadColorCodes();
 	  
 		this.ratingIds = "";
 	// this.recipes = recipesList;
-	 var params = {"limit": "10"};
+	 var params = {}; //{"limit": "10"};
    //  params["caloriesfrom"] = this.searchparam.range.lower;
 	// params["caloriesto"] = this.searchparam.range.upper;
 	 console.log(this.searchparam);
 
+	 if(idslist == "")
+	 {
+		params["limit"] =  "10";
+
+	 }
 		if(idslist !== "")
 		{
 		params["idslist"] = idslist;
@@ -172,7 +177,7 @@ this.loadColorCodes();
 		params["content"] = this.searchparam["q"];
 	  }
   
-	  params["instructions"] = "notempty";
+	//  params["instructions"] = "notempty";
   
 	  console.log(JSON.stringify(params));
 	  this.calculateCaloryFlag = false;
@@ -503,7 +508,14 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 			var idslist = "";
 			for(let i=0; i < this.favouritesList.length; i++)
 			{
-			  idslist += this.favouritesList[i]["recipeid"] + ",";
+				if(idslist.indexOf(this.favouritesList[i]["recipeid"] + ",") > -1)
+				{
+
+				}
+				else
+				{
+			  		idslist += this.favouritesList[i]["recipeid"] + ",";
+				}
 			  this.favouritesList[i]["recipe"]= null;
 			}
 			if(idslist !== "")
@@ -546,35 +558,78 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 					this.plan["days"][item["day_num"]]["meals"][0]["recipe"] = {};
 				this.plan["days"][item["day_num"]]["meals"][0]["recipe"]["id"] = item["breakfast"];
 				console.log(item["breakfast"]);
-				idslist += item["breakfast"] + ",";
+				if(idslist.indexOf(item["breakfast"] + ",") > -1)
+				{
+
+				}
+				else
+				{
+					idslist += item["breakfast"] + ",";
+				}
+				
 				}
 
 				if(typeof(item["snack1"]) !== "undefined" && item["snack1"] !== null && item["snack1"] !== "")
 				{
 					this.plan["days"][item["day_num"]]["meals"][1]["recipe"] = {};
 				this.plan["days"][item["day_num"]]["meals"][1]["recipe"]["id"] = item["snack1"];
-				idslist += item["snack1"] + ",";
+				//idslist += item["snack1"] + ",";
+				if(idslist.indexOf(item["snack1"] + ",") > -1)
+				{
+
+				}
+				else
+				{
+					idslist += item["snack1"] + ",";
+				}
 				}
 
 				if(typeof(item["lunch"]) !== "undefined" && item["lunch"] !== null && item["lunch"] !== "")
 				{
 					this.plan["days"][item["day_num"]]["meals"][2]["recipe"] = {};
 				this.plan["days"][item["day_num"]]["meals"][2]["recipe"]["id"] = item["lunch"];
-				idslist += item["lunch"] + ",";
+				//idslist += item["lunch"] + ",";
+
+					if(idslist.indexOf(item["lunch"] + ",") > -1)
+					{
+
+					}
+					else
+					{
+						idslist += item["lunch"] + ",";
+					}
 				}
 
 				if(typeof(item["snack2"]) !== "undefined" && item["snack2"] !== null && item["snack2"] !== "")
 				{
 					this.plan["days"][item["day_num"]]["meals"][3]["recipe"] = {};
 				this.plan["days"][item["day_num"]]["meals"][3]["recipe"]["id"] = item["snack2"];
-				idslist += item["snack2"] + ",";
+				//idslist += item["snack2"] + ",";
+
+					if(idslist.indexOf(item["snack2"] + ",") > -1)
+					{
+
+					}
+					else
+					{
+						idslist += item["snack2"] + ",";
+					}
 				}
 
 				if(typeof(item["dinner"]) !== "undefined" && item["dinner"] !== null && item["dinner"] !== "")
 				{
 					this.plan["days"][item["day_num"]]["meals"][4]["recipe"] = {};
 				this.plan["days"][item["day_num"]]["meals"][4]["recipe"]["id"] = item["dinner"];
-				idslist += item["dinner"] + ",";
+				//idslist += item["dinner"] + ",";
+				if(idslist.indexOf(item["dinner"] + ",") > -1)
+					{
+
+					}
+					else
+					{
+						idslist += item["dinner"] + ",";
+					}
+
 				}
 
 
@@ -810,7 +865,7 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 	checkData(item)
 	{
 		var retValue = false;
-		console.log(item);
+		//	console.log(item);
 		if(item["meals"]["length"] > 0)
 		{
 			for(let m=0; m < item["meals"]["length"]; m++)
@@ -819,7 +874,7 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 				retValue = true;
 			}
 		}
-		console.log("retValue " + retValue);
+		//	console.log("retValue " + retValue);
 		return retValue;
 	}
 }
