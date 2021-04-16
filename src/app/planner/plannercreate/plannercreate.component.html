@@ -333,20 +333,16 @@
        
 
         <div class="meal-plans-content">
-            <div class="submit-recipe-form" style="text-align:left; padding-bottom:10px;">
+             <div class="submit-recipe-form" style="text-align:left; padding-bottom:10px;">
                 <label for="title">Meal Plan Name</label>
                 <input type="text" name="tiplannametle" id="planname" [(ngModel)] ="plan.name" (blur)="saveMealPlan()">
                 <br>
                 <label for="short-description">Tags</label>
                 <textarea style="margin-bottom:0px" class="short-text" name="plantags" id="plantags" cols="30" rows="3" [(ngModel)] ="plan.tags" (blur)="saveMealPlan()"></textarea>
-    
-                <div>
-                    <div >
-                        <div style='float:left; padding:5px; margin-right:5px;display:flex; align-items: center;' *ngFor="let ccode of colorCodes | keyvalue;"> <div [ngStyle] ="{'background-color':ccode.value}" style="display:inline-block; width:20px; height:20px;  margin-right:5px; "></div> {{setFLU(ccode.key)}} 
-                           
-                        </div>
-                    </div>
+                <div style='float:left; padding:5px; margin-right:5px;display:flex; align-items: center;' *ngFor="let ccode of colorCodes | keyvalue;"> <div [ngStyle] ="{'background-color':ccode.value}" style="display:inline-block; width:20px; height:20px;  margin-right:5px; "></div>{{setFLU(ccode.key)}} 
+                            
                 </div>
+
             </div>
             <div style="clear:both"></div>
             <div class="meal-row-wrapper meal-row__week-days">
