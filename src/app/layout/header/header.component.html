@@ -28,7 +28,7 @@
                                 <ul class="main-menu">
                                     <li *ngFor="let menu of menuItems; let m = index">
                                         <a *ngIf="menu.link !== 'home'" (click)="gotopage(menu.link)">{{menu.menu}}</a>
-                                        <a *ngIf="menu.link == 'home'" (click)="gotopage(home)">{{menu.menu}}</a>
+                                        <a *ngIf="menu.link == 'home'" (click)="gotopage('home')">{{menu.menu}}</a>
                                         <ul *ngIf="menu.children && menu.children.length > 0">
                                             <li *ngFor="let submenu of menu.children; let m = index">
                                                 <a (click)="gotopage(submenu.link)">{{submenu.menu}}</a>
@@ -111,7 +111,7 @@
                                         </ul>
                                     </li>
                                  
-                                    <li><a class="submit-recipe" (click)="gotopage(recipesubmit)" href="javascript:void(0)">Submit recipe</a></li>
+                                    <li><a class="submit-recipe" (click)="gotopage('recipesubmit')" href="javascript:void(0)">Submit recipe</a></li>
                                 </ul>
   
                             </nav>

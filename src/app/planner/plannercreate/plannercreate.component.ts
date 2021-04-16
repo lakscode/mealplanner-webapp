@@ -45,8 +45,9 @@ export class PlannercreateComponent implements OnInit {
 this.addRecipeImage = "assets/images/add-recipe.png"
 
 		this.draggable = "assets/images/icon_draggable_grey.png"
-
 		this.mineralsList= constants.minerals;
+		
+		
 		this.currentUser =this.helpService.getCurrentUser();
 		if(this.currentUser !== null)
 		{

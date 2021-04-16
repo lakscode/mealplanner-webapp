@@ -46,9 +46,28 @@ export class RecipesComponent implements OnInit {
 	}
 	ngOnInit() {
 		this.searchmorebar = false;
-		this.dietLabelsList = constants.dietLabels;
-		this.healthlabelsList = constants.healthLabels;
-		this.mineralsLabelsList = constants.minerals;
+	//	this.dietLabelsList = constants.dietLabels;
+		this.dietLabelsList= [];
+		for(let d=0; d < constants.dietLabels.length; d++)
+		{
+			this.dietLabelsList.push({"name":constants.dietLabels[d], "selected":false})
+		}
+
+		//this.healthlabelsList = constants.healthLabels;
+		this.healthlabelsList= [];
+		for(let h=0; h < constants.healthLabels.length; h++)
+		{
+			this.healthlabelsList.push({"name":constants.healthLabels[h], "selected":false})
+		}
+
+		//this.mineralsLabelsList = constants.minerals;
+		this.mineralsLabelsList= [];
+		for(let m=0; m <constants.minerals.length; m++)
+		{
+			this.mineralsLabelsList.push({"name":constants.minerals[m], "selected":false})
+		}
+
+
 		this.listorgrid = {"menu":"list", "panel":"listing-list"}
 	 $('.listing-buttons span').on("click",function(){
         $('.listing-buttons span').removeClass("current");
@@ -100,7 +119,7 @@ export class RecipesComponent implements OnInit {
 		  this.searchparam["q"] = this.routeParams.dietLabels;
 		}   
 		console.log(this.routeParams);
-	  this.loadRecipes();
+	  this.searchProps();
 	 }); 
 
 //this.loadRecipes()
@@ -136,14 +155,13 @@ export class RecipesComponent implements OnInit {
 	// params["caloriesto"] = this.searchparam.range.upper;
 	 console.log(this.searchparam);
 	
-  
 	  if(typeof(this.routeParams["dietLabels"]) !== "undefined" && this.routeParams["dietLabels"] !== null && this.routeParams["dietLabels"] !== "")
 	  {
 		params["content"] = this.routeParams["dietLabels"];
 	  }
   
 	  params["instructions"] = "notempty";
-	  params["returnfields"] = " id, label, image, healthLabels, dietLabels, calories,s_instructions ";
+	  params["returnfields"] = " id, label, image, healthLabels, s_instructions, dietLabels, calories,s_instructions ";
 	  console.log(JSON.stringify(params));
 	 var res =   this.dbService.getDatabyFields("recipes", params).subscribe(invData => setTimeout(() => {
   
@@ -166,7 +184,6 @@ export class RecipesComponent implements OnInit {
 		  this.totalPage = this.recipesList1["length"] /10;
 		  console.log(this.recipesList1);
 		 
-		  console.log(this.recipesList2);
 		  this.getDisplayList();
 		  this.loadRatings();
 		}
@@ -229,7 +246,7 @@ endIndex = startIndex+ endIndex;
 
 	loadRatings()
 	{
-	  if(this.ratingIds !== "")
+	  if(typeof(this.ratingIds ) !== "undefined" && this.ratingIds !== "")
 	  {			
 	   this.ratingIds = this.ratingIds.substring(0, this.ratingIds.length-1);
 	  }
@@ -265,23 +282,11 @@ endIndex = startIndex+ endIndex;
   
 				  }
   
-				  var rec1Index = this.recipesList2.findIndex(x1 => (x1.id === temp[i]["recipeid"]));
-				  console.log(rec1Index);
-				  if(rec1Index > -1)
-				  {
-					this.recipesList2[rec1Index]["totalcount"] = temp[i]["totalcount"];
-					this.recipesList2[rec1Index]["totalrating"] = temp[i]["totalrating"];
-  
-					if( temp[i]["totalrating"] > 0 &&  temp[i]["totalcount"] > 0 )
-					{
-					  this.recipesList2[rec1Index]["displayrating"] = Math.ceil((temp[i]["totalrating"]/ temp[i]["totalcount"]));
-					 }
-  
-				  }
+
   
 				}
 				console.log(this.ratingsArr);
-				console.log(  this.recipesList2);
+		
 			  }
 			}
 	
@@ -295,7 +300,10 @@ endIndex = startIndex+ endIndex;
 
 	limitTo(str, num)
 	{
-		return this.helpService.limitTo(str, num) + "...";
+		var retVal = str;
+		if(typeof(str) !== "undefined" && str !== "")
+		retVal = this.helpService.limitTo(str, num) + "...";
+		return retVal;
 	}
 
 	formatImage(image, type)
@@ -344,7 +352,9 @@ endIndex = startIndex+ endIndex;
 
 	console.log(this.searchparam);
 
-
+		console.log(this.healthlabelsList);
+		console.log(this.dietLabelsList);
+		console.log(this.mineralsLabelsList);
 	//this.searchRes = [];
  
 
@@ -365,6 +375,72 @@ endIndex = startIndex+ endIndex;
     }
     params["instructions"]="notempty";
    }
+
+   params["returnfields"] = " id, label, image, healthLabels, s_instructions, dietLabels, calories";
+
+	 var dietlabels = "";
+	 for(let m=0; m <this.dietLabelsList.length; m++)
+	 {
+		 if(this.dietLabelsList[m]["selected"])
+		 dietlabels += this.dietLabelsList[m]["name"] + "~";
+	 }
+	 if( dietlabels !== "")
+	 {
+		dietlabels=  dietlabels.slice(0, -1);
+	 }
+
+	 var healthlabels = "";
+	 for(let m=0; m <this.healthlabelsList.length; m++)
+	 {
+		 if(this.healthlabelsList[m]["selected"])
+		 healthlabels += this.healthlabelsList[m]["name"] + "~";
+	 }
+	 if( healthlabels !== "")
+	 {
+		healthlabels=  healthlabels.slice(0, -1);
+	 }
+	
+	 var minerals = "";
+	 for(let m=0; m <this.mineralsLabelsList.length; m++)
+	 {
+		 if(this.mineralsLabelsList[m]["selected"])
+		 minerals += this.mineralsLabelsList[m]["name"] + "~";
+	 }
+	 if( minerals !== "")
+	 {
+		minerals=  minerals.slice(0, -1);
+	 }
+
+	 console.log("dietLabels");
+	 console.log(dietlabels);
+
+
+	 console.log("healthlabels");
+	 console.log(healthlabels);
+
+	 console.log("minerals");
+	 console.log(minerals);
+
+	var checkMinerals = false;
+ 
+   if(typeof(dietlabels) !== "undefined" && dietlabels  !== "")
+   {
+    params["dietLabels"] = dietlabels
+   } 
+
+   if(typeof(healthlabels ) !== "undefined" && healthlabels !== "")
+   {
+    params["healthLabels"] = healthlabels
+   } 
+   if(typeof(minerals ) !== "undefined" && minerals  !== "")
+   {
+    params["totalNutrientsne"]="notempty";
+    params["digestne"]="notempty";
+    checkMinerals = true;
+
+   } 
+  
+	 console.log(checkMinerals);
     this.searchparam.range.lower
    console.log(this.searchparam);
    console.log(params);
@@ -377,25 +453,22 @@ endIndex = startIndex+ endIndex;
         if(typeof(invData["body"]) !== "undefined" && invData["body"] !== null && invData["body"]["length"] > 0)
         {
           this.recipesList1 = [];
-           this.recipesList2 = [];
+		  this.ratingIds="";
           var temp = invData["body"];
           if(temp["length"] > 0)
           {
             for(let i=0; i< temp["length"] ; i++)
             {
-             if(i < temp["length"]/2)
-              //this.searchRes.push(temp[i]["recipe"])
-              this.recipesList1.push(temp[i]);
-              else 
-              this.recipesList2.push(temp[i]);
-
+                this.recipesList1.push(temp[i]);          
+				this.ratingIds += temp[i]["id"] + ",";
             }
+			this.totalPage = this.recipesList1["length"] /10;
           }
          
         }
        
-        console.log(this.recipesList1);
-         console.log(this.recipesList2);
+		this.getDisplayList();
+		this.loadRatings();
 
       }
 

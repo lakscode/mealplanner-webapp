@@ -31,8 +31,8 @@
                                         <div class="listSection" id="healthLabels" style="display:inline-block;">
 
                                             <ng-container *ngFor="let hlabel of healthlabelsList; let h = index">
-                                                <label class="container" style="font-size:12px">{{hlabel}}
-                                                    <input type="checkbox" [checked]="h == 0?'checked':''">
+                                                <label class="container" style="font-size:12px">{{hlabel.name}}
+                                                    <input [(ngModel)] ="hlabel.selected" type="checkbox" [checked]="h == 0?'checked':''">
                                                     <span class="checkmark"></span>
                                                 </label>
                                             </ng-container>
@@ -45,9 +45,9 @@
                                         <label class="form-control-placeholder fcs">Diet Labels</label> 
                                         <div class="listSection" id="diethLabels" style="display:inline-block;">
                                            
-                                            <ng-container *ngFor="let hlabel of healthlabelsList; let h = index">
-                                                <label class="container" style="font-size:12px">{{hlabel}}
-                                                    <input type="checkbox" [checked]="h == 0?'checked':''">
+                                            <ng-container *ngFor="let dlabel of dietLabelsList; let h = index">
+                                                <label class="container" style="font-size:12px">{{dlabel.name}}
+                                                    <input [(ngModel)] ="dlabel.selected" type="checkbox" [checked]="h == 0?'checked':''">
                                                     <span class="checkmark"></span>
                                                 </label>
                                             </ng-container>
@@ -70,8 +70,8 @@
                                         <label class="form-control-placeholder fcs">Nutrients</label> 
                                         <div class="listSection"  style="display:inline-block; height:145px; max-height:145px; overflow:auto;">
                                             <ng-container *ngFor="let mlabel of mineralsLabelsList; let m = index">
-                                                <label class="container" style="font-size:12px">{{setFLU(mlabel)}}
-                                                    <input type="checkbox" [checked]="m == 0?'checked':''">
+                                                <label class="container" style="font-size:12px">{{setFLU(mlabel.name)}}
+                                                    <input [(ngModel)] = 'mlabel.selected' type="checkbox" [checked]="m == 0?'checked':''">
                                                     <span class="checkmark"></span>
                                                 </label>
                                             </ng-container>
@@ -169,7 +169,7 @@
               </ul>-->
                                     <div class="rating-box">
                                         <span class="rating-icons" *ngFor="let item of [1,2,3,4,5]">
-                                            <i class="fa fa-star"></i>
+                                            <i [ngClass]="item <= recipe1.displayrating?'fa fa-star rating-h':'fa fa-star rating'"></i>
                                         </span>
                                         <span class="rating-figure">{{recipe1.displayrating}}</span>
                                     </div>
