@@ -163,4 +163,9 @@ export class LoginComponent implements OnInit {
 		//this.router.navigate(['register']);
 	}
 
+
+gotopage(page){
+	this.router.navigate([page]);
+	}
+
 }
