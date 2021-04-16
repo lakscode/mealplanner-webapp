@@ -197,6 +197,10 @@ export class Landing1Component implements OnInit {
 	//  console.log(retImage);
 	  return retImage;
 	}
+
+	gotoRecipeDetails(id){
+	this.router.navigate(['recipedetails', id]);
+	}
 }
 
 	
