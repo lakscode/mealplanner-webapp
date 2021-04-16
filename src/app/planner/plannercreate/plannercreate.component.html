@@ -308,7 +308,7 @@
                                         <div class="container-fluid create-meal-plan-modal-container"
                                             data-test="container"></div><img
                                             id="add-to-meal-plan-modal-6050d5d15ddc1c00294df92a"
-                                            class="add-to-meal-plan-modal-button" src="/static/images/plus.png"
+                                            class="add-to-meal-plan-modal-button" src="/assets/plus.png"
                                             alt="Add recipe icon" href="#">
                                     </div>
                                     <div data-test="share-modal"><i class="fa fa-share-alt" aria-hidden="true"></i>
@@ -361,7 +361,7 @@
            
                 <ng-container *ngFor="let item of plan['days']; let r = index;">
                     <div class="meal-row-wrapper">
-                   <div class="meal-name" style="min-height:130px"><span>{{item.name}}</span></div>
+                   <div class="meal-name" style="min-height:130px"><span [ngClass]="checkData(item)?'left120':'left30'">{{item.name}}</span></div>
                     <div class="meal-plan-column-container">
                         <div class="meal-plan-row">
                          

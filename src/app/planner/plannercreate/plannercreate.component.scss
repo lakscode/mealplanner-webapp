@@ -39,12 +39,19 @@
 
 .meal-name span {
   top: 60px !important;
-  left:30px !important;
   right: 0 !important;
   bottom: 0 !important;
   padding-left:10px;
 }
 
+.left30
+{
+  left:30px !important;
+}
+.left120
+{
+  left:120px !important;
+}
 .meal-name::before {
 
   content: "";

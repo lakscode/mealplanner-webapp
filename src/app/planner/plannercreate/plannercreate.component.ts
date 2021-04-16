@@ -8,6 +8,7 @@ import { HelpService } from '../../services/help.service';
 import { constants } from '../../jsonfiles/constants';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { ConsoleReporter } from 'jasmine';
 @Component({
 	selector: 'app-plannercreate',
 	templateUrl: './plannercreate.component.html',
@@ -803,6 +804,22 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 		{
 			retValue = this.helpService.setInputFirstToUppercase(str);
 		}
+		return retValue;
+	}
+
+	checkData(item)
+	{
+		var retValue = false;
+		console.log(item);
+		if(item["meals"]["length"] > 0)
+		{
+			for(let m=0; m < item["meals"]["length"]; m++)
+			{
+				if(item["meals"][m]["recipe"] !== null)
+				retValue = true;
+			}
+		}
+		console.log("retValue " + retValue);
 		return retValue;
 	}
 }
