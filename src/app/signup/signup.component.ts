@@ -217,5 +217,9 @@ gotologin()
     //this.errorSignup = "";
   }
 
+  gotopage(page){
+  this.router.navigate([page]);
+  }
+
 
 }

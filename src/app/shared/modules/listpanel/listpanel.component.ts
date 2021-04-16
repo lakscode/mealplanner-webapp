@@ -166,5 +166,9 @@ formatLabels(str)
 
   return retStr;
 }
+
+gotoRecipeDetails(id){
+  this.router.navigate(['recipedetails', id]);
+}
 }
 

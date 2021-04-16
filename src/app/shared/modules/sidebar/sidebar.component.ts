@@ -179,4 +179,8 @@ this.showhideTimeFlag = false;
     }
     return retImage;
   }
+
+  gotoRecipeDetails(id){
+  this.router.navigate(['recipedetails', id]);
+  }
 }

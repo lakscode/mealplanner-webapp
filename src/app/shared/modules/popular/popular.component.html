@@ -4,12 +4,12 @@
     <ul>
         <li *ngFor="let recipe of recipesList; let r = index;">
             <div class="thumb">
-                <a [routerLink]="['/recipedetails', recipe.id]">
+                <a (click)="gotoRecipeDetails(recipe.id)">
                     <img src="{{formatImage(recipe.image, 's')}}" alt="thumbnail">
                 </a>
             </div>
             <div class="detail">
-                <a [routerLink]="['/recipedetails', recipe.id]">{{recipe.label}}</a>
+                <a (click)="gotoRecipeDetails(recipe.id)">{{recipe.label}}</a>
                 <span class="post-date">{{formatLabels(recipe.dietLabels)}}</span>
             </div>
         </li>

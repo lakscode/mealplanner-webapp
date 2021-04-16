@@ -5,11 +5,11 @@
         <ng-container *ngFor="let recipe of relatedrecipesList; let r = index;">
         <div class="recipe-single  wow flipInY animated" style="visibility: visible; animation-name: flipInY;">
             <div class="recipe-image">
-                <a [routerLink]="['/recipedetails', recipe.id]"><img src="{{recipe.image}}" alt="image"></a>
+                <a (click)="gotoRecipeDetails(recipe.id)"><img src="{{recipe.image}}" alt="image"></a>
             </div>
             <div class="outer-detail">
                 <div class="detail">
-                   <h3><a [routerLink]="['/recipedetails', recipe.id]">{{recipe.label}}</a></h3>
+                   <h3><a (click)="gotoRecipeDetails(recipe.id)">{{recipe.label}}</a></h3>
 
                     <div class="short-separator"></div>
                     <ul class="news-post-meta post-meta">
