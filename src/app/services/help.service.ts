@@ -26,6 +26,15 @@ export class HelpService {
 	constructor(private httpService: HttpClient, private router: Router, private route: ActivatedRoute, private dbService: DBService, private userService: UserService, private modalservice: ModalService) {
 
 	}
+	GeneratePassword(idlength) {
+		var characters = "abcdefghijklmnopqrstuvwxyz@#%^&*ABCDEFGHIJKLMNOP1234567890";
+		var password = "";
+		var charactersLength = characters.length;
+		for (var i = 0; i < idlength; i++) {
+			password += characters.charAt(Math.floor(Math.random() * charactersLength));
+		}
+		return password;
+	}
 	encryptPass(str) {  
 	 
 		return CryptoJS.AES.encrypt(str.trim(), this.secretCode).toString();  
@@ -421,5 +430,106 @@ export class HelpService {
 
 	  return retImage;
 	}
+	isProfessional(user)
+	{
+		var returnVal = false;
+		if(typeof(user["role"]) !== "undefined")
+		{
+			if(user["role"] == "PREMIUM")
+			{
+				returnVal = true;
+			}
+		}
+		return returnVal;
 
+	}
+
+	isEmployee(user)
+	{
+		var returnVal = false;
+		if(typeof(user["role"]) !== "undefined")
+		{
+			if(user["role"].toString().toUpperCase().indexOf("EMP") !== -1)
+			{
+				returnVal = true;
+			}
+		}
+		return returnVal;		
+	}
+
+	isMasterAdmin(user)
+	{
+
+		var res = false;
+
+		if(user["role"] == "SUPERADMIN" || user["role"] == "MASTERADMIN"  || user["role"] == "SYSADMIN" || user["role"] == "DEVADMIN" )
+		res = true;
+
+		return res;
+
+	}
+
+	isSuperAdmin(user)
+	{
+
+		var res = false;
+		if(typeof(user) !== "undefined" && user !== null)
+		{
+			if(typeof(user["role"] ) !== "undefined" && user["role"]  !== null)
+			{
+				if(user["role"] == "SUPERADMIN")
+				res = true;
+			}
+		}
+		
+		return res;
+
+	}
+
+	isAdmin(user)
+	{
+		var res = false;
+		if(typeof(user) !== "undefined" && user !== null)
+		{
+			if(typeof(user["role"] ) !== "undefined" && user["role"]  !== null)
+			{
+				if(user["role"] == "SUPERADMIN" || user["role"] == "MASTERADMIN"  || user["role"] == "SYSADMIN" || user["role"] == "DEVADMIN" || user["role"] == "ADMIN"  || user["isAdmin"] == "ADMIN"   || user["isAdmin"] == "CLIENTADMIN"  )
+				res = true;
+			}
+		}
+		return res;
+
+	}
+
+	formatStringDecode(str)
+{
+	var retVal = str;
+	if(str !== "")
+	{
+		retVal = unescape(str);
+	//	retVal = retVal.replace("&#39;", "'");
+		
+	}
+	//console.log(retVal);
+	return retVal;
+}
+formatStringEncode(str)
+{
+	var retVal = str;
+	if(str !== "")
+	{
+		retVal = escape(str);
+/*
+		retVal = str.replace(/’/g, ' ');
+		retVal = retVal.replace(/“/g, ' ');
+		retVal = retVal.replace(/”/g, ' ');
+		retVal = retVal.replace(/‘/g, '&#39;');
+		retVal = retVal.replace(/’/g, '&#39;');
+		retVal = retVal.replace(/'/g, '&#39;');
+*/
+
+	}
+
+	return retVal;
+}
 }

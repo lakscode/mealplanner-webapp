@@ -66,7 +66,7 @@ import { ResetpassModule } from './password/resetpass/resetpass.module';
 import { NgxSpinnerModule } from "ngx-spinner";
 
 import { ModalModule } from './shared/modules'; 
-
+import { AdminModule } from './admin/admin.module'; 
 @NgModule({
   declarations: [
 		AppComponent
@@ -109,7 +109,8 @@ import { ModalModule } from './shared/modules';
 	MyinfoModule,
 	AutherizeModule,
 	PasslostModule, 
-	ResetpassModule
+	ResetpassModule,
+	AdminModule
   ],
   schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
   providers: [UserService],

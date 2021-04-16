@@ -1,0 +1,198 @@
+<div class="row bgborder"
+	*ngIf="isMasterAdmin || isEmployee">
+	<div class="col-12">
+		<div class="section-header corange onlydesktop">Manage Requests</div>
+		<div class="section-header corange onlymobile">Requests</div>
+	</div>
+	<div class="col-12" *ngIf="errorMessage !== ''" style="font-size:10pt">{{errorMessage}}</div>
+	<div class="col-12 " *ngIf="uploadedFilesList.length > 0">
+		<div class="tablpanel onlydesktop" style="padding-bottom:0px;border:1px solid #CCC;color: #444444;">
+			<div class="grid-wrapper gridall">
+				<ag-grid-angular #agGrid id="myGrid" class="ag-theme-balham gridclass" [rowData]="rowData"
+					[gridOptions]="gridOptions" [paginationAutoPageSize]="true" [pagination]="true"
+					(cellClicked)='onCellClicked($event)'>
+				</ag-grid-angular>
+			</div>
+		</div>
+		<div class="onlymobile">		
+			<div class='col-12 col-lg-12 col-xl-12 infoModal' *ngFor="let reqData of uploadedFilesList; let i = index;">					
+				<p class="mDetails"><span>Name :</span> {{reqData.name}}</p>
+				<p class="mDetails"><span>Location :</span> {{reqData.location}}</p>
+				<p class="mDetails"><span>Message :</span> {{reqData.message}}</p>		
+			</div>
+	</div>	
+	</div>
+	<div class="col-12 " *ngIf="uploadedFilesList.length == 0">
+		<span class="norecords">{{propertiesMessage}}</span>
+	</div>
+</div>
+
+<div *ngIf="!isMasterAdmin && !isEmployee">
+	<span> You are not authorized to view
+		this page.</span>
+</div>
+
+<jw-modal id="addnew" style="display:none"  width="80%">
+	<form name="form" (ngSubmit)="addData(uf)" #uf="ngForm" novalidate class="popup-panel">
+		<div class="modal-header" style="background:#FFF;">
+			<h4>
+				<span *ngIf="addItem.id !== ''">Modify Requests</span>
+				<span *ngIf="addItem.id == ''">Add New Requests</span>
+			</h4>
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeModal('addnew');">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		<div class="modal-body" style="background:#FFF;" *ngIf="addItem">
+
+			<div class="row">
+				<div class='col-12 col-lg-3'>
+					<div class="form-group">
+						<label [ngClass]="'inputlabel'" for="name">Name<span class="mandatory">&#42;</span></label>
+						<input type="text" autocomplete="off" id="name" name="name" #name="ngModel" class="form-control"
+							[(ngModel)]="addItem.name" required>
+						<div *ngIf="formSubmitted && name.invalid" class="alert alert-danger">
+							<div *ngIf="name.errors.required">Name is required</div>
+						</div>
+					</div>
+				</div>
+				<div class='col-12 col-lg-3'>
+					<div class="form-group">
+						<label [ngClass]="'inputlabel'" for="email">Email<span class="mandatory">&#42;</span></label>
+						<input type="text" autocomplete="off" id="email" name="email" #email="ngModel"
+							class="form-control" [(ngModel)]="addItem.email" required email>
+						<div *ngIf="formSubmitted && email.invalid" class="alert alert-danger">
+							<div *ngIf="email.errors.required">Email is required</div>
+							<div *ngIf="email.errors.email">Email must be a valid email address</div>	
+						</div>
+					</div>
+				</div>
+
+				<div class='col-12 col-lg-3'>
+					<div class="form-group">
+						<label [ngClass]="'inputlabel'" for="phone">Phone</label>
+						<input type="text" autocomplete="off" id="phone" name="phone" #phone="ngModel"
+							class="form-control" [(ngModel)]="addItem.phone">
+						<!-- <div *ngIf="formSubmitted && phone.invalid" class="alert alert-danger">
+								<div *ngIf="phone.errors.required">Phone is required</div>
+							</div> -->
+					</div>
+				</div>
+
+				<div class='col-12 col-lg-3'>
+					<div class="form-group">
+						<label [ngClass]="'inputlabel'" for="mobile">Mobile</label>
+						<input type="text" autocomplete="off" id="mobile" name="mobile" #mobile="ngModel"
+							class="form-control" [(ngModel)]="addItem.mobile">
+					</div>
+					<div *ngIf="formSubmitted && mobile.invalid" class="alert alert-danger">
+						<div *ngIf="mobile.errors.required">Mobile is required</div>
+					</div>
+				</div>
+				<div class='col-12 col-lg-3'>
+					<div class="form-group">
+						<label [ngClass]="'inputlabel'" for="location">Location<span
+								class="mandatory">&#42;</span></label>
+						<input type="text" autocomplete="off" id="location" name="location" #location="ngModel"
+							class="form-control" required [(ngModel)]="addItem.location">
+					</div>
+					<div *ngIf="formSubmitted && location.invalid" class="alert alert-danger">
+						<div *ngIf="location.errors.required">Location is required</div>
+					</div>
+				</div>
+				<div class='col-12 col-lg-3'>
+					<div class="form-group">
+						<label [ngClass]="'inputlabel'" for="city">City</label>
+						<input type="text" autocomplete="off" id="city" name="city" #city="ngModel" class="form-control"
+							[(ngModel)]="addItem.city">
+					</div>
+				</div>
+				<div class='col-12 col-lg-3'>
+					<div class="form-group">
+						<label [ngClass]="'inputlabel'" for="type">Property Type<span class="mandatory">&#42;</span></label>
+						<div [ngClass]="'select'">
+							<select [(ngModel)]="addItem.type" class="form-control-select round" name="type" id="type"
+								#type="ngModel" required>
+								<option [value]="type.id" *ngFor="let type of ptypeList; let i = index"> {{type.propertytype}}
+								</option>
+							</select>
+						</div>
+						<div *ngIf="formSubmitted && type.invalid" class="alert alert-danger">
+							<div *ngIf="type.errors.required"> Property Type is required</div>
+						</div>
+					</div>
+				</div>
+				<div class='col-12 col-lg-3'>
+					<div class="form-group">
+						<label [ngClass]="'inputlabel'" for="status">Status <span class="mandatory">&#42;</span></label>
+						<div [ngClass]="'select'">
+							<select [(ngModel)]="addItem.status" class="form-control-select round" name="status"
+								id="status" #status="ngModel">
+								<option [value]="type.id" *ngFor="let type of manageRequestStatus; let i = index">
+									{{type.status}} </option>
+							</select>
+						</div>
+					</div>
+				</div>
+
+				<div class='col-12 col-lg-4'>
+					<div class="form-group">
+						<label [ngClass]="'inputlabel'" for="address">Address<span
+								class="mandatory">&#42;</span></label>
+						<textarea rows="6" id="address" name="address" class="form-control"
+							[(ngModel)]="addItem.address" required #address="ngModel"></textarea>
+					</div>
+					<div *ngIf="formSubmitted && address.invalid" class="alert alert-danger">
+						<div *ngIf="address.errors.required">Address is required</div>
+					</div>
+				</div>
+				<div class='col-12 col-lg-4'>
+					<div class="form-group">
+						<label [ngClass]="'inputlabel'" for="message">Message<span
+								class="mandatory">&#42;</span></label>
+						<textarea rows="6" id="message" name="message" class="form-control"
+							[(ngModel)]="addItem.message" required #message="ngModel"></textarea>
+					</div>
+					<div *ngIf="formSubmitted && message.invalid" class="alert alert-danger">
+						<div *ngIf="message.errors.required">Message is required</div>
+					</div>
+				</div>
+				<div class='col-12 col-lg-4'>
+					<div class="form-group">
+						<label [ngClass]="'inputlabel'" for="rcomments">Reviewer Comments<span
+								class="mandatory">&#42;</span></label>
+						<textarea rows="6" id="rcomments" name="rcomments" class="form-control"
+							[(ngModel)]="addItem.rcomments" required #rcomments="ngModel"></textarea>
+					</div>
+					<div *ngIf="formSubmitted && rcomments.invalid" class="alert alert-danger">
+						<div *ngIf="rcomments.errors.required">Reviewer Comments is required</div>
+					</div>
+				</div>
+				
+				
+				<div class='col-12'>
+					<div class="form-group">
+						<button class="defaultbtn" type="submit">Save</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</jw-modal>
+<jw-modal id="popupformessage" style="display:none">
+	<div class="popup-panel">
+		<div class="modal-header">
+			<h4>{{modalHeading}}</h4>
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close"
+				(click)="closeModal('popupformessage');">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		<div class="modal-body">
+			<div class="row" *ngIf="modaltext">
+				<div class="col-12 col-lg-12 col-xl-12 infoModal" innerHTML="{{modaltext}}">
+				</div>
+			</div>
+		</div>
+	</div>
+</jw-modal>

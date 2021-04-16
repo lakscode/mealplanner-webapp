@@ -171,7 +171,7 @@ console.log(currentUrl);
 
 		sessionStorage.setItem('currentUser', "");
 		
-	//	this.router.navigate(['login']);
+		this.router.navigate(['login']);
 	}
 	
 	navbarOpen = false;

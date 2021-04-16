@@ -671,6 +671,7 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
     {
 		var rowItem = this.plan["days"][r]["meals"];
 		console.log(rowItem);
+		console.log( this.plan["days"][r]['id']);
       var params = {};
        
         params["meal_plan_id"] = this.plan["id"];
@@ -703,8 +704,10 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 
     //  console.log(params);
     //  console.log(JSON.stringify(params));
-      if(typeof(rowItem['id']) == "undefined" || this.plan["days"][r]['id'] == "")
+      if(typeof(this.plan["days"][r]['dayid']) == "undefined" || this.plan["days"][r]['dayid'] == "")
       { 
+		  console.log("post data");
+		  console.log(params);
         var res =   this.dbService.postDataByTable("days", params).subscribe(dData => setTimeout(() => {
 
           console.log(dData);
@@ -714,7 +717,7 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
             {
               this.plan["days"][r]["meals"]= rowItem;
               this.plan["days"][r]['id']= dData['inserted_id'];
-		
+			  this.plan["days"][r]['dayid']= dData['inserted_id'];
             }
             else{
             // this.createDay();
@@ -726,8 +729,11 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
       }
       else
       {
-        params["id"] = this.plan["days"][r]['id'];
+		  console.log(this.plan);
+        params["id"] = this.plan["days"][r]['dayid'];
       //  console.log(JSON.stringify(params));
+	  console.log("update data");
+	  console.log(params);
         var res =   this.dbService.updateDataByTable("days", params).subscribe(dData => setTimeout(() => {
 
         //  console.log(dData);

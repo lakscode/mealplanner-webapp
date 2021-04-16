@@ -1,0 +1,196 @@
+<div class="row bgborder"  *ngIf="isAuthorised">
+	<div class="col-12">
+		<div class="section-header corange onlydesktop">Manage Testimonials</div>
+		<div class="section-header corange onlymobile">Testimonials</div>
+	</div>
+	<div class="col-12 paddingt0 onlydesktop" style="text-align:right;" >		
+		<button (click)="modifyTestimonial('')" class="btnadd">Add New Testimonial</button>
+	</div>
+	<div class="col-12 " *ngIf="testimonials.length > 0">
+		<div class="tablpanel onlydesktop" style="padding-bottom:0px;border:1px solid #CCC">
+			<div class="grid-wrapper gridall" >
+                <ag-grid-angular #agGrid  id="myGrid" class="ag-theme-balham gridclass"
+                    [rowData]="rowData" [gridOptions]="gridOptions" [paginationAutoPageSize]="true" [pagination]="true"
+                    (cellClicked)='onCellClicked($event)'>
+                </ag-grid-angular>               
+			</div>			
+		</div>
+		<div class="onlymobile">
+			<ng-container *ngFor="let testimonialData of testimonials; let i = index;">		
+			<div class='col-12 col-lg-12 col-xl-12 infoModal' *ngIf="testimonialData.deleted === '0'" >						
+				<p class="mDetails"><span>Name :</span> {{testimonialData.name}}</p>
+				<p class="mDetails"><span>Email :</span> {{testimonialData.email}}</p>
+				<p class="mDetails"><span>Testimonial :</span> {{testimonialData.testimonial}}</p>	
+			</div>
+		</ng-container>
+		</div>			
+	</div>
+	<div class="col-12 " *ngIf="testimonials.length == 0">
+		<span class="norecords">{{errorMessage}}</span>
+
+			
+			
+			
+			
+	</div>
+	
+
+
+</div>
+<div *ngIf="!isAuthorised">
+	<span>	You are not authorized to view this page.</span>
+</div>
+<jw-modal id="isNewTestimonial" style="display:none;" >
+	<form name="form" (ngSubmit)="addTestimonialData(uf)" #uf="ngForm" novalidate class="popup-panel">
+		<div class="modal-header" *ngIf='newTestimonial' style=" background:#FFF;color:#000;padding:10px;">
+			<h4>
+				<span>{{modalheadingAddEdit}}</span>
+			</h4>
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close"
+				(click)="closeModal('isNewTestimonial');">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		<div class="modal-body" *ngIf='newTestimonial'  style=" background:#FFF;color:#000;text-align:left">
+			
+			<div class="row">
+				<div class='col-6'>
+					<div class="form-group">
+						<label
+						[ngClass]="'inputlabel'"
+							for="name">Name <span class="mandatory">&#42;</span></label>
+					
+						<input type="text" autocomplete="off" id="name" name="name"
+							class="form-control " [disabled]="viewMode" [(ngModel)]="newTestimonial.name" required
+							#name="ngModel">
+						<div *ngIf="formSubmitted && name.invalid" class="alert alert-danger">
+							<div *ngIf="name.errors.required">Name is required</div>
+							
+						</div>
+					</div>
+				</div>
+				<div class='col-6'>
+					<div class="form-group">
+						<label
+						[ngClass]="'inputlabel'"
+							for="email">Email <span class="mandatory">&#42;</span></label>
+					
+						<input type="text" autocomplete="off" id="email" name="email"
+							class="form-control " [disabled]="viewMode" email [(ngModel)]="newTestimonial.email" required
+							#email="ngModel">
+						<div *ngIf="formSubmitted && email.invalid" class="alert alert-danger">
+							<div *ngIf="email.errors.required">Email is required</div>
+							<div *ngIf="email.errors.email">Email must be a valid email address</div>
+						</div>
+					</div>
+				</div>
+				
+				
+				<div class='col-6'>
+					<div class="form-group">
+						<label
+						[ngClass]="'inputlabel'"
+							for="phone">Phone </label>				
+						<input type="text" autocomplete="off" id="phone" name="phone"
+							class="form-control " [disabled]="viewMode" [(ngModel)]="newTestimonial.phone" 
+							#phone="ngModel"  maxlength="12">							
+					</div>
+				</div>
+		
+				<div class='col-12'>
+					<div class="form-group">
+						<label
+						[ngClass]="'inputlabel'"
+							for="additionalInfo">Testimonial <span class="mandatory">&#42;</span></label>
+					
+						<textarea rows="3" id="additionalInfo" name="additionalInfo" class="form-control"
+						#additionalInfo= "ngModel" [(ngModel)]="newTestimonial.testimonial" required ></textarea>
+
+						<div *ngIf="formSubmitted && additionalInfo.invalid" class="alert alert-danger">
+								<div *ngIf="additionalInfo.errors.required">Testimonial is required</div>
+								<!-- <div *ngIf="email.errors.email">Email must be a valid email address</div> -->
+						</div>
+					</div>
+					
+				</div>
+
+				
+				<!-- <div class='col-12' *ngIf="newUserWoEmail.role == 'REALTOR'">
+					<div class="form-group">
+						<label for="file-upload" class="custom-file-upload" >
+    				      <i class="fa fa-cloud-upload"></i> Upload Picture
+   						</label>
+  					<input class="customfile" id="file-upload" type="file"  />
+     				</div>
+				</div> -->
+				
+				<div *ngIf="!viewMode" class='col-12'>
+					<div class="form-group">
+						<button class="defaultbtn" type="submit">Save</button>
+					</div>
+				</div>
+			</div>
+
+		
+		</div>
+		
+
+	</form>
+</jw-modal>
+<jw-modal id="popupformessage" style="display:none">
+	<div class="popup-panel">
+		<div class="modal-header">
+			<h4>{{modalHeading}}</h4>
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close"
+				(click)="closeModal('popupformessage');">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		<div class="modal-body">
+			<div class="row" *ngIf="modaltext">
+				<div class="col-12 col-lg-12 col-xl-12 infoModal" innerHTML="{{modaltext}}">
+				</div>
+			</div>
+		</div>
+	</div>
+</jw-modal>
+
+<jw-modal id="isModelActive" style="display:none;" width="50%">
+	<form name="form" (ngSubmit)="saveStatus(userform)" #userform="ngForm" novalidate class="popup-panel">
+		<div class="modal-header" *ngIf='statusData' style=" background:#FFF;color:#000;padding:10px;">
+			<h4>
+				<span *ngIf="statusData['id'] !== ''">Modify Testimonial</span>
+				<span *ngIf="statusData['id'] == ''">Add New Testimonial</span>
+
+			</h4>
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close"
+				(click)="closeModal('isModelActive');">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		<div class="modal-body" *ngIf='statusData' style=" color:#000;text-align:left">
+
+			<div class="row">
+				<div class='col-12'>
+					<div class="input-group">
+						<label
+							[ngClass]="'inputlabel'"
+							for="newDeleted">Active </label>
+						<input type="checkbox"  name = "newdeleted" id="newDeleted" value="{{statusData.active}}" [(ngModel)]= "statusData.active">
+	
+					</div>
+				
+				</div>
+
+			</div>
+		</div>
+		<div class="modal-footer" style=" background:#FFF;">
+			<div class="input-group">
+				<button class="defaultbtn" type="submit">Save</button>
+			</div>
+		</div>
+	</form>
+</jw-modal>
+
+
+

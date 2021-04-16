@@ -1,0 +1,149 @@
+<div class="row bgborder" *ngIf="isMasterAdmin || isEmployee">
+	<div class="col-12">
+		<div class="section-header corange onlydesktop">Manage Announcements</div>
+		<div class="section-header corange onlymobile">Announcements</div>
+	</div>
+	<div class="col-12 paddingt0 onlydesktop" *ngIf="loading">
+		<div  style="text-align:right;">
+			<button (click)="addNew()" class="btnadd">Add New Announcement</button>
+		</div>
+	</div>
+	<div class="col-12">
+		<p *ngIf="errorMessage !== ''" style="font-size:10pt">{{errorMessage}}</p>
+	</div>
+		<div class="col-12" *ngIf="itemsList.length > 0">
+			<div class="tablpanel onlydesktop" style="padding-bottom:0px;border:1px solid #CCC;color: #444444;">
+				<div class="grid-wrapper gridall">
+					<ag-grid-angular #agGrid id="myGrid" class="ag-theme-balham gridclass" [rowData]="rowData"
+						[gridOptions]="gridOptions" [paginationAutoPageSize]="true" [pagination]="true"
+						(cellClicked)='onCellClicked($event)'>
+					</ag-grid-angular>
+				</div>
+			</div>
+			<div class="onlymobile">
+			<ng-container *ngFor="let listData of itemsList; let i = index;">
+			<div class='col-12 col-lg-12 col-xl-12 infoModal' *ngIf="listData.deleted === '0'" >						
+				<p class="mDetails"><span>Announcement :</span> {{listData.announcement}}</p>	
+			</div>
+		</ng-container>
+	</div>	
+		</div>
+		<div class="col-12 " *ngIf="itemsList.length == 0">
+			<span class="norecords">{{propertiesMessage}}</span>
+		</div>
+
+</div>
+<div *ngIf="!isMasterAdmin && !isEmployee">
+	<span>
+		You are not authorized to view this page.
+	</span>
+</div>
+
+<jw-modal id="addnew" style="display:none">
+	
+	<form name="form" (ngSubmit)="addData(uf)" #uf="ngForm" novalidate class="popup-panel">
+		<div class="modal-header" style="background:#FFF;">
+			<h4>
+				<span *ngIf="addItem.id !== ''">Modify Announcement</span>
+				<span *ngIf="addItem.id == ''">Add New Announcement</span>
+
+			</h4>
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeModal('addnew');">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		<div class="modal-body" style="background:#FFF;" *ngIf="addItem">
+
+			<div class="row">
+				<div class='col-12 col-lg-12'>
+					<div class="form-group">
+						<label [ngClass]="'form-control-placeholder fcs'" for="announcement">Announcement Text<span
+								class="mandatory">&#42;</span></label>
+								<textarea rows="4" maxlength = "120" id="announcement" name="announcement" class="form-control"
+								#announcement= "ngModel" (keyup) = "CountLeftChars(addItem.announcement);" [(ngModel)]="addItem.announcement" required ></textarea>
+							<div *ngIf="formSubmitted && announcement.invalid" class="alert alert-danger">
+							<div *ngIf="announcement.errors.required">Announcement Text is required</div>
+						</div>
+					</div>
+					<p style="font-style:italic;">Maximum allowed length is 120 characters. </p>
+					<div class="leftChars" *ngIf="addItem.announcement !== '' && leftChars !== -1"> {{leftChars}} characters left</div>
+
+				</div>
+				<!-- <div class='col-12 col-lg-6' >
+					<div class="input-group" >
+				
+						<label class="panelcheck">Active
+							<input [(ngModel)]="addItem.deleted" id="itemdeleted" name = "itemdeleted" type="checkbox"
+							>
+							<span class="checkmark"></span>
+						</label>
+
+					</div>		
+				</div> -->
+
+				<div class='col-12'>
+					<div class="form-group">
+						<button class="defaultbtn" type="submit">Save</button>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+	</form>
+</jw-modal>
+
+<jw-modal id="popupformessage" style="display:none">
+	<div class="popup-panel">
+		<div class="modal-header">
+			<h4>{{modalHeading}}</h4>
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close"
+				(click)="closeModal('popupformessage');">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		<div class="modal-body">
+			<div class="row" *ngIf="modaltext">
+				<div class="col-12 col-lg-12 col-xl-12 infoModal" innerHTML="{{modaltext}}">
+				</div>
+			</div>
+		</div>
+	</div>
+</jw-modal>
+
+<jw-modal id="isModelActive" style="display:none;" width="50%">
+	<form name="form" (ngSubmit)="saveStatus(userform)" #userform="ngForm" novalidate class="popup-panel">
+		<div class="modal-header" *ngIf='statusData' style=" background:#FFF;color:#000;padding:10px;">
+			<h4>
+				<span *ngIf="statusData['id'] !== ''">Modify Announcement</span>
+				<span *ngIf="statusData['id'] == ''">Add New Announcement</span>
+
+			</h4>
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close"
+				(click)="closeModal('isModelActive');">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		<div class="modal-body" *ngIf='statusData' style=" color:#000;text-align:left">
+
+			<div class="row">
+				<div class='col-12'>
+					<div class="input-group">
+						<label
+							[ngClass]="'inputlabel'"
+							for="newDeleted">Active </label>
+						<input type="checkbox"  name = "newdeleted" id="newDeleted" value="{{statusData.active}}" [(ngModel)]= "statusData.active">
+	
+					</div>
+				
+				</div>
+
+			</div>
+		</div>
+		<div class="modal-footer" style=" background:#FFF;">
+			<div class="input-group">
+				<button class="defaultbtn" type="submit">Save</button>
+			</div>
+		</div>
+	</form>
+</jw-modal>

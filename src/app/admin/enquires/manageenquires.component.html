@@ -1,0 +1,139 @@
+<div class="row bgborder"
+	*ngIf="isAuthorised">
+	<div class="col-12">
+		<div class="section-header corange onlydesktop">Manage Enquiries</div>
+		<div class="section-header corange onlymobile">Enquiries</div>
+	</div>
+	<div class="col-12" *ngIf="errorMessage !== ''" style="font-size:10pt">{{errorMessage}}</div>
+
+	<div class="col-12 " *ngIf="uploadedFilesList.length > 0">
+		<div class="tablpanel onlydesktop" style="padding-bottom:0px;border:1px solid #CCC;color: #444444;">
+			<div class="grid-wrapper gridall">
+				<ag-grid-angular #agGrid id="myGrid" class="ag-theme-balham gridclass" [rowData]="rowData"
+					[gridOptions]="gridOptions" [paginationAutoPageSize]="true" [pagination]="true"
+					(cellClicked)='onCellClicked($event)'>
+				</ag-grid-angular>
+			</div>
+		</div>
+		<div class="onlymobile">
+			<ng-container *ngFor="let enquiryData of uploadedFilesList; let i = index;">		
+			<div class='col-12 col-lg-12 col-xl-12 infoModal' *ngIf="enquiryData.deleted === '0'" >							
+				<p class="mDetails"><span>Name :</span> {{enquiryData.name}}</p>
+				<p class="mDetails"><span>Email :</span> {{enquiryData.email}}</p>
+				<p class="mDetails"><span>Message :</span> {{enquiryData.message}}</p>	
+			</div>
+		</ng-container>
+	</div>
+	</div>
+	<div class="col-12 " *ngIf="uploadedFilesList.length == 0">
+		<span class="norecords">{{propertiesMessage}}</span>
+	</div>
+
+
+</div>
+<jw-modal id="view" style="display:none">
+	<div class="popup-panel">
+		<div class="modal-header" style="background:#FFF;">
+			<h4>
+				<span>View Enquiry Details</span>
+			</h4>
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeModal('view');">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		<div class="modal-body" *ngIf="enquiryDetail">
+			<div class="row">
+				<div class='col-12 col-lg-12 col-xl-12 infoModal'>
+					<p class="eachitem"><span class="rlabel">Name :</span> {{enquiryDetail.name}}</p>
+					<p class="eachitem"><span class="rlabel">Email :</span> {{enquiryDetail.email}}</p>
+					<p class="eachitem"><span class="rlabel">Phone :</span> {{enquiryDetail.phone}}</p>
+					<p class="eachitem"><span class="rlabel">Message :</span> {{enquiryDetail.message}}</p>
+					<p class="eachitem"><span class="rlabel">Created Date :</span> {{enquiryDetail.createdat}}</p>
+					<!-- <div class="input-group">
+						
+						<label [ngClass]="'form-control-placeholder fcs'" for="announcement"><b>Name</b></label>
+							<div class="ptext" style='display:inline-block'>{{enquiryDetail.name}}</div>						
+					</div> -->
+				</div>
+				<!-- <div class='col-12'>
+					<div class="input-group">
+						<label [ngClass]="'form-control-placeholder fcs'" for="announcement"><b>Email</b></label>
+						<div  class="ptext">{{enquiryDetail.email}}</div>			
+					</div>
+				</div>
+				<div class='col-12'>
+					<div class="input-group">
+						<label [ngClass]="'form-control-placeholder fcs'" for="announcement"><b>Phone</b></label>
+							<div class="ptext">{{enquiryDetail.phone}}</div>						
+					</div>
+				</div>
+				<div class='col-12'>
+					<div class="input-group">
+						<label [ngClass]="'form-control-placeholder fcs'" for="announcement"><b>Message</b></label>
+							<div class="ptext">{{enquiryDetail.message}}</div>						
+					</div>
+				</div> -->
+			</div>
+		</div>
+		</div>
+</jw-modal>
+
+
+
+<jw-modal id="isModelActive" style="display:none;" width="50%">
+	<form name="form" (ngSubmit)="saveStatus(uf)" #uf="ngForm" novalidate class="popup-panel">
+		<div class="modal-header" *ngIf='statusData' style=" background:#FFF;color:#000;padding:10px;">
+			<h4>
+				<span>Modify Enquiry Status</span>
+
+			</h4>
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close"
+				(click)="closeModal('isModelActive');">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		<div class="modal-body" *ngIf='statusData' style=" color:#000;text-align:left">
+
+			<div class="row">
+				<div class='col-12'>
+					<div class="input-group">
+						<label
+							[ngClass]="'inputlabel'"
+							for="newDeleted">Active </label>
+						<input type="checkbox"  name = "newdeleted" id="newDeleted" value="{{statusData.active}}" [(ngModel)]= "statusData.active">
+	
+					</div>
+				
+				</div>
+
+			</div>
+		</div>
+		<div class="modal-footer" style=" background:#FFF;">
+			<div class="input-group">
+				<button class="defaultbtn" type="submit">Save</button>
+			</div>
+		</div>
+	</form>
+</jw-modal>
+
+<jw-modal id="popupformessage" style="display:none">
+	<div class="popup-panel">
+	<div class="modal-header">
+		<h4>{{modalHeading}}</h4>
+		<button type="button" class="close" data-dismiss="modal" aria-label="Close"
+			(click)="closeModal('popupformessage');">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+	<div class="modal-body">
+		<div class="row" *ngIf="modaltext">
+			<div class="col-12 col-lg-12 col-xl-12 infoModal" innerHTML="{{modaltext}}">
+			</div>
+		</div>
+	</div>
+</div>
+</jw-modal>
+<div *ngIf="!isAuthorised">
+	<span> You are not authorized to view
+		this page.</span>
+</div>
