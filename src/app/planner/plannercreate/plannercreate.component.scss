@@ -105,14 +105,23 @@
 .meal-row-wrapper:nth-child(2) .meal-name span {
   left: -9px;
 }
+.dayname
+{
+  min-width: 50px;
+  display: flex;
+  align-items: center;
+  font-weight:bold;
+  font-size: 12px;
+  text-transform: uppercase;
+}
 .meal-name span {
   font-size: 14px;
   font-weight: bold;
   text-transform: uppercase;
-  transform: rotate(270deg);
-  position: absolute;
-  top: 60px;
-  left: 5px;
+//  transform: rotate(270deg);
+ // position: absolute;
+//  top: 60px;
+ // left: 5px;
   margin: 0;
 }
 

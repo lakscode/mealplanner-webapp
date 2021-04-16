@@ -88,13 +88,22 @@ this.loadColorCodes();
 
 
 		this.weekDays = [];
-		this.weekDays.push({"name":"Sunday"})
+		/*this.weekDays.push({"name":"Sunday"})
 		this.weekDays.push({"name":"Monday"})
 		this.weekDays.push({"name":"Tuesday"})
 		this.weekDays.push({"name":"Wednesday"})
 		this.weekDays.push({"name":"Thursday"})
 		this.weekDays.push({"name":"Friday"})
-		this.weekDays.push({"name":"Saturday"})
+		this.weekDays.push({"name":"Saturday"}) */
+
+		this.weekDays.push({"name":"Day 1"})
+		this.weekDays.push({"name":"Day 2"})
+		this.weekDays.push({"name":"Day 3"})
+		this.weekDays.push({"name":"Day 4"})
+		this.weekDays.push({"name":"Day 5"})
+		this.weekDays.push({"name":"Day 6"})
+		this.weekDays.push({"name":"Day 7"})
+
 		this.loadPlan();
 	}
 	loadPlan()

@@ -350,7 +350,7 @@
             </div>
             <div style="clear:both"></div>
             <div class="meal-row-wrapper meal-row__week-days">
-                <div class="meal-name" style="border-bottom:0px"></div>
+                <div class="dayname" style="border-bottom:0px"></div>
                 <div class="meal-plan-row row">
                     <div class="meal-plan-col col " *ngFor="let mealtype of mealsList; let d =index;" style="width:18%;">
                         <div class="meal-day"><span>{{mealtype.name}}</span></div>
@@ -361,7 +361,8 @@
            
                 <ng-container *ngFor="let item of plan['days']; let r = index;">
                     <div class="meal-row-wrapper">
-                   <div class="meal-name" style="min-height:130px"><span [ngClass]="checkData(item)?'left90':'left30'">{{item.name}}</span></div>
+                   <!--<div class="meal-name" style="min-height:130px"><span [ngClass]="checkData(item)?'left90':'left30'">{{item.name}}</span></div>-->
+                   <div class="dayname"><span>{{item.name}}</span></div>
                     <div class="meal-plan-column-container">
                         <div class="meal-plan-row">
                          
@@ -415,7 +416,7 @@
                 </ng-container>
                 
             <div class="meal-row-wrapper meal-row__calories" *ngIf="calculateCaloryFlag">
-                <div class="meal-name"></div>
+                <div class="dayname"></div>
                 <div id="total-calories-row" class="meal-plan-row" style="flex-wrap: nowrap;">
                     <div class="meal-plan-col col" style="width: 132px; min-width: 132px;"  *ngFor="let mealtype of mealsList; let d =index;">
                         <div class="totalcalories">

@@ -1,49 +1,4 @@
-/*-----------------------------------------------------------------------------------*/
-/* Table of contents
 
-1. Body
-
-2. Header / .header , .header-va1, .header-var2, .header-var2.ext-var4
-
-3. Links Wrapper / .wrapper-links
-
-4. Main Navigation / .wrapper-main-nav
-
-5. Logo / .logo-wrapper
-
-6. Home Slider / .home-slider, .variation-two, .variation-three,
-
-7. Banner / .banner
-
-8. Hot Recipes / .container-hot-recipes, .hot-recipes-var1, .hot-recipes-var2, .hot-recipes-var2.ext-var3
-
-9. Good Food / .good-food, .good-food-var1
-
-10 Our Chefs home / .our-chefs
-
-11. Latest News / .latest-news
-
-12. Recipe Listings / .recipe-listing, .listing-list, .listing-grid
-
-13. Recipe Details / .wrapper-detail-contents
-
-14. Our Chefs / .all-chefs;
-
-15. Sidebar / .side-bar
-
-16. Widgets / .widget
-
-17. Footer / .footer .footer-variant-one
-/*-----------------------------------------------------------------------------------*/
-/*-----------------------------------------------------------------------------------*/
-/* Mixin and Variables
-/*-----------------------------------------------------------------------------------*/
-/*-----------------------------------------------------------------------------------*/
-/* classes and mixins
-/*-----------------------------------------------------------------------------------*/
-/*--------------------*/
-/* mixins
-/*--------------------*/
 .placeholder-lora ::-webkit-input-placeholder {
   font-family: 'Lora', serif;
 }
@@ -5315,6 +5270,9 @@ div.widget-measurements .default-btn {
   outline: none;
   border: 1px solid #e4d9d1;
   margin-bottom: 30px;
+  font-size: 14px;
+  padding-right: 20px;
+  padding-left: 20px;
 }
 .submit-recipe-form textarea {
   resize: none;
