@@ -405,6 +405,11 @@ endIndex = startIndex+ endIndex;
 
 		
 	}
+
+
+	gotoRecipeDetails(id){
+	this.router.navigate(['recipedetails', id]);
+	}
 }
 
 	
