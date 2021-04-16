@@ -8,7 +8,7 @@ import { HelpService } from '../../services/help.service';
 import { constants } from '../../jsonfiles/constants';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-import { ConsoleReporter } from 'jasmine';
+
 @Component({
 	selector: 'app-plannercreate',
 	templateUrl: './plannercreate.component.html',
