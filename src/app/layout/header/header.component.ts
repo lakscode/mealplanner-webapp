@@ -57,10 +57,7 @@ console.log(currentUrl);
 			{"id":"home", "menu":"Home", "link":"/home", "display":displayMenu, "active":false,
 			"children":
 				[
-
-				//	{"id":"howitworks", "menu":"How it works", "link":"/howitworks", "display":displayMenu, "active":false},
 					{"id":"aboutus", "menu":"About the Team", "link":"/ourteam", "display":displayMenu, "active":false},
-				//	{"id":"benefits", "menu":"Benefits", "link":"/benefits", "display":displayMenu, "active":false},
 					{"id":"display", "menu":"FAQs", "link":"/faqs", "display":displayMenu, "active":false},
 					{"id":"blogs", "menu":"Blogs", "link":"/blogs", "display":displayMenu, "active":false},
 					{"id":"testimonials", "menu":"Testimonials", "link":"/testimonials", "display":displayMenu, "active":false}
@@ -68,7 +65,6 @@ console.log(currentUrl);
 			},
 			{"id":"features", "menu":"Features", "link":"/features", "display":displayMenu, "active":false},
 			{"id":"pricing", "menu":"Pricing", "link":"/pricing", "display":displayMenu, "active":false},
-			/*{"id":"contact", "menu":"Contact", "link":"/contact", "display":displayMenu, "active":false},*/
 			{"id":"schedule", "menu":"Schedule Demo", "link":"/scheduledemo", "display":displayMenu, "active":false},
 			
 		];
@@ -76,7 +72,6 @@ console.log(currentUrl);
 			{"id":"home", "menu":"Home", "link":"/landing1", "display":displayMenu, "active":false,
 				"children":
 				[
-
 					{"id":"howitworks", "menu":"How it works", "link":"/howitworks", "display":displayMenu, "active":false},
 					{"id":"aboutus", "menu":"Our Team", "link":"/ourteam", "display":displayMenu, "active":false},
 					{"id":"benefits", "menu":"Benefits", "link":"/benefits", "display":displayMenu, "active":false},
@@ -93,11 +88,7 @@ console.log(currentUrl);
 					{"id":"plan-list", "menu":"Plan List", "link":"/plan-list", "display":displayMenu, "active":false},
 					{"id":"plan-create", "menu":"Create Plan", "link":"/plan-create", "display":displayMenu, "active":false}
 				]
-			}
-			/*,
-			{"id":"contact", "menu":"Contact", "link":"/contact", "display":displayMenu, "active":false},*/
-			
-			
+			}				
 		];
 
 	}
@@ -171,7 +162,7 @@ console.log(currentUrl);
 
 		sessionStorage.setItem('currentUser', "");
 		
-		this.router.navigate(['login']);
+		this.gotopage('login');
 	}
 	
 	navbarOpen = false;

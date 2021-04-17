@@ -164,7 +164,8 @@ export class TabspanelComponent implements OnInit, OnDestroy, AfterViewChecked, 
 	// this.recipes = recipesList;
 	 var params = {"limit": "9"};
 
-	  
+   params["returnfields"] = " id, label, image, healthLabels, dietLabels, calories";
+
 	  params["instructions"] = "notempty";
   
 	  console.log(JSON.stringify(params));

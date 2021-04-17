@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
 		if (typeof (this.users) !== "undefined" && this.users !== null) {
 			if (typeof (this.users["id"]) !== "undefined") {
 				if (this.users["id"] != "") {
-					this.router.navigate(['landing1']);
+					this.gotopage('landing1');
 				}
 			}
 		}
@@ -77,10 +77,7 @@ export class LoginComponent implements OnInit {
 	login() {
 		console.log("in login");
 		this.submitted = true;
-		// stop here if form is invalid
-	//	if (this.loginForm.invalid) {
-	//		return;
-	//	}
+
 		if (this.rememberMe === true) {
 			localStorage.setItem('rememberEmail', this.loginForm.value.username);
 		} else {
@@ -89,17 +86,14 @@ export class LoginComponent implements OnInit {
 		}
 	
 		var params = {'username':  this.userObj.username, 'emailphone':this.userObj.username}
-		console.log(params);
+
 		this.dbService.checkIfExists("users", params).subscribe(userDataObj => setTimeout(() => {
-			
-			console.log(userDataObj);
+
 			if (userDataObj['body']['length'] > 0) {
 				var userData = userDataObj['body'][0];
-				console.log(userData);
+			
 				var pass = this.helpService.decryptPass(userData["password"]);  //this.loginForm.value.passWord 
-				console.log(pass);
-				console.log( userData["password"]);
-				console.log(this.userObj.password.trim() );
+				
 				if(pass == this.userObj.password.trim() || userData["password"] == this.userObj.password.trim() )
 				{
 					delete userData["password"];
@@ -108,29 +102,24 @@ export class LoginComponent implements OnInit {
 				}	
 				else 
 				{
-					this.router.navigate(['login']);
+					this.gotopage("login"); 
 					this.errorMessage = "Invalid Username and Password";
 					return;
 				}
 			}
 			else {
-				this.gotopage("login"); //this.router.navigate(['login']);
+				this.gotopage("login"); 
 				this.errorMessage = "Invalid Username and Password";
 				return;
 			}
-			
+			console.log("navigation");
 			if (this.redirecturl == "")
 			{
-					/*this.router.navigateByUrl('/', {skipLocationChange: true}).then(() =>
-				this.router.navigate(['landing1'])); */
-				//this.router.navigate(['landing1']);
-				this.gotopage("home");
-				//window.location.href = "/landing1";
-			
+				
+				this.gotopage("landing1");
+				
 			}
-			else {
-				//this.router.navigate([this.redirecturl]);
-			}
+		
 		}));
 		
 	}
@@ -159,7 +148,7 @@ export class LoginComponent implements OnInit {
 		this.errorSignup = "";
 	}
 	forgot() {
-		this.router.navigate(['forgot-password']);
+		this.gotopage('forgot-password');
 
 	}
 	signup()

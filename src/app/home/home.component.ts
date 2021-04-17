@@ -40,7 +40,7 @@ testimonialsList: Array<any> = [];
 				}
 				else if (userdata['loggedIn'] == true) {
 					this.userName = userdata;
-					window.location.href="/landing1";
+					//window.location.href="/landing1";
 				}
 				else {
 				//	this.router.navigate(["login", { redirectUrl: encodeURI(this.router.url) }]);
