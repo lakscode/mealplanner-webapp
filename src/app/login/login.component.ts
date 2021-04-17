@@ -124,7 +124,7 @@ export class LoginComponent implements OnInit {
 					/*this.router.navigateByUrl('/', {skipLocationChange: true}).then(() =>
 				this.router.navigate(['landing1'])); */
 				//this.router.navigate(['landing1']);
-				this.gotopage("recipes");
+				this.gotopage("home");
 				//window.location.href = "/landing1";
 			
 			}
