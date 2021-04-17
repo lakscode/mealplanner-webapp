@@ -44,7 +44,8 @@ export class LoginComponent implements OnInit {
 		if (typeof (this.users) !== "undefined" && this.users !== null) {
 			if (typeof (this.users["_id"]) !== "undefined") {
 				if (this.users["_id"] != "") {
-					this.router.navigate(['dashboard']);
+				alert(this.users);
+					//this.router.navigate(['dashboard']);
 				}
 			}
 		}
@@ -129,7 +130,7 @@ export class LoginComponent implements OnInit {
 			
 			}
 			else {
-				this.router.navigate([this.redirecturl]);
+				//this.router.navigate([this.redirecturl]);
 			}
 		}));
 		
