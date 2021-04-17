@@ -129,7 +129,7 @@ export class LoginComponent implements OnInit {
 			
 			}
 			else {
-				this.router.navigate([this.redirecturl]);
+				//this.router.navigate([this.redirecturl]);
 			}
 		}));
 		
