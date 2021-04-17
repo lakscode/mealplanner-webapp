@@ -288,7 +288,8 @@
                                     <div style='width:calc(100%)'><a class="hmp-link--no-style"
                                 href="{{recipe.uri}}">
                                 <div class="recipe-content recipe-content--draggable card-body">
-                                    <div class="recipe-image-container mobile" id="imagep_{{k}}"><img class="recipe-image"
+                                    <div class="recipe-image-container mobile" id="imagep_{{k}}">
+                                            <img class="recipe-image"
                                             id="picture_{{k}}"
                                             src="{{formatImage(recipe.image, 's')}}"
                                             alt="Recipe image"  draggable="true" 
@@ -369,6 +370,7 @@
                                             <div class="recipe-image-card card">
                                                 <div class="recipe-image-card-content card-body">
                                                     <div class="image-card-container">
+                                                        <div class="recipe-remove" (click)="removeRecipe(r, c)"><i class="fa fa-trash" aria-hidden="true"></i></div>
                                                         <div class="recipe-name-box">{{meal.recipe.label}}</div><img
                                                             class="recipe-image-card recipe-image-card__img open-fist-cursor"
                                                             style="opacity: 1;" id="picture-5c252abdb834861eec5388f3"

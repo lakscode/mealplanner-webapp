@@ -42,9 +42,9 @@ export class LoginComponent implements OnInit {
 		this.redirecturl = "";
 		//	let token = this.route.params
 		if (typeof (this.users) !== "undefined" && this.users !== null) {
-			if (typeof (this.users["_id"]) !== "undefined") {
-				if (this.users["_id"] != "") {
-					this.router.navigate(['dashboard']);
+			if (typeof (this.users["id"]) !== "undefined") {
+				if (this.users["id"] != "") {
+					this.router.navigate(['landing1']);
 				}
 			}
 		}
@@ -114,7 +114,7 @@ export class LoginComponent implements OnInit {
 				}
 			}
 			else {
-				this.router.navigate(['login']);
+				this.gotopage("login"); //this.router.navigate(['login']);
 				this.errorMessage = "Invalid Username and Password";
 				return;
 			}
@@ -123,8 +123,8 @@ export class LoginComponent implements OnInit {
 			{
 					/*this.router.navigateByUrl('/', {skipLocationChange: true}).then(() =>
 				this.router.navigate(['landing1'])); */
-				this.router.navigate(['landing1']);
-				
+				//this.router.navigate(['landing1']);
+				this.gotopage("recipes");
 				//window.location.href = "/landing1";
 			
 			}
@@ -134,6 +134,9 @@ export class LoginComponent implements OnInit {
 		}));
 		
 	}
+
+
+
 	closeerror()
 	{
 		this.errorMessage = "";

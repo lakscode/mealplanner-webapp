@@ -423,7 +423,11 @@ this.loadColorCodes();
 	//  console.log(retImage);
 	  return retImage;
 	}
-
+	removeRecipe(r, c)
+	{
+		this.plan["days"][r]["meals"][c]["recipe"] =  null;
+		this.SavePlanData(r, c);
+	}
 	drop(ev, r, c) {
 		console.log("Drop function");
 		console.log(ev);

@@ -5,8 +5,7 @@ import { Landing1Component } from './landing1.component';
 const routes: Routes = [
   { 
     path: 'landing1', 
-    component: Landing1Component,
-    data: { showSidebar: false } 
+    component: Landing1Component
   }
 ];
 
