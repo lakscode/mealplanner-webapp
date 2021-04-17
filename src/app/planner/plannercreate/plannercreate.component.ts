@@ -40,6 +40,10 @@ export class PlannercreateComponent implements OnInit {
 	}
 
 	ngOnInit() {
+
+		window.addEventListener("scroll", this.scrollFunc);
+
+
 		this.searchparam['q'] = "";
 //		this.addRecipeImage = "assets/images/placement_addrecipes@2x.png"
 this.addRecipeImage = "assets/images/add-recipe.png"
@@ -891,6 +895,30 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 		//	console.log("retValue " + retValue);
 		return retValue;
 	}
+
+
+
+	 scrollFunc(){
+		console.log("scrolling");
+		if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+		//	mybutton.style.display = "block";
+		  } else {
+		//	mybutton.style.display = "none";
+		  }
+		  console.log(document.documentElement.scrollTop);
+		  var btnsaveplan= document.getElementById('btnsaveplan');
+		  if(document.documentElement.scrollTop > 2300)
+		  {
+			btnsaveplan.setAttribute("class", "saveplan ")
+		  }
+		  else
+		  {
+			btnsaveplan.setAttribute("class", "saveplan floatbtn")
+		  }
+
+
+	  }
+
 }
 
 	
