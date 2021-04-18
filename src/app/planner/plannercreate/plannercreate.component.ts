@@ -910,7 +910,7 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 		  if(btncalculateCaloryFlag !== null)
 		  {
 		  console.log(btncalculateCaloryFlag.offsetTop);
-		  if(typeof(btncalculateCaloryFlag.offsetTop) !== "undefined" && btncalculateCaloryFlag.offsetTop !== null && btncalculateCaloryFlag.offsetTop !== "")
+		  if(typeof(btncalculateCaloryFlag.offsetTop) !== "undefined" && btncalculateCaloryFlag.offsetTop !== null && btncalculateCaloryFlag.offsetTop)
 		  {
 			checkVal = btncalculateCaloryFlag.offsetTop - 300;
 		  }
