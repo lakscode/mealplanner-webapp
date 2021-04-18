@@ -905,9 +905,19 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 		  } else {
 		//	mybutton.style.display = "none";
 		  }
+		  var checkVal  = 2300;;
+		  var btncalculateCaloryFlag = document.getElementById('calculateCaloryFlag');
+		  if(btncalculateCaloryFlag !== null)
+		  {
+		  console.log(btncalculateCaloryFlag.offsetTop);
+		  if(typeof(btncalculateCaloryFlag.offsetTop) !== "undefined" && btncalculateCaloryFlag.offsetTop !== null && btncalculateCaloryFlag.offsetTop !== "")
+		  {
+			checkVal = btncalculateCaloryFlag.offsetTop - 300;
+		  }
+		  }
 		  console.log(document.documentElement.scrollTop);
 		  var btnsaveplan= document.getElementById('btnsaveplan');
-		  if(document.documentElement.scrollTop > 2300)
+		  if(document.documentElement.scrollTop > checkVal)
 		  {
 			btnsaveplan.setAttribute("class", "saveplan ")
 		  }

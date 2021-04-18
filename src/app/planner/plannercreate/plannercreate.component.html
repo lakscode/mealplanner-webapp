@@ -413,7 +413,7 @@
                     
                 </ng-container>
                 
-            <div class="meal-row-wrapper meal-row__calories" *ngIf="calculateCaloryFlag">
+            <div class="meal-row-wrapper meal-row__calories" id="calculateCaloryFlag" *ngIf="calculateCaloryFlag">
                 <div class="dayname"></div>
                 <div id="total-calories-row" class="meal-plan-row" style="flex-wrap: nowrap;">
                     <div class="meal-plan-col col" style="width: 132px; min-width: 132px;"  *ngFor="let mealtype of mealsList; let d =index;">
