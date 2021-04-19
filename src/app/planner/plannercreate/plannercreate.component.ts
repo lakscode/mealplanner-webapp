@@ -305,6 +305,7 @@ this.loadColorCodes();
 	{
 		console.log(pagenum);
 		this.page_num = parseInt(pagenum);
+		this.counter();
 		this.getDisplayList();
 	}
 
