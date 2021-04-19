@@ -35,11 +35,16 @@ export class PlannercreateComponent implements OnInit {
 	oldName: any;
 	calculateCaloryFlag: boolean = false;
 	colorCodes : any = {};
+	page_num: any = 0;
+	totalPage: any = 0;
+	displayList: Array<any> = [];
 	constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
 	
 	}
 
 	ngOnInit() {
+			 this.totalPage = 1;
+	 this.page_num = 0;
 
 		window.addEventListener("scroll", this.scrollFunc);
 
@@ -171,14 +176,14 @@ this.loadColorCodes();
 	  
 		this.ratingIds = "";
 	// this.recipes = recipesList;
-	 var params = {}; //{"limit": "10"};
+	  var params = {"limit": "100"}; //{"limit": "10"};
    //  params["caloriesfrom"] = this.searchparam.range.lower;
 	// params["caloriesto"] = this.searchparam.range.upper;
 	 console.log(this.searchparam);
 
 	 if(idslist == "")
 	 {
-		params["limit"] =  "10";
+//params["limit"] =  "10";
 
 	 }
 		if(idslist !== "")
@@ -192,6 +197,7 @@ this.loadColorCodes();
 	  }
   
 	//  params["instructions"] = "notempty";
+	 params["returnfields"] = " id, label, image, healthLabels, s_instructions, dietLabels, calories,s_instructions ";
   
 	  console.log(JSON.stringify(params));
 	  this.calculateCaloryFlag = false;
@@ -247,12 +253,66 @@ this.loadColorCodes();
 		  this.calculateCaloryFlag = true;
 		 // this.loadRatings();
 	
-	
+	 this.totalPage = this.recipesList["length"] /10;
+		  this.getDisplayList();
 		}
+		 
 	  }
 	
 	 ));
   
+	}
+
+	counter(i: number) {
+		return new Array(i);
+	}
+	prevPage()
+	{
+		if(this.page_num > 0)
+		{
+			this.page_num -= 1;
+		}
+		this.getDisplayList();
+	}
+	nextPage()
+	{
+		
+		if(this.page_num > 0 && this.page_num < this.totalPage-1)
+		{
+			this.page_num += 1;
+		}
+		this.getDisplayList();
+	}
+	currentPage(pagenum)
+	{
+		console.log(pagenum);
+		this.page_num = parseInt(pagenum);
+		this.getDisplayList();
+	}
+
+	getDisplayList()
+	{
+		console.log(this.recipesList);
+		console.log(this.page_num);
+		this.displayList=[];
+		var startIndex= this.page_num*10;
+		var endIndex = 10;
+
+		if(startIndex + endIndex > this.recipesList["length"])
+		{
+			endIndex = this.recipesList["length"]-startIndex;
+		}
+
+		console.log(startIndex);
+		console.log(endIndex);
+endIndex = startIndex+ endIndex;
+		for(let i=startIndex; i < endIndex; i++)
+		{
+		this.displayList.push(this.recipesList[i]);
+		
+		}
+		console.log(this.displayList);
+		window.scrollTo(0, 0);
 	}
 
 	loadRatings()

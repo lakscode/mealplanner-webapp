@@ -1288,3 +1288,40 @@ button, html [type="button"], [type="reset"], [type="submit"] {
   transition: all 0.3s ease 0s;
   visibility: visible;
 }
+
+.pagination
+{
+  
+    width: 100%;
+
+    display: block;
+    text-align: center;
+}
+
+.pagination li {
+  display: inline-block;
+  margin-right: 10px;
+  background: #FFFFFF;
+  border: 1px solid #e4d9d1;
+}
+
+.pagination li a {
+  display: inline-block;
+  width: 38px;
+  height: 38px;
+  line-height: 36px;  
+  font-family: 'Lora', serif;
+  //
+}
+.pagination li.current {
+background-color: $orange;
+color:#FFF;
+}
+.pagination li.current a {
+  font-weight: 600;
+  color:#FFF;
+  }
+.pagination li a:hover {
+  background: transparent;
+  color: #ff642b;
+}
