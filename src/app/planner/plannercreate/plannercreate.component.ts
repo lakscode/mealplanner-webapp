@@ -38,6 +38,7 @@ export class PlannercreateComponent implements OnInit {
 	page_num: any = 0;
 	totalPage: any = 0;
 	displayList: Array<any> = [];
+	pageNosList:  Array<any> = [];
 	constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
 	
 	}
@@ -255,6 +256,7 @@ this.loadColorCodes();
 	
 	 this.totalPage = this.recipesList["length"] /10;
 		  this.getDisplayList();
+		  this.counter();
 		}
 		 
 	  }
@@ -262,9 +264,23 @@ this.loadColorCodes();
 	 ));
   
 	}
-
+/*
 	counter(i: number) {
 		return new Array(i);
+	} */
+	counter() {
+		console.log(this.page_num)
+		this.pageNosList = [1,2,3];
+		if(this.page_num > 0)
+		{
+			this.pageNosList =[];
+			this.pageNosList.push(this.page_num);
+			this.pageNosList.push(this.page_num+1);
+			this.pageNosList.push(this.page_num+2);
+
+		}
+		console.log(this.pageNosList);
+		return this.pageNosList;
 	}
 	prevPage()
 	{
@@ -272,15 +288,17 @@ this.loadColorCodes();
 		{
 			this.page_num -= 1;
 		}
+		this.counter();
 		this.getDisplayList();
 	}
 	nextPage()
 	{
 		
-		if(this.page_num > 0 && this.page_num < this.totalPage-1)
+		if(this.page_num >= 0 && this.page_num < this.totalPage-1)
 		{
 			this.page_num += 1;
 		}
+		this.counter();
 		this.getDisplayList();
 	}
 	currentPage(pagenum)
@@ -292,7 +310,7 @@ this.loadColorCodes();
 
 	getDisplayList()
 	{
-		console.log(this.recipesList);
+	//	console.log(this.recipesList);
 		console.log(this.page_num);
 		this.displayList=[];
 		var startIndex= this.page_num*10;
@@ -575,7 +593,7 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 	  {
 		this.favouritesList = [];
 		var params = {"limit": 100};
-		console.log(params);
+	//	console.log(params);
 		var res =   this.dbService.getDataByTable("favourites", params).subscribe(invData => setTimeout(() => {
 	
 		//  console.log(invData);
@@ -743,7 +761,7 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
  
   saveMealPlan()
   {
-	  console.log(this.plan);
+	//  console.log(this.plan);
   //  console.log(this.plan)
     var params = {};
     if(this.plan["name"] !== "")
@@ -759,7 +777,7 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
     {
       params["id"]  =  this.plan["mealplanid"] 
 
-     console.log(JSON.stringify(params));
+   //  console.log(JSON.stringify(params));
       var res =   this.dbService.updateDataByTable("mealplan", params).subscribe(invData => setTimeout(() => {
 
      //   console.log(invData);
@@ -795,17 +813,17 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
   }
   SavePlanData(r, c)
   {
-	  console.log("in save plan data");
-	console.log(this.plan);
-	console.log(r);
-	console.log("C " + c);
+	//  console.log("in save plan data");
+///	console.log(this.plan);
+//	console.log(r);
+//	console.log("C " + c);
 
 
     if(typeof(this.plan["id"]) !== "undefined" && this.plan["id"] !== "")
     {
 		var rowItem = this.plan["days"][r]["meals"];
-		console.log(rowItem);
-		console.log( this.plan["days"][r]['id']);
+	//	console.log(rowItem);
+	//	console.log( this.plan["days"][r]['id']);
       var params = {};
        
         params["meal_plan_id"] = this.plan["id"];
@@ -840,11 +858,11 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
     //  console.log(JSON.stringify(params));
       if(typeof(this.plan["days"][r]['dayid']) == "undefined" || this.plan["days"][r]['dayid'] == "")
       { 
-		  console.log("post data");
-		  console.log(params);
+	//	  console.log("post data");
+	//	  console.log(params);
         var res =   this.dbService.postDataByTable("days", params).subscribe(dData => setTimeout(() => {
 
-          console.log(dData);
+       //   console.log(dData);
           if(dData !== null)
           {
             if(dData["result"] !== null && dData["result"] !== "")
@@ -863,11 +881,11 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
       }
       else
       {
-		  console.log(this.plan);
+	//	  console.log(this.plan);
         params["id"] = this.plan["days"][r]['dayid'];
       //  console.log(JSON.stringify(params));
-	  console.log("update data");
-	  console.log(params);
+	//  console.log("update data");
+	//  console.log(params);
         var res =   this.dbService.updateDataByTable("days", params).subscribe(dData => setTimeout(() => {
 
         //  console.log(dData);
@@ -959,7 +977,7 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 
 
 	 scrollFunc(){
-		console.log("scrolling");
+	//	console.log("scrolling");
 		if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
 		//	mybutton.style.display = "block";
 		  } else {
@@ -969,13 +987,13 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 		  var btncalculateCaloryFlag = document.getElementById('calculateCaloryFlag');
 		  if(btncalculateCaloryFlag !== null)
 		  {
-		  console.log(btncalculateCaloryFlag.offsetTop);
+	//	  console.log(btncalculateCaloryFlag.offsetTop);
 		  if(typeof(btncalculateCaloryFlag.offsetTop) !== "undefined" && btncalculateCaloryFlag.offsetTop !== null && btncalculateCaloryFlag.offsetTop)
 		  {
 			checkVal = btncalculateCaloryFlag.offsetTop - 300;
 		  }
 		  }
-		  console.log(document.documentElement.scrollTop);
+	//	  console.log(document.documentElement.scrollTop);
 		  var btnsaveplan= document.getElementById('btnsaveplan');
 		  if(document.documentElement.scrollTop > checkVal)
 		  {

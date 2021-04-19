@@ -334,8 +334,11 @@
                             </a>
                         </li>
                         
-                        <li (click)="currentPage(i)" [ngClass]="i == page_num?'current':''" *ngFor='let in of counter(totalPage) ;let i = index'>
+                        <!--<li (click)="currentPage(i)" [ngClass]="i == page_num?'current':''" *ngFor='let in of counter(totalPage) ;let i = index'>
                             <a href="javascript:void(0)">{{i+1}}</a>
+                        </li>-->
+                        <li (click)="currentPage(i)" [ngClass]="in-1 == page_num?'current':''" *ngFor='let in of pageNosList ;let i = index'>
+                            <a href="javascript:void(0)">{{in}}</a>
                         </li>
                         <li (click)="nextPage()" class="">
                             <a href="javascript:void(0)">
