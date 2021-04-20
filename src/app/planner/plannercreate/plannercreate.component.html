@@ -274,35 +274,7 @@
                 </div>
             </div>
         </div>
-        <ul class="pagination">
-            <li (click)="currentPage(1)" class="">
-                <a href="javascript:void(0)">
-                    <i class="fa fa-angle-double-left"></i>
-                </a>
-            </li>
-            <li (click)="prevPage()" class="">
-                <a href="javascript:void(0)">
-                    <i class="fa fa-angle-left"></i>
-                </a>
-            </li>
-            
-            <!--<li (click)="currentPage(i)" [ngClass]="i == page_num?'current':''" *ngFor='let in of counter(totalPage) ;let i = index'>
-                <a href="javascript:void(0)">{{i+1}}</a>
-            </li>-->
-            <li (click)="currentPage(in)" [ngClass]="in == page_num?'current':''" *ngFor='let in of pageNosList ;let i = index'>
-                <a href="javascript:void(0)">{{in}}</a>
-            </li>
-            <li (click)="nextPage()" class="">
-                <a href="javascript:void(0)">
-                    <i class="fa fa-angle-right"></i>
-                </a>
-            </li>
-            <li (click)="currentPage(totalPage-1)" class="">
-                <a href="javascript:void(0)">
-                    <i class="fa fa-angle-double-right"></i>
-                </a>
-            </li>   
-        </ul>
+        
         <div class="content">
             <div class="recipes card-group">
                 <div class="recipe-wrapper" *ngFor="let recipe of displayList; let k=index;">
@@ -352,34 +324,34 @@
             </div>
         </div>
         <ul class="pagination">
-                        <li (click)="currentPage(0)" class="">
-                            <a href="javascript:void(0)">
-                                <i class="fa fa-angle-double-left"></i>
-                            </a>
-                        </li>
-                        <li (click)="prevPage()" class="">
-                            <a href="javascript:void(0)">
-                                <i class="fa fa-angle-left"></i>
-                            </a>
-                        </li>
-                        
-                        <!--<li (click)="currentPage(i)" [ngClass]="i == page_num?'current':''" *ngFor='let in of counter(totalPage) ;let i = index'>
-                            <a href="javascript:void(0)">{{i+1}}</a>
-                        </li>-->
-                        <li (click)="currentPage(in)" [ngClass]="in-1 == page_num?'current':''" *ngFor='let in of pageNosList ;let i = index'>
-                            <a href="javascript:void(0)">{{in}}</a>
-                        </li>
-                        <li (click)="nextPage()" class="">
-                            <a href="javascript:void(0)">
-                                <i class="fa fa-angle-right"></i>
-                            </a>
-                        </li>
-                        <li (click)="currentPage(totalPage-1)" class="">
-                            <a href="javascript:void(0)">
-                                <i class="fa fa-angle-double-right"></i>
-                            </a>
-                        </li>   
-                    </ul>
+            <li (click)="currentPage(1)" class="">
+                <a href="javascript:void(0)">
+                    <i class="fa fa-angle-double-left"></i>
+                </a>
+            </li>
+            <li (click)="prevPage()" class="">
+                <a href="javascript:void(0)">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+            </li>
+            
+            <!--<li (click)="currentPage(i)" [ngClass]="i == page_num?'current':''" *ngFor='let in of counter(totalPage) ;let i = index'>
+                <a href="javascript:void(0)">{{i+1}}</a>
+            </li>-->
+            <li (click)="currentPage(in)" [ngClass]="in == page_num?'current':''" *ngFor='let in of pageNosList ;let i = index'>
+                <a href="javascript:void(0)">{{in}}</a>
+            </li>
+            <li (click)="nextPage()" class="">
+                <a href="javascript:void(0)">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+            <li (click)="currentPage(totalPage-1)" class="">
+                <a href="javascript:void(0)">
+                    <i class="fa fa-angle-double-right"></i>
+                </a>
+            </li>   
+        </ul>
       <!--   <div class="text-center"><button type="button" class="load-more-btn btn btn-outline-primary btn-sm">Load
                 More</button></div> -->
     </div>
