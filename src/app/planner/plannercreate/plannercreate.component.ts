@@ -45,7 +45,7 @@ export class PlannercreateComponent implements OnInit {
 
 	ngOnInit() {
 			 this.totalPage = 1;
-	 this.page_num = 0;
+	 this.page_num = 1;
 
 		window.addEventListener("scroll", this.scrollFunc);
 
@@ -269,14 +269,23 @@ this.loadColorCodes();
 		return new Array(i);
 	} */
 	counter() {
-		console.log(this.page_num)
+		console.log("pagenum " + this.page_num);
 		this.pageNosList = [1,2,3];
-		if(this.page_num > 0)
+		if(this.page_num > 1)
 		{
 			this.pageNosList =[];
+			if(this.page_num < this.totalPage-1)
+			{
+			this.pageNosList.push(this.page_num-1);
+			}
+			else
+			{
+				this.pageNosList.push(this.page_num-2);
+				this.pageNosList.push(this.page_num-1);
+			}
 			this.pageNosList.push(this.page_num);
+			if(this.page_num < this.totalPage-1)
 			this.pageNosList.push(this.page_num+1);
-			this.pageNosList.push(this.page_num+2);
 
 		}
 		console.log(this.pageNosList);
@@ -284,7 +293,8 @@ this.loadColorCodes();
 	}
 	prevPage()
 	{
-		if(this.page_num > 0)
+		console.log("prevPage");
+		if(this.page_num > 1)
 		{
 			this.page_num -= 1;
 		}
@@ -293,7 +303,7 @@ this.loadColorCodes();
 	}
 	nextPage()
 	{
-		
+		console.log("nextPage");
 		if(this.page_num >= 0 && this.page_num < this.totalPage-1)
 		{
 			this.page_num += 1;
@@ -303,7 +313,9 @@ this.loadColorCodes();
 	}
 	currentPage(pagenum)
 	{
-		console.log(pagenum);
+		console.log("currentPage");
+
+		console.log("pagenum " + pagenum);
 		this.page_num = parseInt(pagenum);
 		this.counter();
 		this.getDisplayList();
@@ -314,7 +326,7 @@ this.loadColorCodes();
 	//	console.log(this.recipesList);
 		console.log(this.page_num);
 		this.displayList=[];
-		var startIndex= this.page_num*10;
+		var startIndex= (this.page_num-1)*10;
 		var endIndex = 10;
 
 		if(startIndex + endIndex > this.recipesList["length"])
@@ -322,15 +334,15 @@ this.loadColorCodes();
 			endIndex = this.recipesList["length"]-startIndex;
 		}
 
-		console.log(startIndex);
-		console.log(endIndex);
+		console.log("startIndex " + startIndex);
+		console.log("endIndex" + endIndex);
 endIndex = startIndex+ endIndex;
 		for(let i=startIndex; i < endIndex; i++)
 		{
 		this.displayList.push(this.recipesList[i]);
 		
 		}
-		console.log(this.displayList);
+	//	console.log(this.displayList);
 		window.scrollTo(0, 0);
 	}
 
