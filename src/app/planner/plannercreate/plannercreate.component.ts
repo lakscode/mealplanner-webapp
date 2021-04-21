@@ -198,7 +198,7 @@ this.loadColorCodes();
 	  }
   
 	//  params["instructions"] = "notempty";
-	 params["returnfields"] = " id, label, image, healthLabels, s_instructions, dietLabels, calories,s_instructions ";
+	 params["returnfields"] = " id, label, image, healthLabels, s_instructions, dietLabels, totalNutrients, digest,calories,s_instructions ";
   
 	  console.log(JSON.stringify(params));
 	  this.calculateCaloryFlag = false;
@@ -501,7 +501,7 @@ endIndex = startIndex+ endIndex;
       }
     }
   }
- // console.log(oRecipe);
+  console.log(oRecipe);
     return oRecipe;
   }
 
