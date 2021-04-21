@@ -118,7 +118,7 @@
                     </div>
                     <h2>Recipes</h2>
 
-                    <ul class="pagination" *ngIf="totalPage > 0">
+                    <ul class="pagination" *ngIf="totalPage >= 10">
                         <li (click)="currentPage(0)" class="">
                             <a href="javascript:void(0)">
                                 <i class="fa fa-angle-double-left"></i>
@@ -238,7 +238,7 @@
 
 
 
-                        <ul class="pagination">
+                        <ul class="pagination" *ngIf="totalPage >= 10">
                             <li (click)="currentPage(0)" class="">
                                 <a href="javascript:void(0)">
                                     <i class="fa fa-angle-double-left"></i>
