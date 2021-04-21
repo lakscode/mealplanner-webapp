@@ -27,7 +27,7 @@ export class RecipesubmitComponent implements OnInit {
 	}
 
 	ngOnInit() {
-
+		this.searchRes = {};
 		this.nutrientsList =  constants.minerals;
 		console.log(this.nutrientsList);
 		this.routeParams = {};
@@ -36,12 +36,15 @@ export class RecipesubmitComponent implements OnInit {
 	   this.routeParams = params;     
 	   if (typeof (this.routeParams.id) !== "undefined") {
 		 console.log(this.routeParams.id);
+		 this.loadRecipe(this.routeParams.id);
 	   }    
 	   if (typeof (this.routeParams.draft) !== "undefined") {
 		console.log(this.routeParams.draft);
+		this.loadRecipe(this.routeParams.draft);
 	  }  
 		console.log(this.routeParams);
-		this.loadRecipe(this.routeParams.id);
+
+		
 
 		}); 
 	}
@@ -82,6 +85,9 @@ loadRecipe(id)
 		  for(let i=0; i< temp["length"] ; i++)
 		  {
 			  this.searchRes = temp[i];
+			  if(typeof(this.routeParams.draft) !== "undefined" && this.routeParams.draft !== "")
+			  delete this.searchRes["id"];
+			  
 			  var tempDigest = this.searchRes["digest"];
 			  
 			  if(typeof(this.searchRes["digest"]) !== "undefined")
