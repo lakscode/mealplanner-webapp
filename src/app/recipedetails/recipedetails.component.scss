@@ -410,3 +410,33 @@ h1 { font-size: 1.5em; margin: 10px; }
 .rating > input:checked ~ label:hover,
 .rating > label:hover ~ input:checked ~ label, /* lighten current selection */
 .rating > input:checked ~ label:hover ~ label { color: #6EBE3B;  } 
+
+
+.details-fav
+{
+  text-align:right;
+  ul {
+    list-style-type: none;
+    li{
+      margin-right: 10px;
+      font-size:16px;
+     
+    }
+    li.set, li i:hover{
+      color: $orange;
+    }
+
+    .ratingSelected
+    {
+      color: $orange;
+    }
+    .ratingGray
+    {
+      color:#CCC;
+    }
+  }
+}
+
+.set, .rating-icons  i:hover{
+  color: $orange;
+}

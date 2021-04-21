@@ -209,27 +209,17 @@ this.loadColorCodes();
 	  var count = 0;
 	  if(invData !== null && typeof(invData["body"]) !== "undefined" && invData["body"] !== null && invData["body"]["length"] > 0)
 		{
-		 // this.recipesList = [];
-	
 
+			this.recipesList = [];
+
+	
 		  for(let i=0; i < invData["body"]["length"] ; i++)
 		  {
 			var recIndex = this.recipesList.findIndex(x1 => (x1.id === invData["body"][i]["id"]));
-			//	console.log(recIndex);
 				if(recIndex == -1)
 				{
 					this.recipesList.push(invData["body"][i]);
-				}
-
-
-		//	if(count < 6)
-		//	{
-		//	var rIndex = Math.floor(Math.random() * 7);  
-		//	var cIndex = Math.floor(Math.random() * 5);  
-		//	this.plan["days"][rIndex]["meals"][cIndex]["recipe"] = invData["body"][i];
-		//	count++;
-		//	}
-		//	this.ratingIds += invData["body"][i]["id"] + ",";
+				}	
 		  }
 		  for(let p =0 ; p < this.plan['days']['length']; p++)
 		  {
@@ -243,7 +233,7 @@ this.loadColorCodes();
 				//	console.log(recIndex);
 					if(recIndex > -1)
 					{
-						this.plan['days'][p]['meals'][q]["recipe"] = this.formatRecipe(this.recipesList[recIndex]);
+						this.plan['days'][p]['meals'][q]["recipe"] = JSON.parse(JSON.stringify(this.formatRecipe(this.recipesList[recIndex])));
 					}
 				}
 			}
@@ -255,6 +245,7 @@ this.loadColorCodes();
 		 // this.loadRatings();
 	
 	 this.totalPage = this.recipesList["length"] /10;
+	 console.log(this.totalPage);
 		  this.getDisplayList();
 		  this.counter();
 		}
@@ -270,7 +261,11 @@ this.loadColorCodes();
 	} */
 	counter() {
 		console.log("pagenum " + this.page_num);
+		if(this.totalPage > 3)
 		this.pageNosList = [1,2,3];
+		else
+		if(this.totalPage == 2)
+		this.pageNosList = [1,2];
 		if(this.page_num > 1)
 		{
 			this.pageNosList =[];
@@ -323,7 +318,6 @@ this.loadColorCodes();
 
 	getDisplayList()
 	{
-	//	console.log(this.recipesList);
 		console.log(this.page_num);
 		this.displayList=[];
 		var startIndex= (this.page_num-1)*10;
@@ -333,16 +327,12 @@ this.loadColorCodes();
 		{
 			endIndex = this.recipesList["length"]-startIndex;
 		}
-
-		console.log("startIndex " + startIndex);
-		console.log("endIndex" + endIndex);
-endIndex = startIndex+ endIndex;
+		endIndex = startIndex+ endIndex;
 		for(let i=startIndex; i < endIndex; i++)
 		{
 		this.displayList.push(this.recipesList[i]);
 		
 		}
-	//	console.log(this.displayList);
 		window.scrollTo(0, 0);
 	}
 
@@ -387,8 +377,6 @@ endIndex = startIndex+ endIndex;
 				
   
 				}
-				console.log(this.ratingsArr);
-				console.log(  this.recipesList);
 			  }
 			}
 	
@@ -501,7 +489,7 @@ endIndex = startIndex+ endIndex;
       }
     }
   }
-  console.log(oRecipe);
+  //console.log(oRecipe);
     return oRecipe;
   }
 
@@ -609,7 +597,7 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 	//	console.log(params);
 		var res =   this.dbService.getDataByTable("favourites", params).subscribe(invData => setTimeout(() => {
 	
-		//  console.log(invData);
+	  console.log(invData);
 		  if(invData !== null)
 		  {
 			var obj = invData["body"]["length"];

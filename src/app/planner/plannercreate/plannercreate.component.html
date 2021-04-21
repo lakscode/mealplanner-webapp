@@ -323,7 +323,7 @@
                 </div>
             </div>
         </div>
-        <ul class="pagination">
+        <ul class="pagination" *ngIf="totalPage > 2">
             <li (click)="currentPage(1)" class="">
                 <a href="javascript:void(0)">
                     <i class="fa fa-angle-double-left"></i>

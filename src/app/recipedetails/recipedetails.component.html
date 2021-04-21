@@ -98,9 +98,9 @@
     <div class="recipe-detail-body">
     <div class="rating-box">
         <span class="rating-icons" *ngFor="let item of [1,2,3,4,5]">
-            <i class="fa fa-star"></i>
+            <i [ngClass]="ratingObj['displayrating'] >= item?'fa fa-star set':'fa fa-star'"></i>
           </span>
-        <span class="rating-figure">(4.1 / 5)</span>
+        <span class="rating-figure">({{ratingObj['displayrating']}} / 5)</span>
     </div>
     <!--<ul class="pre-tags">
         <li><span>Cuisine : </span>Chinese</li>
@@ -215,7 +215,21 @@
                 </div>
             </div>
             <div class="col-sm-5">
-                <div class="details-social-icons">
+                <div class="details-fav"><ul>
+                    <li (click)="toggleFav()" [ngClass]="setFav?'set':''"><i  class="fa fa-heart" aria-hidden="true"></i></li>
+                    <li [ngClass]="rating > 0?'set':''" (click)="showRate = !showRate;"><i class="fa fa-star" aria-hidden="true"></i></li>
+                    </ul>
+                </div>
+                <div *ngIf="showRate" class="details-fav">
+                    <ul>
+                        <ng-container *ngFor="let in of [1,2,3,4,5]; let i = index">
+                            <li (click)="rate(in)">
+                                <i [ngClass] = "rating >=in? 'fa fa-star ratingSelected' : 'fa fa-star ratingGray'" aria-hidden="true"></i>
+                            </li>
+                        </ng-container>
+                    </ul> <span>{{rating}}/5</span>
+                </div>
+                <!--<div class="details-social-icons">
                     <ul>
                         <li><a href="javascript:void(0)"><i class="fa fa-facebook"></i></a></li>
                         <li><a href="javascript:void(0)"><i class="fa fa-twitter"></i></a></li>
@@ -223,7 +237,7 @@
                         <li><a href="javascript:void(0)"><i class="fa fa-pinterest"></i></a></li>
                         <li><a href="javascript:void(0)"><i class="fa fa-plus"></i></a></li>
                     </ul>
-                </div>
+                </div>-->
             </div>
         <!--     <div class="col-12" >
                 <fieldset class="rating" style="float:right">

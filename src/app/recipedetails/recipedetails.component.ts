@@ -35,6 +35,8 @@ export class RecipedetailsComponent implements OnInit {
  mineralsList: Array<any> = [];
 listParams: any;
 updated: any;
+setFav: boolean = false;
+showRate: boolean = false;
 	constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
 	
 	}
@@ -42,6 +44,9 @@ updated: any;
 	ngOnInit() {
 		this.listParams = null;
 		this.updated = 0;
+		this.showRate  = false;
+		this.setFav = false;
+
 		this.mineralsList = constants.minerals;
 		this.colors = ["#E0E0E0", "#76FF03", "#FFCA28", "#DD2C00"];
 		this.rating= 0;
@@ -56,6 +61,7 @@ updated: any;
 		 
 		console.log(this.routeParams);
 		this.loadRecipe(this.routeParams.id);
+		this.getTotalRating();
 		}); 
 		this.currentUser =this.helpService.getCurrentUser();
 		if(this.currentUser !== null)
@@ -235,7 +241,9 @@ getFavouriteStatus()
 		if(invData["body"]['length'] > 0)
 		{
 		  this.favStatus = invData["body"][0];
+		  console.log("favStatus ");
 		  console.log(this.favStatus);
+		  this.setFav = true;
 		}
 	  }
 	}));
@@ -248,6 +256,17 @@ getFavouriteStatus()
 	}, 1000);
   }
 
+}
+toggleFav()
+{
+	if(this.setFav )
+	{
+		this.removeFavourite();
+	}
+	else
+	{
+		this.setFavourite();
+	}
 }
 
 setFavourite()
@@ -263,7 +282,7 @@ setFavourite()
 	var res =   this.dbService.postDataByTable("favourites", params).subscribe(invData => setTimeout(() => {
 	  if(invData !== null)
 	  {
-	   
+	    this.setFav = true;
 		  this.getFavouriteStatus();
 	   
 	  }
@@ -280,6 +299,7 @@ removeFavourite()
 	params["id"] = this.favStatus["id"];
 
 	var res =   this.dbService.deleteDataByTable("favourites", params).subscribe(invData => setTimeout(() => {
+		this.setFav = false;
 	  if(invData !== null)
 	  {
 		this.getFavouriteStatus();
@@ -311,6 +331,7 @@ rate(index)
   this.rating = rating;
  console.log(index);
  console.log(this.rating);
+ this.setRating();
 }
 
 showRating()
@@ -349,6 +370,7 @@ getTotalRating()
 		  if( this.ratingObj["totalrating"] > 0 &&  this.ratingObj["totalcount"] > 0 )
 		  {
 			this.ratingObj["displayrating"] = Math.ceil((this.ratingObj["totalrating"]/ this.ratingObj["totalcount"]));
+			console.log("displayrating");
 			console.log(this.ratingObj["displayrating"]);
 		  }
 		}
@@ -378,6 +400,7 @@ getRating()
 		  console.log(this.ratingRecord);
 	   
 		  this.rating = this.ratingRecord["rating"];
+		  console.log(this.rating);
 		}
 	  }
 	}));
@@ -398,6 +421,7 @@ setRating()
 	  params["rating"] = this.rating;
 	  if( this.ratingRecord == null)
 	  {
+
 		var res =   this.dbService.postDataByTable("rating", params).subscribe(invData => setTimeout(() => {
 		  if(invData !== null)
 		  {
@@ -411,7 +435,9 @@ setRating()
 		if(typeof(this.ratingRecord["id"]) !== "undefined" && this.ratingRecord["id"] !== "")
 		{
 		  params["id"] = this.ratingRecord["id"];
+		  console.log(params);
 		  var res =   this.dbService.updateDataByTable("rating", params).subscribe(invData => setTimeout(() => {
+			console.log(invData);
 			if(invData !== null)
 			{
 				this.getRating();     
@@ -467,6 +493,8 @@ formatLabels(str)
 	}
 	return retArr;
 }
+
+
 
 }
 
