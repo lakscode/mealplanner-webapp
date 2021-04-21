@@ -12,9 +12,15 @@
                 <h2>Recipe Details</h2>
     
             </div>
-            <div class="recipe-media">
-                <a class="print-button" href="javascript:void(0)"><i class="fa fa-print"></i> Print Recipe</a>
+            <div>
+                <a class="copy-button" (click)="newRecipe()" href="javascript:void(0)"><i class="fa fa-copy"></i> Copy to New Draft</a>
+            
             </div>
+
+             <!-- <div class="recipe-media">
+              <a class="print-button" href="javascript:void(0)"><i class="fa fa-print"></i> Print Recipe</a>
+                <a class="copy-button" (click)="newRecipe()" href="javascript:void(0)"><i class="fa fa-copy"></i> Copy to New Draft</a>
+            </div>-->
         </div>
         <div class="row fadeInLeft animated newanim" *ngIf='searchRes'>
             <div class="col-12 col-lg-6" style="padding-left:0px; padding-right:0px;">

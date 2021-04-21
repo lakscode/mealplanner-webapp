@@ -532,4 +532,113 @@ formatStringEncode(str)
 
 	return retVal;
 }
+
+SendEmailPasswordReset(email,data) {
+    var paramstoken = { "email": email, "resetdatetime": new Date() };
+	console.log(paramstoken);
+    this.dbService.resettoken(paramstoken).subscribe(emailData1 => setTimeout(() => {   
+		console.log(emailData1);   
+      if (emailData1) {      
+		  if(typeof(emailData1['status_code']) !== "undefined" && emailData1['status_code'] !== "")
+		  {
+			  if(emailData1['status_code'] == 1)
+			  {
+				var params1 = { "email": email };
+				this.dbService.getDatabyParam("users", params1).subscribe(emailData => setTimeout(() => { 
+
+					if(emailData["body"]["length"] > 0)
+					{
+
+				var temp = emailData['body'][0]['resettoken'];
+
+					if(data == null)
+					data = {};
+					// var apiUrl = window.location.origin;
+					var resetLink = window.location.origin + "/resetpassword;token=" + encodeURIComponent(temp) + ";email=" + email;
+					data['resetLink'] = resetLink;
+					data['email'] = email;
+					var IemailSubject = this.FormatEmailContent(data.emailSubject, data);
+					var IemailContent = this.FormatEmailContent(data.emailContent, data); 
+					let Emaildata: any = { "to": email,  "from": environment.fromname+environment.fromemail, "datetime": new Date(), "subject": IemailSubject, "content": IemailContent, "contenthtml": IemailContent };
+					 console.log(Emaildata);
+					// send email     
+					
+					this.dbService.postData("email", Emaildata).subscribe(emailData => setTimeout(() => {
+					if (emailData) {
+					}
+					return emailData;
+					}, 0));    
+				}
+				})); 
+				}
+			}  
+      }
+    }));
+  }
+
+
+  /***************************************** */
+	FormatEmailContent(content, data) {		
+		var formattedContent = "";
+		formattedContent = content;	
+		if(formattedContent && data){			
+			
+
+			if(data.username)
+			formattedContent = formattedContent.replace(/<username>/gi,data.username.charAt(0).toUpperCase() + data.username.slice(1));
+			
+			if(typeof(data.userphone) !== "undefined" && data.userphone !== "")
+			{
+				formattedContent = formattedContent.replace(/<userphone>/gi, "Phone: " + data.userphone + "<br />");
+			}
+			else
+			{
+				formattedContent = formattedContent.replace(/<userphone>/gi, "");
+			}
+
+			formattedContent = formattedContent.replace(/<useremail>/gi, data.useremail);
+			
+			if(data.mealplan)
+			formattedContent = formattedContent.replace(/<mealplan>/gi, data.mealplan);
+
+			if(data.link)
+			formattedContent = formattedContent.replace(/<link>/gi, data.link);
+
+			formattedContent = formattedContent.replace(/<email>/gi, data.email);
+
+			formattedContent = formattedContent.replace(/<name>/gi, data.name);
+			formattedContent = formattedContent.replace(/<toname>/gi, data.toname);
+			formattedContent = formattedContent.replace(/<phone>/gi, data.phone);
+
+	
+			formattedContent = formattedContent.replace(/<password>/gi, data.password);
+			
+			if(data.firstname)
+			formattedContent = formattedContent.replace(/<firstname>/gi, data.firstname.charAt(0).toUpperCase() + data.firstname.slice(1));
+			
+				
+			if(data.lastname)
+			formattedContent = formattedContent.replace(/<lastname>/gi, ' '+ data.lastname.charAt(0).toUpperCase() + data.lastname.slice(1));	
+			
+			if(data.resetLink)
+			formattedContent = formattedContent.replace(/<resetLink>/gi, data.resetLink);
+
+			if(data.verifycode)
+			formattedContent = formattedContent.replace(/<verifycode>/gi, data.verifycode);
+			
+
+			formattedContent = formattedContent.replace(/<location>/gi, data.location);
+			formattedContent = formattedContent.replace(/<role>/gi, data.role);
+			formattedContent = formattedContent.replace(/<url>/gi, data.appUrl);
+			formattedContent = formattedContent.replace(/<logiurl>/gi, data.loginUrl);
+			formattedContent = formattedContent.replace(/<workemail>/gi, data.workemail);
+	
+			formattedContent = formattedContent.replace(/<usertype>/gi, data.usertype);			
+			formattedContent = formattedContent.replace(/<companyname>/gi, environment.companyname);			
+				
+			return formattedContent;			
+		}
+	
+	}
+
 }

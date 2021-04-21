@@ -49,12 +49,17 @@ export class ResetpassComponent implements OnInit, OnDestroy {
   checkIfTokenValid() {
     var params = { "email": this.email, "resettoken": this.token };
     this.dbService.getDatabyParam("users", params).subscribe(userData => setTimeout(() => {
-      if (userData["length"] > 0) {
-        this.selectedUser = userData[0];
-        var resetsentat = new Date(this.selectedUser["resetsentat"].toString());
+      console.log(userData);
+      if (userData["body"]["length"] > 0) {
+        this.selectedUser = userData["body"][0];
+        console.log(this.selectedUser["resetdatetime"].toString());
+        var resetsentat = new Date(this.selectedUser["resetdatetime"].toString());
+        console.log(resetsentat);
         var currentDttm = new Date();
+        console.log(currentDttm);
         var difference = currentDttm.getTime() - resetsentat.getTime();
         var resultInMinutes = Math.round(difference / 60000);
+        console.log(resultInMinutes);
         if (resultInMinutes > 90) {
           this.result = 2;
           this.displaymessage = "Your reset password token has been expired.";
@@ -63,6 +68,7 @@ export class ResetpassComponent implements OnInit, OnDestroy {
           this.result = 0;
           this.displaymessage = "";
         }
+        console.log("result " + this.result);
       }
       else {
         this.result = 2;
@@ -79,12 +85,12 @@ export class ResetpassComponent implements OnInit, OnDestroy {
   resetpass() {
     this.result = 1;
     if (this.password == this.confirmpassword) {
-      var params = { "password": this.password };
-      this.dbService.putData("users/" + this.selectedUser["_id"], params).subscribe(userData => setTimeout(() => {
+      var params = { "password": this.password, "id": this.selectedUser["_id"]};
+      this.dbService.putData("users", params).subscribe(userData => setTimeout(() => {
         this.result = 1;
         this.displaymessage = "Password has been reset.";
-        var paramsRest = { "resetsentat": "", "resettoken": "" };
-        this.dbService.putData("users/" + this.selectedUser["_id"], paramsRest).subscribe(userresetData => setTimeout(() => {
+        var paramsRest = { "resetsentat": "", "resettoken": "", "id":this.selectedUser["_id"] };
+        this.dbService.putData("users", paramsRest).subscribe(userresetData => setTimeout(() => {
         }));
       }));
     }

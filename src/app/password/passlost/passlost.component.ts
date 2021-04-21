@@ -3,7 +3,7 @@ import { Subject, interval } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { HelpService } from '../../services/help.service';
 import { DBService } from '../../dbservices/db.service';
-
+import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-passlost',
   templateUrl: './passlost.component.html',
@@ -14,15 +14,28 @@ export class PasslostComponent implements OnInit, OnDestroy {
   userEmail: string ; 
   result: any;
   ngUnsubscribe: Subject<any> = new Subject();
-
-  constructor(private helpService: HelpService, private dbService: DBService) { }
+  emailContents: any;
+  constructor(private helpService: HelpService, private httpClient: HttpClient, private dbService: DBService) { }
 
   ngOnInit() {
-  
+  this.getEmailContent();
   this.result = 0;
   this.userEmail = "";
   
   }
+  getEmailContent(){
+    //get email contents
+    this.httpClient.get('assets/data/email.json').subscribe(
+      emailtemplate => {        
+        if(emailtemplate){
+          this.emailContents = emailtemplate;
+          console.log(this.emailContents);
+        }else{
+          this.getEmailContent();
+        }
+      });  
+  }
+
   resetpass()
   { 
 
@@ -44,7 +57,18 @@ export class PasslostComponent implements OnInit, OnDestroy {
    // console.log("hasmatched" + hasMatch);
     if(hasMatch == true) {
       this.result = 1; 
-     this.SendEmailPasswordReset(this.userEmail,null);
+      var data = {};      
+      data["emailContent"] = this.emailContents.emails.resetpasswordToken.content;
+      data["emailSubject"] = this.emailContents.emails.resetpasswordToken.subject;
+      
+      if(userData["body"][0]["firstname"] !== "")
+      data['username'] =userData["body"][0]["firstname"];
+      else
+      data['username'] =userData["body"][0]["username"];
+
+      if(userData["body"][0]["lastname"] !== "")
+      data['username'] += " " + userData["body"][0]["lastname"];
+     this.helpService.SendEmailPasswordReset(this.userEmail,data);
     } else {
       this.result = 2;
     }
@@ -52,28 +76,7 @@ export class PasslostComponent implements OnInit, OnDestroy {
   }
 
 
-  SendEmailPasswordReset(email,data) {
-    var paramstoken = { "email": email };
-    this.dbService.postData("users/resettoken", paramstoken).subscribe(emailData => setTimeout(() => {      
-      if (emailData) {      
-        // var apiUrl = window.location.origin;
-        var resetLink = window.location.origin + "/resetpassword;token=" + encodeURIComponent(emailData["hash"]) + ";email=" + email;
-        data['resetLink'] = resetLink;
-        data['email'] = email;
-        var IemailSubject = this.FormatEmailContent(data.emailSubject, data);
-        var IemailContent = this.FormatEmailContent(data.emailContent, data); 
-        let Emaildata: any = { "to": email,  "from": environment.fromname+environment.fromemail, "datetime": new Date(), "subject": IemailSubject, "content": IemailContent, "contenthtml": IemailContent };
-        // console.log(Emaildata);
-        // send email     
-        this.SaveEmailData(null, Emaildata);    
-        this.dbService.postData("email", Emaildata).subscribe(emailData => setTimeout(() => {
-          if (emailData) {
-          }
-          return emailData;
-        }, 0));       
-      }
-    }));
-  }
+ 
 ngOnDestroy() {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();

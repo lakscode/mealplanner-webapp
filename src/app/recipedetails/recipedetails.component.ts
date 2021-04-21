@@ -494,7 +494,12 @@ formatLabels(str)
 	return retArr;
 }
 
+newRecipe()
+{
+	console.log("new recipe");
+		this.router.navigate(['recipesubmit', {'draft':this.routeParams.id}]);
 
+}
 
 }
 

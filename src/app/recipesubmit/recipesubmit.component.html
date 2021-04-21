@@ -116,16 +116,16 @@
                     </div>-->
     
                     <label for="dietLabels">Diet Labels <em>Comma separated</em></label>
-                    <input type="text" name="dietLabels" id="dietLabels">
+                    <input type="text" [(ngModel)="searchRes.dietLabels" name="dietLabels" id="dietLabels">
     
                     <label for="healthtags">Health Labels <em>Comma separated</em></label>
-                    <input type="text" name="healthLabels" id="healthLabels">
+                    <input type="text" [(ngModel)="searchRes.healthLabels"  name="healthLabels" id="healthLabels">
 
                      <label for="calorietags">Calories </label>
-                    <input type="text" name="calorieLabels" id="calorieLabels">
+                    <input type="text"  [(ngModel)="searchRes.calories" name="calorieLabels" id="calorieLabels">
 
                     <label for="meal-type">Meal Type</label>            
-                    <select name="meal-type" id="meal-type" class="advance-selectable" tabindex="0">
+                    <select name="meal-type" [(ngModel)="searchRes.mealtype" id="meal-type" class="advance-selectable" tabindex="0">
                         <option value="t0" selected="selected">None</option>
                         <option value="t1">Breakfast</option>
                         <option value="t2">Pre-lunch Snack</option>

@@ -86,7 +86,18 @@ checkIfExists(path, params){
 	map((res) => res)).pipe(share());
 
 }
+resettoken(input){
 
+	var tempUrl = this.apiUrl + "/users/resettoken.php"; 
+	
+
+	var options = {
+		headers : new HttpHeaders({"Content-Type": "application/json"})
+		};
+  
+	return this.httpService.post(tempUrl, JSON.stringify(input), options).pipe(
+		map((res) => res)).pipe(share());
+}
    postData(path, input){
 
 	   var tempUrl = this.apiUrl + '/' + path + "/create.php"; 
