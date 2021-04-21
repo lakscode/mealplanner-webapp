@@ -365,6 +365,11 @@
 
         <div class="meal-plans-content">
              <div class="submit-recipe-form" style="text-align:left; padding-bottom:10px;">
+                <div style='text-align:right;'>
+                    <a class="copy-button" (click)="downloadplan()" href="javascript:void(0)"><i class="fa fa-download"></i> Download PDF</a>
+                
+                </div>
+
                 <label for="title">Meal Plan Name</label>
                 <input type="text" name="tiplannametle" id="planname" [(ngModel)] ="plan.name" (blur)="saveMealPlan()">
                 <br>

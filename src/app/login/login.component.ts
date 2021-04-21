@@ -161,28 +161,5 @@ gotopage(page){
 	this.router.navigate([page]);
 	}
 
-resetpass()
-  { 
-
-  var hasMatch = false;
-  var iemail = { "email": this.userName};
-  this.dbService.getDatabyParam("users", iemail).subscribe((userData: any[]) => setTimeout(() => {
-    if(userData.length > 0)
-    {
-      if (userData[0].email == this.userName) {
-        //console.log("email exists" + userData[0].email);
-          
-          hasMatch = true;
-      } 
-    }        
-   // console.log("hasmatched" + hasMatch);
-    if(hasMatch == true) {
-      this.result = 1; 
-     // this.helpService.SendEmailPasswordReset(this.userName,null);
-    } else {
-      this.result = 2;
-    }
-  }));
-  }
 
 }

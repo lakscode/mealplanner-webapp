@@ -4,11 +4,12 @@ import { UserService } from '../../services/user.service';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DBService } from '../../dbservices/db.service';
 import { HelpService } from '../../services/help.service';
+import { PDFService } from '../../services/pdf.service';
 
 import { constants } from '../../jsonfiles/constants';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-
+import { environment} from "../../../environments/environment"
 @Component({
 	selector: 'app-plannercreate',
 	templateUrl: './plannercreate.component.html',
@@ -39,7 +40,7 @@ export class PlannercreateComponent implements OnInit {
 	totalPage: any = 0;
 	displayList: Array<any> = [];
 	pageNosList:  Array<any> = [];
-	constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
+	constructor(private router: Router, private route: ActivatedRoute, private pdfService: PDFService, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
 	
 	}
 
@@ -1008,6 +1009,29 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 
 	  }
 
+	  downloadplan()
+	  {
+		if(typeof(this.plan["id"]) !== "undefined" && this.plan["id"] !== "")
+		{
+		//	var path = "https://dentavacation.com/mobileapp/api/generate_pdf.php?id=" + this.plan["id"];
+			this.pdfService.createpdf(this.plan["id"]).subscribe(dData => setTimeout(() => {
+
+				console.log(dData);
+				if(dData !== null )
+				{
+				var mealPlan ={};
+				mealPlan["mealplan"] = this.plan["name"];
+				mealPlan["link"] = environment.apiUrl + "/" + dData["filename"];
+				var link = document.createElement('a');
+				link.href = mealPlan["link"];
+				link.target = "_blank";
+			//	link.download = mealPlan["link"];
+				link.click();
+				console.log(mealPlan["link"]);
+				}
+			}));
+	  	}
+	}
 }
 
 	
