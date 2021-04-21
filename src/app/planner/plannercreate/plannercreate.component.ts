@@ -40,6 +40,7 @@ export class PlannercreateComponent implements OnInit {
 	totalPage: any = 0;
 	displayList: Array<any> = [];
 	pageNosList:  Array<any> = [];
+	updatingFlag : boolean = false;
 	constructor(private router: Router, private route: ActivatedRoute, private pdfService: PDFService, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
 	
 	}
@@ -763,54 +764,58 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
  
   saveMealPlan()
   {
-	//  console.log(this.plan);
-  //  console.log(this.plan)
-    var params = {};
-    if(this.plan["name"] !== "")
-    params["name"] = this.plan["name"];
-    if(this.plan["tags"] !== "")
-    params["tags"] = this.plan["tags"];
+	if(!this.updatingFlag )
+	{
+		this.updatingFlag = true;
+		var params = {};
+		if(this.plan["name"] !== "")
+		params["name"] = this.plan["name"];
+		if(this.plan["tags"] !== "")
+		params["tags"] = this.plan["tags"];
 
-    if(this.plan["totalweeks"] !== "")
-    params["totalweeks"] = this.plan["totalweeks"];
-    params["status"] = this.plan["status"];
-    params["created_by"] = this.currentUser["id"];
-    if(typeof(this.plan["mealplanid"]) !== "undefined" && this.plan["mealplanid"] !== "")
-    {
-      params["id"]  =  this.plan["mealplanid"] 
+		if(typeof(this.plan["status"]) !== "undefined" && this.plan["status"] !== "")
+		params["status"] = this.plan["status"];
+		else
+		params["status"] = "0";
+		params["created_by"] = this.currentUser["id"];
+		if(typeof(this.plan["mealplanid"]) !== "undefined" && this.plan["mealplanid"] !== "")
+		{
+		params["id"]  =  this.plan["mealplanid"] 
+console.log(params);
+		var res =   this.dbService.updateDataByTable("mealplan", params).subscribe(invData => setTimeout(() => {
 
-   //  console.log(JSON.stringify(params));
-      var res =   this.dbService.updateDataByTable("mealplan", params).subscribe(invData => setTimeout(() => {
+		console.log(invData);
 
-     //   console.log(invData);
+			if(invData !== null)
+			{
+				this.updatingFlag = false;
+			}
+		//   console.log(this.plan)
+		}));
+		}
+		else
+		{
+	//   console.log(params);
+		var res =   this.dbService.postDataByTable("mealplan", params).subscribe(invData => setTimeout(() => {
 
-        if(invData !== null)
-        {
-        
-        }
-     //   console.log(this.plan)
-      }));
-    }
-    else
-    {
-   //   console.log(params);
-      var res =   this.dbService.postDataByTable("mealplan", params).subscribe(invData => setTimeout(() => {
+			console.log(invData);
 
-   //     console.log(invData);
-
-        if(invData !== null)
-        {
-        if(typeof(invData["inserted_id"]) !== "undefined") 
-        {
-			this.routeParams["id"] = invData['inserted_id'];
-			this.plan["id"]=invData['inserted_id'];
-            this.plan["mealplanid"]=invData['inserted_id'];
+			if(invData !== null)
+			{
+			if(typeof(invData["inserted_id"]) !== "undefined") 
+			{
+				var insertedid = invData["inserted_id"];
+				console.log(insertedid)
 			
-       //   console.log(this.plan);
-        }
-        }
-      }));
-    }
+				this.plan["id"]=insertedid;
+				this.plan["mealplanid"]=insertedid;
+				this.updatingFlag = false;
+		//   console.log(this.plan);
+			}
+			}
+		}));
+		}
+	}
 
   }
   SavePlanData(r, c)
@@ -997,6 +1002,8 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 		  }
 	//	  console.log(document.documentElement.scrollTop);
 		  var btnsaveplan= document.getElementById('btnsaveplan');
+		  if(btnsaveplan !== null)
+		  { 
 		  if(document.documentElement.scrollTop > checkVal)
 		  {
 			btnsaveplan.setAttribute("class", "saveplan ")
@@ -1004,6 +1011,7 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 		  else
 		  {
 			btnsaveplan.setAttribute("class", "saveplan floatbtn")
+		  }
 		  }
 
 
