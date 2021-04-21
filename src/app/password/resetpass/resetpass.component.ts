@@ -3,7 +3,7 @@ import { Subject, interval } from 'rxjs';
 import { Router, ActivatedRoute } from "@angular/router";
 import { DBService } from '../../dbservices/db.service';
 import { UserService } from '../../services/user.service';
-
+import { HelpService } from '../../services/help.service';
 @Component({
   selector: 'app-resetpass',
   templateUrl: './resetpass.component.html',
@@ -23,7 +23,7 @@ export class ResetpassComponent implements OnInit, OnDestroy {
   displaymessage: any;
 
 
-  constructor(private router: Router, private route: ActivatedRoute, private dbService: DBService, private userService: UserService) { }
+  constructor(private router: Router, private route: ActivatedRoute, private helpService: HelpService,  private dbService: DBService, private userService: UserService) { }
   ngOnInit() {
     this.result = 0;
     this.userName = "";
@@ -47,6 +47,7 @@ export class ResetpassComponent implements OnInit, OnDestroy {
   }
 
   checkIfTokenValid() {
+    console.log("IN checkIfTokenValid");
     var params = { "email": this.email, "resettoken": this.token };
     this.dbService.getDatabyParam("users", params).subscribe(userData => setTimeout(() => {
       console.log(userData);
@@ -85,13 +86,17 @@ export class ResetpassComponent implements OnInit, OnDestroy {
   resetpass() {
     this.result = 1;
     if (this.password == this.confirmpassword) {
-      var params = { "password": this.password, "id": this.selectedUser["_id"]};
+      var encryptedPass = this.helpService.encryptPass(this.password);
+      var params = { "password": encryptedPass, "id": this.selectedUser["id"]};
+      console.log(params);
       this.dbService.putData("users", params).subscribe(userData => setTimeout(() => {
+        console.log(userData);
         this.result = 1;
         this.displaymessage = "Password has been reset.";
-        var paramsRest = { "resetsentat": "", "resettoken": "", "id":this.selectedUser["_id"] };
-        this.dbService.putData("users", paramsRest).subscribe(userresetData => setTimeout(() => {
-        }));
+        console.log(this.result);
+      //  var paramsRest = { "resetsentat": "", "resettoken": "", "id":this.selectedUser["id"] };
+     //   this.dbService.putData("users", paramsRest).subscribe(userresetData => setTimeout(() => {
+      //  }));
       }));
     }
     else {

@@ -1,8 +1,18 @@
 <div class="contentpage"  style="max-width: 500px; margin:0 auto;">
 
 	<div class="centertext">
-		Change Password
+		Change Password {{result}}
 	</div>
+	<div style="width:80%; margin:0 auto; min-height: 365px;" *ngIf="result == 1">
+		<p class='res-success'><i class="fa fa-check-circle fasuccess"></i> &nbsp;&nbsp;Your {{displaymessage}} <br><a
+				*ngIf="result == 1" href="javascript:void(0)" (click)="trylogin()">Login</a></p>
+	</div>
+	<div style="width:80%; margin:0 auto; min-height: 365px;" *ngIf="result == 2 || result == 3">
+		<p class='res-warning'><i class="fa fa-times-circle fawarning"></i> &nbsp;&nbsp;{{displaymessage}}. <a
+				*ngIf="result == 3" href="javascript:void(0)" (click)="tryagain()">Try Again</a></p>
+
+	</div>
+
 		<div class="login-form">
 			<div class="sign-in-htm"  *ngIf="result == 0">
 	
@@ -23,14 +33,6 @@
 		</div>
 	
 
-	<div style="width:80%; margin:0 auto; min-height: 365px;" *ngIf="result == 1">
-		<p class='res-success'><i class="fa fa-check-circle fasuccess"></i> &nbsp;&nbsp;Your {{displaymessage}}<a
-				*ngIf="result == 1" href="javascript:void(0)" (click)="trylogin()">Login</a></p>
-	</div>
-	<div style="width:80%; margin:0 auto; min-height: 365px;" *ngIf="result == 2 || result == 3">
-		<p class='res-warning'><i class="fa fa-times-circle fawarning"></i> &nbsp;&nbsp;{{displaymessage}}. <a
-				*ngIf="result == 3" href="javascript:void(0)" (click)="tryagain()">Try Again</a></p>
 
-	</div>
 	<br><br><br>
 </div>
