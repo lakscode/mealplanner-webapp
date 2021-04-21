@@ -372,7 +372,8 @@
                 </div>
 
                 <label for="title">Meal Plan Name</label>
-                <input type="text" name="tiplannametle" id="planname" [(ngModel)] ="plan.name" (blur)="saveMealPlan()">
+                <input type="text" name="tiplannametle" id="planname" [(ngModel)] ="plan.name" (blur)="saveMealPlan()" style="margin-bottom:5px">
+                <span *ngIf="errorMessage && !plan.name" style="color:red;font-size:12px">{{errorMessage}}</span>
                 <br>
                 <label for="short-description">Tags</label>
                 <textarea style="margin-bottom:0px" class="short-text" name="plantags" id="plantags" cols="30" rows="3" [(ngModel)] ="plan.tags" (blur)="saveMealPlan()"></textarea>
