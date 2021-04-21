@@ -837,7 +837,7 @@ console.log(params);
        
         params["meal_plan_id"] = this.plan["id"];
         params["day_num"] = r;
-       // params["name"] = "Day " + (r +1);
+        params["name"] = "Day " + (r +1);
 
         params["breakfast"] = "";
         if(typeof(rowItem[0]["recipe"]) !== "undefined" && rowItem[0]["recipe"] !== null && typeof(rowItem[0]["recipe"]["id"]) !== "undefined")
