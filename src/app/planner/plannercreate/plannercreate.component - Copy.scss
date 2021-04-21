@@ -552,7 +552,7 @@ mark, .mark {
 
 
 .side-recipes .recipes .recipe-image {
-  max-width: 50px;
+  max-width: 70px;
 }
 .recipe-mb .recipe-image {
   max-width: 70px;
@@ -562,8 +562,8 @@ mark, .mark {
 }
 
 .recipe-image-container.mobile {
-  height: 50px;
-  width: 50px;
+  height: 70px;
+  width: 70px;
   padding: 0.4rem;
   display: inline-block;
   background: url("/static/images/placeholder-img@2x.png");
@@ -584,7 +584,7 @@ mark, .mark {
 }
 .recipe-mb .recipe-content--draggable {
   display: inline-block;
-  height: 60px;
+  height: 80px;
   max-width: calc(100%);
   width: calc(100%);
 }
@@ -635,7 +635,7 @@ mark, .mark {
 .recipe-mb--draggable {
   display: flex !important;
   flex-wrap: wrap !important;
-  height: 55px !important;
+  height: 75px !important;
 }
 
 .side-recipes .recipes .recipe-wrapper {
@@ -663,8 +663,7 @@ mark, .mark {
 .recipe-mb .title {
   font-size: 12px;
   height: 30px;
-  //margin-bottom: 20px;
-  margin-bottom: 0px;
+  margin-bottom: 20px;
   font-weight: bold;
   padding-top: 5px;
   text-align:left;
@@ -695,7 +694,7 @@ mark, .mark {
 }
 .recipe-mb--draggable .recipe-mb-info {
 
-    width: calc(100% - 50px) !important;
+    width: calc(100% - 70px) !important;
 
 }
 

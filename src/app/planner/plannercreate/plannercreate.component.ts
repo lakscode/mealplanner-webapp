@@ -41,12 +41,14 @@ export class PlannercreateComponent implements OnInit {
 	displayList: Array<any> = [];
 	pageNosList:  Array<any> = [];
 	updatingFlag : boolean = false;
+	pageCount: any = 5;
 	constructor(private router: Router, private route: ActivatedRoute, private pdfService: PDFService, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
 	
 	}
 
 	ngOnInit() {
 			 this.totalPage = 1;
+			 this.pageCount= 5;
 	 this.page_num = 1;
 
 		window.addEventListener("scroll", this.scrollFunc);
@@ -246,7 +248,7 @@ this.loadColorCodes();
 		  this.calculateCaloryFlag = true;
 		 // this.loadRatings();
 	
-	 this.totalPage = this.recipesList["length"] /10;
+	 this.totalPage = this.recipesList["length"] /this.pageCount;
 	 console.log(this.totalPage);
 		  this.getDisplayList();
 		  this.counter();
@@ -322,8 +324,8 @@ this.loadColorCodes();
 	{
 		console.log(this.page_num);
 		this.displayList=[];
-		var startIndex= (this.page_num-1)*10;
-		var endIndex = 10;
+		var startIndex= (this.page_num-1)*this.pageCount;
+		var endIndex = this.pageCount;
 
 		if(startIndex + endIndex > this.recipesList["length"])
 		{
@@ -529,8 +531,8 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 		console.log(panelObj);
 		var img = document.createElement('img');
             img.src = this.formatImage(recipeItem["image"], 's');
-			img.style.width = "70px";
-			img.style.height = "70px";
+			img.style.width = "50px";
+			img.style.height = "50px";
 			img.style.position = "absolute";
 			img.id = "picture_" + index;
 			img.style.top = "0";
@@ -1017,15 +1019,19 @@ console.log(params);
 		  var recipelistpnael = document.getElementById('recipelistpnael');
 		  console.log(recipelistpnael.offsetTop);
 		  console.log(recipelistpnael.offsetLeft);
-
+		  var w = window.innerWidth;
+		  console.log("w " + w);
 		  var btnsaveplan1= document.getElementById('recipes-container');
 		  if(btnsaveplan1 !== null)
 		  { 
-		  if(document.documentElement.scrollTop > 100)
+		  if(document.documentElement.scrollTop > 100 && document.documentElement.scrollTop < (checkVal))
 		  {
 			  console.log("document.documentElement.scrollTop")
 			  console.log(document.documentElement.scrollTop);
-		//	btnsaveplan1.setAttribute("class", "container-fluid side-recipes floatpanel")
+			  console.log(w)
+			  var leftP = (w - 1200)/2;
+			  btnsaveplan1.style.left = leftP + "px";
+			btnsaveplan1.setAttribute("class", "container-fluid side-recipes floatpanel")
 		  }
 		  else
 		  {
