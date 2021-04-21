@@ -1014,7 +1014,24 @@ console.log(params);
 		  }
 		  }
 
+		  var recipelistpnael = document.getElementById('recipelistpnael');
+		  console.log(recipelistpnael.offsetTop);
+		  console.log(recipelistpnael.offsetLeft);
 
+		  var btnsaveplan1= document.getElementById('recipes-container');
+		  if(btnsaveplan1 !== null)
+		  { 
+		  if(document.documentElement.scrollTop > 100)
+		  {
+			  console.log("document.documentElement.scrollTop")
+			  console.log(document.documentElement.scrollTop);
+		//	btnsaveplan1.setAttribute("class", "container-fluid side-recipes floatpanel")
+		  }
+		  else
+		  {
+			btnsaveplan1.setAttribute("class", "container-fluid side-recipes ")
+		  }
+		  }
 	  }
 
 	  downloadplan()
