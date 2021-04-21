@@ -118,7 +118,7 @@
                     </div>
                     <h2>Recipes</h2>
 
-                    <ul class="pagination">
+                    <ul class="pagination" *ngIf="totalPage > 0">
                         <li (click)="currentPage(0)" class="">
                             <a href="javascript:void(0)">
                                 <i class="fa fa-angle-double-left"></i>
@@ -279,125 +279,5 @@
             </div>
         </div>
 
-    </div>
-</div>
-
-
-
-<div class="site-section" style="display:none">
-    <div class="container">
-        <section class="tstbite-components my-4 my-md-5">
-            <h5 class="py-3 mb-0">Latest Recipes</h5>
-            <div class="row">
-                <div class="col-lg-3 col-md-4 col-6">
-                    <figure class="my-3 my-md-4 tstbite-card">
-                        <a href="recipe-sidebar.html" class="tstbite-animation stretched-link rounded-6">
-                            <img src="assets/1.jpg" class="w-100" alt="Menu">
-                        </a>
-                        <figcaption class="mt-2">
-                            <a href="recipe-sidebar.html"
-                                class="text-black d-block mt-1 font-weight-semibold big">Caramel Strawberry
-                                Milkshake</a>
-                        </figcaption>
-                    </figure>
-                </div>
-                <div class="col-lg-3 col-md-4 col-6">
-                    <figure class="my-3 my-md-4 tstbite-card">
-                        <a href="recipe-sidebar.html" class="tstbite-animation stretched-link rounded-6">
-                            <img src="assets/4.jpg" class="w-100" alt="Menu">
-                        </a>
-                        <figcaption class="mt-2">
-                            <a href="recipe-sidebar.html"
-                                class="text-black d-block mt-1 font-weight-semibold big">Cashew Vegan Rice</a>
-                        </figcaption>
-                    </figure>
-                </div>
-                <div class="col-lg-3 col-md-4 col-6">
-                    <figure class="my-3 my-md-4 tstbite-card">
-                        <a href="recipe-sidebar.html" class="tstbite-animation stretched-link rounded-6">
-                            <img src="assets/8.jpg" class="w-100" alt="Menu">
-                        </a>
-                        <figcaption class="mt-2">
-                            <a href="recipe-sidebar.html"
-                                class="text-black d-block mt-1 font-weight-semibold big">Smoked Salmon Salad
-                                Sandwich</a>
-                        </figcaption>
-                    </figure>
-                </div>
-                <div class="col-lg-3 col-md-4 col-6">
-                    <figure class="my-3 my-md-4 tstbite-card">
-                        <a href="recipe-sidebar.html" class="tstbite-animation stretched-link rounded-6">
-                            <img src="assets/17.jpg" class="w-100" alt="Menu">
-                        </a>
-                        <figcaption class="mt-2">
-                            <a href="recipe-sidebar.html"
-                                class="text-black d-block mt-1 font-weight-semibold big">Salmon in Creamy Sun Dried
-                                Tomato Sauce</a>
-                        </figcaption>
-                    </figure>
-                </div>
-                <div class="col-lg-3 col-md-4 col-6">
-                    <figure class="my-3 my-md-4 tstbite-card">
-                        <a href="recipe-sidebar.html" class="tstbite-animation stretched-link rounded-6">
-                            <img src="assets/4.jpg" class="w-100" alt="Menu">
-                        </a>
-                        <figcaption class="mt-2">
-                            <a href="recipe-sidebar.html"
-                                class="text-black d-block mt-1 font-weight-semibold big">Healthy Jam Waffle
-                                Breakfast</a>
-                        </figcaption>
-                    </figure>
-                </div>
-                <div class="col-lg-3 col-md-4 col-6">
-                    <figure class="my-3 my-md-4 tstbite-card">
-                        <a href="recipe-sidebar.html" class="tstbite-animation stretched-link rounded-6">
-                            <img src="assets/8.jpg" class="w-100" alt="Menu">
-                        </a>
-                        <figcaption class="mt-2">
-                            <a href="recipe-sidebar.html"
-                                class="text-black d-block mt-1 font-weight-semibold big">Chocolate and Banana Jar
-                                Cake</a>
-                        </figcaption>
-                    </figure>
-                </div>
-                <div class="col-lg-3 col-md-4 col-6">
-                    <figure class="my-3 my-md-4 tstbite-card">
-                        <a href="recipe-sidebar.html" class="tstbite-animation stretched-link rounded-6">
-                            <img src="assets/3.jpg" class="w-100" alt="Menu">
-                        </a>
-                        <figcaption class="mt-2">
-                            <a href="recipe-sidebar.html"
-                                class="text-black d-block mt-1 font-weight-semibold big">Caramel Blueberry Scones</a>
-                        </figcaption>
-                    </figure>
-                </div>
-                <div class="col-lg-3 col-md-4 col-6">
-                    <figure class="my-3 my-md-4 tstbite-card">
-                        <a href="recipe-sidebar.html" class="tstbite-animation stretched-link rounded-6">
-                            <img src="assets/1.jpg" class="w-100" alt="Menu">
-                        </a>
-                        <figcaption class="mt-2">
-                            <a href="recipe-sidebar.html"
-                                class="text-black d-block mt-1 font-weight-semibold big">Blueberry Carrot Cake</a>
-                        </figcaption>
-                    </figure>
-                </div>
-                <div class="col-lg-3 col-md-4 col-6">
-                    <figure class="my-3 my-md-4 tstbite-card">
-                        <a href="recipe-sidebar.html" class="tstbite-animation stretched-link rounded-6">
-                            <img src="assets/17.jpg" class="w-100" alt="Menu">
-                        </a>
-                        <figcaption class="mt-2">
-                            <a href="recipe-sidebar.html" class="text-black d-block mt-1 font-weight-semibold big">Vegan
-                                Cauliflower Salad</a>
-                        </figcaption>
-                    </figure>
-                </div>
-
-            </div>
-            <div class="text-center py-5">
-                <a href="#0" class="btn btn-outline-dark px-4 px-md-5 py-1 py-md-2 big font-weight-medium">Load More</a>
-            </div>
-        </section>
     </div>
 </div>

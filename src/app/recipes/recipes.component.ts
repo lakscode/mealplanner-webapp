@@ -170,18 +170,14 @@ export class RecipesComponent implements OnInit {
 	  if(invData !== null && typeof(invData["body"]) !== "undefined" && invData["body"] !== null && invData["body"]["length"] > 0)
 		{
 		  this.recipesList1 = [];
-		  this.recipesList2 = [];
 
 		  for(let i=0; i < invData["body"]["length"] ; i++)
 		  {
-		//	  if(i < invData["body"]["length"]/2)
 			this.recipesList1.push(invData["body"][i]);
-		//	else 
-		//	this.recipesList2.push(invData["body"][i]);
-
 			this.ratingIds += invData["body"][i]["id"] + ",";
 		  }
 		  this.totalPage = this.recipesList1["length"] /10;
+		  this.counter(this.totalPage);
 		  console.log(this.recipesList1);
 		 
 		  this.getDisplayList();
@@ -193,7 +189,9 @@ export class RecipesComponent implements OnInit {
   
 	}
 	counter(i: number) {
-		return new Array(i);
+		console.log(i);
+		var num = Math.ceil(i);
+		return new Array(num);
 	}
 	prevPage()
 	{
@@ -350,12 +348,7 @@ endIndex = startIndex+ endIndex;
 	searchProps()
 	{
 
-	console.log(this.searchparam);
-
-		console.log(this.healthlabelsList);
-		console.log(this.dietLabelsList);
-		console.log(this.mineralsLabelsList);
-	//this.searchRes = [];
+	console.log('searchProps');
  
 
    var params = {}
@@ -411,16 +404,6 @@ endIndex = startIndex+ endIndex;
 		minerals=  minerals.slice(0, -1);
 	 }
 
-	 console.log("dietLabels");
-	 console.log(dietlabels);
-
-
-	 console.log("healthlabels");
-	 console.log(healthlabels);
-
-	 console.log("minerals");
-	 console.log(minerals);
-
 	var checkMinerals = false;
  
    if(typeof(dietlabels) !== "undefined" && dietlabels  !== "")
@@ -440,10 +423,9 @@ endIndex = startIndex+ endIndex;
 
    } 
   
-	 console.log(checkMinerals);
+
     this.searchparam.range.lower
-   console.log(this.searchparam);
-   console.log(params);
+
     var res =   this.dbService.getDatabyFields("recipes", params).subscribe(invData => setTimeout(() => {
 
       console.log(invData);
@@ -463,8 +445,9 @@ endIndex = startIndex+ endIndex;
 				this.ratingIds += temp[i]["id"] + ",";
             }
 			this.totalPage = this.recipesList1["length"] /10;
+			this.counter(this.totalPage);
           }
-         
+         console.log("totalPage " + this.totalPage);
         }
        
 		this.getDisplayList();

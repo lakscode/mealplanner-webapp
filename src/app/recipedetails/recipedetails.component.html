@@ -98,7 +98,7 @@
     <div class="recipe-detail-body">
     <div class="rating-box">
         <span class="rating-icons" style="font-size:16px" *ngFor="let item of [1,2,3,4,5]">
-            <i [ngClass]="ratingObj['displayrating'] >= item?'fa fa-star set':'fa fa-star'"></i>
+            <i [ngClass]="ratingObj['displayrating'] >= item?'fa fa-star set':'fa fa-star unset'"></i>
           </span>
         <span class="rating-figure">({{ratingObj['displayrating']}} / 5)</span>
     </div>
