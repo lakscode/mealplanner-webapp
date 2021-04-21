@@ -34,7 +34,7 @@
                                             selections</div>
                                     </div>
                                 </div>
-                                <div class="input-group-append"><button type="submit" (click)="loadRecipes()" class="btn btn-secondary"><i
+                                <div class="input-group-append"> &nbsp;&nbsp;<button type="submit" (click)="loadRecipes()" class="btn btn-secondary"><i
                                             class="fa fa-search" aria-hidden="true"></i></button></div>
                             </div>
                         </div>
@@ -52,7 +52,7 @@
                         class="advanced-filters btn-filter btn-filter-mb other-filters-btn   btn-group btn-group-sm"><button
                             type="button" id="advancedFilterToggle" aria-haspopup="true" aria-expanded="false"
                             class="btn btn-secondary"><i class="fa fa-plus" aria-hidden="true"></i>Filters</button>
-                        <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right">
+                        <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right" style="display:none">
                             <div class="advanced-filters-area">
                                 <form>
                                     <div class="favorites-area form-group">
@@ -115,7 +115,7 @@
                                                             type="checkbox" id="5c252abab834861eec53846b"
                                                             name="5c252abab834861eec53846b" value=""><span
                                                             class="hm-checkbox-mark"></span></div>
-                                                </div><span><img class="info-icon" src="/static/images/info.png"
+                                                </div><span><img class="info-icon" 
                                                         srcset="/static/images/info.png 1x, /static/images/info@2x.png 2x, /static/images/info@3x.png 3x"
                                                         alt="Info icon" id="Popover-5c252abab834861eec53846b"></span>
                                             </div>
@@ -125,7 +125,7 @@
                                                             data-test="test-label-Egg-Free">Egg-Free</span><input type="checkbox"
                                                             id="5c252abab834861eec53846f" name="5c252abab834861eec53846f"
                                                             value=""><span class="hm-checkbox-mark"></span></div>
-                                                </div><span><img class="info-icon" src="/static/images/info.png"
+                                                </div><span><img class="info-icon" 
                                                         srcset="/static/images/info.png 1x, /static/images/info@2x.png 2x, /static/images/info@3x.png 3x"
                                                         alt="Info icon" id="Popover-5c252abab834861eec53846f"></span>
                                             </div>
@@ -136,7 +136,7 @@
                                                             type="checkbox" id="5c252abab834861eec53846c"
                                                             name="5c252abab834861eec53846c" value=""><span
                                                             class="hm-checkbox-mark"></span></div>
-                                                </div><span><img class="info-icon" src="/static/images/info.png"
+                                                </div><span><img class="info-icon" 
                                                         srcset="/static/images/info.png 1x, /static/images/info@2x.png 2x, /static/images/info@3x.png 3x"
                                                         alt="Info icon" id="Popover-5c252abab834861eec53846c"></span>
                                             </div>
@@ -146,7 +146,7 @@
                                                             data-test="test-label-Nut-Free">Nut-Free</span><input type="checkbox"
                                                             id="5c252abab834861eec53846a" name="5c252abab834861eec53846a"
                                                             value=""><span class="hm-checkbox-mark"></span></div>
-                                                </div><span><img class="info-icon" src="/static/images/info.png"
+                                                </div><span><img class="info-icon" 
                                                         srcset="/static/images/info.png 1x, /static/images/info@2x.png 2x, /static/images/info@3x.png 3x"
                                                         alt="Info icon" id="Popover-5c252abab834861eec53846a"></span>
                                             </div>
@@ -157,7 +157,7 @@
                                                             type="checkbox" id="5c252abab834861eec53846e"
                                                             name="5c252abab834861eec53846e" value=""><span
                                                             class="hm-checkbox-mark"></span></div>
-                                                </div><span><img class="info-icon" src="/static/images/info.png"
+                                                </div><span><img class="info-icon" 
                                                         srcset="/static/images/info.png 1x, /static/images/info@2x.png 2x, /static/images/info@3x.png 3x"
                                                         alt="Info icon" id="Popover-5c252abab834861eec53846e"></span>
                                             </div>
@@ -167,7 +167,7 @@
                                                             data-test="test-label-Vegan">Vegan</span><input type="checkbox"
                                                             id="5c252abab834861eec53846d" name="5c252abab834861eec53846d"
                                                             value=""><span class="hm-checkbox-mark"></span></div>
-                                                </div><span><img class="info-icon" src="/static/images/info.png"
+                                                </div><span><img class="info-icon" 
                                                         srcset="/static/images/info.png 1x, /static/images/info@2x.png 2x, /static/images/info@3x.png 3x"
                                                         alt="Info icon" id="Popover-5c252abab834861eec53846d"></span>
                                             </div>
@@ -176,7 +176,7 @@
                                     <hr>
                                     <div class="form-group">
                                         <p class="advanced-filters-title">INGREDIENTS<span><img class="info-icon"
-                                                    src="/static/images/info.png"
+                                                    
                                                     srcset="/static/images/info.png 1x, /static/images/info@2x.png 2x, /static/images/info@3x.png 3x"
                                                     alt="Info icon" id="Popover-ingredientPop"></span></p>
                                         <div class="toggle-wrapper col-6 ingredients-filter col-md-12" data-test="toogle-input">
@@ -286,8 +286,9 @@
                                     src="{{draggable}}"
                                     alt="Draggable icon" draggable="true" 
                                     (dragstart)="drag($event, k)"></div>-->
-                                    <div style='width:calc(100%)'><a class="hmp-link--no-style"
-                                href="{{recipe.uri}}">
+                                    <!-- <div style='width:calc(100%)'><a class="hmp-link--no-style"
+                                href="{{recipe.uri}}"> -->
+                                <div style='width:calc(100%)'><a class="hmp-link--no-style" style="cursor: -webkit-grabbing; cursor: grabbing;"> 
                                 <div class="recipe-content recipe-content--draggable card-body">
                                     <div class="recipe-image-container mobile" id="imagep_{{k}}">
                                             <img class="recipe-image"
@@ -297,7 +298,7 @@
                                             (dragstart)="drag($event, k)" ></div>
                                     <div class="recipe-mb-info">
                                         <h2 class="title overflow-text" id="recipe-6050d5d15ddc1c00294df92a">{{recipe.label}}</h2>
-                                        <div class="calories" id="calories-6050d5d15ddc1c00294df92a">{{recipe.calories}} calories</div>
+                                        <div class="calories" style="float:right;margin-right:5px;font-weight:bold" id="calories-6050d5d15ddc1c00294df92a">{{recipe.calories}} calories</div>
                                     </div>
                                     <!--<img id="favorite-button-side-favorite-button-6050d5d15ddc1c00294df92a"
                                         class="side-favorite-button" src="assets/images/heart.png" alt="Heart icon">-->
