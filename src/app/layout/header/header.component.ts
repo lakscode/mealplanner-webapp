@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { UserService, User } from '../../services/user.service';
 import { DBService } from '../../dbservices/db.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-header',
@@ -34,7 +35,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 	subscribeCompanyService: any;
 	companylogo : any;
 
-	constructor(private router :Router, private userService: UserService,  private dbService: DBService,) {
+	constructor(private router :Router, private userService: UserService,  private dbService: DBService, private location: Location) {
 
 	var currentUrl = this.router.url;
 	currentUrl = currentUrl.replace("/","");
@@ -169,9 +170,10 @@ console.log(currentUrl);
 	}
 	gotoLogin()
 	{
-		if(!this.loggedIn)
+	var str = this.location.path();	 
+		if(!this.loggedIn && str.indexOf("resetpassword") == -1)
 		{
-			this.router.navigate(["login"]);
+			this.router.navigate(["login"]);			
 		}
 	}
 		gotopage(page)
