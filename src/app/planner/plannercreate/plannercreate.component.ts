@@ -9,7 +9,7 @@ import { PDFService } from '../../services/pdf.service';
 import { constants } from '../../jsonfiles/constants';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-import { environment} from "../../../environments/environment"
+import { environment} from "../../../environments/environment";
 @Component({
 	selector: 'app-plannercreate',
 	templateUrl: './plannercreate.component.html',
@@ -610,12 +610,30 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 	  getFavourites()
 	  {
 		this.favouritesList = [];
-		var params = {"limit": 100};
+		//var params = {"limit": 100};
+		var params ={};
 	//	console.log(params);
-		var res =   this.dbService.getDataByTable("favourites", params).subscribe(invData => setTimeout(() => {
+		params["query"] = "select id, label, image, healthLabels, s_instructions, dietLabels, calories,s_instructions  from recipes  where id in (select recipeid from favourites where userid ='" + this.currentUser["id"] + "')";
+		 var res =   this.dbService.getDatabyQuery("recipes", params).subscribe(invData => setTimeout(() => {
 	
 	  console.log(invData);
-		  if(invData !== null)
+	  	
+	  if(invData !== null && typeof(invData["body"]) !== "undefined" && invData["body"] !== null && invData["body"]["length"] > 0)
+		{
+		  this.recipesList = [];
+
+		  for(let i=0; i < invData["body"]["length"] ; i++)
+		  {
+			this.recipesList.push(invData["body"][i]);
+		  }
+		  this.totalPage = this.recipesList["length"] /10;
+		  this.counter(this.totalPage);
+		  console.log(this.recipesList);
+		 
+		  this.getDisplayList();
+		 
+		}
+		/*  if(invData !== null)
 		  {
 			var obj = invData["body"]["length"];
 			this.favouritesList = invData["body"];
@@ -637,7 +655,7 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 			  idslist = idslist.substring(0, idslist.length-1);
 			  this.loadRecipes(idslist, false);
 			}
-		  }
+		  }*/
 	
 		}));
 	  }
