@@ -82,7 +82,7 @@ export class TabspanelComponent implements OnInit, OnDestroy, AfterViewChecked, 
     LoadData()
     {
       this.selectedTab = 1;
-      console.log("Show spinner");
+   //   console.log("Show spinner");
     //  this.spinner.show();
       this.userService.loggedinUser().subscribe(userdata => setTimeout(() => {
         if(typeof(userdata) !=="undefined" && userdata !== null)
@@ -168,10 +168,10 @@ export class TabspanelComponent implements OnInit, OnDestroy, AfterViewChecked, 
 
 	  params["instructions"] = "notempty";
   
-	  console.log(JSON.stringify(params));
+	  //console.log(JSON.stringify(params));
 	 var res =   this.dbService.getDatabyFields("recipes", params).subscribe(invData => setTimeout(() => {
   
-	  console.log(invData);
+	 // console.log(invData);
     this.ratingIds ="";
 	  if(invData !== null && typeof(invData["body"]) !== "undefined" && invData["body"] !== null && invData["body"]["length"] > 0)
 		{
@@ -190,9 +190,9 @@ export class TabspanelComponent implements OnInit, OnDestroy, AfterViewChecked, 
       this.ratingIds += invData["body"][i]["id"] + ",";
 		
 		  }
-		  console.log(this.recipesList1);
-		  console.log(this.recipesList2);
-		  console.log(this.recipesList3);
+		//  console.log(this.recipesList1);
+		 // console.log(this.recipesList2);
+		 // console.log(this.recipesList3);
       this.recipesList = this.recipesList1;
       this.loadRatings();
 		}
@@ -223,7 +223,7 @@ export class TabspanelComponent implements OnInit, OnDestroy, AfterViewChecked, 
 	   
 		params["query"] = "SELECT count(rating) as totalcount, sum(rating) as totalrating, recipeid FROM `rating` where recipeid in (" + this.ratingIds + ") group by recipeid";
 		var res =   this.dbService.getDatabyTablebyQuery("rating", params).subscribe(invData => setTimeout(() => {
-		console.log(invData);
+	//	console.log(invData);
 		  if(invData !== null)
 		  {
 			if(typeof(invData["body"]) !== "undefined" && invData["body"] !== null && invData["body"]["length"] > 0)
@@ -235,9 +235,9 @@ export class TabspanelComponent implements OnInit, OnDestroy, AfterViewChecked, 
 				for(let i=0; i< temp["length"] ; i++)
 				{
 				 
-				  console.log(temp[i]);
+				//  console.log(temp[i]);
 				  var recIndex = this.recipesList1.findIndex(x1 => (x1.id === temp[i]["recipeid"]));
-				  console.log(recIndex);
+				//  console.log(recIndex);
 				  if(recIndex > -1)
 				  {
 					this.recipesList1[recIndex]["totalcount"] = temp[i]["totalcount"];
@@ -252,7 +252,7 @@ export class TabspanelComponent implements OnInit, OnDestroy, AfterViewChecked, 
 				  }
   
 				  var rec1Index = this.recipesList2.findIndex(x1 => (x1.id === temp[i]["recipeid"]));
-				  console.log(rec1Index);
+				//  console.log(rec1Index);
 				  if(rec1Index > -1)
 				  {
 					this.recipesList2[rec1Index]["totalcount"] = temp[i]["totalcount"];
@@ -269,7 +269,7 @@ export class TabspanelComponent implements OnInit, OnDestroy, AfterViewChecked, 
 				  }
 
           var rec3Index = this.recipesList3.findIndex(x3 => (x3.id === temp[i]["recipeid"]));
-				  console.log(rec1Index);
+				//  console.log(rec1Index);
 				  if(rec3Index > -1)
 				  {
 					this.recipesList3[rec3Index]["totalcount"] = temp[i]["totalcount"];
@@ -288,7 +288,7 @@ export class TabspanelComponent implements OnInit, OnDestroy, AfterViewChecked, 
   
 				}
 		
-				console.log(  this.recipesList2);
+			//	console.log(  this.recipesList2);
 			  }
 			}
 	

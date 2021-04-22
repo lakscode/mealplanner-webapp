@@ -17,38 +17,20 @@ export class Landing1Component implements OnInit {
 	sliderList: Array<any> = [];
 	recommendedRecipes: Array<any> = [];
 	healthLabels: Array<any> = [];
+	RecipeoftheDay: Array<any> = [];
 	constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
 	
 	}
 
 	ngOnInit() {
 		this.count++;
-
+		this.loadRecipeoftheDay();
 
 		this.loadHealthLabels();
-		//if(this.count==0)
-		//window.location.reload();
-		this.loadSliders();
+	
 		this.loadRecommendedRecipes();
 	
 	}
-
-	loadSliders()
-    {
-		this.sliderList=[];
-      /*
-      this.sliderList.push({"title":"pasto pizza with cheesey dip", "image":"assets/images/temp-images/full-slide-1.jpg","rating":"(4.1 / 5)", "description":"Nam ornare arcu turpis, nec congues with us     <br/>Curabitur quis euismod mauris. Nulls<br/>eget semper vulputate."});
-      this.sliderList.push({"title":"pasto pizza with juicy dip", "image":"assets/images/temp-images/full-slide-2.jpg","rating":"(4.1 / 5)", "description":"Nam ornare arcu turpis, nec congues with us     <br/>Curabitur quis euismod mauris. Nulls<br/>eget semper vulputate."});
-      this.sliderList.push({"title":"pasto pizza with extra topping", "image":"assets/images/temp-images/full-slide-3.jpg","rating":"(4.1 / 5)", "description":"Nam ornare arcu turpis, nec congues with us     <br/>Curabitur quis euismod mauris. Nulls<br/>eget semper vulputate."});
-      */
-
-      this.sliderList.push({"title":"More than 50 thousand recipes.", "image":"assets/images/temp-images/full-slide-1.jpg","rating":"", "description":"By providing tools that streamline the meal planning process we equip households to eat better food, eat together, save money at the grocery store, and have a less stressful cooking experience in the kitchen."});
-      this.sliderList.push({"title":"Meal Planning tool to add recipes to your weekly plan", "image":"assets/images/temp-images/full-slide-4.jpg","rating":"", "description":" recipes that fit your lifestyle and customized meal plan to accommodate your schedule,"});
-    //  this.sliderList.push({"title":"pasto pizza with extra topping", "image":"assets/images/temp-images/full-slide-3.jpg","rating":"", "description":"Nam ornare arcu turpis, nec congues with us     <br/>Curabitur quis euismod mauris. Nulls<br/>eget semper vulputate."});
-
-
-
-    }
 
 
 	loadRecommendedRecipes()
@@ -57,8 +39,6 @@ export class Landing1Component implements OnInit {
   
 	  var params = {"limit": "4"};
 	  params["query"]="select id, label, image, s_instructions, healthLabels from recipes where s_instructions != '' AND label != '' AND image != '' group by healthLabels order by rand() limit 0, 4";
-  
-	  //select rc.id, rc.label, rc.image, rc.s_instructions, rc.healthLabels, count(rt.rating) as totalcount, sum(rt.rating) as totalrating from recipes rc join rating rt where rt.recipeid = rc.id AND s_instructions != '' AND label != '' AND image != '' group by healthLabels limit 0, 5
   
 	  var res =   this.dbService.getDatabyQuery("recipes", params).subscribe(invData => setTimeout(() => {
    
@@ -70,10 +50,9 @@ export class Landing1Component implements OnInit {
 		   for(let i=0; i < invData["body"]["length"] ; i++)
 		   {
 			 this.recommendedRecipes.push(invData["body"][i]);
-			// this.ratingIds += invData["body"][i]["id"] + ",";
+			
 		   }
-		 //  this.recipesLoaded++;
-		 //  this.loadRatings();
+		
 		 }
 		 console.log(this.recommendedRecipes);
 	   }
@@ -82,19 +61,26 @@ export class Landing1Component implements OnInit {
    
 	}
 
-	loadHealthLabelsold()
+	loadRecipeoftheDay()
 	{
-		this.healthLabels = [];
+	  this.RecipeoftheDay = [];
+	  var params = {};
+    params["query"] = "select id, image, label, dietLabels, s_instructions from recipes where s_instructions != '' order by rand() limit 1";
 
-		this.healthLabels.push({"label":"7 Days Meal Plan", "image":"assets/images/temp-images/listing-1.jpg"});
-		this.healthLabels.push({"label":"Low-Carb", "image":"assets/images/temp-images/listing-2.jpg"});
-		this.healthLabels.push({"label":"Gluten-Free", "image":"assets/images/temp-images/listing-3.jpg"});
-		this.healthLabels.push({"label":"Pescatarian", "image":"assets/images/temp-images/listing-1.jpg"});
-		this.healthLabels.push({"label":"Vegetarian", "image":"assets/images/temp-images/listing-2.jpg"});
-		this.healthLabels.push({"label":"Vegan", "image":"assets/images/temp-images/listing-3.jpg"});
-
+	 var res =   this.dbService.getDatabyTablebyQuery("recipes", params).subscribe(invData => setTimeout(() => {
+   
+	  if(invData !== null && typeof(invData["body"]) !== "undefined" && invData["body"] !== null && invData["body"]["length"] > 0)
+		{
+      this.RecipeoftheDay = [];
+   		for(let i=0; i < invData["body"]["length"] ; i++)
+		  {			
+			  this.RecipeoftheDay.push(invData["body"][i]);		
+		  }
+		}
+   console.log(this.RecipeoftheDay);
+	 }));
+  
 	}
-
 
 
 	loadHealthLabels()

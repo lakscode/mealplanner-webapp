@@ -171,7 +171,7 @@ console.log(currentUrl);
 	gotoLogin()
 	{
 	var str = this.location.path();	 
-		if(!this.loggedIn && str.indexOf("resetpassword") == -1)
+		if(!this.loggedIn && str.indexOf("resetpassword") == -1 && str.indexOf("home") == -1)
 		{
 			this.router.navigate(["login"]);			
 		}
