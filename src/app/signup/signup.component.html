@@ -10,6 +10,9 @@
             <div *ngIf="errorMessage  !== ''" class="group">
             <p class="loginerror">{{errorMessage }}</p>
           </div>
+          <div *ngIf="successMessage  !== ''" class="group">
+            <p class="loginsuccess">{{successMessage }}</p>
+          </div>
 
             <div class="group">
               <label for="username" class="label">Username</label>

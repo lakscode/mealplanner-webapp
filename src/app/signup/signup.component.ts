@@ -21,6 +21,7 @@ pass: any;
 routeParams: any; 
 emailphone: any;
 errorMessage: any;
+successMessage: any;
 userObj: any = {};
 role: any;
 sub: any;
@@ -29,6 +30,7 @@ sub: any;
   constructor(private router: Router, private route: ActivatedRoute, private helpService: HelpService, private dbService: DBService) { 
     this.role = "FREE";
     this.errorMessage = "";
+    this.successMessage = "";
     this.shakeitcls = "";
       this.errorPassMatch = "";
     this.username = "";
@@ -151,7 +153,7 @@ else if(this.userObj.password !== "" && this.userObj.password == this.userObj.co
           {
             if(typeof(invData["result"]) !== "undefined" && invData["result"] == "success")
             {
-              this.errorMessage = "User has been created. ";
+              this.successMessage = "User has been created. ";
               var parent = this;
                 setTimeout(function(){ 
                   parent.gotologin();
