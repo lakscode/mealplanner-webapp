@@ -184,7 +184,7 @@ this.loadColorCodes();
 	  
 		this.ratingIds = "";
 	// this.recipes = recipesList;
-	  var params = {"limit": "100"}; //{"limit": "10"};
+	  var params = {"limit": "50"}; //{"limit": "10"};
    //  params["caloriesfrom"] = this.searchparam.range.lower;
 	// params["caloriesto"] = this.searchparam.range.upper;
 	// console.log(this.searchparam);
@@ -351,7 +351,7 @@ this.loadColorCodes();
 	   this.ratingIds = this.ratingIds.substring(0, this.ratingIds.length-1);
 	  }
 	 
-		var params = {"limit": 100};
+		var params = {"limit": 50};
 	   
 		params["query"] = "SELECT count(rating) as totalcount, sum(rating) as totalrating, recipeid FROM `rating` where recipeid in (" + this.ratingIds + ") group by recipeid";
 		var res =   this.dbService.getDatabyTablebyQuery("rating", params).subscribe(invData => setTimeout(() => {
