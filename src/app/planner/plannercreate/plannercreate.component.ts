@@ -10,6 +10,8 @@ import { constants } from '../../jsonfiles/constants';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { environment} from "../../../environments/environment";
+
+import { ModalService } from './../../shared/modules/modal/modal.service';
 @Component({
 	selector: 'app-plannercreate',
 	templateUrl: './plannercreate.component.html',
@@ -45,7 +47,8 @@ export class PlannercreateComponent implements OnInit {
 	errorMessage: any = "";
 	loadedPlan: boolean  = false;
 	totalNutriArr :  Array<any> = [];
-	constructor(private router: Router, private route: ActivatedRoute, private pdfService: PDFService, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
+	shoppingList:  Array<any> = [];
+	constructor(private router: Router, private route: ActivatedRoute, private modalService: ModalService, private pdfService: PDFService, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
 	
 	}
 
@@ -205,7 +208,7 @@ this.loadColorCodes();
 	  }
   
 	//  params["instructions"] = "notempty";
-	 params["returnfields"] = " id, label, image, healthLabels, s_instructions, dietLabels, totalNutrients, digest,calories,s_instructions ";
+	 params["returnfields"] = " id, label, image, healthLabels,ingredients, s_instructions, dietLabels, totalNutrients, digest,calories,s_instructions ";
   
 	  console.log(JSON.stringify(params));
 	  this.calculateCaloryFlag = false;
@@ -613,7 +616,7 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 		//var params = {"limit": 100};
 		var params ={};
 	//	console.log(params);
-		params["query"] = "select id, label, image, healthLabels, s_instructions, dietLabels, calories,s_instructions  from recipes  where id in (select recipeid from favourites where userid ='" + this.currentUser["id"] + "')";
+		params["query"] = "select id, label, image, healthLabels, ingredients, s_instructions, dietLabels, calories,s_instructions  from recipes  where id in (select recipeid from favourites where userid ='" + this.currentUser["id"] + "')";
 		 var res =   this.dbService.getDatabyQuery("recipes", params).subscribe(invData => setTimeout(() => {
 	
 	  console.log(invData);
@@ -1168,6 +1171,93 @@ console.log(params);
 			retval = parseFloat(str).toFixed(2);
 		}
 		return retval;
+	}
+
+
+
+	getIngredientsList()
+	{
+	  console.log(this.plan);
+	  var ingredientsList = [];
+	  var shoppingList = [];
+	  var consList = [];
+	  for(let i=0; i < this.plan["days"]["length"]; i++)
+	  {
+	  //  console.log(this.plan["days"][i]);
+		var itemday = this.plan["days"][i];
+		for(let j=0; j < this.plan["days"][i]["meals"].length; j++)
+		{
+			var itemmeal = this.plan["days"][i]["meals"][j];
+			console.log(itemmeal);
+		  if(typeof(itemday) !== "undefined" && typeof(itemmeal["recipe"]) !== "undefined" && itemmeal["recipe"] !== null)
+		  {
+		  console.log(itemmeal["recipe"]["ingredients"]);
+		//  console.log(itemday[this.mealTypeList[j]]["ingredientLines"]);
+			if(typeof(itemmeal["recipe"]["ingredients"]) !== "undefined" && itemmeal["recipe"]["ingredients"] !== "")
+		  {
+			var tempA = JSON.parse(itemmeal["recipe"]["ingredients"]);
+		  console.log(tempA);
+		  for(let k=0; k < tempA.length; k++)
+		  {
+			ingredientsList.push(tempA[k]['text'])
+			var t = tempA[k]['text'];
+			if(t.indexOf('cups') > -1)
+			{
+			  var t1 = t.split('cups');
+			  var cIndex = consList.findIndex(x => (x.name  === t1[1].trim()));
+			  if(cIndex > -1)
+			  {
+				consList[cIndex]['quantity'] = parseFloat(consList[cIndex]['quantity']) +  parseFloat(t1[0].trim());
+			  }
+			  else
+			  {
+				consList.push({"name":t1[1].trim(), 'quantity': t1[0].trim(), 'measure':"cups"})
+			  }
+			  shoppingList.push({"name":t1[1].trim(), 'quantity': t1[0].trim() + " cups"})
+			}
+			else if(t.indexOf('cup') > -1)
+			{
+			  var t1 = t.split('cup');
+			  //var cIndex = shoppingList.findIndex(x => (x.name  === t1[1]));
+			  var cIndex = consList.findIndex(x => (x.name  === t1[1].trim()));
+			  if(cIndex > -1)
+			  {
+				consList[cIndex]['quantity'] = parseFloat(consList[cIndex]['quantity']) +  parseFloat(t1[0].trim());
+			  }
+			  else
+			  {
+				consList.push({"name":t1[1].trim(), 'quantity': t1[0].trim(), 'measure':"cups"})
+			  }
+  
+			  shoppingList.push({"name":t1[1].trim(), 'quantity': t1[0].trim() + " cup"})
+			}
+			else
+			{
+			  shoppingList.push({"name":t, 'quantity': " "})
+			  consList.push({"name":t, 'quantity': '', 'measure':""})
+			}
+		  }
+		}
+		  }
+		}
+	  }
+	//  console.log(ingredientsList);
+	 // console.log(shoppingList);
+	//  console.log(consList);
+	  this.shoppingList = consList
+	  //console.log(JSON.stringify(shoppingList));
+	  console.log(JSON.stringify(consList));
+	 // sessionStorage.setItem("list",JSON.stringify(consList));
+	  this.openModal("popuppanel");
+	}
+
+	openModal(id)
+	{
+		this.modalService.open(id);
+	}
+	closeModal(id)
+	{
+		this.modalService.close(id);
 	}
 }
 
