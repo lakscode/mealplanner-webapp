@@ -1,3 +1,4 @@
+<div class="recipes-home-body inner-page">
 <div class="row w-1200" style="text-align:center; margin:0 auto;">
 
 
@@ -291,7 +292,7 @@
                                             (dragstart)="drag($event, k)" ></div>
                                     <div class="recipe-mb-info">
                                         <h2 class="title overflow-text" id="recipe-6050d5d15ddc1c00294df92a">{{recipe.label}}</h2>
-                                        <div class="calories" style="float:right;margin-right:5px;font-weight:bold" id="calories-6050d5d15ddc1c00294df92a">{{recipe.calories}} calories</div>
+                                        <div class="calories" id="calories-6050d5d15ddc1c00294df92a">{{recipe.calories}} calories</div>
                                     </div>
                                     <!--<img id="favorite-button-side-favorite-button-6050d5d15ddc1c00294df92a"
                                         class="side-favorite-button" src="assets/images/heart.png" alt="Heart icon">-->
@@ -361,9 +362,9 @@
        
 
         <div class="meal-plans-content">
-             <div class="submit-recipe-form" style="text-align:left; padding-bottom:10px;">
+             <div class="submit-recipe-form" style="text-align:left; padding-bottom:10px;  background-color: #f8f6f5;">
                 <div style='text-align:right;'>
-                    <a class="copy-button" (click)="downloadplan()" href="javascript:void(0)"><i class="fa fa-download"></i> Download PDF</a>
+                    <a class="copy-button" (click)="downloadplan()"><i class="fa fa-download"></i> Download PDF</a>
                 
                 </div>
 
@@ -395,10 +396,10 @@
                     <div class="meal-row-wrapper">
                    <!--<div class="meal-name" style="min-height:130px"><span [ngClass]="checkData(item)?'left90':'left30'">{{item.name}}</span></div>-->
                    <div class="dayname"><span>{{item.name}}</span></div>
-                    <div class="meal-plan-column-container">
+                    <div class="meal-plan-column-container" style="background-color:#fff">
                         <div class="meal-plan-row">
                          
-                            <div class="meal-plan-slot mealplan-col" *ngFor="let meal of item.meals; let c= index;">
+                            <div class="meal-plan-slot mealplan-col" *ngFor="let meal of item.meals; let c= index;" >
                                 <div *ngIf="meal.recipe">
                                     <div draggable="true">
                                         <div class="recipe-image-wrapper ">
@@ -477,4 +478,5 @@
        
     </div>
     
+</div>
 </div>
