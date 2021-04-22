@@ -522,19 +522,28 @@ this.loadColorCodes();
 		console.log(c);
 		ev.preventDefault();
 		var index = sessionStorage.getItem("dragstartindex");
-		var recipeItem = this.recipesList[index];
+		
+
+		var r_index = parseInt(index);
+		if(this.page_num > 1)
+		r_index = parseInt(index) + (this.page_num-1 * this.pageCount)
+		console.log("index " + index);
+		console.log("page_num " + this.page_num);
+		console.log("r_index " + r_index);
+		//var recipeItem = this.recipesList[r_index];
+		var recipeItem = this.displayList[index];
 
 		var data = ev.dataTransfer.getData("text");
 this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 	
-		var panelObj = document.getElementById("imagep_" + index);
+		var panelObj = document.getElementById("imagep_" + this.page_num + "_" + index);
 		console.log(panelObj);
 		var img = document.createElement('img');
             img.src = this.formatImage(recipeItem["image"], 's');
 			img.style.width = "50px";
 			img.style.height = "50px";
 			img.style.position = "absolute";
-			img.id = "picture_" + index;
+			img.id = "picture_" + this.page_num + "_" + index;
 			img.style.top = "0";
 			img.style.left = "0";
 			img.setAttribute("class","recipe-image");

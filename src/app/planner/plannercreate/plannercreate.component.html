@@ -11,7 +11,7 @@
         <div>
             <div class="filter-bar--side-version">
                 <div class="filter-bar__search-container">
-                    <form class="recipe-search false" onsubmit ="loadRecipes()">
+                    <form class="recipe-search false" (submit) ="loadRecipes()">
                         <div class="form-group">
                             <div class="input-group">
                                 <div class="hm-typeahead " data-test="typeahead-input">
@@ -281,17 +281,12 @@
                     <div id="Drag{{k}}" 
                     (dragover)="allowDrop($event)">
                         <div class="recipe-mb mb-3 recipe-mb--draggable  card">
-                            <!--<div class="draggable-bar" id="draggable-bar_{{k}}"><img
-                                    id="nutritional-toggle-6050d5d15ddc1c00294df92a" class="toggle-icon"
-                                    src="{{draggable}}"
-                                    alt="Draggable icon" draggable="true" 
-                                    (dragstart)="drag($event, k)"></div>-->
-                                    <div style='width:calc(100%)'><a class="hmp-link--no-style"
+                            <div style='width:calc(100%)'><a class="hmp-link--no-style"
                                 href="{{recipe.uri}}">
                                 <div class="recipe-content recipe-content--draggable card-body">
-                                    <div class="recipe-image-container mobile" id="imagep_{{k}}">
+                                    <div class="recipe-image-container mobile" id="imagep_{{page_num}}_{{k}}">
                                             <img class="recipe-image"
-                                            id="picture_{{k}}"
+                                            id="picture_{{page_num}}_{{k}}"
                                             src="{{formatImage(recipe.image, 's')}}"
                                             alt="Recipe image"  draggable="true" 
                                             (dragstart)="drag($event, k)" ></div>
