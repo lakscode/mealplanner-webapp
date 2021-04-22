@@ -140,7 +140,7 @@ this.showhideTimeFlag = false;
 	{
 	  this.recipesList = [];
 	  var params = {};
-    params["query"] = "select * from recipes where s_instructions != '' order by rand() limit 4";
+    params["query"] = "select id, image, label, dietLabels from recipes where s_instructions != '' order by rand() limit 4";
 
 	 var res =   this.dbService.getDatabyTablebyQuery("recipes", params).subscribe(invData => setTimeout(() => {
    

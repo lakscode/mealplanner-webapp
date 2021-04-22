@@ -60,7 +60,7 @@ export class AppComponent implements OnInit {
 
     var parent = this;
   
-   // setTimeout(function(){  parent.openModal(); }, 3000);
+   // setTimeout(function(){  parent.openModal('popupformessage'); }, 3000);
 
     localStorage.setItem('currentUser', "");
     this.router.events.subscribe(event => {
@@ -78,14 +78,40 @@ export class AppComponent implements OnInit {
         this.userName = this.user["userName"];
         if(this.user["loggedIn"])
        this.loggedIn = this.user["loggedIn"];
+       var showRenew = sessionStorage.getItem("showRenew");
+       if(typeof(showRenew) == "undefined" || showRenew !== "true")
+       {
+       if(typeof(this.user["created_time"]) !== "undefined" && this.user["created_time"] !== "")
+       {
+        var resetsentat = new Date(this.user["created_time"].toString());
+        console.log(resetsentat);
+        var currentDttm = new Date();
+        console.log(currentDttm);
+        var difference = currentDttm.getTime() - resetsentat.getTime();
+        var resultInMinutes = Math.round(difference / 60000);
+        console.log(resultInMinutes);
+        var resultInDays = Math.round(difference / (1000 * 3600 * 24));
+        console.log(resultInDays);
+        if(resultInDays > 30)
+        {
+          sessionStorage.setItem("showRenew", "true")
+       // this.openModal("popupforrenew");
+        }
+       }
+      }
+      
 
       }
     }, 0));
   }
-
-  openModal()
+  gotopage(page)
   {
-    this.modalService.open('popupformessage');
+    this.closeModal("popupforrenew")
+    this.router.navigate([page]);
+  }
+  openModal(id)
+  {
+    this.modalService.open(id);
   }
   closeModal(id)
   {

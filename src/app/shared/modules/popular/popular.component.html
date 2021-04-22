@@ -1,6 +1,6 @@
  <!--popular recipes widget-->
  <div class="widget latest-news-widget">
-    <h2>Popular recipes</h2>
+    <h2>Popular Recipes</h2>
     <ul>
         <li *ngFor="let recipe of recipesList; let r = index;">
             <div class="thumb">
@@ -9,7 +9,7 @@
                 </a>
             </div>
             <div class="detail">
-                <a (click)="gotoRecipeDetails(recipe.id)">{{recipe.label}}</a>
+                <a style="font-weight:bold" (click)="gotoRecipeDetails(recipe.id)">{{recipe.label}}</a>
                 <span class="post-date">{{formatLabels(recipe.dietLabels)}}</span>
             </div>
         </li>
