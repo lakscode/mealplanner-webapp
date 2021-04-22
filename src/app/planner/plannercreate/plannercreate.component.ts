@@ -43,6 +43,8 @@ export class PlannercreateComponent implements OnInit {
 	updatingFlag : boolean = false;
 	pageCount: any = 5;
 	errorMessage: any = "";
+	loadedPlan: boolean  = false;
+	totalNutriArr :  Array<any> = [];
 	constructor(private router: Router, private route: ActivatedRoute, private pdfService: PDFService, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
 	
 	}
@@ -51,7 +53,7 @@ export class PlannercreateComponent implements OnInit {
 			 this.totalPage = 1;
 			 this.pageCount= 5;
 	 this.page_num = 1;
-
+this.loadedPlan = false;
 		window.addEventListener("scroll", this.scrollFunc);
 
 
@@ -70,7 +72,7 @@ this.addRecipeImage = "assets/images/add-recipe.png"
 		  this.currentUser["displayname"] = this.currentUser["firstname"];
 		  else if( this.currentUser["username"] !== "")
 		  this.currentUser["displayname"] = this.currentUser["username"];
-		  console.log(this.currentUser["displayname"]);
+		//  console.log(this.currentUser["displayname"]);
 		}
 	
 		this.mealTypeList = ["breakfast", "snack1", "lunch", "snack2", "dinner"];
@@ -81,7 +83,7 @@ this.addRecipeImage = "assets/images/add-recipe.png"
 		  this.routeParams = params;     
 		  if (typeof (this.routeParams.id) !== "undefined") {
 			console.log(this.routeParams.id);
-			this.plan["mealplanid"] =this.routeParams.id;
+		//	this.plan["mealplanid"] =this.routeParams.id;
 			//this.loadRecipe(this.routeParams.id);
 		  }   
 		 
@@ -137,7 +139,7 @@ this.loadColorCodes();
 			this.plan["days"].push({"id":"row" + (j+1), "name":this.weekDays[j]["name"], "meals":daysM})
 		}
 	
-		console.log(this.plan);
+	//	console.log(this.plan);
 	
 		this.setDefaults();
 	}
@@ -150,7 +152,7 @@ this.loadColorCodes();
       
       var res =   this.dbService.getDataByTable("mealplan", params).subscribe(mpData => setTimeout(() => {
 
-        console.log(mpData);
+    //    console.log(mpData);
         if(mpData !== null)
         {
           if(mpData["body"] !== null && mpData["body"]['length'] > 0)
@@ -174,7 +176,7 @@ this.loadColorCodes();
 
 	searchParam()
 	{
-		console.log(this.searchparam);
+	//	console.log(this.searchparam);
 	
 	}
 	loadRecipes(idslist = "")
@@ -185,7 +187,7 @@ this.loadColorCodes();
 	  var params = {"limit": "100"}; //{"limit": "10"};
    //  params["caloriesfrom"] = this.searchparam.range.lower;
 	// params["caloriesto"] = this.searchparam.range.upper;
-	 console.log(this.searchparam);
+	// console.log(this.searchparam);
 
 	 if(idslist == "")
 	 {
@@ -209,7 +211,7 @@ this.loadColorCodes();
 	  this.calculateCaloryFlag = false;
 	 var res =   this.dbService.getDatabyFields("recipes", params).subscribe(invData => setTimeout(() => {
   
-	  console.log(invData);
+	//  console.log(invData);
   
 	  var count = 0;
 	  if(invData !== null && typeof(invData["body"]) !== "undefined" && invData["body"] !== null && invData["body"]["length"] > 0)
@@ -243,9 +245,9 @@ this.loadColorCodes();
 				}
 			}
 		  }
-		  console.log(this.recipesList);
+		//  console.log(this.recipesList);
 	
-		  console.log(this.plan);
+		//  console.log(this.plan);
 		  this.calculateCaloryFlag = true;
 		 // this.loadRatings();
 	
@@ -752,6 +754,7 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
          ////   this.planDay['forall']= {};
           //  console.log(this.planDay);
           //  this.selDay = this.plan["days"][0];
+		  this.loadedPlan = true;
           }
           else{
           //  this.initializeDays();
@@ -1032,18 +1035,16 @@ console.log(params);
 		  }
 
 		  var recipelistpnael = document.getElementById('recipelistpnael');
-		  console.log(recipelistpnael.offsetTop);
-		  console.log(recipelistpnael.offsetLeft);
+		//  console.log(recipelistpnael.offsetTop);
+		//  console.log(recipelistpnael.offsetLeft);
 		  var w = window.innerWidth;
-		  console.log("w " + w);
+		//  console.log("w " + w);
 		  var btnsaveplan1= document.getElementById('recipes-container');
 		  if(btnsaveplan1 !== null)
 		  { 
 		  if(document.documentElement.scrollTop > 100 && document.documentElement.scrollTop < (checkVal))
 		  {
-			  console.log("document.documentElement.scrollTop")
-			  console.log(document.documentElement.scrollTop);
-			  console.log(w)
+			
 			  var leftP = (w - 1200)/2;
 			  btnsaveplan1.style.left = leftP + "px";
 			btnsaveplan1.setAttribute("class", "container-fluid side-recipes floatpanel")
@@ -1077,6 +1078,77 @@ console.log(params);
 				}
 			}));
 	  	}
+	}
+	calculateTotalCalory(col)
+	{
+		var mMacro = [];
+		console.log(this.plan["days"][col]);
+		if(this.loadedPlan)
+		{
+		for(let i=0; i < this.plan["days"][col]["meals"]["length"]; i++)
+		{
+			var dItem = this.plan["days"][col]["meals"][i];
+		//	console.log(dItem);
+			if(dItem["recipe"] !== null)
+			{
+				if(typeof(dItem["recipe"]["paramMicro"]) !== "undefined")
+				{
+				for(let j=0; j < dItem["recipe"]["paramMicro"]["length"]; j++)
+				{
+					var dmItem = dItem["recipe"]["paramMicro"][j];
+					var lbl = dmItem["label"].toLowerCase();
+					var fIndex = mMacro.findIndex(x=>(x.name == lbl));
+
+					if(fIndex > -1)
+					mMacro[fIndex]["value"] =  parseFloat(mMacro[fIndex]["value"]) + dmItem["total"];
+					else
+					mMacro.push({"name" : lbl, "value" : dmItem["total"], "unit" : dmItem["unit"]});
+				
+					
+					
+				}
+				}
+				if(typeof(dItem["recipe"]["minerals"]) !== "undefined")
+				{
+				for(let j=0; j < dItem["recipe"]["minerals"]["length"]; j++)
+				{
+					var dmItem1 = dItem["recipe"]["minerals"][j];
+					//console.log(dmItem1);
+					var lbl1 = dmItem1["name"].toLowerCase();
+
+					var fIndex1 = mMacro.findIndex(x1=>(x1.name == lbl1));
+					if(fIndex1 > -1)
+					mMacro[fIndex1]["value"] = parseFloat(mMacro[fIndex1]["value"]) + dmItem1["value"];
+					else
+					mMacro.push({"name" : lbl1, "value" : dmItem1["value"], "unit" : dmItem1["unit"]});
+								
+					//console.log(mMacro[dmItem1["name"]]);
+				}
+				}
+				
+			}
+		}
+	}
+	else
+	{
+	//	setTimeout(() => {
+
+		//	this.calculateTotalCalory(col);
+	//	},300);
+	}
+	console.log ("day " + col);
+	console.log(mMacro);
+	return mMacro;
+	}
+
+	formatValue(str)
+	{
+		var retval = str;
+		if(str !== "")
+		{
+			retval = parseFloat(str).toFixed(2);
+		}
+		return retval;
 	}
 }
 

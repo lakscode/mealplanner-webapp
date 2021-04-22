@@ -382,10 +382,12 @@
             <div class="meal-row-wrapper meal-row__week-days">
                 <div class="dayname" style="border-bottom:0px"></div>
                 <div class="meal-plan-row row">
-                    <div class="meal-plan-col col " *ngFor="let mealtype of mealsList; let d =index;" style="width:18%;">
+                    <div class="meal-plan-col col mealplan-col" *ngFor="let mealtype of mealsList; let d =index;">
                         <div class="meal-day"><span>{{mealtype.name}}</span></div>
                     </div>
-                   
+                    <div class="meal-plan-col col mealplan-col" >
+                        <div class="meal-day"><span>Total</span></div>
+                    </div>
                 </div>
             </div>
            
@@ -396,7 +398,7 @@
                     <div class="meal-plan-column-container">
                         <div class="meal-plan-row">
                          
-                            <div class="meal-plan-slot" style="width: 18%;"  *ngFor="let meal of item.meals; let c= index;">
+                            <div class="meal-plan-slot mealplan-col" *ngFor="let meal of item.meals; let c= index;">
                                 <div *ngIf="meal.recipe">
                                     <div draggable="true">
                                         <div class="recipe-image-wrapper ">
@@ -437,6 +439,18 @@
                                 </div>
                                 <div class="calories-slot-sum">0 Calories</div>
                             </div>
+                            </div>
+                            <div class="meal-plan-slot mealplan-col" >                              
+                                
+                                <div class="minerals">
+                                    <div style='float:left; padding:2px; margin-right:5px;display:flex; align-items: center;' *ngFor="let totalM of calculateTotalCalory(r) "> <div [ngStyle] ="{'background-color':getColorCode(totalM)}" style="display:inline-block; width:10px; height:10px;  margin-right:3px; "></div>
+                                        <a href="javascript:void(0)" title="{{setFLU(totalM.name)}} {{formatValue(totalM.value)}} {{totalM.unit}}">{{formatValue(totalM.value)}} {{totalM.unit}} </a>
+                                    
+                                        </div>
+
+                                </div>
+                           
+                                
                             </div>
                        </div>
                     </div>
