@@ -1042,7 +1042,7 @@ input.form-control {
   border-color: $gray-dark2;
   color: #8D8D8F;
   font-family: Lato;
-  font-size: 14px;
+  font-size: 10px;
   font-weight: bold;
   text-align: center;
 }
@@ -1301,16 +1301,16 @@ button, html [type="button"], [type="reset"], [type="submit"] {
 
 .pagination li {
   display: inline-block;
-  margin-right: 10px;
+  margin-right:5px;
   background: #FFFFFF;
   border: 1px solid #e4d9d1;
 }
 
 .pagination li a {
   display: inline-block;
-  width: 38px;
-  height: 38px;
-  line-height: 36px;  
+  width: 30px;
+  height: 30px;
+  line-height: 30px;  
   font-family: 'Lora', serif;
   //
 }
@@ -1340,5 +1340,14 @@ color:#FFF;
   position:fixed;
   top:0px;
   left:50px;
-  max-width:370px;
+  max-width:300px;
+}
+.leftblock
+{
+  width: 25%; display:inline-block
+}
+
+.rightblock
+{
+  width: 75%; display:inline-block
 }
