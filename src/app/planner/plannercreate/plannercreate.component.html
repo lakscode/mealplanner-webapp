@@ -281,10 +281,6 @@
                     <div id="Drag{{k}}" 
                     (dragover)="allowDrop($event)">
                         <div class="recipe-mb mb-3 recipe-mb--draggable  card">
-<<<<<<< HEAD
-                            <div style='width:calc(100%)'><a class="hmp-link--no-style"
-                                href="{{recipe.uri}}">
-=======
                             <!--<div class="draggable-bar" id="draggable-bar_{{k}}"><img
                                     id="nutritional-toggle-6050d5d15ddc1c00294df92a" class="toggle-icon"
                                     src="{{draggable}}"
@@ -292,8 +288,8 @@
                                     (dragstart)="drag($event, k)"></div>-->
                                     <!-- <div style='width:calc(100%)'><a class="hmp-link--no-style"
                                 href="{{recipe.uri}}"> -->
-                                <div style='width:calc(100%)'><a class="hmp-link--no-style" style="cursor: -webkit-grabbing; cursor: grabbing;"> 
->>>>>>> 32a9cb4805a0acdb884f87b487c1d3de40b4ebb7
+                                <div style='width:calc(100%)'>
+                                    <a class="hmp-link--no-style" style="cursor: -webkit-grabbing; cursor: grabbing;"> 
                                 <div class="recipe-content recipe-content--draggable card-body">
                                     <div class="recipe-image-container mobile" id="imagep_{{page_num}}_{{k}}">
                                             <img class="recipe-image"
@@ -308,8 +304,8 @@
                                     <!--<img id="favorite-button-side-favorite-button-6050d5d15ddc1c00294df92a"
                                         class="side-favorite-button" src="assets/images/heart.png" alt="Heart icon">-->
                                 </div>
-                            </a>
-                                </div>
+                           
+                              
                             <div class="recipe-footer card-footer">
                                 <div class="row recipe-icons justify-content-md-center">
                                     <div data-test="add-to-meal-plan-modal-button">
@@ -324,9 +320,11 @@
                                         class="share-modal-button" src="assets/images/heart.png" alt="Heart icon">
                                 </div>
                             </div>
+                        </a>
                         </div>
                     </div>
                 </div>
+            </div>
             </div>
         </div>
         <ul class="pagination" *ngIf="totalPage > 2">
