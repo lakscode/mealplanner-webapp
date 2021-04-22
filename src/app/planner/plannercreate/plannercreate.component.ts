@@ -42,6 +42,7 @@ export class PlannercreateComponent implements OnInit {
 	pageNosList:  Array<any> = [];
 	updatingFlag : boolean = false;
 	pageCount: any = 5;
+	errorMessage: any = "";
 	constructor(private router: Router, private route: ActivatedRoute, private pdfService: PDFService, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
 	
 	}
@@ -774,7 +775,9 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
   }
  
   saveMealPlan()
-  {
+  { 
+  this.errorMessage ="";
+    if(this.plan["name"] !== ""){
 	if(!this.updatingFlag )
 	{
 		this.updatingFlag = true;
@@ -826,6 +829,9 @@ console.log(params);
 			}
 		}));
 		}
+	}
+	} else {
+	this.errorMessage = "Plan Name is required";
 	}
 
   }
