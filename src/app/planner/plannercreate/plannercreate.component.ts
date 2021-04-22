@@ -90,7 +90,7 @@ this.addRecipeImage = "assets/images/add-recipe.png"
 	   });  
 
 
-this.loadRecipes()
+this.loadRecipes("", true)
 this.loadWeekDays();
 this.loadColorCodes();
 	}
@@ -179,7 +179,7 @@ this.loadColorCodes();
 	//	console.log(this.searchparam);
 	
 	}
-	loadRecipes(idslist = "")
+	loadRecipes(idslist = "", allFlag = true)
 	{
 	  
 		this.ratingIds = "";
@@ -217,6 +217,7 @@ this.loadColorCodes();
 	  if(invData !== null && typeof(invData["body"]) !== "undefined" && invData["body"] !== null && invData["body"]["length"] > 0)
 		{
 
+			if(allFlag)
 			this.recipesList = [];
 
 	
@@ -634,7 +635,7 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 			if(idslist !== "")
 			{			
 			  idslist = idslist.substring(0, idslist.length-1);
-			  this.loadRecipes(idslist);
+			  this.loadRecipes(idslist, false);
 			}
 		  }
 	
@@ -769,7 +770,7 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 		if(idslist !== "")
 		{			
 		  idslist = idslist.substring(0, idslist.length-1);
-		  this.loadRecipes(idslist);
+		  this.loadRecipes(idslist, false);
 		}
        // this.loadRecipesToDays();
       }))
