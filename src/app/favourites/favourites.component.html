@@ -15,7 +15,7 @@
                                 class="fa fa-bars"></i></span>
                     </div>
                     <h2>Favourite Recipes</h2>
-
+                    <h3 *ngIf='displayList.length == 0' style="margin-bottom:20px">You have no favourites recipes yet. Please search recipes and set as favourite.</h3>
                     <ul class="pagination" *ngIf="totalPage >= 10">
                         <li (click)="currentPage(0)" class="">
                             <a href="javascript:void(0)">
