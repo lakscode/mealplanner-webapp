@@ -1,0 +1,121 @@
+<div style='width:100%'>
+<div class="row">
+
+
+   <section class="home-sec" style="padding-bottom: 80px;background: #FFF; margin-bottom:0px;">
+   <div class="container col-12">
+      <div class="home-sec-box">
+         <div class="text-side">
+            <div class="home-sec-intro">
+               <span class="heading-small">Its all about</span>
+                  <h2>Easy customized nutrition</h2>
+                  <span class="desc">The diet was developed with customers' needs in mind. Without the hassle, build healthy meal plans and attractive facilities. Get more done in one place for one low price as a health professional.</span>
+                  <ul class="home-sec-list">
+                      <li><span><img src="assets/images/burger-icon.png" alt="icon"></span><a href="javascript:void(0)">Nam ornare arcu turpis, nec congue nibh tempores</a></li>
+                      <li><span><img src="assets/images/grapes-icon.png" alt="icon"></span><a href="javascript:void(0)">Quis euismod mauris. Nulla porttitor orcirisk</a></li>
+                      <li><span><img src="assets/images/salt-pot-icon.png" alt="icon"></span><a href="javascript:void(0)">We are hugeseget semper vulputate. </a></li>
+                  </ul>
+                  <a class="button-default theme-filled video-button swipebox" href="https://vimeo.com/15306847">Watch our Video</a>
+                  <a class="button-default hollow-button" href="javascript:void(0)">Know more About Us</a>
+              </div>
+         </div>
+         <div class="image-side  wow zoomIn animated" style="visibility: visible; animation-name: zoomIn;">
+            <div class="home-sec-image">
+               <img src="assets/images/temp-images/good-food.jpg" alt="image">
+            </div>
+         </div>
+      </div>
+   </div>
+   </section>
+
+   <section class="home-sec">
+      <div class="container">
+         <div class="col-12">
+	        <div class=" w-1000" style="padding-top:30px;">
+	           <div class="row secL" *ngFor="let step of stepsList; let i = index;">
+		            <div class="col-12 col-lg-6">
+			            <h1 class="text-lg-left mb-4 title">{{step.label}}</h1>
+			            <h3 class="subtitle">{{step.subtitle}}</h3>
+			            <p class="text-justify mb-5 description"  style=" direction: ltr;">{{step.description}}</p>
+			            <div *ngIf="i %2 ==0" style="text-align:right;">
+			               <img style=" height: 150px" src="assets/images/temp-images/arrow-right.svg" />
+			            </div>
+			            <div *ngIf="i %2 ==1" style="text-align:left">
+			               <img style=" height: 150px" src="assets/images/temp-images/arrow-left.svg" />
+			            </div>
+		            </div>
+		            <div class="col-12 col-lg-6" style="text-align:center;">
+				         <img src="{{step.image}}" style=" height: 250px" class="rounded-bg specialty-image w-80">
+		             </div>
+	            </div>
+	            <div class="row">
+		            <div class="col-12" style="text-align:center;margin-top:20px;">
+			            <a href="javascript:void(0);" (click)="gotopage('pricing')" class="getstarted">Get Started</a>
+		            </div>
+	            </div>
+            </div>
+         </div>
+      </div>
+   </section>
+</div>
+
+<section class="home-sec" style="padding-bottom: 30px;background: #FFF; margin-bottom:0px;margin-top:30px">
+   <div class="container col-12">
+      <div class="home-sec-box">
+         <div class="text-side">
+            <div class="home-sec-intro">
+               <span class="heading-small">Download for Free!</span>
+                  <h2>Meal planning made easy...</h2>
+                 
+                  <div class="storeImgDiv">
+                     <a href="#"><img src="assets/app-store.png" alt="Download on the App Store" class="storeImg"></a>
+                     <a href="#"><img src="assets/play-store.png" alt="Get it on Google Play" class="storeImg"></a></div>
+                 
+              </div>
+         </div>
+         <div class="image-side  wow zoomIn animated" style="visibility: visible; animation-name: zoomIn;margin-bottom:40px">
+            <div class="home-sec-image image-outer">
+               <img src="assets/mtc1.png" style="width:210px;height:425px" alt="image">
+           </div>&nbsp;&nbsp;&nbsp;
+               <div class="home-sec-image image-outer">               
+               <img src="assets/MTC2.png" style="width:210px;height:425px" alt="image">
+            </div>&nbsp;&nbsp;&nbsp;
+            <div class="home-sec-image image-outer">               
+               <img src="assets/MTC3.png" style="width:210px;height:425px" alt="image">
+            </div>
+         </div>
+      </div>
+      <hr/>
+   </div>
+
+   </section>
+
+<!--- testimonial slider   commented for now - needed in future releases - dont remove-->
+<!-- <div class="contentpage" style="width:1000px">
+<ngb-carousel *ngIf="testimonialsList" [interval]="4000" >
+	<div class="row" style="height:200px;">
+	  <div class="related_product_slide">
+  
+		<ng-template ngbSlide *ngFor="let item of testimonialsList; let i= index" class="slider slide-in">
+		  <div class="item col-md-4 active" *ngFor="let item1 of item.child; let i1= index;" style="margin-bottom:30px;">
+			<div class="testimonial-item">
+				<div class="testmonial-title">
+				{{item1.name}} {{i}}
+				<div class="new_product">New</div>
+				</div>
+				<div class="testmonial-content">
+					<h4>iPhone 6S</h4>
+					<p>
+					  Living in today's metropolitan
+					  world of cellular phones 
+					</p>
+					<h5> 100</h5>
+					<h6> <span class="through_line">680</span></h6>
+				</div>
+			</div>
+		  </div>
+		</ng-template>
+	  </div>
+	</div>
+  </ngb-carousel>
+</div>   -->

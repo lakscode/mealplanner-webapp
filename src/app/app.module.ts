@@ -43,11 +43,13 @@ import { UserService } from './services/user.service';
 import { HighchartsChartModule } from 'highcharts-angular';
 
 import { HomeModule } from './home/home.module'; 
+import { FeaturesModule } from './features/features.module'; 
 import { LandingModule } from './landing/landing.module'; 
 
 import { Landing1Module } from './landing1/landing1.module'; 
 
 import { RecipesModule } from './recipes/recipes.module'; 
+import { FavouritesModule } from './favourites/favourites.module'; 
 import { RecipedetailsModule } from './recipedetails/recipedetails.module'; 
 import { RecipesubmitModule } from './recipesubmit/recipesubmit.module'; 
 import { TestimonialsModule } from './testimonials/testimonials.module'; 
@@ -97,7 +99,9 @@ import { AdminModule } from './admin/admin.module';
 	NgMultiSelectDropDownModule.forRoot(),
 	HighchartsChartModule,
 	HomeModule,
+	FeaturesModule,
 	RecipesModule,
+	FavouritesModule,
 	RecipedetailsModule,
 	RecipesubmitModule,
 	TestimonialsModule,

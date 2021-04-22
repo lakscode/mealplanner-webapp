@@ -80,7 +80,15 @@ console.log(currentUrl);
 					{"id":"testimonials", "menu":"Testimonials", "link":"/testimonials", "display":displayMenu, "active":false}
 				]
 			},
-			{"id":"recipes", "menu":"Recipes", "link":"/recipes", "display":displayMenu, "active":false},
+			{"id":"recipes", "menu":"Recipes", "link":"/recipes", "display":displayMenu, "active":false,
+				"children":
+				[
+
+					{"id":"recipe-list", "menu":"Recipes", "link":"/recipes", "display":displayMenu, "active":false},
+					{"id":"recipe-favourites", "menu":"Favourites", "link":"/favourites", "display":displayMenu, "active":false},
+					{"id":"recipe-submit", "menu":"Submit Recipe", "link":"/recipesubmit", "display":displayMenu, "active":false}
+				]
+			},
 			{"id":"planner", "menu":"Planner", "link":"/plan-list", "display":displayMenu, "active":false,
 				"children":
 				[
@@ -136,10 +144,7 @@ console.log(currentUrl);
 				this.companyname = "";
 
 			}
-			if(!this.loggedIn)
-			{
-				this.router.navigate(["login"]);
-			}
+			
 			console.log(this.loggedIn);
 		}, 0));
 	}
@@ -153,8 +158,20 @@ console.log(currentUrl);
 
 			if (this.router.url.indexOf(this.menuItems[i]["id"]) !== -1) {
 				this.menuItems[i]["active"] = true;
+				
+			}
+			else
+			{
+				this.gotoLogin();
 			}
 
+		}
+	}
+	gotoLogin()
+	{
+		if(!this.loggedIn)
+		{
+			this.router.navigate(["login"]);
 		}
 	}
 		gotopage(page)

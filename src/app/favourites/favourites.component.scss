@@ -1,0 +1,460 @@
+@import "../../variables.scss";
+
+.tstbite-animation {
+  display: block;
+  overflow: hidden
+}
+
+.tstbite-animation img {
+  transform: scale(1);
+  transition: all ease .8s
+}
+
+.tstbite-animation:hover img {
+  transform: scale(1.1)
+}
+
+
+
+.tstbite-card {
+  position: relative
+}
+
+.tstbite-card:hover figcaption a {
+  color: #ff642f
+}
+
+.tstbite-card:hover .tstbite-animation img {
+  transform: scale(1.1)
+}
+.py-3 {
+    padding-top: 1rem!important;
+    padding-bottom: 1rem!important;
+}
+
+.mb-0 {
+    margin-bottom: 0!important;
+}
+
+h5, .h5, .h5 {
+    font-size: 36px;
+}
+
+big, .big {
+    font-size: 18px;
+}
+.font-weight-semibold {
+    font-weight: 600!important;
+}
+.mt-1 {
+    margin-top: .25rem!important;
+}
+.d-block {
+    display: block!important;
+}
+a {
+    color: #000;
+}
+
+a:hover {
+    color: #ff642b;
+        //text-decoration: underline;
+
+        }
+
+        text-black-50 {
+  color: rgba(0, 0, 0, .5)!important
+}
+
+.btn-outline-dark {
+    background-color: transparent;
+    border-color: #000;
+    color: #000;
+}
+.btn {
+    font-weight: 500;
+}
+
+.rating
+{
+  color: #CCC;
+}
+.rating-h
+{
+  color: orange;
+}
+
+
+  .listSection{
+           // border: solid 1px #888;
+            //border-radius: 4px;
+            padding: 5px 5px 0px 0px;
+           //width: 340px;
+            margin: 0 auto;
+            font-size: 10.5pt;
+            display: inline-block;
+            height: 24px;
+            margin-left: 6px;
+        }
+  
+
+    .round {
+    margin-left:20px;
+    margin-right:20px;
+    }
+
+
+.round label {
+  background-color: #ccc;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  cursor: pointer;
+  height: 24px;
+  left: 15px;
+  right:15px;
+   
+ 
+  top: 10px;
+  width: 24px;
+  margin-left:10px;
+
+}
+
+.round input {
+ height: 28px;
+  
+}
+
+.checkboxText {
+  height:28px; width: 40px; position:absolute;vertical-align:middle;margin-top:5px;
+}
+
+
+
+.round {
+  /*position: relative; */
+}
+
+.round label {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  cursor: pointer;
+  height: 28px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 28px;
+}
+
+.round label:after {
+  border: 2px solid #fff;
+  border-top: none;
+  border-right: none;
+  content: "";
+  height: 6px;
+  left: 7px;
+  opacity: 0;
+  position: absolute;
+  top: 8px;
+  transform: rotate(-45deg);
+  width: 12px;
+}
+
+.round input[type="checkbox"] {
+  visibility: hidden;
+}
+
+.round input[type="checkbox"]:checked + label {
+  background-color: $orange;
+  border:1px solid $orange;
+}
+
+.round input[type="checkbox"]:checked + label:after {
+  opacity: 1;
+}
+
+.container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 16px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  font-weight:normal;
+}
+
+/* Hide the browser's default checkbox */
+.container input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: #FFF;
+   //border-radius: 50%;
+   border:1px solid $orange;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input[type="checkbox"] ~ .checkmark {
+  background-color: #FFF;
+}
+
+/* When the checkbox is checked, add a blue background */
+.container input[type="checkbox"]:checked ~ .checkmark {
+background-color: $orange;
+  border:1px solid $orange;
+  //background-color: #66bb6a;
+  //border:1px solid #66bb6a;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+  left: 7px;
+  top: 3px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+
+/***************8 Search bar */
+
+
+
+.searchicon
+{
+  display: inline-block;
+  margin-right: 8px;
+  border-radius: 3px;
+  padding: 8px 8px;
+  min-width: 30px;
+padding-left:11px;
+padding-right:11px;
+  text-align: center;
+  font-size: 14px;
+  color: #ffffff;
+  text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(0,0,0,0.3);
+  border-bottom-color: rgba(0,0,0,0.1);
+  box-shadow: 0px 0px 6px rgba(0,0,0, 0.08);
+  background: -moz-linear-gradient(top, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.13) 100%);
+  background: -webkit-linear-gradient(top, rgba(0,0,0,0.4) 0%,rgba(0,0,0,0.13) 100%);
+  background: linear-gradient(to bottom, rgba(0,0,0,0.4) 0%,rgba(0,0,0,0.13) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8c000000', endColorstr='#17000000',GradientType=0 );
+}
+
+
+.inputbox {
+  border-radius: 4px;
+  width: calc(100% - 215px);
+  min-width: 200px;
+  padding: 8px 15px;
+  background: #ffffff;
+  border: 1px solid #ffffff;
+  font-size: 14px;
+  //box-shadow: inset 0 6px 5px -5px rgb(32 36 39 / 18%);
+  border-radius: 5px;
+  padding: 5px;
+  margin: 10px 0;
+ 
+  font-weight: 400;
+  border: 1px solid #ccc;
+  outline: none;
+
+}
+
+.searchbaranim {
+  opacity: 1;
+  -webkit-animation: slide 1s ease 3.5s forwards;
+  animation: slide 1s ease 3.5s forwards;
+}
+
+.searchmorebar{
+  background: #FFF;
+  padding: 10px;
+  opacity: 0;
+  -webkit-transition: opacity 0.6s linear;
+  transition: opacity 0.6s linear;
+  color: #555555;
+  font-size: 10pt;
+  text-align: left;
+}
+
+
+.searchmorebar select {
+  width: 15%;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.select-css {
+  width: 100% !important;
+  margin-bottom: 10px;
+}
+.select-css {
+  display: block;
+  font-size: 12px;
+  color: #444;
+  line-height: 1.3;
+  padding: 0.6em 1.4em 0.5em 0.8em;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  border: 1px solid #aaa;
+  box-shadow: 0 1px 0 1px rgb(0 0 0 / 4%);
+  border-radius: 0.5em;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: #fff;
+  background-image: url(data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007CB2%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E), -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#e5e5e5));
+  background-image: url(data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007CB2%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E), linear-gradient(to bottom, #ffffff 0%, #e5e5e5 100%);
+  background-repeat: no-repeat, repeat;
+  background-position: right 0.7em top 50%, 0 0;
+  background-size: 0.65em auto, 100%;
+}
+
+
+.showonmobile {
+  display: none !important;
+}
+
+.searchbtn {
+  width: 160px;
+}
+.defaultbtn {
+  margin-top: 10px;
+  line-height: 1;
+  border: none;
+  text-align: center;
+  display: inline-block;
+  border-radius: 5px;
+  letter-spacing: 0em;
+  padding: 13px 25px;
+  margin-bottom: 0px;
+  max-width: 160px;
+  margin-left: 8px;
+  font-size: 14px;
+  color: #ffffff;
+  background-color: #fd815a;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-family: "Source Sans Pro", sans-serif;
+  background-position: bottom left;
+  background-repeat: repeat-x;
+ // background-image: url(button-hover.png);
+  text-shadow: 0px -1px 0px rgb(0 0 0 / 40%);
+  box-shadow: inset 0 0 0 1px rgb(0 0 0 / 25%);
+}
+.header-more-search-btn{
+  width: 100%;
+  margin: 0 auto;
+  text-align: right;
+  margin-top: -4px;
+}
+
+.header-more-search-btn i {
+  margin-right: 20px;
+  background: #FFF;
+  color: #CCC;
+  padding: 10px;
+  padding-top: 0px;
+  border-bottom-left-radius: 18px;
+  border-bottom-right-radius: 18px;
+}
+
+.fa-chevron-up:before {
+  content: "\f077";
+}
+
+
+.searchbaranim
+{
+  opacity: 1;
+  -moz-animation: slide 1s ease 3.5s forwards;
+   -webkit-animation: slide 1s ease 3.5s forwards;
+   -o-animation: slide 1s ease 3.5s forwards;
+   -ms-animation: slide 1s ease 3.5s forwards;
+    animation: slide 1s ease 3.5s forwards;
+}
+
+.inputbox-fullwidth {
+  border-radius: 5px;
+  padding: 5px;
+  margin: 10px 0;
+  font-size: 17px;
+  font-weight: 400;
+  border: 1px solid #ccc;
+  outline: none;
+  width:100%;
+}
+
+.pagination
+{
+  
+    width: 100%;
+
+    display: block;
+    text-align: center;
+}
+
+.pagination li {
+  display: inline-block;
+  margin-right: 10px;
+  background: #FFFFFF;
+  border: 1px solid #e4d9d1;
+}
+
+.pagination li a {
+  display: inline-block;
+  width: 38px;
+  height: 38px;
+  line-height: 36px;  
+  font-family: 'Lora', serif;
+  //
+}
+.pagination li.current {
+background-color: $orange;
+color:#FFF;
+}
+.pagination li.current a {
+  font-weight: 600;
+  color:#FFF;
+  }
+.pagination li a:hover {
+  background: transparent;
+  color: #ff642b;
+}
+
