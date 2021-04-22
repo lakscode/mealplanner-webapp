@@ -283,18 +283,19 @@ img {
 }
 
 .calories-item {
-  color: $orange;
+  color: $green;
  // position: absolute;
   font-size: 12px;
   text-align: center;
  // bottom: -15px;
   width: 100%;
 //  left: 0;
+font-weight:bold;
 }
 
 .totalcalories
 {
-  font-size: 16px;font-weight: bold; color: $orange; 
+  font-size: 16px;font-weight: bold; color: $green; 
 }
 
 /********** Side container */
@@ -674,6 +675,9 @@ mark, .mark {
   line-height: 1;
   color: $green;
   text-align:left;
+  float:right;
+  margin-right:5px;
+  font-weight:bold;
 }
 
 .recipe-mb--draggable .side-favorite-button {
@@ -1333,6 +1337,7 @@ color:#FFF;
     font-family: 'Lato', sans-serif;
     font-weight: 400;
     font-size: 16px;
+    cursor:pointer;
 }
 
 .floatpanel
