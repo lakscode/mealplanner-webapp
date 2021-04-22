@@ -627,7 +627,7 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 			this.recipesList.push(invData["body"][i]);
 		  }
 		  this.totalPage = this.recipesList["length"] /10;
-		  this.counter(this.totalPage);
+		  this.counter();
 		  console.log(this.recipesList);
 		 
 		  this.getDisplayList();
