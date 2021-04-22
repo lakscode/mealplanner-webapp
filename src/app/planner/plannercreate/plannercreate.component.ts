@@ -1082,7 +1082,7 @@ console.log(params);
 	calculateTotalCalory(col)
 	{
 		var mMacro = [];
-		console.log(this.plan["days"][col]);
+	//	console.log(this.plan["days"][col]);
 		if(this.loadedPlan)
 		{
 		for(let i=0; i < this.plan["days"][col]["meals"]["length"]; i++)
@@ -1136,8 +1136,8 @@ console.log(params);
 		//	this.calculateTotalCalory(col);
 	//	},300);
 	}
-	console.log ("day " + col);
-	console.log(mMacro);
+	//console.log ("day " + col);
+	//console.log(mMacro);
 	return mMacro;
 	}
 
