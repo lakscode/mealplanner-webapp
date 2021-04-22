@@ -102,6 +102,7 @@ console.log(currentUrl);
 			this.setIconMenu();
 			this.loggedIn = false;
 			
+			console.log(userdata);
 			if(typeof(userdata) !== "undefined" && userdata !== null)
 			{
 				this.currentUser = userdata;
@@ -121,8 +122,11 @@ console.log(currentUrl);
 				 if(typeof(this.currentUser["username"]) !== "undefined") {
                 this.userName = this.currentUser["username"];
                 }
-
-				this.loggedIn = true;
+				if(typeof(this.currentUser["loggedIn"]) !== "undefined") {
+					this.loggedIn = this.currentUser["loggedIn"];
+					}
+	
+				//this.loggedIn = true;
 				this.userRole =  this.currentUser["role"];
 				this.userRoleDet = this.currentUser["role"];
 
@@ -132,7 +136,11 @@ console.log(currentUrl);
 				this.companyname = "";
 
 			}
-
+			if(!this.loggedIn)
+			{
+				this.router.navigate(["login"]);
+			}
+			console.log(this.loggedIn);
 		}, 0));
 	}
 	
