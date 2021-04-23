@@ -44,7 +44,7 @@ import { HighchartsChartModule } from 'highcharts-angular';
 
 import { HomeModule } from './home/home.module'; 
 import { FeaturesModule } from './features/features.module'; 
-import { LandingModule } from './landing/landing.module'; 
+
 
 import { Landing1Module } from './landing1/landing1.module'; 
 
@@ -59,7 +59,7 @@ import { PricingModule } from './pricing/pricing.module';
 import { OurteamModule } from './ourteam/ourteam.module'; 
 import { MyinfoModule } from './myinfo/myinfo.module'; 
 import { AutherizeModule } from './autherize/autherize.module'; 
-
+import { BenefitsModule } from './benefits/benefits.module'; 
 
 import { PasslostModule } from './password/passlost/passlost.module';
 
@@ -84,7 +84,7 @@ import { AdminModule } from './admin/admin.module';
 	LayoutModule,
     LoginModule,
 	SignupModule,
-    LandingModule,
+    BenefitsModule,
 	Landing1Module,
 	ToastrModule.forRoot({
 		timeOut: 1000,

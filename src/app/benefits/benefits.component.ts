@@ -9,11 +9,11 @@ import { environment } from './../../environments/environment';
 declare var $: any;
 
 @Component({
-	selector: 'app-landing',
-	templateUrl: './landing.component.html',
-	styleUrls: ['./landing.component.scss']
+	selector: 'app-benefits',
+	templateUrl: './benefits.component.html',
+	styleUrls: ['./benefits.component.scss']
 })
-export class LandingComponent implements OnInit {
+export class BenefitsComponent implements OnInit {
 	
 	constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
 	

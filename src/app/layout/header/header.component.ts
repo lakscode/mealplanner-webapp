@@ -39,7 +39,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
 	var currentUrl = this.router.url;
 	currentUrl = currentUrl.replace("/","");
-console.log(currentUrl);
+	//console.log(currentUrl);
 	var displayMenu =  true;
 
 		this.currentUser = new User();
@@ -111,7 +111,7 @@ console.log(currentUrl);
 			this.setIconMenu();
 			this.loggedIn = false;
 			
-			console.log(userdata);
+			//console.log(userdata);
 			if(typeof(userdata) !== "undefined" && userdata !== null)
 			{
 				this.currentUser = userdata;
@@ -146,13 +146,13 @@ console.log(currentUrl);
 
 			}
 			
-			console.log(this.loggedIn);
+		//	console.log(this.loggedIn);
 		}, 0));
 	}
 	
 	setIconMenu()
 	{
-		console.log("In setIconMenu");
+	//	console.log("In setIconMenu");
 		for(let i=0; i < this.menuItems.length; i++)
 		{
 			this.menuItems[i]["active"] = false;
@@ -170,8 +170,10 @@ console.log(currentUrl);
 	}
 	gotoLogin()
 	{
-	var str = this.location.path();	 
-		if(!this.loggedIn && str.indexOf("resetpassword") == -1 && str.indexOf("home") == -1)
+	var str = this.location.path();	
+	//console.log("gotoLogin") ;
+	//console.log(str);
+		if(!this.loggedIn && str.indexOf("resetpassword") == -1 && str.indexOf("index") == -1 && str.indexOf("home") == -1)
 		{
 			this.router.navigate(["login"]);			
 		}

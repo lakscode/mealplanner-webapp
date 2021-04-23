@@ -1,19 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { LandingRoutingModule } from './landing-routing.module';
-import { LandingComponent } from './landing.component';
+import { BenefitsRoutingModule } from './benefits-routing.module';
+import { BenefitsComponent } from './benefits.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
     CommonModule,
-    LandingRoutingModule,
+    BenefitsRoutingModule,
     FlexLayoutModule,
 	FormsModule,
 	ReactiveFormsModule
   ],
-  declarations: [LandingComponent]
+  declarations: [BenefitsComponent]
 })
-export class LandingModule { }
+export class BenefitsModule { }

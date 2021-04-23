@@ -42,7 +42,7 @@ export class Landing1Component implements OnInit {
   
 	  var res =   this.dbService.getDatabyQuery("recipes", params).subscribe(invData => setTimeout(() => {
    
-	  console.log(invData);
+	//  console.log(invData);
    
 	   if(invData !== null && typeof(invData["body"]) !== "undefined" && invData["body"] !== null && invData["body"]["length"] > 0)
 		 {
@@ -54,7 +54,7 @@ export class Landing1Component implements OnInit {
 		   }
 		
 		 }
-		 console.log(this.recommendedRecipes);
+	//	 console.log(this.recommendedRecipes);
 	   }
 	 
 	  ));
@@ -65,7 +65,8 @@ export class Landing1Component implements OnInit {
 	{
 	  this.RecipeoftheDay = [];
 	  var params = {};
-    params["query"] = "select id, image, label, dietLabels, s_instructions from recipes where s_instructions != '' order by rand() limit 1";
+    //params["query"] = "select id, image, label, dietLabels, s_instructions from recipes where s_instructions != '' order by rand() limit 1";
+	params["query"] = "select * from recipes where s_instructions != '' order by rand() limit 1";
 
 	 var res =   this.dbService.getDatabyTablebyQuery("recipes", params).subscribe(invData => setTimeout(() => {
    
@@ -159,7 +160,7 @@ export class Landing1Component implements OnInit {
 			 
 		   }
 		 }
-		 console.log(this.healthLabels);
+	//	 console.log(this.healthLabels);
 	   }
    
 	  ));
@@ -191,6 +192,30 @@ export class Landing1Component implements OnInit {
 	gotoRecipes(id) {
 		this.router.navigate(['recipes', {dietLabels:id}]);
 	}
+
+	formatValue(str)
+{
+//	console.log(str);
+	var retValue = str;
+	if(str !== "")
+	{
+		retValue = parseFloat(str).toFixed(2);
+	}
+//	console.log(retValue);
+	return retValue;
+}
+formatLabels(str)
+{
+//	console.log(str);
+	var retArr = [];
+	retArr.push(str);
+	if(str !== "")
+	{
+		retArr = [];
+		retArr = str.split("~");
+	}
+	return retArr;
+}
 }
 
 	
