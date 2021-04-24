@@ -33,7 +33,7 @@
                         </div>
                     </form>
                 </div>
-                <p style='display:none' class="browse-recipes-text">Browse recipes</p>
+
                 <div class="filters-mb">
                     
                     <div id="meal-type"
@@ -41,7 +41,7 @@
                             type="button" (click)="getFavourites()" aria-haspopup="true" aria-expanded="false" class="btn btn-secondary"><i
                                 class="fa fa-heart" aria-hidden="true"></i>Favourites</button>
                     </div>
-                    <div id="advanced-filters"
+                    <div id="advanced-filters" (click)="loadFilterLabels(); filtersOpt = !filtersOpt"
                         class="advanced-filters btn-filter btn-filter-mb other-filters-btn   btn-group btn-group-sm"><button
                             type="button" id="advancedFilterToggle" aria-haspopup="true" aria-expanded="false"
                             class="btn btn-secondary"><i class="fa fa-plus" aria-hidden="true"></i>Filters</button>
@@ -52,6 +52,92 @@
                         type="button" (click)="loadRecipes()" aria-haspopup="true" aria-expanded="false" class="btn btn-secondary"><i
                             class="fa fa-trash" aria-hidden="true"></i>Clear</button>
                     </div>
+                </div>
+                <div *ngIf="filtersOpt">
+                
+                    <div class="{{animClass}}" style="max-height:300px; overflow:auto; width:95%">
+                      
+                        <div class="row "  style="padding-left:0; padding-right:0px">
+                            <div class="col-12">
+                                <h3>Advance Filters</h3>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+
+                                    <label class="form-control-placeholder fcs">Health Labels </label>
+                                    <div class="listSection" id="healthLabels" style="display:inline-block;">
+                                        <div class="row">
+                                        <ng-container *ngFor="let hlabel of healthlabelsList; let h = index">
+                                            <div class="col-12 col-lg-6">
+                                            <label class="container" style="font-size:12px;text-align:left">{{hlabel.name}}
+                                                <input [(ngModel)] ="hlabel.selected" type="checkbox" [checked]="h == 0?'checked':''">
+                                                <span class="checkmark"></span>
+                                            </label>
+                                            </div>
+                                        </ng-container>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 ">
+                                <div class="form-group">
+                                    <label class="form-control-placeholder fcs">Diet Labels</label> 
+                                    <div class="listSection" id="diethLabels" style="display:inline-block;">
+                                        <div class="row">
+                                        <ng-container *ngFor="let dlabel of dietLabelsList; let h = index">
+                                            <div class="col-12 col-lg-6">
+                                            <label class="container" style="font-size:12px">{{dlabel.name}}
+                                                <input [(ngModel)] ="dlabel.selected" type="checkbox" [checked]="h == 0?'checked':''">
+                                                <span class="checkmark"></span>
+                                            </label>
+                                            </div>
+                                        </ng-container>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label class="form-control-placeholder fcs">Calories</label> 
+                                    <div class="listSection"  style="display:inline-block;">
+                                        <span>Max calories</span>
+                                      <input type="text" class="inputbox-fullwidth" />
+
+                                    </div>
+                                </div>
+                            </div>
+                              <div class="col-12">
+                                <div class="form-group">
+                                    <label class="form-control-placeholder fcs">Nutrients</label> 
+                                    <div class="listSection"  style="display:inline-block; height:145px; max-height:145px; overflow:auto;">
+                                        <div class="row">
+                                        <ng-container *ngFor="let mlabel of mineralsLabelsList; let m = index">
+                                           <div class="col-12 col-lg-6">
+                                            <label class="container" style="font-size:12px">{{setFLU(mlabel.name)}}
+                                                <input [(ngModel)] = 'mlabel.selected' type="checkbox" [checked]="m == 0?'checked':''">
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </div>
+                                        </ng-container>
+                                        </div>
+                                    </div>
+                                </div>
+                              </div>
+
+   
+            
+                            <div class="col-12">
+                                <input type="button" (click)="searchFilters()" style="margin-bottom:10px;" class="defaultbtn searchbtn" id="header-submit-search-pro" name="submit" value="Search">
+            
+                            </div>
+            
+                        </div>
+                        
+                          
+                    
+                    </div>
+
                 </div>
             </div>
         </div>

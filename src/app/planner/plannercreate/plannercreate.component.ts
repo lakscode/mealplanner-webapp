@@ -48,6 +48,12 @@ export class PlannercreateComponent implements OnInit {
 	loadedPlan: boolean  = false;
 	totalNutriArr :  Array<any> = [];
 	shoppingList:  Array<any> = [];
+	filtersOpt: boolean = false;
+
+	dietLabelsList: Array<any> = [];
+	healthlabelsList: Array<any> = [];
+	mineralsLabelsList: Array<any> = [];
+	filtersParams : any = {};
 	constructor(private router: Router, private route: ActivatedRoute, private modalService: ModalService, private pdfService: PDFService, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
 	
 	}
@@ -55,6 +61,7 @@ export class PlannercreateComponent implements OnInit {
 	ngOnInit() {
 			 this.totalPage = 1;
 			 this.pageCount= 5;
+			 this.filtersOpt = false;
 	 this.page_num = 1;
 this.loadedPlan = false;
 		window.addEventListener("scroll", this.scrollFunc);
@@ -209,14 +216,22 @@ this.loadColorCodes();
   
 	//  params["instructions"] = "notempty";
 	 params["returnfields"] = " id, label, image, healthLabels,ingredients, s_instructions, dietLabels, totalNutrients, digest,calories,s_instructions ";
+	 if(typeof(this.filtersParams.dietlabels) !== "undefined" && this.filtersParams.dietlabels  !== "")
+	 {
+	  params["dietLabels"] = this.filtersParams.dietlabels
+	 } 
   
+	 if(typeof(this.filtersParams.healthlabels ) !== "undefined" && this.filtersParams.healthlabels !== "")
+	 {
+	  params["healthLabels"] = this.filtersParams.healthlabels
+	 } 
+	  
 	  console.log(JSON.stringify(params));
 	  this.calculateCaloryFlag = false;
 	 var res =   this.dbService.getDatabyFields("recipes", params).subscribe(invData => setTimeout(() => {
   
 	//  console.log(invData);
-  
-	  var count = 0;
+ var count = 0;
 	  if(invData !== null && typeof(invData["body"]) !== "undefined" && invData["body"] !== null && invData["body"]["length"] > 0)
 		{
 
@@ -612,6 +627,7 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 
 	  getFavourites()
 	  {
+		  this.filtersOpt = false;
 		this.favouritesList = [];
 		//var params = {"limit": 100};
 		var params ={};
@@ -1258,6 +1274,72 @@ console.log(params);
 	closeModal(id)
 	{
 		this.modalService.close(id);
+	}
+
+	loadFilterLabels()
+	{
+		this.dietLabelsList= [];
+		for(let d=0; d < constants.dietLabels.length; d++)
+		{
+			this.dietLabelsList.push({"name":constants.dietLabels[d], "selected":false})
+		}
+
+		//this.healthlabelsList = constants.healthLabels;
+		this.healthlabelsList= [];
+		for(let h=0; h < constants.healthLabels.length; h++)
+		{
+			this.healthlabelsList.push({"name":constants.healthLabels[h], "selected":false})
+		}
+
+		//this.mineralsLabelsList = constants.minerals;
+		this.mineralsLabelsList= [];
+		for(let m=0; m <constants.minerals.length; m++)
+		{
+			this.mineralsLabelsList.push({"name":constants.minerals[m], "selected":false})
+		}
+
+	}
+	searchFilters()
+	{
+		var dietlabels = "";
+		for(let m=0; m <this.dietLabelsList.length; m++)
+		{
+			if(this.dietLabelsList[m]["selected"])
+			dietlabels += this.dietLabelsList[m]["name"] + "~";
+		}
+		if( dietlabels !== "")
+		{
+		   dietlabels=  dietlabels.slice(0, -1);
+
+		   this.filtersParams["dietlabels"] = dietlabels;
+		}
+   
+		var healthlabels = "";
+		for(let m=0; m <this.healthlabelsList.length; m++)
+		{
+			if(this.healthlabelsList[m]["selected"])
+			healthlabels += this.healthlabelsList[m]["name"] + "~";
+		}
+		if( healthlabels !== "")
+		{
+		   healthlabels=  healthlabels.slice(0, -1);
+		   this.filtersParams["healthlabels"] = healthlabels;
+		}
+	   
+		var minerals = "";
+		for(let m=0; m <this.mineralsLabelsList.length; m++)
+		{
+			if(this.mineralsLabelsList[m]["selected"])
+			minerals += this.mineralsLabelsList[m]["name"] + "~";
+		}
+		if( minerals !== "")
+		{
+		   minerals=  minerals.slice(0, -1);
+		   this.filtersParams["minerals"] = minerals;
+		}
+
+		console.log(this.filtersParams);
+		this.loadRecipes();
 	}
 }
 
