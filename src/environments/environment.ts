@@ -11,7 +11,9 @@ export const environment = {
   fromemail:"<contact@medicaltourismco.com>",
   companyname: "MTC",
    contactToName:"Admin",
-  contactEmail: "contact@medicaltourismco.com"
+  contactEmail: "contact@medicaltourismco.com",
+  edamameId: "eaec56cb",
+  edamameKey: "a9fec70780e435632a893d2d10eee322"
 };
 
 /*

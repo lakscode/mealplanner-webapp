@@ -22,11 +22,14 @@ export class RecipesubmitComponent implements OnInit {
 	loading:any = 0;
 	paramMicro: Array<any> =[];
 	mineralsList: Array<any> =[];
+	ingredients: Array<any> =[];
 	constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
 	
 	}
 
 	ngOnInit() {
+		this.ingredients = [];
+		this.ingredients.push({"text":""});
 		this.searchRes = {};
 		this.nutrientsList =  constants.minerals;
 		console.log(this.nutrientsList);
@@ -167,6 +170,27 @@ loadRecipe(id)
   }));
   }
 //}
+}
+
+getNutrients(item)
+{
+	console.log(item);
+	var api_id = environment.edamameId;
+	var api_key = environment.edamameKey;
+	console.log(api_id);
+	console.log(api_key);
+	var apiURL = constants.edamam_nutrient_api   +"?app_id="+ api_id + "&app_key=" + api_key + "&ingr=" + item.text;
+
+	console.log(apiURL);
+	var res =   this.dbService.getLocalData(apiURL).subscribe(recipeData => setTimeout(() => {
+		console.log(recipeData);
+		item["nutrients"] = recipeData;
+	}));
+
+}
+addNutrients()
+{
+	this.ingredients.push({"text":""});
 }
 }
 
