@@ -4,7 +4,7 @@ import { UserService } from '../services/user.service';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DBService } from '../dbservices/db.service';
 import { HelpService } from '../services/help.service';
-
+import { HttpClient } from '@angular/common/http';
 import { environment } from './../../environments/environment';
 
 @Component({
@@ -18,12 +18,14 @@ export class Landing1Component implements OnInit {
 	recommendedRecipes: Array<any> = [];
 	healthLabels: Array<any> = [];
 	RecipeoftheDay: Array<any> = [];
-	constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
+
+constructor(private router: Router, private httpClient : HttpClient, private route: ActivatedRoute, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
 	
 	}
 
 	ngOnInit() {
 		this.count++;
+		this.defaultRecipeofTheDay();
 		this.loadRecipeoftheDay();
 
 		this.loadHealthLabels();
@@ -32,7 +34,19 @@ export class Landing1Component implements OnInit {
 	
 	}
 
-
+	defaultRecipeofTheDay()
+	{
+		this.httpClient.get('assets/data/recipeoftheday.json').subscribe(
+			recipeoftheday => {        
+			  if(recipeoftheday){
+				this.RecipeoftheDay = [];
+				this.RecipeoftheDay.push(recipeoftheday);
+				console.log(this.RecipeoftheDay);
+			  }else{
+				this.defaultRecipeofTheDay();
+			  }
+			});  
+	}
 	loadRecommendedRecipes()
 	{
 	  this.recommendedRecipes = [];
