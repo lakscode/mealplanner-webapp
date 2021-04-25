@@ -113,12 +113,25 @@
                                     <div class="listSection"  style="display:inline-block; height:145px; max-height:145px; overflow:auto;">
                                         <div class="row">
                                         <ng-container *ngFor="let mlabel of mineralsLabelsList; let m = index">
-                                           <div class="col-12 col-lg-6">
-                                            <label class="container" style="font-size:12px">{{setFLU(mlabel.name)}}
+                                           <div class="col-12 col-lg-12">
+                                            <label class="container" style="font-size:12px;text-align:left;">{{setFLU(mlabel.name)}}
                                                 <input [(ngModel)] = 'mlabel.selected' type="checkbox" [checked]="m == 0?'checked':''">
                                                 <span class="checkmark"></span>
                                             </label>
-                                        </div>
+                                            </div>
+                                            <div class="col-5 paddinglr0" *ngIf="mlabel.selected">
+                                                            
+                                                    <input class="mineral-input" type='text' name="minerals_{{m}}_min" [(ngModel)]="mlabel.min" placeholder="min" />
+                                                    <span class="maxmin">{{formatVal(mlabel.t_min)}}</span>
+                                            
+                                            </div>
+                                            <div class="col-5 paddinglr0" *ngIf="mlabel.selected">
+                                                <input class="mineral-input" type='text' name="minerals_{{m}}_max" [(ngModel)]="mlabel.max" placeholder="max" />
+                                                <span class="maxmin">{{formatVal(mlabel.t_max)}}</span>
+
+                                            </div>
+                                            <div class="col-2 paddinglr0" *ngIf="mlabel.selected"> {{mlabel.unit}}</div>
+                                    
                                         </ng-container>
                                         </div>
                                     </div>
