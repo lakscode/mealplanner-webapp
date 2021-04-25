@@ -67,7 +67,7 @@ export class PlannercreateComponent implements OnInit {
 this.loadedPlan = false;
 		window.addEventListener("scroll", this.scrollFunc);
 		this.getNutrientsMaxMin(); 
-
+		
 		this.searchparam['q'] = "";
 //		this.addRecipeImage = "assets/images/placement_addrecipes@2x.png"
 this.addRecipeImage = "assets/images/add-recipe.png"
@@ -1298,7 +1298,7 @@ console.log(params);
 		{
 			this.mineralsLabelsList.push({"name":constants.minerals[m], "selected":false, "unit":"",  "min":"", "max":"", "t_min":"", "t_max":""})
 		}
-
+		this.loadNutrientsMaxMin();
 	}
 	searchFilters()
 	{
