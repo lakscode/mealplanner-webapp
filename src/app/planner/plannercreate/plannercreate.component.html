@@ -58,9 +58,9 @@
                     <div class="" style="max-height:300px; overflow:auto; width:95%">
                       
                         <div class="row "  style="padding-left:0; padding-right:0px">
-                            <div class="col-12">
+                           <!--  <div class="col-12">
                                 <h3>Advance Filters</h3>
-                            </div>
+                            </div> -->
                             <div class="col-12">
                                 <div class="form-group">
 
@@ -98,10 +98,10 @@
                                 </div>
                             </div>
                             <div class="col-12">
-                                <div class="form-group">
+                                <div class="row form-group" style="padding-left:15px">
                                     <label class="form-control-placeholder fcs">Calories</label> 
                                     <div class="listSection"  style="display:inline-block;">
-                                        <span>Max calories</span>
+                                        <span>Max calories&nbsp;&nbsp;</span>
                                       <input type="text" class="inputbox-fullwidth" />
 
                                     </div>
@@ -110,7 +110,7 @@
                               <div class="col-12">
                                 <div class="form-group">
                                     <label class="form-control-placeholder fcs">Nutrients</label> 
-                                    <div class="listSection"  style="display:inline-block; height:145px; max-height:145px; overflow:auto;">
+                                    <div class="listSection"  style="display:inline-block; height:145px; max-height:145px;overflow-x: hidden;">
                                         <div class="row">
                                         <ng-container *ngFor="let mlabel of mineralsLabelsList; let m = index">
                                            <div class="col-12 col-lg-12">
