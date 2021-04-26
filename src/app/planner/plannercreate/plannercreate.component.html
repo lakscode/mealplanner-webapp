@@ -257,7 +257,7 @@
                     font-family: 'Lato', sans-serif;
                     font-weight: 400;
                     font-size: 16px;">Show Nutrients
-                        <input (click)="showNutrients = !showNutrients" [(ngModel)] = 'showNutrients' type="checkbox">
+                        <input [(ngModel)] = 'showNutrients' type="checkbox">
                         <span class="checkmark"></span>
                     </label>
                     <a class="copy-button" (click)="downloadplan()" title="Download PDF"><i class="fa fa-download"></i> Download</a>
