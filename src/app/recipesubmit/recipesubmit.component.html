@@ -16,8 +16,7 @@
                     <textarea class="short-text" name="short-des" id="short-description" cols="30" rows="10"></textarea>
                     <!--<label for="recipe-content">Recipe Contents</label>
                     <textarea name="content" id="recipe-content" cols="30" rows="10"></textarea>-->
-                    <label for="upload-image">Upload Images</label>
-                    <input type="file" name="fileUpload" id="upload-image">
+                   
                     <fieldset class="ingredient-set">
                         <label for="ingredients">Ingredients</label>
                         <ul class="list-sortable ingredients-list ui-sortable">
@@ -77,27 +76,43 @@
                                             </span>
                     </fieldset>
 
-                    <label class="video-based-recipe">Video Based Recipe</label>
-                    <br>
-                    <label for="radio-yes">
-                        <input class="radio-btn" id="radio-yes" type="radio" name="video-recipe" value="yes" checked=""><span class="radio-text">yes</span>
-                    </label>
-                    <label for="radio-no">
-                        <input class="radio-btn" id="radio-no" type="radio" name="video-recipe" value="no"> <span class="radio-text">no</span>
-                    </label>
-                    <br>
-                    <br>
-                    <label for="video-embed">Video Embed Code</label>
-                    <textarea class="short-text" name="embed-code" id="video-embed" cols="30" rows="10"></textarea>
                     
                     <div class="row">
-                        <div class="col-sm-6">
-                            <label for="yield">Yield</label>
-                            <input type="text" name="yield" id="yield">
+                        <div class="col-12 col-lg-6">
+                            <label for="upload-image">Upload Images</label>
+                            <input type="file" name="fileUpload" id="upload-image">
                         </div>
-                        <div class="col-sm-6">
+
+                        <div class="col-12 col-lg-6">
+                            <label class="video-based-recipe">Video Based Recipe</label>
+                            <br>
+                            <label class="container" style=" text-align: left;
+                            display: inline-block;
+                            font-family: 'Lato', sans-serif;
+                            font-weight: 400;
+                            font-size: 16px;">Video Based Recipe
+                                <input name="videoenabled" (click)="searchRes.video = !searchRes.video" [(ngModel)] = 'searchRes.video' type="checkbox">
+                                <span class="checkmark"></span>
+                            </label>
+                                
+                            <br>
+                            <br>
+                            <div *ngIf="searchRes.video" >
+                                <label for="video-embed">Video Embed Code</label>
+                                <textarea class="short-text" name="embed-code" id="video-embed" cols="30" rows="10"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-12 col-lg-6">
                             <label for="servings">Servings</label>
                             <input type="text" name="s_servings" id="s_servings">
+                        </div>
+                        <div class="col-12 col-lg-6">
+                            <label for="calorietags">Calories </label>
+                            <input type="text"  [(ngModel)]="searchRes.calories" name="calorieLabels" id="calorieLabels" />
                         </div>
                     </div>
     
@@ -116,24 +131,36 @@
                         </div>
                     </div>-->
     
-                    <label for="dietLabels">Diet Labels <em>Comma separated</em></label>
-                    <input type="text" [(ngModel)]="searchRes.dietLabels" name="dietLabels" id="dietLabels" />
-    
-                    <label for="healthtags">Health Labels <em>Comma separated</em></label>
-                    <input type="text" [(ngModel)]="searchRes.healthLabels"  name="healthLabels" id="healthLabels" />
+                    <div class="row">
+                        <div class="col-12 col-lg-6">
+                            <label for="dietLabels">Diet Labels <em>Comma separated</em></label>
+                            <input type="text" [(ngModel)]="searchRes.dietLabels" name="dietLabels" id="dietLabels" />
+                        </div>
+            
+                        <div class="col-12 col-lg-6">
+                            <label for="healthtags">Health Labels <em>Comma separated</em></label>
+                            <input type="text" [(ngModel)]="searchRes.healthLabels"  name="healthLabels" id="healthLabels" />
+                        </div>
+                 
+                       
+                
+                        <div class="col-12 col-lg-6">
+                            <label for="mealtype">Meal Type</label>            
+                            <select name="mealtype" [(ngModel)]="searchRes.mealtype" id="mealtype" class="advance-selectable" tabindex="0">
+                                <option value="t0" selected="selected">None</option>
+                                <option value="t1">Breakfast</option>
+                                <option value="t2">Pre-lunch Snack</option>
+                                <option value="t3">Lunch</option>
+                                <option value="t4">Evening Snack</option>
+                                <option value="t5">Dinner</option>
+                            </select>   
+                        </div>
+                    </div>
 
-                     <label for="calorietags">Calories </label>
-                    <input type="text"  [(ngModel)]="searchRes.calories" name="calorieLabels" id="calorieLabels" />
 
-                    <label for="mealtype">Meal Type</label>            
-                    <select name="mealtype" [(ngModel)]="searchRes.mealtype" id="mealtype" class="advance-selectable" tabindex="0">
-                        <option value="t0" selected="selected">None</option>
-                        <option value="t1">Breakfast</option>
-                        <option value="t2">Pre-lunch Snack</option>
-                        <option value="t3">Lunch</option>
-                        <option value="t4">Evening Snack</option>
-                        <option value="t5">Dinner</option>
-                    </select>      
+                   
+
+                      
                 
                     <!--<div class="row">
                         <div class="col-sm-6">
