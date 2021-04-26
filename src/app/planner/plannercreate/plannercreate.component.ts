@@ -55,6 +55,7 @@ export class PlannercreateComponent implements OnInit {
 	mineralsLabelsList: Array<any> = [];
 	filtersParams : any = {};
 	nutrientDbFields : Array<any> = [];
+	showNutrients: boolean = true;
 	constructor(private router: Router, private route: ActivatedRoute, private modalService: ModalService, private pdfService: PDFService, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
 	
 	}
@@ -63,6 +64,7 @@ export class PlannercreateComponent implements OnInit {
 			 this.totalPage = 1;
 			 this.pageCount= 5;
 			 this.filtersOpt = false;
+			 this.showNutrients= true;
 	 this.page_num = 1;
 this.loadedPlan = false;
 		window.addEventListener("scroll", this.scrollFunc);
