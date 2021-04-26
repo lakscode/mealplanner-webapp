@@ -165,7 +165,7 @@ this.loadColorCodes();
       
       var res =   this.dbService.getDataByTable("mealplan", params).subscribe(mpData => setTimeout(() => {
 
-    //    console.log(mpData);
+        console.log(mpData);
         if(mpData !== null)
         {
           if(mpData["body"] !== null && mpData["body"]['length'] > 0)

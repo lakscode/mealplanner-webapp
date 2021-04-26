@@ -439,9 +439,8 @@ endIndex = startIndex+ endIndex;
 
    } 
   
-
-    this.searchparam.range.lower
-
+   console.log(params);
+  
     var res =   this.dbService.getDatabyFields("recipes", params).subscribe(invData => setTimeout(() => {
 
       console.log(invData);

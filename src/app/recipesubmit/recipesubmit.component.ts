@@ -28,6 +28,7 @@ export class RecipesubmitComponent implements OnInit {
 	}
 
 	ngOnInit() {
+		this.getLabels();
 		this.ingredients = [];
 		this.ingredients.push({"text":""});
 		this.searchRes = {};
@@ -171,7 +172,23 @@ loadRecipe(id)
   }
 //}
 }
+dietLabelsList: Array<any>=[];
+healthlabelsList: Array<any>=[];
+getLabels()
+{
+	this.dietLabelsList= [];
+	for(let d=0; d < constants.dietLabels.length; d++)
+	{
+		this.dietLabelsList.push({"name":constants.dietLabels[d], "selected":false})
+	}
 
+	//this.healthlabelsList = constants.healthLabels;
+	this.healthlabelsList= [];
+	for(let h=0; h < constants.healthLabels.length; h++)
+	{
+		this.healthlabelsList.push({"name":constants.healthLabels[h], "selected":false})
+	}
+}
 getNutrients(item)
 {
 	console.log(item);

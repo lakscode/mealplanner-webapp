@@ -100,6 +100,10 @@
                             <div *ngIf="searchRes.video" >
                                 <label for="video-embed">Video Embed Code</label>
                                 <textarea class="short-text" name="embed-code" id="video-embed" cols="30" rows="10"></textarea>
+
+
+                                <label for="upload-video">Upload Video</label>
+                                <input type="file" name="videoUpload" id="upload-video">
                             </div>
                         </div>
                     </div>
@@ -133,13 +137,28 @@
     
                     <div class="row">
                         <div class="col-12 col-lg-6">
-                            <label for="dietLabels">Diet Labels <em>Comma separated</em></label>
-                            <input type="text" [(ngModel)]="searchRes.dietLabels" name="dietLabels" id="dietLabels" />
+                            <label for="dietLabels">Diet Labels</label>
+                            
+                            <label class="container" style=" text-align: left;
+                            display: inline-block;
+                            font-family: 'Lato', sans-serif;
+                            font-weight: 400;
+                            font-size: 16px;" *ngFor="let dietLabel of dietLabelsList; let d=index;">{{dietLabel.name}}
+                                <input name="videoenabled" id="dietLabel{{d}}" name="dietLabel{{d}}" [(ngModel)] = 'dietLabel.selected' type="checkbox">
+                                <span class="checkmark"></span>
+                            </label>
                         </div>
             
                         <div class="col-12 col-lg-6">
-                            <label for="healthtags">Health Labels <em>Comma separated</em></label>
-                            <input type="text" [(ngModel)]="searchRes.healthLabels"  name="healthLabels" id="healthLabels" />
+                            <label for="healthtags">Health Labels</label>
+                            <label class="container" style=" text-align: left;
+                            display: inline-block;
+                            font-family: 'Lato', sans-serif;
+                            font-weight: 400;
+                            font-size: 16px;" *ngFor="let healthLabel of healthlabelsList; let h=index;">{{healthLabel.name}}
+                                <input name="videoenabled" id="healthLabel{{h}}" name="healthLabel{{h}}" [(ngModel)] = 'healthLabel.selected' type="checkbox">
+                                <span class="checkmark"></span>
+                            </label>
                         </div>
                  
                        
