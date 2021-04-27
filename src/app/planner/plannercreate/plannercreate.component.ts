@@ -839,7 +839,7 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 		if(typeof(this.plan["mealplanid"]) !== "undefined" && this.plan["mealplanid"] !== "")
 		{
 		params["id"]  =  this.plan["mealplanid"] 
-console.log(params);
+
 		var res =   this.dbService.updateDataByTable("mealplan", params).subscribe(invData => setTimeout(() => {
 
 		console.log(invData);
@@ -848,12 +848,12 @@ console.log(params);
 			{
 				this.updatingFlag = false;
 			}
-		//   console.log(this.plan)
+
 		}));
 		}
 		else
 		{
-	//   console.log(params);
+
 		var res =   this.dbService.postDataByTable("mealplan", params).subscribe(invData => setTimeout(() => {
 
 			console.log(invData);
@@ -868,7 +868,7 @@ console.log(params);
 				this.plan["id"]=insertedid;
 				this.plan["mealplanid"]=insertedid;
 				this.updatingFlag = false;
-		//   console.log(this.plan);
+
 			}
 			}
 		}));
@@ -881,17 +881,12 @@ console.log(params);
   }
   SavePlanData(r, c)
   {
-	//  console.log("in save plan data");
-///	console.log(this.plan);
-//	console.log(r);
-//	console.log("C " + c);
 
 
     if(typeof(this.plan["id"]) !== "undefined" && this.plan["id"] !== "")
     {
 		var rowItem = this.plan["days"][r]["meals"];
-	//	console.log(rowItem);
-	//	console.log( this.plan["days"][r]['id']);
+
       var params = {};
        
         params["meal_plan_id"] = this.plan["id"];
@@ -922,15 +917,13 @@ console.log(params);
         params["created_at"] = new Date();
         params["status"] = 1;
 
-    //  console.log(params);
-    //  console.log(JSON.stringify(params));
+ 
       if(typeof(this.plan["days"][r]['dayid']) == "undefined" || this.plan["days"][r]['dayid'] == "")
       { 
-	//	  console.log("post data");
-	//	  console.log(params);
+	
         var res =   this.dbService.postDataByTable("days", params).subscribe(dData => setTimeout(() => {
 
-       //   console.log(dData);
+  
           if(dData !== null)
           {
             if(dData["result"] !== null && dData["result"] !== "")
@@ -940,36 +933,31 @@ console.log(params);
 			  this.plan["days"][r]['dayid']= dData['inserted_id'];
             }
             else{
-            // this.createDay();
+        
             }
           }
-        //  console.log(this.plan);
+
 
         }));
       }
       else
       {
-	//	  console.log(this.plan);
+
         params["id"] = this.plan["days"][r]['dayid'];
-      //  console.log(JSON.stringify(params));
-	//  console.log("update data");
-	//  console.log(params);
+  
         var res =   this.dbService.updateDataByTable("days", params).subscribe(dData => setTimeout(() => {
 
-        //  console.log(dData);
           if(dData !== null)
           {
             if(dData["result"] !== null && dData["result"] !== "")
             {
-           //   this.plan["days"][this.selDayIndex]= params;
-            //  this.plan["days"][this.selDayIndex]['id']= dData['inserted_id'];
+        
             }
             else{
-            // this.createDay();
+           
             }
           }
-        //  console.log(this.plan);
-         // this.loadRecipesToDays();
+      
         }));
       }
     }  
@@ -1122,8 +1110,9 @@ console.log(params);
 	}
 	calculateTotalCalory(col)
 	{
+		console.log(this.loadedPlan);
 		var mMacro = [];
-	//	console.log(this.plan["days"][col]);
+		console.log(this.plan["days"][col]);
 		if(this.loadedPlan)
 		{
 		for(let i=0; i < this.plan["days"][col]["meals"]["length"]; i++)
