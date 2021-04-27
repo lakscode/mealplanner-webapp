@@ -7,12 +7,17 @@ import { HelpService } from '../../services/help.service';
 })
 export class FooterComponent implements OnInit {
   labels: any;
+  subscribe: any = {};
   constructor(private helpService:HelpService) {
     //console.log('Footer constructor called');
   }
 
   ngOnInit() {
+    this.subscribe["email"] ="";
     this.labels={"companyName":this.helpService.getConstants("companyName"), "copyright":this.helpService.getConstants("copyright")};
   }
-
+  subscribeEmail()
+  {
+    console.log(this.subscribe);
+  }
 }

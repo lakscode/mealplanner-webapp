@@ -58,7 +58,7 @@ export class LoginComponent implements OnInit {
 			}
 		}
 
-		if (this.users["id"] != "") {
+		if (this.users !== null && this.users["id"] !== "") {
 			if(this.redirecturl !== "")
 			{
 				this.gotopage(this.redirecturl);
