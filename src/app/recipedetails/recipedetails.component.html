@@ -273,11 +273,12 @@
     
     
     <div class="recipe-comments">
-        <h3 class="lined">Comments (2)</h3>
+        <h3 class="lined">Comments <span *ngIf="commentsCount">({{commentsCount}})</span></h3>
         <ul>
             <li *ngFor="let comment of commentsList; let c = index;">
                 <div class="avatar">
-                    <a href="javascript:void(0)"><img src="{{formatApiUrl(comment.profileimage)}}" alt="avatar"></a>
+                    <a href="javascript:void(0)" *ngIf="comment.profileimage"><img src="{{formatApiUrl(comment.profileimage)}}" alt="avatar"></a>
+                     <a href="javascript:void(0)" *ngIf="!comment.profileimage"><img src="assets/user-icon.png" alt="avatar"></a>
                 </div>
                 <div class="comment">
                     <h5><a href="javascript:void(0)">{{formatName(comment)}}</a></h5>
