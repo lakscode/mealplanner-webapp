@@ -192,7 +192,7 @@ export class RecipesComponent implements OnInit {
   
 	}
 	counter(i: number) {
-		console.log(i);
+	//	console.log(i);
 		var num = Math.ceil(i);
 		return new Array(num);
 	}
@@ -215,15 +215,15 @@ export class RecipesComponent implements OnInit {
 	}
 	currentPage(pagenum)
 	{
-		console.log(pagenum);
+	//	console.log(pagenum);
 		this.page_num = parseInt(pagenum);
 		this.getDisplayList();
 	}
 
 	getDisplayList()
 	{
-		console.log(this.recipesList1);
-		console.log(this.page_num);
+	//	console.log(this.recipesList1);
+	//	console.log(this.page_num);
 		this.displayList=[];
 		var startIndex= this.page_num*10;
 		var endIndex = 10;
@@ -233,15 +233,15 @@ export class RecipesComponent implements OnInit {
 			endIndex = this.recipesList1["length"]-startIndex;
 		}
 
-		console.log(startIndex);
-		console.log(endIndex);
+	//	console.log(startIndex);
+	//	console.log(endIndex);
 endIndex = startIndex+ endIndex;
 		for(let i=startIndex; i < endIndex; i++)
 		{
 		this.displayList.push(this.recipesList1[i]);
 		
 		}
-		console.log(this.displayList);
+	//	console.log(this.displayList);
 		window.scrollTo(0, 0);
 	}
 
@@ -256,7 +256,7 @@ endIndex = startIndex+ endIndex;
 	   
 		params["query"] = "SELECT count(rating) as totalcount, sum(rating) as totalrating, recipeid FROM `rating` where recipeid in (" + this.ratingIds + ") group by recipeid";
 		var res =   this.dbService.getDatabyTablebyQuery("rating", params).subscribe(invData => setTimeout(() => {
-		console.log(invData);
+	//	console.log(invData);
 		  if(invData !== null)
 		  {
 			if(typeof(invData["body"]) !== "undefined" && invData["body"] !== null && invData["body"]["length"] > 0)
@@ -268,9 +268,9 @@ endIndex = startIndex+ endIndex;
 				for(let i=0; i< temp["length"] ; i++)
 				{
 				  this.ratingsArr.push(temp[i])
-				  console.log(temp[i]);
+				//  console.log(temp[i]);
 				  var recIndex = this.recipesList1.findIndex(x1 => (x1.id === temp[i]["recipeid"]));
-				  console.log(recIndex);
+				//  console.log(recIndex);
 				  if(recIndex > -1)
 				  {
 					this.recipesList1[recIndex]["totalcount"] = temp[i]["totalcount"];
@@ -286,7 +286,7 @@ endIndex = startIndex+ endIndex;
 
   
 				}
-				console.log(this.ratingsArr);
+			//	console.log(this.ratingsArr);
 		
 			  }
 			}
@@ -347,7 +347,7 @@ endIndex = startIndex+ endIndex;
 
 
   /******** recipes api serach */
-
+  maxcalories: any = 0;
 	searchProps()
 	{
 
@@ -365,9 +365,9 @@ endIndex = startIndex+ endIndex;
     {
       params["caloriesfrom"] = this.searchparam.range.lower;
     }
-    if(typeof(this.searchparam.range.upper) !== "undefined")
+    if(typeof(this.maxcalories) !== "undefined" && this.maxcalories > 0)
     {
-      params["caloriesto"] = this.searchparam.range.upper;
+      params["caloriesto"] = this.maxcalories;
     }
     params["instructions"]="notempty";
    }
@@ -401,21 +401,28 @@ endIndex = startIndex+ endIndex;
 	 for(let m=0; m <this.mineralsLabelsList.length; m++)
 	 {
 		 var item = this.mineralsLabelsList[m];
+		 console.log(item);
 		 if(this.mineralsLabelsList[m]["selected"])
 		 minerals += this.mineralsLabelsList[m]["name"] + "~";
 		 if(typeof(item["min"]) !== "undefined" && item["min"] !== "" && item["min"] >0)
               {
-                mQuery += " " + item["name"]['label'].toLowerCase() + " >= " + item["min"] + " AND ";
+                mQuery += " " + item["name"].toLowerCase() + " >= " + item["min"] + " AND ";
               }
               if(typeof(item["max"]) !== "undefined" && item["max"] !== "" && item["max"] >0)
               {
-                mQuery += " " + item["name"]['label'].toLowerCase() + " <= " + item["max"] + " AND ";
+                mQuery += " " + item["name"].toLowerCase() + " <= " + item["max"] + " AND ";
               }
 
 	 }
 	 if( minerals !== "")
 	 {
 		minerals=  minerals.slice(0, -1);
+	 }
+
+	 if( mQuery !== "")
+	 {
+		mQuery=  mQuery.slice(0, -4);
+		
 	 }
 	 console.log("mQuery");
 	 console.log(mQuery);
@@ -439,44 +446,79 @@ endIndex = startIndex+ endIndex;
 
    } 
   
-   console.log(params);
-  
-    var res =   this.dbService.getDatabyFields("recipes", params).subscribe(invData => setTimeout(() => {
+  // console.log(params);
+  if(mQuery !== "")
+  {
+	  var params1 = {};
 
-      console.log(invData);
+	  var query = "select id, label, image, healthLabels, s_instructions, dietLabels, calories from recipes ";
+	  var where = " where totalNutrients != '' AND digest != ''  AND s_instructions != '' " ;
+	  if(this.maxcalories > 0)
+	  where +=  " AND calories >= " + this.maxcalories
 
-      if(invData !== null)
-      {
-        if(typeof(invData["body"]) !== "undefined" && invData["body"] !== null && invData["body"]["length"] > 0)
-        {
-          this.recipesList1 = [];
-		  this.ratingIds="";
-          var temp = invData["body"];
-          if(temp["length"] > 0)
-          {
-            for(let i=0; i< temp["length"] ; i++)
-            {
-                this.recipesList1.push(temp[i]);          
-				this.ratingIds += temp[i]["id"] + ",";
-            }
-			this.totalPage = this.recipesList1["length"] /10;
-			this.counter(this.totalPage);
-          }
-         console.log("totalPage " + this.totalPage);
-        }
-       
-		this.getDisplayList();
-		this.loadRatings();
+	  if(dietlabels !== "")
+	  {
+		  var t = dietlabels.split("~");
+		  for(let i=0; i < t.length; i++)
+		  {
+			  where +=  " AND dietLabels LIKE '%" + t[i] + "%'" 
+		  }
+	  }
+	  if(healthlabels !== "")
+	  {
+		  var t1 = healthlabels.split("~");
+		  for(let i=0; i < t1.length; i++)
+		  {
+			  where +=  " AND healthLabels LIKE '%" + t1[i] + "%'" 
+		  }
+	  }
 
-      }
+	  where += " AND id in (select recipeid from nutrients where " + mQuery +  ")";
 
-    
-
-    }));
-
+	  params1["query"] = query + where + " limit 0, 100";
+	  console.log(params1);
+    var res =   this.dbService.getDatabyTablebyQuery("recipes", params1).subscribe(invData => setTimeout(() => {
+		console.log(invData);
+		this.formatResult(invData);
+	  }));
+  }
+  else
+  {
+	var res =   this.dbService.getDatabyFields("recipes", params).subscribe(invData => setTimeout(() => {
+		console.log(invData);
+		this.formatResult(invData);
+	  }));
+  }
 		
 	}
 
+	formatResult(invData)
+	{
+		if(invData !== null)
+		{
+		  if(typeof(invData["body"]) !== "undefined" && invData["body"] !== null && invData["body"]["length"] > 0)
+		  {
+			this.recipesList1 = [];
+			this.ratingIds="";
+			var temp = invData["body"];
+			if(temp["length"] > 0)
+			{
+			  for(let i=0; i< temp["length"] ; i++)
+			  {
+				  this.recipesList1.push(temp[i]);          
+				  this.ratingIds += temp[i]["id"] + ",";
+			  }
+			  this.totalPage = this.recipesList1["length"] /10;
+			  this.counter(this.totalPage);
+			}
+		   console.log("totalPage " + this.totalPage);
+		  }
+		 
+		  this.getDisplayList();
+		  this.loadRatings();
+  
+		}
+	}
 
 	gotoRecipeDetails(id){
 	this.router.navigate(['recipedetails', id]);
@@ -484,14 +526,14 @@ endIndex = startIndex+ endIndex;
 
 	loadNutrientsMaxMin()
   {
-    console.log("loadNutrientsMaxMin");
-    console.log(this.mineralsLabelsList);
-    console.log(this.nutrientDbFields);
+ //   console.log("loadNutrientsMaxMin");
+//    console.log(this.mineralsLabelsList);
+ //   console.log(this.nutrientDbFields);
 
     if(this.mineralsLabelsList["length"] > 0 && this.nutrientDbFields["length"] > 0)
     {
-      console.log(this.mineralsLabelsList);
-      console.log(this.nutrientDbFields);
+  //    console.log(this.mineralsLabelsList);
+  //    console.log(this.nutrientDbFields);
       for(let m =0; m < this.mineralsLabelsList["length"]; m++)
       {
         var lbl = this.mineralsLabelsList[m]["name"].toLowerCase();
@@ -511,7 +553,7 @@ endIndex = startIndex+ endIndex;
         }
 
       }
-      console.log(this.mineralsLabelsList);
+   ////   console.log(this.mineralsLabelsList);
     }
     else
     {
@@ -540,14 +582,14 @@ endIndex = startIndex+ endIndex;
   //  console.log(query);
     query = query.slice(0, -2);
     params1["query"] = "Select " + query + " from nutrients";
-    console.log(params1);
+ //   console.log(params1);
    var res =   this.dbService.getDatabyQuery("recipes", params1).subscribe(invData => setTimeout(() => {
 
-	console.log(invData);
+//	console.log(invData);
     if(invData["body"]["length"] > 0)
     {
       this.nutrientDbFields = invData["body"];
-      console.log(this.nutrientDbFields);
+  //    console.log(this.nutrientDbFields);
     }
    }))
   
