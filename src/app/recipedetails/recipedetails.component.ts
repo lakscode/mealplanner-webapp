@@ -573,6 +573,28 @@ formatApiUrl(path)
 	console.log(urlapi + path);
 	return urlapi + path;
 }
+formatName(comment)
+{
+	var username = "";
+	if(comment.firstname !== "")
+	{
+		username = comment.firstname;
+		if(comment.lastname !== "")
+		{
+			username += " " + comment.lastname;
+		}
+	}
+	else if(comment.username !== "")
+	{
+		username = comment.username;
+	}
+	else if(comment.email !== "")
+	{
+		username = comment.email;
+	}
+
+	return username;
+}
 uploadmedia(type)
 {
 	this.comment["uploadtype"]  = type;

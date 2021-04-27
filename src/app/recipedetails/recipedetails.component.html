@@ -280,7 +280,7 @@
                     <a href="javascript:void(0)"><img src="{{formatApiUrl(comment.profileimage)}}" alt="avatar"></a>
                 </div>
                 <div class="comment">
-                    <h5><a href="javascript:void(0)">John Doe</a></h5>
+                    <h5><a href="javascript:void(0)">{{formatName(comment)}}</a></h5>
                     <span class="time">{{comment.created_time}}</span>
                     <p>
                         {{comment.message}}
