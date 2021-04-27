@@ -103,7 +103,7 @@ export class LoginComponent implements OnInit {
 		var params = {'username':  this.userObj.username, 'emailphone':this.userObj.username}
 
 		this.dbService.checkIfExists("users", params).subscribe(userDataObj => setTimeout(() => {
-
+			console.log(userDataObj);
 			if (userDataObj['body']['length'] > 0) {
 				var userData = userDataObj['body'][0];
 			
