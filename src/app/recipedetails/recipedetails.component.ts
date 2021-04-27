@@ -41,6 +41,7 @@ setFav: boolean = false;
 showRate: boolean = false;
 commentsList:  Array<any> = [];
 comment: any = {};
+commentsCount: any = "";
 apiUrl: any = "";
 
 	constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
@@ -539,6 +540,7 @@ loadComments()
 		{
 			if(rData['body']['length'] > 0)
 			this.commentsList = rData['body'];
+			this.commentsCount = rData['body']['length'];
 		}
 	  }));
 
