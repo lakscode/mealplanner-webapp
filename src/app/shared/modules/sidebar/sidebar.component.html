@@ -132,11 +132,11 @@
         <li *ngFor="let recipe of recipesList; let r = index;">
             <div class="thumb">
                 <a (click)="gotoRecipeDetails(recipe.id)">
-                    <img src="{{formatImage(recipe.image, 's')}}" alt="thumbnail">
+                    <img style="cursor:pointer" src="{{formatImage(recipe.image, 's')}}" alt="thumbnail">
                 </a>
             </div>
             <div class="detail" style="font-size:14px">
-                <a style="font-weight:bold" (click)="gotoRecipeDetails(recipe.id)">{{recipe.label}}</a>
+                <a style="font-weight:bold;cursor:pointer" (click)="gotoRecipeDetails(recipe.id)">{{recipe.label}}</a>
                 <span class="post-date">{{formatLabels(recipe.dietLabels)}}</span>
             </div>
         </li>
