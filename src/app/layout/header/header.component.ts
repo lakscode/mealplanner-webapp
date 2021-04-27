@@ -184,9 +184,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
 			}
 			else
 			{
-				params = {"redirecturl":this.router.url}
+		//		params = {"redirecturl":this.router.url}
 			}
-			this.router.navigate(["login", params]);			
+		//	this.router.navigate(["login", params]);	
+		this.router.navigate(["login"]);			
 		}
 	}
 		gotopage(page)

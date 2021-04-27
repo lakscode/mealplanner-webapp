@@ -1110,9 +1110,9 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 	}
 	calculateTotalCalory(col)
 	{
-		console.log(this.loadedPlan);
+	//	console.log(this.loadedPlan);
 		var mMacro = [];
-		console.log(this.plan["days"][col]);
+	//	console.log(this.plan["days"][col]);
 		if(this.loadedPlan)
 		{
 		for(let i=0; i < this.plan["days"][col]["meals"]["length"]; i++)
@@ -1342,7 +1342,7 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
             }
           
 			}
-			if( this.filtersParams["minerals"] !== "")
+			if( typeof( this.filtersParams["minerals"]) !== "undefined" && this.filtersParams["minerals"] !== "")
 			{
 				console.log(mQuery);
 				this.filtersParams["mineralsquery"] =  mQuery.slice(0, -4);
