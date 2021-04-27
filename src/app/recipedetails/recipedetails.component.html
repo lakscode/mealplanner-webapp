@@ -275,34 +275,21 @@
     <div class="recipe-comments">
         <h3 class="lined">Comments (2)</h3>
         <ul>
-            <li>
+            <li *ngFor="let comment of commentsList; let c = index;">
                 <div class="avatar">
-                    <a href="javascript:void(0)"><img src="assets/images/temp-images/recipe-comment1.jpg" alt="avatar"></a>
+                    <a href="javascript:void(0)"><img src="{{formatApiUrl(comment.profileimage)}}" alt="avatar"></a>
                 </div>
                 <div class="comment">
                     <h5><a href="javascript:void(0)">John Doe</a></h5>
-                    <span class="time">(2hours ago)</span>
+                    <span class="time">{{comment.created_time}}</span>
                     <p>
-                        Rinse the chicken pieces in cold water and pat dry. Place the chicken in a large, resealable zip-top bag and pour in the marinade.
+                        {{comment.message}}
                     </p>
                     <!--<a href="javascript:void(0)" class="reply-button">Reply</a>-->
                 </div>
     
             </li>
-    
-            <li>
-                <div class="avatar">
-                    <a href="javascript:void(0)"><img src="assets/images/temp-images/recipe-comment1.jpg" alt="avatar"></a>
-                </div>
-                <div class="comment">
-                    <h5><a href="javascript:void(0)">John Doe</a></h5>
-                    <span class="time">(2hours ago)</span>
-                    <p>
-                        Rinse the chicken pieces in cold water and pat dry. Place the chicken in a large, resealable zip-top bag and pour in the marinade.
-                    </p>
-                    <!--<a href="javascript:void(0)" class="reply-button">Reply</a>-->
-                </div>
-            </li>
+
         </ul>
     </div>
     
@@ -325,19 +312,30 @@
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <button (click)="uploadmedia('image')" class="submit-comment"> Upload Image</button>
+                   
+                    <label  class='comment-label'>Upload Image</label>
+                     <button (click)="uploadmedia('image')" class="upload-comment">
+                        <i class="fa fa-picture-o" aria-hidden="true"></i> Upload Image</button>
                     <div>
                         <input id="inputuploadrecipe" hidden type="file" name="inputuploadrecipe" (change)="onFileSelect($event)" />
                       </div>
-                    
+                      <img *ngIf="comment.image" src="{{comment.image}}"  style="width: 90%" />
                       
                 </div>
    
                 <div class="col-md-6">
-                    <button (click)="uploadmedia('video')" class="submit-comment"> Upload Video</button>
+                    <label class='comment-label'>Upload Video</label>
+                    <button (click)="uploadmedia('video')" class="upload-comment">
+                        <i class="fa fa-file-video-o" aria-hidden="true"></i> Upload Video</button>
+                    <div *ngIf="comment.video" style="width:100%; display:block">
+                        <video width="400" controls>
+                            <source src="{{comment.video}}" type="video/mp4">
+                            Your browser does not support HTML video.
+                          </video>
+                    </div>
                 </div>
 
-                <div class="col-12">
+                <div class="col-12" style="padding:15px; text-align:right;">
                     <button (click)="submitcomment()" class="submit-comment">Submit</button>
                 </div>
 

@@ -173,9 +173,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
 	var str = this.location.path();	
 	//console.log("gotoLogin") ;
 	//console.log(str);
+	console.log("this.router.url ") ;
+	console.log(this.router.url);
 		if(!this.loggedIn && str.indexOf("resetpassword") == -1 && str.indexOf("index") == -1 && str.indexOf("home") == -1)
 		{
-			this.router.navigate(["login"]);			
+			this.router.navigate(["login", {"redirecturl":this.router.url}]);			
 		}
 	}
 		gotopage(page)

@@ -42,17 +42,32 @@ export class LoginComponent implements OnInit {
 		this.redirecturl = "";
 		//	let token = this.route.params
 		if (typeof (this.users) !== "undefined" && this.users !== null) {
+		
 			if (typeof (this.users["id"]) !== "undefined") {
 				if (this.users["id"] != "") {
-					this.gotopage('landing1');
+				//	this.gotopage('landing1');
 				}
 			}
 		}
 		if (typeof (this.route.params["_value"]) !== "undefined") {
 			this.routeParams = this.route.params["_value"];
-			if (typeof (this.routeParams.redirectUrl) !== "undefined") {
-				this.redirecturl = decodeURI(this.routeParams.redirectUrl);
+
+			if (typeof (this.routeParams.redirecturl) !== "undefined") {
+				this.redirecturl = decodeURI(this.routeParams.redirecturl);
+
 			}
+		}
+
+		if (this.users["id"] != "") {
+			if(this.redirecturl !== "")
+			{
+				this.gotopage(this.redirecturl);
+			}
+			else
+			{
+				this.gotopage('landing1');
+			}
+			
 		}
 		this.loginForm = this.formBuilder.group({
 			username: ['', Validators.required],

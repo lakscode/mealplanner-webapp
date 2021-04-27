@@ -42,6 +42,7 @@ showRate: boolean = false;
 commentsList:  Array<any> = [];
 comment: any = {};
 apiUrl: any = "";
+
 	constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
 	
 	}
@@ -518,16 +519,28 @@ newRecipe()
 loadComments()
 {
 	console.log("loadComments");
-	var params = {};
+/*	var params = {};
 	params["recipeid"] = this.routeParams.id;
 	console.log(params);
 	var res =   this.dbService.getDataByTable("comments", params).subscribe(rData => setTimeout(() => {
 	  console.log(rData);     
 	  if(rData !== null)
 	  {
+		  if(rData['body']['length'] > 0)
+		  this.commentsList = rData['body'];
 	  }
 	}));
-
+	*/
+	var params = {};
+	params["query"] = "select c.*, u.firstname, u.lastname, u.username, u.email, u.image as profileimage from comments c,  users u where u.id = c.userid  and c.recipeid =" + this.routeParams.id;
+	var res =   this.dbService.getDatabyTablebyQuery("comments", params).subscribe(rData => setTimeout(() => {
+		console.log(rData);     
+		if(rData !== null)
+		{
+			if(rData['body']['length'] > 0)
+			this.commentsList = rData['body'];
+		}
+	  }));
 
 }
 submitcomment()
@@ -546,9 +559,19 @@ submitcomment()
 	  console.log(rData);     
 	  if(rData !== null)
 	  {
+		this.loadComments();
 	  }
+	  
 	}));
 
+}
+formatApiUrl(path)
+{
+	console.log(path);
+	var urlapi = this.apiUrl.replace("/api","");
+	console.log(urlapi);
+	console.log(urlapi + path);
+	return urlapi + path;
 }
 uploadmedia(type)
 {
@@ -601,7 +624,9 @@ onFileSelect(event) {
 		  {
 			if(typeof(resultData["name"]) !== "undefined" && resultData["name"] !== null && resultData["name"] !== "")
 			{
-			  this.comment[type] = this.apiUrl + resultData["name"];
+				var urlapi = this.apiUrl.replace("/api","");
+
+			  this.comment[type] = urlapi + resultData["name"];
 			console.log(type);	
 			  console.log(this.comment)
 			}

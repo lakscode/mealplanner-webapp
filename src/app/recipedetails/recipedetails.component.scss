@@ -466,3 +466,28 @@ h1 { font-size: 1.5em; margin: 10px; }
     background-color: #fff;
     box-shadow: 0px 15px 20px -10px rgb(0 0 0 / 15%), 0px 1px 4px -2px rgb(0 0 0 / 40%);
 }
+
+.upload-comment
+{
+  margin-left: 20px;
+  height: 36px;
+  background: #ffffff;
+  font-family: "Lora", serif;
+  font-size: 14px;
+  color: #6ebe3b;
+  padding: 0 25px;
+  border: 1px solid #6ebe3b;
+  -webkit-transition: 0.2s all ease-in-out;
+  transition: 0.2s all ease-in-out;
+}
+.upload-comment:hover
+{
+  background: #6ebe3b;
+  color: #ffffff  ;
+}
+
+.comment-label
+{
+  font-weight:normal;
+  font-size:14px;
+}
