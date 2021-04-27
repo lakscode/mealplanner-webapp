@@ -309,32 +309,41 @@
     <div class="comment-form">
         <h3 class="lined">Leave Comment</h3>
     
-        <form action="#" method="post">
-            <div class="row">
+     
+            <!--<div class="row">
                 <div class="col-md-6">
                     <input type="text" name="name" placeholder="Name">
                 </div>
                 <div class="col-md-6">
                     <input type="email" name="email" placeholder="Email">
                 </div>
-            </div>
+            </div>-->
             <div class="row">
                 <div class="col-md-12">
-                    <textarea name="comment" id="comment" cols="30" rows="10" placeholder="Message"></textarea>
+                    <textarea [(ngModel)]="comment.message" name="comment" id="comment" cols="30" rows="10" placeholder="Message"></textarea>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-12">
-                    Upload Image
+                <div class="col-md-6">
+                    <button (click)="uploadmedia('image')" class="submit-comment"> Upload Image</button>
+                    <div>
+                        <input id="inputuploadrecipe" hidden type="file" name="inputuploadrecipe" (change)="onFileSelect($event)" />
+                      </div>
+                    
+                      
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    Upload Video
+   
+                <div class="col-md-6">
+                    <button (click)="uploadmedia('video')" class="submit-comment"> Upload Video</button>
                 </div>
+
+                <div class="col-12">
+                    <button (click)="submitcomment()" class="submit-comment">Submit</button>
+                </div>
+
             </div>
-            <button class="submit-comment">Submit</button>
-        </form>
+           
+       
     </div>
     
     

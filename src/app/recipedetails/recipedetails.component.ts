@@ -9,6 +9,8 @@ import { environment } from './../../environments/environment';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { constants } from './../jsonfiles/constants';
+import { HttpHeaders } from '@angular/common/http';
+import { env } from 'process';
 
 @Component({
 	selector: 'app-recipedetails',
@@ -37,11 +39,17 @@ listParams: any;
 updated: any;
 setFav: boolean = false;
 showRate: boolean = false;
+commentsList:  Array<any> = [];
+comment: any = {};
+apiUrl: any = "";
 	constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
 	
 	}
 
 	ngOnInit() {
+		this.apiUrl = environment.apiUrl;
+		this.commentsList= [];
+		this.comment = {"userid":"", "message":"", "image":"", "video":"", "status":"0", "created_time": new Date()};
 		this.listParams = null;
 		this.updated = 0;
 		this.showRate  = false;
@@ -54,14 +62,18 @@ showRate: boolean = false;
 		this.routeParams = {};
 		this.route.params.pipe(takeUntil(this.onDestroy$)).subscribe(params => {
 	 //  console.log(params);   
-	   this.routeParams = params;     
-	   if (typeof (this.routeParams.id) !== "undefined") {
-		 console.log(this.routeParams.id);
-	   }    
-		 
+		this.routeParams = params;     
+		if (typeof (this.routeParams.id) !== "undefined") {
+			console.log(this.routeParams.id);
+		}  
+
+		this.loadComments();
 		console.log(this.routeParams);
+		
 		this.loadRecipe(this.routeParams.id);
+		
 		this.getTotalRating();
+
 		}); 
 		this.currentUser =this.helpService.getCurrentUser();
 		if(this.currentUser !== null)
@@ -71,6 +83,7 @@ showRate: boolean = false;
 		else if( this.currentUser["username"] !== "")
 		this.currentUser["displayname"]  = this.currentUser["username"];
 		console.log(this.currentUser);
+		this.comment['userid'] = this.currentUser["id"];
 		this.getFavouriteStatus();
 		this.getRating();
 		}
@@ -500,6 +513,113 @@ newRecipe()
 		this.router.navigate(['recipesubmit', {'draft':this.routeParams.id}]);
 
 }
+
+/************ comments functions  */
+loadComments()
+{
+	console.log("loadComments");
+	var params = {};
+	params["recipeid"] = this.routeParams.id;
+	console.log(params);
+	var res =   this.dbService.getDataByTable("comments", params).subscribe(rData => setTimeout(() => {
+	  console.log(rData);     
+	  if(rData !== null)
+	  {
+	  }
+	}));
+
+
+}
+submitcomment()
+{
+	console.log(this.comment);
+	var params = {};
+	params["recipeid"] = this.routeParams.id;
+	params["userid"] = this.currentUser["id"];
+	params["message"] = this.comment["message"];
+	params["image"] = this.comment["image"];
+	params["video"] = this.comment["video"];
+
+	console.log(JSON.stringify(params));
+
+	var res =   this.dbService.postDataByTable("comments", params).subscribe(rData => setTimeout(() => {
+	  console.log(rData);     
+	  if(rData !== null)
+	  {
+	  }
+	}));
+
+}
+uploadmedia(type)
+{
+	this.comment["uploadtype"]  = type;
+	this.fileupload();
+}
+fileupload()
+{
+  var obj = document.getElementById('inputuploadrecipe');
+  if(obj !== null)
+  obj.click();
+}
+onFileSelect(event) {
+
+	var type = "image";
+	if(typeof(this.comment["uploadtype"] ) !== "undefined" && this.comment["uploadtype"]  !== "")
+	{
+		type = this.comment["uploadtype"] ;
+
+	}
+
+  if (event.target.files.length > 0) {
+	const file = event.target.files[0];
+	this.getBase64(file).then(
+	  data => {
+	//	console.log(data);
+
+
+		var options = {
+		  headers : new HttpHeaders({"Content-Type": "application/json"})
+		  };
+
+
+	//	this.comment.image = data.toString();
+		
+
+		var imgData = data.toString().replace("data:image/jpeg;base64,","");
+		var params = {};
+		
+		if(type !== "")
+		params[type]= data.toString();
+		else
+		params["image"]= data.toString();
+
+		params["name"]= this.currentUser["id"] + "_" + new Date().getTime() + "_"  + file.name;
+		console.log(JSON.stringify(params));
+		this.dbService.uploadMedia(params).subscribe(resultData => setTimeout(() => {
+		  console.log(resultData);
+		  if(typeof(resultData) !== "undefined" && resultData !== null)
+		  {
+			if(typeof(resultData["name"]) !== "undefined" && resultData["name"] !== null && resultData["name"] !== "")
+			{
+			  this.comment[type] = this.apiUrl + resultData["name"];
+			console.log(type);	
+			  console.log(this.comment)
+			}
+		  }
+		}));
+	});
+  }
+}
+
+getBase64(file) {
+  return new Promise((resolve, reject) => {
+	const reader = new FileReader();
+	reader.readAsDataURL(file);
+	reader.onload = () => resolve(reader.result);
+	reader.onerror = error => reject(error);
+  });
+}
+
 
 }
 

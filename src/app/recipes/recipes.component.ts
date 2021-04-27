@@ -125,39 +125,33 @@ export class RecipesComponent implements OnInit {
 	  this.searchProps();
 	 }); 
 
-//this.loadRecipes()
+
 	
 	}
 
-	loadTempRecipes()
-    {
-      this.recipesList.push({"title":"pasto pizza with cheesey dip", "image":"assets/images/temp-images/listing-1.jpg","rating":"(4.1 / 5)", "description":"Nam ornare arcu turpis, nec congues with us     <br/>Curabitur quis euismod mauris. Nulls<br/>eget semper vulputate.", "author":"Peter Stiles", "created_at":"23/10/2015"});
-
-      this.recipesList.push({"title":"pasto pizza with juicy dip", "image":"assets/images/temp-images/listing-2.jpg","rating":"(4.1 / 5)", "description":"Nam ornare arcu turpis, nec congues with us     <br/>Curabitur quis euismod mauris. Nulls<br/>eget semper vulputate.", "author":"Peter Stiles", "created_at":"23/10/2015"});
 
 
-
-      this.recipesList.push({"title":"pasto pizza with extra topping", "image":"assets/images/temp-images/listing-3.jpg","rating":"(4.1 / 5)", "description":"Nam ornare arcu turpis, nec congues with us     <br/>Curabitur quis euismod mauris. Nulls<br/>eget semper vulputate.", "author":"Peter Stiles", "created_at":"23/10/2015"});
-
-
-	  this.recipesList.push({"title":"pasto pizza with extra topping", "image":"assets/images/temp-images/listing-4.jpg","rating":"(4.1 / 5)", "description":"Nam ornare arcu turpis, nec congues with us     <br/>Curabitur quis euismod mauris. Nulls<br/>eget semper vulputate.", "author":"Peter Stiles", "created_at":"23/10/2015"});
-
-	  this.recipesList.push({"title":"pasto pizza with juicy dip", "image":"assets/images/temp-images/listing-2.jpg","rating":"(4.1 / 5)", "description":"Nam ornare arcu turpis, nec congues with us     <br/>Curabitur quis euismod mauris. Nulls<br/>eget semper vulputate.", "author":"Peter Stiles", "created_at":"23/10/2015"});
-
-      this.recipesList.push({"title":"pasto pizza with extra topping", "image":"assets/images/temp-images/listing-3.jpg","rating":"(4.1 / 5)", "description":"Nam ornare arcu turpis, nec congues with us     <br/>Curabitur quis euismod mauris. Nulls<br/>eget semper vulputate.", "author":"Peter Stiles", "created_at":"23/10/2015"});
-
-    }
-
-	loadRecipes()
+	loadRecipes(limitstart = 0, limitCount = 10)
 	{
 	  this.recipesList1 = [];
-	  this.recipesList2 = [];
+	
+	  
 	// this.recipes = recipesList;
-	 var params = {"limit": "100"};
+	 var params = {"limit": "10"};
    //  params["caloriesfrom"] = this.searchparam.range.lower;
 	// params["caloriesto"] = this.searchparam.range.upper;
 	 console.log(this.searchparam);
-	
+		if( limitstart !== 0)
+		{
+		params["limitfrom"] = limitstart;
+		delete params["limit"];
+		}
+		if( limitCount !== 10)
+		{
+			params["limitto"] = limitCount;
+			delete params["limit"];
+		}
+
 	  if(typeof(this.routeParams["dietLabels"]) !== "undefined" && this.routeParams["dietLabels"] !== null && this.routeParams["dietLabels"] !== "")
 	  {
 		params["content"] = this.routeParams["dietLabels"];
@@ -169,21 +163,23 @@ export class RecipesComponent implements OnInit {
 	 var res =   this.dbService.getDatabyFields("recipes", params).subscribe(invData => setTimeout(() => {
   
 	  console.log(invData);
-  
+	  this.ratingIds ="";
 	  if(invData !== null && typeof(invData["body"]) !== "undefined" && invData["body"] !== null && invData["body"]["length"] > 0)
 		{
 		  this.recipesList1 = [];
-
+		  this.displayList =[];
 		  for(let i=0; i < invData["body"]["length"] ; i++)
 		  {
 			this.recipesList1.push(invData["body"][i]);
+			this.displayList.push(invData["body"][i]);
 			this.ratingIds += invData["body"][i]["id"] + ",";
 		  }
 		  this.totalPage = this.recipesList1["length"] /10;
 		  this.counter(this.totalPage);
 		  console.log(this.recipesList1);
 		 
-		  this.getDisplayList();
+		  //this.getDisplayList();
+		  window.scrollTo(0, 0);
 		  this.loadRatings();
 		}
 	  }
@@ -207,7 +203,7 @@ export class RecipesComponent implements OnInit {
 	nextPage()
 	{
 		
-		if(this.page_num > 0 && this.page_num < this.totalPage-1)
+		if(this.page_num > 0 && this.page_num < 9)
 		{
 			this.page_num += 1;
 		}
@@ -224,25 +220,28 @@ export class RecipesComponent implements OnInit {
 	{
 		console.log(this.recipesList1);
 		console.log(this.page_num);
-		this.displayList=[];
+	//	this.displayList=[];
 		var startIndex= this.page_num*10;
 		var endIndex = 10;
 
-		if(startIndex + endIndex > this.recipesList1["length"])
+	/*	if(startIndex + endIndex > this.recipesList1["length"])
 		{
 			endIndex = this.recipesList1["length"]-startIndex;
 		}
-
+	*/
 		console.log(startIndex);
 		console.log(endIndex);
-endIndex = startIndex+ endIndex;
+//endIndex = startIndex+ endIndex;
+		this.loadRecipes(startIndex, endIndex);
+	/*
 		for(let i=startIndex; i < endIndex; i++)
 		{
 		this.displayList.push(this.recipesList1[i]);
 		
 		}
+		*/
 		console.log(this.displayList);
-		window.scrollTo(0, 0);
+	//
 	}
 
 	loadRatings()

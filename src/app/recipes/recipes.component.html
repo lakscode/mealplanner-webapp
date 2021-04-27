@@ -136,7 +136,7 @@
                     </div>
                     <h2>Recipes</h2>
 
-                    <ul class="pagination" *ngIf="totalPage >= 10">
+                    <ul class="pagination"">
                         <li (click)="currentPage(0)" class="">
                             <a href="javascript:void(0)">
                                 <i class="fa fa-angle-double-left"></i>
@@ -148,7 +148,7 @@
                             </a>
                         </li>
                         
-                        <li (click)="currentPage(i)" [ngClass]="i == page_num?'current':''" *ngFor='let in of counter(totalPage) ;let i = index'>
+                        <li (click)="currentPage(i)" [ngClass]="i == page_num?'current':''" *ngFor='let in of counter(10) ;let i = index'>
                             <a href="javascript:void(0)">{{i+1}}</a>
                         </li>
                         <li (click)="nextPage()" class="">
@@ -156,7 +156,7 @@
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         </li>
-                        <li (click)="currentPage(totalPage-1)" class="">
+                        <li (click)="currentPage(9)" class="">
                             <a href="javascript:void(0)">
                                 <i class="fa fa-angle-double-right"></i>
                             </a>

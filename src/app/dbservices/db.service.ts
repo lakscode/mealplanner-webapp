@@ -227,5 +227,16 @@ resettoken(input){
 		return this.httpService.post(tempUrl, JSON.stringify(input), options).pipe(
 			map((res) => res)).pipe(share());
 	}
-
+	uploadMedia(input)
+	{
+		var tempUrl = this.apiUrl + "/uploadMedia.php"; 
+		
+		//	  console.log(tempUrl);
+		   var options = {
+			   headers : new HttpHeaders({"Content-Type": "application/json"})
+			   };
+		 
+		   return this.httpService.post(tempUrl, JSON.stringify(input), options).pipe(
+			   map((res) => res)).pipe(share());
+	}
 }

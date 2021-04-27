@@ -4496,6 +4496,15 @@ div.widget-measurements .default-btn {
 .recipe-comments .comment .reply-button:hover {
   color: #c1452b;
 }
+
+
+.comment-form
+{
+	    background: #FFF;
+    padding: 25px;
+  color: #000000;
+	 font-size: 16px;
+}
 .comment-form form {
   background-color: #ffffff;
   padding: 25px;
@@ -4541,15 +4550,11 @@ div.widget-measurements .default-btn {
 }
 .comment-form textarea {
   margin-bottom: 40px;
-  background-color: transparent;
   display: block;
-  line-height: 50px;
-  overflow: hidden;
-  resize: none;
-  background-image: linear-gradient(#ffffff 49px, #e7e3e1 50px);
-  background-size: 100% 50px;
+  line-height: 30px;
+ 
   height: 100px;
-  background-attachment: scroll;
+ border: 1px solid #ccc;
 }
 .comment-form button {
   height: 42px;
