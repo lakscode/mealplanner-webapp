@@ -10,6 +10,7 @@ import { constants } from './../../jsonfiles/constants';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { HttpHeaders } from '@angular/common/http';
+import { parse } from 'querystring';
 @Component({
 	selector: 'app-recipesubmit',
 	templateUrl: './recipesubmit.component.html',
@@ -26,12 +27,13 @@ export class RecipesubmitComponent implements OnInit {
 	ingredients: Array<any> =[];
 	currentUser: any;
 	apiUrl: any = "";
+	ispublic: boolean = false;
 	constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
 	
 	}
 
 	ngOnInit() {
-
+		this.ispublic = false;
 		this.apiUrl = environment.apiUrl;
 		this.currentUser =this.helpService.getCurrentUser();
 		if(this.currentUser !== null)
@@ -221,8 +223,134 @@ getNutrients(item)
 	var res =   this.dbService.getLocalData(apiURL).subscribe(recipeData => setTimeout(() => {
 		console.log(recipeData);
 		item["nutrients"] = recipeData;
+		this.formatIngredients();
 	}));
 
+}
+cons_Nutrients: any= {};
+total_calories: any = 0;
+total_weight: any = 0;
+labels: any = {};
+formatIngredients()
+{
+	console.log(this.ingredients);
+	var temp = "";
+	var totalNutrients = {};
+	this.cons_Nutrients= {};
+	this.total_calories = 0;
+	this.total_weight = 0;
+	for(let i=0; i < this.ingredients.length; i++)
+	{
+		temp += this.ingredients[i]["text"] + "~";
+		if(typeof(this.ingredients[i]["nutrients"]) !== "undefined")
+		this.consolidateNutrients(this.ingredients[i]["nutrients"]);
+		this.formatLabels(this.ingredients[i]["nutrients"]);
+	}
+	if(temp !== '')
+	temp=  temp.slice(0, -1);
+
+	this.searchRes["ingredientLines"] = temp;
+	this.searchRes["totalNutrients"] = JSON.stringify(this.cons_Nutrients);
+	this.searchRes["calories"] = this.total_calories;
+}
+
+formatLabels(item)
+{
+	if(typeof(item) !== "undefined" && item !== null)
+	{
+	
+	if(typeof(item["cautions"]) !== "undefined" && item['cautions'] !== null && item['cautions'] !== "")
+	{
+		var cautions  = item["cautions"]
+		if(typeof(this.labels["cautions"]) == "undefined")
+		{
+			this.labels["cautions"] = cautions.join("~");
+		}
+		else
+		{
+			for(let c=0; c < cautions.length; c++)
+			{
+				if(this.labels["cautions"].indexOf(cautions[c]) == -1)
+				{
+					this.labels["cautions"] += "~" + cautions[c];
+				}
+			}
+		}
+		this.searchRes["cautions"] = this.labels["cautions"];
+	}
+	if(typeof(item["dietLabels"]) !== "undefined" && item['dietLabels'] !== null && item['dietLabels'] !==  "")
+	{
+		var tDiet  = item["dietLabels"];
+		if(typeof(this.labels["dietLabels"]) == "undefined")
+		{
+			this.labels["dietLabels"] = tDiet.join("~");
+		}
+		else
+		{
+			for(let c=0; c < tDiet.length; c++)
+			{
+				if(this.labels["dietLabels"].indexOf(tDiet[c]) == -1)
+				{
+					this.labels["dietLabels"] += "~" + tDiet[c];
+				}
+			}
+		}
+		this.searchRes["dietLabels"] = this.labels["dietLabels"];
+	}
+	if(typeof(item["healthLabels"]) !== "undefined" && item['healthLabels'] !== null && item['healthLabels'] !== "")
+	{
+		var tlabel2  = item["healthLabels"];
+		if(typeof(this.labels["healthLabels"]) == "undefined")
+		{
+			this.labels["healthLabels"] = tlabel2.join("~");
+		}
+		else
+		{
+			for(let c=0; c < tlabel2.length; c++)
+			{
+				if(this.labels["healthLabels"].indexOf(tlabel2[c]) == -1)
+				{
+					this.labels["healthLabels"] += "~" + tlabel2[c];
+				}
+			}
+		}
+		this.searchRes["healthLabels"] = this.labels["healthLabels"];
+	}
+	console.log(this.labels);
+	}
+}
+consolidateNutrients(item)
+{
+	if(typeof(item["totalWeight"]) !== "undefined" && item['totalWeight'] !== null)
+	{
+	this.total_weight  += item["totalWeight"];
+	}
+
+	if(typeof(item["calories"]) !== "undefined" && item['calories'] !== null)
+	{
+	this.total_calories  += item["calories"];
+	}
+	if(typeof(item["totalNutrients"]) !== "undefined" && item['totalNutrients'] !== null)
+	{
+	var obj = item["totalNutrients"];
+
+	if(item)
+		{
+			for (let x in obj) {
+			
+				if(typeof(this.cons_Nutrients[x]) == "undefined")
+				{
+					this.cons_Nutrients[x] = obj[x];
+				}
+				else
+				{
+					this.cons_Nutrients[x]['quantity'] = parseFloat(this.cons_Nutrients[x]['quantity']) + obj[x]["quantity"];
+				}
+			}
+		
+		}
+		console.log(this.cons_Nutrients); 
+	}
 }
 addNutrients()
 {
@@ -234,16 +362,38 @@ autosave()
 	console.log("autosave");
 	console.log(this.searchRes);
 	var params = {};
-	var paramAdded = false;
-	if(this.searchRes.label !== "")
-	{
 	
-		params["label"] = this.searchRes.label;
-		paramAdded = true;
-		
-	}
-	if(paramAdded)
+	this.searchRes.status = 0;
+	params["status"] =0;
+
+	if(this.ispublic)
 	{
+		params["status"] =1;
+		this.searchRes.status = 1;
+	}
+	if(typeof(this.searchRes["ingredientLines"]) !== "undefined" && this.searchRes["ingredientLines"] !== "")
+	{
+		params["ingredientLines"] =this.searchRes["ingredientLines"];
+	}
+	
+	if(this.searchRes.label !== "")
+	{	
+		params["label"] = this.searchRes.label;
+	}
+	if(typeof(this.searchRes['dietLabels']) !== "undefined"  &&  this.searchRes["dietLabels"] !== "")
+	{
+		params["dietLabels"] =this.searchRes["dietLabels"];
+	}
+	if(typeof(this.searchRes['healthLabels']) !== "undefined"  &&  this.searchRes["healthLabels"] !== "")
+	{
+		params["healthLabels"] =this.searchRes["healthLabels"];
+	}
+
+	if(typeof(this.searchRes['totalNutrients']) !== "undefined"  &&  this.searchRes["totalNutrients"] !== "")
+	{
+		params["totalNutrients"] =this.searchRes["totalNutrients"];
+	}
+	
 		if(typeof(this.searchRes.id) !== "undefined"  && this.searchRes.id !== "")
 		{
 			console.log("updating");
@@ -272,7 +422,7 @@ autosave()
 				}
 			}));
 		}
-	}
+	
 
 }
 
