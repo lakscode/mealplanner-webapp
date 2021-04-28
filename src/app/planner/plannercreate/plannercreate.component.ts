@@ -198,7 +198,7 @@ this.loadColorCodes();
 	  
 		this.ratingIds = "";
 	// this.recipes = recipesList;
-	  var params = {"limit": "50"}; //{"limit": "10"};
+	  var params = {"limit": "30"}; //{"limit": "10"};
    //  params["caloriesfrom"] = this.searchparam.range.lower;
 	// params["caloriesto"] = this.searchparam.range.upper;
 	// console.log(this.searchparam);
@@ -222,13 +222,25 @@ this.loadColorCodes();
 	 params["returnfields"] = " id, label, image, healthLabels,ingredients, s_instructions, dietLabels, totalNutrients, digest,calories,s_instructions ";
 	 if(typeof(this.filtersParams.dietlabels) !== "undefined" && this.filtersParams.dietlabels  !== "")
 	 {
-	  params["dietLabels"] = this.filtersParams.dietlabels
+	  params["dietLabels"] = this.filtersParams.dietlabels;
 	 } 
   
 	 if(typeof(this.filtersParams.healthlabels ) !== "undefined" && this.filtersParams.healthlabels !== "")
 	 {
-	  params["healthLabels"] = this.filtersParams.healthlabels
+	  params["healthLabels"] = this.filtersParams.healthlabels;
 	 } 
+
+
+	 if(typeof(this.filtersParams.mineralsquery ) !== "undefined" && this.filtersParams.mineralsquery !== "")
+	 {
+	  params["totalNutrients"] = this.filtersParams.mineralsquery;
+	 }
+
+	 if(typeof(this.filtersParams.calories ) !== "undefined" && this.filtersParams.calories !== "")
+	 {
+	  params["calories"] = this.filtersParams.calories;
+	 }  
+	  
 	  
 	  console.log(JSON.stringify(params));
 	  this.calculateCaloryFlag = false;
@@ -373,7 +385,7 @@ this.loadColorCodes();
 	   this.ratingIds = this.ratingIds.substring(0, this.ratingIds.length-1);
 	  }
 	 
-		var params = {"limit": 50};
+		var params = {"limit": 30};
 	   
 		params["query"] = "SELECT count(rating) as totalcount, sum(rating) as totalrating, recipeid FROM `rating` where recipeid in (" + this.ratingIds + ") group by recipeid";
 		var res =   this.dbService.getDatabyTablebyQuery("rating", params).subscribe(invData => setTimeout(() => {
@@ -1295,6 +1307,11 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 	searchFilters()
 	{
 		var dietlabels = "";
+		console.log(this.dietLabelsList);
+		console.log(this.searchparam.calories);
+		if(this.searchparam.calories !== ""){
+		 this.filtersParams["calories"] = this.searchparam.calories;
+		}
 		for(let m=0; m <this.dietLabelsList.length; m++)
 		{
 			if(this.dietLabelsList[m]["selected"])
@@ -1332,11 +1349,11 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
               console.log(item);
               if(typeof(item["min"]) !== "undefined" && item["min"] !== "" && item["min"] >0)
               {
-                mQuery += " " + item["name"]['label'].toLowerCase() + " >= " + item["min"] + " AND ";
+                mQuery += " " + item["name"].toLowerCase() + " >= " + item["min"] + " AND ";
               }
               if(typeof(item["max"]) !== "undefined" && item["max"] !== "" && item["max"] >0)
               {
-                mQuery += " " + item["name"]['label'].toLowerCase() + " <= " + item["max"] + " AND ";
+                mQuery += " " + item["name"].toLowerCase() + " <= " + item["max"] + " AND ";
               }
 
             	this.filtersParams["minerals"] += item["name"]['label'] + "~";
