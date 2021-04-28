@@ -240,7 +240,7 @@ this.loadColorCodes();
 
 	 if(typeof(this.filtersParams.mineralsquery ) !== "undefined" && this.filtersParams.mineralsquery !== "")
 	 {
-	  params["totalNutrients"] = this.filtersParams.mineralsquery;
+	  params["nutrients"] = this.filtersParams.mineralsquery;
 	 }
 
 	 if(typeof(this.filtersParams.calories ) !== "undefined" && this.filtersParams.calories !== "")
