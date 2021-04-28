@@ -9,6 +9,7 @@ import { environment } from './../../../environments/environment';
 import { constants } from './../../jsonfiles/constants';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { HttpHeaders } from '@angular/common/http';
 @Component({
 	selector: 'app-recipesubmit',
 	templateUrl: './recipesubmit.component.html',
@@ -24,12 +25,14 @@ export class RecipesubmitComponent implements OnInit {
 	mineralsList: Array<any> =[];
 	ingredients: Array<any> =[];
 	currentUser: any;
+	apiUrl: any = "";
 	constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
 	
 	}
 
 	ngOnInit() {
 
+		this.apiUrl = environment.apiUrl;
 		this.currentUser =this.helpService.getCurrentUser();
 		if(this.currentUser !== null)
 		{
@@ -272,6 +275,84 @@ autosave()
 	}
 
 }
+
+/*********** imageand video upload  */
+
+
+uploadtype: any= "";
+uploadmedia(type)
+{
+	this.uploadtype  = type;
+	this.fileupload();
+}
+fileupload()
+{
+  var obj = document.getElementById('inputuploadrecipe');
+  if(obj !== null)
+  obj.click();
+}
+onFileSelect(event) {
+
+	var type = "image";
+	if(typeof(this.uploadtype) !== "undefined" && this.uploadtype  !== "")
+	{
+		type = this.uploadtype ;
+
+	}
+
+  if (event.target.files.length > 0) {
+	const file = event.target.files[0];
+	this.getBase64(file).then(
+	  data => {
+	//	console.log(data);
+
+
+		var options = {
+		  headers : new HttpHeaders({"Content-Type": "application/json"})
+		  };
+
+
+	//	this.comment.image = data.toString();
+		
+
+		var imgData = data.toString().replace("data:image/jpeg;base64,","");
+		var params = {};
+		
+		if(type !== "")
+		params[type]= data.toString();
+		else
+		params["image"]= data.toString();
+
+		params["name"]= this.currentUser["id"] + "_" + new Date().getTime() + "_"  + file.name;
+		console.log(JSON.stringify(params));
+		this.dbService.uploadRecipe(params).subscribe(resultData => setTimeout(() => {
+		  console.log(resultData);
+		  if(typeof(resultData) !== "undefined" && resultData !== null)
+		  {
+			if(typeof(resultData["name"]) !== "undefined" && resultData["name"] !== null && resultData["name"] !== "")
+			{
+				var urlapi = this.apiUrl.replace("/api","");
+
+			  this.searchRes[type] = urlapi + resultData["name"];
+			console.log(type);	
+			  console.log(this.searchRes)
+			}
+		  }
+		}));
+	});
+  }
+}
+
+getBase64(file) {
+  return new Promise((resolve, reject) => {
+	const reader = new FileReader();
+	reader.readAsDataURL(file);
+	reader.onload = () => resolve(reader.result);
+	reader.onerror = error => reject(error);
+  });
+}
+
+
 }
 
 	

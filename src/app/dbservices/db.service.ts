@@ -239,4 +239,17 @@ resettoken(input){
 		   return this.httpService.post(tempUrl, JSON.stringify(input), options).pipe(
 			   map((res) => res)).pipe(share());
 	}
+
+	uploadRecipe(input)
+	{
+		var tempUrl = this.apiUrl + "/uploadRecipes.php"; 
+		
+		//	  console.log(tempUrl);
+		   var options = {
+			   headers : new HttpHeaders({"Content-Type": "application/json"})
+			   };
+		 
+		   return this.httpService.post(tempUrl, JSON.stringify(input), options).pipe(
+			   map((res) => res)).pipe(share());
+	}
 }
