@@ -193,6 +193,13 @@ this.loadColorCodes();
 	//	console.log(this.searchparam);
 	
 	}
+
+	clearFilters(){
+	this.filtersOpt = false;
+	this.filtersParams = [];
+	this.loadRecipes();
+
+	}
 	loadRecipes(idslist = "", allFlag = true)
 	{
 	  
