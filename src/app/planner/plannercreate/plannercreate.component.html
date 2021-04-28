@@ -172,7 +172,7 @@
                                     <a class="hmp-link--no-style" style="cursor: -webkit-grabbing; cursor: grabbing;"> 
                                 <div class="recipe-content recipe-content--draggable card-body">
                                     <div class="recipe-image-container mobile" id="imagep_{{page_num}}_{{k}}">
-                                            <img class="recipe-image"
+                                            <img  class="recipe-image"
                                             id="picture_{{page_num}}_{{k}}"
                                             src="{{formatImage(recipe.image, 's')}}"
                                             alt="Recipe image"  draggable="true" 
@@ -251,6 +251,16 @@
         <div class="meal-plans-content">
              <div class="submit-recipe-form" style="text-align:left; padding-bottom:10px;  background-color: #f8f6f5;">
                 <div style='text-align:right;'>
+                    <!--<label class="container" style=" text-align: left;
+                    display: inline-block;
+                    width: 155px;
+                    font-family: 'Lato', sans-serif;
+                    font-weight: 400;
+                    font-size: 16px;">Show Images
+                        <input [(ngModel)] = 'showImages' type="checkbox">
+                        <span class="checkmark"></span>
+                    </label>-->
+
                     <label class="container" style=" text-align: left;
                     display: inline-block;
                     width: 155px;
@@ -308,7 +318,7 @@
                                                 <div class="recipe-image-card-content card-body">
                                                     <div class="image-card-container">
                                                         <div class="recipe-remove" (click)="removeRecipe(r, c)"><i class="fa fa-trash" aria-hidden="true"></i></div>
-                                                        <div class="recipe-name-box">{{meal.recipe.label}}</div><img
+                                                        <div class="recipe-name-box">{{meal.recipe.label}}</div><img *ngIf="showImages"
                                                             class="recipe-image-card recipe-image-card__img open-fist-cursor"
                                                             style="opacity: 1;" id="picture-5c252abdb834861eec5388f3"
                                                             src="{{meal.recipe.image}}"
@@ -335,9 +345,10 @@
                                 </div>
                                 <div style="min-height:130px" *ngIf="!meal.recipe" id="drop-{{r}}-{{c}}"  (drop)="drop($event, r, c)" (dragover)="allowDrop($event)">                             
                                     <div id="image-placeholder-{{r}}-{{c}}" class="recipe-image-placeholder card">
-                                    <div  class="recipe-image-card-content  card-body"><img id="target-{{r}}-{{c}}"
+                                    <div  class="recipe-image-card-content  card-body"><img  *ngIf="showImages" id="target-{{r}}-{{c}}"
                                             class="recipe-card-placeholder-image" src="{{addRecipeImage}}"
-                                            alt="Recipe Image Card"></div>
+                                            alt="Recipe Image Card">
+                                        <span *ngIf="!showImages">Add Image</span></div>
                                 </div>
                                 <div class="calories-slot-sum">0 Calories</div>
                             </div>
@@ -371,7 +382,7 @@
                         {{calculateCalory(mealtype, d)}}</div>
                     </div>
                     <div [ngClass]="showNutrients?'meal-plan-col col mealplan-col':'meal-plan-col col mealplan-col20'">
-                        
+
                     </div>
                 </div>
             </div>

@@ -29,7 +29,6 @@
                                   <span class="price">
                                       <span *ngIf="package.payment !== 'FREE'" class="sign">$</span>
                                       <span class="currency">{{package.payment}}</span>
-                                      <!--<span class="cent">.99</span>-->
                                       <span *ngIf="package.payment !== 'FREE'" class="month">/MON</span>
                                   </span>
                               </div>
@@ -38,11 +37,6 @@
 
                           <div class="generic_feature_list">
                             <ul>
-                              <!--  <li><span>2GB</span> Bandwidth</li>
-                                  <li><span>150GB</span> Storage</li>
-                                  <li><span>12</span> Accounts</li>
-                                  <li><span>7</span> Host Domain</li>
-                                  <li><span>24/7</span> Support</li>-->
                                   <li *ngFor="let option of package.options; let j=index;">{{option}}</li>
                               </ul>
                           </div>

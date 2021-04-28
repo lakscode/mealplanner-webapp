@@ -554,7 +554,7 @@ SendEmailPasswordReset(email,data) {
 					if(data == null)
 					data = {};
 					// var apiUrl = window.location.origin;
-					var resetLink = window.location.origin + "/resetpassword;token=" + encodeURIComponent(temp) + ";email=" + email;
+					var resetLink = environment.appUrl + "/resetpassword;token=" + encodeURIComponent(temp) + ";email=" + email;
 					data['resetLink'] = resetLink;
 					data['email'] = email;
 					var IemailSubject = this.FormatEmailContent(data.emailSubject, data);

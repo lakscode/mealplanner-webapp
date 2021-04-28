@@ -56,6 +56,7 @@ export class PlannercreateComponent implements OnInit {
 	filtersParams : any = {};
 	nutrientDbFields : Array<any> = [];
 	showNutrients: boolean = true;
+	showImages: boolean = true;
 	constructor(private router: Router, private route: ActivatedRoute, private modalService: ModalService, private pdfService: PDFService, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
 	
 	}
