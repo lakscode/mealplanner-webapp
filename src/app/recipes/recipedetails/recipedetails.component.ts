@@ -1,14 +1,14 @@
 import { Component, OnInit,OnDestroy  } from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
-import { UserService } from '../services/user.service';
+import { UserService } from '../../services/user.service';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { DBService } from '../dbservices/db.service';
-import { HelpService } from '../services/help.service';
+import { DBService } from '../../dbservices/db.service';
+import { HelpService } from '../../services/help.service';
 
-import { environment } from './../../environments/environment';
+import { environment } from './../../../environments/environment';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-import { constants } from './../jsonfiles/constants';
+import { constants } from './../../jsonfiles/constants';
 import { HttpHeaders } from '@angular/common/http';
 import { env } from 'process';
 

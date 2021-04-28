@@ -1,23 +1,23 @@
 import { Component, OnInit,OnDestroy  } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd } from "@angular/router";
-import { UserService } from '../services/user.service';
+import { UserService } from '../../services/user.service';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { DBService } from '../dbservices/db.service';
-import { HelpService } from '../services/help.service';
+import { DBService } from '../../dbservices/db.service';
+import { HelpService } from '../../services/help.service';
 
-import { environment } from './../../environments/environment';
+import { environment } from './../../../environments/environment';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import * as $ from 'jquery';
-import { constants } from '../jsonfiles/constants';
+import { constants } from '../../jsonfiles/constants';
 //declare var $: any;
 
 @Component({
-	selector: 'app-recipes',
-	templateUrl: './recipes.component.html',
-	styleUrls: ['./recipes.component.scss']
+	selector: 'app-myrecipes',
+	templateUrl: './myrecipes.component.html',
+	styleUrls: ['./myrecipes.component.scss']
 })
-export class RecipesComponent implements OnInit {
+export class MyRecipesComponent implements OnInit {
 	recipesList: Array<any> = [];
 	recipesList1: Array<any> = [];
 	recipesList2: Array<any> = [];
@@ -108,7 +108,7 @@ export class RecipesComponent implements OnInit {
 		}
 	  this.totalPage = 1;
 	 this.page_num = 0;
-	  this.searchparam = {"q":"", "range":{}}
+	 this.searchProps();
 	
   
 	  this.routeParams = {};
@@ -122,75 +122,14 @@ export class RecipesComponent implements OnInit {
 		  this.searchparam["q"] = this.routeParams.dietLabels;
 		}   
 		console.log(this.routeParams);
-	  this.searchProps();
+	 
 	 }); 
 
 //this.loadRecipes()
 	
 	}
 
-	loadTempRecipes()
-    {
-      this.recipesList.push({"title":"pasto pizza with cheesey dip", "image":"assets/images/temp-images/listing-1.jpg","rating":"(4.1 / 5)", "description":"Nam ornare arcu turpis, nec congues with us     <br/>Curabitur quis euismod mauris. Nulls<br/>eget semper vulputate.", "author":"Peter Stiles", "created_at":"23/10/2015"});
 
-      this.recipesList.push({"title":"pasto pizza with juicy dip", "image":"assets/images/temp-images/listing-2.jpg","rating":"(4.1 / 5)", "description":"Nam ornare arcu turpis, nec congues with us     <br/>Curabitur quis euismod mauris. Nulls<br/>eget semper vulputate.", "author":"Peter Stiles", "created_at":"23/10/2015"});
-
-
-
-      this.recipesList.push({"title":"pasto pizza with extra topping", "image":"assets/images/temp-images/listing-3.jpg","rating":"(4.1 / 5)", "description":"Nam ornare arcu turpis, nec congues with us     <br/>Curabitur quis euismod mauris. Nulls<br/>eget semper vulputate.", "author":"Peter Stiles", "created_at":"23/10/2015"});
-
-
-	  this.recipesList.push({"title":"pasto pizza with extra topping", "image":"assets/images/temp-images/listing-4.jpg","rating":"(4.1 / 5)", "description":"Nam ornare arcu turpis, nec congues with us     <br/>Curabitur quis euismod mauris. Nulls<br/>eget semper vulputate.", "author":"Peter Stiles", "created_at":"23/10/2015"});
-
-	  this.recipesList.push({"title":"pasto pizza with juicy dip", "image":"assets/images/temp-images/listing-2.jpg","rating":"(4.1 / 5)", "description":"Nam ornare arcu turpis, nec congues with us     <br/>Curabitur quis euismod mauris. Nulls<br/>eget semper vulputate.", "author":"Peter Stiles", "created_at":"23/10/2015"});
-
-      this.recipesList.push({"title":"pasto pizza with extra topping", "image":"assets/images/temp-images/listing-3.jpg","rating":"(4.1 / 5)", "description":"Nam ornare arcu turpis, nec congues with us     <br/>Curabitur quis euismod mauris. Nulls<br/>eget semper vulputate.", "author":"Peter Stiles", "created_at":"23/10/2015"});
-
-    }
-
-	loadRecipes()
-	{
-	  this.recipesList1 = [];
-	  this.recipesList2 = [];
-	// this.recipes = recipesList;
-	 var params = {"limit": "100"};
-   //  params["caloriesfrom"] = this.searchparam.range.lower;
-	// params["caloriesto"] = this.searchparam.range.upper;
-	 console.log(this.searchparam);
-	
-	  if(typeof(this.routeParams["dietLabels"]) !== "undefined" && this.routeParams["dietLabels"] !== null && this.routeParams["dietLabels"] !== "")
-	  {
-		params["content"] = this.routeParams["dietLabels"];
-	  }
-  
-	  params["instructions"] = "notempty";
-	  params["returnfields"] = " id, label, image, healthLabels, s_instructions, dietLabels, calories,s_instructions ";
-	  console.log(JSON.stringify(params));
-	 var res =   this.dbService.getDatabyFields("recipes", params).subscribe(invData => setTimeout(() => {
-  
-	  console.log(invData);
-  
-	  if(invData !== null && typeof(invData["body"]) !== "undefined" && invData["body"] !== null && invData["body"]["length"] > 0)
-		{
-		  this.recipesList1 = [];
-
-		  for(let i=0; i < invData["body"]["length"] ; i++)
-		  {
-			this.recipesList1.push(invData["body"][i]);
-			this.ratingIds += invData["body"][i]["id"] + ",";
-		  }
-		  this.totalPage = this.recipesList1["length"] /10;
-		  this.counter(this.totalPage);
-		  console.log(this.recipesList1);
-		 
-		  this.getDisplayList();
-		  this.loadRatings();
-		}
-	  }
-	
-	 ));
-  
-	}
 	counter(i: number) {
 	//	console.log(i);
 		var num = Math.ceil(i);
@@ -353,142 +292,15 @@ endIndex = startIndex+ endIndex;
 
 	console.log('searchProps');
  
-
    var params = {}
-   if(this.searchparam.q)
-   {
-   params["content"] = this.searchparam.q;
-   }
-   if(typeof(this.searchparam.range) !== "undefined")
-   {
-    if(typeof(this.searchparam.range.lower) !== "undefined")
-    {
-      params["caloriesfrom"] = this.searchparam.range.lower;
-    }
-    if(typeof(this.maxcalories) !== "undefined" && this.maxcalories > 0)
-    {
-      params["caloriesto"] = this.maxcalories;
-    }
-    params["instructions"]="notempty";
-   }
 
-   params["returnfields"] = " id, label, image, healthLabels, s_instructions, dietLabels, calories";
 
-	 var dietlabels = "";
-	 for(let m=0; m <this.dietLabelsList.length; m++)
-	 {
-		 if(this.dietLabelsList[m]["selected"])
-		 dietlabels += this.dietLabelsList[m]["name"] + "~";
-	 }
-	 if( dietlabels !== "")
-	 {
-		dietlabels=  dietlabels.slice(0, -1);
-	 }
-
-	 var healthlabels = "";
-	 for(let m=0; m <this.healthlabelsList.length; m++)
-	 {
-		 if(this.healthlabelsList[m]["selected"])
-		 healthlabels += this.healthlabelsList[m]["name"] + "~";
-	 }
-	 if( healthlabels !== "")
-	 {
-		healthlabels=  healthlabels.slice(0, -1);
-	 }
-	
-	 var minerals = "";
-	 var mQuery = "";
-	 for(let m=0; m <this.mineralsLabelsList.length; m++)
-	 {
-		 var item = this.mineralsLabelsList[m];
-		 console.log(item);
-		 if(this.mineralsLabelsList[m]["selected"])
-		 minerals += this.mineralsLabelsList[m]["name"] + "~";
-		 if(typeof(item["min"]) !== "undefined" && item["min"] !== "" && item["min"] >0)
-              {
-                mQuery += " " + item["name"].toLowerCase() + " >= " + item["min"] + " AND ";
-              }
-              if(typeof(item["max"]) !== "undefined" && item["max"] !== "" && item["max"] >0)
-              {
-                mQuery += " " + item["name"].toLowerCase() + " <= " + item["max"] + " AND ";
-              }
-
-	 }
-	 if( minerals !== "")
-	 {
-		minerals=  minerals.slice(0, -1);
-	 }
-
-	 if( mQuery !== "")
-	 {
-		mQuery=  mQuery.slice(0, -4);
-		
-	 }
-	 console.log("mQuery");
-	 console.log(mQuery);
-	var checkMinerals = false;
- 
-   if(typeof(dietlabels) !== "undefined" && dietlabels  !== "")
-   {
-    params["dietLabels"] = dietlabels
-   } 
-
-   if(typeof(healthlabels ) !== "undefined" && healthlabels !== "")
-   {
-    params["healthLabels"] = healthlabels
-   } 
-   if(typeof(minerals ) !== "undefined" && minerals  !== "")
-   {
-    params["totalNutrientsne"]="notempty";
-    params["digestne"]="notempty";
-    checkMinerals = true;
-	console.log(minerals);
-
-   } 
-  
-  // console.log(params);
-  if(mQuery !== "")
-  {
-	  var params1 = {};
-
-	  var query = "select id, label, image, healthLabels, s_instructions, dietLabels, calories from recipes ";
-	  var where = " where totalNutrients != '' AND digest != ''  AND s_instructions != '' " ;
-	  if(this.maxcalories > 0)
-	  where +=  " AND calories >= " + this.maxcalories
-
-	  if(dietlabels !== "")
-	  {
-		  var t = dietlabels.split("~");
-		  for(let i=0; i < t.length; i++)
-		  {
-			  where +=  " AND dietLabels LIKE '%" + t[i] + "%'" 
-		  }
-	  }
-	  if(healthlabels !== "")
-	  {
-		  var t1 = healthlabels.split("~");
-		  for(let i=0; i < t1.length; i++)
-		  {
-			  where +=  " AND healthLabels LIKE '%" + t1[i] + "%'" 
-		  }
-	  }
-
-	  where += " AND id in (select recipeid from nutrients where " + mQuery +  ")";
-
-	  params1["query"] = query + where + " limit 0, 100";
-	  console.log(params1);
-    var res =   this.dbService.getDatabyTablebyQuery("recipes", params1).subscribe(invData => setTimeout(() => {
+	params['created_by'] =  this.currentUser["id"] ;
+	var res =   this.dbService.getDataByTable("myrecipes", params).subscribe(invData => setTimeout(() => {
 		console.log(invData);
 		this.formatResult(invData);
 	  }));
-  }
-  else
-  {
-	var res =   this.dbService.getDatabyFields("recipes", params).subscribe(invData => setTimeout(() => {
-		console.log(invData);
-		this.formatResult(invData);
-	  }));
-  }
+
 		
 	}
 
@@ -521,7 +333,7 @@ endIndex = startIndex+ endIndex;
 	}
 
 	gotoRecipeDetails(id){
-	this.router.navigate(['recipedetails', id]);
+	this.router.navigate(['recipesubmit', {id:id}]);
 	}
 
 	loadNutrientsMaxMin()

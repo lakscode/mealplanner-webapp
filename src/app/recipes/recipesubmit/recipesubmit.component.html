@@ -10,7 +10,7 @@
             <div class="submit-recipe-form">
                 <form action="#" method="post">
                     <label for="title">Recipe Title</label>
-                    <input type="text" name="title" id="title" [(ngModel)]="searchRes.label">
+                    <input type="text" name="title" id="title" (blur)="autosave()" [(ngModel)]="searchRes.label">
                     <br>
                     <label for="short-description">Short Description</label>
                     <textarea class="short-text" name="short-des" id="short-description" cols="30" rows="10"></textarea>

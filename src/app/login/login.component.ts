@@ -65,7 +65,7 @@ export class LoginComponent implements OnInit {
 			}
 			else
 			{
-				this.gotopage('landing1');
+				this.gotopage('landing');
 			}
 			
 		}
@@ -131,7 +131,7 @@ export class LoginComponent implements OnInit {
 			if (this.redirecturl == "")
 			{
 				
-				this.gotopage("landing1");
+				this.gotopage("landing");
 				
 			}
 		

@@ -1,20 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { RecipesubmitRoutingModule } from './recipesubmit-routing.module';
-import { RecipesubmitComponent } from './recipesubmit.component';
+import { RecipesRoutingModule } from './recipes-routing.module';
+import { RecipesComponent } from './recipes.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {SidebarModule } from "../shared/modules"
+import {SidebarModule } from "../../shared/modules"
 @NgModule({
   imports: [
     CommonModule,
-    RecipesubmitRoutingModule,
+    RecipesRoutingModule,
     FlexLayoutModule,
 	FormsModule,
 	ReactiveFormsModule,
   SidebarModule
   ],
-  declarations: [RecipesubmitComponent]
+  declarations: [RecipesComponent]
 })
-export class RecipesubmitModule { }
+export class RecipesModule { }

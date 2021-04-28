@@ -70,7 +70,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 			
 		];
 		this.menuItems1= [
-			{"id":"home", "menu":"Home", "link":"/landing1", "display":displayMenu, "active":false,
+			{"id":"home", "menu":"Home", "link":"/landing", "display":displayMenu, "active":false,
 				"children":
 				[
 					{"id":"howitworks", "menu":"How it works", "link":"/howitworks", "display":displayMenu, "active":false},
@@ -87,6 +87,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
 					{"id":"recipe-list", "menu":"Recipes", "link":"/recipes", "display":displayMenu, "active":false},
 					{"id":"recipe-favourites", "menu":"Favourites", "link":"/favourites", "display":displayMenu, "active":false},
+					{"id":"my-recipes", "menu":"My Recipes", "link":"/myrecipes", "display":displayMenu, "active":false},
 					{"id":"recipe-submit", "menu":"Submit Recipe", "link":"/recipesubmit", "display":displayMenu, "active":false}
 				]
 			},

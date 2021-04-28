@@ -1,12 +1,12 @@
 import { Component, OnInit,OnDestroy  } from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
-import { UserService } from '../services/user.service';
+import { UserService } from '../../services/user.service';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { DBService } from '../dbservices/db.service';
-import { HelpService } from '../services/help.service';
+import { DBService } from '../../dbservices/db.service';
+import { HelpService } from '../../services/help.service';
 
-import { environment } from './../../environments/environment';
-import { constants } from './../jsonfiles/constants';
+import { environment } from './../../../environments/environment';
+import { constants } from './../../jsonfiles/constants';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 @Component({
@@ -23,11 +23,23 @@ export class RecipesubmitComponent implements OnInit {
 	paramMicro: Array<any> =[];
 	mineralsList: Array<any> =[];
 	ingredients: Array<any> =[];
+	currentUser: any;
 	constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
 	
 	}
 
 	ngOnInit() {
+
+		this.currentUser =this.helpService.getCurrentUser();
+		if(this.currentUser !== null)
+		{
+		  if( this.currentUser["firstname"] !== "")
+		  this.currentUser["displayname"] = this.currentUser["firstname"];
+		  else if( this.currentUser["username"] !== "")
+		  this.currentUser["displayname"] = this.currentUser["username"];
+		  console.log( this.currentUser["displayname"]);
+		}
+
 		this.getLabels();
 		this.ingredients = [];
 		this.ingredients.push({"text":""});
@@ -58,6 +70,7 @@ export class RecipesubmitComponent implements OnInit {
 loadRecipe(id)
 {
   console.log("In load Recipe");
+  console.log(id);
   this.loading++;
   console.log(this.loading);
  // if(this.loading ==1)
@@ -73,7 +86,7 @@ loadRecipe(id)
  
  if(this.loading)
   {
-  var res =   this.dbService.getDatabyParam("recipes", params).subscribe(recipeData => setTimeout(() => {
+  var res =   this.dbService.getDataByTable("myrecipes", params).subscribe(recipeData => setTimeout(() => {
 
 	console.log(recipeData);
 	this.searchRes["ingredients"] =[];
@@ -94,7 +107,7 @@ loadRecipe(id)
 			  
 			  var tempDigest = this.searchRes["digest"];
 			  
-			  if(typeof(this.searchRes["digest"]) !== "undefined")
+			  if(typeof(this.searchRes["digest"]) !== "undefined" && this.searchRes["digest"] !== "")
 			  {
 				if (typeof(this.searchRes["digest"]) === 'object')
 				{
@@ -106,7 +119,7 @@ loadRecipe(id)
 				}
 			  }
 			  var tempNutrients = this.searchRes["totalNutrients"];
-			  if(typeof(this.searchRes["totalNutrients"]) !== "undefined")
+			  if(typeof(this.searchRes["totalNutrients"]) !== "undefined" && this.searchRes["totalNutrients"] !== "")
 			  {
 				if (typeof(this.searchRes["totalNutrients"]) === 'object')
 				{
@@ -119,14 +132,17 @@ loadRecipe(id)
 			  }
 			  this.searchRes["digestArr"]  = tempDigest;
 			  this.searchRes['nutrientsArr'] = tempNutrients;
-			  try{
-				  console.log(this.searchRes["ingredients"]);
-				this.searchRes["ingredients"] = JSON.parse(this.searchRes["ingredients"]);
-			  }
-			  catch(error)
+			  if(typeof(this.searchRes["ingredients"]) !== "undefined" && this.searchRes["ingredients"] !== "")
 			  {
-				this.searchRes["ingredients"] = this.searchRes["ingredients"].split("~");
-			  }
+				try{
+					console.log(this.searchRes["ingredients"]);
+					this.searchRes["ingredients"] = JSON.parse(this.searchRes["ingredients"]);
+				}
+				catch(error)
+				{
+					this.searchRes["ingredients"] = this.searchRes["ingredients"].split("~");
+				}
+			 }
 			
 			  this.searchRes["instructions"] = this.searchRes["s_instructions"];
 			 // console.log(this.searchRes["s_instructions"]);
@@ -208,6 +224,53 @@ getNutrients(item)
 addNutrients()
 {
 	this.ingredients.push({"text":""});
+}
+
+autosave()
+{
+	console.log("autosave");
+	console.log(this.searchRes);
+	var params = {};
+	var paramAdded = false;
+	if(this.searchRes.label !== "")
+	{
+	
+		params["label"] = this.searchRes.label;
+		paramAdded = true;
+		
+	}
+	if(paramAdded)
+	{
+		if(typeof(this.searchRes.id) !== "undefined"  && this.searchRes.id !== "")
+		{
+			console.log("updating");
+			params["id"] = this.searchRes.id;
+			params["uri"] = environment.appUrl + "/recipedetails/" + this.searchRes.id;
+			params["url"] = environment.appUrl + "/recipedetails/" + this.searchRes.id;
+			params["created_by"] =  this.currentUser["id"];
+			var res =   this.dbService.updateDataByTable("myrecipes", params).subscribe(recipeData => setTimeout(() => {
+				console.log(recipeData);	
+				this.loadRecipe(this.searchRes.id);
+				
+			}));
+		}
+		else
+		{
+			params["created_by"] =  this.currentUser["id"];
+			params["uri"] = environment.appUrl + "/recipedetails/" + Math.random();
+			params["url"] = environment.appUrl + "/recipedetails/" + Math.random();
+			console.log("adding");
+			var res =   this.dbService.postDataByTable("myrecipes", params).subscribe(recipeData => setTimeout(() => {
+				console.log(recipeData);
+		
+				if(recipeData['inserted_id'] !== "undefined" && recipeData['inserted_id'] !== "")
+				{
+					this.loadRecipe(recipeData['inserted_id']);	
+				}
+			}));
+		}
+	}
+
 }
 }
 

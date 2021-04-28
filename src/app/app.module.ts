@@ -48,10 +48,11 @@ import { FeaturesModule } from './features/features.module';
 
 import { Landing1Module } from './landing1/landing1.module'; 
 
-import { RecipesModule } from './recipes/recipes.module'; 
+import { RecipesModule } from './recipes/recipes/recipes.module'; 
+import { MyRecipesModule } from './recipes/myrecipes/myrecipes.module'; 
 import { FavouritesModule } from './favourites/favourites.module'; 
-import { RecipedetailsModule } from './recipedetails/recipedetails.module'; 
-import { RecipesubmitModule } from './recipesubmit/recipesubmit.module'; 
+import { RecipedetailsModule } from './recipes/recipedetails/recipedetails.module'; 
+import { RecipesubmitModule } from './recipes/recipesubmit/recipesubmit.module'; 
 import { TestimonialsModule } from './testimonials/testimonials.module'; 
 import { PlannerlistModule } from './planner/plannerlist/plannerlist.module'; 
 import { PlannercreateModule } from './planner/plannercreate/plannercreate.module'; 
@@ -101,6 +102,7 @@ import { AdminModule } from './admin/admin.module';
 	HomeModule,
 	FeaturesModule,
 	RecipesModule,
+	MyRecipesModule,
 	FavouritesModule,
 	RecipedetailsModule,
 	RecipesubmitModule,
