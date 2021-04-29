@@ -1295,6 +1295,10 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 		//  console.log(itemday[this.mealTypeList[j]]["ingredientLines"]);
 			if(typeof(itemmeal["recipe"]["ingredients"]) !== "undefined" && itemmeal["recipe"]["ingredients"] !== "")
 		  {
+			  console.log(itemmeal["recipe"]["ingredients"]);
+			
+			  if(itemmeal["recipe"]["ingredients"].length  < 4999)
+			  {
 			var tempA = JSON.parse(itemmeal["recipe"]["ingredients"]);
 		  console.log(tempA);
 		  for(let k=0; k < tempA.length; k++)
@@ -1338,6 +1342,8 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 			}
 		  }
 		}
+		  }
+	
 		  }
 		}
 	  }
