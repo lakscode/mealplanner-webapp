@@ -23,7 +23,7 @@
                             <li style="" *ngFor="let ingredient of ingredients; let i = index;">
                                 <div class="add-fields">
                                     <span class="handler-list ui-sortable-handle"><i class="fa fa-arrows"></i></span>
-                                    <input type="text" name="ingredients{{i}}"  [(ngModel)] = "ingredient.text" (blur)="getNutrients(ingredient)" id="ingredients{{i}}">
+                                    <input type="text" name="ingredients{{i}}"  [(ngModel)] = "ingredient.text" [disabled]="i< existingIngCount" (blur)="getNutrients(ingredient)" id="ingredients{{i}}">
                                     <span class="del-list"><i class="fa fa-trash"></i></span>
                                 </div>
                             </li>
@@ -57,23 +57,17 @@
                             <li style="">
                                 <div class="add-fields">
                                     <span class="handler-list ui-sortable-handle"><i class="fa fa-arrows"></i></span>                                   
-                                    <div style="width:40%" class="selectric-wrapper selectric-advance-selectable"><div class="selectric-select"><select name="cuisine" id="cuisine" class="advance-selectable" tabindex="0">
-                                        <option value="" selected="selected">Select Nutrient</option>
-                                        <option *ngFor="let nutrient of nutrientsList; let n = index" value="{{nutrient}}">{{nutrient}}</option>
-                  
-                                    </select></div></div>
-
-                                    <input type="text" name="nutrients[]" id="nutrients">
-                                    <span class="del-list"><i class="fa fa-trash"></i></span>
+                                    <div class="row" class="selectric-wrapper selectric-advance-selectable">
+                                        <div class="col-4 selectric-select" *ngFor="let nutrient of searchRes['nutrientsArr'] | keyvalue; let n = index">
+                                        <span >{{nutrient['value']['label']}}  {{nutrient['value']['quantity']}} {{nutrient['value']['unit']}}</span>
+                                    </div>
+                                    </div>
                                 </div>
                             </li>
-                            <!--<li style=""><div class="add-fields"> <span class="handler-list"><i class="fa fa-arrows"></i></span>  <input type="text" name="nutrients[]" id="nutrients">  <input type="text" name="nutrients[]" id="nutrients"> <span class="del-list"><i class="fa fa-trash"></i></span></div></li>
-                            <li style=""><div class="add-fields"> <span class="handler-list"><i class="fa fa-arrows"></i></span> <input type="text" name="nutrients[]" id="ingredients"> <input type="text" name="nutrients[]" id="ingredients"> <span class="del-list"><i class="fa fa-trash"></i></span></div></li>-->
+                          
                     
                         </ul>
-                                             <span class="add-button add-nutrient">
-                                                <i class="fa fa-plus"></i>
-                                            </span>
+
                     </fieldset>
 
                     
@@ -110,13 +104,17 @@
 
 
                     <div class="row">
-                        <div class="col-12 col-lg-6">
+                        <div class="col-12 col-lg-4">
                             <label for="servings">Servings</label>
                             <input type="text" name="s_servings" id="s_servings">
                         </div>
-                        <div class="col-12 col-lg-6">
+                        <div class="col-12 col-lg-4">
                             <label for="calorietags">Calories </label>
                             <input type="text"  [(ngModel)]="searchRes.calories" name="calorieLabels" id="calorieLabels" />
+                        </div> 
+                        <div class="col-12 col-lg-4">
+                            <label for="weighttag">Total Weight </label>
+                            <input type="text"  [(ngModel)]="searchRes.totalWeight" name="weighttag" id="weighttag" />
                         </div>
                     </div>
     
@@ -136,7 +134,7 @@
                     </div>-->
     
                     <div class="row">
-                        <div class="col-12 col-lg-6">
+                        <div class="col-12 col-lg-4">
                             <label for="dietLabels">Diet Labels</label>
                             
                             <label class="container" style=" text-align: left;
@@ -149,16 +147,23 @@
                             </label>
                         </div>
             
-                        <div class="col-12 col-lg-6">
+                        <div class="col-12 col-lg-8">
                             <label for="healthtags">Health Labels</label>
-                            <label class="container" style=" text-align: left;
-                            display: inline-block;
-                            font-family: 'Lato', sans-serif;
-                            font-weight: 400;
-                            font-size: 16px;" *ngFor="let healthLabel of healthlabelsList; let h=index;">{{healthLabel.name}}
-                                <input name="videoenabled" id="healthLabel{{h}}" name="healthLabel{{h}}" [(ngModel)] = 'healthLabel.selected' type="checkbox">
-                                <span class="checkmark"></span>
-                            </label>
+                            <div class="row" style="max-height: 200px;
+                            overflow: auto;">
+                                <div class="col-12 col-lg-6" *ngFor="let healthLabel of healthlabelsList; let h=index;">
+                                    <label class="container" style=" text-align: left;
+                                    display: inline-block;
+                                    font-family: 'Lato', sans-serif;
+                                    font-weight: 400;
+                                    font-size: 16px;" >{{healthLabel.name}}
+                                        <input name="videoenabled" id="healthLabel{{h}}" name="healthLabel{{h}}" [(ngModel)] = 'healthLabel.selected' type="checkbox">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            </div>
+                           
+                           
                         </div>
                  
                        

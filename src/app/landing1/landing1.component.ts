@@ -6,7 +6,7 @@ import { DBService } from '../dbservices/db.service';
 import { HelpService } from '../services/help.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from './../../environments/environment';
-
+import {constants} from "../jsonfiles/constants"
 @Component({
 	selector: 'app-landing1',
 	templateUrl: './landing1.component.html',
@@ -97,8 +97,52 @@ constructor(private router: Router, private httpClient : HttpClient, private rou
   
 	}
 
-
 	loadHealthLabels()
+	{
+	  this.healthLabels = [];
+	
+				 var arrLabel = constants.healthLabelsNew;
+				 if(arrLabel.length > 0)
+				 {
+				   for(let l=0; l < arrLabel.length; l++)
+				   {
+					
+						var img = "assets/menu/veg.png";
+						if(arrLabel[l].toString().toLowerCase().indexOf("vegetarian") !== -1)
+						{
+						  img = "assets/menu/vegetarian1.jpg";
+						}
+						else if(arrLabel[l].toString().toLowerCase().indexOf("vegan") !== -1)
+						{
+						  img = "assets/menu/vegan.png";
+						}
+						else if(arrLabel[l].toString().toLowerCase().indexOf("peanut-free") !== -1)
+						{
+						  img = "assets/menu/peanutfree.jpg";
+						}
+						else if(arrLabel[l].toString().toLowerCase().indexOf("sugar-conscious") !== -1)
+						{
+						  img = "assets/menu/sugarfree.jpg";
+						}
+						else if(arrLabel[l].toString().toLowerCase().indexOf("alcohol-free") !== -1)
+						{
+						  img = "assets/menu/alcoholfree.png";
+						}
+						else if(arrLabel[l].toString().toLowerCase().indexOf("balanced") !== -1)
+						{
+						  img = "assets/menu/balanced-diet.png";
+						}
+					 //   console.log(img);
+					  this.healthLabels.push({"label":arrLabel[l], "image":img});
+					  
+					
+					
+				   }
+				 }
+			  
+   
+	}
+	loadHealthLabelsfromDB()
 	{
 	  this.healthLabels = [];
 	 // this.recipes = recipesList;
@@ -174,7 +218,7 @@ constructor(private router: Router, private httpClient : HttpClient, private rou
 			 
 		   }
 		 }
-	//	 console.log(this.healthLabels);
+		 console.log(this.healthLabels);
 	   }
    
 	  ));

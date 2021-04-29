@@ -71,7 +71,7 @@ export class RecipesubmitComponent implements OnInit {
 	}
 
 	
-
+existingIngCount:any = 0;
 loadRecipe(id)
 {
   console.log("In load Recipe");
@@ -149,6 +149,34 @@ loadRecipe(id)
 				}
 			 }
 			
+			 console.log(this.searchRes["ingredientLines"]);
+			 if(typeof(this.searchRes["ingredientLines"]) !== "undefined" && this.searchRes["ingredientLines"] !== "")
+			 {
+				var tempIng= this.searchRes["ingredientLines"].split("~");
+				console.log(tempIng);
+				if(tempIng.length > 0)
+				{
+					this.ingredients= [];
+					for(let i=0; i < tempIng.length; i++)
+					{
+						this.existingIngCount++;
+						this.ingredients.push({"text":tempIng[i], "nutrients":""})
+					}
+				}
+
+			 }
+			 this.total_calories = 0;
+			 this.total_weight = 0;
+
+			 if(typeof(this.searchRes["calories"]) !== "undefined" && this.searchRes["calories"] !== "")
+			 {
+				this.total_calories = parseFloat(this.searchRes["calories"]);
+			 }
+			 if(typeof(this.searchRes["totalWeight"]) !== "undefined" && this.searchRes["totalWeight"] !== "")
+			 {
+				this.total_weight = parseFloat(this.searchRes["totalWeight"]);
+			 }
+
 			  this.searchRes["instructions"] = this.searchRes["s_instructions"];
 			 // console.log(this.searchRes["s_instructions"]);
 			  if(typeof(this.searchRes["s_instructions"]) !== "undefined" && this.searchRes["s_instructions"] !== "")
@@ -164,6 +192,7 @@ loadRecipe(id)
 				this.searchRes["instructions"]  = temp1;
 			  }
 			  }
+			  
 			  this.paramMicro = [];
 			  if(tempDigest["length"] > 0)
 			  {
@@ -187,6 +216,8 @@ loadRecipe(id)
 		  }
 		}
 	  }
+	  this.setLabels();
+
 	console.log(this.searchRes);
 	}
   }));
@@ -205,10 +236,59 @@ getLabels()
 
 	//this.healthlabelsList = constants.healthLabels;
 	this.healthlabelsList= [];
-	for(let h=0; h < constants.healthLabels.length; h++)
+
+	for(let h=0; h < constants.healthLabelsNew.length; h++)
 	{
-		this.healthlabelsList.push({"name":constants.healthLabels[h], "selected":false})
+		if(constants.healthLabels[h] !== "")
+		{
+		this.healthlabelsList.push({"name":constants.healthLabelsNew[h], "selected":false})
+		}
 	}
+	console.log(this.healthlabelsList);
+}
+
+setLabels()
+{
+	if(this.searchRes !== null)
+	{
+		if(typeof(this.searchRes["healthLabels"]) !== "undefined" && this.searchRes["healthLabels"] !=="")
+		{
+			var temp = this.searchRes["healthLabels"].split("~");
+			if(temp.length > 0)
+			{
+				for(let d=0; d < temp.length; d++)
+				{
+					temp[d] = temp[d].replace("_", "-");
+					var indexh= this.healthlabelsList.findIndex(x => (x.name.toLowerCase() == temp[d].toLowerCase()))
+					if(indexh > -1)
+					{
+						this.healthlabelsList[indexh]["selected"] = true;
+					}
+				}
+			}
+		}
+
+		if(typeof(this.searchRes["dietLabels"]) !== "undefined" && this.searchRes["dietLabels"] !=="")
+		{
+			var temp = this.searchRes["dietLabels"].split("~");
+			if(temp.length > 0)
+			{
+				for(let d=0; d < temp.length; d++)
+				{
+					temp[d] = temp[d].replace("_", "-");
+					var indexD = this.dietLabelsList.findIndex(x => (x.name.toLowerCase() == temp[d].toLowerCase()))
+					if(indexD > -1)
+					{
+						this.dietLabelsList[indexD]["selected"] = true;
+					}
+				}
+			}
+		}
+	}
+}
+formahtLabel(item)
+{
+	console.log(item);
 }
 getNutrients(item)
 {
@@ -237,8 +317,11 @@ formatIngredients()
 	var temp = "";
 	var totalNutrients = {};
 	this.cons_Nutrients= {};
-	this.total_calories = 0;
-	this.total_weight = 0;
+	
+	if(typeof(this.searchRes["totalNutrients"]) !== "undefined" && this.searchRes["totalNutrients"]!== "")
+	{
+		this.cons_Nutrients = JSON.parse(this.searchRes["totalNutrients"]);
+	}
 	for(let i=0; i < this.ingredients.length; i++)
 	{
 		temp += this.ingredients[i]["text"] + "~";
@@ -291,6 +374,7 @@ formatLabels(item)
 			{
 				if(this.labels["dietLabels"].indexOf(tDiet[c]) == -1)
 				{
+					tDiet[c] = tDiet[c].replace("_", "-");
 					this.labels["dietLabels"] += "~" + tDiet[c];
 				}
 			}
@@ -310,6 +394,7 @@ formatLabels(item)
 			{
 				if(this.labels["healthLabels"].indexOf(tlabel2[c]) == -1)
 				{
+					tlabel2[c] = tlabel2[c].replace("_", "-");
 					this.labels["healthLabels"] += "~" + tlabel2[c];
 				}
 			}
@@ -388,7 +473,14 @@ autosave()
 	{
 		params["healthLabels"] =this.searchRes["healthLabels"];
 	}
-
+	if(typeof(this.total_calories) !== "undefined"  &&  this.total_calories !== "")
+	{
+		params["calories"] =this.total_calories;
+	}
+	if(typeof(this.total_weight) !== "undefined"  &&  this.total_weight !== "")
+	{
+		params["totalWeight"] =this.total_weight;
+	}
 	if(typeof(this.searchRes['totalNutrients']) !== "undefined"  &&  this.searchRes["totalNutrients"] !== "")
 	{
 		params["totalNutrients"] =this.searchRes["totalNutrients"];

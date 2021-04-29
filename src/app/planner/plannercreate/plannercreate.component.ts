@@ -717,7 +717,7 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 
       var res =   this.dbService.getDataByTable("days", params).subscribe(dData => setTimeout(() => {
 
-   		//	 console.log(dData);
+   			 console.log(dData);
         if(dData !== null)
         {
 			var idslist = ""; 
@@ -726,6 +726,7 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
             for(let i=0; i < dData["body"]['length'] ; i++)
             {
 				var item = dData['body'][i];
+				console.log(item);
 				this.plan["days"][item["day_num"]]["dayid"] = item["id"]
 				if(typeof(item["breakfast"]) !== "undefined" && item["breakfast"] !== null && item["breakfast"] !== "")
 				{
@@ -888,7 +889,7 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 				this.plan["id"]=insertedid;
 				this.plan["mealplanid"]=insertedid;
 				this.updatingFlag = false;
-
+				this.createDays();
 			}
 			}
 		}));
@@ -896,6 +897,77 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 	}
 	} else {
 	this.errorMessage = "Plan Name is required";
+	}
+
+  }
+
+  insertR: any =0;
+  createDays()
+  {
+	if(typeof(this.plan["id"]) !== "undefined" && this.plan["id"] !== "")
+    {
+		var r =  this.insertR;
+	
+			var rowItem = this.plan["days"][r]["meals"];
+	
+		  var params = {};
+		   
+			params["meal_plan_id"] = this.plan["id"];
+			params["day_num"] = r;
+			params["name"] = "Day " + (r +1);
+	
+			params["breakfast"] = "";
+			if(typeof(rowItem[0]["recipe"]) !== "undefined" && rowItem[0]["recipe"] !== null && typeof(rowItem[0]["recipe"]["id"]) !== "undefined")
+			params["breakfast"] = rowItem[0]["recipe"]["id"];
+	
+			params["snack1"] = "";
+			if(typeof(rowItem[1]["recipe"]) !== "undefined" && rowItem[1]["recipe"] !== null && typeof(rowItem[1]["recipe"]["id"]) !== "undefined")
+			params["snack1"] = rowItem[1]["recipe"]["id"];
+	
+			params["lunch"] = "";
+			if(typeof(rowItem[2]["recipe"]) !== "undefined" && rowItem[2]["recipe"] !== null && typeof(rowItem[2]["recipe"]["id"]) !== "undefined")
+			params["lunch"] = rowItem[2]["recipe"]["id"];
+	
+			params["snack2"] = "";
+			if(typeof(rowItem[3]["recipe"]) !== "undefined" && rowItem[3]["recipe"] !== null && typeof(rowItem[3]["recipe"]["id"]) !== "undefined")
+			params["snack2"] = rowItem[3]["recipe"]["id"];
+	
+			params["dinner"] = "";
+			if(typeof(rowItem[4]["recipe"]) !== "undefined" && rowItem[4]["recipe"] !== null && rowItem[4]["recipe"]["id"] !== "undefined")
+			params["dinner"] = rowItem[4]["recipe"]["id"];
+	
+			params["created_by"] = "";
+			params["created_at"] = new Date();
+			params["status"] = 1;
+	
+	 
+		
+			var res =   this.dbService.postDataByTable("days", params).subscribe(dData => setTimeout(() => {
+	
+	  
+			  if(dData !== null)
+			  {
+				if(dData["result"] !== null && dData["result"] !== "")
+				{
+				  this.plan["days"][r]["meals"]= rowItem;
+				  this.plan["days"][r]['id']= dData['inserted_id'];
+				  this.plan["days"][r]['dayid']= dData['inserted_id'];
+				  this.insertR++;
+				  setTimeout(() => {
+				  if(this.insertR < 7)
+				  {
+					  this.createDays();
+				  }
+				  },100);
+				}
+			
+			  }
+	
+	
+			}));
+		 
+		 
+		  
 	}
 
   }
@@ -909,9 +981,9 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 
       var params = {};
        
-        params["meal_plan_id"] = this.plan["id"];
-        params["day_num"] = r;
-        params["name"] = "Day " + (r +1);
+      //  params["meal_plan_id"] = this.plan["id"];
+      //  params["day_num"] = r;
+     //   params["name"] = "Day " + (r +1);
 
         params["breakfast"] = "";
         if(typeof(rowItem[0]["recipe"]) !== "undefined" && rowItem[0]["recipe"] !== null && typeof(rowItem[0]["recipe"]["id"]) !== "undefined")

@@ -6,5 +6,6 @@ export const constants = {
   healthLabels: ["Vegetarian", "Vegan","Peanut-free", "Low potassium", "Alcohol-free"],
   nutrientDbFields:["fat","carbs","protein","cholesterol","sodium","calcium","magnesium","potassium","iron","zinc","phosphorus","vitamin_a","vitamin_c","thiamin_b1","riboflavin_b2","niacin_b3","vitamin_b6","folate_equivalent_total","folate_food","folic_acid","vitamin_b12","vitamin_d","vitamin_e","vitamin_k","sugar_alcohols",
         "water","energy","saturated","monounsaturated","polyunsaturated","fiber","sugars","sugars_added"],
-  edamam_nutrient_api :"https://api.edamam.com/api/nutrition-data"
+  edamam_nutrient_api :"https://api.edamam.com/api/nutrition-data",
+  healthLabelsNew: ["Vegetarian","Pescatarian","Egg-Free","Peanut-Free", "Tree-Nut-Free","Soy-Free","Fish-Free","Shellfish-Free","Pork-Free","Red-Meat-Free","Crustacean-Free","Celery-Free","Mustard-Free", "Sesame-Free","Lupine-Free","Mollusk-Free","Alcohol-Free", "Kosher","Kidney-Friendly","Gluten-Free", "Wheat-Free","Vegan","Dairy-Free","Sugar-Conscious", "Immuno-Supportive","No oil added","Low Potassium", "Keto-Friendly","FODMAP-Free"]
 };
