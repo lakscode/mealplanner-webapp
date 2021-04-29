@@ -1299,48 +1299,56 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 			
 			  if(itemmeal["recipe"]["ingredients"].length  < 4999)
 			  {
-			var tempA = JSON.parse(itemmeal["recipe"]["ingredients"]);
-		  console.log(tempA);
-		  for(let k=0; k < tempA.length; k++)
-		  {
-			ingredientsList.push(tempA[k]['text'])
-			var t = tempA[k]['text'];
-			if(t.indexOf('cups') > -1)
-			{
-			  var t1 = t.split('cups');
-			  var cIndex = consList.findIndex(x => (x.name  === t1[1].trim()));
-			  if(cIndex > -1)
-			  {
-				consList[cIndex]['quantity'] = parseFloat(consList[cIndex]['quantity']) +  parseFloat(t1[0].trim());
-			  }
-			  else
-			  {
-				consList.push({"name":t1[1].trim(), 'quantity': t1[0].trim(), 'measure':"cups"})
-			  }
-			  shoppingList.push({"name":t1[1].trim(), 'quantity': t1[0].trim() + " cups"})
-			}
-			else if(t.indexOf('cup') > -1)
-			{
-			  var t1 = t.split('cup');
-			  //var cIndex = shoppingList.findIndex(x => (x.name  === t1[1]));
-			  var cIndex = consList.findIndex(x => (x.name  === t1[1].trim()));
-			  if(cIndex > -1)
-			  {
-				consList[cIndex]['quantity'] = parseFloat(consList[cIndex]['quantity']) +  parseFloat(t1[0].trim());
-			  }
-			  else
-			  {
-				consList.push({"name":t1[1].trim(), 'quantity': t1[0].trim(), 'measure':"cups"})
-			  }
-  
-			  shoppingList.push({"name":t1[1].trim(), 'quantity': t1[0].trim() + " cup"})
-			}
-			else
-			{
-			  shoppingList.push({"name":t, 'quantity': " "})
-			  consList.push({"name":t, 'quantity': '', 'measure':""})
-			}
-		  }
+				  try{
+					var tempA = JSON.parse(itemmeal["recipe"]["ingredients"]);
+					console.log(tempA);
+					for(let k=0; k < tempA.length; k++)
+					{
+					  ingredientsList.push(tempA[k]['text'])
+					  var t = tempA[k]['text'];
+					  if(t.indexOf('cups') > -1)
+					  {
+						var t1 = t.split('cups');
+						var cIndex = consList.findIndex(x => (x.name  === t1[1].trim()));
+						if(cIndex > -1)
+						{
+						  consList[cIndex]['quantity'] = parseFloat(consList[cIndex]['quantity']) +  parseFloat(t1[0].trim());
+						}
+						else
+						{
+						  consList.push({"name":t1[1].trim(), 'quantity': t1[0].trim(), 'measure':"cups"})
+						}
+						shoppingList.push({"name":t1[1].trim(), 'quantity': t1[0].trim() + " cups"})
+					  }
+					  else if(t.indexOf('cup') > -1)
+					  {
+						var t1 = t.split('cup');
+						//var cIndex = shoppingList.findIndex(x => (x.name  === t1[1]));
+						var cIndex = consList.findIndex(x => (x.name  === t1[1].trim()));
+						if(cIndex > -1)
+						{
+						  consList[cIndex]['quantity'] = parseFloat(consList[cIndex]['quantity']) +  parseFloat(t1[0].trim());
+						}
+						else
+						{
+						  consList.push({"name":t1[1].trim(), 'quantity': t1[0].trim(), 'measure':"cups"})
+						}
+			
+						shoppingList.push({"name":t1[1].trim(), 'quantity': t1[0].trim() + " cup"})
+					  }
+					  else
+					  {
+						shoppingList.push({"name":t, 'quantity': " "})
+						consList.push({"name":t, 'quantity': '', 'measure':""})
+					  }
+					}
+				  }
+				  catch(error)
+				  {
+					  console.log("Error");
+					  console.log(error);
+				  }
+			
 		}
 		  }
 	

@@ -1038,7 +1038,7 @@ input.form-control {
   margin-top: 10px;
   padding: 0.2rem 1rem;
 }
-.filter-bar .btn-filter .btn-secondary, .filter-bar--side-version .btn-filter .btn-secondary {
+.filter-bar .btn-filter .btn-secondary, .filter-bar--side-version .btn-filter .btn-secondary, .btnsecondary {
   border-radius: 2rem !important;
   color: $gray-dark2;
   background-color: transparent;
@@ -1365,6 +1365,22 @@ color:#FFF;
 .mealplan-col20
 {
   width: 20%;
+}
+
+
+.searchbtn
+{
+  padding:5px 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-family: Lato;
+    font-size: 10px;
+    font-weight: bold;
+    text-align: center;
+    padding: 0.2rem 1rem;
+}
+.searchbtn:hover{
+  cursor: pointer;
 }
 .container {
   display: block;
