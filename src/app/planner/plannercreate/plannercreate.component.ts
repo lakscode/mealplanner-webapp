@@ -226,7 +226,7 @@ this.loadColorCodes();
 	  }
   
 	//  params["instructions"] = "notempty";
-	 params["returnfields"] = " id, label, image, healthLabels,ingredients, s_instructions, dietLabels, totalNutrients, digest,calories,s_instructions ";
+	 params["returnfields"] = " id, label, image, healthLabels,ingredients,  dietLabels, totalNutrients, digest,calories ";
 	 if(typeof(this.filtersParams.dietlabels) !== "undefined" && this.filtersParams.dietlabels  !== "")
 	 {
 	  params["dietLabels"] = this.filtersParams.dietlabels;
@@ -292,7 +292,7 @@ this.loadColorCodes();
 		//  console.log(this.plan);
 		  this.calculateCaloryFlag = true;
 		 // this.loadRatings();
-	
+		  this.page_num = 1;
 	 this.totalPage = this.recipesList["length"] /this.pageCount;
 	 console.log(this.totalPage);
 		  this.getDisplayList();
