@@ -1527,12 +1527,15 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
    }))
   
   }
-  formatVal(str)
+  formatVal(str, limit = 0)
   {
 	var retVal = str;
 	if(str !== "")
 	{
+	if(limit == 0)
 	  retVal = Math.ceil(parseFloat(str));
+	  else
+	  retVal = parseFloat(str).toFixed(limit);
 	}
 	return retVal;
   }
