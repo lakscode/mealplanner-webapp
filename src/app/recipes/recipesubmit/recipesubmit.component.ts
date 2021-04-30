@@ -25,6 +25,8 @@ export class RecipesubmitComponent implements OnInit {
 	paramMicro: Array<any> =[];
 	mineralsList: Array<any> =[];
 	ingredients: Array<any> =[];
+	instructions: Array<any> = [];
+
 	currentUser: any;
 	apiUrl: any = "";
 	ispublic: boolean = false;
@@ -33,6 +35,7 @@ export class RecipesubmitComponent implements OnInit {
 	}
 
 	ngOnInit() {
+		this.instructions= [];
 		this.ispublic = false;
 		this.apiUrl = environment.apiUrl;
 		this.currentUser =this.helpService.getCurrentUser();
@@ -148,6 +151,9 @@ loadRecipe(id)
 					this.searchRes["ingredients"] = this.searchRes["ingredients"].split("~");
 				}
 			 }
+		
+			
+			
 			
 			 console.log(this.searchRes["ingredientLines"]);
 			 if(typeof(this.searchRes["ingredientLines"]) !== "undefined" && this.searchRes["ingredientLines"] !== "")
@@ -163,8 +169,22 @@ loadRecipe(id)
 						this.ingredients.push({"text":tempIng[i], "nutrients":""})
 					}
 				}
+				else
+				{
+					this.addRows("ing");
+				}
 
 			 }
+			 else
+			 {
+				this.addRows("ing");
+			 }
+
+			
+
+			
+
+
 			 this.total_calories = 0;
 			 this.total_weight = 0;
 
@@ -181,18 +201,54 @@ loadRecipe(id)
 			 // console.log(this.searchRes["s_instructions"]);
 			  if(typeof(this.searchRes["s_instructions"]) !== "undefined" && this.searchRes["s_instructions"] !== "")
 			  {
-			  var temp1 = this.searchRes["s_instructions"].split("~");
-			  if(temp1.length > 1)
+				var temp1 = this.searchRes["s_instructions"].split("~");
+				if(temp1.length > 1)
+				{
+				this.searchRes["instructions"]  = temp1;
+				}
+				else
+				{
+					temp1 = this.searchRes["s_instructions"].split(". ");
+					this.searchRes["instructions"]  = temp1;
+				}
+			
+			  }
+			
+			  if(typeof(this.searchRes["s_instructions"]) !== "undefined" && this.searchRes["s_instructions"] !== "")
 			  {
-			  this.searchRes["instructions"]  = temp1;
+				var tempIns = this.searchRes["s_instructions"].split("~");
+				if(tempIns.length > 1)
+				{
+				this.searchRes["instructions"]  = tempIns;
+				}
+				else
+				{
+					tempIns = this.searchRes["s_instructions"].split(". ");
+					this.searchRes["instructions"]  = tempIns;
+				}
+				 console.log(tempIng);
+				 if(tempIns.length > 0)
+				 {
+					 this.instructions= [];
+					 for(let i=0; i < tempIns.length; i++)
+					 {
+		
+						 this.instructions.push({"text":tempIns[i], "deleted":""})
+					 }
+				 }
+				 else
+				 {
+					 this.addRows("ins");
+				 }
+ 
 			  }
 			  else
 			  {
-				temp1 = this.searchRes["s_instructions"].split(". ");
-				this.searchRes["instructions"]  = temp1;
+				 this.addRows("ins");
 			  }
-			  }
-			  
+ 
+		
+			
 			  this.paramMicro = [];
 			  if(tempDigest["length"] > 0)
 			  {
@@ -355,6 +411,7 @@ formatLabels(item)
 			{
 				if(this.labels["cautions"].indexOf(cautions[c]) == -1)
 				{
+					cautions[c] = cautions[c].replace("_", "-");
 					this.labels["cautions"] += "~" + cautions[c];
 				}
 			}
@@ -437,14 +494,32 @@ consolidateNutrients(item)
 		console.log(this.cons_Nutrients); 
 	}
 }
-addNutrients()
+addRows(type)
 {
-	this.ingredients.push({"text":""});
-}
+	console.log("add rows");
+	console.log(type);
+	console.log(JSON.stringify(this.instructions));
+	if(type=="ing") this.ingredients.push({"text":""});
+	if(type=="ins") this.instructions.push({"text":""});
 
-autosave()
+	console.log(this.instructions);
+}
+formatInstructions()
 {
-	console.log("autosave");
+	if(this.instructions.length > 0)
+	{
+		this.searchRes["instructionLines"] = "";
+		for(let i = 0; i < this.instructions.length; i++)
+		{
+			this.searchRes["instructionLines"] += this.instructions[i]["text"] + "~";
+		}
+		if(this.searchRes["instructionLines"] !== "")
+		this.searchRes["instructionLines"] = this.searchRes["instructionLines"].slice(0, -1);
+	}
+}
+saveRecipe()
+{
+	console.log("saveRecipe");
 	console.log(this.searchRes);
 	var params = {};
 	
@@ -460,7 +535,11 @@ autosave()
 	{
 		params["ingredientLines"] =this.searchRes["ingredientLines"];
 	}
-	
+	if(typeof(this.searchRes["instructionLines"] ) !== "undefined" && this.searchRes["instructionLines"]  !== "")
+	{
+		params["s_instructions"] =this.searchRes["instructionLines"];
+		console.log(params["s_instructions"]);
+	}
 	if(this.searchRes.label !== "")
 	{	
 		params["label"] = this.searchRes.label;
@@ -594,7 +673,23 @@ getBase64(file) {
   });
 }
 
+formatVal(str)
+  {
+	return this.helpService.formatValue(str);
+  }
 
+  deleteContent(type, index)
+  {
+	  if(type == "ins")
+	  {
+		  this.instructions.splice(index, 1);
+	  }
+
+	  if(type == "ings")
+	  {
+		  this.ingredients.splice(index, 1);
+	  }
+  }
 }
 
 	

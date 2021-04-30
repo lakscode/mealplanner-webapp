@@ -236,7 +236,15 @@ endIndex = startIndex+ endIndex;
 	  
 	  
 	}
-
+	formatIns(str)
+	{
+		var retVal = str;
+		if(typeof(str) !== "undefined" && str !== "")
+		{
+			retVal = str.replaceAll("~",". ")
+		}
+		return retVal;
+	}
 
 	limitTo(str, num)
 	{

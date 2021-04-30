@@ -24,12 +24,12 @@
                                 <div class="add-fields">
                                     <span class="handler-list ui-sortable-handle"><i class="fa fa-arrows"></i></span>
                                     <input type="text" name="ingredients{{i}}"  [(ngModel)] = "ingredient.text" [disabled]="i< existingIngCount" (blur)="getNutrients(ingredient)" id="ingredients{{i}}">
-                                    <span class="del-list"><i class="fa fa-trash"></i></span>
+                                    <span (click)="deleteContent('ing', i)" class="del-list"><i class="fa fa-trash"></i></span>
                                 </div>
                             </li>
                         <!--<li style=""><div class="add-fields"> <span class="handler-list"><i class="fa fa-arrows"></i></span> <input type="text" name="ingredients[]" id="ingredients"> <span class="del-list"><i class="fa fa-trash"></i></span></div></li><li style=""><div class="add-fields"> <span class="handler-list"><i class="fa fa-arrows"></i></span> <input type="text" name="ingredients[]" id="ingredients"> <span class="del-list"><i class="fa fa-trash"></i></span></div></li>
                         --></ul>
-                                             <span (click)="addNutrients()" class="add-button add-ing">
+                                             <span (click)="addRows('ing')" class="add-button add-ing">
                                                 <i class="fa fa-plus"></i>
                                             </span>
                     </fieldset>
@@ -37,15 +37,15 @@
                     <fieldset class="ingredient-set">
                         <label for="steps">Instructions</label>
                         <ul class="list-sortable steps ui-sortable">
-                            <li style="">
-                                <div class="add-fields">
-                                    <span class="handler-list ui-sortable-handle"><i class="fa fa-arrows"></i></span>
-                                    <textarea class="short-text" name="steps" id="steps" cols="30" rows="10">    </textarea>
-                                    <span class="del-list"><i class="fa fa-trash"></i></span>
+                            <li style="" *ngFor="let instruction of instructions; let i = index;">
+                                <div class="add-fields"> 
+                                <span class="handler-list"><i class="fa fa-arrows"></i></span>
+                                <textarea class="short-text" (blur)="formatInstructions()" [(ngModel)]= "instruction.text" name="steps{{i}}" id="steps{{i}}" cols="30" rows="10" >    </textarea>  <br>
+                                <span (click)="deleteContent('ins', i)" class="del-list"><i class="fa fa-trash"></i></span>
                                 </div>
                             </li>
-                        <li style=""><div class="add-fields"> <span class="handler-list"><i class="fa fa-arrows"></i></span><textarea class="short-text" name="steps" id="steps" cols="30" rows="10">    </textarea> <span class="del-list"><i class="fa fa-trash"></i></span></div></li></ul>
-                                             <span class="add-button add-steps">
+                        </ul>
+                                             <span  (click)="addRows('ins')"  class="add-button add-steps">
                                                 <i class="fa fa-plus"></i>
                                             </span>
                     </fieldset>
@@ -53,21 +53,24 @@
 
                     <fieldset class="ingredient-set">
                         <label for="nutrients">Nutrients</label>
+                     
                         <ul class="list-sortable nutrients-list ui-sortable">
-                            <li style="">
+                            <div class="row" style="max-height: 200px; overflow: auto;">
+                            <div class="col-4" *ngFor="let nutrient of searchRes['nutrientsArr'] | keyvalue; let n = index">
+                            <li style="" >
                                 <div class="add-fields">
-                                    <span class="handler-list ui-sortable-handle"><i class="fa fa-arrows"></i></span>                                   
-                                    <div class="row" class="selectric-wrapper selectric-advance-selectable">
-                                        <div class="col-4 selectric-select" *ngFor="let nutrient of searchRes['nutrientsArr'] | keyvalue; let n = index">
-                                        <span >{{nutrient['value']['label']}}  {{nutrient['value']['quantity']}} {{nutrient['value']['unit']}}</span>
+                                    <span style="border-right: 1px;" class="handler-list ui-sortable-handle"><i class="fa fa-arrows"></i></span>                                   
+                                    <div class="row" style='    border: 1px solid #CCC;  width:100%; margin-bottom: 0px;' class="selectric-wrapper selectric-advance-selectable">
+                                        <div class= "col-12 selectric-select" >
+                                        <span style="font-size:12px;" >{{nutrient['value']["label"]}}  {{formatVal(nutrient['value']["quantity"])}} {{nutrient['value']['unit']}}</span>
                                     </div>
                                     </div>
                                 </div>
                             </li>
-                          
-                    
+                        </div>
+                    </div>
                         </ul>
-
+                    
                     </fieldset>
 
                     
@@ -241,7 +244,7 @@
                         </div>
                     </div>-->
                     <div class="text-center">
-                        <button type="submit" class="recipe-submit-btn">Submit Your Recipe</button>
+                        <button type="submit" (click)="saveRecipe()"  class="recipe-submit-btn">Submit Your Recipe</button>
                     </div>
                 </form>
             </div>
