@@ -154,7 +154,12 @@ export class TabspanelComponent implements OnInit, OnDestroy, AfterViewChecked, 
 
 		this.closeDT.emit(this.dt);
 	}	
-	
+  formatValuePServing(str, servings)
+  {
+
+    var retVal = this.helpService.formatValuePServing(str, servings);
+    return retVal;
+  }
   
   loadRecipes()
 	{
@@ -164,7 +169,7 @@ export class TabspanelComponent implements OnInit, OnDestroy, AfterViewChecked, 
 	// this.recipes = recipesList;
 	 var params = {"limit": "9"};
 
-   params["returnfields"] = " id, label, image, healthLabels, dietLabels, calories";
+   params["returnfields"] = " id, label, image, healthLabels, dietLabels, calories, yield";
 
 	  params["instructions"] = "notempty";
   

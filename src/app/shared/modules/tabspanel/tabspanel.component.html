@@ -96,6 +96,7 @@
             </div>
             <div class="right-side">
                 <h3><a style="cursor:pointer" (click)="gotoRecipeDetails(recipe.id)">{{recipe.label}}</a></h3>
+                <p>Calories per serving {{formatValuePServing(recipe.calories, recipe.yield)}}</p>
                 <div class="rating-box" *ngIf="recipe.displayrating">
                     <span class="rating-icons" >
                         <i *ngIf="recipe.displayrating >=1" class="fa fa-star"></i>

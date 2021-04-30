@@ -1084,6 +1084,22 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 	*/
 
   }
+  showNutrientsPServing: boolean = false;
+  
+  toggleNutrients(opt)
+  {
+	console.log("opt " + opt);
+    console.log("showTotal " + this.showNutrients);
+    console.log("showPerServing " + this.showNutrientsPServing);
+
+    if(opt == "total" && this.showNutrients)
+    this.showNutrientsPServing = false;
+    
+    
+    if(opt == "perserving" && this.showNutrientsPServing)
+    this.showNutrients = false;
+   
+  }
   getColorCode(param)
   {
 	//  console.log("getColorCode")

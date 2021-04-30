@@ -273,7 +273,7 @@
                     font-family: 'Lato', sans-serif;
                     font-weight: 400;
                     font-size: 16px;">Show Nutrients per Serving
-                        <input [(ngModel)] = 'showNutrientsPServing' type="checkbox">
+                        <input (change)="toggleNutrients('perserving')" [(ngModel)] = 'showNutrientsPServing' type="checkbox">
                         <span class="checkmark"></span>
                     </label>
                     <label class="container" style=" text-align: left;
@@ -282,7 +282,7 @@
                     font-family: 'Lato', sans-serif;
                     font-weight: 400;
                     font-size: 16px;">Show Nutrients
-                        <input [(ngModel)] = 'showNutrients' type="checkbox">
+                        <input (change)="toggleNutrients('total')" [(ngModel)] = 'showNutrients' type="checkbox">
                         <span class="checkmark"></span>
                     </label>
                     <a class="copy-button" (click)="downloadplan()" title="Download PDF"><i class="fa fa-download"></i> Download</a>

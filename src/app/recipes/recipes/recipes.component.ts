@@ -603,17 +603,7 @@ endIndex = startIndex+ endIndex;
 	formatValuePServing(str, servings)
   {
 
-    var retVal = str;
-    if(typeof(str) !== "undefined" && str !== "")
-    {
-      retVal = parseFloat(str);
-     
-      if(typeof(servings) !== "undefined" && servings !== "" && servings !== 0)
-      { 
-        retVal = (parseFloat(str) /  servings).toFixed(2);
-      
-      }
-    }
+    var retVal = this.helpService.formatValuePServing(str, servings);
     return retVal;
   }
 }
