@@ -1057,21 +1057,31 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
   loadColorCodes()
   {
 	this.colorCodes ={};
-	this.colorCodes["calcium"] ="#488e4f"; //light gray
-	this.colorCodes["magnesium"] ="#D1d2d3"; //pink
-	this.colorCodes["iron"] ="#ff6700"; //orange
-	this.colorCodes["sodium"] ="#fa5a73"; //dark blue
-	this.colorCodes["potassium"] ="#cb410b"; //violet
-	this.colorCodes["phosphorus"] ="#2887c8";
-	this.colorCodes["chloride"] ="#1e90ff";
-	this.colorCodes["zinc"] ="#76d7ea";
-	this.colorCodes["iodine"] ="#010b13";
-	this.colorCodes["manganese"] ="#3f00ff";
-	this.colorCodes["fat"] ="#a6a6a6";
-	this.colorCodes["protein"] ="#02075d";
-	this.colorCodes["carbs"] ="#778ba5";
+	this.colorCodes["calcium"] ="#FF0000"; //light gray
+	this.colorCodes["magnesium"] ="#00FFFF"; //pink
+	this.colorCodes["iron"] ="#0000FF"; //orange
+	this.colorCodes["sodium"] ="#808080"; //dark blue
+	this.colorCodes["potassium"] ="#0000A0"; //violet
+	this.colorCodes["phosphorus"] ="#000000";
+	this.colorCodes["chloride"] ="#ADD8E6";
+	this.colorCodes["zinc"] ="#FFA500";
+	this.colorCodes["iodine"] ="#800080";
+	this.colorCodes["manganese"] ="#A52A2A";
+	this.colorCodes["fat"] ="#FFFF00";
+	this.colorCodes["protein"] ="#800000";
+	this.colorCodes["carbs"] ="#008000";
 
-
+	/*
+	Red	#FF0000	White	#FFFFFF
+	Cyan	#00FFFF	Silver	#C0C0C0
+	Blue	#0000FF	Gray or Grey	#808080
+	DarkBlue	#0000A0	Black	#000000
+	LightBlue	#ADD8E6	Orange	#FFA500
+	Purple	#800080	Brown	#A52A2A
+	Yellow	#FFFF00	Maroon	#800000
+	Lime	#00FF00	Green	#008000
+	Magenta	#FF00FF	Olive	#808000
+	*/
 
   }
   getColorCode(param)
