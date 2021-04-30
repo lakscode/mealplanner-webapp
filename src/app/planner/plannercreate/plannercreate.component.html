@@ -425,7 +425,7 @@
                                     </div>
                                     <div style="clear:both"></div>
                                     <div style='float:left; padding:2px; margin-right:5px;display:flex; align-items: center;' *ngFor="let totalM1 of calculateTotalCaloryPServing(r) "> <div [ngStyle] ="{'background-color':getColorCode(totalM1)}" style="display:inline-block; width:10px; height:10px;  margin-right:3px; "></div>
-                                        <a href="javascript:void(0)" title="Total {{setFLU(totalM1.name)}} {{formatValue(totalM1.value)}} {{totalM1.unit}}">{{formatValue(formatValPServing(totalM1.value, totalM1.yield))}} {{totalM1.unit}} </a>
+                                        <a href="javascript:void(0)" title="Total {{setFLU(totalM1.name)}} {{formatValue(totalM1.value)}} {{totalM1.unit}}">{{formatValue(totalM1.value)}} {{totalM1.unit}} </a>
                                     
                                         </div>
 

@@ -1297,24 +1297,13 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 		//	console.log(dItem);
 			if(dItem["recipe"] !== null)
 			{
-				/*
-				if(typeof(dItem["recipe"]["paramMicro"]) !== "undefined")
-				{
-				for(let j=0; j < dItem["recipe"]["paramMicro"]["length"]; j++)
-				{
-					var dmItem = dItem["recipe"]["paramMicro"][j];
-					var lbl = dmItem["label"].toLowerCase();
-					var fIndex = mMacro.findIndex(x=>(x.name == lbl));
-
-					if(fIndex > -1)
-					mMacro[fIndex]["value"] =  parseFloat(mMacro[fIndex]["value"]) + dmItem["total"];
+			
+				var fIndex1s = mMacro.findIndex(x1=>(x1.name == "calories"));
+					if(fIndex1s > -1)
+					mMacro[fIndex1s]["value"] = parseFloat(mMacro[fIndex1s]["value"]) +parseFloat(dItem["recipe"]["calories"])/ dItem["recipe"]["yield"];
 					else
-					mMacro.push({"name" : lbl, "value" : dmItem["total"], "unit" : dmItem["unit"], "yield":dItem["recipe"]["yield"]});
-				
-					
-					
-				}
-				} */
+					mMacro.push({"name" : "calories", "value" : parseFloat(dItem["recipe"]["calories"])/ dItem["recipe"]["yield"], "unit" : "Kcal", "yield":dItem["recipe"]["yield"]});
+			
 				if(typeof(dItem["recipe"]["minerals"]) !== "undefined")
 				{
 				for(let j=0; j < dItem["recipe"]["minerals"]["length"]; j++)
@@ -1325,9 +1314,9 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 
 					var fIndex1 = mMacro.findIndex(x1=>(x1.name == lbl1));
 					if(fIndex1 > -1)
-					mMacro[fIndex1]["value"] = parseFloat(mMacro[fIndex1]["value"]) + dmItem1["value"];
+					mMacro[fIndex1]["value"] = parseFloat(mMacro[fIndex1]["value"]) +parseFloat(dmItem1["value"])/ dItem["recipe"]["yield"];
 					else
-					mMacro.push({"name" : lbl1, "value" : dmItem1["value"], "unit" : dmItem1["unit"], "yield":dItem["recipe"]["yield"]});
+					mMacro.push({"name" : lbl1, "value" : parseFloat(dmItem1["value"])/ dItem["recipe"]["yield"], "unit" : dmItem1["unit"], "yield":dItem["recipe"]["yield"]});
 				}
 				}
 				

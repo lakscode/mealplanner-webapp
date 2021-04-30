@@ -26,7 +26,8 @@ export class RecipesubmitComponent implements OnInit {
 	mineralsList: Array<any> =[];
 	ingredients: Array<any> =[];
 	instructions: Array<any> = [];
-
+	totalWeight: any=0
+	calories: any=0
 	currentUser: any;
 	apiUrl: any = "";
 	ispublic: boolean = false;
@@ -184,8 +185,7 @@ loadRecipe(id)
 			
 
 			
-
-
+			
 			 this.total_calories = 0;
 			 this.total_weight = 0;
 
