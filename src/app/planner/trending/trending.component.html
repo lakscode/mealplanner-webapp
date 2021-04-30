@@ -1,124 +1,143 @@
-<div id="generic_price_table" style="background: #F8F6F5;margin-top:0px;margin-bottom:0px">   
-<section>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="price-heading clearfix">
-                        <h1>Pricing</h1>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            
-            <!--BLOCK ROW START-->
-            <div class="row">
-
-
-                 
-                <div class="col-md-4"  *ngFor="let package of packages; let i = index;">
-                      <div class="generic_content active  clearfix packageitem"><!--active-->
-                          <div class="generic_head_price clearfix">
-                               <div class="generic_head_content clearfix">
-                                  <div class="head_bg"></div>
-                                  <div class="head">
-                                      <span>{{package.name}}</span>
-                                  </div>                                 
-                              </div>
-                              <div class="generic_price_tag clearfix">  
-                                  <span class="price">
-                                      <span *ngIf="package.payment !== 'FREE'" class="sign">$</span>
-                                      <span class="currency">{{package.payment}}</span>
-                                      <span *ngIf="package.payment !== 'FREE'" class="month">/MON</span>
-                                  </span>
-                              </div>
-                             
-                          </div>                            
-
-                          <div class="generic_feature_list">
-                            <ul>
-                                  <li *ngFor="let option of package.options; let j=index;">{{option}}</li>
-                              </ul>
-                          </div>
-
-                          <div class="generic_price_btn clearfix">
-                            <a class="" href="javascript:void(0)" (click)="gotopage('signup')">Sign up</a>
-                          </div>
-
-                          
-                      </div>
-
-                          
-                  </div>
-
-            </div>  
-
-            
-        </div>
-    </section>  
-
-    <section>
-        <div class="container" style="margin-top:30px;">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="price-heading" >
-                        <h1 style="padding-bottom:0px !important">Frequently Asked Questions</h1>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="container">
-          <div class="row">
-            <div class="col-md-6">
-        
-          <div class="question" id="01" >Question?</div>
-          <div class="answer" ><span>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo omnis voluptatem consectetur quam tempore.  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo omnis voluptatem consectetur quam tempore</span></div>
-        </div>
-
-         <div class="col-md-6">
-        
-          <div class="question" id="01" >Question?</div>
-          <div class="answer" ><span>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo omnis voluptatem consectetur quam tempore.  </span></div>
-        </div>
-     
-    </div>
-
-     <div class="row">
-            <div class="col-md-6">
-        
-          <div class="question" id="01" >Question?</div>
-          <div class="answer" ><span>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo omnis voluptatem consectetur quam tempore. <br/>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo omnis voluptatem consectetur quam tempore</span></div>
-        </div>
-
-        <div class="col-md-6">
-        
-          <div class="question" id="01" >Question?</div>
-          <div class="answer" ><span>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo omnis voluptatem consectetur quam tempore. <br/>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo omnis voluptatem consectetur quam tempore</span></div>
-        </div>
-     
-    </div>
-
-     <div class="row">
-            <div class="col-md-6">
-        
-          <div class="question" id="01" >Question?</div>
-          <div class="answer" ><span>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo omnis voluptatem consectetur quam tempore. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo omnis voluptatem consectetur quam temporeLorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo omnis voluptatem consectetur quam tempore</span></div>
-        </div>
-
-        <div class="col-md-6">
-        
-          <div class="question" id="01" >Question?</div>
-          <div class="answer" ><span>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo omnis voluptatem consectetur quam tempore.</span></div>
-        </div>
-     
-    </div>
-  </div>
-
-        </section>   
-        <br/>        
- </div>
-
  
+    <div class="recipes-home-body inner-page" *ngIf="plan">
+        <div class="container">
+            <div class="row">
+            <div class="col-12">
+            <div class="recipe-set">
+    
+        <div *ngIf="plan.name">
+          <div class="center">
+            <label>
+              <span class="title-black center" >{{plan.name}}</span> <br>
+  
+            </label>
+          </div>
+        </div>
+        <div *ngIf="plan.name">
+          <div >
+            <div class="paddingse0">
+            <label>Total </label>
+            <input type="checkbox" class="paddingse0 chkbox" (change)="toggleNutrients('total')" [(ngModel)]="showTotal" />
+          </div>
+          </div>
+          <div  >
+            <div class="paddingse0">
+            <label>Per Serving</label>
+            <input type="checkbox" class="paddingse0 chkbox"  (change)="toggleNutrients('perserving')" [(ngModel)]="showPerServing" />
+          </div>
+          </div>
+        </div>
+  <ng-container  *ngFor="let itemday of plan['days']; let i = index ">
+   
+    <ng-container *ngIf="itemday && itemday.id && (itemday.breakfast || itemday.snack1  || itemday.lunch ||itemday.snack2 || itemday.dinner )">
+    <label ><p class="day-title">{{itemday.name}}</p></label>
+    <div class='bg-green' *ngIf="planDay">
+      <label>Nutritions</label>
+      <div (click)="itemday['expandT'] = !itemday['expandT']"  style="text-align:right">
+        <img style="margin-top:10px; width: 10px; height: 30px;" src="assets/more.png" />
+      </div>
+  
+    </div>
+  
+  
+    <div class="nutrient-panel " *ngIf="showTotal && itemday['expandT']"  >
+      <ng-container *ngFor="let nutrient1 of calculateTotalCalory(i); let n = index;">
+        <div class="nutrient-item"> 
+            <div class="label">{{SetFLU(nutrient1["name"])}}</div>
+            <div class="quantity">{{nutrient1.value.toFixed(2)}}</div>
+            <div class="unit"> {{nutrient1.unit}}</div>
+        </div>
+    
+      </ng-container>
+  </div>
+  
+  
+  <div class="nutrient-panel " *ngIf="showPerServing && itemday['expandT']"  >
+   <ng-container *ngFor="let nutrient2 of calculateTotalCaloryPServing(i); let n = index;">
+      <div class="nutrient-item">
+          <div class="label">{{SetFLU(nutrient2["name"])}}</div>
+          <div class="quantity">{{nutrient2.value.toFixed(2)}}</div>
+          <div class="unit"> {{nutrient2.unit}}</div>
+      </div>
+  
+    </ng-container>
+  </div>
+  
+  <div style='clear:both'></div>
+  <div class="row">
+  <div class="col-12 col-lg-4" *ngFor="let mealtype of mealTypeList; let j= index">
+    <div class="row meal-row" *ngIf="itemday && itemday[mealtype] && itemday[mealtype].label" style="border-bottom: 1px solid #CCC;">
+          <div class="col-12 col-lg-3" class="colv plan-seperator">
+            <p  style="margin-top:0px;padding-top:10px;color:#AAA;">{{SetFLU(mealtype)}}</p>
+          </div>
+          <div size="col-12 col-lg-8" class="colv " >
+            <p class="meal-title" (click)="gotopagedetails('recipedetails',itemday[mealtype])" *ngIf="itemday && itemday[mealtype].label">  {{SetFLU(itemday[mealtype].label)}}</p>
+           </div>
+           <div size="col-12 col-lg-1" class="colv" (click)="showPerServingMeal[mealtype]= true; itemday[mealtype].expand = !itemday[mealtype].expand" >
+            <img style="margin-top:10px" src="assets/more.png" />
+             </div>
+  
+  
+    </div>
+  
+      <div *ngIf="itemday[mealtype].expand" class="nutrient-panel ">
+  
+        <div class="nutrient-item">
+            <div class="label">Calories</div>
+            <div *ngIf="showTotal" class="quantity">{{itemday[mealtype].calories}}</div>
+            <div *ngIf="showPerServing" class="quantity">{{formatValuePServing(itemday[mealtype].calories, itemday[mealtype].yield)}}</div>
+            <div class="unit">Kcal</div>
+        </div>
+  
+        <ng-container *ngFor="let mmicro of itemday[mealtype]['paramMicro']; let m = index;">
+          <div class="nutrient-item">
+              <div class="label">{{mmicro.label}}</div>
+              <div *ngIf="showTotal" class="quantity">{{mmicro.totalP}}</div>
+              <div *ngIf="showPerServing" class="quantity">{{formatValuePServing(mmicro.totalP, itemday[mealtype].yield)}}</div>
+              <div class="unit"> {{mmicro.unit}}</div>
+          </div>
+  
+        </ng-container>
+      <ng-container *ngIf=" itemday[mealtype]['nutrientsSel']['length'] > 0">
+     
+        <ng-container *ngFor="let nutrient of itemday[mealtype]['nutrientsSel']; let n = index;">
+          <div class="nutrient-item"> <!--(click)="itemday[mealtype]['selNutrient'] = nutrient">-->
+              <div class="label">{{nutrient["value"]["label"]}}</div>
+              <div *ngIf="showTotal" class="quantity">{{nutrient.value.quantity.toFixed(2)}}</div>
+              <div *ngIf="showPerServing"class="quantity">{{formatValuePServing(nutrient.value.quantity,itemday[mealtype].yield) }}</div>
+              <div class="unit"> {{nutrient.value.unit}}</div>
+          </div>
+  
+        </ng-container>
+      </ng-container>
+  
+      </div>
+      <div style="clear:both"></div>
+     
+     
+  
+    </div>
+</div>
+  </ng-container>
+  
+  
+    <div *ngIf="itemday && itemday.id && (itemday.breakfast || itemday.snack1  || itemday.lunch ||itemday.snack2 || itemday.dinner )" class="sepbg sepbg{{i}}">
+  
+  </div>
+  </ng-container>
+  
+  
+  
+      </div>
+     
+    </div>
+    </div>
+    </div>
+    </div>
+    
+  
+  
+   
+
+  
+    

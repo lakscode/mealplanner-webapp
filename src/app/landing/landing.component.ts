@@ -327,12 +327,15 @@ loadMealPlan()
   planStatus: Array<any>= []; 
 getPlanStatus()
 {
+	console.log("in getPlanstatus");
+	console.log(this.currentUser);
  // var params = {};
   if(this.currentUser && this.currentUser["id"] !== null && this.currentUser["id"] !== "")
   {
 
 	var params = {"query": "SELECT mum.id mum_id, mp.id id, mp.name mpname, mp.tags FROM mealplan_user_mapping mum, mealplan mp where mum.userid = " + this.currentUser["id"] + " AND mp.id = mum.mealplanid AND mp.status=1 AND mum.status = 1 "};
 
+	console.log(params);
 	  var res =   this.dbService.getDatabyTablebyQuery("mealplan_user_mapping", params).subscribe(invData => setTimeout(() => {
    
 	if(invData !== null)

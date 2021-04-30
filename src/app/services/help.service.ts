@@ -667,4 +667,36 @@ SendEmailPasswordReset(email,data) {
     }
     return retVal;
   }
+
+
+  getMonth(date, num = null)
+	{
+		const monthNames = ["January", "February", "March", "April", "May", "June",
+		"July", "August", "September", "October", "November", "December"
+		];
+		var d = new Date();
+		if(date !== null)
+		 d = date;
+		var monthName= monthNames[d.getMonth()];
+		if(num !== null)
+		monthName = monthName.substr(0, num);
+		else
+		monthName = monthName.substr(0, 3);
+		return monthName;
+	}
+	getDay(date, num = null)
+	{
+		const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday",
+		"Saturday"];
+		var d = new Date();
+		if(date !== null)
+		 d = date;
+		var dayName= dayNames[d.getDay()];
+		if(num !== null)
+		dayName = dayName.substr(0, num);
+		else
+		dayName = dayName.substr(0, 3);
+		
+		return dayName;
+	}
 }
