@@ -18,12 +18,22 @@ export class LandingComponent implements OnInit {
 	recommendedRecipes: Array<any> = [];
 	healthLabels: Array<any> = [];
 	RecipeoftheDay: Array<any> = [];
-
+	currentUser: any ;
 constructor(private router: Router, private httpClient : HttpClient, private route: ActivatedRoute, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
 	
 	}
 
 	ngOnInit() {
+		this.currentUser =this.helpService.getCurrentUser();
+		if(this.currentUser !== null)
+		{
+		  if( this.currentUser["firstname"] !== "")
+		  this.currentUser["displayname"] = this.currentUser["firstname"];
+		  else if( this.currentUser["username"] !== "")
+		  this.currentUser["displayname"] = this.currentUser["username"];
+		//  console.log(this.currentUser["displayname"]);
+		}
+		this.getPlanStatus();
 		this.count++;
 		this.defaultRecipeofTheDay();
 		this.loadRecipeoftheDay();
@@ -283,6 +293,67 @@ formatLabels(str)
 	}
 	return retArr;
 }
+
+
+/************ new functions  */
+mealplans: Array<any> = [];
+
+
+loadMealPlan()
+  {
+    this.mealplans = [];
+   // this.recipes = recipesList;
+    var params = {"query": "SELECT * FROM mealplan where status=1 ORDER BY RAND() LIMIT 1"};
+    // //console.log(JSON.stringify(params));
+    var res =   this.dbService.getDatabyTablebyQuery("mealplan", params).subscribe(invData => setTimeout(() => {
+  
+     if(invData !== null && typeof(invData["body"]) !== "undefined" && invData["body"] !== null && invData["body"]["length"] > 0)
+       {
+         this.mealplans = [];
+         for(let i=0; i < invData["body"]["length"] ; i++)
+         {
+           this.mealplans.push(invData["body"][i]);
+           console.log(  this.mealplans);
+         }
+       }
+     }
+   
+    ));
+ 
+  }
+
+  planStatus: Array<any>= []; 
+getPlanStatus()
+{
+ // var params = {};
+  if(this.currentUser && this.currentUser["id"] !== null && this.currentUser["id"] !== "")
+  {
+
+	var params = {"query": "SELECT mum.id mum_id, mp.id id, mp.name mpname, mp.tags FROM mealplan_user_mapping mum, mealplan mp where mum.userid = " + this.currentUser["id"] + " AND mp.id = mum.mealplanid AND mp.status=1 AND mum.status = 1 "};
+
+	  var res =   this.dbService.getDatabyTablebyQuery("mealplan_user_mapping", params).subscribe(invData => setTimeout(() => {
+   
+	if(invData !== null)
+	{
+	 
+	  if(invData["body"]["length"] > 0)
+	  {
+		this.planStatus = invData["body"];
+	  	console.log(this.planStatus);
+	  }
+	  else
+	  {
+		this.loadMealPlan();
+	  }
+	}
+	else
+	{
+	  this.loadMealPlan();
+	}
+	}));
+  }
+}
+
 }
 
 	

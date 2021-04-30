@@ -137,18 +137,29 @@
 
 <!--trending plan-->
 <div class="trendings-banner">
+   
    <div class="container">
        <div class="trendings-card text-center wow animated bounceInDown">
-           <div class="chefs-card-inner">
-               <h2>trending plan for you</h2>
+         
+          <div class="chefs-card-inner">
+            <img class="badget" src="assets/bg/ribbon1.png" />
+               <h2>trending meal plan for you</h2>
                <div class="short-separator"></div>
                <img src="assets/images/chefs-hat.png" alt="hat"/>
-               <p>
-                   Nam ornare arcu turpis, nec congues with us <br/>
-                   Curabitur quis euismod mauris. Nulls <br/>
-                   eget semper vulputate.
-               </p>
-               <a class="read-more-bordered" href="javascript:void(0)">Read More</a>
+               <ng-container *ngIf="mealplans.length > 0">
+                  <p >
+                    {{mealplans[0]["name"]}} <br/>
+                    {{mealplans[0]["tags"]}} <br/>
+                     </p>
+                  <a class="read-more-bordered" href="javascript:void(0)">Read More</a>
+               </ng-container>
+               <ng-container *ngIf="planStatus.length > 0">
+                  <p >
+                    {{planStatus[0]["name"]}} <br/>
+                    {{planStatus[0]["tags"]}} <br/>
+                     </p>
+                  <a class="read-more-bordered" href="javascript:void(0)">Read More</a>
+               </ng-container>
            </div>
        </div>
    </div>
