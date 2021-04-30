@@ -154,7 +154,8 @@ loadRecipe(id)
 		
 			
 			
-			
+			console.log(this.searchRes);
+			console.log("this.searchRes");
 			 console.log(this.searchRes["ingredientLines"]);
 			 if(typeof(this.searchRes["ingredientLines"]) !== "undefined" && this.searchRes["ingredientLines"] !== "")
 			 {
@@ -190,11 +191,11 @@ loadRecipe(id)
 
 			 if(typeof(this.searchRes["calories"]) !== "undefined" && this.searchRes["calories"] !== "")
 			 {
-				this.total_calories = parseFloat(this.searchRes["calories"]);
+				this.calories = parseFloat(this.searchRes["calories"]);
 			 }
 			 if(typeof(this.searchRes["totalWeight"]) !== "undefined" && this.searchRes["totalWeight"] !== "")
 			 {
-				this.total_weight = parseFloat(this.searchRes["totalWeight"]);
+				this.totalWeight = parseFloat(this.searchRes["totalWeight"]);
 			 }
 
 			  this.searchRes["instructions"] = this.searchRes["s_instructions"];
@@ -552,14 +553,27 @@ saveRecipe()
 	{
 		params["healthLabels"] =this.searchRes["healthLabels"];
 	}
-	if(typeof(this.total_calories) !== "undefined"  &&  this.total_calories !== "")
+	if(typeof(this.searchRes.calories) !== "undefined"  &&  this.searchRes.calories !== "")
 	{
-		params["calories"] =this.total_calories;
+		params["calories"] =this.searchRes.calories;
 	}
-	if(typeof(this.total_weight) !== "undefined"  &&  this.total_weight !== "")
+	if(typeof(this.searchRes.totalWeight) !== "undefined"  &&  this.searchRes.totalWeight !== "")
 	{
-		params["totalWeight"] =this.total_weight;
+		params["totalWeight"] =this.searchRes.totalWeight;
 	}
+	if(typeof(this.searchRes.s_servings) !== "undefined"  &&  this.searchRes.s_servings !== "")
+	{
+		params["s_servings"] =this.searchRes.s_servings;
+	}
+	if(typeof(this.searchRes['mealtype']) !== "undefined"  &&  this.searchRes['mealtype'] !== "")
+	{
+		params["mealtype"] =this.searchRes['mealtype'];
+	}
+	if(typeof(this.searchRes.ispublic) !== "undefined"  &&  this.searchRes.ispublic !== "")
+	{
+		params["ispublic"] =this.searchRes.ispublic;
+	}
+
 	if(typeof(this.searchRes['totalNutrients']) !== "undefined"  &&  this.searchRes["totalNutrients"] !== "")
 	{
 		params["totalNutrients"] =this.searchRes["totalNutrients"];

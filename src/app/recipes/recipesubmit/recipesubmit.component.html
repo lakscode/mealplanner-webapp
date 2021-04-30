@@ -77,7 +77,7 @@
                     <div class="row">
                         <div class="col-12 col-lg-6">
                             <label for="upload-image">Upload Images</label>
-                            <input type="file" name="fileUpload" id="upload-image">
+                            <input type="file" name="fileUpload" id="upload-image" [(ngModel)] = 'searchRes.image'>
                         </div>
 
                         <div class="col-12 col-lg-6">
@@ -109,7 +109,7 @@
                     <div class="row">
                         <div class="col-12 col-lg-4">
                             <label for="servings">Servings</label>
-                            <input type="text" name="s_servings" id="s_servings">
+                            <input type="text" name="s_servings" id="s_servings" [(ngModel)]="searchRes.s_servings" >
                         </div>
                         <div class="col-12 col-lg-4">
                             <label for="calorietags">Calories </label>
@@ -173,7 +173,7 @@
                 
                         <div class="col-12 col-lg-6">
                             <label for="mealtype">Meal Type</label>            
-                            <select name="mealtype" [(ngModel)]="searchRes.mealtype" id="mealtype" class="advance-selectable" tabindex="0">
+                            <select name="mealtype" [(ngModel)]="mealtype" id="mealtype" class="advance-selectable" tabindex="0">
                                 <option value="t0" selected="selected">None</option>
                                 <option value="t1">Breakfast</option>
                                 <option value="t2">Pre-lunch Snack</option>
@@ -189,7 +189,7 @@
                             font-family: 'Lato', sans-serif;
                             font-weight: 400;
                             font-size: 16px;">Make Public?
-                                <input id="ispublic" name="ispublic" [(ngModel)] = 'ispublic' type="checkbox">
+                                <input id="ispublic" name="ispublic" [(ngModel)] = 'searchRes.ispublic' type="checkbox">
                                 <span class="checkmark"></span>
                             </label>  
                         </div>
