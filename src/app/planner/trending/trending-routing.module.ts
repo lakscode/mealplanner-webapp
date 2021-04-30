@@ -4,7 +4,7 @@ import { TrendingComponent } from './trending.component';
 
 const routes: Routes = [
   { 
-    path: 'trending', 
+    path: 'trending/:id', 
     component: TrendingComponent,
     data: { showSidebar: false } 
   }

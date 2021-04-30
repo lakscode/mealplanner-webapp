@@ -151,13 +151,13 @@
                <ng-container *ngIf="mealplans.length > 0">
                   <p class="plan-name">{{mealplans[0]["name"]}} </p>
                     <p class="plan-tags">{{mealplans[0]["tags"]}} <br/>
-                  <a class="read-more-bordered" href="javascript:void(0)">Read More</a>
+                  <a class="read-more-bordered" (click)="gotopage('trending', mealplans[0]['id'])" href="javascript:void(0)">Read More</a>
                </ng-container>
                <ng-container *ngIf="planStatus.length > 0">
                   <p class="plan-name">{{planStatus[0]["name"]}} </p>
                     <p class="plan-tags">{{planStatus[0]["tags"]}} <br/>
                      </p>
-                  <a class="read-more-bordered" href="javascript:void(0)">Read More</a>
+                  <a class="read-more-bordered" (click)="gotopage('schedule', planStatus[0]['id'])" href="javascript:void(0)">Read More</a>
                </ng-container>
            </div>
        </div>

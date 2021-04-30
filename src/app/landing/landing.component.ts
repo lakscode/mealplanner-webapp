@@ -269,7 +269,9 @@ constructor(private router: Router, private httpClient : HttpClient, private rou
 	gotoRecipes(id) {
 		this.router.navigate(['recipes', {dietLabels:id}]);
 	}
-
+	gotopage(page, id) {
+		this.router.navigate([page, id]);
+	}
 	formatValue(str)
 {
 //	console.log(str);
