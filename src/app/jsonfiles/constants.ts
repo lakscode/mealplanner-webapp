@@ -7,5 +7,37 @@ export const constants = {
   nutrientDbFields:["fat","carbs","protein","cholesterol","sodium","calcium","magnesium","potassium","iron","zinc","phosphorus","vitamin_a","vitamin_c","thiamin_b1","riboflavin_b2","niacin_b3","vitamin_b6","folate_equivalent_total","folate_food","folic_acid","vitamin_b12","vitamin_d","vitamin_e","vitamin_k","sugar_alcohols",
         "water","energy","saturated","monounsaturated","polyunsaturated","fiber","sugars","sugars_added"],
   edamam_nutrient_api :"https://api.edamam.com/api/nutrition-data",
-  healthLabelsNew: ["Vegetarian","Pescatarian","Egg-Free","Peanut-Free", "Tree-Nut-Free","Soy-Free","Fish-Free","Shellfish-Free","Pork-Free","Red-Meat-Free","Crustacean-Free","Celery-Free","Mustard-Free", "Sesame-Free","Lupine-Free","Mollusk-Free","Alcohol-Free", "Kosher","Kidney-Friendly","Gluten-Free", "Wheat-Free","Vegan","Dairy-Free","Sugar-Conscious", "Immuno-Supportive","No oil added","Low Potassium", "Keto-Friendly","FODMAP-Free"]
+  healthLabelsNew: ["Vegetarian","Pescatarian","Egg-Free","Peanut-Free", "Tree-Nut-Free","Soy-Free","Fish-Free","Shellfish-Free","Pork-Free","Red-Meat-Free","Crustacean-Free","Celery-Free","Mustard-Free", "Sesame-Free","Lupine-Free","Mollusk-Free","Alcohol-Free", "Kosher","Kidney-Friendly","Gluten-Free", "Wheat-Free","Vegan","Dairy-Free","Sugar-Conscious", "Immuno-Supportive","No oil added","Low Potassium", "Keto-Friendly","FODMAP-Free"],
+
+  healthLabelsWithImages: [
+    {"name":"Vegetarian", "image":"assets/images/vegetarian.png"},
+    {"name":"Pescatarian", "image":"assets/images/pescatarian.png"},
+    {"name":"Egg-Free", "image":"assets/images/free-egg.png"},
+    {"name":"Peanut-Free", "image":"assets/images/peanut-free.png"},
+    {"name":"Vegan","image":"assets/images/vegan.png"},
+    {"name":"Tree-Nut-Free", "image":"assets/images/free-nut.png"},
+    {"name":"Dairy-Free","image":"assets/images/free-dairy.png"},
+    {"name":"Keto-Friendly","image":"assets/images/keto-diet.png"},
+    {"name":"Gluten-Free", "image":"assets/images/free-gluten.png"},   
+    {"name":"Alcohol-Free", "image":"assets/menu/alcoholfree.png"},     
+    {"name":"Soy-Free","image":"assets/images/tick.png"},
+    {"name":"Fish-Free","image":"assets/images/tick.png"},
+    {"name":"Shellfish-Free","image":"assets/images/tick.png"},
+    {"name":"Pork-Free","image":"assets/images/tick.png"},
+    {"name":"Red-Meat-Free","image":"assets/images/tick.png"},
+    {"name":"Crustacean-Free","image":"assets/images/tick.png"},
+    {"name":"Celery-Free","image":"assets/images/tick.png"},
+    {"name":"Mustard-Free", "image":"assets/images/tick.png"},
+    {"name":"Sesame-Free","image":"assets/images/tick.png"},
+    {"name":"Lupine-Free","image":"assets/images/tick.png"},
+    {"name":"Mollusk-Free","image":"assets/images/tick.png"},
+    {"name":"Kosher","image":"assets/images/tick.png"},
+    {"name":"Kidney-Friendly","image":"assets/images/tick.png"},
+    {"name":"Wheat-Free","image":"assets/images/tick.png"},   
+    {"name":"Sugar-Conscious", "image":"assets/images/tick.png"},
+    {"name":"Immuno-Supportive","image":"assets/images/tick.png"},
+    {"name":"No oil added","image":"assets/images/tick.png"},
+    {"name":"Low Potassium", "image":"assets/images/tick.png"}, 
+    {"name":"FODMAP-Free","image":"assets/images/tick.png"}
+  ]
 };

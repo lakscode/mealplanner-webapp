@@ -106,14 +106,17 @@ constructor(private router: Router, private httpClient : HttpClient, private rou
 	{
 	  this.healthLabels = [];
 	
-				 var arrLabel = constants.healthLabelsNew;
+				 var arrLabel = constants.healthLabelsWithImages;
 				 if(arrLabel.length > 0)
 				 {
 				   for(let l=0; l < arrLabel.length; l++)
 				   {
 					
-						var img = "assets/menu/veg.png";
-						if(arrLabel[l].toString().toLowerCase().indexOf("vegetarian") !== -1)
+
+				
+						/*var img = "assets/menu/veg.png";
+						
+						if(arrLabel[l]["name"].toString().toLowerCase().indexOf("vegetarian") !== -1)
 						{
 						  img = "assets/menu/vegetarian1.jpg";
 						}
@@ -137,8 +140,9 @@ constructor(private router: Router, private httpClient : HttpClient, private rou
 						{
 						  img = "assets/menu/balanced-diet.png";
 						}
+						*/
 					 //   console.log(img);
-					  this.healthLabels.push({"label":arrLabel[l], "image":img});
+					  this.healthLabels.push({"label":arrLabel[l]["name"], "image":arrLabel[l]["image"]});
 					  
 					
 					
