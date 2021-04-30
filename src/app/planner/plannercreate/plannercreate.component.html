@@ -171,6 +171,13 @@
                                 <div style='width:calc(100%)'>
                                     <a class="hmp-link--no-style" style="cursor: -webkit-grabbing; cursor: grabbing;"> 
                                 <div class="recipe-content recipe-content--draggable card-body">
+                                    <div class="recipe-image-container recipe-drag-container" id="dragp_{{page_num}}_{{k}}">
+                                        <img  class="recipe-image"
+                                        id="drag_{{page_num}}_{{k}}"
+                                        src="assets/images/drag.png" style="width:80%" title="Drag Recipe"
+                                        alt="{{recipe.label}} Image"  draggable="true" 
+                                        (dragstart)="drag($event, k)" ></div>
+
                                     <div class="recipe-image-container mobile" id="imagep_{{page_num}}_{{k}}">
                                             <img  class="recipe-image"
                                             id="picture_{{page_num}}_{{k}}"
@@ -260,7 +267,15 @@
                         <input [(ngModel)] = 'showImages' type="checkbox">
                         <span class="checkmark"></span>
                     </label>-->
-
+                    <label class="container" style=" text-align: left;
+                    display: inline-block;
+                    width: 240px;
+                    font-family: 'Lato', sans-serif;
+                    font-weight: 400;
+                    font-size: 16px;">Show Nutrients per Serving
+                        <input [(ngModel)] = 'showNutrientsPServing' type="checkbox">
+                        <span class="checkmark"></span>
+                    </label>
                     <label class="container" style=" text-align: left;
                     display: inline-block;
                     width: 155px;
@@ -294,10 +309,10 @@
             <div class="meal-row-wrapper meal-row__week-days">
                 <div class="dayname" style="border-bottom:0px"></div>
                 <div class="meal-plan-row row">
-                    <div [ngClass]="showNutrients?'meal-plan-col col mealplan-col':'meal-plan-col col mealplan-col20'" *ngFor="let mealtype of mealsList; let d =index;">
+                    <div [ngClass]="showNutrients || showNutrientsPServing?'meal-plan-col col mealplan-col':'meal-plan-col col mealplan-col20'" *ngFor="let mealtype of mealsList; let d =index;">
                         <div class="meal-day"><span>{{mealtype.name}}</span></div>
                     </div>
-                    <div *ngIf="showNutrients" class="meal-plan-col col mealplan-col" >
+                    <div *ngIf="showNutrients || showNutrientsPServing" class="meal-plan-col col mealplan-col" >
                         <div class="meal-day"><span>Total</span></div>
                     </div>
                 </div>
@@ -310,7 +325,7 @@
                     <div class="meal-plan-column-container" style="background-color:#fff">
                         <div class="meal-plan-row">
                          
-                            <div [ngClass]="showNutrients?'meal-plan-slot mealplan-col':'meal-plan-slot mealplan-col20'" *ngFor="let meal of item.meals; let c= index;" >
+                            <div [ngClass]="showNutrients || showNutrientsPServing?'meal-plan-slot mealplan-col':'meal-plan-slot mealplan-col20'" *ngFor="let meal of item.meals; let c= index;" >
                                 <div *ngIf="meal.recipe">
                                     <div draggable="true">
                                         <div class="recipe-image-wrapper ">
@@ -328,12 +343,24 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div *ngIf='meal.recipe.calories > 0' class="calories-item">{{meal.recipe.calories}} Calories</div>
+                                    <div *ngIf='meal.recipe.calories > 0' class="calories-item">
+                                        <span *ngIf="showNutrients">
+                                            Calories{{meal.recipe.calories}} Kcal <br>
+                                        </span>
+                                        <span *ngIf="showNutrientsPServing">
+                                        Calories<br> per Serving<br>{{formatValPServing(meal.recipe.calories, meal.recipe.yield)}} Kcal 
+                                        </span>
+                                    </div>
                                     <div class="minerals" *ngIf="showNutrients">
-                                        <div style='float:left; padding:2px; margin-right:5px;display:flex; align-items: center;' *ngFor="let paramM of meal.recipe.paramMicro"> <div [ngStyle] ="{'background-color':getColorCode(paramM)}" style="display:inline-block; width:10px; height:10px;  margin-right:3px; "></div>
+                                        <div style="clear:both"></div>
+                                        <div style="display:block">
+                                        <p  style="font-weight:bold">Nutrients</p>
+                                        </div>
+                                        <div style="clear:both"></div>
+                                        <!--<div style='float:left; padding:2px; margin-right:5px;display:flex; align-items: center;' *ngFor="let paramM of meal.recipe.paramMicro"> <div [ngStyle] ="{'background-color':getColorCode(paramM)}" style="display:inline-block; width:10px; height:10px;  margin-right:3px; "></div>
                                         <a href="javascript:void(0)" title="{{setFLU(paramM.label)}} {{paramM.totalP}} {{paramM.unit}}">{{formatVal(paramM.totalP,2)}} {{paramM.unit}} </a>
                            
-                                        </div>
+                                        </div>-->
                                         <ng-container *ngFor="let paramN of meal.recipe.minerals">
                                        
                                             <div *ngIf='paramN.value > 0' style='float:left; padding:2px; margin-right:5px;display:flex; align-items: center;' > <div [ngStyle] ="{'background-color':getColorCode(paramN)}" style="display:inline-block; width:10px; height:10px;  margin-right:3px; "></div>
@@ -342,6 +369,26 @@
                                         </div>
                                         </ng-container>
                                     </div>
+
+                                    <div class="minerals" *ngIf="showNutrientsPServing">
+                                        <div style="clear:both"></div>
+                                        <div style="display:block">
+                                        <p style="font-weight:bold">Nutrients per serving</p>
+                                        </div>
+                                        <div style="clear:both"></div>
+                                        <!--<div style='float:left; padding:2px; margin-right:5px;display:flex; align-items: center;' *ngFor="let paramM of meal.recipe.paramMicro"> <div [ngStyle] ="{'background-color':getColorCode(paramM)}" style="display:inline-block; width:10px; height:10px;  margin-right:3px; "></div>
+                                        <a href="javascript:void(0)" title="{{setFLU(paramM.label)}} {{paramM.totalP}} {{paramM.unit}}">{{formatValPServing(paramM.totalP,meal.recipe.yield)}} {{paramM.unit}} </a>
+                           
+                                        </div>-->
+                                        <ng-container *ngFor="let paramN of meal.recipe.minerals">
+                                       
+                                            <div *ngIf='paramN.value > 0' style='float:left; padding:2px; margin-right:5px;display:flex; align-items: center;' > <div [ngStyle] ="{'background-color':getColorCode(paramN)}" style="display:inline-block; width:10px; height:10px;  margin-right:3px; "></div>
+                                            <a href="javascript:void(0)" title="{{setFLU(paramN.name)}} {{paramN.value}} {{paramN.unit}}">{{formatValPServing(paramN.value,meal.recipe.yield)}} {{paramN.unit}} </a>
+                            
+                                        </div>
+                                        </ng-container>
+                                    </div>
+
                                 </div>
                                 <div style="min-height:130px" *ngIf="!meal.recipe" id="drop-{{r}}-{{c}}"  (drop)="drop($event, r, c)" (dragover)="allowDrop($event)">                             
                                     <div id="image-placeholder-{{r}}-{{c}}" class="recipe-image-placeholder card">
@@ -353,16 +400,35 @@
                                 <div class="calories-slot-sum">0 Calories</div>
                             </div>
                             </div>
-                            <div class="meal-plan-slot mealplan-col"  *ngIf="showNutrients">                              
+                            <div class="meal-plan-slot mealplan-col"  *ngIf="showNutrients || showNutrientsPServing">                              
                             
-                                <div class="minerals">
+                                <div class="minerals" *ngIf="showNutrients">
+                                    <div style="clear:both"></div>
+                                    <div style="display:block">
+                                    <p  style="font-weight:bold">Total Nutrients<br>
+                                        per day</p>
+                                    </div>
+                                    <div style="clear:both"></div>
                                     <div style='float:left; padding:2px; margin-right:5px;display:flex; align-items: center;' *ngFor="let totalM of calculateTotalCalory(r) "> <div [ngStyle] ="{'background-color':getColorCode(totalM)}" style="display:inline-block; width:10px; height:10px;  margin-right:3px; "></div>
                                         <a href="javascript:void(0)" title="Total {{setFLU(totalM.name)}} {{formatValue(totalM.value)}} {{totalM.unit}}">{{formatValue(totalM.value)}} {{totalM.unit}} </a>
                                     
                                         </div>
 
                                 </div>
-                           
+                                <div class="minerals" *ngIf="showNutrientsPServing">
+                                    <div style="clear:both"></div>
+                                    <div style="display:block">
+                                    <p  style="font-weight:bold">Total Nutrients  <br>
+                                        per Day <br>
+                                        per serving</p>
+                                    </div>
+                                    <div style="clear:both"></div>
+                                    <div style='float:left; padding:2px; margin-right:5px;display:flex; align-items: center;' *ngFor="let totalM1 of calculateTotalCaloryPServing(r) "> <div [ngStyle] ="{'background-color':getColorCode(totalM1)}" style="display:inline-block; width:10px; height:10px;  margin-right:3px; "></div>
+                                        <a href="javascript:void(0)" title="Total {{setFLU(totalM1.name)}} {{formatValue(totalM1.value)}} {{totalM1.unit}}">{{formatValue(formatValPServing(totalM1.value, totalM1.yield))}} {{totalM1.unit}} </a>
+                                    
+                                        </div>
+
+                                </div>
                                 
                             </div>
                        </div>
