@@ -685,7 +685,7 @@ formatVal(str)
 		  this.instructions.splice(index, 1);
 	  }
 
-	  if(type == "ings")
+	  if(type == "ing")
 	  {
 		  this.ingredients.splice(index, 1);
 	  }
