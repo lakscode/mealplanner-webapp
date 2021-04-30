@@ -208,6 +208,27 @@ cursor: pointer;
   position: absolute;
     z-index: 999;
     width: 150px;
-    right: -30px;
-    top: -45px;
+    right: -6px;
+    top: -5px;
+}
+.plan-name
+{
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: #78C04A;
+    font-family: "Lato", sans-serif;
+    font-weight: 900;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 18px;
+    text-transform: uppercase;
+    font-style: normal;
+    line-height: 30px;
+}
+
+.plan-tags
+{
+  font-size: 16px;
+  color: #77c14b;
+  text-decoration: none;
 }

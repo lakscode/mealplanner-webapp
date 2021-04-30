@@ -56,6 +56,10 @@ import { RecipesubmitModule } from './recipes/recipesubmit/recipesubmit.module';
 import { TestimonialsModule } from './testimonials/testimonials.module'; 
 import { PlannerlistModule } from './planner/plannerlist/plannerlist.module'; 
 import { PlannercreateModule } from './planner/plannercreate/plannercreate.module'; 
+import { ScheduleModule } from './planner/schedule/schedule.module'; 
+import { TrendingModule } from './planner/trending/trending.module'; 
+
+
 import { PricingModule } from './pricing/pricing.module'; 
 import { OurteamModule } from './ourteam/ourteam.module'; 
 import { MyinfoModule } from './myinfo/myinfo.module'; 
@@ -109,6 +113,8 @@ import { AdminModule } from './admin/admin.module';
 	TestimonialsModule,
 	PlannerlistModule,
 	PlannercreateModule,
+	ScheduleModule,
+	TrendingModule,
 	PricingModule,
 	OurteamModule,
 	ModalModule,

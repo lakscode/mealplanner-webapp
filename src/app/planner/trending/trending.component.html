@@ -1,0 +1,124 @@
+<div id="generic_price_table" style="background: #F8F6F5;margin-top:0px;margin-bottom:0px">   
+<section>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="price-heading clearfix">
+                        <h1>Pricing</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            
+            <!--BLOCK ROW START-->
+            <div class="row">
+
+
+                 
+                <div class="col-md-4"  *ngFor="let package of packages; let i = index;">
+                      <div class="generic_content active  clearfix packageitem"><!--active-->
+                          <div class="generic_head_price clearfix">
+                               <div class="generic_head_content clearfix">
+                                  <div class="head_bg"></div>
+                                  <div class="head">
+                                      <span>{{package.name}}</span>
+                                  </div>                                 
+                              </div>
+                              <div class="generic_price_tag clearfix">  
+                                  <span class="price">
+                                      <span *ngIf="package.payment !== 'FREE'" class="sign">$</span>
+                                      <span class="currency">{{package.payment}}</span>
+                                      <span *ngIf="package.payment !== 'FREE'" class="month">/MON</span>
+                                  </span>
+                              </div>
+                             
+                          </div>                            
+
+                          <div class="generic_feature_list">
+                            <ul>
+                                  <li *ngFor="let option of package.options; let j=index;">{{option}}</li>
+                              </ul>
+                          </div>
+
+                          <div class="generic_price_btn clearfix">
+                            <a class="" href="javascript:void(0)" (click)="gotopage('signup')">Sign up</a>
+                          </div>
+
+                          
+                      </div>
+
+                          
+                  </div>
+
+            </div>  
+
+            
+        </div>
+    </section>  
+
+    <section>
+        <div class="container" style="margin-top:30px;">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="price-heading" >
+                        <h1 style="padding-bottom:0px !important">Frequently Asked Questions</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6">
+        
+          <div class="question" id="01" >Question?</div>
+          <div class="answer" ><span>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo omnis voluptatem consectetur quam tempore.  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo omnis voluptatem consectetur quam tempore</span></div>
+        </div>
+
+         <div class="col-md-6">
+        
+          <div class="question" id="01" >Question?</div>
+          <div class="answer" ><span>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo omnis voluptatem consectetur quam tempore.  </span></div>
+        </div>
+     
+    </div>
+
+     <div class="row">
+            <div class="col-md-6">
+        
+          <div class="question" id="01" >Question?</div>
+          <div class="answer" ><span>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo omnis voluptatem consectetur quam tempore. <br/>
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo omnis voluptatem consectetur quam tempore</span></div>
+        </div>
+
+        <div class="col-md-6">
+        
+          <div class="question" id="01" >Question?</div>
+          <div class="answer" ><span>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo omnis voluptatem consectetur quam tempore. <br/>
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo omnis voluptatem consectetur quam tempore</span></div>
+        </div>
+     
+    </div>
+
+     <div class="row">
+            <div class="col-md-6">
+        
+          <div class="question" id="01" >Question?</div>
+          <div class="answer" ><span>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo omnis voluptatem consectetur quam tempore. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo omnis voluptatem consectetur quam temporeLorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo omnis voluptatem consectetur quam tempore</span></div>
+        </div>
+
+        <div class="col-md-6">
+        
+          <div class="question" id="01" >Question?</div>
+          <div class="answer" ><span>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo omnis voluptatem consectetur quam tempore.</span></div>
+        </div>
+     
+    </div>
+  </div>
+
+        </section>   
+        <br/>        
+ </div>
+
+ 
