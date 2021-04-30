@@ -51,18 +51,16 @@
                                   </div>
                                   <p style="clear:both;margin-top:10px;"></p>
                                   <div class="recipe-details" *ngIf="RecipeoftheDay[0].calories">
-                                  <p>Calories:</p>
+                                    <p>Calories:</p>
+                                    <p style="display:block;">
+                                        <a href="javascript:void(0);" class="hlabel">{{formatValue(RecipeoftheDay[0].calories)}} Kcal</a> 
+                                    </p>
+                                  <p>Calories per Serving:</p>
                                   <p style="display:block;">
-                                      <a href="javascript:void(0);"  class="hlabel">{{formatValue(RecipeoftheDay[0].calories)}} kcal</a> 
+                                      <a href="javascript:void(0);" class="hlabel">{{formatValuePServing(RecipeoftheDay[0].calories, RecipeoftheDay[0].yield)}} Kcal</a> 
                                   </p>
-                              </div>
-                                  <p style="clear:both;margin-top:10px;"></p>
-                                  <div class="recipe-details" *ngIf="RecipeoftheDay[0].yield">
-                                  <p>Servings:  </p>
-                                  <p style="display:block;">
-                                      <a href="javascript:void(0);"  class="hlabel">{{RecipeoftheDay[0].yield}}</a> 
-                                  </p>
-                              </div>
+                                 </div>
+                                  
                                   <p style="clear:both;margin-top:10px;"></p>
                                   <div class="recipe-details" *ngIf="RecipeoftheDay[0].dietLabels">
                                   <p>Diet Labels:</p>

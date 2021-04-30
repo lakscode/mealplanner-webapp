@@ -80,7 +80,7 @@ constructor(private router: Router, private httpClient : HttpClient, private rou
 	  this.RecipeoftheDay = [];
 	  var params = {};
     //params["query"] = "select id, image, label, dietLabels, s_instructions from recipes where s_instructions != '' order by rand() limit 1";
-	params["query"] = "select * from recipes where s_instructions != '' order by rand() limit 1";
+	params["query"] = "select id, label, image, healthLabels, dietLabels, calories, totalWeight, yield from recipes where s_instructions != '' order by rand() limit 1";
 
 	 var res =   this.dbService.getDatabyTablebyQuery("recipes", params).subscribe(invData => setTimeout(() => {
    
@@ -96,7 +96,12 @@ constructor(private router: Router, private httpClient : HttpClient, private rou
 	 }));
   
 	}
-
+	formatValuePServing(str, servings)
+	{
+  
+	  var retVal = this.helpService.formatValuePServing(str, servings);
+	  return retVal;
+	}
 	loadHealthLabels()
 	{
 	  this.healthLabels = [];
