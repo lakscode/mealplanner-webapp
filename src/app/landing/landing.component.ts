@@ -8,9 +8,9 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import {constants} from "../jsonfiles/constants"
 @Component({
-	selector: 'app-landing1',
-	templateUrl: './landing1.component.html',
-	styleUrls: ['./landing1.component.scss']
+	selector: 'app-landing',
+	templateUrl: './landing.component.html',
+	styleUrls: ['./landing.component.scss']
 })
 export class LandingComponent implements OnInit {
 	count: any = 0;
