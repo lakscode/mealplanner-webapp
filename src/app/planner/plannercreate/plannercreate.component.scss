@@ -1486,3 +1486,11 @@ background-color: $orange;
   color: #CCC;
   display:none;
 }
+
+.overflow-text {
+  //width: 100px;
+  max-width:40ch;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
