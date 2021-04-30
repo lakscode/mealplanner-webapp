@@ -184,3 +184,22 @@
 .specialty-label:hover{
 cursor: pointer;
 }
+
+.trendings-banner 
+{
+  background-image: url(../../assets/bg/background6.jpg);
+  background-size: cover;
+  background-position: center bottom;
+  position: relative;
+  overflow: hidden;
+}
+.trendings-card {
+  position: relative;
+  z-index: 12;
+  margin-top: 120px;
+  margin-bottom: 120px;
+  max-width: 410px;
+  background: #ffffff;
+  padding: 15px;
+  color: #000000;
+}

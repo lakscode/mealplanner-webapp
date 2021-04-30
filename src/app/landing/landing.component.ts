@@ -5,14 +5,14 @@ import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } 
 import { DBService } from '../dbservices/db.service';
 import { HelpService } from '../services/help.service';
 import { HttpClient } from '@angular/common/http';
-import { environment } from './../../environments/environment';
+import { environment } from '../../environments/environment';
 import {constants} from "../jsonfiles/constants"
 @Component({
 	selector: 'app-landing1',
 	templateUrl: './landing1.component.html',
 	styleUrls: ['./landing1.component.scss']
 })
-export class Landing1Component implements OnInit {
+export class LandingComponent implements OnInit {
 	count: any = 0;
 	sliderList: Array<any> = [];
 	recommendedRecipes: Array<any> = [];

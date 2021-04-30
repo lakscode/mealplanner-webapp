@@ -46,7 +46,7 @@ import { HomeModule } from './home/home.module';
 import { FeaturesModule } from './features/features.module'; 
 
 
-import { Landing1Module } from './landing1/landing1.module'; 
+import { LandingModule } from './landing/landing.module'; 
 
 import { RecipesModule } from './recipes/recipes/recipes.module'; 
 import { MyRecipesModule } from './recipes/myrecipes/myrecipes.module'; 
@@ -86,7 +86,7 @@ import { AdminModule } from './admin/admin.module';
     LoginModule,
 	SignupModule,
     BenefitsModule,
-	Landing1Module,
+	LandingModule,
 	ToastrModule.forRoot({
 		timeOut: 1000,
 	}),
