@@ -1494,3 +1494,8 @@ background-color: $orange;
   overflow: hidden;
   text-overflow: ellipsis;
 }
+.overflow-text:hover{
+  overflow: visible; 
+  white-space: normal; 
+  width: auto;
+}

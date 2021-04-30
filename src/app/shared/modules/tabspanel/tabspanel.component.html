@@ -95,9 +95,9 @@
                 <a (click)="gotoRecipeDetails(recipe.id)"><img style="width:84px; height:64px;cursor:pointer" src="{{formatImage(recipe.image, 's')}}" alt="image for {{recipe.label}}"/></a>
             </div>
             <div class="right-side">
-                <h3><a style="cursor:pointer" (click)="gotoRecipeDetails(recipe.id)">{{recipe.label}}</a></h3>
-                <p>Calories per serving {{formatValuePServing(recipe.calories, recipe.yield)}}</p>
-                <div class="rating-box" *ngIf="recipe.displayrating">
+                <h3 class="overflow-text" style="cursor:pointer" (click)="gotoRecipeDetails(recipe.id)">{{recipe.label}}</h3>
+                <p>Calories/serving: <b>{{formatValuePServing(recipe.calories, recipe.yield)}}</b></p>
+                <div class="rating-box" style="color:orange" *ngIf="recipe.displayrating">
                     <span class="rating-icons" >
                         <i *ngIf="recipe.displayrating >=1" class="fa fa-star"></i>
                         <i *ngIf="recipe.displayrating >=2" class="fa fa-star"></i>
@@ -106,7 +106,7 @@
                         <i *ngIf="recipe.displayrating >=5" class="fa fa-star"></i>
 
                       </span>
-                    <span *ngIf="recipe.displayrating" class="rating-figure">{{recipe.displayrating}}</span>
+                    <!-- <span *ngIf="recipe.displayrating" class="rating-figure">{{recipe.displayrating}}</span> -->
                 </div>
             </div>
         </div>
