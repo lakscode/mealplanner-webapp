@@ -372,7 +372,7 @@ endIndex = startIndex+ endIndex;
     params["instructions"]="notempty";
    }
 
-   params["returnfields"] = " id, label, image, healthLabels, s_instructions, dietLabels, calories";
+   params["returnfields"] = " id, label, image, healthLabels, s_instructions, dietLabels, calories, yield";
 
 	 var dietlabels = "";
 	 for(let m=0; m <this.dietLabelsList.length; m++)
@@ -451,7 +451,7 @@ endIndex = startIndex+ endIndex;
   {
 	  var params1 = {};
 
-	  var query = "select id, label, image, healthLabels, s_instructions, dietLabels, calories from recipes ";
+	  var query = "select id, label, image, healthLabels, s_instructions, dietLabels, calories, yield from recipes ";
 	  var where = " where totalNutrients != '' AND digest != ''  AND s_instructions != '' " ;
 	  if(this.maxcalories > 0)
 	  where +=  " AND calories >= " + this.maxcalories
@@ -596,12 +596,25 @@ endIndex = startIndex+ endIndex;
   }
   formatVal(str)
   {
-	var retVal = str;
-	if(str !== "")
-	{
-	  retVal = Math.ceil(parseFloat(str));
-	}
-	return retVal;
+	return this.helpService.formatValue(str);
+  }
+
+ 
+	formatValuePServing(str, servings)
+  {
+
+    var retVal = str;
+    if(typeof(str) !== "undefined" && str !== "")
+    {
+      retVal = parseFloat(str);
+     
+      if(typeof(servings) !== "undefined" && servings !== "" && servings !== 0)
+      { 
+        retVal = (parseFloat(str) /  servings).toFixed(2);
+      
+      }
+    }
+    return retVal;
   }
 }
 

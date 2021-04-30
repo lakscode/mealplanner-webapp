@@ -177,9 +177,13 @@
                                 <p innerHTML="{{limitTo(recipe1.s_instructions, 200)}}">
 
                                 </p>
+                                <p>Calories: {{recipe1.calories}} Kcal</p>
                                 <div class="meta-listing">
-                                    <div style="display:inline-block;color: #5e676b;">
+                                    <!--<div style="display:block;color: #5e676b;">
                                         Calories: {{recipe1.calories}} Kcal
+                                    </div>-->
+                                    <div style="display:inline-block;color: #5e676b;">
+                                        Calories per Serving: {{formatValuePServing(recipe1.calories, recipe1.yield)}} Kcal
                                     </div>
                                     <!--<ul class="post-meta">
                   <li>Calories: {{recipe1.calories}}</li>

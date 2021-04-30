@@ -640,5 +640,31 @@ SendEmailPasswordReset(email,data) {
 		}
 	
 	}
+	formatValue(str)
+	{
+  
+	  var retVal = str;
+	  if(typeof(str) !== "undefined" && str !== "" )
+		{ 
+		 retVal = parseFloat(str).toFixed(2);
+		
+		}
+	  return retVal;
+	}
+	formatValuePServing(str, servings)
+  {
 
+    var retVal = str;
+    if(typeof(str) !== "undefined" && str !== "")
+    {
+      retVal = parseFloat(str);
+     
+      if(typeof(servings) !== "undefined" && servings !== "" && servings !== 0)
+      { 
+        retVal = (parseFloat(str) /  servings).toFixed(2);
+      
+      }
+    }
+    return retVal;
+  }
 }
