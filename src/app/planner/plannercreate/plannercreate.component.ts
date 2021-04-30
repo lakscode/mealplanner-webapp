@@ -1231,7 +1231,7 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 				}
 				}*/
 
-				console.log(JSON.stringify(mMacro1));
+		
 				if(typeof(dItem["recipe"]["minerals"]) !== "undefined")
 				{
 				for(let j=0; j < dItem["recipe"]["minerals"]["length"]; j++)
@@ -1249,11 +1249,11 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 				//	console.log(mMacro);
 				}
 				}
-				console.log(JSON.stringify(mMacro1));
+				
 			}
 		}
 	}
-	console.log(mMacro1);
+	
 	return mMacro1;
 	}
 
