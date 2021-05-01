@@ -3,7 +3,7 @@
    <div class="container">
       <div class="container-food-tabs">
          <section class="row custom-row-food-tabs">
-            <div class="col-md-7 col-lg-8">
+            <div class="col-12 col-lg-8">
                <!--<div class="recipe-of-day animated wow fadeInLeft" *ngIf="RecipeoftheDay && RecipeoftheDay.length > 0">
                   <a href="javascript:void(0)"><img style="width: 100%; height: 418px;" src="{{RecipeoftheDay[0]['image']}}" alt="Recipe of the day"/></a>
                   <div class="recipe-contents-outer">
@@ -23,10 +23,10 @@
 
 
                <div class="row fadeInLeft animated newanim recipeDay-outer" *ngIf='RecipeoftheDay && RecipeoftheDay[0]' >
-                  <div class="col-12 col-lg-7" style="padding-left:0px; padding-right:0px;">
+                  <div class="col-12 col-md-7 col-lg-7" style="padding-left:0px; padding-right:0px;">
                       <img src="{{RecipeoftheDay[0].image}}" alt="slide" style='width:100%;max-height:440px'>       
                   </div>
-                  <div class="col-12 col-lg-5"  style="padding-left:0px; padding-right:0px; background: #ffffff;">
+                  <div class="col-12 col-md-5 col-lg-5"  style="padding-left:0px; padding-right:0px; background: #ffffff;">
                       <div class="outerbox" style="background-image:url('{{RecipeoftheDay[0].image}}');">
                           <div class="innerbox">
                               <!--<p class="tag">Recipe Details</p>-->
@@ -84,7 +84,7 @@
               </div>
 
             </div>
-            <div class="col-md-5 col-lg-4 custom-col-food-tabs  recipeDay-outer">
+            <div class="col-12 col-lg-4 custom-col-food-tabs  recipeDay-outer">
                <!--tabs start-->
                <app-tabspanel></app-tabspanel>
                <!--tabs end-->

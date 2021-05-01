@@ -432,7 +432,7 @@ formatLabels(item)
 			{
 				if(this.labels["dietLabels"].indexOf(tDiet[c]) == -1)
 				{
-					tDiet[c] = tDiet[c].replace("_", "-");
+					tDiet[c] = tDiet[c].replaceAll("_", "-");
 					this.labels["dietLabels"] += "~" + tDiet[c];
 				}
 			}
@@ -452,7 +452,7 @@ formatLabels(item)
 			{
 				if(this.labels["healthLabels"].indexOf(tlabel2[c]) == -1)
 				{
-					tlabel2[c] = tlabel2[c].replace("_", "-");
+					tlabel2[c] = tlabel2[c].replaceAll("_", "-");
 					this.labels["healthLabels"] += "~" + tlabel2[c];
 				}
 			}
