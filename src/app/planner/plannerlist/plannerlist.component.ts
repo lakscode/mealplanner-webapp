@@ -15,6 +15,7 @@ import { environment } from './../../../environments/environment';
 })
 export class PlannerlistComponent implements OnInit {
 	mealPlans: Array<any> = [];
+    currentUser: any;
 	constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
 	
 	}
@@ -36,6 +37,7 @@ export class PlannerlistComponent implements OnInit {
 
         }
     });
+    this.currentUser =this.helpService.getCurrentUser();
     
 this.loadPlans()
 	
@@ -44,7 +46,8 @@ this.loadPlans()
 	loadPlans()
     {
         this.mealPlans = [];
-        var params = {"limit": 100};
+        var params = {"limit": 20};
+        params["created_by"]  = this.currentUser["id"];
         console.log(params);
         var res =   this.dbService.getDataByTable("mealplan", params).subscribe(invData => setTimeout(() => {
     
