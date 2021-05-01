@@ -75,33 +75,48 @@
 
                     
                     <div class="row">
-                        <div class="col-12 col-lg-6">
-                            <label for="upload-image">Upload Images</label>
-                            <input type="file" name="fileUpload" id="upload-image" [(ngModel)] = 'searchRes.image'>
-                        </div>
+                        <div class="col-12 col-md-6 col-lg-6">
+                            <label  class='comment-label'>Upload Image</label>
+                            <button (click)="uploadmedia('image')" class="upload-comment">
+                               <i class="fa fa-picture-o" aria-hidden="true"></i> Upload Image</button>
+                           <div>
+                               <input id="inputuploadrecipe" hidden type="file" name="inputuploadrecipe" (change)="onFileSelect($event)" />
+                             </div>
+                             <img *ngIf="searchRes.image" src="{{searchRes.image}}"  style="width: 90%; max-width: 200px;" />
+                     
+                             
+                          </div>
 
-                        <div class="col-12 col-lg-6">
-                            <label class="video-based-recipe">Video Based Recipe</label>
+                        <div class="col-12 col-md-6 col-lg-6">
+                          <!--  <label class="video-based-recipe">Video Based Recipe</label>
                             <br>
                             <label class="container" style=" text-align: left;
                             display: inline-block;
                             font-family: 'Lato', sans-serif;
                             font-weight: 400;
                             font-size: 16px;">Video Based Recipe
-                                <input name="videoenabled" [(ngModel)] = 'searchRes.video' type="checkbox">
+                                <input name="videoenabled" [(ngModel)] = 'searchRes.videoshow' type="checkbox">
                                 <span class="checkmark"></span>
                             </label>
                                 
                             <br>
-                            <br>
-                            <div *ngIf="searchRes.video" >
-                                <label for="video-embed">Video Embed Code</label>
+                            <br>-->
+                            <!--<div *ngIf="searchRes.videoshow" >-->
+                              
+                              <!--  <label for="video-embed">Video Embed Code</label>
                                 <textarea class="short-text" name="embed-code" id="video-embed" cols="30" rows="10"></textarea>
+                              -->
 
-
-                                <label for="upload-video">Upload Video</label>
-                                <input type="file" name="videoUpload" id="upload-video">
-                            </div>
+                                <label class='comment-label'>Upload Video</label>
+                                    <button (click)="uploadmedia('video')" class="upload-comment">
+                                        <i class="fa fa-file-video-o" aria-hidden="true"></i> Upload Video</button>
+                                    <div *ngIf="searchRes.video" style="width:100%; display:block">
+                                        <video style="width:100%; max-width:300" controls>
+                                            <source src="{{searchRes.video}}" type="video/mp4">
+                                            Your browser does not support HTML video.
+                                        </video>
+                                    </div>
+                            <!--</div>-->
                         </div>
                     </div>
 
@@ -173,13 +188,13 @@
                 
                         <div class="col-12 col-lg-6">
                             <label for="mealtype">Meal Type</label>            
-                            <select name="mealtype" [(ngModel)]="mealtype" id="mealtype" class="advance-selectable" tabindex="0">
-                                <option value="t0" selected="selected">None</option>
-                                <option value="t1">Breakfast</option>
-                                <option value="t2">Pre-lunch Snack</option>
-                                <option value="t3">Lunch</option>
-                                <option value="t4">Evening Snack</option>
-                                <option value="t5">Dinner</option>
+                            <select name="mealtype" [(ngModel)]="searchRes.mealType" (change)="mtypeChange()" id="mealtype" class="advance-selectable" tabindex="0">
+                                <option value="" selected="selected">None</option>
+                                <option value="breakfast">Breakfast</option>
+                                <option value="snack1">Pre-lunch Snack</option>
+                                <option value="lunch">Lunch</option>
+                                <option value="snack2">Evening Snack</option>
+                                <option value="dinner">Dinner</option>
                             </select>   
                         </div>
                         <div class="col-12 col-lg-6">
@@ -189,7 +204,7 @@
                             font-family: 'Lato', sans-serif;
                             font-weight: 400;
                             font-size: 16px;">Make Public?
-                                <input id="ispublic" name="ispublic" [(ngModel)] = 'searchRes.ispublic' type="checkbox">
+                                <input id="ispublic" name="ispublic" [(ngModel)] = 'ispublic' type="checkbox">
                                 <span class="checkmark"></span>
                             </label>  
                         </div>

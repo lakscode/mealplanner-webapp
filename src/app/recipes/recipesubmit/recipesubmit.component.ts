@@ -114,6 +114,19 @@ loadRecipe(id)
 			  if(typeof(this.routeParams.draft) !== "undefined" && this.routeParams.draft !== "")
 			  delete this.searchRes["id"];
 			  
+
+			  if(typeof(this.searchRes["status"]) !== "undefined" && this.searchRes["status"] !== "")
+			  {
+				if (this.searchRes["status"] == 0)
+				{
+				  this.ispublic = false;
+				} 
+				else
+				{
+				  this.ispublic = true;
+				}
+			  }
+
 			  var tempDigest = this.searchRes["digest"];
 			  
 			  if(typeof(this.searchRes["digest"]) !== "undefined" && this.searchRes["digest"] !== "")
@@ -281,6 +294,11 @@ loadRecipe(id)
   }
 //}
 }
+mtypeChange()
+{
+	console.log(this.searchRes);
+	console.log("mealType " + this.searchRes["mealType"]);
+}
 dietLabelsList: Array<any>=[];
 healthlabelsList: Array<any>=[];
 getLabels()
@@ -310,6 +328,7 @@ setLabels()
 	{
 		if(typeof(this.searchRes["healthLabels"]) !== "undefined" && this.searchRes["healthLabels"] !=="")
 		{
+			console.log(this.searchRes["healthLabels"]);
 			var temp = this.searchRes["healthLabels"].split("~");
 			if(temp.length > 0)
 			{
@@ -532,6 +551,7 @@ saveRecipe()
 		params["status"] =1;
 		this.searchRes.status = 1;
 	}
+
 	if(typeof(this.searchRes["ingredientLines"]) !== "undefined" && this.searchRes["ingredientLines"] !== "")
 	{
 		params["ingredientLines"] =this.searchRes["ingredientLines"];
@@ -541,6 +561,8 @@ saveRecipe()
 		params["s_instructions"] =this.searchRes["instructionLines"];
 		console.log(params["s_instructions"]);
 	}
+	
+
 	if(this.searchRes.label !== "")
 	{	
 		params["label"] = this.searchRes.label;
@@ -565,15 +587,23 @@ saveRecipe()
 	{
 		params["s_servings"] =this.searchRes.s_servings;
 	}
-	if(typeof(this.searchRes['mealtype']) !== "undefined"  &&  this.searchRes['mealtype'] !== "")
+	if(typeof(this.searchRes['mealType']) !== "undefined"  &&  this.searchRes['mealType'] !== "")
 	{
-		params["mealtype"] =this.searchRes['mealtype'];
+		params["mealType"] =this.searchRes['mealType'];
 	}
 	if(typeof(this.searchRes.ispublic) !== "undefined"  &&  this.searchRes.ispublic !== "")
 	{
 		params["ispublic"] =this.searchRes.ispublic;
 	}
 
+	if(typeof(this.searchRes.image) !== "undefined"  &&  this.searchRes.image !== "")
+	{
+		params["image"] =this.searchRes.image;
+	}
+	if(typeof(this.searchRes.video) !== "undefined"  &&  this.searchRes.video !== "")
+	{
+		params["video"] =this.searchRes.video;
+	}
 	if(typeof(this.searchRes['totalNutrients']) !== "undefined"  &&  this.searchRes["totalNutrients"] !== "")
 	{
 		params["totalNutrients"] =this.searchRes["totalNutrients"];
@@ -583,9 +613,9 @@ saveRecipe()
 		{
 			console.log("updating");
 			params["id"] = this.searchRes.id;
-			params["uri"] = environment.appUrl + "/recipedetails/" + this.searchRes.id;
-			params["url"] = environment.appUrl + "/recipedetails/" + this.searchRes.id;
+			params["uri"] = environment.appUrl + "/recipedetails/my" + this.searchRes.id;
 			params["created_by"] =  this.currentUser["id"];
+			console.log(params);
 			var res =   this.dbService.updateDataByTable("myrecipes", params).subscribe(recipeData => setTimeout(() => {
 				console.log(recipeData);	
 				this.loadRecipe(this.searchRes.id);
@@ -595,9 +625,9 @@ saveRecipe()
 		else
 		{
 			params["created_by"] =  this.currentUser["id"];
-			params["uri"] = environment.appUrl + "/recipedetails/" + Math.random();
-			params["url"] = environment.appUrl + "/recipedetails/" + Math.random();
+			params["uri"] = environment.appUrl + "/recipedetails/my" + Math.random();
 			console.log("adding");
+			console.log(params);
 			var res =   this.dbService.postDataByTable("myrecipes", params).subscribe(recipeData => setTimeout(() => {
 				console.log(recipeData);
 		
@@ -620,6 +650,7 @@ uploadmedia(type)
 	this.uploadtype  = type;
 	this.fileupload();
 }
+
 fileupload()
 {
   var obj = document.getElementById('inputuploadrecipe');
@@ -627,14 +658,14 @@ fileupload()
   obj.click();
 }
 onFileSelect(event) {
-
+	console.log("Fileselect");
 	var type = "image";
 	if(typeof(this.uploadtype) !== "undefined" && this.uploadtype  !== "")
 	{
 		type = this.uploadtype ;
 
 	}
-
+console.log("type " + type);
   if (event.target.files.length > 0) {
 	const file = event.target.files[0];
 	this.getBase64(file).then(
@@ -659,7 +690,7 @@ onFileSelect(event) {
 		params["image"]= data.toString();
 
 		params["name"]= this.currentUser["id"] + "_" + new Date().getTime() + "_"  + file.name;
-		console.log(JSON.stringify(params));
+	//	console.log(JSON.stringify(params));
 		this.dbService.uploadRecipe(params).subscribe(resultData => setTimeout(() => {
 		  console.log(resultData);
 		  if(typeof(resultData) !== "undefined" && resultData !== null)
