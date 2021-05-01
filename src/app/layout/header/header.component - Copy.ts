@@ -34,7 +34,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 	companyname: any;
 	subscribeCompanyService: any;
 	companylogo : any;
-	collapsed: boolean  = true;
+
 	constructor(private router :Router, private userService: UserService,  private dbService: DBService, private location: Location) {
 
 	var currentUrl = this.router.url;
@@ -66,7 +66,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 			},
 			{"id":"features", "menu":"Features", "link":"/features", "display":displayMenu, "active":false},
 			{"id":"pricing", "menu":"Pricing", "link":"/pricing", "display":displayMenu, "active":false},
-		//	{"id":"schedule", "menu":"Schedule Demo", "link":"/scheduledemo", "display":displayMenu, "active":false},
+			{"id":"schedule", "menu":"Schedule Demo", "link":"/scheduledemo", "display":displayMenu, "active":false},
 			
 		];
 		this.menuItems1= [
@@ -102,17 +102,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 		];
 
 	}
-	showMenu: boolean = false;
-	mobilemenu(item)
-	{
-		console.log("mobilemenu");
-		console.log(item);
-		item.expand = !item.expand; 
-		this.gotopage(item.link);
-		if(typeof(item.children) == "undefined" || item.children.length == 0)
-		this.showMenu = false;
-		
-	}
+
 	ngOnInit() {
 		
 		this.companylogo = 'assets/logo-dark.png';

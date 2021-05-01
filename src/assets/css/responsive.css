@@ -323,8 +323,25 @@
 
  
 /* small mobile :320px. */
-@media (max-width: 767px) {
+@media only screen and (max-width: 767px) {
 .container {width:300px}
+span.sign-in-buttons .login {
+	
+	display:none;
+}
+.header-main {
+    text-align: center;
+	padding-top: 0px;
+}
+
+.logo-wrapper {
+	
+	margin-top:20px;
+}
+.logo-wrapper img
+{
+	max-width: 100px;
+}
 .header-right .search {
   display: none;
 }  

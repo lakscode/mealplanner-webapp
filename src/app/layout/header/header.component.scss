@@ -7,3 +7,76 @@
  margin:0 auto;
 
 }
+.desktoponly
+{
+  display:block;
+}
+.mobileonly
+{
+  display:none;
+}
+
+.menuham
+{
+  text-align: right;
+  width: 100%;
+  margin-top: 5px;
+  font-size: 40px;
+  color:$green;
+}
+@media only screen and (max-width: 767px) {
+  .desktoponly
+  {
+    display:none;
+  }
+  .mobileonly
+  {
+    display:block;
+  }
+  .main-menu
+  {
+    li {display:block;}
+  }
+  .menu-mob
+  {
+    background: $green;
+    color:#FFF;
+  }
+  .username
+  {
+    margin-top:20px;
+    font-size: 16px;
+    margin-bottom:30px;
+  }
+  .main-menu-mob
+  {
+    list-style-type: none;
+    li{
+      font-weight:bold;
+    }
+    li ul li 
+    {
+      font-weight:normal;
+    }
+    li,  li ul li { display: block;
+      padding:10px;
+      font-size: 16px;
+    }
+    li,  li ul 
+    {
+      margin-top:10px;
+      margin-bottom:10px;
+    }
+    li a,  li ul li a,  li a:active,  li ul li:active,   li a:hover,  li ul li:hover
+    {
+      text-decoration:none;
+      color:#FFF !important;
+    }
+
+    li ul li{
+      margin-left: 15px;
+  
+   }
+   
+  }
+}

@@ -1,31 +1,34 @@
-
 <!--header when not logged in -->
-<header *ngIf="!currentUser.loggedIn">
+
+<header class="desktoponly">
     <div class="header header-main header-var2 fade-load-down">
         <div class="container">
             <div class="row">
-                <div class="col-lg-2">
+                <div class="col-6 col-lg-2">
                     <div class="logo-wrapper">
-                        <a href="index.html"><img src="assets/logo-new1.png" alt="logo"/></a>
+                        <a href="index.html"><img src="assets/logo-new1.png" alt="logo" /></a>
                     </div>
                 </div>
-                <div class="col-lg-10">
+                <div class="col-6 col-lg-10">
                     <div class="outer-nav">
                         <div class="wrapper-links">
-                          
+                            <span *ngIf="currentUser.loggedIn"
+                                style="margin-right:10px; font-size:14px;color:var(--green) ">Welcome
+                                <strong>{{userName}}</strong></span>
                             <ul class="header-social-icons">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                <li><a href="javascript:void(0)"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="javascript:void(0)"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="javascript:void(0)"><i class="fa fa-google-plus"></i></a></li>
                             </ul>
-                    <span class="sign-in-buttons">
-                        <a class="login" (click)="gotopage('login')">Login</a>
-                        <!--<a class="register" href="/signup">Register</a>-->
-                    </span>
+
+                            <span class="sign-in-buttons">
+                                <a class="login" *ngIf="!currentUser.loggedIn" (click)="gotopage('login')">Login</a>
+                                <a class="login" *ngIf="currentUser.loggedIn" (click)="logout()">Logout</a>
+                            </span>
                         </div>
                         <div class="wrapper-main-nav ">
                             <nav class="nav-collapse responsive-menu">
-                                <ul class="main-menu">
+                                <ul class="main-menu" *ngIf="!currentUser.loggedIn">
                                     <li *ngFor="let menu of menuItems; let m = index">
                                         <a *ngIf="menu.link !== 'home'" (click)="gotopage(menu.link)">{{menu.menu}}</a>
                                         <a *ngIf="menu.link == 'home'" (click)="gotopage('home')">{{menu.menu}}</a>
@@ -35,92 +38,78 @@
                                             </li>
                                         </ul>
                                     </li>
-                                    <!--<li><a href="/recipes">Recipes</a></li>
-                                    <li><a href="/recipes">Planner</a></li>
-                                    <li>
-                                        <a href="recipe-listing.html">Recent Recipes</a>
-                                        <ul>
-                                            <li><a href="recipe-listing.html">recipe listing list view</a></li>
-                                            <li><a href="recipe-listing-grid.html">recipe listing grid view</a></li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="recipe-listing.html">Recipe Detail</a>
-                                        <ul>
-                                            <li><a href="recipe-detail.html">recipe detail version 1</a></li>
-                                            <li><a href="recipe-detail2.html">recipe detail version 2</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="our-chefs.html">Chefs</a></li>
-                                    <li><a href="blog.html">blog</a>
-                                        <ul>
-                                            <li><a href="single.html">Single post</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="elements.html">elements</a></li>
-                                    <li><a href="contact.html">contact</a></li>
-                                    <li><a class="submit-recipe" href="/recipesubmit">Submit recipe</a></li>-->
                                 </ul>
-  
-                            </nav>
-  
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-  </header>
-  <!--header ends-->
-
-
-
-  
-<!--header when logged in -->
-<header *ngIf="currentUser.loggedIn">
-    <div class="header header-main header-var2 fade-load-down">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-2">
-                    <div class="logo-wrapper">
-                        <a href="index.html"><img src="assets/logo-new1.png" alt="logo"/></a>
-                    </div>
-                </div>
-                <div class="col-lg-10">
-                    <div class="outer-nav">
-                        <div class="wrapper-links">
-                            <span style="margin-right:10px; font-size:14px;color:var(--green) ">Welcome <strong>{{userName}}</strong></span>
-                            <ul class="header-social-icons">
-                                <li><a href="javascript:void(0)"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="javascript:void(0)"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="javascript:void(0)"><i class="fa fa-google-plus"></i></a></li>
-                            </ul>
-                    <span class="sign-in-buttons">
-                        <a class="login" (click)="logout()">Logout</a>
-                    </span>
-                        </div>
-                        <div class="wrapper-main-nav ">
-                            <nav class="nav-collapse responsive-menu">
-                                <ul class="main-menu">
+                                <ul class="main-menu" *ngIf="currentUser.loggedIn">
                                     <li *ngFor="let menu1 of menuItems1; let m = index">
-                                        <a  (click)="gotopage(menu1.link)">{{menu1.menu}}</a>
+                                        <a (click)="gotopage(menu1.link)">{{menu1.menu}}</a>
                                         <ul *ngIf="menu1.children && menu1.children.length > 0">
                                             <li *ngFor="let submenu1 of menu1.children; let m = index">
                                                 <a (click)="gotopage(submenu1.link)">{{submenu1.menu}}</a>
                                             </li>
                                         </ul>
                                     </li>
-                                 
-                                    <li><a class="submit-recipe" (click)="gotopage('recipesubmit')" href="javascript:void(0)">Submit recipe</a></li>
+
+                                    <li><a class="submit-recipe" (click)="gotopage('recipesubmit')"
+                                            href="javascript:void(0)">Submit recipe</a></li>
                                 </ul>
-  
                             </nav>
-  
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-  </header>
-  <!--header ends-->
+</header>
+
+<!--header ends-->
+<!-- Mobile menu starts -->
+<header class="mobileonly">
+    <div class="row">
+        <div class="col-6">
+            <div style="padding:10px" class="">
+                <a href="index.html"><img style="max-width :100px" src="assets/logo-new1.png" alt="logo" /></a>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="menuham" (click)="showMenu = !showMenu;">
+                <i class="fa fa-bars"></i>
+            </div>
+        </div>
+        <div class="col-12  menu-mob" *ngIf="showMenu">
+        
+            <p class="username" *ngIf="currentUser.loggedIn">Welcome <strong>{{userName}}</strong></p>
+            <ul class="main-menu-mob" *ngIf="!currentUser.loggedIn">
+                <li *ngFor="let menu of menuItems; let m = index">
+                    <a (click)="mobilemenu(menu)" >{{menu.menu}}</a>
+                    <ul class="submenu" *ngIf="menu.expand && menu.children && menu.children.length > 0">
+                       <li *ngIf="menu.menu.toLowerCase() == 'home'" ><a (click)="mobilemenu(menu)">Home</a></li>
+                        <li *ngFor="let submenu of menu.children; let m = index">
+                            <a (click)="mobilemenu(submenu)">{{submenu.menu}}</a>
+                        </li>
+                    </ul>
+                </li>
+                <li><a (click)="showMenu= !showMenu;  gotopage('login')">Login</a></li>
+            </ul>
+            <ul class="main-menu-mob" *ngIf="currentUser.loggedIn">
+                <li *ngFor="let menu1 of menuItems1; let m = index">
+                    <a (click)="mobilemenu(menu1)">{{menu1.menu}}</a>
+                    <ul *ngIf="menu1.expand && menu1.children && menu1.children.length > 0">
+                        <li *ngFor="let submenu1 of menu1.children; let m = index">
+                            <a (click)="mobilemenu(submenu1)">{{submenu1.menu}}</a>
+                        </li>
+                    </ul>
+                </li>
+        
+                <li><a (click)="showMenu= !showMenu; gotopage('recipesubmit')" href="javascript:void(0)">Submit recipe</a></li>
+                <li><a (click)="showMenu= !showMenu; logout()">Logout</a></li>
+            </ul>
+        
+        
+        </div>
+    </div>
+
+</header>
+
+
+<!-- Mobile menu ends -->
