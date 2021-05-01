@@ -13,28 +13,32 @@
             </label>
           </div>
         </div>
-        <div *ngIf="plan.name">
+        <div class="col-12" *ngIf="plan.name">
           <div >
-            <div class="paddingse0">
-            <label>Total </label>
+            <div class="col-md-2">
+            <label style="font-size:14px">Total Nutrients &nbsp;&nbsp;</label>
             <input type="checkbox" class="paddingse0 chkbox" (change)="toggleNutrients('total')" [(ngModel)]="showTotal" />
           </div>
           </div>
           <div  >
-            <div class="paddingse0">
-            <label>Per Serving</label>
+            <div class="paddingse0 col-md-3">
+            <label style="font-size:14px">Nutrients Per Serving &nbsp;&nbsp; </label>
             <input type="checkbox" class="paddingse0 chkbox"  (change)="toggleNutrients('perserving')" [(ngModel)]="showPerServing" />
           </div>
           </div>
-        </div>
-  <ng-container  *ngFor="let itemday of plan['days']; let i = index ">
+          <div class="col-md-7">
+          </div>
+        </div> 
+      </div>
+      <div>
+  <ng-container  class="col-12" *ngFor="let itemday of plan['days']; let i = index ">
    
     <ng-container *ngIf="itemday && itemday.id && (itemday.breakfast || itemday.snack1  || itemday.lunch ||itemday.snack2 || itemday.dinner )">
-    <label ><p class="day-title">{{itemday.name}}</p></label>
+    <label ><p class="day-title" style="color:orange">{{itemday.name}}</p></label>
     <div class='bg-green' *ngIf="planDay">
-      <label>Nutritions</label>
-      <div (click)="itemday['expandT'] = !itemday['expandT']"  style="text-align:right">
-        <img style="margin-top:10px; width: 10px; height: 30px;" src="assets/more.png" />
+     
+      <div (click)="itemday['expandT'] = !itemday['expandT']"  > <label style="color:green;font-size:14px">Nutritions</label>
+        <img style=" width: 20px; height: 30px;" src="assets/more.png" />
       </div>
   
     </div>
@@ -66,15 +70,15 @@
   <div style='clear:both'></div>
   <div class="row">
   <div class="col-12 col-lg-4" *ngFor="let mealtype of mealTypeList; let j= index">
-    <div class="row meal-row" *ngIf="itemday && itemday[mealtype] && itemday[mealtype].label" style="border-bottom: 1px solid #CCC;">
+    <div class="row meal-row" *ngIf="itemday && itemday[mealtype] && itemday[mealtype].label" style="border-bottom: 1px solid #ddd;">
           <div class="col-12 col-lg-3" class="colv plan-seperator">
-            <p  style="margin-top:0px;padding-top:10px;color:#AAA;">{{SetFLU(mealtype)}}</p>
+            <p  style="margin-top:0px;padding:5px;color:#000;font-size:14px">{{SetFLU(mealtype)}} &nbsp;</p>
           </div>
           <div size="col-12 col-lg-8" class="colv " >
-            <p class="meal-title" (click)="gotopagedetails('recipedetails',itemday[mealtype])" *ngIf="itemday && itemday[mealtype].label">  {{SetFLU(itemday[mealtype].label)}}</p>
+            <p class="meal-title overflow-text" style="padding:5px" (click)="gotopagedetails('recipedetails',itemday[mealtype])" *ngIf="itemday && itemday[mealtype].label">  {{SetFLU(itemday[mealtype].label)}}</p>
            </div>
-           <div size="col-12 col-lg-1" class="colv" (click)="showPerServingMeal[mealtype]= true; itemday[mealtype].expand = !itemday[mealtype].expand" >
-            <img style="margin-top:10px" src="assets/more.png" />
+           <div size="col-12 col-lg-1"  style="float:right;text-align:right"class="colv" (click)="showPerServingMeal[mealtype]= true; itemday[mealtype].expand = !itemday[mealtype].expand" >
+            <img style=" width: 20px; height: 30px;float:right" src="assets/more.png" />
              </div>
   
   

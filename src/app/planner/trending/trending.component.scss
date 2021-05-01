@@ -15,7 +15,7 @@ font-weight:800;
   border-right:4px solid green;
 }
 
-.colv
+.col
 {
   vertical-align: middle;
 }
@@ -29,6 +29,43 @@ font-weight:800;
 }
 .meal-row:nth-child(2n) .plan-seperator {
   border-color: #FFAF42;
+}
+
+
+.paddingse0
+{
+  --padding-start: 0px;
+    --inner-padding-end: 0px;
+}
+
+.chkbox
+{
+  margin-inline-end: 10px;
+  
+}
+
+.day-title
+{
+color:blue !important;
+  font-size:16px; padding-top:10px; padding-bottom:10px; font-weight:bold; padding-left:5px;
+  font-family: metropolisbold, metropolis, "Courier New", Courier, monospace !important;
+}
+
+.bg-green
+{
+  background:var(--green1);
+background: linear-gradient(17deg, var(--green1) 0%, var(--green2) 100%);
+--background:var(--green1);
+--background: linear-gradient(17deg, var(--green1) 0%, var(--green2) 100%);
+color:#FFF;
+}
+
+
+.title-black
+{
+  font-size: 24px !important;
+  font-family: metropolisbold, metropolis, "Courier New", Courier, monospace !important;
+  color:#000  !important;
 }
 
 .meal-row:nth-child(3n) .plan-seperator {
@@ -252,3 +289,6 @@ display:inline-block;
   background-position: left center;
 }
 
+.overflow-text {
+  max-width:25ch !important;
+}
