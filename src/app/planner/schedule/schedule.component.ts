@@ -641,6 +641,7 @@ export class ScheduleComponent implements OnInit {
 			  }
 			  if(totalValue > 0)
 			  {
+				this.chartUnit=  "g";
 			  this.data[chartValCount] =  totalValue; //totalValue.toFixed(0);
 			  this.dataPie[chartValCount] = {"name":this.setFLU(this.mealTypeList[i]), "y":  totalValue}
 			  this.labels[chartValCount] =  this.setFLU(this.mealTypeList[i]);
