@@ -69,7 +69,9 @@
     <div>
       <p style='text-align:center; font-weight:bold; font-size:16px;'>{{chartTitle}} in {{chartUnit}}</p>
     </div>
-    <canvas #pieChart></canvas>
+    <highcharts-chart [Highcharts]="Highcharts" [constructorType]="chartConstructor"
+    [options]="chartOptionsLine" [(update)]="updateFlag" class="graphcommon">
+    </highcharts-chart>
   </div>
    
   </div>

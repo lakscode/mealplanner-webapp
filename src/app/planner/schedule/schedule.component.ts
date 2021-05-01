@@ -127,6 +127,7 @@ export class ScheduleComponent implements OnInit {
 		  }
 		  this.getPlanStatus();
 	   });
+	   this.ChartDefaults();
 	}
 	toggleMore()
    {
@@ -450,6 +451,7 @@ export class ScheduleComponent implements OnInit {
 	  }
 	}
   
+	dataPie : Array<any> = [];
 	selectCat()
 	{
 	  console.log(this.selCat);
@@ -458,6 +460,7 @@ export class ScheduleComponent implements OnInit {
 	  this.selCatValues = [];
 	  this.labels = [];
 	  this.data = [];
+	  this.dataPie= [];
 	  var chartValCount = 0;
 	  this.totalCats = [];
 	  var totalValArr =[];
@@ -474,7 +477,8 @@ export class ScheduleComponent implements OnInit {
 		  if(this.selCat["name"] == "Calories")
 		  {
 			this.selCatValues[chartValCount]["details"].push({"name":"Calories", "value": obj["calories"], "unit":"Kcal"});
-			this.data[chartValCount] =  obj["calories"];
+			this.data[chartValCount] =  parseFloat(obj["calories"]);
+			this.dataPie[chartValCount] = {"name":this.setFLU(this.mealTypeList[i]), "y":  parseFloat(obj["calories"])}
 			this.labels[chartValCount] =  this.setFLU(this.mealTypeList[i]);
 			chartValCount++;
 			var cIndex = this.totalCats.findIndex(x => (x.name  === "Calories"));
@@ -527,7 +531,9 @@ export class ScheduleComponent implements OnInit {
 			  }
 			  if(totalValue > 0)
 			  {
-			  this.data[chartValCount] =  totalValue.toFixed(0);
+			  this.data[chartValCount] =  totalValue; //totalValue.toFixed(0);
+			  this.dataPie[chartValCount] = {"name":this.setFLU(this.mealTypeList[i]), "y":  totalValue}
+		
 			  this.labels[chartValCount] =  this.setFLU(this.mealTypeList[i]);
 			  chartValCount++;
 			 
@@ -586,7 +592,8 @@ export class ScheduleComponent implements OnInit {
 			  }
 			  if(totalValue > 0)
 			  {
-			  this.data[chartValCount] =  totalValue.toFixed(0);
+			  this.data[chartValCount] =  totalValue; //totalValue.toFixed(0);
+			  this.dataPie[chartValCount] = {"name":this.setFLU(this.mealTypeList[i]), "y":  totalValue}
 			  this.labels[chartValCount] =  this.setFLU(this.mealTypeList[i]);
 			  chartValCount++;
 			 
@@ -634,7 +641,8 @@ export class ScheduleComponent implements OnInit {
 			  }
 			  if(totalValue > 0)
 			  {
-			  this.data[chartValCount] =  totalValue.toFixed(0);
+			  this.data[chartValCount] =  totalValue; //totalValue.toFixed(0);
+			  this.dataPie[chartValCount] = {"name":this.setFLU(this.mealTypeList[i]), "y":  totalValue}
 			  this.labels[chartValCount] =  this.setFLU(this.mealTypeList[i]);
 			  chartValCount++;
 			 
@@ -682,7 +690,8 @@ export class ScheduleComponent implements OnInit {
 			  }
 			  if(totalValue > 0)
 			  {
-			  this.data[chartValCount] =  totalValue.toFixed(0);
+			  this.data[chartValCount] =  totalValue; //parseFloat(totalValue).toFixed(0);
+			  this.dataPie[chartValCount] = {"name":this.setFLU(this.mealTypeList[i]), "y":  totalValue}
 			  this.labels[chartValCount] =  this.setFLU(this.mealTypeList[i]);
 			  chartValCount++;
 			 
@@ -701,7 +710,7 @@ export class ScheduleComponent implements OnInit {
 		}
 	}
 	  }
-	//  console.log(this.totalCats);
+	console.log(this.data);
   
 	  this.totalCats = this.totalCats.sort(this.helpService.sortArraybyName);
 	//  console.log(this.selCatValues);
@@ -767,6 +776,7 @@ export class ScheduleComponent implements OnInit {
 			  if(totalValue > 0)
 			  {
 			  this.data[chartValCount] =  totalValue.toFixed(0);
+			  this.dataPie[chartValCount] = {"name":this.setFLU(this.mealTypeList[i]), "y":  totalValue}
 			  this.labels[chartValCount] =  this.setFLU(this.mealTypeList[i]);
 			  chartValCount++;
 			 
@@ -806,6 +816,7 @@ export class ScheduleComponent implements OnInit {
 			  if(totalValue > 0)
 			  {
 			  this.data[chartValCount] =  totalValue.toFixed(0);
+			  this.dataPie[chartValCount] = {"name":this.setFLU(this.mealTypeList[i]), "y":  totalValue}
 			  this.labels[chartValCount] =  this.setFLU(this.mealTypeList[i]);
 			  chartValCount++;
 			 
@@ -823,32 +834,7 @@ export class ScheduleComponent implements OnInit {
   
 	/* Chart functions */
   
-	createPieChart() {
-	  var parent = this;
-  //console.log(this.chartUnit);
-	  var colorsArr = this.colorArrayList[0];
-	  var index = 0;
-	  index = this.categories.findIndex(x => (x.name ===  this.selCat["name"]));
-	  if(index == -1)
-	  index = 0;
-  
-   //   console.log(index);
-	  if(typeof(index) !== "undefined")
-	  {
-		colorsArr = this.colorArrayList[index];
-	  }
-   //   console.log("createPieChart");
-  
-	  var datasets = [];
-	  datasets.push({
-		data: this.data,
-		backgroundColor: colorsArr, 
-		borderColor: this.colorArray[2],
-		borderWidth: 1
-	  });
-	 
 	
-	}
 	setFLU(str)
 	{
 	  var retStr = str;
@@ -1006,6 +992,157 @@ export class ScheduleComponent implements OnInit {
 	 
 	}
   
+	ChartDefaults()
+	{
+	
+		var parent = this;
+		this.chartOptionsLine = {
+			responsive: {
+				rules: [{
+				  condition: {
+					maxWidth: 500
+				  },
+				  chartOptions: {
+					legend: {
+					  enabled: false
+					}
+				  }
+				}]
+			  },
+			exporting: {
+				filename: 'Day wise graph'
+			}, 
+			chart: {
+				type: 'pie'
+			  },
+		  credits: {
+			enabled: false
+		  },
+		  title: {
+			text: ''
+		  },
+		  subtitle: {
+			text: ''
+		  },
+		xAxis: {
+			categories: []
+		  },
+		yAxis: {
+			allowDecimals: false,
+			title: {
+			  text: 'No. of ' + parent.selCat["name"]
+			},
+			plotLines: [{
+			  value: 0,
+			  width: 1,
+			  color: '#808080'
+			}]
+		},
+	
+		plotOptions: {
+			pie: {
+				allowPointSelect: true,
+				cursor: 'pointer',
+				dataLabels: {
+					enabled: true,
+				//	format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+				format: '<b>{point.name}</b>: {point.y:.1f} ' + parent.chartUnit,
+				}
+			}
+		},
+		tooltip: {
+		//	pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+		pointFormat: '{series.name}: <b>{point.y:.1f} ' + parent.chartUnit + '</b>'
+		},
+		accessibility: {
+			point: {
+				valueSuffix: '%'
+			}
+		},
+		  series: [{"name":"", "data":[],  colorByPoint: true, 	
+			  point:{
+				events:{
+					click: function (event) {
+					//	console.log(event.clientX);
+						var xcord = event.clientX;
+						if(xcord > 990)
+						xcord = xcord-150;
+					/*parent.window.document.getElementById("contextmenu").style.display = 'block';
+					parent.window.document.getElementById("contextmenu").style.top = event.clientY + "px"  ;
+					parent.window.document.getElementById("contextmenu").style.left = xcord + "px"  ;
+					parent.window.document.getElementById("contextLabel").style.display = 'block';
+	
+					var newlabel =  parent.window.document.getElementById("contextLabel")
+					newlabel.innerHTML = "<b>" + event.point.series.name + "</b> : " + event.point.category + "<br><b>No. of Cases</b> : " + event.point.y;
+	
+					sessionStorage.setItem("reportType","complaintdttm");
+					sessionStorage.setItem("reportProperty",event.point.series.name);
+					sessionStorage.setItem("reportValue",event.point.category);	
+					sessionStorage.setItem("reportDisplayText","Date");
+					*/
+					}
+				}
+			}      
+		}]
+		}; // required
+	
+	}
+
+	createPieChart() {
+
+		this.ChartDefaults();
+		this.chartOptionsLine["series"][0]["data"] = this.dataPie;
+		this.chartOptionsLine["series"][0]["name"] = 	this.selCat["name"];
+		//this.chartOptionsLine["yAxis"]["title"] = 	"No.  of " + this.chartUnit;
+
+		console.log(this.chartUnit);
+		this.chartOptionsLine["xAxis"]["categories"] = this.labels;
+		console.log(this.chartOptionsLine);
+	
+	var chartOptionsLine1 = {   
+			chart: {
+			   type: "spline"
+			},
+			title: {
+			   text: "Monthly Average Temperature"
+			},
+			subtitle: {
+			   text: "Source: WorldClimate.com"
+			},
+			xAxis:{
+			   categories:["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+				  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+			},
+			yAxis: {          
+			   title:{
+				  text:"Temperature °C"
+			   } 
+			},
+			tooltip: {
+			   valueSuffix:" °C"
+			},
+			series: [
+			   {
+				  name: 'Tokyo',
+				  data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2,26.5, 23.3, 18.3, 13.9, 9.6]
+			   },
+			   {
+				  name: 'New York',
+				  data: [-0.2, 0.8, 5.7, 11.3, 17.0, 22.0, 24.8,24.1, 20.1, 14.1, 8.6, 2.5]
+			   },
+			   {
+				  name: 'Berlin',
+				  data: [-0.9, 0.6, 3.5, 8.4, 13.5, 17.0, 18.6, 17.9, 14.3, 9.0, 3.9, 1.0]
+			   },
+			   {
+				  name: 'London',
+				  data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
+			   }
+			]
+		 };
+		 console.log(this.chartOptionsLine);
+	}
+
   }
   
 
