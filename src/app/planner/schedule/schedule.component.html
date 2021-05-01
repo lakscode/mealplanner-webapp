@@ -54,28 +54,25 @@
           <p innerHtml = "{{errorMessage}}"></p>
          </div>
   <div *ngIf= "!errorMessage && categories">
-  
+    <div class="row">
+        <div class="col-12 col-md-4 col-lg-3">
     <div *ngIf="categories.length > 0 && selCat">
       <ng-container  *ngFor="let itemday of categories; let i = index ">
       <div [ngClass]="selCat['name'] == itemday.name?'itemcat active':'itemcat'" (click)="selCat = itemday; selectCat()">
-        <label>{{itemday.name}}</label>
+        <p>{{itemday.name}}</p>
       </div>
     </ng-container>
     </div>
- 
-  <div *ngIf="chartTitle">
+ </div>
+
+  <div class="col-12 col-md-8 col-lg-9" *ngIf="chartTitle">
     <div>
       <p style='text-align:center; font-weight:bold; font-size:16px;'>{{chartTitle}} in {{chartUnit}}</p>
     </div>
+    <canvas #pieChart></canvas>
   </div>
-    <div class="row">
-      <div class="col-12 col-md-6 col-lg-3">
    
-        <canvas #pieChart></canvas>
-     
-      </div>
   </div>
-  
   
   
     <div *ngIf="selCatValues && selCatValues['length'] > 0">
