@@ -37,7 +37,7 @@
 
                           <div class="generic_feature_list">
                             <ul>
-                                  <li *ngFor="let option of package.options; let j=index;">{{option}}</li>
+                                  <li *ngFor="let option of package.options; let j=index;" innerHTML="{{option}}"></li>
                               </ul>
                           </div>
 

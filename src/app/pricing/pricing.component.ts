@@ -20,9 +20,16 @@ export class PricingComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		this.packages.push({"name":"Standard","duration":"7 Days","payment":"FREE", "currency":"","selected":false, "options":["Limited Recipes", "No nutrition details"]});
+		this.packages.push({"name":"Standard","duration":"7 Days","payment":"FREE", "currency":"","selected":false, "options":["Try it for 7 Days", "At the end subscribe for", "either <b>Premium</b> or <b>Professional</b> Plan", "to Continue to avail the features."]});
 		this.packages.push({"name":"Premium","duration":"Monthly","payment":"9", "currency":"dollar","selected":false, "options":["Unlimited Recipes", "Meal Plan Suggestions"]});
-		this.packages.push({"name":"Professional","duration":"Monthly","payment":"49", "currency":"dollar","selected":false, "options":["Unlimited Recipes", "Meal Plan Suggestions", "Client Organiser"]});
+		this.packages.push({"name":"Professional","duration":"Monthly","payment":"49", "currency":"dollar","selected":false, 
+		"options":[
+			"Unlimited Recipes", 
+			"Meal Plan Suggestions",
+			"Custom Recipe Creation",
+			"Client Organiser", 
+			"PDF Export of Meal Plan"
+			]});
 		
 	
 	}

@@ -142,7 +142,8 @@
        <div class="trendings-card text-center wow animated bounceInDown">
          
           <div class="chefs-card-inner">
-            <img class="badget" src="assets/bg/ribbon2.png" />
+            <img *ngIf="mealplans.length > 0" class="badget" src="assets/bg/ribbon2.png" />
+            <img *ngIf="planStatus.length > 0" class="badge-right" src="assets/bg/schedule.png" />
                <h2 *ngIf="mealplans.length > 0" style="    padding-top: 20px;">Meal Plan for YOU</h2>
                <h2 *ngIf="planStatus.length > 0" style="    padding-top: 20px;">Schedule for TODAY</h2>
 

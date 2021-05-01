@@ -211,6 +211,22 @@ cursor: pointer;
     right: -6px;
     top: -5px;
 }
+.badge-right
+{
+  position: absolute;
+    z-index: 999;
+    width: 150px;
+    right: -13px;
+    top: -12px;
+}
+.badge-left
+{
+  position: absolute;
+    z-index: 999;
+    width: 150px;
+    left: -8px;
+    top: -8px;
+}
 .plan-name
 {
     padding: 5px 10px;
