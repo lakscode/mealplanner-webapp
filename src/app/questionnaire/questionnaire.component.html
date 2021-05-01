@@ -1,0 +1,25 @@
+<div id="wrapper">
+    <h1>What kind of computer scientist are you?</h1>
+    <p>Take this questionnaire to find out!</p>
+    
+    <form id="quiz">
+        <ng-container *ngFor="let question of questionsList; let i =index;">
+      <!-- Question 1 -->
+      <h2>{{question.question}}</h2>
+      <!-- Here are the choices for the first question. Each input tag must have the same name. For this question, the name is q1. -->
+      <!-- The value is which answer the choice corresponds to. -->
+      <ng-container  *ngFor="let answer of question.answers; let i =index;" >
+        <label><input type="radio" name="{{answer.name}}" [(ngModel)]="question.answer" value="{{answer.value}}">
+            {{answer.text}}
+          </label><br />
+
+      </ng-container>
+           
+    </ng-container>
+    <button type="submit" id="submit" onclick="tabulateAnswers()">Submit Your Answers</button>
+    <button type="reset" id="reset" onclick="resetAnswer()">Reset</button>
+    </form>
+    
+    
+    <div id="answer">Your result will show up here!</div>
+  </div>

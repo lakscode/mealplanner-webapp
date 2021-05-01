@@ -74,6 +74,7 @@ import { NgxSpinnerModule } from "ngx-spinner";
 
 import { ModalModule } from './shared/modules'; 
 import { AdminModule } from './admin/admin.module'; 
+import { QuestionnaireModule } from './questionnaire/questionnaire.module'; 
 
 
 @NgModule({
@@ -125,7 +126,8 @@ import { AdminModule } from './admin/admin.module';
 	PasslostModule, 
 	ResetpassModule,
 	AdminModule,
-	HighchartsChartModule
+	HighchartsChartModule,
+	QuestionnaireModule
   ],
   schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
   providers: [UserService],
