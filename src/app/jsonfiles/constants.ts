@@ -39,5 +39,17 @@ export const constants = {
     {"name":"No oil added","image":"assets/images/tick.png"},
     {"name":"Low Potassium", "image":"assets/images/tick.png"}, 
     {"name":"FODMAP-Free","image":"assets/images/tick.png"}
-  ]
+  ],
+  "colors":["#FF3155", "#FFAF42", "#FFED5E", "#49F770", "#2DAEFD", "#FF3155","#003f5c","#58508d","#f2f1f1", "#FFFFFF"],
+  "colorslist":[
+      ["#0D1F73", "#17469F", "#2969BA", "#3A89C0", "#4AA7B3", "#59C39B","#6ADC7F"],
+      ["#FF3155", "#FFAF42", "#FFED5E", "#49F770", "#2DAEFD", "#FF3155","#003f5c"],
+      ["#5899DA", "#E8743B", "#19A979", "#ED4A7B","#945ECF","#13A4B4","#525DF4"],
+      ["#B26E39", "#FE9D52", "#FFCEA9", "#DDDDDD","#9ECBED","#3C97DA","#2A6A99"],
+      ["#142458", "#186BA1", "#19ABDE", "#1AC9E6","#1BD5D4","#1DE4BD","#6DF0D1"],
+      ["#27076A", "#7C3AC0", "#AF4BCF", "#DA4CB2","#EC548D","#E97369","#F0A58E"],
+      ["#810400", "#C02322", "#DE542D", "#EF7E32","#EE9A3A","#EABE3B","#E7E34E"],
+      ["#1F77B4", "#FF7F0E", "#2CA02C", "#D62728","#9467BD","#8C564B","#E377C2"],
+      ["#2CA02C", "#BCBD22", "#1F77B4", "#D62728","#9467BD","#F9CB9C","#FF9900"]
+      ],
 };

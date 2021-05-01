@@ -5,13 +5,15 @@ import {ScheduleRoutingModule } from './schedule-routing.module';
 import { ScheduleComponent } from './schedule.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HighchartsChartModule } from 'highcharts-angular';
 @NgModule({
   imports: [
     CommonModule,
     ScheduleRoutingModule,
     FlexLayoutModule,
 	FormsModule,
-	ReactiveFormsModule
+	ReactiveFormsModule,
+  HighchartsChartModule
   ],
   declarations: [ScheduleComponent]
 })

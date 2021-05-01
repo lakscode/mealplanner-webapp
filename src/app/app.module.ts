@@ -74,6 +74,8 @@ import { NgxSpinnerModule } from "ngx-spinner";
 
 import { ModalModule } from './shared/modules'; 
 import { AdminModule } from './admin/admin.module'; 
+
+
 @NgModule({
   declarations: [
 		AppComponent
@@ -122,7 +124,8 @@ import { AdminModule } from './admin/admin.module';
 	AutherizeModule,
 	PasslostModule, 
 	ResetpassModule,
-	AdminModule
+	AdminModule,
+	HighchartsChartModule
   ],
   schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
   providers: [UserService],

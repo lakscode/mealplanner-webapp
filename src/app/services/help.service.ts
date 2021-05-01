@@ -699,4 +699,16 @@ SendEmailPasswordReset(email,data) {
 		
 		return dayName;
 	}
+
+	
+	sortArraybyName(a, b) {
+		//	return b.name - a.name;
+			if ( a['name'] < b['name'] ){
+				return -1;
+			  }
+			  if ( a['name'] > b['name'] ){
+				return 1;
+			  }
+			  return 0;
+		}
 }

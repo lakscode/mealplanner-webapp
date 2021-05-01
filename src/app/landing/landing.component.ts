@@ -270,7 +270,15 @@ constructor(private router: Router, private httpClient : HttpClient, private rou
 		this.router.navigate(['recipes', {dietLabels:id}]);
 	}
 	gotopage(page, id) {
+		if(page == "schedule")
+		{
+			console.log(this.planStatus[0]);
+			this.router.navigate([page, {id:id, mum_id:this.planStatus[0]["mum_id"], userid: this.currentUser["id"]}]);
+		}
+		else
+		{
 		this.router.navigate([page, id]);
+		}
 	}
 	formatValue(str)
 {

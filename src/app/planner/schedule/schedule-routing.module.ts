@@ -4,7 +4,7 @@ import { ScheduleComponent } from './schedule.component';
 
 const routes: Routes = [
   { 
-    path: 'schedule/:id', 
+    path: 'schedule', 
     component: ScheduleComponent,
     data: { showSidebar: false } 
   }
