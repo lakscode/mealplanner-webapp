@@ -24,7 +24,7 @@
                                 <div class="add-fields">
                                     <span class="handler-list ui-sortable-handle"><i class="fa fa-arrows"></i></span>
                                     <input type="text" name="ingredients{{i}}"  [(ngModel)] = "ingredient.text" [disabled]="i< existingIngCount" (blur)="getNutrients(ingredient)" id="ingredients{{i}}">
-                                    <span (click)="deleteContent('ing', i)" class="del-list"><i class="fa fa-trash"></i></span>
+                                    <span *ngIf="i >= existingIngCount" (click)="deleteContent('ing', i)" class="del-list"><i class="fa fa-trash"></i></span>
                                 </div>
                             </li>
                         <!--<li style=""><div class="add-fields"> <span class="handler-list"><i class="fa fa-arrows"></i></span> <input type="text" name="ingredients[]" id="ingredients"> <span class="del-list"><i class="fa fa-trash"></i></span></div></li><li style=""><div class="add-fields"> <span class="handler-list"><i class="fa fa-arrows"></i></span> <input type="text" name="ingredients[]" id="ingredients"> <span class="del-list"><i class="fa fa-trash"></i></span></div></li>
