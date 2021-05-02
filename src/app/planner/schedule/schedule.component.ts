@@ -371,7 +371,7 @@ export class ScheduleComponent implements OnInit {
 	  this.selDay = this.plan["days"][0];
 	  this.selType = "breakfast";
 	  this.selectType();
-	  this.selectCat();
+	  this.selectCat(0);
       console.log(this.selDay);
    //this.loadingService.dismiss();
 	}
@@ -452,8 +452,10 @@ export class ScheduleComponent implements OnInit {
 	}
   
 	dataPie : Array<any> = [];
-	selectCat()
+	chartIndex: any = 0;
+	selectCat(index)
 	{
+		this.chartIndex = index;
 	  console.log(this.selCat);
 	  this.chartTitle = this.selCat.name;
 	  this.chartUnit = this.selCat.unit;
@@ -995,7 +997,28 @@ export class ScheduleComponent implements OnInit {
   
 	ChartDefaults()
 	{
-	
+	var colorsArr = this.colorArrayList[0];
+	if(typeof(this.chartIndex) !== "undefined" &&  this.chartIndex > -1)
+	{
+		colorsArr = this.colorArrayList[this.chartIndex];
+	}
+
+	Highcharts.setOptions({
+		colors: Highcharts.map(colorsArr, function (color) {
+			return {
+				radialGradient: {
+					cx: 0.5,
+					cy: 0.3,
+					r: 0.7
+				},
+				stops: [
+					[0, color],
+					[1, Highcharts.color(color).brighten(-0.3).get('rgb')] // darken
+				]
+			};
+		})
+	});
+
 		var parent = this;
 		this.chartOptionsLine = {
 			responsive: {
@@ -1039,18 +1062,25 @@ export class ScheduleComponent implements OnInit {
 			  color: '#808080'
 			}]
 		},
-	
-		plotOptions: {
+	plotOptions: {
 			pie: {
+				colors: colorsArr,
 				allowPointSelect: true,
 				cursor: 'pointer',
 				dataLabels: {
+					distance: '-20%',
 					enabled: true,
-				//	format: '<b>{point.name}</b>: {point.percentage:.1f} %'
-				format: '<b>{point.name}</b>: {point.y:.1f} ' + parent.chartUnit,
-				}
+					//	format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+					//format: '<b>{point.name}</b>: {point.y:.1f} ' + parent.chartUnit,
+					format: '{point.y:.1f} ' + parent.chartUnit,
+					style: {color:"#000",
+						textShadow: false ,
+						textOutline: false 
+					}
+				},
+				showInLegend: true
 			}
-		},
+		}, 
 		tooltip: {
 		//	pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
 		pointFormat: '{series.name}: <b>{point.y:.1f} ' + parent.chartUnit + '</b>'
@@ -1109,6 +1139,11 @@ export class ScheduleComponent implements OnInit {
 			},
 			subtitle: {
 			   text: "Source: WorldClimate.com"
+			},
+			legend: {
+				align: 'right',
+				verticalAlign: 'middle',
+				layout: 'vertical'
 			},
 			xAxis:{
 			   categories:["Jan", "Feb", "Mar", "Apr", "May", "Jun",

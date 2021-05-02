@@ -1,3 +1,4 @@
+@import "../../../variables.scss";
 .bg-green30
 {
   background: -webkit-linear-gradient(top, var(--green1), var(--green1) 170px, var(--light-green1) 170px, var(--light-green1));
@@ -52,7 +53,7 @@
 .day-title
 {
   font-size:16px; padding-top:10px; padding-bottom:10px; font-weight:bold; padding-left:5px;
-  font-family: metropolisbold, metropolis, "Courier New", Courier, monospace !important;
+
 }
 .meal-title
 {
@@ -60,10 +61,13 @@
   margin-top:0px;
  //  padding-top:10px;
     font-size:15px;
-  font-family: metropolisbold, metropolis, "Courier New", Courier, monospace !important;
+    font-family: 'Lato', sans-serif;
   word-break: break-all;
   color:#000;
-
+  display:block; 
+  text-align:left;
+  font-weight:bold;
+  color:$green;
 }
 
 
@@ -126,12 +130,14 @@ ion-segment-button {
   margin-bottom: 10px;
   border-radius: 5px;
   color: #000;
-  border:1px solid var(--blue);
+  border:1px solid var(--orange);
+  width:100%;
+  text-align:left;
 }
 
-.itemcat.active
+.itemcat:hover, .itemcat.active
 {
-  background: var(--blue);
+  background: var(--orange);
   color: #FFF;
 }
 
@@ -139,11 +145,11 @@ ion-segment-button {
 {
   display:inline-block; 
   float:left;
-  margin-right: 10px;
-  border:1px solid var(--blue);
+  margin-right: 5px;
+  border: 1px solid var(--blue);
   background: var(--light-green1);
-  padding:5px;
-  margin-bottom:10px;
+  padding: 0px 6px;
+  margin-bottom: 5px;
   border-radius: 5px;
 }
 
@@ -188,5 +194,22 @@ ion-segment-button {
 
 .graphcommon
 {
-  width: 100%; height: 400px; display: block;
+  width: 100%; height: 300px; display: block;
+}
+.menu-options-sc
+{
+  list-style-type: none;
+  .menu-option
+  {
+    float:left; 
+    padding: 10px;
+    background: $green;
+    color:#FFF;
+    margin-right: 10px;
+  }
+}
+
+.chartpanel
+{
+  
 }

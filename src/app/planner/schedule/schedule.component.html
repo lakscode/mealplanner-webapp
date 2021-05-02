@@ -1,117 +1,93 @@
 
     <div class="recipes-home-body inner-page" *ngIf="plan">
         <div class="row w-1200" style="text-align:center; margin:0 auto;">
- 
-      <label class="title-light" *ngIf='dateObj'>{{dateObj["day"]}}, {{dateObj["date"]}} {{dateObj["month"]}} </label>
-   
+           
 
-    <div>
-      <ul class="menu-options">
-        <li class="menu-option" (click)="gotopage('home'); toggleMore();">Home</li>
-        <li class="menu-option" (click)="loadDefaults(); toggleMore();">Reload</li>
-        <!--<li class="menu-option" (click)="gotopage('recipeadd'); toggleMore();">Create Recipe</li>-->
-        <!--<li class="menu-option" (click)="gotopage('myrecipes'); toggleMore();">My Recipes</li>-->
-        <li class="menu-option" (click)="gotopage('favourites'); toggleMore();">My Favourites</li>
-        <li class="menu-option" (click)="getIngredientsList(); toggleMore();">Grocery List</li>      
-      </ul>
-    </div>
-  
-  
-    <div  vertical="bottom" horizontal="end" slot="fixed" *ngIf="plan && plan['days'] && plan['days']['length'] > 0 && plan['days'][0]['day_num'] == 6">
-      <button> 
-        <i name="checkmark"></i>
-      </button>
-      <div  style="width: 100px;
-      --border-radius: 5px;">
-  
-    <div 
-     class="fablistbutton">
-      <i style=" margin-top: 0px;" slot="end"  name="checkmark"></i>
-      <label style=" margin-top: 0px;">Complete</label>
-    </div>
-  
-  
-      </div>
-  
-      </div>
-  
-      
-  
-    <div>
-      <div style="font-size:11pt;">
-        <div *ngIf="plan.name">
-          <div class="center">
-            <label>
-              <p class="title-black center" >{{setFLU(plan.name)}}</p> <br>
-              <p innerHtml = "{{welcomeMessage}}"></p>
-  
-            </label>
-          </div>
-        </div>
-  
-  
         <div *ngIf="errorMessage">
           <p innerHtml = "{{errorMessage}}"></p>
          </div>
   <div *ngIf= "!errorMessage && categories">
     <div class="row">
-        <div class="col-12 col-md-4 col-lg-3">
-    <div *ngIf="categories.length > 0 && selCat">
+      <div class="col-12 col-lg-4 col-md-4">
+        <div class="left">
+            <h1 class="title-black center" >{{setFLU(plan.name)}}</h1> <br>
+            <p innerHtml = "{{welcomeMessage}}"></p>
+        </div>
+      </div>
+      <div class="col-12  col-lg-8 col-md-8">
+        <ul class="menu-options-sc">
+          <li class="menu-option" (click)="gotopage('home'); toggleMore();">Home</li>
+          <li class="menu-option" (click)="loadDefaults(); toggleMore();">Reload</li>
+          <li class="menu-option" (click)="gotopage('favourites'); toggleMore();">My Favourites</li>
+          <li class="menu-option" (click)="getIngredientsList(); toggleMore();">Grocery List</li>           
+          <li *ngIf="plan && plan['days'] && plan['days']['length'] > 0 && plan['days'][0]['day_num'] == 6" class="menu-option" (click)=" toggleMore();">Set Plan Complete</li>    
+
+        </ul>
+      </div>
+      
+        <div class="col-12 col-md-2 col-lg-2">
+    <div style='width:100%;' *ngIf="categories.length > 0 && selCat">
       <ng-container  *ngFor="let itemday of categories; let i = index ">
-      <div [ngClass]="selCat['name'] == itemday.name?'itemcat active':'itemcat'" (click)="selCat = itemday; selectCat()">
+      <div [ngClass]="selCat['name'] == itemday.name?'itemcat active':'itemcat'" (click)="selCat = itemday; selectCat(i)">
         <p>{{itemday.name}}</p>
       </div>
     </ng-container>
     </div>
+  
  </div>
 
-  <div class="col-12 col-md-8 col-lg-9" *ngIf="chartTitle">
-    <div>
-      <p style='text-align:center; font-weight:bold; font-size:16px;'>{{chartTitle}} in {{chartUnit}}</p>
-    </div>
-    <highcharts-chart [Highcharts]="Highcharts" [constructorType]="chartConstructor"
-    [options]="chartOptionsLine" [(update)]="updateFlag" class="graphcommon">
-    </highcharts-chart>
-  </div>
-   
-  </div>
-  
-  
-    <div *ngIf="selCatValues && selCatValues['length'] > 0">
-      <div style='background: #FFF;
+  <div class="col-12 col-md-6 col-lg-6">
+
+    <div style='background: #FFF;
       padding: 10px;
       line-height: 20px;
-      border-bottom: 1px solid #ccc;'>
-      <label>Total </label>
+      border-bottom: 1px solid #ccc;' *ngIf="chartTitle">
+       <p style='text-align:center; font-weight:bold; font-size:16px;'>{{chartTitle}} in {{chartUnit}}</p>
       <div style='display:block; width:100%'>
         <ng-container *ngFor="let item of totalCats" >
           <div [ngClass]="item.active?'nutriitem active':'nutriitem' ">
-          <div *ngIf="selCat.name.toLowerCase() == 'vitamin' || selCat.name.toLowerCase() == 'minerals' " (click)="selectSubCat(item)" > <b>{{ setFLU(item.name) }}</b> - {{ item['value'] }}  {{ item['unit'] }} <br></div>
-          <div *ngIf="selCat.name.toLowerCase() !== 'vitamin' && selCat.name.toLowerCase() !== 'minerals'  " > <b>{{ setFLU(item.name) }}</b> - {{ item['value'] }}  {{ item['unit'] }} <br></div>
+          <div *ngIf="selCat.name.toLowerCase() == 'vitamin' || selCat.name.toLowerCase() == 'minerals' " (click)="selectSubCat(item)" > <b>Total {{ setFLU(item.name) }}</b> - {{ item['value'] }}  {{ item['unit'] }} <br></div>
+          <div *ngIf="selCat.name.toLowerCase() !== 'vitamin' && selCat.name.toLowerCase() !== 'minerals'  " > <b>Total {{ setFLU(item.name) }}</b> - {{ item['value'] }}  {{ item['unit'] }} <br></div>
         </div>
         </ng-container>
       </div>
       <div style="clear:both"></div>
-      </div>
+      
   
+
+    <div class="panel-box" *ngIf="chartTitle">
+     
+    
+    <highcharts-chart [Highcharts]="Highcharts" [constructorType]="chartConstructor"
+    [options]="chartOptionsLine" [(update)]="updateFlag" class="graphcommon">
+    </highcharts-chart>
+  </div>
+</div>
+  </div>
+  <div class="col-12 col-md-4 col-lg-4">
+    
+    <div *ngIf="selCatValues && selCatValues['length'] > 0">
+      
    
   
       <div class="row meal-row"    style="border-bottom: 1px solid #CCC;">
         <ng-container *ngFor="let itemcat of selCatValues; let i = index;">
-        <div class="col-12 col-md-6 col-lg-4" [ngClass]="i%2 == 0?'colv plan-seperator-right' : 'colv plan-seperator-right'" >
-          <div class="panel-box" >
-          <p  (click)="gotopagedetails('recipedetails',itemcat)" style="display:block; margin-top:0px;padding-top:10px;color:#AAA;">{{setFLU(itemcat.name)}} <span style="float:right"><b>Total Weight:</b> {{formatValue(itemcat.totalWeight)}} gms</span></p>
-          <p  (click)="gotopagedetails('recipedetails',itemcat)" class="meal-title" style='display:block; color:#000;' *ngIf="itemcat.label">  {{setFLU(itemcat.label)}}</p>
+        <div class="col-12" [ngClass]="i%2 == 0?'colv plan-seperator-left' : 'colv plan-seperator-right'" >
+          <div class="panel-box" style="text-align:left;" >
+            <div [ngClass]="completeStatus[itemcat.name]  == 1?'nutriitemright green':'nutriitemright '">
+              <a *ngIf="completeStatus[itemcat.name] !== '1'" href="javascript:void(0)" (click)="setComplete(itemcat)">Set Complete</a>
+              <a *ngIf="completeStatus[itemcat.name] == '1'" href="javascript:void(0)">Completed</a>
+            </div>
+          <p  (click)="gotopagedetails('recipedetails',itemcat)" style="display:block; margin-top:0px;padding-top:10px;color:#AAA;text-align:left">{{setFLU(itemcat.name)}} <span style="float:right;margin-right:5px;"><b>Total Weight:</b> {{formatValue(itemcat.totalWeight)}} gms</span>
+        </p>
+          <p  (click)="gotopagedetails('recipedetails',itemcat)" class="meal-title"  *ngIf="itemcat.label">  {{setFLU(itemcat.label)}}</p>
          
         <label *ngFor = "let item of itemcat['details']; let j=index">
           <div class='nutriitem'>
             <p class="nut-col1" style="display:inline-block;color:#000; margin-right:5px;font-weight:bold;">{{item.name}}</p>
           <p class="nut-col2" style="display:inline-block;color:#000" >{{formatValue(item.value)}} {{item.unit}}</p>
           </div>
-          <div [ngClass]="completeStatus[itemcat.name]  == 1?'nutriitemright green':'nutriitemright '">
-            <a *ngIf="completeStatus[itemcat.name] !== '1'" href="javascript:void(0)" (click)="setComplete(itemcat)">Set Complete</a>
-            <a *ngIf="completeStatus[itemcat.name] == '1'" href="javascript:void(0)">Completed</a>
-          </div>
+        
         </label>
         </div>
         </div>
@@ -120,13 +96,14 @@
   
 
   </div>
+
+  </div>
+  </div>
+  
+  
   </div>
  
-      </div>
-     
-    </div>
-  
-  
+    
    
   
   </div>
