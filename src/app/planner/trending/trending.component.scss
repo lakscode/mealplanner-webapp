@@ -1,13 +1,21 @@
+@import "../../../_variables.scss";
+
+::host
+{
+  font-family: 'Lato', sans-serif;
+}
+
 .title-black
 {
 font-size:20px;
 font-weight:800;
-
+margin-top:20px;
 }
+
 .bg-green30
 {
-  background: -webkit-linear-gradient(top, var(--green1), var(--green1) 170px, var(--light-green1) 170px, var(--light-green1));
-  --background: -webkit-linear-gradient(top, var(--green1), var(--green1) 170px, var(--light-green1) 170px, var(--light-green1));
+  background: -webkit-linear-gradient(top, $green, $green 170px, var(--light-green1) 170px, var(--light-green1));
+  --background: -webkit-linear-gradient(top, $green, $green 170px, var(--light-green1) 170px, var(--light-green1));
 }
 
 .plan-seperator
@@ -48,7 +56,6 @@ font-weight:800;
 {
 color:blue !important;
   font-size:16px; padding-top:10px; padding-bottom:10px; font-weight:bold; padding-left:5px;
-  font-family: metropolisbold, metropolis, "Courier New", Courier, monospace !important;
 }
 
 .bg-green
@@ -64,20 +71,26 @@ color:#FFF;
 .title-black
 {
   font-size: 24px !important;
-  font-family: metropolisbold, metropolis, "Courier New", Courier, monospace !important;
   color:#000  !important;
 }
 
-.meal-row:nth-child(3n) .plan-seperator {
+.meal-row .cl:nth-child(1n) .plan-seperator {
+  border-color: #733dca;
+}
+
+.meal-row .cl:nth-child(2n) .plan-seperator {
+  border-color: #b61639;
+}
+.meal-row .cl:nth-child(3n) .plan-seperator {
   border-color: #49F770;
 }
 
-.meal-row:nth-child(4n) .plan-seperator {
+.meal-row .cl:nth-child(4n)  .plan-seperator{
   border-color: #FFED5E;
 }
 
 
-.meal-row:nth-child(5n) .plan-seperator {
+.meal-row .cl:nth-child(5n) .plan-seperator {
   border-color: #2DAEFD;
 }
 
@@ -86,12 +99,11 @@ color:#FFF;
 .day-title
 {
   font-size:16px; padding-top:10px; padding-bottom:10px; font-weight:bold; padding-left:5px;
-  font-family: metropolisbold, metropolis, "Courier New", Courier, monospace !important;
+
 }
 .meal-title
 {
   padding-left:5px;margin-top:0px; padding-top:10px; font-size:15px;
-  font-family: metropolisbold, metropolis, "Courier New", Courier, monospace !important;
   word-break: break-all;
 
 }

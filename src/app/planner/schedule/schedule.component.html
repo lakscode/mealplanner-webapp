@@ -14,10 +14,10 @@
         </div>
       </div>
       <div class="col-12  col-lg-8 col-md-8" style="text-align:right;">
-        <ul class="menu-options-sc">
-          <li class="menu-option" (click)="gotopage('home'); toggleMore();">Home</li>
+        <ul class="menu-options-sc" style="float:right;">
+      <!--  <li class="menu-option" (click)="gotopage('home'); toggleMore();">Home</li>-->
           <li class="menu-option" (click)="loadDefaults(); toggleMore();">Reload</li>
-          <li class="menu-option" (click)="gotopage('favourites'); toggleMore();">My Favourites</li>
+        <!-- <li class="menu-option" (click)="gotopage('favourites'); toggleMore();">My Favourites</li>-->
           <li class="menu-option" (click)="getIngredientsList(); toggleMore();">Grocery List</li>           
           <li *ngIf="plan && plan['days'] && plan['days']['length'] > 0 && plan['days'][0]['day_num'] == 6" class="menu-option" (click)=" toggleMore();">Set Plan Complete</li>    
 
@@ -72,9 +72,9 @@
       <div class="row meal-row"    style="border-bottom: 1px solid #CCC;">
         <ng-container *ngFor="let itemcat of selCatValues; let i = index;">
         <div class="col-12" [ngClass]="i%2 == 0?'colv plan-seperator-left' : 'colv plan-seperator-right'" >
-          <div class="panel-box" style="text-align:left;" >
-            <div [ngClass]="completeStatus[itemcat.name]  == 1?'nutriitemright green':'nutriitemright '">
-              <a *ngIf="completeStatus[itemcat.name] !== '1'" href="javascript:void(0)" (click)="setComplete(itemcat)">Set Complete</a>
+          <div class="panel-box" style="text-align:left;">
+            <div [ngClass]="completeStatus[itemcat.name] == '1'?'nutriitemright green':'nutriitemright '">
+              <a *ngIf="completeStatus[itemcat.name] == '0'" href="javascript:void(0)" (click)="setComplete(itemcat)">Set Complete</a>
               <a *ngIf="completeStatus[itemcat.name] == '1'" href="javascript:void(0)">Completed</a>
             </div>
           <p  (click)="gotopagedetails('recipedetails',itemcat)" style="display:block; margin-top:0px;padding-top:10px;color:#AAA;text-align:left">{{setFLU(itemcat.name)}} <span style="float:right;margin-right:5px;"><b>Total Weight:</b> {{formatValue(itemcat.totalWeight)}} gms</span>

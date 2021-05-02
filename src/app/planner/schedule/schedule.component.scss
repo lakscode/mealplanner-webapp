@@ -168,8 +168,8 @@ ion-segment-button {
 
 .green
 {
-  border:1px solid var(--green1);
-  background: var(--green1);
+  border:1px solid $green;
+  background: $green;
 }
 .nutriitemright a, .nutriitemright a:hover
 {
@@ -199,6 +199,7 @@ ion-segment-button {
 .menu-options-sc
 {
   list-style-type: none;
+  margin-bottom:10px;
   .menu-option
   {
     float:left; 
@@ -206,6 +207,8 @@ ion-segment-button {
     background: $green;
     color:#FFF;
     margin-right: 10px;
+    font-size: 14px;
+    border-radius: 5px;
   }
 }
 

@@ -1,147 +1,154 @@
- 
-    <div class="recipes-home-body inner-page" *ngIf="plan">
-        <div class="container">
-            <div class="row">
-            <div class="col-12">
-            <div class="recipe-set">
-    
-        <div *ngIf="plan.name">
-          <div class="center">
-            <label>
-              <span class="title-black center" >{{plan.name}}</span> <br>
-  
-            </label>
-          </div>
-        </div>
-        <div class="col-12" *ngIf="plan.name">
-          <div >
-            <div class="col-md-2">
-            <label style="font-size:14px">Total Nutrients &nbsp;&nbsp;</label>
-            <input type="checkbox" class="paddingse0 chkbox" (change)="toggleNutrients('total')" [(ngModel)]="showTotal" />
-          </div>
-          </div>
-          <div  >
-            <div class="paddingse0 col-md-3">
-            <label style="font-size:14px">Nutrients Per Serving &nbsp;&nbsp; </label>
-            <input type="checkbox" class="paddingse0 chkbox"  (change)="toggleNutrients('perserving')" [(ngModel)]="showPerServing" />
-          </div>
-          </div>
-          <div class="col-md-7">
-          </div>
-        </div> 
-      </div>
-      <div>
-  <div class="col-12 col-lg-4" *ngFor="let itemday of plan['days']; let i = index ">
-   
-    <ng-container *ngIf="itemday && itemday.id && (itemday.breakfast || itemday.snack1  || itemday.lunch ||itemday.snack2 || itemday.dinner )">
-    <label ><p class="day-title" style="color:orange">{{itemday.name}}</p></label>
-    <div class='bg-green' *ngIf="planDay">
-     
-      <div (click)="itemday['expandT'] = !itemday['expandT']"  > <label style="color:green;font-size:14px">Nutritions</label>
-        <img style=" width: 20px; height: 30px;" src="assets/more.png" />
-      </div>
-  
-    </div>
-  
-  
-    <div class="nutrient-panel " *ngIf="showTotal && itemday['expandT']"  >
-      <ng-container *ngFor="let nutrient1 of calculateTotalCalory(i); let n = index;">
-        <div class="nutrient-item"> 
-            <div class="label">{{SetFLU(nutrient1["name"])}}</div>
-            <div class="quantity">{{nutrient1.value.toFixed(2)}}</div>
-            <div class="unit"> {{nutrient1.unit}}</div>
-        </div>
-    
-      </ng-container>
-  </div>
-  
-  
-  <div class="nutrient-panel " *ngIf="showPerServing && itemday['expandT']"  >
-   <ng-container *ngFor="let nutrient2 of calculateTotalCaloryPServing(i); let n = index;">
-      <div class="nutrient-item">
-          <div class="label">{{SetFLU(nutrient2["name"])}}</div>
-          <div class="quantity">{{nutrient2.value.toFixed(2)}}</div>
-          <div class="unit"> {{nutrient2.unit}}</div>
-      </div>
-  
-    </ng-container>
-  </div>
-  
-  <div style='clear:both'></div>
-  <div class="row">
-  <div class="col-12" style=' padding-left: 0; padding-right: 0;' *ngFor="let mealtype of mealTypeList; let j= index">
-    <div class="row meal-row" *ngIf="itemday && itemday[mealtype] && itemday[mealtype].label" style="border-bottom: 1px solid #ddd;">
-          <div class="col-3" class="colv plan-seperator">
-            <p  class="mtype">{{SetFLU(mealtype)}} &nbsp;</p>
-          </div>
-          <div class="col-8" >
-            <p class="meal-title overflow-text" style="padding:5px" (click)="gotopagedetails('recipedetails',itemday[mealtype])" *ngIf="itemday && itemday[mealtype].label">  {{SetFLU(itemday[mealtype].label)}}</p>
-           </div>
-           <div class="col-1"  style="float:right;text-align:right"class="colv" (click)="showPerServingMeal[mealtype]= true; itemday[mealtype].expand = !itemday[mealtype].expand" >
-            <img style=" width: 20px; height: 30px;float:right" src="assets/more.png" />
-             </div>
-  
-  
-    </div>
-  
-      <div *ngIf="itemday[mealtype].expand" class="nutrient-panel ">
-  
-        <div class="nutrient-item">
-            <div class="label">Calories</div>
-            <div *ngIf="showTotal" class="quantity">{{itemday[mealtype].calories}}</div>
-            <div *ngIf="showPerServing" class="quantity">{{formatValuePServing(itemday[mealtype].calories, itemday[mealtype].yield)}}</div>
-            <div class="unit">Kcal</div>
-        </div>
-  
-        <ng-container *ngFor="let mmicro of itemday[mealtype]['paramMicro']; let m = index;">
-          <div class="nutrient-item">
-              <div class="label">{{mmicro.label}}</div>
-              <div *ngIf="showTotal" class="quantity">{{mmicro.totalP}}</div>
-              <div *ngIf="showPerServing" class="quantity">{{formatValuePServing(mmicro.totalP, itemday[mealtype].yield)}}</div>
-              <div class="unit"> {{mmicro.unit}}</div>
-          </div>
-  
-        </ng-container>
-      <ng-container *ngIf=" itemday[mealtype]['nutrientsSel']['length'] > 0">
-     
-        <ng-container *ngFor="let nutrient of itemday[mealtype]['nutrientsSel']; let n = index;">
-          <div class="nutrient-item"> <!--(click)="itemday[mealtype]['selNutrient'] = nutrient">-->
-              <div class="label">{{nutrient["value"]["label"]}}</div>
-              <div *ngIf="showTotal" class="quantity">{{nutrient.value.quantity.toFixed(2)}}</div>
-              <div *ngIf="showPerServing"class="quantity">{{formatValuePServing(nutrient.value.quantity,itemday[mealtype].yield) }}</div>
-              <div class="unit"> {{nutrient.value.unit}}</div>
-          </div>
-  
-        </ng-container>
-      </ng-container>
-  
-      </div>
-      <div style="clear:both"></div>
-     
-     
-  
-    </div>
-</div>
-  </ng-container>
-  
-  
-    <div *ngIf="itemday && itemday.id && (itemday.breakfast || itemday.snack1  || itemday.lunch ||itemday.snack2 || itemday.dinner )" class="sepbg sepbg{{i}}">
-  
-  </div>
-</div>
-  
-  
-  
-      </div>
-     
-    </div>
-    </div>
-    </div>
-    </div>
-    
-  
-  
-   
+<div class="recipes-home-body inner-page" *ngIf="plan">
+  <div class="container" style="background: #FFF;">
+    <div class="row">
+      <div class="col-12">
+        <div class="row recipe-set" *ngIf="plan.name">
 
-  
-    
+          <div class="col-12 col-md-6  col-lg-4">
+            <h1 class="title-black center">{{plan.name}}</h1>
+          </div>
+          <div class="col-12 col-md-6 col-lg-8">
+            <div style="text-align:right; margin-top:20px;">
+            <div style="display:inline-block;">
+              <label style="font-size:14px">Total Nutrients &nbsp;&nbsp;</label>
+              <input type="checkbox" class="paddingse0 chkbox" (change)="toggleNutrients('total')"
+                [(ngModel)]="showTotal" />
+            </div>
+
+            <div style="display:inline-block;">              
+                <label style="font-size:14px">Nutrients Per Serving &nbsp;&nbsp; </label>
+                <input type="checkbox" class="paddingse0 chkbox" (change)="toggleNutrients('perserving')"
+                  [(ngModel)]="showPerServing" />         
+            </div>
+          </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-lg-4" *ngFor="let itemday of plan['days']; let i = index ">
+
+          <ng-container
+            *ngIf="itemday && itemday.id && (itemday.breakfast || itemday.snack1  || itemday.lunch ||itemday.snack2 || itemday.dinner )">
+            <div class="row">
+              <div class="col-6" style="padding-left: 0;">
+                <span class="day-title" style="color:orange">{{itemday.name}}</span>
+              </div>
+              <div class="col-6" style="padding-right: 0;" *ngIf="planDay">
+                  <div style="text-align:right;" (click)="itemday['expandT'] = !itemday['expandT']; shownut(itemday); "> 
+                    <span style="color:green;font-size:14px; line-height:20px; font-weight:bold;">Nutritions</span>&nbsp;&nbsp;
+                    <span style="font-size:20px">
+                      <i *ngIf="!itemday['expandT']" class="fa fa-caret-down"></i>
+                      <i *ngIf="itemday['expandT']" class="fa fa-caret-up"></i>
+                    </span>
+                    </div>
+              </div>
+            </div>
+            
+            <div class="nutrient-panel " *ngIf="showTotal && itemday['expandT']">
+              <ng-container *ngFor="let nutrient1 of calculateTotalCalory(i); let n = index;">
+                <div class="nutrient-item">
+                  <div class="label">{{SetFLU(nutrient1["name"])}}</div>
+                  <div class="quantity">{{nutrient1.value.toFixed(2)}}</div>
+                  <div class="unit"> {{nutrient1.unit}}</div>
+                </div>
+
+              </ng-container>
+            </div>
+
+
+            <div class="nutrient-panel " *ngIf="showPerServing && itemday['expandT']">
+              <ng-container *ngFor="let nutrient2 of calculateTotalCaloryPServing(i); let n = index;">
+                <div class="nutrient-item">
+                  <div class="label">{{SetFLU(nutrient2["name"])}}</div>
+                  <div class="quantity">{{nutrient2.value.toFixed(2)}}</div>
+                  <div class="unit"> {{nutrient2.unit}}</div>
+                </div>
+
+              </ng-container>
+            </div>
+
+            <div style='clear:both'></div>
+            <div class="row meal-row">
+              <div class="col-12 cl" style=' padding-left: 0; padding-right: 0;'
+                *ngFor="let mealtype of mealTypeList; let j= index">
+                <div class="row " *ngIf="itemday && itemday[mealtype] && itemday[mealtype].label"
+                  style="border-bottom: 1px solid #ddd;">
+                  <div class="col-3 plan-seperator" style="padding-left:0;">
+                    <p class="mtype">{{SetFLU(mealtype)}} &nbsp;</p>
+                  </div>
+                  <div class="col-8">
+                    <p class="meal-title overflow-text" style="padding:5px"
+                      (click)="gotopagedetails('recipedetails',itemday[mealtype])"
+                      *ngIf="itemday && itemday[mealtype].label"> {{SetFLU(itemday[mealtype].label)}}</p>
+                  </div>
+                  <div class="col-1" style="padding-right:0;text-align:right;"
+                    (click)="showPerServingMeal[mealtype]= true; plan['days'][i][mealtype].expand = !plan['days'][i][mealtype].expand; shownut(itemday);">
+                    <span style="font-size:20px">
+                      <i *ngIf="!plan['days'][i][mealtype].expand" class="fa fa-caret-down"></i>
+                      <i *ngIf="plan['days'][i][mealtype].expand" class="fa fa-caret-up"></i>
+                    </span>
+                    <!--<img style=" width: 20px; height: 30px;float:right" src="assets/more.png" />-->
+                  </div>
+
+
+                </div>
+
+                <div *ngIf="plan['days'][i][mealtype].expand" class="nutrient-panel ">
+
+                  <div class="nutrient-item">
+                    <div class="label">Calories</div>
+                    <div *ngIf="showTotal" class="quantity">{{itemday[mealtype].calories}}</div>
+                    <div *ngIf="showPerServing" class="quantity">{{formatValuePServing(itemday[mealtype].calories,
+                      itemday[mealtype].yield)}}</div>
+                    <div class="unit">Kcal</div>
+                  </div>
+
+                  <ng-container *ngFor="let mmicro of itemday[mealtype]['paramMicro']; let m = index;">
+                    <div class="nutrient-item">
+                      <div class="label">{{mmicro.label}}</div>
+                      <div *ngIf="showTotal" class="quantity">{{mmicro.totalP}}</div>
+                      <div *ngIf="showPerServing" class="quantity">{{formatValuePServing(mmicro.totalP,
+                        itemday[mealtype].yield)}}</div>
+                      <div class="unit"> {{mmicro.unit}}</div>
+                    </div>
+
+                  </ng-container>
+                  <ng-container *ngIf=" itemday[mealtype]['nutrientsSel']['length'] > 0">
+
+                    <ng-container *ngFor="let nutrient of itemday[mealtype]['nutrientsSel']; let n = index;">
+                      <div class="nutrient-item">
+                        <!--(click)="itemday[mealtype]['selNutrient'] = nutrient">-->
+                        <div class="label">{{nutrient["value"]["label"]}}</div>
+                        <div *ngIf="showTotal" class="quantity">{{nutrient.value.quantity.toFixed(2)}}</div>
+                        <div *ngIf="showPerServing" class="quantity">
+                          {{formatValuePServing(nutrient.value.quantity,itemday[mealtype].yield) }}</div>
+                        <div class="unit"> {{nutrient.value.unit}}</div>
+                      </div>
+
+                    </ng-container>
+                  </ng-container>
+
+                </div>
+                <div style="clear:both"></div>
+
+
+
+              </div>
+            </div>
+          </ng-container>
+
+
+          <div
+            *ngIf="itemday && itemday.id && (itemday.breakfast || itemday.snack1  || itemday.lunch ||itemday.snack2 || itemday.dinner )"
+            class="sepbg sepbg{{i}}">
+
+          </div>
+        </div>
+
+
+
+
+
+      </div>
+    </div>
+  </div>
+</div>

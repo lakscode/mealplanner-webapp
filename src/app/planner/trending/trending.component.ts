@@ -52,7 +52,11 @@ export class TrendingComponent implements OnInit {
 		   });
 		   this.loadDefaults();
 	}
-
+	shownut(item)
+	{
+	//	console.log(item);
+	//	console.log(this.plan['days']);
+	}
 	gotopage(page)
 	{
 		this.router.navigate([page]);
@@ -73,7 +77,7 @@ export class TrendingComponent implements OnInit {
 		//  console.log(params);   
 		  this.routeParams = params;     
 		  if (typeof (this.routeParams.id) !== "undefined") {
-			console.log(this.routeParams.id);
+		//	console.log(this.routeParams.id);
 			this.plan["mealplanid"] =this.routeParams.id;
 			//this.loadRecipe(this.routeParams.id);
 		  }   
@@ -99,7 +103,7 @@ export class TrendingComponent implements OnInit {
 		
 		var res =   this.dbService.getDataByTable("mealplan", params).subscribe(mpData => setTimeout(() => {
   
-		  console.log(mpData);
+		//  console.log(mpData);
 		  if(mpData !== null)
 		  {
 			if(mpData["body"] !== null && mpData["body"]['length'] > 0)
@@ -132,11 +136,11 @@ export class TrendingComponent implements OnInit {
 	  {
 		var params = {};
 		 
-		  params["meal_plan_id"] = this.plan["id"];
+		//  params["meal_plan_id"] = this.plan["id"];
 		 // params["day_num"] = this.selDayIndex;
 	   //   console.log(params);
-  
-		var res =   this.dbService.getDataByTable("days", params).subscribe(dData => setTimeout(() => {
+		params['query'] = "select * from days where meal_plan_id = " + this.plan["id"] + " order by day_num";
+		var res =   this.dbService.getDatabyTablebyQuery("recipes", params).subscribe(dData => setTimeout(() => {
   
 	   //   console.log(dData);
 		  if(dData !== null)
@@ -584,12 +588,12 @@ export class TrendingComponent implements OnInit {
 		  }
 		}
 	  }
-	  console.log(ingredientsList);
-	  console.log(shoppingList);
-	  console.log(consList);
+	 // console.log(ingredientsList);
+	//  console.log(shoppingList);
+	//  console.log(consList);
   
-	  console.log(JSON.stringify(shoppingList));
-	  console.log(JSON.stringify(consList));
+	//  console.log(JSON.stringify(shoppingList));
+	//  console.log(JSON.stringify(consList));
 	  sessionStorage.setItem("list",JSON.stringify(consList));
 	//  this.gotopage('grocerylist')
 	}
@@ -607,7 +611,7 @@ export class TrendingComponent implements OnInit {
 	  if(typeof(str) !== "undefined" && str !== "" && typeof(servings) !== "undefined" && servings !== "" && servings !== 0)
 		{ 
 		 retVal = this.helpService.formatValuePServing(str,servings);
-		  console.log(retVal);
+	
 		}
 	  return retVal;
 	}
