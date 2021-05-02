@@ -31,7 +31,7 @@
         </div> 
       </div>
       <div>
-  <ng-container  class="col-12" *ngFor="let itemday of plan['days']; let i = index ">
+  <div class="col-12 col-lg-4" *ngFor="let itemday of plan['days']; let i = index ">
    
     <ng-container *ngIf="itemday && itemday.id && (itemday.breakfast || itemday.snack1  || itemday.lunch ||itemday.snack2 || itemday.dinner )">
     <label ><p class="day-title" style="color:orange">{{itemday.name}}</p></label>
@@ -69,15 +69,15 @@
   
   <div style='clear:both'></div>
   <div class="row">
-  <div class="col-12 col-lg-4" *ngFor="let mealtype of mealTypeList; let j= index">
+  <div class="col-12" style=' padding-left: 0; padding-right: 0;' *ngFor="let mealtype of mealTypeList; let j= index">
     <div class="row meal-row" *ngIf="itemday && itemday[mealtype] && itemday[mealtype].label" style="border-bottom: 1px solid #ddd;">
-          <div class="col-12 col-lg-3" class="colv plan-seperator">
-            <p  style="margin-top:0px;padding:5px;color:#000;font-size:14px">{{SetFLU(mealtype)}} &nbsp;</p>
+          <div class="col-3" class="colv plan-seperator">
+            <p  class="mtype">{{SetFLU(mealtype)}} &nbsp;</p>
           </div>
-          <div size="col-12 col-lg-8" class="colv " >
+          <div class="col-8" >
             <p class="meal-title overflow-text" style="padding:5px" (click)="gotopagedetails('recipedetails',itemday[mealtype])" *ngIf="itemday && itemday[mealtype].label">  {{SetFLU(itemday[mealtype].label)}}</p>
            </div>
-           <div size="col-12 col-lg-1"  style="float:right;text-align:right"class="colv" (click)="showPerServingMeal[mealtype]= true; itemday[mealtype].expand = !itemday[mealtype].expand" >
+           <div class="col-1"  style="float:right;text-align:right"class="colv" (click)="showPerServingMeal[mealtype]= true; itemday[mealtype].expand = !itemday[mealtype].expand" >
             <img style=" width: 20px; height: 30px;float:right" src="assets/more.png" />
              </div>
   
@@ -128,7 +128,7 @@
     <div *ngIf="itemday && itemday.id && (itemday.breakfast || itemday.snack1  || itemday.lunch ||itemday.snack2 || itemday.dinner )" class="sepbg sepbg{{i}}">
   
   </div>
-  </ng-container>
+</div>
   
   
   

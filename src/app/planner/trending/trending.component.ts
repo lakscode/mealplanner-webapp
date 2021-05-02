@@ -16,7 +16,7 @@ import { constants } from '../../jsonfiles/constants';
 	styleUrls: ['./trending.component.scss']
 })
 export class TrendingComponent implements OnInit {
-	packages: Array<any> = [];
+
 	routeParams: any;
 	private onDestroy$: Subject<void> = new Subject<void>();
 	sub: any;
@@ -42,16 +42,11 @@ export class TrendingComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		this.packages.push({"name":"Standard","duration":"7 Days","payment":"FREE", "currency":"","selected":false, "options":["Limited Recipes", "No nutrition details"]});
-		this.packages.push({"name":"Premium","duration":"Monthly","payment":"9", "currency":"dollar","selected":false, "options":["Unlimited Recipes", "Meal Plan Suggestions"]});
-		this.packages.push({"name":"Professional","duration":"Monthly","payment":"49", "currency":"dollar","selected":false, "options":["Unlimited Recipes", "Meal Plan Suggestions", "Client Organiser"]});
-		this.sub = this.route.params.pipe(takeUntil(this.onDestroy$)).subscribe(params => {
+			this.sub = this.route.params.pipe(takeUntil(this.onDestroy$)).subscribe(params => {
 			//  console.log(params);   
 			  this.routeParams = params;     
 			  if (typeof (this.routeParams.id) !== "undefined") {
 				console.log(this.routeParams.id);
-			//	this.plan["mealplanid"] =this.routeParams.id;
-				//this.loadRecipe(this.routeParams.id);
 			  }   
 			 
 		   });
