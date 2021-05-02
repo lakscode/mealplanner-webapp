@@ -12,9 +12,7 @@
                 <div class="col-8 col-lg-10">
                     <div class="outer-nav">
                         <div class="wrapper-links">
-                            <span *ngIf="currentUser.loggedIn"
-                                style="margin-right:10px; font-size:14px;color:var(--green) ">Welcome
-                                <strong>{{userName}}</strong></span>
+                            
                             <ul class="header-social-icons">
                                 <li><a href="javascript:void(0)"><i class="fa fa-facebook"></i></a></li>
                                 <li><a href="javascript:void(0)"><i class="fa fa-twitter"></i></a></li>
@@ -28,6 +26,11 @@
                                 <div class="dropdown1 " *ngIf="currentUser.loggedIn">
                                     <a href="javascript:void(0)" class="dropbtn1"><i class="fa fa-user"></i></a>
                                     <div class="dropdown1-content">
+                                        <span *ngIf="currentUser.loggedIn"
+                                style="margin-right:10px; margin-bottom:10px; font-size:14px;color:var(--green) ">Welcome
+                                <strong>{{SetFLU(userName)}}</strong></span>
+                                <p  style="margin-right:10px; margin-bottom:10px; font-size:14px;color:red " *ngIf='isTrialExpired'>Your Trial version expired.</p>
+
                                       <a href="#">My Info</a>
                                       <a href="#">Progress</a>
                                       <a  (click)="logout()" href="javascript:void(0)">Logout</a>

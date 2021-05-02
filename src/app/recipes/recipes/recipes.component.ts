@@ -37,6 +37,9 @@ export class RecipesComponent implements OnInit {
 	totalPage: any = 0;
 	displayList: Array<any> = [];
 	nutrientDbFields : Array<any> = [];
+	role: any = {};
+	showNutrientsFlag: boolean = false;
+
 	constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
 	
 	}
@@ -106,6 +109,12 @@ export class RecipesComponent implements OnInit {
 		  this.currentUser["displayname"] = this.currentUser["username"];
 		  console.log( this.currentUser["displayname"]);
 		}
+		
+		this.role = this.helpService.getRoleStatus(this.currentUser);
+
+		this.showNutrientsFlag = this.helpService.showorhideNutritions(this.role);
+
+		console.log(this.showNutrientsFlag);
 	  this.totalPage = 1;
 	 this.page_num = 0;
 	  this.searchparam = {"q":"", "range":{}}

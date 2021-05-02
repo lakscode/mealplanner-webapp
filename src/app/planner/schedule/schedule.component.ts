@@ -77,9 +77,17 @@ export class ScheduleComponent implements OnInit {
 		this.router.navigate([page]);
 	}
 
-
+	currentUser: any;
+	showNutrientsFlag: boolean = false;
+	role: any = {"isTrialExpired":false, "isPremium":false, "isProfessional":false};
 	loadDefaults()
 	{
+		this.currentUser =this.helpService.getCurrentUser();
+		this.role = this.helpService.getRoleStatus(this.currentUser);
+		this.showNutrientsFlag = this.helpService.showorhideNutritions(this.role);
+
+		console.log(this.showNutrientsFlag);
+
 	  this.showpopupMenu = false;
 	  this.selSubCat = "";
 	 // this.loadingService.present();

@@ -19,6 +19,8 @@ export class LandingComponent implements OnInit {
 	healthLabels: Array<any> = [];
 	RecipeoftheDay: Array<any> = [];
 	currentUser: any ;
+	showNutrientsFlag: boolean = false;
+	role: any = {"isTrialExpired":false, "isPremium":false, "isProfessional":false};
 constructor(private router: Router, private httpClient : HttpClient, private route: ActivatedRoute, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
 	
 	}
@@ -33,6 +35,11 @@ constructor(private router: Router, private httpClient : HttpClient, private rou
 		  this.currentUser["displayname"] = this.currentUser["username"];
 		//  console.log(this.currentUser["displayname"]);
 		}
+		this.role = this.helpService.getRoleStatus(this.currentUser);
+		this.showNutrientsFlag = this.helpService.showorhideNutritions(this.role);
+
+		console.log(this.showNutrientsFlag);
+
 		this.getPlanStatus();
 		this.count++;
 		this.defaultRecipeofTheDay();

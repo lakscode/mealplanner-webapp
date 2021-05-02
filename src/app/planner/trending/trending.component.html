@@ -7,7 +7,7 @@
           <div class="col-12 col-md-6  col-lg-4">
             <h1 class="title-black center">{{plan.name}}</h1>
           </div>
-          <div class="col-12 col-md-6 col-lg-8">
+          <div *ngIf='showNutrientsFlag' class="col-12 col-md-6 col-lg-8">
             <div style="text-align:right; margin-top:20px;">
             <div style="display:inline-block;">
               <label style="font-size:14px">Total Nutrients &nbsp;&nbsp;</label>
@@ -32,7 +32,7 @@
               <div class="col-6" style="padding-left: 0;">
                 <span class="day-title" style="color:orange">{{itemday.name}}</span>
               </div>
-              <div class="col-6" style="padding-right: 0;" *ngIf="planDay">
+              <div class="col-6" style="padding-right: 0;" *ngIf="showNutrientsFlag && planDay">
                   <div style="text-align:right;" (click)="itemday['expandT'] = !itemday['expandT']; shownut(itemday); "> 
                     <span style="color:green;font-size:14px; line-height:20px; font-weight:bold;">Nutritions</span>&nbsp;&nbsp;
                     <span style="font-size:20px">
@@ -75,12 +75,12 @@
                   <div class="col-3 plan-seperator" style="padding-left:0;">
                     <p class="mtype">{{SetFLU(mealtype)}} &nbsp;</p>
                   </div>
-                  <div class="col-8">
+                  <div [ngClass]="showNutrientsFlag?'col-8':'col-9'">
                     <p class="meal-title overflow-text" style="padding:5px"
                       (click)="gotopagedetails('recipedetails',itemday[mealtype])"
                       *ngIf="itemday && itemday[mealtype].label"> {{SetFLU(itemday[mealtype].label)}}</p>
                   </div>
-                  <div class="col-1" style="padding-right:0;text-align:right;"
+                  <div *ngIf="showNutrientsFlag" class="col-1" style="padding-right:0;text-align:right;"
                     (click)="showPerServingMeal[mealtype]= true; plan['days'][i][mealtype].expand = !plan['days'][i][mealtype].expand; shownut(itemday);">
                     <span style="font-size:20px">
                       <i *ngIf="!plan['days'][i][mealtype].expand" class="fa fa-caret-down"></i>

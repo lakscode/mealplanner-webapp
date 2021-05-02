@@ -36,8 +36,8 @@ export class PricingComponent implements OnInit {
 
 	gotopage(page)
 	{
-	//	this.router.navigate([page]);
-	this.router.navigate(["questionnaire"]);
+		this.router.navigate([page]);
+	//this.router.navigate(["questionnaire"]);
 	}
 }
 

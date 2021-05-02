@@ -35,7 +35,8 @@ export class TrendingComponent implements OnInit {
   mineralsList: Array<any>= [];
   selNutrient: any;
   showpopupMenu: boolean = false;
-
+  currentUser: any;
+  role: any = {};
 
 	constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
 	
@@ -63,9 +64,17 @@ export class TrendingComponent implements OnInit {
 	}
 
 
-	
+	showNutrientsFlag: boolean = false;
 	loadDefaults()
 	{
+
+		this.currentUser =this.helpService.getCurrentUser();
+		this.role = this.helpService.getRoleStatus(this.currentUser);
+		this.showNutrientsFlag = this.helpService.showorhideNutritions(this.role);
+
+		console.log(this.showNutrientsFlag);
+
+		console.log(this.role);
 	  this.showpopupMenu = false;
 	  this.mineralsList = constants.minerals;
 

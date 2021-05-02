@@ -4,7 +4,7 @@ import { UserService, User } from '../../services/user.service';
 import { DBService } from '../../dbservices/db.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { Location } from '@angular/common';
-
+import { HelpService } from '../../services/help.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -35,7 +35,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 	subscribeCompanyService: any;
 	companylogo : any;
 	collapsed: boolean  = true;
-	constructor(private router :Router, private userService: UserService,  private dbService: DBService, private location: Location) {
+	constructor(private router :Router, private userService: UserService, private helpService: HelpService,  private dbService: DBService, private location: Location) {
 
 	var currentUrl = this.router.url;
 	currentUrl = currentUrl.replace("/","");
@@ -102,7 +102,17 @@ export class HeaderComponent implements OnInit, OnDestroy {
 		];
 
 	}
+	SetFLU(str)
+	{
+	  var retStr = str;
+	  if(str !== "")
+	  {
+		retStr = this.helpService.setFirstLetterToUppercase(str);
+	  }
+	  return retStr;
+	}
 	showMenu: boolean = false;
+	isTrialExpired: boolean  = false;
 	mobilemenu(item)
 	{
 		console.log("mobilemenu");
@@ -154,7 +164,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
 				this.companylogo = 'assets/logo-dark.png';
 				this.companyname = "";
-
+				this.isTrialExpired = this.helpService.isTrialExpired(this.currentUser);
 			}
 			
 		//	console.log(this.loggedIn);

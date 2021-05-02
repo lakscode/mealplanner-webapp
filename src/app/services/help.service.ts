@@ -430,12 +430,87 @@ export class HelpService {
 
 	  return retImage;
 	}
-	isProfessional(user)
+
+	isTrialExpired(user)
+	{
+		var res = false;
+		if(typeof(user) !== "undefined" && user !== null)
+		{
+			if(user["role"] == "TRIAL")
+			{
+				res = false;
+			
+				if(typeof(user["created_time"] ) !== "undefined" && user["created_time"]  !== null)
+				{
+					console.log(user['created_time']);
+					console.log(new Date())
+					var Difference_In_Time = new Date().getTime() - new Date(user['created_time']).getTime(); 
+	
+					var diff_days = Difference_In_Time / (1000 * 3600 * 24); 
+					console.log(diff_days);
+					if(diff_days > 0)
+					res = true;
+				}
+			}
+		}
+		return res;
+
+	}
+	
+	showorhideNutritions(role)
+	{
+		var showNutrientsFlag = true;
+
+		if(role["isTrialExpired"])
+		 showNutrientsFlag = false;
+		else if(role["isPremium"]) 
+		showNutrientsFlag = true;		
+		else if(role["isProfessional"])
+		 showNutrientsFlag = true;
+
+		 return showNutrientsFlag;
+	}
+	getRoleStatus(user)
+	{
+		var role = {"isTrialExpired":false, "isPremium":false, "isProfessional":false };
+		role["isTrialExpired"] = this.isTrialExpired(user);
+		role["isPremium"] = this.isPremium(user);
+		role["isProfessional"] = this.isProfessional(user);
+		
+		return role;
+	}
+	isTrial(user)
+	{
+		var returnVal = false;
+		if(typeof(user["role"]) !== "undefined")
+		{
+			if(user["role"] == "TRIAL")
+			{
+				returnVal = true;
+			}
+		}
+		return returnVal;
+
+	}
+	isPremium(user)
 	{
 		var returnVal = false;
 		if(typeof(user["role"]) !== "undefined")
 		{
 			if(user["role"] == "PREMIUM")
+			{
+				returnVal = true;
+			}
+		}
+		return returnVal;
+
+	}
+	isProfessional(user)
+	{
+		var returnVal = false;
+		if(typeof(user["role"]) !== "undefined")
+		{
+			if(user["role"] == "PROFESSIONAL")
 			{
 				returnVal = true;
 			}
@@ -500,6 +575,9 @@ export class HelpService {
 		return res;
 
 	}
+
+
+	
 
 	formatStringDecode(str)
 {

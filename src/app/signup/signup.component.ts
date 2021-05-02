@@ -143,7 +143,8 @@ else if(this.userObj.password !== "" && this.userObj.password == this.userObj.co
         var params = {
           "username":this.userObj["username"],
           "email":this.userObj["email"],
-          "password":encryptedPass
+          "password":encryptedPass,
+          "role":this.userObj['role']
         }
         console.log(params);
         var res =   this.dbService.postData("users", params).subscribe(invData => setTimeout(() => 
