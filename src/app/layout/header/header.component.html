@@ -21,9 +21,19 @@
                                 <li><a href="javascript:void(0)"><i class="fa fa-google-plus"></i></a></li>
                             </ul>
 
-                            <span class="sign-in-buttons">
+                            <span style="border:0px;">
                                 <a class="login" *ngIf="!currentUser.loggedIn" (click)="gotopage('login')">Login</a>
-                                <a class="login" *ngIf="currentUser.loggedIn" (click)="logout()">Logout</a>
+                                
+                               <!-- <a class="login"   (click)="showProfile = !showProfile">MENU</a>-->
+                                <div class="dropdown1 " *ngIf="currentUser.loggedIn">
+                                    <a href="javascript:void(0)" class="dropbtn1"><i class="fa fa-user"></i></a>
+                                    <div class="dropdown1-content">
+                                      <a href="#">My Info</a>
+                                      <a href="#">Progress</a>
+                                      <a  (click)="logout()" href="javascript:void(0)">Logout</a>
+                                    </div>
+                                  </div>
+                                
                             </span>
                         </div>
                         <div class="wrapper-main-nav ">
