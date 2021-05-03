@@ -259,3 +259,12 @@ cursor: pointer;
   line-height: 36px;
   margin-bottom: 20px;
 }
+
+ @media (max-width: 767px) {
+ 
+  .padding-xs-0 {
+  padding-right:0px !important;
+  padding-left:0px !important;
+  margin-bottom:10px !important;
+}
+}
