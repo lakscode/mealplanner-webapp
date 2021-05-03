@@ -74,6 +74,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 				"children":
 				[
 				//	{"id":"howitworks", "menu":"How it works", "link":"/howitworks", "display":displayMenu, "active":false},
+				{"id":"home", "menu":"Home", "link":"/landing", "display":displayMenu, "active":false},
 					{"id":"aboutus", "menu":"Our Team", "link":"/ourteam", "display":displayMenu, "active":false},
 					{"id":"benefits", "menu":"Benefits", "link":"/benefits", "display":displayMenu, "active":false},
 					{"id":"display", "menu":"FAQs", "link":"/faqs", "display":displayMenu, "active":false},
