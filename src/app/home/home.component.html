@@ -32,12 +32,14 @@
    </div>
    </section>
 
-   <section class="home-sec">
+   <section class="home-sec" style="background:#FFF;">
       <div class="container">
          <div class="col-12">
 	        <div class=" w-1000" style="padding-top:30px;">
 	           <div class="row secL" *ngFor="let step of stepsList; let i = index;">
 		            <div class="col-12 col-lg-6">
+                     <span style='    font-size: 24px;' class="heading-small">How to start?</span>
+                     <h2  style="font-size: 38px;">Easy steps</h2>
 			            <h1 class="text-lg-left mb-4 title">{{step.label}}</h1>
 			            <h3 class="subtitle">{{step.subtitle}}</h3>
 			            <p class="text-justify mb-5 description"  style=" direction: ltr;">{{step.description}}</p>
