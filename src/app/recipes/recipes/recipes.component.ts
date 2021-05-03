@@ -108,13 +108,14 @@ export class RecipesComponent implements OnInit {
 		  else if( this.currentUser["username"] !== "")
 		  this.currentUser["displayname"] = this.currentUser["username"];
 		  console.log( this.currentUser["displayname"]);
+		  this.role = this.helpService.getRoleStatus(this.currentUser);
+
+		  this.showNutrientsFlag = this.helpService.showorhideNutritions(this.role);
+  
+		  console.log(this.showNutrientsFlag);
 		}
 		
-		this.role = this.helpService.getRoleStatus(this.currentUser);
-
-		this.showNutrientsFlag = this.helpService.showorhideNutritions(this.role);
-
-		console.log(this.showNutrientsFlag);
+	
 	  this.totalPage = 1;
 	 this.page_num = 0;
 	  this.searchparam = {"q":"", "range":{}}

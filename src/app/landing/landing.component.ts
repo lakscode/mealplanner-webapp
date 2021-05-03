@@ -22,10 +22,11 @@ export class LandingComponent implements OnInit {
 	showNutrientsFlag: boolean = false;
 	role: any = {"isTrialExpired":false, "isPremium":false, "isProfessional":false};
 constructor(private router: Router, private httpClient : HttpClient, private route: ActivatedRoute, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
-	
+	this.RecipeoftheDay = [];
 	}
 
 	ngOnInit() {
+		console.log("ngOnInit");
 		this.currentUser =this.helpService.getCurrentUser();
 		if(this.currentUser !== null)
 		{
@@ -43,7 +44,8 @@ constructor(private router: Router, private httpClient : HttpClient, private rou
 		this.getPlanStatus();
 		this.count++;
 		this.defaultRecipeofTheDay();
-		this.loadRecipeoftheDay();
+		if(this.RecipeoftheDay["length"] == 0)
+		this.checkRecipeoftheDay();
 
 		this.loadHealthLabels();
 	
@@ -91,26 +93,106 @@ constructor(private router: Router, private httpClient : HttpClient, private rou
 	  ));
    
 	}
-
-	loadRecipeoftheDay()
+	checkRecipeoftheDay()
 	{
+	
+	  var params = {};
+	  var d = new Date();
+	  var tempDt2 = { year: d.getFullYear(), month: d.getMonth() + 1, day: d.getDate() };
+	  var tempDt ="";
+	  tempDt = tempDt2.month + "-" + tempDt2.day + "-"  + tempDt2.year ;
+
+    //params["query"] = "select id, image, label, dietLabels, s_instructions from recipes where s_instructions != '' order by rand() limit 1";
+	params["query"] = "select * from recipeoftheday where datetime = '" + tempDt + "'";
+		console.log(params["query"]);
+	 var res =   this.dbService.getDatabyTablebyQuery("recipes", params).subscribe(invData => setTimeout(() => {
+   
+	  if(invData !== null && typeof(invData["body"]) !== "undefined" && invData["body"] !== null && invData["body"]["length"] > 0)
+		{
+			var item = invData["body"][0];
+			this.loadRecipeoftheDay(item["recipeid"]);	 
+		
+		}
+		else
+		{
+			this.loadRecipeoftheDay("");
+		}
+   	console.log(this.RecipeoftheDay);
+	 }));
+  
+	}
+	loadRecipeoftheDay(id="")
+	{
+		console.log("loadRecipeoftheDay");
+		console.log("id-" + id + "-");
 	  this.RecipeoftheDay = [];
 	  var params = {};
+	 
     //params["query"] = "select id, image, label, dietLabels, s_instructions from recipes where s_instructions != '' order by rand() limit 1";
+	if(id == "")
 	params["query"] = "select id, label, image, healthLabels, dietLabels, calories, totalWeight, yield from recipes where s_instructions != '' order by rand() limit 1";
+	else
+	params["query"] = "select id, label, image, healthLabels, dietLabels, calories, totalWeight, yield from recipes where id= " + id + "";
 
 	 var res =   this.dbService.getDatabyTablebyQuery("recipes", params).subscribe(invData => setTimeout(() => {
    
 	  if(invData !== null && typeof(invData["body"]) !== "undefined" && invData["body"] !== null && invData["body"]["length"] > 0)
 		{
-      this.RecipeoftheDay = [];
-   		for(let i=0; i < invData["body"]["length"] ; i++)
-		  {			
-			  this.RecipeoftheDay.push(invData["body"][i]);		
-		  }
+     		   		
+			this.RecipeoftheDay.push(invData["body"][0]);		
+		  	if(id == "") 
+			  this.setRecipeoftheDay(this.RecipeoftheDay[0]);
 		}
-   console.log(this.RecipeoftheDay);
+   		console.log(this.RecipeoftheDay);
 	 }));
+  
+	}
+	
+	setRecipeoftheDay(recipe)
+	{
+	
+		var params = {};
+		var d = new Date();
+		var tempDt2 = { year: d.getFullYear(), month: d.getMonth() + 1, day: d.getDate() };
+		var tempDt ="";
+		tempDt = tempDt2.month + "-" + tempDt2.day + "-"  + tempDt2.year ;
+  
+
+	  	params["query"] = "select * from recipeoftheday where datetime = '" + tempDt + "'";
+		  console.log(params["query"]);
+	   var res =   this.dbService.getDatabyTablebyQuery("recipes", params).subscribe(invData => setTimeout(() => {
+
+		if(invData !== null && typeof(invData["body"]) !== "undefined" && invData["body"] !== null && invData["body"]["length"] > 0)
+		  {
+			
+		  
+		  }
+		  else
+		  {
+			var params1 = {};
+    
+			var d = new Date();
+			var tempDt2 = { year: d.getFullYear(), month: d.getMonth() + 1, day: d.getDate() };
+			var tempDt ="";
+			tempDt = tempDt2.month + "-" + tempDt2.day + "-"  + tempDt2.year ;
+	  
+		  params1["query"] = "INSERT into recipeoftheday (recipeid, datetime) values(" + recipe["id"] + ", '" + tempDt + "')";
+			  console.log(params1['query']);
+	  
+		   var res =   this.dbService.getDatabyTablebyQuery("recipes", params1).subscribe(invData => setTimeout(() => {
+			  
+				  if(invData !== null && typeof(invData["body"]) !== "undefined" && invData["body"] !== null && invData["body"]["length"] > 0)
+				  {
+		  
+	  
+				  }
+	  
+				  }));
+		  }
+		 console.log(this.RecipeoftheDay);
+	   }));
+	 
+
   
 	}
 	formatValuePServing(str, servings)
