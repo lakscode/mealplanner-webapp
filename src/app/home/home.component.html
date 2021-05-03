@@ -6,7 +6,7 @@
 
 
 
-   <section class="home-sec" style="padding-bottom: 80px;margin-bottom:0px; padding-top:20px">
+   <section class="home-sec aboutus-sec" >
    <div class="container col-12">
       <div class="home-sec-box">
          <div class="text-side">
@@ -19,8 +19,8 @@
                       <li><span><img src="assets/images/grapes-icon.png" alt="icon"></span><a href="javascript:void(0)">Personalize Your Diet</a></li>
                       <li><span><img src="assets/images/salt-pot-icon.png" alt="icon"></span><a href="javascript:void(0)">Tailor Grocery List</a></li>
                   </ul>
-                  <a class="button-default theme-filled video-button swipebox" href="javascript:void(0)">Watch our Video</a>
-                  <a class="button-default hollow-button" href="javascript:void(0)">Know more About Us</a>
+                  <!--<a class="button-default theme-filled video-button swipebox" href="javascript:void(0)">Watch our Video</a>-->
+                  <a class="button-default theme-filled hollow-button" href="javascript:void(0)">Know more About Us</a>
               </div>
          </div>
          <div class="image-side  wow zoomIn animated hidden-xs" style="visibility: visible; animation-name: zoomIn;">
@@ -41,10 +41,10 @@
 			            <h1 class="text-lg-left mb-4 title">{{step.label}}</h1>
 			            <h3 class="subtitle">{{step.subtitle}}</h3>
 			            <p class="text-justify mb-5 description"  style=" direction: ltr;">{{step.description}}</p>
-			            <div *ngIf="i %2 ==0" style="text-align:right;">
+			            <div *ngIf="i %2 ==0"  class="arrowimg" style="text-align:right;">
 			               <img style=" height: 150px" src="assets/images/temp-images/arrow-right.svg" />
 			            </div>
-			            <div *ngIf="i %2 ==1" style="text-align:left">
+			            <div *ngIf="i %2 ==1" class="arrowimg" style="text-align:left">
 			               <img style=" height: 150px" src="assets/images/temp-images/arrow-left.svg" />
 			            </div>
 		            </div>
@@ -72,8 +72,11 @@
                   <h2>Meal planning made easy...</h2>
                  
                   <div class="storeImgDiv">
-                     <a href="javascript:void(0)"><img src="assets/app-store.png" alt="Download on the App Store" class="storeImg"></a>
-                     <a href="javascript:void(0)"><img src="assets/play-store.png" alt="Get it on Google Play" class="storeImg"></a></div>
+                     <a href="javascript:void(0)">
+                        <img src="assets/app-store.png" alt="Download on the App Store" class="storeImg"></a>
+                     <a href="javascript:void(0)">
+                        <img src="assets/play-store.png" alt="Get it on Google Play" class="storeImg"></a>
+                  </div>
                  
               </div>
          </div>
@@ -111,9 +114,11 @@
                        
             </div>
          </div>
-         <div class="col-12 col-lg-6 wow zoomIn animated" style="visibility: visible; animation-name: zoomIn;margin-bottom:40px">
+         <div class="col-12 col-lg-6 wow zoomIn animated" 
+         style="visibility: visible; animation-name: zoomIn;">
             <div class="home-sec-image image-outer1">
-               <img src="assets/bg/bg4.png" style="width:425px;height:425px" alt="image">
+               <img src="assets/bg/bg4.png" style="max-width: 425px;
+               max-height: 425px;" alt="image">
            </div>&nbsp;&nbsp;&nbsp;
               
          </div>
@@ -125,33 +130,3 @@
 
 
 </div>
-
-<!--- testimonial slider   commented for now - needed in future releases - dont remove-->
-<!-- <div class="contentpage" style="width:1000px">
-<ngb-carousel *ngIf="testimonialsList" [interval]="4000" >
-	<div class="row" style="height:200px;">
-	  <div class="related_product_slide">
-  
-		<ng-template ngbSlide *ngFor="let item of testimonialsList; let i= index" class="slider slide-in">
-		  <div class="item col-md-4 active" *ngFor="let item1 of item.child; let i1= index;" style="margin-bottom:30px;">
-			<div class="testimonial-item">
-				<div class="testmonial-title">
-				{{item1.name}} {{i}}
-				<div class="new_product">New</div>
-				</div>
-				<div class="testmonial-content">
-					<h4>iPhone 6S</h4>
-					<p>
-					  Living in today's metropolitan
-					  world of cellular phones 
-					</p>
-					<h5> 100</h5>
-					<h6> <span class="through_line">680</span></h6>
-				</div>
-			</div>
-		  </div>
-		</ng-template>
-	  </div>
-	</div>
-  </ngb-carousel>
-</div>   -->

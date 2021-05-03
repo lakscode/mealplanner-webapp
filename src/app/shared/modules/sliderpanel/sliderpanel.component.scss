@@ -1,3 +1,4 @@
+@import "../../../../_variables.scss";
 
 .carousel-item.active {
     -webkit-animation: flip-in-ver-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
@@ -59,7 +60,7 @@ font-family: 'Karla', sans-serif;
     display: inline-block;
     height: 30px;
     line-height: 28px;
-    font-family: 'Lora', serif;
+    font-family: 'Lato', serif;
     font-style: italic;
     font-weight: 700;
     padding: 0 15px;
@@ -68,5 +69,44 @@ font-family: 'Karla', sans-serif;
 }
 
 a:hover {
-  color:#green;
+  color:var(--green);
+}
+@media only screen and (max-width: 767px) {
+  .slide-detail-inner
+  {
+    min-height:100px;
+    padding:5px;
+    border:0px;
+  }
+  .carousel-caption
+  {
+    background: transparent; 
+      padding: 16px;
+      width: 100%;
+      left: 0%;
+    right: 0%;
+    bottom: 0px;
+    top: 0; 
+  }
+
+  .slide-detail-inner p
+  {
+   display:none; 
+  }
+
+  .slide-detail-inner h2
+  {
+    font-size: 20px;
+  }
+  .slide-detail-inner .read-more-bordered
+  {
+    border:0px;
+    background: $green;
+    color: #FFF;
+    font-family: 'Lato', serif;
+  }
+  .carousel-indicators
+  {
+    display:none;
+  }
 }

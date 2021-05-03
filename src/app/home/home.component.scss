@@ -311,8 +311,9 @@ section {
 }
 
 .image-outer1 {
-  display: inline;
+  /* display: inline; */
   text-align:center;
+  padding-top:20px;
 }
 
 .free-sec
@@ -349,5 +350,40 @@ text-align:center;
   {
     border:1px solid $green;
     
+  }
+}
+
+
+.arrowimg
+{
+  display:block;
+}
+
+.aboutus-sec
+{
+  padding-bottom: 80px;margin-bottom:0px; padding-top:20px;
+  padding-left: 15px;
+  padding-right:15px;
+}
+
+@media only screen and (max-width: 767px) {
+  .arrowimg
+  {
+    display:none;
+  }
+  .free-sec .link-btn
+  {
+    font-size: 22px;
+  }
+  .aboutus-sec
+  {
+    padding-bottom: 0px;
+  }
+  .home-sec {
+    margin-bottom: 20px;
+  }
+  .home-sec-intro h2
+  {
+    font-size: 38px;
   }
 }

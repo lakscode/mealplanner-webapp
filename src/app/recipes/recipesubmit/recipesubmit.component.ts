@@ -1,4 +1,4 @@
-import { Component, OnInit,OnDestroy  } from '@angular/core';
+import { Component, OnInit,OnDestroy, OnChanges  } from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
 import { UserService } from '../../services/user.service';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -10,13 +10,13 @@ import { constants } from './../../jsonfiles/constants';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { HttpHeaders } from '@angular/common/http';
-import { parse } from 'querystring';
+import { recipe } from '../../jsonfiles/recipestructure';
 @Component({
 	selector: 'app-recipesubmit',
 	templateUrl: './recipesubmit.component.html',
 	styleUrls: ['./recipesubmit.component.scss']
 })
-export class RecipesubmitComponent implements OnInit {
+export class RecipesubmitComponent implements OnInit, OnChanges {
 	private onDestroy$: Subject<void> = new Subject<void>();
 	nutrientsList: Array<any> =[];
 	routeParams: any = {};
@@ -34,47 +34,67 @@ export class RecipesubmitComponent implements OnInit {
 	constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
 	
 	}
-
+ngOnChanges()
+{
+	console.log("ngOnchanges");
+	this.loadDefaults();
+}
 	ngOnInit() {
-		this.instructions= [];
-		this.ispublic = false;
-		this.apiUrl = environment.apiUrl;
-		this.currentUser =this.helpService.getCurrentUser();
-		if(this.currentUser !== null)
-		{
-		  if( this.currentUser["firstname"] !== "")
-		  this.currentUser["displayname"] = this.currentUser["firstname"];
-		  else if( this.currentUser["username"] !== "")
-		  this.currentUser["displayname"] = this.currentUser["username"];
-		  console.log( this.currentUser["displayname"]);
-		}
-
-		this.getLabels();
-		this.ingredients = [];
-		this.ingredients.push({"text":""});
-		this.searchRes = {};
-		this.nutrientsList =  constants.minerals;
-		console.log(this.nutrientsList);
-		this.routeParams = {};
-		this.route.params.pipe(takeUntil(this.onDestroy$)).subscribe(params => {
-	 //  console.log(params);   
-	   this.routeParams = params;     
-	   if (typeof (this.routeParams.id) !== "undefined") {
-		 console.log(this.routeParams.id);
-		 this.loadRecipe(this.routeParams.id);
-	   }    
-	   if (typeof (this.routeParams.draft) !== "undefined") {
-		console.log(this.routeParams.draft);
-		this.loadRecipe(this.routeParams.draft);
-	  }  
-		console.log(this.routeParams);
-
-		
-
-		}); 
+		this.loadDefaults();
 	}
+loadDefaults()
+{
+	this.instructions= [];
+	this.ispublic = false;
+	this.apiUrl = environment.apiUrl;
+	this.currentUser =this.helpService.getCurrentUser();
+	if(this.currentUser !== null)
+	{
+	  if( this.currentUser["firstname"] !== "")
+	  this.currentUser["displayname"] = this.currentUser["firstname"];
+	  else if( this.currentUser["username"] !== "")
+	  this.currentUser["displayname"] = this.currentUser["username"];
+	  console.log( this.currentUser["displayname"]);
+	}
+	this.routeParams = {};
+	this.route.params.pipe(takeUntil(this.onDestroy$)).subscribe(params => {
+		//  console.log(params);   
+		  this.routeParams = params;     
+		  if (typeof (this.routeParams.id) !== "undefined") {
+			console.log(this.routeParams.id);
+			this.setDefaults();
+			this.loadRecipe(this.routeParams.id);
+		  }    
+		  else
+		  {
+			  this.setDefaults();
+		   this.searchRes = recipe;
+	   
+		  }
+		  if (typeof (this.routeParams.draft) !== "undefined") {
+		   console.log(this.routeParams.draft);
+		   this.loadRecipe(this.routeParams.draft);
+		 }  
+		   console.log(this.routeParams);
+	}); 
 
 	
+
+
+}
+
+setDefaults()
+{
+	this.addRows("ins");
+	this.addRows("ing");
+	this.getLabels();
+	this.ingredients = [];
+	this.instructions= [];
+	this.ingredients.push({"text":""});
+	this.searchRes = {};
+	this.nutrientsList =  constants.minerals;
+	console.log(this.nutrientsList);
+}
 existingIngCount:any = 0;
 loadRecipe(id)
 {
@@ -261,7 +281,7 @@ loadRecipe(id)
 				 this.addRows("ins");
 			  }
  
-		
+			  console.log(this.instructions);
 			
 			  this.paramMicro = [];
 			  if(tempDigest["length"] > 0)
