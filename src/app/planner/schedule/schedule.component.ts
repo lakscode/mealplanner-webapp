@@ -61,7 +61,7 @@ export class ScheduleComponent implements OnInit {
 	errorMessage:any = "";
 	showpopupMenu: boolean = false;
 	completeStatus: any = {};
-	
+	updateFlag: boolean = false;
 
 	constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
 	
@@ -1005,6 +1005,7 @@ export class ScheduleComponent implements OnInit {
   
 	ChartDefaults()
 	{
+		this.updateFlag = true;
 	var colorsArr = this.colorArrayList[0];
 	if(typeof(this.chartIndex) !== "undefined" &&  this.chartIndex > -1)
 	{

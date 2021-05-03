@@ -19,7 +19,7 @@ require('highcharts/modules/exporting')(Highcharts);
 export class ProgressComponent implements OnInit {
 	Highcharts = Highcharts; // required
 	chartConstructor = 'chart'; // optional string, defaults to 'chart'
-
+  updateFlag: boolean = false;
 	bars: any;
 	colorArray: any;
 	lines: any;
@@ -741,6 +741,8 @@ createStepsChart(chartname, labels, data)
 chartOptionsCalories: any;
 createCaloriesChart(chartname, labels, data)
 {
+  this.updateFlag = true;
+  
 	console.log("chart name " + chartname);
 	console.log(labels);
 	console.log(data);

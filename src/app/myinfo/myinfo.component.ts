@@ -289,6 +289,10 @@ export class MyinfoComponent implements OnInit {
 	base64Image;
 	beforeImage;
 	afterImage;
+	uploadimage()
+	{
+		
+	}
 	/*
 	uploadimage()
 	{
