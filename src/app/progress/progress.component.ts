@@ -810,11 +810,11 @@ createDistanceChart(chartname, labels, data)
 		},
 		yAxis: {          
 		   title:{
-			  text:"In kms"
+			  text:"In meters"
 		   } 
 		},
 		tooltip: {
-		   valueSuffix:" km"
+		   valueSuffix:" m"
 		},
 		series: [
 		   {
