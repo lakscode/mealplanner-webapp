@@ -5,7 +5,7 @@ import { PlannerlistRoutingModule } from './plannerlist-routing.module';
 import { PlannerlistComponent } from './plannerlist.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {SidebarModule } from "../../shared/modules"
+import {SidebarModule } from "../../shared/modules";
 @NgModule({
   imports: [
     CommonModule,
