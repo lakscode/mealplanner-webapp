@@ -1,0 +1,42 @@
+.bg-white
+{
+    margin:0 auto;
+    background:#FFF;
+    box-shadow: 0px 15px 20px -10px rgb(0 0 0 / 15%), 0px 1px 4px -2px rgb(0 0 0 / 40%);
+}
+.form-group
+{
+    margin-bottom:10px;
+    font-size:16px;
+    text-align:left;
+}
+.input-label
+{
+    border:1px splid #999;
+    padding:10px;
+    display:inline-block;
+    min-width: 200px;
+    text-align:left;
+}
+
+.input-text
+{
+    border:1px solid #999;
+    padding:10px;
+    display:inline-block;
+    text-align:left;
+    font-size:16px; 
+}
+
+.menu-options
+{
+    .menu-option{
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        font-size:14px;
+        margin-bottom:10px;
+        width: 200px;
+        background-color: #f1f1f1;
+    }
+}

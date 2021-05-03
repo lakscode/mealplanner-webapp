@@ -1,7 +1,94 @@
-<section class="wrapper-main-contents all-chefs">
-    <div class="container">
-        <a href="https://www.fitbit.com/oauth2/authorize?response_type=code&client_id={{client_id}}&redirect_uri={{redirect_url}}&scope=activity%20heartrate%20location%20nutrition%20profile%20settings%20sleep%20social%20weight&expires_in=604800">
-            Login to Fitbit
-            </a>
+<div class="recipes-home-body inner-page">
+    <div class="row w-1200 bg-white">  
+
+<div class="col-12 col-md-6 col-lg-6">  
+  <div class="form-group">
+    <div class="input-label"> Username </div>
+    <input type="text" class="input-text" (blur)="changeInfo('username')" [(ngModel)] = "currentUser['username']" />
+  </div>
+</div>
+<div class="col-12 col-md-6 col-lg-6"> 
+  
+  <div class="form-group">
+    <div class="input-label" > Email </div>
+    <input type="text"  class="input-text"  (blur)="changeInfo('email')" [(ngModel)] = "currentUser['email']" />
+  </div>
+</div>
+<div class="col-12 col-md-6 col-lg-6">
+  <div class="form-group">
+      <div class="input-label" >  Firstname </div>
+      <input type="text"  class="input-text"  (ionBlur)="changeInfo('firstname')" [(ngModel)] = "currentUser['firstname']" />
     </div>
-    </section>
+  
+</div>
+<div class="col-12 col-md-6 col-lg-6">
+    <div class="form-group">
+      <div class="input-label" >  Lastname </div>
+      <input type="text"  class="input-text"  (blur)="changeInfo('lastname')" [(ngModel)] = "currentUser['lastname']" />
+    </div>
+</div>
+<div class="col-12 col-md-6 col-lg-6">
+  <div class="form-group">
+    <div class="input-label" >  Phone </div>
+    <input  type="text" class="input-text"  (blur)="changeInfo('phone')" [(ngModel)] = "currentUser['phone']" />
+  </div>
+</div>
+<div class="col-12 col-md-6 col-lg-6">
+  <div class="form-group">
+    <div class="input-label" >Date of Birth</div>
+    <!--<ion-datetime (ionChange)="changeInfo('dob')" [(ngModel)] = "currentUser['dob']"  placeholder="None"></ion-datetime>-->
+    <!--<input (blur)="changeInfo('dob')" [(ngModel)] = "currentUser['dob']"></input>-->
+  </div>
+</div>
+<div class="col-12 col-md-6 col-lg-6">  
+  <div class="form-group">
+    <div class="input-label">Age</div>
+    <input type="text"  class="input-text"  (ionBlur)="changeInfo('age')" [(ngModel)] = "currentUser['age']" />
+  </div>
+</div>
+<div class="col-12 col-md-6 col-lg-6">  
+  <div class="form-group">
+    <div class="input-label">Gender</div>
+    <select style="width:150px" lass="input-text" (change)="changeInfo('gender')" [(ngModel)]="currentUser['gender']" >
+      <option value="f">Female</option>
+      <option value="m">Male</option>
+    </select>
+  </div>
+</div>
+<div class="col-12 col-md-6 col-lg-6"> 
+  <div class="form-group">
+    <div class="input-label">Height (in cms)</div>
+    <input class="input-text" (blur)="changeInfo('height')" [(ngModel)] = "currentUser['height']" />
+  </div>
+</div>
+<div class="col-12 col-md-6 col-lg-6">
+  <div class="form-group">
+    <div class="input-label">Weight (in kgs)</div>
+    <input class="input-text"  (blur)="changeInfo('weight')" [(ngModel)] = "currentUser['weight']" />
+  </div>
+</div>
+<div class="col-12">
+    <div class="row">
+        <div class="col-12 col-lg-6 col-md-6">
+           
+
+            <div style="display:block"> <img src="{{profileImage}}" /></div>
+            <ul class="menu-options">
+                <li class="menu-option" (click)="fileupload();"> Upload Image</li>
+                <li class="menu-option" (click)="uploadimage();">Capture Image</li>
+             
+              </ul>
+              <input id="inputuploadimage" hidden type="file" name="inputuploadimage" (change)="onFileSelect($event)" />
+
+          </div>
+        <div class="col-12 col-lg-6 col-md-6">
+         
+        </div>
+     
+
+    </div>
+    
+</div>
+  
+  </div>
+  </div>
