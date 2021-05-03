@@ -31,8 +31,8 @@
                                 <strong>{{SetFLU(userName)}}</strong></span>
                                 <p  style="margin-right:10px; margin-bottom:10px; font-size:14px;color:red " *ngIf='isTrialExpired'>Your Trial version expired.</p>
 
-                                      <a href="#">My Info</a>
-                                      <a href="#">Progress</a>
+                                      <a href="javascript:void(0);" (click)="gotopage('myinfo')">My Info</a>
+                                      <a href="javascript:void(0);" (click)="gotopage('progress')">Progress</a>
                                       <a  (click)="logout()" href="javascript:void(0)">Logout</a>
                                     </div>
                                   </div>

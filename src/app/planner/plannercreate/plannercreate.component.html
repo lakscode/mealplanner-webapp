@@ -41,7 +41,7 @@
                             type="button" (click)="getFavourites()" aria-haspopup="true" aria-expanded="false" class="btn btn-secondary"><i
                                 class="fa fa-heart" aria-hidden="true"></i>Favourites</button>
                     </div>
-                    <div id="advanced-filters" (click)="loadFilterLabels(); filtersOpt = !filtersOpt"
+                    <div *ngIf="showNutrientsFlag" id="advanced-filters" (click)="loadFilterLabels(); filtersOpt = !filtersOpt"
                         class="advanced-filters btn-filter btn-filter-mb other-filters-btn   btn-group btn-group-sm"><button
                             type="button" id="advancedFilterToggle" aria-haspopup="true" aria-expanded="false"
                             class="btn btn-secondary"><i class="fa fa-plus" aria-hidden="true"></i>Filters</button>
@@ -259,21 +259,28 @@
         <div class="meal-plans-content">
              <div class="submit-recipe-form" style="text-align:left; padding-bottom:10px;  background-color: #f8f6f5;">
                 <div style='text-align:right;'>
-                    <!--<label class="container" style=" text-align: left;
+                    <div style="display:inline-block;text-align:right;width: 400px">
+                    <div style="display:block">
+                    <label *ngIf="showNutrientsFlag"  class="container" style=" text-align: left;
                     display: inline-block;
                     width: 155px;
                     font-family: 'Lato', sans-serif;
                     font-weight: 400;
-                    font-size: 16px;">Show Images
-                        <input [(ngModel)] = 'showImages' type="checkbox">
+                    font-size: 16px;">Show Nutrients
+                        <input (change)="showhidenutrients()" [(ngModel)] = 'showhidenutrientsFlag' type="checkbox">
                         <span class="checkmark"></span>
-                    </label>-->
+                    </label>
+                    <a class="copy-button" (click)="downloadplan()" title="Download PDF"><i class="fa fa-download"></i> Download</a>
+                    &nbsp; <a  class="copy-button" (click)="getIngredientsList()" title="Ingredients List"><i class="fa fa-download"></i> Ingredients </a>
+                    &nbsp;  
+                    </div>
+                    <div style="display:block" *ngIf="showhidenutrientsFlag">
                     <label class="container" style=" text-align: left;
                     display: inline-block;
-                    width: 240px;
+                    width: 200px;
                     font-family: 'Lato', sans-serif;
                     font-weight: 400;
-                    font-size: 16px;">Show Nutrients per Serving
+                    font-size: 16px;">Nutrients per Serving
                         <input (change)="toggleNutrients('perserving')" [(ngModel)] = 'showNutrientsPServing' type="checkbox">
                         <span class="checkmark"></span>
                     </label>
@@ -282,14 +289,14 @@
                     width: 155px;
                     font-family: 'Lato', sans-serif;
                     font-weight: 400;
-                    font-size: 16px;">Show Nutrients
+                    font-size: 16px;">Total Nutrients
                         <input (change)="toggleNutrients('total')" [(ngModel)] = 'showNutrients' type="checkbox">
                         <span class="checkmark"></span>
                     </label>
-                    <a class="copy-button" (click)="downloadplan()" title="Download PDF"><i class="fa fa-download"></i> Download</a>
-                   &nbsp; <a  class="copy-button" (click)="getIngredientsList()" title="Ingredients List"><i class="fa fa-download"></i> Ingredients </a>
-                   &nbsp;  
+                </div>
+                    </div>
                    
+               
                 </div>
 
                 <label for="title">Meal Plan Name</label>
@@ -443,13 +450,13 @@
             <div class="meal-row-wrapper meal-row__calories" id="calculateCaloryFlag" *ngIf="calculateCaloryFlag">
                 <div class="dayname"></div>
                 <div id="total-calories-row" class="meal-plan-row" style="flex-wrap: nowrap;">
-                    <div [ngClass]="showNutrients?'meal-plan-col col mealplan-col':'meal-plan-col col mealplan-col20'"
+                    <div [ngClass]="showNutrients || showNutrientsPServing?'meal-plan-col col mealplan-col':'meal-plan-col col mealplan-col20'"
                     *ngFor="let mealtype of mealsList; let d =index;">
                         <div class="totalcalories">
                         {{calculateCalory(mealtype, d)}}</div>
                     </div>
-                    <div [ngClass]="showNutrients?'meal-plan-col col mealplan-col':'meal-plan-col col mealplan-col20'">
-
+                    <div *ngIf="showNutrients || showNutrientsPServing" [ngClass]="showNutrients || showNutrientsPServing?'meal-plan-col col mealplan-col':'meal-plan-col col mealplan-col20'">
+                       
                     </div>
                 </div>
             </div>

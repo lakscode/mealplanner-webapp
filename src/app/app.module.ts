@@ -75,6 +75,7 @@ import { NgxSpinnerModule } from "ngx-spinner";
 import { ModalModule } from './shared/modules'; 
 import { AdminModule } from './admin/admin.module'; 
 import { QuestionnaireModule } from './questionnaire/questionnaire.module'; 
+import { ProgressModule } from './progress/progress.module'; 
 
 
 @NgModule({
@@ -127,7 +128,8 @@ import { QuestionnaireModule } from './questionnaire/questionnaire.module';
 	ResetpassModule,
 	AdminModule,
 	HighchartsChartModule,
-	QuestionnaireModule
+	QuestionnaireModule,
+	ProgressModule
   ],
   schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
   providers: [UserService],

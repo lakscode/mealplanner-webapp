@@ -57,6 +57,8 @@ export class PlannercreateComponent implements OnInit {
 	nutrientDbFields : Array<any> = [];
 	showNutrients: boolean = true;
 	showImages: boolean = true;
+	showNutrientsFlag: boolean = false;
+	role: any = {};
 	constructor(private router: Router, private route: ActivatedRoute, private modalService: ModalService, private pdfService: PDFService, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
 	
 	}
@@ -65,7 +67,7 @@ export class PlannercreateComponent implements OnInit {
 			 this.totalPage = 1;
 			 this.pageCount= 5;
 			 this.filtersOpt = false;
-			 this.showNutrients= true;
+			 this.showNutrients= false;
 	 this.page_num = 1;
 this.loadedPlan = false;
 		window.addEventListener("scroll", this.scrollFunc);
@@ -88,7 +90,12 @@ this.addRecipeImage = "assets/images/add-recipe.png"
 		  this.currentUser["displayname"] = this.currentUser["username"];
 		//  console.log(this.currentUser["displayname"]);
 		}
-	
+		this.role = this.helpService.getRoleStatus(this.currentUser);
+
+		this.showNutrientsFlag = this.helpService.showorhideNutritions(this.role);
+
+		console.log(this.showNutrientsFlag);
+
 		this.mealTypeList = ["breakfast", "snack1", "lunch", "snack2", "dinner"];
 		this.recipesList = [];
 		this.routeParams = {};
@@ -1085,7 +1092,20 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 
   }
   showNutrientsPServing: boolean = false;
-  
+  showhidenutrientsFlag: boolean = false;
+  showhidenutrients()
+  {
+	if(!this.showhidenutrientsFlag)
+	{
+		this.showNutrientsPServing = false;
+		this.showNutrients = false;
+
+	}
+	if(this.showhidenutrientsFlag)
+	{
+		this.showNutrientsPServing = true;
+	}
+  }
   toggleNutrients(opt)
   {
 	console.log("opt " + opt);
