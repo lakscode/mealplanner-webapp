@@ -353,7 +353,8 @@
                                     </div>
                                     <div *ngIf='meal.recipe.calories > 0' class="calories-item">
                                         <span *ngIf="showNutrients">
-                                            Calories{{meal.recipe.calories}} Kcal <br>
+                                            Calories {{meal.recipe.calories}} Kcal <br>
+                                            Servings {{meal.recipe.yield}} Kcal <br>
                                         </span>
                                         <span *ngIf="showNutrientsPServing">
                                         Calories<br> per Serving<br>{{formatValPServing(meal.recipe.calories, meal.recipe.yield)}} Kcal 
