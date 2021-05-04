@@ -512,3 +512,15 @@ font-size:13pt;
   white-space: normal; 
   width: auto;
 }
+
+.carousel-indicators
+{
+	display:block;
+}
+
+@media only screen and (max-width: 767px) {
+	.carousel-indicators
+	{
+		display:none;
+	}
+}

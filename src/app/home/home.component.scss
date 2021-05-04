@@ -365,7 +365,20 @@ text-align:center;
   padding-left: 15px;
   padding-right:15px;
 }
-
+.heading-big-1
+{
+  font-size: 38px; font-weight:bold;
+  font-family: "Lora", serif;
+    font-style: italic;
+    font-weight: 700;
+}
+.heading-small-1
+{
+  font-size: 24px;
+  font-family: "Lora", serif;
+    font-style: italic;
+    font-weight: 700;
+}
 @media only screen and (max-width: 767px) {
   .arrowimg
   {

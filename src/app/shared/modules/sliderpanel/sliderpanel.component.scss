@@ -71,6 +71,15 @@ font-family: 'Karla', sans-serif;
 a:hover {
   color:var(--green);
 }
+
+.desktoponly
+{
+  display:block;
+}
+.mobileonly
+{
+  display:none;
+}
 @media only screen and (max-width: 767px) {
   .slide-detail-inner
   {
@@ -109,4 +118,16 @@ a:hover {
   {
     display:none;
   }
+
+
+  .desktoponly
+{
+  display:none;
 }
+.mobileonly
+{
+  display:block;
+}
+}
+
+

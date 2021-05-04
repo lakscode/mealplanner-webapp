@@ -242,7 +242,7 @@ resettoken(input){
 
 	uploadRecipe(input)
 	{
-		var tempUrl = this.apiUrl + "/uploadRecipes.php"; 
+		var tempUrl = this.apiUrl + "/uploadRecipe.php"; 
 		
 		//	  console.log(tempUrl);
 		   var options = {
