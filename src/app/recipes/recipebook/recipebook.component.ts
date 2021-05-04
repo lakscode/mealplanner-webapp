@@ -175,17 +175,29 @@ saveRecipebook()
 	console.log(this.searchRes);
 	var params = {};
 	
-	this.searchRes.status = 0;
-	params["status"] =0;
+	if(this.searchRes["recipebook_name"] !== "")
+    params["recipebook_name"] = this.searchRes["recipebook_name"];
+   
+    if(this.searchRes["description"] !== "")
+    params["description"] = this.searchRes["description"];
 
+    if(this.searchRes["notes"] !== "")
+    params["notes"] = this.searchRes["notes"];
 
-	
+    if(this.searchRes["recipes"] !== "")
+    params["recipes"] = this.searchRes["recipes"];
+
+	if(typeof(this.searchRes["createdby"]) =="undefined" || this.searchRes["createdby"] == "" || this.searchRes["createdby"] == "0")
+    {
+      if(typeof(this.currentUser["id"]) !== "undefined" && this.currentUser["id"] !== "")
+      params["createdby"] = this.currentUser["id"];
+    }   
 		if(typeof(this.searchRes.id) !== "undefined"  && this.searchRes.id !== "")
 		{
 			console.log("updating");
 			params["id"] = this.searchRes.id;
 		
-			params["created_by"] =  this.currentUser["id"];
+		
 			console.log(params);
 			var res =   this.dbService.updateDataByTable("recipebook", params).subscribe(recipeData => setTimeout(() => {
 				console.log(recipeData);	
@@ -195,7 +207,7 @@ saveRecipebook()
 		}
 		else
 		{
-			params["created_by"] =  this.currentUser["id"];
+		
 			console.log("adding");
 			console.log(params);
 			var res =   this.dbService.postDataByTable("recipebook", params).subscribe(recipeData => setTimeout(() => {
