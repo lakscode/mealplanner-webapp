@@ -55,11 +55,13 @@ testimonialsList: Array<any> = [];
 	{
 		this.stepsList = [];
 
-		this.stepsList.push({"label":"Browse", "subtitle":"Healthy Recipes", "image":"assets/images/temp-images/listing-1.jpg", "description":"We've got hundreds of delicious recipes for every taste and dietary preference. Browse them all using our Search and Filter tools and choose the ones that are right for you."});
+		this.stepsList.push({"label":"Features", "subtitle":"Recipe Suggestions", "image":"assets/images/temp-images/main-recipe3.jpg", "description":"With over 50 thousand recipes available, we assure you that you won’t run out of options to choose from. Even more, dieticians from across the world continue to add recipes to this bundle."});
 
-		this.stepsList.push({"label":"Choose", "subtitle":"Meal Plan","image":"assets/images/temp-images/balance-meals-z.jpg", "description":"Use our Meal Planning tool to add recipes to your weekly meal plan. It's as simple as drag and drop (or select and place on mobile). You can add as many recipes as you want and keep track of your daily calorie intake."});
+		this.stepsList.push({"label":"Choose", "subtitle":"Calculators","image":"assets/images/temp-images/new-var2.jpg", "description":"Easily calculate and save your BMI (Body Mass Index), BMR (Basal Metabolic Rate), BFP (Body Fat Percentage) using our app. Moreover, the calorie counter automatically calculates your calorie intake of the day and makes changes to the above."});
 
-		this.stepsList.push({"label":"Design", "subtitle":"Meal Plan","image":"assets/images/temp-images/Meal-Planning.jpg", "description":"Decide when you would like to eat your recipes by placing them on your calendar. Your meal plan is completely flexible to accommodate your schedule"});
+		this.stepsList.push({"label":"Design", "subtitle":"Progress Tracker","image":"assets/images/temp-images/steps-tab1.jpg", "description":"Progress graphs show number of steps taken, calories burned, distance covered, weight changes, blood pressure and BMI fluctuations calculated per day. The tracker allows you to compare this data for 15 days in one sight."});
+
+		/*this.stepsList.push({"label":"Design", "subtitle":"Image Transformation","image":"assets/images/temp-images/Meal-Planning.jpg", "description":"Just take a snapshot of your face and have us detect your current BMI. From here, the image transformation feature allows you to look at a future, healthier version of you with the desired BMI."});*/
 
 
 	}

@@ -1,42 +1,49 @@
-<div style="width:100%" style="background: #FFF">
+<div style="width:100%" style="background: #F8F6F5">
 <div class="row" >
 
+  <div class="col-12">
+    <img style="width:100%;min-height: 200px;" src="assets/images/temp-images/full-slide-4.jpg" alt="More than 50 thousand recipes.">
+   </div>
 
-   <section class="home-sec" style="background: #FFF; padding-bottom: 80px; margin-bottom:0px;">
+
+   <section class="home-sec" style=" padding-bottom: 20px;padding-top:20px; margin-bottom:0px;">
    <div class="container col-12">
       <div class="home-sec-box">
-         <div class="text-side">
+         <div class="">
             <div class="home-sec-intro">
-               <span class="heading-small">Its all about</span>
-                  <h2>Easy customized nutrition</h2>
-                  <span class="desc">The diet was developed with customers' needs in mind. Without the hassle, build healthy meal plans and attractive facilities. Get more done in one place for one low price as a health professional.</span>
-                  <ul class="home-sec-list">
+               <!--  <span class="heading-small">Features and Benefits</span> --> 
+                  <h2>Features and Benefits</h2>
+                  
+
+                <!--   <p class="heading-small">Recipe Suggestions: </p>
+                  <p class="desc"> With over 50 thousand recipes available, we assure you that you won’t run out of options to choose from. Even more, dieticians from across the world continue to add recipes to this bundle.</p>  -->
+                 <!--  <ul class="home-sec-list">
                       <li><span><img src="assets/images/burger-icon.png" alt="icon"></span><a href="javascript:void(0)">Nam ornare arcu turpis, nec congue nibh tempores</a></li>
                       <li><span><img src="assets/images/grapes-icon.png" alt="icon"></span><a href="javascript:void(0)">Quis euismod mauris. Nulla porttitor orcirisk</a></li>
                       <li><span><img src="assets/images/salt-pot-icon.png" alt="icon"></span><a href="javascript:void(0)">We are hugeseget semper vulputate. </a></li>
                   </ul>
                   <a class="button-default theme-filled video-button swipebox" href="javascript:void(0)">Watch our Video</a>
-                  <a class="button-default hollow-button" href="javascript:void(0)">Know more About Us</a>
+                  <a class="button-default hollow-button" href="javascript:void(0)">Know more About Us</a> -->
               </div>
          </div>
-         <div class="image-side  wow zoomIn animated hidden-xs" style="visibility: visible; animation-name: zoomIn;">
+        <!--  <div class="image-side  wow zoomIn animated hidden-xs" style="visibility: visible; animation-name: zoomIn;">
             <div class="home-sec-image">
                <img src="assets/images/temp-images/good-food.jpg" alt="image">
             </div>
-         </div>
+         </div> -->
       </div>
    </div>
    </section>
 
-   <section class="home-sec"  style="background: #F8F6F5">
+   <section class="home-sec"  >
       <div class="container">
          <div class="col-12">
-	        <div class=" w-1000" style="padding-top:30px;">
+	        <div class=" w-1000">
 	           <div class="row secL" *ngFor="let step of stepsList; let i = index;">
 		            <div class="col-12 col-lg-6">
-			            <h1 class="text-lg-left mb-4 title">{{step.label}}</h1>
-			            <h3 class="subtitle">{{step.subtitle}}</h3>
-			            <p class="text-justify mb-5 description"  style=" direction: ltr;">{{step.description}}</p>
+			            <h1 class="text-lg-left mb-4 title">{{step.subtitle}}</h1>
+                 <!--  <h3 class="subtitle">{{step.subtitle}}</h3> -->
+                   <p class="text-justify mb-5 description"  style=" direction: ltr;">{{step.description}}</p>
 			            <div *ngIf="i %2 ==0" style="text-align:right;">
 			               <img style=" height: 150px" src="assets/images/temp-images/arrow-right.svg" />
 			            </div>
