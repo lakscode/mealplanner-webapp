@@ -1,0 +1,87 @@
+<div class="recipes-home-body inner-page">
+    <div class="container">
+    <div class="row">
+    <div class="col-12 col-md-12 col-lg-9">
+        <div class="recipe-set submit-recipe-set">
+            <h2>Recipe Book</h2>
+            <p>Food Recipe theme include a Recipe Submit Template. It allow users to submit a recipe with featured image and related details. A user
+                should be logged in to submit a recipe. </p>
+    
+            <div class="submit-recipe-form">
+                <form action="#" method="post">
+                    <label for="title">Recipe book Title</label>
+                    <input type="text" name="title" id="title" [(ngModel)]="searchRes.recipebook_name">
+                    <br>
+                    <label for="description">Description</label>
+                    <textarea class="short-text" name="description" [(ngModel)]='searchRes.description' id="description" cols="30" rows="10"></textarea>
+ 
+                   
+                 
+                    
+                    <div class="row">
+                        <div class="col-12 col-md-6 col-lg-6">
+                            <label  class='comment-label'>Upload Image</label>
+                            <button (click)="uploadmedia('image')" class="upload-comment">
+                               <i class="fa fa-picture-o" aria-hidden="true"></i> Upload Image</button>
+                           <div>
+                               <input id="inputuploadrecipe" hidden type="file" name="inputuploadrecipe" (change)="onFileSelect($event)" />
+                             </div>
+                             <img *ngIf="searchRes.image" src="{{searchRes.image}}"  style="width: 90%; max-width: 200px;" />
+                     
+                             
+                          </div>
+
+                       
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <button >Add Recipe</button>
+                        </div>
+                    </div>
+                    <div class="row" style="padding-left:0px; padding-right:0px;">
+                        <div class="col-12 col-lg-6 col-md-6" *ngFor="let recipe of recipesList; let i = index;">
+                            <div class="recipe-item">
+                            <div class='row'>
+                                <div class="col-4">
+                                    <img style="width:100%" src="{{recipe.image}}" />
+                                </div>
+                                <div class="col-8">
+                                    <h1 class="recipe-label">{{recipe.label}}</h1>                                  
+                                   
+                                </div>
+                                <div class="col-12">
+                                    <p>Calories: {{recipe.calories}} Kcal, Servings: {{recipe.yield}}</p>
+                                </div>
+                                <div class="col-12" *ngIf="recipe.dietLabels">
+                                    <p>Diet Labels: {{recipe.dietLabels}} </p>
+                                </div>
+                               
+                            </div>
+                        </div>
+                           
+
+                        </div>
+                    </div>
+
+                    <div class="text-center">
+                        <button type="submit" (click)="saveRecipebook()"  class="recipe-submit-btn">Save Your Recipe Book</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-12  col-md-4 col-lg-3">
+    <aside>
+    <div class="side-bar">
+   
+    <!--popular recipes widget-->
+    <app-sidebar></app-sidebar>
+    <!--popular recipes widget ends-->
+    
+    </div>
+    </aside>
+    </div>
+    </div>
+    
+    </div>
+    </div>

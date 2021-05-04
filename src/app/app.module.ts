@@ -76,8 +76,8 @@ import { ModalModule } from './shared/modules';
 import { AdminModule } from './admin/admin.module'; 
 import { QuestionnaireModule } from './questionnaire/questionnaire.module'; 
 import { ProgressModule } from './progress/progress.module'; 
-
-
+import { RecipebooksModule } from './recipes/recipebooks/recipebooks.module'; 
+import { RecipebookModule } from './recipes/recipebook/recipebook.module'; 
 @NgModule({
   declarations: [
 		AppComponent
@@ -129,7 +129,9 @@ import { ProgressModule } from './progress/progress.module';
 	AdminModule,
 	HighchartsChartModule,
 	QuestionnaireModule,
-	ProgressModule
+	ProgressModule,
+	RecipebooksModule,
+	RecipebookModule
   ],
   schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
   providers: [UserService],

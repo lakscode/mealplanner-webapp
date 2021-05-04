@@ -89,6 +89,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 					{"id":"recipe-list", "menu":"Recipes", "link":"/recipes", "display":displayMenu, "active":false},
 					{"id":"recipe-favourites", "menu":"Favourites", "link":"/favourites", "display":displayMenu, "active":false},
 					{"id":"my-recipes", "menu":"My Recipes", "link":"/myrecipes", "display":displayMenu, "active":false},
+					{"id":"recipebooks", "menu":"Recipe Books", "link":"/recipebooks", "display":displayMenu, "active":false},
 					{"id":"recipe-submit", "menu":"Submit Recipe", "link":"/recipesubmit", "display":displayMenu, "active":false}
 				]
 			},

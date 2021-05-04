@@ -1,0 +1,187 @@
+@import "../../../variables.scss";
+
+.tstbite-animation {
+  display: block;
+  overflow: hidden
+}
+
+.tstbite-animation img {
+  transform: scale(1);
+  transition: all ease .8s
+}
+
+.tstbite-animation:hover img {
+  transform: scale(1.1)
+}
+
+
+
+.tstbite-card {
+  position: relative
+}
+
+.tstbite-card:hover figcaption a {
+  color: #ff642f
+}
+
+.tstbite-card:hover .tstbite-animation img {
+  transform: scale(1.1)
+}
+.py-3 {
+    padding-top: 1rem!important;
+    padding-bottom: 1rem!important;
+}
+
+.mb-0 {
+    margin-bottom: 0!important;
+}
+
+h5, .h5, .h5 {
+    font-size: 36px;
+}
+
+big, .big {
+    font-size: 18px;
+}
+.font-weight-semibold {
+    font-weight: 600!important;
+}
+.mt-1 {
+    margin-top: .25rem!important;
+}
+.d-block {
+    display: block!important;
+}
+a {
+    color: #000;
+}
+
+a:hover {
+    color: #ff642b;
+        //text-decoration: underline;
+
+        }
+
+        text-black-50 {
+  color: rgba(0, 0, 0, .5)!important
+}
+
+.btn-outline-dark {
+    background-color: transparent;
+    border-color: #000;
+    color: #000;
+}
+.btn {
+    font-weight: 500;
+}
+
+
+.list-sortable li {
+ 
+  margin-bottom: 0px;
+}
+
+
+
+.container {
+  display: block;
+  position: relative;
+  padding-left: 30px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 16px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  font-weight:normal;
+}
+
+/* Hide the browser's default checkbox */
+.container input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: #FFF;
+   //border-radius: 50%;
+   border:1px solid $orange;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input[type="checkbox"] ~ .checkmark {
+  background-color: #FFF;
+}
+
+/* When the checkbox is checked, add a blue background */
+.container input[type="checkbox"]:checked ~ .checkmark {
+background-color: $orange;
+  border:1px solid $orange;
+  //background-color: #66bb6a;
+  //border:1px solid #66bb6a;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+  left: 7px;
+  top: 3px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.recipe-label
+{
+  line-height: 20px;
+    margin-top: 0;
+    font-family: 'Lato', sans-serif;
+    font-weight: 900;
+    font-size: 14px;
+    text-transform: uppercase;
+    font-style: normal;
+    position: relative;
+    padding-bottom: 5px;
+}
+
+.recipe-item
+{
+  border: solid 2px #fff;
+  box-shadow: 0 1rem 1.5rem rgb(0 0 0 / 25%);
+  border-radius:10px;
+  min-height:130px;
+  margin:10px;
+  padding:10px;
+}
+
+.recipe-item:hover
+{
+  box-shadow: 0 1rem 1.5rem rgb(255 145 0 / 25%);
+
+}
