@@ -34,6 +34,11 @@ export class RecipebookComponent implements OnInit, OnChanges {
 	currentUser: any;
 	apiUrl: any = "";
 	ispublic: boolean = false;
+	searchparam: any = {};
+	dietLabelsList: Array<any> = [];
+	healthlabelsList: Array<any> = [];
+	mineralsLabelsList: Array<any> = [];
+
 	constructor(private router: Router, private route: ActivatedRoute, private pdfService: PDFService, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder, private modalService: ModalService) {
 	
 	}
@@ -47,6 +52,32 @@ ngOnChanges()
 	}
 loadDefaults()
 {
+
+	this.getNutrientsMaxMin(); 
+
+		this.dietLabelsList= [];
+		for(let d=0; d < constants.dietLabels.length; d++)
+		{
+			this.dietLabelsList.push({"name":constants.dietLabels[d], "selected":false})
+		}
+
+		//this.healthlabelsList = constants.healthLabels;
+		this.healthlabelsList= [];
+		for(let h=0; h < constants.healthLabels.length; h++)
+		{
+			this.healthlabelsList.push({"name":constants.healthLabels[h], "selected":false})
+		}
+
+		//this.mineralsLabelsList = constants.minerals;
+		this.mineralsLabelsList= [];
+		for(let m=0; m <constants.minerals.length; m++)
+		{
+			this.mineralsLabelsList.push({"name":constants.minerals[m], "selected":false,  "unit":"",  "min":"", "max":"", "t_min":"", "t_max":""})
+		}
+
+		this.loadNutrientsMaxMin();
+
+	this.searchparam = {"q":"", "range":{}}
 	this.instructions= [];
 	this.ispublic = false;
 	this.apiUrl = environment.apiUrl;
@@ -149,6 +180,8 @@ loadRecipes(idslist = "")
 	params["idslist"] = idslist;
 
 	}
+	else if(this.searchparam.q !== "")
+	params["content"] = this.searchparam.q;
 
 	//params["instructions"] = "notempty";
 	params["returnfields"] = " id, label, image, healthLabels, dietLabels, calories, yield ";
@@ -162,7 +195,7 @@ loadRecipes(idslist = "")
 		this.recipesList = [];
 
 		this.recipesList = invData["body"];
-		console.log(this.recipesList);
+	//	console.log(this.recipesList);
 	
 	}
 	 
@@ -172,6 +205,295 @@ loadRecipes(idslist = "")
 
 }
 
+maxcalories:any = 0;
+recipesList1:Array<any>=[];
+searchProps()
+{
+
+//console.log('searchProps');
+
+
+var params = {}
+if(this.searchparam.q)
+{
+params["content"] = this.searchparam.q;
+this.helpService.saveSearchHistory(this.searchparam.q, "text", this.currentUser["id"]);
+}
+if(typeof(this.searchparam.range) !== "undefined")
+{
+if(typeof(this.searchparam.range.lower) !== "undefined")
+{
+  params["caloriesfrom"] = this.searchparam.range.lower;
+}
+if(typeof(this.maxcalories) !== "undefined" && this.maxcalories > 0)
+{
+  params["caloriesto"] = this.maxcalories;
+}
+params["instructions"]="notempty";
+}
+
+params["returnfields"] = " id, label, image, healthLabels, dietLabels, calories, yield";
+
+ var dietlabels = "";
+ for(let m=0; m <this.dietLabelsList.length; m++)
+ {
+	 if(this.dietLabelsList[m]["selected"])
+	 dietlabels += this.dietLabelsList[m]["name"] + "~";
+ }
+ if( dietlabels !== "")
+ {
+	dietlabels=  dietlabels.slice(0, -1);
+ }
+
+ var healthlabels = "";
+ for(let m=0; m <this.healthlabelsList.length; m++)
+ {
+	 if(this.healthlabelsList[m]["selected"])
+	 healthlabels += this.healthlabelsList[m]["name"] + "~";
+ }
+ if( healthlabels !== "")
+ {
+	healthlabels=  healthlabels.slice(0, -1);
+ }
+
+ var minerals = "";
+ var mQuery = "";
+ for(let m=0; m <this.mineralsLabelsList.length; m++)
+ {
+	 var item = this.mineralsLabelsList[m];
+	// console.log(item);
+	 if(this.mineralsLabelsList[m]["selected"])
+	 minerals += this.mineralsLabelsList[m]["name"] + "~";
+	 if(typeof(item["min"]) !== "undefined" && item["min"] !== "" && item["min"] >0)
+		  {
+			mQuery += " " + item["name"].toLowerCase() + " >= " + item["min"] + " AND ";
+		  }
+		  if(typeof(item["max"]) !== "undefined" && item["max"] !== "" && item["max"] >0)
+		  {
+			mQuery += " " + item["name"].toLowerCase() + " <= " + item["max"] + " AND ";
+		  }
+
+ }
+ if( minerals !== "")
+ {
+	minerals=  minerals.slice(0, -1);
+ }
+
+ if( mQuery !== "")
+ {
+	mQuery=  mQuery.slice(0, -4);
+	this.helpService.saveSearchHistory(mQuery, "nutrients", this.currentUser["id"]);
+ }
+ //console.log("mQuery");
+ //console.log(mQuery);
+var checkMinerals = false;
+
+if(typeof(dietlabels) !== "undefined" && dietlabels  !== "")
+{
+params["dietLabels"] = dietlabels
+this.helpService.saveSearchHistory(dietlabels, "dietLabels", this.currentUser["id"]);
+} 
+
+if(typeof(healthlabels ) !== "undefined" && healthlabels !== "")
+{
+params["healthLabels"] = healthlabels
+this.helpService.saveSearchHistory(healthlabels, "healthLabels", this.currentUser["id"]);
+} 
+
+if(typeof(minerals ) !== "undefined" && minerals  !== "")
+{
+params["totalNutrientsne"]="notempty";
+params["digestne"]="notempty";
+checkMinerals = true;
+//console.log(minerals);
+
+} 
+
+// console.log(params);
+if(mQuery !== "")
+{
+  var params1 = {};
+
+  var query = "select id, label, image, healthLabels, dietLabels, calories, yield from recipes ";
+  var where = " where totalNutrients != '' AND digest != ''  AND s_instructions != '' " ;
+  if(this.maxcalories > 0)
+  where +=  " AND calories >= " + this.maxcalories
+
+  if(dietlabels !== "")
+  {
+	  var t = dietlabels.split("~");
+	  for(let i=0; i < t.length; i++)
+	  {
+		  where +=  " AND dietLabels LIKE '%" + t[i] + "%'" 
+	  }
+  }
+  if(healthlabels !== "")
+  {
+	  var t1 = healthlabels.split("~");
+	  for(let i=0; i < t1.length; i++)
+	  {
+		  where +=  " AND healthLabels LIKE '%" + t1[i] + "%'" 
+	  }
+  }
+
+  where += " AND id in (select recipeid from nutrients where " + mQuery +  ")";
+
+  params1["query"] = query + where + " limit 0, 100";
+  console.log(params1);
+	var res =   this.dbService.getDatabyTablebyQuery("recipes", params1).subscribe(invData => setTimeout(() => {
+		console.log(invData);
+		this.formatResult(invData);
+	}));
+	}
+	else
+	{
+	var res =   this.dbService.getDatabyFields("recipes", params).subscribe(invData => setTimeout(() => {
+		console.log(invData);
+		this.formatResult(invData);
+	}));
+	}
+	
+}
+ratingIds: any;
+formatResult(invData)
+{
+	if(invData !== null)
+	{
+	  if(typeof(invData["body"]) !== "undefined" && invData["body"] !== null && invData["body"]["length"] > 0)
+	  {
+		this.recipesList1 = [];
+		this.ratingIds="";
+		var temp = invData["body"];
+		if(temp["length"] > 0)
+		{
+		  for(let i=0; i< temp["length"] ; i++)
+		  {
+			  this.recipesList1.push(temp[i]);          
+			  this.ratingIds += temp[i]["id"] + ",";
+		  }
+	
+		}
+
+	  }
+	 
+	 
+	  this.loadRatings();
+
+	}
+}
+ratingsArr: Array<any> = [];
+
+loadRatings()
+{
+  if(typeof(this.ratingIds ) !== "undefined" && this.ratingIds !== "")
+  {			
+   this.ratingIds = this.ratingIds.substring(0, this.ratingIds.length-1);
+  }
+ 
+	var params = {"limit": 100};
+   
+	params["query"] = "SELECT count(rating) as totalcount, sum(rating) as totalrating, recipeid FROM `rating` where recipeid in (" + this.ratingIds + ") group by recipeid";
+	var res =   this.dbService.getDatabyTablebyQuery("rating", params).subscribe(invData => setTimeout(() => {
+//	console.log(invData);
+	  if(invData !== null)
+	  {
+		if(typeof(invData["body"]) !== "undefined" && invData["body"] !== null && invData["body"]["length"] > 0)
+		{
+		  var temp = invData["body"];
+		  if(temp["length"] > 0)
+		  {
+			this.ratingsArr = [];
+			for(let i=0; i< temp["length"] ; i++)
+			{
+			  this.ratingsArr.push(temp[i])
+			//  console.log(temp[i]);
+			  var recIndex = this.recipesList1.findIndex(x1 => (x1.id === temp[i]["recipeid"]));
+
+			  if(recIndex > -1)
+			  {
+				this.recipesList1[recIndex]["totalcount"] = temp[i]["totalcount"];
+				this.recipesList1[recIndex]["totalrating"] = temp[i]["totalrating"];
+
+				if( temp[i]["totalrating"] > 0 &&  temp[i]["totalcount"] > 0 )
+				{
+				  this.recipesList1[recIndex]["displayrating"] = Math.ceil((temp[i]["totalrating"]/ temp[i]["totalcount"]));
+				 }
+
+			  }
+			}	
+		  }
+		}
+
+	  }
+	}));
+ 
+  
+  
+}
+
+loadNutrientsMaxMin()
+{
+
+
+  if(this.mineralsLabelsList["length"] > 0 && this.nutrientDbFields["length"] > 0)
+  {
+	for(let m =0; m < this.mineralsLabelsList["length"]; m++)
+	{
+	  var lbl = this.mineralsLabelsList[m]["name"].toLowerCase();
+	  if(lbl.indexOf(" ") > -1)
+	  {
+		lbl = lbl.replace(" ", "_");
+	  }
+	  
+	  if(typeof(this.nutrientDbFields[0]["min"+lbl]) !== "undefined" && this.nutrientDbFields[0]["min"+lbl] !== "")
+	  {
+		this.mineralsLabelsList[m]["t_min"] = this.nutrientDbFields[0]["min"+lbl];
+	  }
+
+	  if(typeof(this.nutrientDbFields[0]["max"+lbl]) !== "undefined" && this.nutrientDbFields[0]["max"+lbl] !== "")
+	  {
+		this.mineralsLabelsList[m]["t_max"] = this.nutrientDbFields[0]["max"+lbl];
+	  }
+
+	}
+  }
+  else
+  {
+	setTimeout(() => {
+	  
+	  this.loadNutrientsMaxMin();
+
+	},1000);
+  }
+}
+
+addRecipe(recipe)
+{
+	console.log(recipe);
+	var fIndex = this.recipesList.findIndex(r =>(r.id == recipe.id));
+	console.log(fIndex);
+	console.log(this.recipesList);
+	if(fIndex == -1)
+	{
+		this.recipesList.push(recipe);
+		this.searchRes["recipes"] ="";
+		var recipeids = "";
+		for(let r=0; r < this.recipesList.length; r++)
+		{
+			recipeids +=  this.recipesList[r]["id"] + ",";
+		}
+		if(recipeids !== "")
+		{
+			recipeids = recipeids.substring(0, recipeids.length-1);	
+			this.searchRes["recipes"] = recipeids;
+		}
+		console.log(this.recipesList);
+		console.log(this.searchRes);
+	}
+	this.toggleRecipeAdd = false;
+	this.searchparam["q"] ="";
+	
+}
 saveRecipebook()
 {
 	console.log("saveRecipebook");
@@ -202,8 +524,6 @@ saveRecipebook()
 		{
 			console.log("updating");
 			params["id"] = this.searchRes.id;
-		
-		
 			console.log(params);
 			var res =   this.dbService.updateDataByTable("recipebook", params).subscribe(recipeData => setTimeout(() => {
 				console.log(recipeData);	
@@ -329,15 +649,47 @@ formatVal(str)
 		}
   }
 
+  toggleRecipeAdd: boolean = false;
+
    addNew() {
     
-    this.modalService.open("addnew");
+    this.toggleRecipeAdd = !this.toggleRecipeAdd;
+
   }
   closeModal(id) {
     this.modalService.close(id);
   }
 
+  nutrientDbFields:Array<any>=[];
+  getNutrientsMaxMin()
+  {
+    console.log("getNutrientsMaxMin");
+    var params1 = {};
+    var nutrientFields = constants.nutrientDbFields;
+  //  console.log( params1["query"])
+    var query = "";
+    for(let i=0; i < nutrientFields.length; i++)
+    {
+      var lbl = nutrientFields[i];
+     
+      query += " min(" + lbl + ") min" + lbl +", ";
+      query += " max(" + lbl + ") max" + lbl + ", ";
+    }
+  //  console.log(query);
+    query = query.slice(0, -2);
+    params1["query"] = "Select " + query + " from nutrients";
+ //   console.log(params1);
+   var res =   this.dbService.getDatabyQuery("recipes", params1).subscribe(invData => setTimeout(() => {
 
+//	console.log(invData);
+    if(invData["body"]["length"] > 0)
+    {
+      this.nutrientDbFields = invData["body"];
+  //    console.log(this.nutrientDbFields);
+    }
+   }))
+  
+  }
 
   
 }
