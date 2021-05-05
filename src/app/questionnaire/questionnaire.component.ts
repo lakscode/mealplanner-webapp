@@ -21,6 +21,7 @@ export class  QuestionnaireComponent implements OnInit {
 	questionsList: any;
 	responseText : any = "";
 	answersList : any= {};
+	errorMessage: any;
 	constructor(private router: Router, private route: ActivatedRoute, private httpClient: HttpClient, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
 	
 	}
@@ -132,6 +133,20 @@ export class  QuestionnaireComponent implements OnInit {
 
 	saveAnswers() {
 	console.log(this.answersList);
+	this.errorMessage = "";
+	
+	if(this.answersList["question1"] == "" || this.answersList["question2"] == "" || this.answersList["question3"] == "" || this.answersList["question4"] == "" || this.answersList["question5"] == "" || this.answersList["question6"] == "" || this.answersList["question7"] == "" || this.answersList["question8"] == "" ||	this.answersList["question9"] == "") {
+
+	this.errorMessage = "Please fill out all the fields to help better....";
+
+
+	} else {
+	this.errorMessage  ="";
+	}
+	console.log(this.errorMessage);
+
+	
+    
   }
   
   // program the reset button
