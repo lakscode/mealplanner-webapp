@@ -51,8 +51,9 @@
                         <div class="listing" *ngFor="let recipe1 of recipebooks; let i = index;">
                             <div class="image">
                                 <a (click)="gotoRecipebook(recipe1.id)">
-                                    <img class="tstbite-animation" src="{{recipe1.image}}"
-                                        alt="image">
+                                    <img *ngIf="recipe1.image !== ''" class="tstbite-animation" src="{{recipe1.image}}"
+                                        alt="{{recipe1.recipebook_name}} image">
+                                    <img *ngIf="recipe1.image == ''" class="tstbite-animation"  src="assets/notavailable.png" alt="{{recipe1.recipebook_name}} image">
                                 </a>
                             </div>
                             <div class="detail">

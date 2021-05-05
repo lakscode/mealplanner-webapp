@@ -10,7 +10,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import * as $ from 'jquery';
 import { constants } from '../../jsonfiles/constants';
-import {HelpService} from "../../services/help.service";
+
 //declare var $: any;
 
 @Component({

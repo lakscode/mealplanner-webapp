@@ -24,23 +24,23 @@ export const data =[{
         ]
     },
     {
-        "id":"4", "type":"text", "textlabel":"years",
+        "id":"4", "type":"text", "opt":"Years",  "textlabel":"Years", 
         "question": "What's your age?", "answers":[]
     },
     {
-        "id":"5", "type":"text", "textlabel":"Ft",
+        "id":"5", "type":"text", "opt":"Inch", "options":[{"name":"Inch", "selected":true},{"name":"Cm", "selected":false}], 
         "question": "What's your height?", "answers":[]
     },
     {
-        "id":"6", "type":"text", "textlabel":"pounds",
+        "id":"6", "type":"text", "opt":"Kg", "options":[{"name":"Kg", "selected":true},{"name":"Lbs", "selected":false}], 
         "question": "What's your weight?", "answers":[]
     },
     {
-        "id":"7", "type":"text", "textlabel":"pounds",
+        "id":"7", "type":"text", "opt":"Kg", "options":[{"name":"Kg", "selected":true},{"name":"Lbs", "selected":false}],  
         "question": "What's your target weight?", "answers":[]
     },
     {
-        "id":"8","type":"option",
+        "id":"8","type":"checkbox",
         "question": "Allergic to?", "answers":[
         {"name":"q8", "value":"c1", "text":"Wheat", "subtext":""},
         {"name":"q8", "value":"c2", "text":"Soy", "subtext":""},
@@ -51,7 +51,7 @@ export const data =[{
         ]
     },
     {
-        "id":"9","type":"option",
+        "id":"9","type":"checkbox",
         "question": "What's your recommended diet?", "answers":[
         {"name":"q9", "value":"c1", "text":"Balanced", "subtext":""},
         {"name":"q9", "value":"c2", "text":"High-Fiber", "subtext":""},
