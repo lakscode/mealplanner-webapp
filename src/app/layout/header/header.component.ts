@@ -62,6 +62,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 					{"id":"display", "menu":"FAQs", "link":"/faqs", "display":displayMenu, "active":false},
 				//	{"id":"blogs", "menu":"Blogs", "link":"/blogs", "display":displayMenu, "active":false},
 				//	{"id":"testimonials", "menu":"Testimonials", "link":"/testimonials", "display":displayMenu, "active":false}
+				{"id":"questionnaire", "menu":"Questionnaire", "link":"/questionnaire", "display":displayMenu, "active":false}
 				]
 			},
 			{"id":"features", "menu":"Features", "link":"/features", "display":displayMenu, "active":false},
@@ -80,7 +81,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 					{"id":"display", "menu":"FAQs", "link":"/faqs", "display":displayMenu, "active":false},
 				//	{"id":"blogs", "menu":"Blogs", "link":"/blogs", "display":displayMenu, "active":false},
 				//	{"id":"testimonials", "menu":"Testimonials", "link":"/testimonials", "display":displayMenu, "active":false}
-					{"id":"questionnaire", "menu":"Questionnaire", "link":"/questionnaire", "display":displayMenu, "active":false}
+					//{"id":"questionnaire", "menu":"Questionnaire", "link":"/questionnaire", "display":displayMenu, "active":false}
 				]
 			},
 			{"id":"recipes", "menu":"Recipes", "link":"/recipes", "display":displayMenu, "active":false,
