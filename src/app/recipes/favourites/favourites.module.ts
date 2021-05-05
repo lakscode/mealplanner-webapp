@@ -5,7 +5,7 @@ import { FavouritesRoutingModule } from './favourites-routing.module';
 import { FavouritesComponent } from './favourites.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {SidebarModule } from "../shared/modules"
+import {SidebarModule } from "../../shared/modules"
 @NgModule({
   imports: [
     CommonModule,

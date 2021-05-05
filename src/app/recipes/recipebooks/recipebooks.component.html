@@ -1,10 +1,10 @@
 <div class="recipes-home-body inner-page">
     
-    <div class="container">
+    <div class="container" style="padding-left:0px; padding-right:0px;">
         <div class="row">
             <div class="col-md-8 col-lg-9">
                
-                <div style='; width:100%'></div>
+                <div style= 'width:100%'></div>
                 <div class="recipe-set">
                     <!-- <div class="listing-buttons">
                         <span (click)="setListorGrid('grid')"
@@ -48,10 +48,10 @@
                     <div class="recipe-listing {{listorgrid.panel}}">
 
 
-                        <div class="listing" *ngFor="let recipe1 of recipebooks; let i = index;">
+                        <div class="listing boxshadow5" *ngFor="let recipe1 of recipebooks; let i = index;">
                             <div class="image">
                                 <a (click)="gotoRecipebook(recipe1.id)">
-                                    <img *ngIf="recipe1.image !== ''" class="tstbite-animation" src="{{recipe1.image}}"
+                                    <img style="max-height:140px;" *ngIf="recipe1.image !== ''" class="tstbite-animation" src="{{recipe1.image}}"
                                         alt="{{recipe1.recipebook_name}} image">
                                     <img *ngIf="recipe1.image == ''" class="tstbite-animation"  src="assets/notavailable.png" alt="{{recipe1.recipebook_name}} image">
                                 </a>

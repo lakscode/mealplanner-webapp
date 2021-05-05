@@ -1,6 +1,6 @@
 <div class="recipes-home-body inner-page">
     
-    <div class="container">
+    <div class="container"  style="padding-left:0px; padding-right:0px;">
         <div class="row">
             <div class="col-md-8 col-lg-9">
                 <div style='height:20px; width:100%'></div>
@@ -13,7 +13,7 @@
                             [ngClass]="listorgrid.menu == 'list'?'list current':'list'"><i
                                 class="fa fa-bars"></i></span>
                     </div>
-                    <h2>Recipes</h2>
+                    <h2>My Recipes</h2>
 
                     <ul class="pagination" *ngIf="totalPage >= 10">
                         <li (click)="currentPage(0)" class="">

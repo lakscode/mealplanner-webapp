@@ -50,7 +50,7 @@ import { LandingModule } from './landing/landing.module';
 
 import { RecipesModule } from './recipes/recipes/recipes.module'; 
 import { MyRecipesModule } from './recipes/myrecipes/myrecipes.module'; 
-import { FavouritesModule } from './favourites/favourites.module'; 
+import { FavouritesModule } from './recipes/favourites/favourites.module'; 
 import { RecipedetailsModule } from './recipes/recipedetails/recipedetails.module'; 
 import { RecipesubmitModule } from './recipes/recipesubmit/recipesubmit.module'; 
 import { TestimonialsModule } from './testimonials/testimonials.module'; 
