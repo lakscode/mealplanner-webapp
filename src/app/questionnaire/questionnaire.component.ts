@@ -18,6 +18,7 @@ import { data} from "../jsonfiles/questionnaire"
 })
 export class  QuestionnaireComponent implements OnInit {
 	questionsList: any;
+	responseText : any = "";
 
 	constructor(private router: Router, private route: ActivatedRoute, private httpClient: HttpClient, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
 	
@@ -29,11 +30,16 @@ export class  QuestionnaireComponent implements OnInit {
 
 	loadData()
 	{
+		this.responseText = "";
 		this.questionsList =[];
 
 		this.questionsList =data;
 			
 
+	}
+	saveAnswer()
+	{
+		console.log(this.questionsList);	
 	}
  tabulateAnswers() {
 	// initialize variables for each choice's score

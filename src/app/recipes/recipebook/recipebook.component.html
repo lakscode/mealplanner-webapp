@@ -63,7 +63,9 @@
 
                         </div>
                     </div>
-
+                    <br>
+                    <label for="notes">Notes</label>
+                    <textarea class="short-text" name="notes" [(ngModel)]='searchRes.notes' id="notes" cols="30" rows="10"></textarea>
                     <div class="text-center">
                         <button type="submit" (click)="saveRecipebook()"  class="recipe-submit-btn">Save Your Recipe Book</button>
                     </div>

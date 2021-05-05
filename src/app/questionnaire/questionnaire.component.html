@@ -1,25 +1,52 @@
-<div id="wrapper">
-    <h1>What kind of computer scientist are you?</h1>
-    <p>Take this questionnaire to find out!</p>
-    
-    <form id="quiz">
-        <ng-container *ngFor="let question of questionsList; let i =index;">
-      <!-- Question 1 -->
-      <h2>{{question.question}}</h2>
-      <!-- Here are the choices for the first question. Each input tag must have the same name. For this question, the name is q1. -->
-      <!-- The value is which answer the choice corresponds to. -->
-      <ng-container  *ngFor="let answer of question.answers; let i =index;" >
-        <label><input type="radio" name="{{answer.name}}" [(ngModel)]="question.answer" value="{{answer.value}}">
-            {{answer.text}}
-          </label><br />
+<div class="recipes-home-body inner-page">
+  <div class="row w-1200" style="text-align:center; margin:0 auto;">
+    <div class="col-12">
+      <div id="wrapper">
+          <h1>Take this questionnaire to let us know your choices!!!</h1>
 
-      </ng-container>
+          <!--<p>Take this questionnaire to let us know your choices!</p>   --> 
+
+          <div class="row">
+          <form id="quiz">
+              <ng-container *ngFor="let question of questionsList; let i =index;">
+                <div class="col-12 col-lg-4 col-md-4" >
+                  <div [ngClass]="question.type == 'text'?'question-box h120':'question-box h200' ">
+                    <!-- Question {{i+1}} -->
+                    <h2 class="question-name">{{question.question}}</h2>
+                    <ng-container *ngIf="question.type == 'text'">
+
+                      <input class="input-text" type="text" name="q_{{question.id}}"  [(ngModel)] = 'question.answer' />
+
+                    </ng-container>
+
+                    <ng-container *ngIf="question.type == 'option'">
+                    <ng-container  *ngFor="let answer of question.answers; let i =index;" >
+
+                      <label class="container" style=" text-align: left; display:inline-block;max-width: 200px; width:auto;font-family: 'Lato', sans-serif;font-weight: 400;font-size: 16px;"> {{answer.text}}
+                        <input (change)="saveAnswer()" name="q_{{answer.name}}" [(ngModel)] = 'answer.answer' type="radio" value="{{answer.value}}">
+                          <span class="checkmark"></span>
+                      </label>
+                      <!--<label><input type="radio" name="{{answer.name}}" [(ngModel)]="question.answer" value="{{answer.value}}">
+                          {{answer.text}}
+                      </label><br />-->
+                    </ng-container>
+                
+                    </ng-container>
+                  </div>
+              </div>
+              </ng-container>
            
-    </ng-container>
-    <button type="submit" id="submit" onclick="tabulateAnswers()">Submit Your Answers</button>
-    <button type="reset" id="reset" onclick="resetAnswer()">Reset</button>
-    </form>
-    
-    
-    <div id="answer">Your result will show up here!</div>
+          </form>
+          
+        </div>
+        <div class="row">
+          <div class="col-12" style='text-align:right; margin-bottom:10px;'>
+            <button type="reset" id="reset" onclick="resetAnswer()">Reset</button>
+            <button type="submit" id="submit" onclick="tabulateAnswers()">Submit Your Answers</button>
+          </div>
+        </div>
+          <div id="answer">Your result will show up here!</div>
+        </div>
+    </div>  
   </div>
+</div>
