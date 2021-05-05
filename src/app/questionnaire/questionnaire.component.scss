@@ -2,6 +2,8 @@
 
 h2 {
     margin: 5px 0;
+    font-family:'Lora', serif;
+    font-size:24px;
   }
   #wrapper {
     width: 100%;
@@ -64,6 +66,12 @@ h2 {
 .question-name
 {
   margin-bottom:10px;
+   margin-top: 0;
+  font-family: 'Lato', sans-serif;
+  font-weight: 900;
+  font-size: 16px;
+  font-style: normal;
+  line-height: 30px;
 }
 .input-text
 {
@@ -255,8 +263,3 @@ background-color: $orange;
 	background: white;
 }
 
-.mandatory
-{
-  color:red ;
-  font-weight:bold;
-}

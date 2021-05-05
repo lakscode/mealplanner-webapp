@@ -15,19 +15,19 @@
           </div>
 
             <div class="group">
-              <label for="username" class="label">Username</label>
+              <label for="username" class="label">Username <span class="mandatory">&#42;</span></label>
               <input (focus)="clearError('signup')" id="username" name= "username" [(ngModel)]="userObj.username" type="text" class="input" required>
             </div>
             <div class="group">
-              <label for="email" class="label">Email Address</label>
+              <label for="email" class="label">Email Address <span class="mandatory">&#42;</span></label>
               <input (focus)="clearError('signup')" id="email" name="email" [(ngModel)]="userObj.email"  type="text" class="input" required>
             </div>            
             <div class="group">
-              <label for="password" class="label">Password</label>
+              <label for="password" class="label">Password <span class="mandatory">&#42;</span></label>
               <input (focus)="errorPassMatch= ''; clearError('signup')" id="password" name="password" [(ngModel)]="userObj.password"  type="password" class="input" data-type="password" required>
             </div>
             <div class="group">
-              <label for="confirmpass" class="label">Repeat Password</label>
+              <label for="confirmpass" class="label">Repeat Password <span class="mandatory">&#42;</span></label>
               <input (blur)="matchPass()" (focus)="errorPassMatch= '';clearError('signup')" id="confirmpass" name="confirmpass" [(ngModel)]="userObj.confirmpass"  type="password" class="input" data-type="password" required>
             </div>
           <div *ngIf="errorPassMatch !== ''" class="group">

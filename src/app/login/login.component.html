@@ -6,11 +6,11 @@
 			<div class="login-form">
 				<div class="sign-in-htm">
 					<div class="group">
-						<label for="userl" class="label">Username</label>
+						<label for="userl" class="label">Username <span class="mandatory">&#42;</span></label>
 						<input id="userl" name = "userl" [(ngModel)]="userObj.username"  type="text" class="input" required>
 					</div>
 					<div class="group">
-						<label for="passl" class="label">Password</label>
+						<label for="passl" class="label">Password <span class="mandatory">&#42;</span></label>
 						<input id="passl" name="passl" [(ngModel)]="userObj.password"   type="password" class="input" data-type="password" required (keyup.enter)="login()">
 					</div>
 					<div class="group">

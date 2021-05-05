@@ -20,7 +20,7 @@ export const data =[{
         {"name":"q3", "value":"c2", "text":"Mild", "subtext":"Workout 1-3 days a week"},
         {"name":"q3", "value":"c3", "text":"Moderate", "subtext":"Workout 3-5 days a week"},
         {"name":"q3", "value":"c4", "text":"Heavy", "subtext":"Workout 6-7 days a week"},
-		{"name":"q3", "value":"c5", "text":"Extrme", "subtext":"Workout and continuous other activities"}
+		{"name":"q3", "value":"c5", "text":"Extreme", "subtext":"Workout and continuous other activities"}
         ]
     },
     {

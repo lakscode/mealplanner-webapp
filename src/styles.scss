@@ -243,3 +243,15 @@ font-size:24px;
   background: linear-gradient(17deg, $orange1 0%,$orange 100%);
   color:#FFF;
 }
+
+.mandatory
+{
+  color:red ;
+  font-weight:bold;
+}
+
+.copy-button
+{
+    color:$orange1;
+    font-size:12px;
+}

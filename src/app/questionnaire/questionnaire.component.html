@@ -2,7 +2,7 @@
   <div class="row w-1200" style="text-align:center; margin:0 auto;">
     <div class="col-12">
       <div id="wrapper">
-          <h1>Take this questionnaire to let us know your choices!!!</h1>
+          <h2>Take this questionnaire to let us know your choices!!!</h2>
 
           <div id="answer" *ngIf="errorMessage"><span style="color:red">{{errorMessage}}</span></div>
           <!--<p>Take this questionnaire to let us know your choices!</p>   --> 
@@ -13,11 +13,11 @@
                 <div class="col-12 col-lg-4 col-md-4" >
                   <div [ngClass]="question.type == 'text'?'question-box h120':'question-box h200' ">
                     <!-- Question {{i+1}} -->
-                    <h2 class="question-name">{{question.question}} <span class="mandatory">&#42;</span></h2>
+                    <h4 class="question-name">{{question.question}} <span class="mandatory">&#42;</span></h4>
                     <ng-container *ngIf="question.type == 'text'">
 
                       <input class="input-text" type="text" (blur)="makeAnswers(question)" name="q_{{question.id}}"  [(ngModel)] = 'question.answer' />
-                      <span style="font-size:12px; margin-left:10px" *ngIf="question.textlabel">{{question.textlabel}}</span>
+                      <span *ngIf="question.textlabel">{{question.textlabel}}</span>
                       <div class="opts" *ngIf="question && question.options &&  question.options.length > 0">
                         <div (click)="toggleChoice(question, question.options, i)" [ngClass]="opt.selected?'opt sel':'opt'" *ngFor="let opt of question.options; let i = index;">{{opt.name}}</div>
 
