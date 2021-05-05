@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HelpService } from '../../services/help.service';
+import { DBService } from '../../dbservices/db.service';
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',
@@ -8,7 +9,7 @@ import { HelpService } from '../../services/help.service';
 export class FooterComponent implements OnInit {
   labels: any;
   subscribe: any = {};
-  constructor(private helpService:HelpService) {
+  constructor(private helpService:HelpService, private dbService: DBService) {
     //console.log('Footer constructor called');
   }
 
@@ -19,5 +20,20 @@ export class FooterComponent implements OnInit {
   subscribeEmail()
   {
     console.log(this.subscribe);
+    if(this.subscribe.email)
+    {
+      //this.helpService.savesubscribeemail(this.subscribe.email);
+      var params={};
+      params["email"] = this.subscribe.email;
+
+      console.log(params);
+      var res =   this.dbService.postDataByTable("subscriptions", params).subscribe(recipeData => setTimeout(() => {
+        console.log(recipeData);
+    
+      
+      }));	
+
+    }
+    
   }
 }

@@ -711,7 +711,7 @@ console.log("type " + type);
 
 		params["name"]= this.currentUser["id"] + "_" + new Date().getTime() + "_"  + file.name;
 	//	console.log(JSON.stringify(params));
-		this.dbService.uploadRecipe(params).subscribe(resultData => setTimeout(() => {
+		this.dbService.uploadMedia(params).subscribe(resultData => setTimeout(() => {
 		  console.log(resultData);
 		  if(typeof(resultData) !== "undefined" && resultData !== null)
 		  {

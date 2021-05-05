@@ -186,6 +186,9 @@ saveRecipebook()
     if(this.searchRes["notes"] !== "")
     params["notes"] = this.searchRes["notes"];
 
+	if(this.searchRes["image"] !== "")
+    params["image"] = this.searchRes["image"];
+
     if(this.searchRes["recipes"] !== "")
     params["recipes"] = this.searchRes["recipes"];
 
@@ -228,13 +231,6 @@ saveRecipebook()
 /*********** imageand video upload  */
 
 
-uploadtype: any= "";
-uploadmedia(type)
-{
-	this.uploadtype  = type;
-	this.fileupload();
-}
-
 fileupload()
 {
   var obj = document.getElementById('inputuploadrecipe');
@@ -244,38 +240,26 @@ fileupload()
 onFileSelect(event) {
 	console.log("Fileselect");
 	var type = "image";
-	if(typeof(this.uploadtype) !== "undefined" && this.uploadtype  !== "")
-	{
-		type = this.uploadtype ;
 
-	}
 console.log("type " + type);
   if (event.target.files.length > 0) {
 	const file = event.target.files[0];
 	this.getBase64(file).then(
 	  data => {
-	//	console.log(data);
+		console.log(data);
 
 
 		var options = {
 		  headers : new HttpHeaders({"Content-Type": "application/json"})
 		  };
 
-
-	//	this.comment.image = data.toString();
-		
-
-		var imgData = data.toString().replace("data:image/jpeg;base64,","");
 		var params = {};
 		
-		if(type !== "")
-		params[type]= data.toString();
-		else
 		params["image"]= data.toString();
 
 		params["name"]= this.currentUser["id"] + "_" + new Date().getTime() + "_"  + file.name;
 	//	console.log(JSON.stringify(params));
-		this.dbService.uploadRecipe(params).subscribe(resultData => setTimeout(() => {
+		this.dbService.uploadMedia(params).subscribe(resultData => setTimeout(() => {
 		  console.log(resultData);
 		  if(typeof(resultData) !== "undefined" && resultData !== null)
 		  {
@@ -283,7 +267,7 @@ console.log("type " + type);
 			{
 				var urlapi = this.apiUrl.replace("/api","");
 
-			  this.searchRes[type] = urlapi + resultData["name"];
+			  this.searchRes["image"] = urlapi + resultData["name"];
 			console.log(type);	
 			  console.log(this.searchRes)
 			}
@@ -343,6 +327,10 @@ formatVal(str)
 		  }));
 		}
   }
+
+
+
+  
 }
 
 	
