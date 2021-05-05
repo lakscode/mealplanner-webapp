@@ -4,6 +4,7 @@
       <div id="wrapper">
           <h1>Take this questionnaire to let us know your choices!!!</h1>
 
+          <div id="answer" *ngIf="errorMessage"><span style="color:red">{{errorMessage}}</span></div>
           <!--<p>Take this questionnaire to let us know your choices!</p>   --> 
 
           <div class="row">
@@ -12,7 +13,7 @@
                 <div class="col-12 col-lg-4 col-md-4" >
                   <div [ngClass]="question.type == 'text'?'question-box h120':'question-box h200' ">
                     <!-- Question {{i+1}} -->
-                    <h2 class="question-name">{{question.question}}</h2>
+                    <h2 class="question-name">{{question.question}} <span class="mandatory">&#42;</span></h2>
                     <ng-container *ngIf="question.type == 'text'">
 
                       <input class="input-text" type="text" (blur)="makeAnswers(question)" name="q_{{question.id}}"  [(ngModel)] = 'question.answer' />
@@ -61,7 +62,7 @@
             <button type="submit" id="submit" (click)="saveAnswers()">Submit Your Answers</button>
           </div>
         </div>
-          <div id="answer">Your result will show up here!</div>
+          <!-- <div id="answer">Your result will show up here!</div> -->
         </div>
     </div>  
   </div>
