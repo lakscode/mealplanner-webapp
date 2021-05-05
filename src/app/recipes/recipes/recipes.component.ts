@@ -368,6 +368,7 @@ endIndex = startIndex+ endIndex;
    if(this.searchparam.q)
    {
    params["content"] = this.searchparam.q;
+   this.helpService.saveSearchHistory(this.searchparam.q, "text", this.currentUser["id"]);
    }
    if(typeof(this.searchparam.range) !== "undefined")
    {
@@ -432,7 +433,7 @@ endIndex = startIndex+ endIndex;
 	 if( mQuery !== "")
 	 {
 		mQuery=  mQuery.slice(0, -4);
-		
+		this.helpService.saveSearchHistory(mQuery, "nutrients", this.currentUser["id"]);
 	 }
 	 console.log("mQuery");
 	 console.log(mQuery);
@@ -441,12 +442,15 @@ endIndex = startIndex+ endIndex;
    if(typeof(dietlabels) !== "undefined" && dietlabels  !== "")
    {
     params["dietLabels"] = dietlabels
+	this.helpService.saveSearchHistory(dietlabels, "dietLabels", this.currentUser["id"]);
    } 
 
    if(typeof(healthlabels ) !== "undefined" && healthlabels !== "")
    {
     params["healthLabels"] = healthlabels
+	this.helpService.saveSearchHistory(healthlabels, "healthLabels", this.currentUser["id"]);
    } 
+
    if(typeof(minerals ) !== "undefined" && minerals  !== "")
    {
     params["totalNutrientsne"]="notempty";

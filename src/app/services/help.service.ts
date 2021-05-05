@@ -792,4 +792,20 @@ SendEmailPasswordReset(email,data) {
 			  }
 			  return 0;
 		}
+
+	saveSearchHistory(searchwords, category, userid)
+	{
+		var params = {};
+		params["text"] =  searchwords;
+		params["category"] =  category;
+		params["userid"] =  userid;
+		console.log("adding");
+		console.log(params);
+		var res =   this.dbService.postDataByTable("search_history", params).subscribe(recipeData => setTimeout(() => {
+			console.log(recipeData);
+	
+		
+		}));		
+	}
+
 }
