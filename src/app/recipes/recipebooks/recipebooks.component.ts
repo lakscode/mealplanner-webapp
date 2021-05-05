@@ -10,6 +10,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import * as $ from 'jquery';
 import { constants } from '../../jsonfiles/constants';
+import {HelpService} from "../../services/help.service";
 //declare var $: any;
 
 @Component({
@@ -238,6 +239,16 @@ endIndex = startIndex+ endIndex;
 	this.router.navigate(['recipebook', id]);
 	}
 
+ gotopage(page , params = null)
+    {
+        console.log("in gotopage");
+        var param = {};
+        if(params !== null)
+        param = params;
+        this.router.navigate([page, param]);
+    
+    }
+  
 
   formatVal(str)
   {

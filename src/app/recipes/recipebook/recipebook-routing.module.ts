@@ -4,7 +4,7 @@ import { RecipebookComponent } from './recipebook.component';
 
 const routes: Routes = [
   { 
-    path: 'recipebook/:id', 
+    path: 'recipebook', 
     component: RecipebookComponent,
     data: { showSidebar: false } 
   }
