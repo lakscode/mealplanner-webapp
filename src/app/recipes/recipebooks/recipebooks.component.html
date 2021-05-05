@@ -6,19 +6,23 @@
                
                 <div style= 'width:100%'></div>
                 <div class="recipe-set">
-                    <!-- <div class="listing-buttons">
+                     <div class="listing-buttons">
                         <span (click)="setListorGrid('grid')"
                             [ngClass]="listorgrid.menu == 'grid'?'grid current':'grid' "><i
                                 class="fa fa-th-large"></i></span>
                         <span (click)="setListorGrid('grid')"
                             [ngClass]="listorgrid.menu == 'list'?'list current':'list'"><i
                                 class="fa fa-bars"></i></span>
-                    </div> -->
-                    <div class="create-book" (click)="gotopage('recipebook');">
-                        <i class="fa fa-plus"></i>  Create New
-                    </div>
+                    </div> 
+                   
                     <h2>Recipe Books</h2>
-
+                    <div class="row" style=" width:100%; text-align:right;margin-bottom:20px;">
+                        <div class="col-12">
+                            <div class="create-book" (click)="gotopage('recipebook');">
+                            <i class="fa fa-plus"></i>  Create New
+                        </div>
+                    </div>
+                    </div>
                     <ul class="pagination" *ngIf="totalPage >= 10">
                         <li (click)="currentPage(0)" class="">
                             <a href="javascript:void(0)">
