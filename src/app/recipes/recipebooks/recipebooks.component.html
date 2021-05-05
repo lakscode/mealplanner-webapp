@@ -4,15 +4,18 @@
         <div class="row">
             <div class="col-md-8 col-lg-9">
                
-                <div style='height:20px; width:100%'></div>
+                <div style='; width:100%'></div>
                 <div class="recipe-set">
-                    <div class="listing-buttons">
+                    <!-- <div class="listing-buttons">
                         <span (click)="setListorGrid('grid')"
                             [ngClass]="listorgrid.menu == 'grid'?'grid current':'grid' "><i
                                 class="fa fa-th-large"></i></span>
                         <span (click)="setListorGrid('grid')"
                             [ngClass]="listorgrid.menu == 'list'?'list current':'list'"><i
                                 class="fa fa-bars"></i></span>
+                    </div> -->
+                    <div class="create-book" (click)="gotopage('recipebook');">
+                        <i class="fa fa-plus"></i>  Create New
                     </div>
                     <h2>Recipe Books</h2>
 
@@ -53,7 +56,7 @@
                                 </a>
                             </div>
                             <div class="detail">
-                                <h4><a (click)="gotoRecipebook(recipe1.id)">{{recipe1.recipebook_name}}</a></h4>
+                                <h4><a (click)="gotopage('recipebook', {'id':recipe1.id});">{{recipe1.recipebook_name}}</a></h4>
                                 <p innerHTML="{{limitTo(recipe1.description, 200)}}">
 
                                 </p>  
