@@ -13,7 +13,7 @@ import { HttpHeaders } from '@angular/common/http';
 import { recipe } from '../../jsonfiles/recipestructure';
 import { PDFService } from '../../services/pdf.service';
 import { ModalService } from '../../shared/modules/modal/modal.service';
-
+import { ToastrService } from 'ngx-toastr';
 @Component({
 	selector: 'app-recipebook',
 	templateUrl: './recipebook.component.html',
@@ -39,7 +39,7 @@ export class RecipebookComponent implements OnInit, OnChanges {
 	healthlabelsList: Array<any> = [];
 	mineralsLabelsList: Array<any> = [];
 
-	constructor(private router: Router, private route: ActivatedRoute, private pdfService: PDFService, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder, private modalService: ModalService) {
+	constructor(private router: Router, private route: ActivatedRoute, private toastr: ToastrService, private pdfService: PDFService, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder, private modalService: ModalService) {
 	
 	}
 ngOnChanges()
@@ -466,7 +466,32 @@ loadNutrientsMaxMin()
 	},1000);
   }
 }
-
+removeRecipe(recipe)
+{
+	console.log(recipe);
+	var fIndex = this.recipesList.findIndex(r =>(r.id == recipe.id));
+	console.log(fIndex);
+	console.log(this.recipesList);
+	if(fIndex !== -1)
+	{
+		console.log(fIndex);
+		this.recipesList.splice(fIndex, 1);
+		this.searchRes["recipes"] ="";
+		var recipeids = "";
+		for(let r=0; r < this.recipesList.length; r++)
+		{
+			recipeids +=  this.recipesList[r]["id"] + ",";
+		}
+		if(recipeids !== "")
+		{
+			recipeids = recipeids.substring(0, recipeids.length-1);	
+			this.searchRes["recipes"] = recipeids;
+		}
+		console.log(this.recipesList);
+		console.log(this.searchRes);
+	}
+	this.toastr.error('Removed Recipe from Recipe Book', 'Recipe Book!');	
+}
 addRecipe(recipe)
 {
 	console.log(recipe);
@@ -492,7 +517,7 @@ addRecipe(recipe)
 	}
 	this.toggleRecipeAdd = false;
 	this.searchparam["q"] ="";
-	
+	this.toastr.success('Added Recipe to Recipe Book', 'Recipe Book!');	
 }
 saveRecipebook()
 {
@@ -526,7 +551,8 @@ saveRecipebook()
 			params["id"] = this.searchRes.id;
 			console.log(params);
 			var res =   this.dbService.updateDataByTable("recipebook", params).subscribe(recipeData => setTimeout(() => {
-				console.log(recipeData);	
+				console.log(recipeData);
+				this.toastr.success('Updated Recipe Book!', 'Recipe Book!');	
 				this.loadRecipebook(this.searchRes.id);
 				
 			}));
@@ -538,7 +564,7 @@ saveRecipebook()
 			console.log(params);
 			var res =   this.dbService.postDataByTable("recipebook", params).subscribe(recipeData => setTimeout(() => {
 				console.log(recipeData);
-		
+				this.toastr.success('Saved Recipe Book!', 'Recipe Book!');
 				if(recipeData['inserted_id'] !== "undefined" && recipeData['inserted_id'] !== "")
 				{
 					this.loadRecipebook(recipeData['inserted_id']);	

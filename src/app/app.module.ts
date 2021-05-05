@@ -78,6 +78,8 @@ import { QuestionnaireModule } from './questionnaire/questionnaire.module';
 import { ProgressModule } from './progress/progress.module'; 
 import { RecipebooksModule } from './recipes/recipebooks/recipebooks.module'; 
 import { RecipebookModule } from './recipes/recipebook/recipebook.module'; 
+
+
 @NgModule({
   declarations: [
 		AppComponent
@@ -96,7 +98,9 @@ import { RecipebookModule } from './recipes/recipebook/recipebook.module';
     BenefitsModule,
 	LandingModule,
 	ToastrModule.forRoot({
-		timeOut: 1000,
+		timeOut:1000,
+		positionClass: 'toast-top-full-width',
+		preventDuplicates: true,
 	}),
 
 	AngularFontAwesomeModule,

@@ -234,7 +234,6 @@ background-color: $orange;
   padding: 10px;
 }
 
-
 .recipe-add
 {
   position: absolute;
@@ -261,10 +260,56 @@ background-color: $orange;
   width:150px;
 }
 
+
 .recipe-add:hover::after
 {
   content:" Add to Recipe Book";  
 }
+
+
+
+
+.toggleremove .recipe-remove
+{
+  display:none;
+}
+.toggleremove:hover .recipe-remove
+{
+  display:block;
+}
+.recipe-remove
+{
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  width: 60px;
+  text-align: center;
+  height: 22px;
+  background: #Eee;
+  color: #555;
+  font-size: 13px;
+  box-shadow: 3px 3px 3px 0px #ccc;
+  padding: 0px;
+  border-radius: 4px;
+  padding-top: 2px;
+  padding-left: 1px;
+  padding-bottom:2px;
+}
+
+.recipe-remove:hover
+{
+  background:$orange;
+  color:#FFF;
+  /*width:150px; */
+}
+
+/*
+.recipe-remove:hover::after
+{
+  content:" Recipe";  
+}
+*/
+
 
 .container {
   display: block;

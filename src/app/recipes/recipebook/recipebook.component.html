@@ -178,22 +178,25 @@
                         </div>
                         <div class="col-12 col-lg-6 col-md-6" *ngFor="let recipe of recipesList; let i = index;">
                             <div class="recipe-item">
-                            <div class='row'>
+                            <div class='row toggleremove'>
                                 <div class="col-4">
                                     <img style="width:100%" src="{{recipe.image}}" />
                                 </div>
-                                <div class="col-8">
+                                <div class="col-8 ">
                                     <h1 class="recipe-label">{{recipe.label}}</h1>                                  
-                                   
+                                  
                                 </div>
                                 <div class="col-12">
                                     <p><b><em>Calories</em></b>: {{recipe.calories}} Kcal, <b><em>Servings</em></b>: {{recipe.yield}}</p>
+                                    <div class="recipe-remove" (click)="removeRecipe(recipe)">Remove</div>
                                 </div>
                                 <div class="col-12" *ngIf="recipe.dietLabels">
                                     <p><b><em>Diet Labels</em></b>: {{recipe.dietLabels}} </p>
+                                
                                 </div>
                                
                             </div>
+                           
                         </div>
                            
 
