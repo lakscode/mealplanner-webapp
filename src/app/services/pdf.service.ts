@@ -20,4 +20,15 @@ export class PDFService {
 
 
     }
+
+    createrecipebookpdf(id)
+    {
+
+        var tempUrl = "https://dentavacation.com/mobileapp/api/pdf-recipebook.php?id=" + id; 
+        console.log(tempUrl);
+	    return this.httpClient.get(tempUrl).pipe(share());
+
+
+
+    }
 }

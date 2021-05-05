@@ -11,6 +11,8 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { HttpHeaders } from '@angular/common/http';
 import { recipe } from '../../jsonfiles/recipestructure';
+import { PDFService } from '../../services/pdf.service';
+
 @Component({
 	selector: 'app-recipebook',
 	templateUrl: './recipebook.component.html',
@@ -31,7 +33,7 @@ export class RecipebookComponent implements OnInit, OnChanges {
 	currentUser: any;
 	apiUrl: any = "";
 	ispublic: boolean = false;
-	constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
+	constructor(private router: Router, private route: ActivatedRoute, private pdfService: PDFService, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
 	
 	}
 ngOnChanges()
@@ -316,6 +318,30 @@ formatVal(str)
 	  {
 		  this.ingredients.splice(index, 1);
 	  }
+  }
+
+
+  downloadplan()
+	{
+	  if(typeof(this.searchRes["id"]) !== "undefined" && this.searchRes["id"] !== "")
+	  {
+		  this.pdfService.createrecipebookpdf(this.searchRes["id"]).subscribe(dData => setTimeout(() => {
+
+			  console.log(dData);
+			  if(dData !== null )
+			  {
+			  var recipeBook ={};
+			  recipeBook["recipebook"] = this.searchRes["recipebook_name"];
+			  recipeBook["link"] = environment.apiUrl + "/" + dData["filename"];
+			  var link = document.createElement('a');
+			  link.href = recipeBook["link"];
+			  link.target = "_blank";
+		  //	link.download = mealPlan["link"];
+			  link.click();
+			  console.log(recipeBook["link"]);
+			  }
+		  }));
+		}
   }
 }
 

@@ -679,6 +679,9 @@ SendEmailPasswordReset(email,data) {
 			if(data.mealplan)
 			formattedContent = formattedContent.replace(/<mealplan>/gi, data.mealplan);
 
+			if(data.recipebook)
+			formattedContent = formattedContent.replace(/<recipebook>/gi, data.recipebook);
+
 			if(data.link)
 			formattedContent = formattedContent.replace(/<link>/gi, data.link);
 
