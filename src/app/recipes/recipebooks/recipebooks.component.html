@@ -48,7 +48,7 @@
                         <div class="listing" *ngFor="let recipe1 of recipebooks; let i = index;">
                             <div class="image">
                                 <a (click)="gotoRecipebook(recipe1.id)">
-                                    <img class="tstbite-animation" src="{{formatImage(recipe1.image, 'm')}}"
+                                    <img class="tstbite-animation" src="{{recipe1.image}}"
                                         alt="image">
                                 </a>
                             </div>
