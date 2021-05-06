@@ -113,7 +113,8 @@
               <p>
                  Get a 7-day free trial of our app.<br/> Satisfied users choose from <br/>various affordable subscriptions. 
               </p>
-              <a class="read-more-bordered" (click)="gotopage('pricing')">Join Now</a>
+              <!--<a class="read-more-bordered" (click)="gotopage('pricing')">Join Now</a>-->
+              <a class="read-more-bordered" (click)="openModal('popupforquestions')">Join Now</a>
           </div>
       </div>
   </div>
@@ -126,7 +127,8 @@
             <div class="free-sec">
                <p class="free-heading-small">Try it FREE for 7 Days! No payment details needed!</p>
                <div class="link-d">
-                  <a  class="link-btn" href="javascript:void(0)" (click)="gotopage('signup')">Start 7 Days Trial NOW</a>
+                  <!--<a  class="link-btn" href="javascript:void(0)" (click)="gotopage('signup')">Start 7 Days Trial NOW</a>-->
+                  <a  class="link-btn" href="javascript:void(0)" (click)="openModal('popupforquestions')">Start 7 Days Trial NOW</a>
                </div>
                  
                        
@@ -147,4 +149,28 @@
    </section>
 
 
+   <!--<div class="col-12">
+      questions
+      <app-questions></app-questions>
+    </div>-->
 </div>
+
+
+<div *ngIf='popupforquestions' id="popupforquestions" class="popupforquestions" style="width:40%">
+
+
+     <button type="button" class="close" 
+       (click)="popupforquestions=false;" style="font-size:40px;color:#000;opacity:1">
+       <span aria-hidden="true">&times;</span>
+     </button>
+ 
+   <div style="border-bottom:0px;min-height: 550px;">
+     <div class="row" >
+       <div class="col-12 col-lg-12 col-xl-12 infoModal" style='max-height:500px; border:0px;margin-top:0px; text-align:center'>
+         <app-questions></app-questions>
+       </div>
+     </div>
+   </div>
+
+</div>
+ 

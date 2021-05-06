@@ -406,3 +406,20 @@ text-align:center;
   background:url("../../assets/bg/diet2.jpg");
   background-size:cover;
 }
+
+.popupforquestions
+{
+  position: fixed;
+  top: 10%;
+  width: 40%;
+  left: 30%;
+  height: 500px;
+  display: block;
+  background: #FFF;
+
+  z-index: 10000;
+  background: url("../../assets//bg/bg6.png");
+  background-size: cover;
+  border-radius: 15px;
+  border: 2px solid #CCC;
+}

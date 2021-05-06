@@ -29,7 +29,7 @@ export class FooterComponent implements OnInit {
       console.log(params);
       var res =   this.dbService.postDataByTable("subscriptions", params).subscribe(recipeData => setTimeout(() => {
         console.log(recipeData);
-    
+        
       
       }));	
 

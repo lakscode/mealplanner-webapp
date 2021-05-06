@@ -8,7 +8,9 @@ import { ModalService } from './modal.service';
 })
 export class ModalComponent implements OnInit, OnDestroy {
     @Input() id: string;
+    @Input() width: string;
     private element: any;
+    widthClass:any = "60";
     constructor(private modalService: ModalService, private el: ElementRef) {
         this.element = el.nativeElement;
     }
@@ -28,6 +30,15 @@ export class ModalComponent implements OnInit, OnDestroy {
         });
         // add self (this modal instance) to the modal service so it's accessible from controllers
         this.modalService.add(this);
+        if(this.width)
+        {
+            if(this.width == "40")
+            this.widthClass ="width40";
+            else if(this.width == "50")
+            this.widthClass ="width50";
+            else 
+            this.widthClass ="width60";
+        }
     }
 
     // remove self from modal service when component is destroyed

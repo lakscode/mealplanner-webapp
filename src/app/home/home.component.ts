@@ -7,6 +7,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { DBService } from '../dbservices/db.service';
 import { HelpService } from '../services/help.service';
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
+import { ModalService } from '../shared/modules/modal/modal.service';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -19,10 +21,10 @@ currentUser: any;
 stepsList: Array<any> = [];
 testimonialsList: Array<any> = [];
 
+popupforquestions: boolean =false;
 
 
-
-  constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private helpService: HelpService, private dbService: DBService, private config: NgbCarouselConfig) {
+  constructor(private router: Router, private modalService: ModalService, private route: ActivatedRoute, private userService: UserService, private helpService: HelpService, private dbService: DBService, private config: NgbCarouselConfig) {
 	this.labels={"companyName":this.helpService.getConstants("companyName")};
 	config.interval = 8000;
 	config.showNavigationIndicators = true;
@@ -100,7 +102,17 @@ testimonialsList: Array<any> = [];
 		this.router.navigate([page]);	
 	}
 
+	openModal(id)
+	{
 
+		this.popupforquestions  = true;
+		console.log(this.popupforquestions);
+	}
+
+	closeModal(id)
+	{
+		this.modalService.close(id);
+	}
 }
 
 
