@@ -35,7 +35,7 @@
    <section class="home-sec">
       <div class="container">
          <div class="col-12">
-	        <div class=" w-1000" style="padding-top:30px;">
+	        <div class="" style="padding-top:30px;">
             <span class="heading-small-1">How to start?</span>
                      <h2  class="heading-big-1" style="">Easy steps</h2>
 	           <div class="row secL" *ngFor="let step of stepsList; let i = index;">
@@ -103,9 +103,23 @@
    
 
 
-
+ <div class="chefs-banner">
+  <div class="container">
+      <div class="chefs-card text-center wow animated bounceInDown">
+          <div class="chefs-card-inner">
+              <h2>we love our users, <br/>join us now</h2>
+              <div class="short-separator"></div>
+              <img src="assets/images/chefs-hat.png" alt="hat" height="80%"/>
+              <p>
+                 Get a 7-day free trial of our app.<br/> Satisfied users choose from <br/>various affordable subscriptions. 
+              </p>
+              <a class="read-more-bordered" (click)="gotopage('pricing')">Join Now</a>
+          </div>
+      </div>
+  </div>
+</div>
      
-<section class="home-sec bg-green" style="padding-bottom: 30px; margin-bottom:0px;padding-top:30px">
+<section class="home-sec bg-green" style="padding-bottom: 30px; margin-bottom:0px;padding-top:30px;display:none">
    <div class="container col-12">
       <div class="row">
          <div class="col-12 col-lg-6">
