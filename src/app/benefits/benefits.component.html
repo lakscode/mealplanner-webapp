@@ -49,6 +49,23 @@
           <img src="assets/images/temp-images/header-banner.jpg" alt="banner">
       </a>
   </div>
+
+  <div class="site-section">
+      <div class="container" >
+         <div class="col-12" >
+            <div class=" w-1000" style="display:flex; align-items: center;padding-top:40px"> 
+               <div class="row " >
+                  <div class="col-md-12 col-lg-12 pl-5" style="padding-left:0px !important" *ngFor="let step of stepsList; let i = index;">
+                     <h1 class="text-lg-left mb-4 title">{{step.subtitle}}</h1>
+                     <p class="text-justify mb-5 description">{{step.description}}</p>
+                    
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
   
   
  
@@ -56,8 +73,12 @@
 
 
   </div>
+
+
   </div>
   </div>
+
+
   <div class="col-md-4 col-lg-3">
   <aside>
   <div class="side-bar">
