@@ -36,6 +36,7 @@ constructor(private router: Router, private httpClient : HttpClient, private rou
 		  this.currentUser["displayname"] = this.currentUser["username"];
 		//  console.log(this.currentUser["displayname"]);
 		}
+		this.getUserPreferences();
 		this.role = this.helpService.getRoleStatus(this.currentUser);
 		this.showNutrientsFlag = this.helpService.showorhideNutritions(this.role);
 
@@ -49,7 +50,7 @@ constructor(private router: Router, private httpClient : HttpClient, private rou
 
 		this.loadHealthLabels();
 	
-		this.loadRecommendedRecipes();
+	//	this.loadRecommendedRecipes();
 	
 	}
 
@@ -68,14 +69,24 @@ constructor(private router: Router, private httpClient : HttpClient, private rou
 	}
 	loadRecommendedRecipes()
 	{
+		
 	  this.recommendedRecipes = [];
   
 	  var params = {"limit": "4"};
-	  params["query"]="select id, label, image, s_instructions, healthLabels from recipes where s_instructions != '' AND label != '' AND image != '' group by healthLabels order by rand() limit 0, 4";
-  
+
+	  var query = "select id, label, image, s_instructions, dietLabels, healthLabels from recipes  ";
+	  var qWhere = " where s_instructions != '' AND label != '' AND image != '' ";
+
+	  console.log(this.userPref);
+	  if(typeof(this.userPref) !== "undefined" && this.userPref !== null && typeof(this.userPref["dietLabels"]) !== "undefined" && this.userPref["dietLabels"] !== null && this.userPref["dietLabels"] !== "")
+	  {
+		qWhere += " AND dietLabels = '" + this.userPref["dietLabels"] + "' AND dietLabels != ''  ";
+	  }
+	  params["query"]= query + qWhere + "  group by healthLabels order by rand() limit 0, 4";
+
 	  var res =   this.dbService.getDatabyQuery("recipes", params).subscribe(invData => setTimeout(() => {
    
-	//  console.log(invData);
+	  console.log(invData);
    
 	   if(invData !== null && typeof(invData["body"]) !== "undefined" && invData["body"] !== null && invData["body"]["length"] > 0)
 		 {
@@ -91,7 +102,7 @@ constructor(private router: Router, private httpClient : HttpClient, private rou
 	   }
 	 
 	  ));
-   
+	
 	}
 	checkRecipeoftheDay()
 	{
@@ -455,6 +466,73 @@ getPlanStatus()
 	}));
   }
 }
+
+
+
+userPref: any ;
+user_ipaddress: any;
+uniqueid: any;
+
+getUserPreferences()
+{
+
+  this.userPref = {};
+  var params ={};
+  var paramFound = false;
+  var qWhere = "";
+
+  this.user_ipaddress = this.currentUser["user_ipaddress"];
+  this.uniqueid = this.currentUser["uniqueid"];
+
+  if(typeof(this.user_ipaddress) !=="undefined" && this.user_ipaddress !== null && this.user_ipaddress !== "")
+  {
+	params["user_ipaddress"] = this.user_ipaddress;
+	paramFound = true;
+	qWhere  = " user_ipaddress = '" + this.user_ipaddress  + "' ";
+  }
+ 
+  if(typeof(this.uniqueid) !=="undefined" && this.uniqueid !== null && this.uniqueid !== "")
+  {
+	params["uniqueid"] = this.uniqueid;
+	paramFound = true;
+	if(qWhere == "")
+	{
+	  qWhere  += " user_uniqueid = '" + this.uniqueid + "' " ;
+	}
+	else
+	{
+	  qWhere  += " OR user_uniqueid = '" + this.uniqueid  + "'  " ;
+	}
+  }
+ 
+
+	if(paramFound)
+	{
+   
+	  var params1 = {};
+	  params1["query"] = "select * from questionnaire ";
+	  if(qWhere !== "")
+	  {
+		params1["query"] += " where " + qWhere;
+	  }
+	  var res =   this.dbService.getDatabyTablebyQuery("recipes", params1 ).subscribe(qData => setTimeout(() => {
+
+	  if(qData !== null && qData["body"] && qData["body"]["length"] > 0)
+	  {
+		if( qData["body"][0]["question9"] !== "")
+		{
+		  sessionStorage.setItem['userPref'] = qData["body"][0];
+		  sessionStorage.setItem['userPref_dietLabels'] = qData["body"][0]["question9"];
+		  this.userPref["dietLabels"] = qData["body"][0]["question9"];
+		}
+	  }
+	  this.loadRecommendedRecipes();
+		
+	} ));
+
+  }
+}
+
 
 }
 

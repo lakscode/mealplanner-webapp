@@ -6123,7 +6123,7 @@ div.widget-measurements .default-btn {
   }
   .tabs-container .left-side,
   .tabs-container .right-side {
-    width: 100%;
+    width: 50%;
   }
   .tabs-container .left-side {
     margin-bottom: 10px;

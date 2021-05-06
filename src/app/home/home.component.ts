@@ -15,7 +15,7 @@ import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 export class HomeComponent implements OnInit {
 userName: any;
 labels:any;
-
+currentUser: any;
 stepsList: Array<any> = [];
 testimonialsList: Array<any> = [];
 
@@ -40,6 +40,7 @@ testimonialsList: Array<any> = [];
 				}
 				else if (userdata['loggedIn'] == true) {
 					this.userName = userdata;
+					this.currentUser = userdata;
 					//window.location.href="/landing1";
 				}
 				else {
@@ -98,6 +99,8 @@ testimonialsList: Array<any> = [];
 	{
 		this.router.navigate([page]);	
 	}
+
+
 }
 
 

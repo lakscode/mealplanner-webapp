@@ -82,37 +82,21 @@ export class TabspanelComponent implements OnInit, OnDestroy, AfterViewChecked, 
     LoadData()
     {
       this.selectedTab = 1;
-   //   console.log("Show spinner");
-    //  this.spinner.show();
-      this.userService.loggedinUser().subscribe(userdata => setTimeout(() => {
-        if(typeof(userdata) !=="undefined" && userdata !== null)
+      //   console.log("Show spinner");
+        //  this.spinner.show();
+        this.currentUser =this.helpService.getCurrentUser();
+        if(this.currentUser !== null)
         {
-        if(typeof(userdata['loggedIn']) !=="undefined")
-        {   if(userdata['loggedIn'] == true)
-          {
-                    this.currentUser = userdata;
-                }
-              
+          if( this.currentUser["firstname"] !== "")
+          this.currentUser["displayname"] = this.currentUser["firstname"];
+          else if( this.currentUser["username"] !== "")
+          this.currentUser["displayname"] = this.currentUser["username"];
+        //  console.log(this.currentUser["displayname"]);
         }
-        else 
-        {
-          this.currentUser = userdata;
-            }
-          }
-         
-         if(typeof(this.currentUser) !== "undefined" && this.currentUser !== null)
-            {
-             // this.loadProfileImg();
-            //  this.LoadProfileImages()
-           
-                
-                
-
-            }
-    
+            this.getUserPreferences();
    
-        }, 0));
-        this.loadRecipes();
+      
+     
     }
  
 
@@ -173,6 +157,11 @@ export class TabspanelComponent implements OnInit, OnDestroy, AfterViewChecked, 
 
 	  params["instructions"] = "notempty";
   
+    if(typeof( this.userPref["dietLabels"] ) !== "undefined" &&  this.userPref["dietLabels"]  !== null &&  this.userPref["dietLabels"]  !== "")
+    {
+      params["dietLabels"] = this.userPref["dietLabels"];
+  
+    }
 	  //console.log(JSON.stringify(params));
 	 var res =   this.dbService.getDatabyFields("recipes", params).subscribe(invData => setTimeout(() => {
   
@@ -320,4 +309,71 @@ export class TabspanelComponent implements OnInit, OnDestroy, AfterViewChecked, 
   gotoRecipeDetails(id){
     this.router.navigate(['recipedetails', id]);
   }
+
+
+  
+userPref: any ;
+user_ipaddress: any;
+uniqueid: any;
+
+getUserPreferences()
+{
+
+  this.userPref = {};
+  var params ={};
+  var paramFound = false;
+  var qWhere = "";
+
+  this.user_ipaddress = this.currentUser["user_ipaddress"];
+  this.uniqueid = this.currentUser["uniqueid"];
+
+  if(typeof(this.user_ipaddress) !=="undefined" && this.user_ipaddress !== null && this.user_ipaddress !== "")
+  {
+	params["user_ipaddress"] = this.user_ipaddress;
+	paramFound = true;
+	qWhere  = " user_ipaddress = '" + this.user_ipaddress  + "' ";
+  }
+ 
+  if(typeof(this.uniqueid) !=="undefined" && this.uniqueid !== null && this.uniqueid !== "")
+  {
+	params["uniqueid"] = this.uniqueid;
+	paramFound = true;
+	if(qWhere == "")
+	{
+	  qWhere  += " user_uniqueid = '" + this.uniqueid + "' " ;
+	}
+	else
+	{
+	  qWhere  += " OR user_uniqueid = '" + this.uniqueid  + "'  " ;
+	}
+  }
+ 
+
+	if(paramFound)
+	{
+   
+	  var params1 = {};
+	  params1["query"] = "select * from questionnaire ";
+	  if(qWhere !== "")
+	  {
+		params1["query"] += " where " + qWhere;
+	  }
+	  var res =   this.dbService.getDatabyTablebyQuery("recipes", params1 ).subscribe(qData => setTimeout(() => {
+
+	  if(qData !== null && qData["body"] && qData["body"]["length"] > 0)
+	  {
+		if( qData["body"][0]["question9"] !== "")
+		{
+		  sessionStorage.setItem['userPref'] = qData["body"][0];
+		  sessionStorage.setItem['userPref_dietLabels'] = qData["body"][0]["question9"];
+		  this.userPref["dietLabels"] = qData["body"][0]["question9"];
+		}
+	  }
+	  this.loadRecipes();
+		
+	} ));
+
+  }
+}
+
 }
