@@ -793,12 +793,13 @@ SendEmailPasswordReset(email,data) {
 			  return 0;
 		}
 
-	saveSearchHistory(searchwords, category, userid)
+	saveSearchHistory(searchwords, category, page, userid)
 	{
 		var params = {};
 		params["text"] =  searchwords;
 		params["category"] =  category;
 		params["userid"] =  userid;
+		params["page"] = page;
 		console.log("adding");
 		console.log(params);
 		var res =   this.dbService.postDataByTable("search_history", params).subscribe(recipeData => setTimeout(() => {

@@ -230,6 +230,8 @@ this.loadColorCodes();
 		else if(typeof(this.searchparam["q"]) !== "undefined" && this.searchparam["q"] !== null && this.searchparam["q"] !== "")
 	  {
 		params["content"] = this.searchparam["q"];
+		this.helpService.saveSearchHistory(this.searchparam["q"], "content", "plan", this.currentUser["id"]);
+
 	  }
   
 	//  params["instructions"] = "notempty";

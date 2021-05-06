@@ -171,6 +171,7 @@ export class RecipesComponent implements OnInit {
 	  if(typeof(this.routeParams["dietLabels"]) !== "undefined" && this.routeParams["dietLabels"] !== null && this.routeParams["dietLabels"] !== "")
 	  {
 		params["content"] = this.routeParams["dietLabels"];
+		this.helpService.saveSearchHistory(params["content"], "text", "recipes", this.currentUser["id"]);
 	  }
   
 	  params["instructions"] = "notempty";
@@ -368,7 +369,7 @@ endIndex = startIndex+ endIndex;
    if(this.searchparam.q)
    {
    params["content"] = this.searchparam.q;
-   this.helpService.saveSearchHistory(this.searchparam.q, "text", this.currentUser["id"]);
+   this.helpService.saveSearchHistory(this.searchparam.q, "text", "recipes", this.currentUser["id"]);
    }
    if(typeof(this.searchparam.range) !== "undefined")
    {
@@ -433,7 +434,7 @@ endIndex = startIndex+ endIndex;
 	 if( mQuery !== "")
 	 {
 		mQuery=  mQuery.slice(0, -4);
-		this.helpService.saveSearchHistory(mQuery, "nutrients", this.currentUser["id"]);
+		this.helpService.saveSearchHistory(mQuery, "nutrients", "recipes", this.currentUser["id"]);
 	 }
 	 console.log("mQuery");
 	 console.log(mQuery);
@@ -442,13 +443,13 @@ endIndex = startIndex+ endIndex;
    if(typeof(dietlabels) !== "undefined" && dietlabels  !== "")
    {
     params["dietLabels"] = dietlabels
-	this.helpService.saveSearchHistory(dietlabels, "dietLabels", this.currentUser["id"]);
+	this.helpService.saveSearchHistory(dietlabels, "dietLabels", "recipes", this.currentUser["id"]);
    } 
 
    if(typeof(healthlabels ) !== "undefined" && healthlabels !== "")
    {
     params["healthLabels"] = healthlabels
-	this.helpService.saveSearchHistory(healthlabels, "healthLabels", this.currentUser["id"]);
+	this.helpService.saveSearchHistory(healthlabels, "healthLabels", "recipes", this.currentUser["id"]);
    } 
 
    if(typeof(minerals ) !== "undefined" && minerals  !== "")
