@@ -2,6 +2,8 @@ import { Component, OnInit, Injectable } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { UserService } from './services/user.service';
 import { ModalService } from './shared/modules/modal/modal.service';
+import { DBService } from './dbservices/db.service';
+
 import {
   trigger,
   state,
@@ -49,7 +51,7 @@ export class AppComponent implements OnInit {
 
 
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute, private modalService: ModalService, private userService: UserService) {
+  constructor(private router: Router, private dbService: DBService,  private activatedRoute: ActivatedRoute, private modalService: ModalService, private userService: UserService) {
     
   }
  
@@ -60,6 +62,19 @@ export class AppComponent implements OnInit {
 
     var parent = this;
   
+    this.dbService.getLocalData("http://www.geoplugin.net/json.gp").subscribe(ipdata => setTimeout(() => 
+    {
+     console.log(ipdata);
+     if(typeof(ipdata) !== "undefined" && ipdata !== null && typeof(ipdata['geoplugin_request']) !== "undefined" && ipdata['geoplugin_request'] !== "")
+     {
+       var ipaddress = ipdata['geoplugin_request'];
+       if(typeof(ipaddress) !== "undefined" && ipaddress !== null && ipaddress !== "")
+       {
+         localStorage.setItem("ipaddress", ipaddress);
+       }
+     }
+    }));
+
    // setTimeout(function(){  parent.openModal('popupformessage'); }, 3000);
 
     localStorage.setItem('currentUser', "");

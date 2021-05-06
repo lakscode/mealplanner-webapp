@@ -165,7 +165,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 				this.userRoleDet = this.currentUser["role"];
 
 				this.setIconMenu();
-
+				this.setUniqueid();
 				this.companylogo = 'assets/logo-dark.png';
 				this.companyname = "";
 				this.isTrialExpired = this.helpService.isTrialExpired(this.currentUser);
@@ -175,6 +175,43 @@ export class HeaderComponent implements OnInit, OnDestroy {
 		}, 0));
 	}
 	
+	setUniqueid()
+	{
+		if(typeof(this.currentUser["uniqueid"]) == "undefined" || this.currentUser["uniqueid"] == "")
+        {
+          var uniqueid =  localStorage.getItem("uniqueid");
+          console.log(uniqueid);
+          if(typeof(uniqueid) !== "undefined" && uniqueid !== null && uniqueid !== "")
+          {
+            var params = {};
+            params["id"] = this.currentUser["id"];
+            params["uniqueid"] = uniqueid;
+            console.log(params);
+            var res =   this.dbService.updateDataByTable("users", params).subscribe(invData => setTimeout(() => 
+            {
+
+            }));
+          }
+        }
+        
+        if(typeof(this.currentUser["user_ipaddress"]) == "undefined" || this.currentUser["user_ipaddress"] == "")
+        {
+          var ipaddress =  localStorage.getItem("ipaddress");
+          console.log(ipaddress);
+          if(typeof(ipaddress) !== "undefined" && ipaddress !== null && ipaddress !== "")
+          {
+            var params = {};
+            params["id"] = this.currentUser["id"];
+            params["user_ipaddress"] = ipaddress;
+            console.log(params);
+            var res =   this.dbService.updateDataByTable("users", params).subscribe(invData => setTimeout(() => 
+            {
+
+            }));
+          }
+        }
+
+	}
 	setIconMenu()
 	{
 	//	console.log("In setIconMenu");

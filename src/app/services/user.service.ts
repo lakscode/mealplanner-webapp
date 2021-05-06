@@ -46,4 +46,6 @@ export class User
   rolename:string;
   company: string;
   location: string;
+  uniqueid: string = "";
+  user_ipaddress: string = "";
 }
