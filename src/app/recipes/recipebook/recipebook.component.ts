@@ -38,7 +38,7 @@ export class RecipebookComponent implements OnInit, OnChanges {
 	dietLabelsList: Array<any> = [];
 	healthlabelsList: Array<any> = [];
 	mineralsLabelsList: Array<any> = [];
-
+	searchmorebar:boolean = false;
 	constructor(private router: Router, private route: ActivatedRoute, private toastr: ToastrService, private pdfService: PDFService, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder, private modalService: ModalService) {
 	
 	}
@@ -217,7 +217,7 @@ var params = {}
 if(this.searchparam.q)
 {
 params["content"] = this.searchparam.q;
-this.helpService.saveSearchHistory(this.searchparam.q, "text", this.currentUser["id"]);
+this.helpService.saveSearchHistory(this.searchparam.q, "text", "recipebook", this.currentUser["id"]);
 }
 if(typeof(this.searchparam.range) !== "undefined")
 {
@@ -282,7 +282,7 @@ params["returnfields"] = " id, label, image, healthLabels, dietLabels, calories,
  if( mQuery !== "")
  {
 	mQuery=  mQuery.slice(0, -4);
-	this.helpService.saveSearchHistory(mQuery, "nutrients", this.currentUser["id"]);
+	this.helpService.saveSearchHistory(mQuery, "nutrients", "recipebook", this.currentUser["id"]);
  }
  //console.log("mQuery");
  //console.log(mQuery);
@@ -291,13 +291,13 @@ var checkMinerals = false;
 if(typeof(dietlabels) !== "undefined" && dietlabels  !== "")
 {
 params["dietLabels"] = dietlabels
-this.helpService.saveSearchHistory(dietlabels, "dietLabels", this.currentUser["id"]);
+this.helpService.saveSearchHistory(dietlabels, "dietLabels",  "recipebook",this.currentUser["id"]);
 } 
 
 if(typeof(healthlabels ) !== "undefined" && healthlabels !== "")
 {
 params["healthLabels"] = healthlabels
-this.helpService.saveSearchHistory(healthlabels, "healthLabels", this.currentUser["id"]);
+this.helpService.saveSearchHistory(healthlabels, "healthLabels", "recipebook", this.currentUser["id"]);
 } 
 
 if(typeof(minerals ) !== "undefined" && minerals  !== "")
@@ -716,7 +716,15 @@ formatVal(str)
    }))
   
   }
-
+  setFLU(str)
+  {
+	  var retValue = str;
+	  if(str !== "")
+	  {
+		  retValue = this.helpService.setInputFirstToUppercase(str);
+	  }
+	  return retValue;
+  }
   
 }
 

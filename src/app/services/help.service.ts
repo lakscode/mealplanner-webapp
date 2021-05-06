@@ -802,11 +802,10 @@ SendEmailPasswordReset(email,data) {
 		params["page"] = page;
 		console.log("adding");
 		console.log(params);
-		var res =   this.dbService.postDataByTable("search_history", params).subscribe(recipeData => setTimeout(() => {
+		var res =   this.dbService.getDataByTable("search_history", params).subscribe(recipeData => setTimeout(() => {
 			console.log(recipeData);
 	
 		
 		}));		
 	}
-
 }
