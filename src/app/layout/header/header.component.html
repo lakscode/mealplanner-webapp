@@ -46,7 +46,7 @@
                                         <a *ngIf="menu.link !== 'home'" (click)="gotopage(menu.link)">{{menu.menu}}</a>
                                         <a *ngIf="menu.link == 'home'" (click)="gotopage('home')">{{menu.menu}}</a>
                                         <ul *ngIf="menu.children && menu.children.length > 0">
-                                            <li (click)="setMenuActive(submenu);" *ngFor="let submenu of menu.children; let m = index">
+                                            <li (click)="setMenuActive();" *ngFor="let submenu of menu.children; let m = index">
                                                 <a (click)="gotopage(submenu.link)">{{submenu.menu}}</a>
                                             </li>
                                         </ul>
