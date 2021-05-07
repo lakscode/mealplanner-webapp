@@ -130,9 +130,47 @@ export class HeaderComponent implements OnInit, OnDestroy {
 	ngOnInit() {
 		
 		this.companylogo = 'assets/logo-dark.png';
-		
+		this.setIconMenu();
+		this.loggedIn = false;
+		this.currentUser =this.helpService.getCurrentUser();
+		console.log("current USER");
+		console.log(this.currentUser);
 	
-	
+
+		if(typeof(this.currentUser) !== "undefined" && this.currentUser !== null)
+			{
+				
+				this.userName= "";
+				if(typeof(this.currentUser["firstname"]) !== "undefined")
+				{
+					this.userName = this.currentUser["firstname"];
+					this.userName = this.userName.charAt(0).toUpperCase() + this.userName.slice(1);
+				}
+
+				if(typeof(this.currentUser["lastname"]) !== "undefined")
+				{
+					var lastname = this.currentUser["lastname"].charAt(0).toUpperCase() + this.currentUser["lastname"].slice(1);
+				this.userName = this.userName + " " + lastname;
+				}
+
+				 if(typeof(this.currentUser["username"]) !== "undefined") {
+                this.userName = this.currentUser["username"];
+                }
+				//if(typeof(this.currentUser["loggedIn"]) !== "undefined") {
+					this.loggedIn = true;
+				//	}
+				this.currentUser['loggedIn'] = true;
+				//this.loggedIn = true;
+				this.userRole =  this.currentUser["role"];
+				this.userRoleDet = this.currentUser["role"];
+
+				this.setMenuActive();
+				this.setUniqueid();
+				this.companylogo = 'assets/logo-dark.png';
+				this.companyname = "";
+				this.isTrialExpired = this.helpService.isTrialExpired(this.currentUser);
+			}
+/*
 		this.userService.loggedinUser().subscribe(userdata => setTimeout(() => {
 			this.setIconMenu();
 			this.loggedIn = false;
@@ -174,6 +212,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 			
 		//	console.log(this.loggedIn);
 		}, 0));
+		*/
 	}
 	
 	setUniqueid()
