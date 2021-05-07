@@ -34,7 +34,7 @@ popupforquestions: boolean =false;
   	ngOnInit() {
 
 		this.loadSteps(); 
-		this.loadTestimonials();
+	//	this.loadTestimonials();
 
 		this.currentUser =this.helpService.getCurrentUser();
 		if(this.currentUser !== null)
@@ -79,7 +79,7 @@ popupforquestions: boolean =false;
 
 
 	}
-
+/*
 	loadTestimonials()
 	{
 		this.testimonialsList = [];
@@ -109,6 +109,7 @@ popupforquestions: boolean =false;
 		}
 		console.log(this.testimonialsList);
 	}
+	*/
 
 	gotopage(page)
 	{
