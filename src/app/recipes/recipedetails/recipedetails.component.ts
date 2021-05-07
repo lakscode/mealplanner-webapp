@@ -45,12 +45,16 @@ commentsCount: any = "";
 apiUrl: any = "";
 role: any = {};
 showNutrientsFlag: boolean = false;
+urlShare : any = "";
 	constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
 	
 	}
 
 	ngOnInit() {
 		this.apiUrl = environment.apiUrl;
+
+		this.urlShare = window.location.href;
+		
 		this.commentsList= [];
 		this.comment = {"userid":"", "message":"", "image":"", "video":"", "status":"0", "created_time": new Date()};
 		this.listParams = null;

@@ -7,3 +7,4 @@ export * from './popular/popular.module';
 export * from './sidebar/sidebar.module';
 export * from './listpanel/listpanel.module';
 export * from "./questions/questions.module";
+export * from "./socialshare/socialshare.module";

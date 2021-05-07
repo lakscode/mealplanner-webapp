@@ -25,7 +25,7 @@
         <div [ngClass]="questions[currentQuestion]['answer'] == answer.text?'btn-panel active':'btn-panel'" (click)="setAnswer(answer)" *ngFor="let answer of questions[currentQuestion]['answers']; let a = index;">
           <div  class="answer-box" >
             {{getFLU(answer.text)}}
-            <span style="font-size:12px" *ngIf="answer.subtext !== ''"><br>{{getFLU(answer.subtext)}}</span>
+            <span style="font-size:12px; color:#FFF" *ngIf="answer.subtext !== ''"><br>{{getFLU(answer.subtext)}}</span>
           </div>
           <div class="tick-mark">
             <i class="fa fa-check"></i>

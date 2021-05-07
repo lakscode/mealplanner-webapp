@@ -237,7 +237,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 	//console.log(str);
 	//console.log("this.router.url ") ;
 	//console.log(this.router.url);
-		if(!this.loggedIn && str.indexOf("resetpassword") == -1 && str.indexOf("index") == -1 && str.indexOf("home") == -1 && str.indexOf("signup") == -1 && str.indexOf("pricing") == -1 && str.indexOf("features") == -1)
+		if(!this.loggedIn && str.indexOf("resetpassword") == -1 && str.indexOf("index") == -1 && str.indexOf("home") == -1 && str.indexOf("signup") == -1 && str.indexOf("pricing") == -1 && str.indexOf("features") == -1 && str.indexOf("recipedetails") == -1)
 		{
 			var params = {};
 			if( this.router.url.indexOf("login") > -1)

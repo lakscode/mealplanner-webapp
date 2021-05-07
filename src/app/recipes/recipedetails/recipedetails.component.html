@@ -12,7 +12,7 @@
                 <h2>Recipe Details</h2>
     
             </div>
-            <div>
+            <div *ngIf='currentUser'>
                 <a class="copy-button" (click)="newRecipe()" href="javascript:void(0)"><i class="fa fa-copy"></i> Copy to New Draft</a>
             
             </div>
@@ -220,7 +220,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="col-sm-5">
+            <div class="col-sm-5" *ngIf="currentUser">
                 <div class="details-fav"><ul>
                     <li (click)="toggleFav()" [ngClass]="setFav?'set':''"><i  class="fa fa-heart" aria-hidden="true"></i></li>
                     <li [ngClass]="rating > 0?'set':''" (click)="showRate = !showRate;"><i class="fa fa-star" aria-hidden="true"></i></li>
@@ -240,9 +240,18 @@
        
         </div>
     </div>
+
     </div>
 
+    <div class="separator-post"></div>
+    <div class="row">
+        <div class="col-12" style="text-align:right">
 
+            
+    <app-socialshare *ngIf="urlShare" [labeltext]="searchRes.label" [urlShare]="urlShare"></app-socialshare>
+
+        </div>
+    </div>
     
    
     <div class="related-recipes" *ngIf="listParams">
