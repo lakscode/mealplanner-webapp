@@ -1,11 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 import { Router } from '@angular/router';
-import { UserService } from '../services/user.service';
-import { HttpClient } from '@angular/common/http';
-import { HttpErrorResponse } from '@angular/common/http';
-import { DBService } from '../dbservices/db.service';
-import { HelpService } from '../services/help.service';
+
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-features',
@@ -22,31 +18,15 @@ testimonialsList: Array<any> = [];
 
 
 
-  constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private helpService: HelpService, private dbService: DBService, private config: NgbCarouselConfig) {
-	this.labels={"companyName":this.helpService.getConstants("companyName")};
-	config.interval = 8000;
-	config.showNavigationIndicators = true;
-	config.showNavigationArrows = true; 
+  constructor(private router: Router, private route: ActivatedRoute, private config: NgbCarouselConfig) {
+	 
 	}
 
   	ngOnInit() {
 
 		this.loadSteps(); 
-		this.loadTestimonials();
-    	this.userService.loggedinUser().subscribe(userdata => setTimeout(() => {
-			if (userdata !== null && typeof (userdata['loggedIn']) !== "undefined") {
-				if (userdata['loggedIn'] == false) {
-				//	this.router.navigate(["login", { redirectUrl: encodeURI(this.router.url) }]);
-				}
-				else if (userdata['loggedIn'] == true) {
-					this.userName = userdata;
-					//window.location.href="/landing1";
-				}
-				else {
-				//	this.router.navigate(["login", { redirectUrl: encodeURI(this.router.url) }]);
-				}
-			}
-		}, 0));
+		//this.loadTestimonials();
+    	
   
 	}
 
@@ -66,7 +46,7 @@ testimonialsList: Array<any> = [];
 
 	}
 
-	loadTestimonials()
+/*	loadTestimonials()
 	{
 		this.testimonialsList = [];
 		var count = 0;
@@ -94,7 +74,7 @@ testimonialsList: Array<any> = [];
 		
 		}
 		console.log(this.testimonialsList);
-	}
+	}*/
 
 	gotopage(page)
 	{
