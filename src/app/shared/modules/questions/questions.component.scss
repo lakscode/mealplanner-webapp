@@ -20,7 +20,7 @@ background-size: cover;
 {
     margin-top:30px;
     margin-bottom:30px;
-    color:#FFF;
+    color:#000;
     font-weight:bold;
 }
 .input-text
@@ -31,6 +31,7 @@ background-size: cover;
     border-bottom: 2px solid #999;
     outline:0;
     box-shadow: 0 0.5rem 0.5rem rgb(0 0 0 / 25%);
+    font-size: 13px;
 }
 
 .input-text:focus, .input-text:hover
