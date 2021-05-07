@@ -492,7 +492,7 @@ removeRecipe(recipe)
 		console.log(this.recipesList);
 		console.log(this.searchRes);
 	}
-	this.toastr.error('Removed Recipe from Recipe Book', 'Recipe Book!');	
+	//this.toastr.error('Removed Recipe from Recipe Book', 'Recipe Book!');	
 }
 addRecipe(recipe)
 {
@@ -519,7 +519,7 @@ addRecipe(recipe)
 	}
 	this.toggleRecipeAdd = false;
 	this.searchparam["q"] ="";
-	this.toastr.success('Added Recipe to Recipe Book', 'Recipe Book!');	
+	//this.toastr.success('Added Recipe to Recipe Book', 'Recipe Book!');	
 }
 saveRecipebook()
 {
@@ -554,7 +554,7 @@ saveRecipebook()
 			console.log(params);
 			var res =   this.dbService.updateDataByTable("recipebook", params).subscribe(recipeData => setTimeout(() => {
 				console.log(recipeData);
-				this.toastr.success('Updated Recipe Book!', 'Recipe Book!');	
+				//this.toastr.success('Updated Recipe Book!', 'Recipe Book!');	
 				this.loadRecipebook(this.searchRes.id);
 				
 			}));
@@ -566,7 +566,7 @@ saveRecipebook()
 			console.log(params);
 			var res =   this.dbService.postDataByTable("recipebook", params).subscribe(recipeData => setTimeout(() => {
 				console.log(recipeData);
-				this.toastr.success('Saved Recipe Book!', 'Recipe Book!');
+				//this.toastr.success('Saved Recipe Book!', 'Recipe Book!');
 				if(recipeData['inserted_id'] !== "undefined" && recipeData['inserted_id'] !== "")
 				{
 					this.loadRecipebook(recipeData['inserted_id']);	
