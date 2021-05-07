@@ -1,8 +1,6 @@
 @import "../../variables.scss";
 
-@import url(https://fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700italic,700,900italic,900);
-@import url(https://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700,800,900);
-@import url(https://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700,800,900);
+
 body{background-color:#eee;}
 
 #generic_price_table{
@@ -252,13 +250,7 @@ body{background-color:#eee;}
     margin-bottom:75px;
   }
 }
-@media (min-width: 992px) and (max-width: 1199px) {
-}
-@media (min-width: 1200px) {
-}
-#generic_price_table_home{
-   font-family: 'Raleway', sans-serif;
-}
+
 
 .text-center h1,
 .text-center h1 a{
@@ -267,111 +259,8 @@ body{background-color:#eee;}
   font-weight: 300;
   text-decoration: none;
 }
-.demo-pic{
-  margin: 0 auto;
-}
-.demo-pic:hover{
-  opacity: 0.7;
-}
 
-#generic_price_table_home ul{
-  margin: 0 auto;
-  padding: 0;
-  list-style: none;
-  display: table;
-}
-#generic_price_table_home li{
-  float: left;
-}
-#generic_price_table_home li + li{
-  margin-left: 10px;
-  padding-bottom: 10px;
-}
-#generic_price_table_home li a{
-  display: block;
-  width: 50px;
-  height: 50px;
-  font-size: 0px;
-}
-#generic_price_table_home .blue{
-  background: #3498DB;
-  transition: all 0.3s ease-in-out 0s;
-}
-#generic_price_table_home .emerald{
-  background: #2ECC71;
-  transition: all 0.3s ease-in-out 0s;
-}
-#generic_price_table_home .grey{
-  background: #7F8C8D;
-  transition: all 0.3s ease-in-out 0s;
-}
-#generic_price_table_home .midnight{
-  background: #34495E;
-  transition: all 0.3s ease-in-out 0s;
-}
-#generic_price_table_home .orange{
-  background: #E67E22;
-  transition: all 0.3s ease-in-out 0s;
-}
-#generic_price_table_home .purple{
-  background: #9B59B6;
-  transition: all 0.3s ease-in-out 0s;
-}
-#generic_price_table_home .red{
-  background: #E74C3C;
-  transition:all 0.3s ease-in-out 0s;
-}
-#generic_price_table_home .turquoise{
-  background: #1ABC9C;
-  transition: all 0.3s ease-in-out 0s;
-}
 
-#generic_price_table_home .blue:hover,
-#generic_price_table_home .emerald:hover,
-#generic_price_table_home .grey:hover,
-#generic_price_table_home .midnight:hover,
-#generic_price_table_home .orange:hover,
-#generic_price_table_home .purple:hover,
-#generic_price_table_home .red:hover,
-#generic_price_table_home .turquoise:hover{
-  border-bottom-left-radius: 50px;
-    border-bottom-right-radius: 50px;
-    border-top-left-radius: 50px;
-    border-top-right-radius: 50px;
-  transition: all 0.3s ease-in-out 0s;
-}
-#generic_price_table_home .divider{
-  border-bottom: 1px solid #ddd;
-  margin-bottom: 20px;
-  padding: 20px;
-}
-#generic_price_table_home .divider span{
-  width: 100%;
-  display: table;
-  height: 2px;
-  background: #ddd;
-  margin: 50px auto;
-  line-height: 2px;
-}
-#generic_price_table_home .itemname{
-  text-align: center;
-  font-size: 50px ;
-  padding: 50px 0 20px ;
-  border-bottom: 1px solid #ddd;
-  margin-bottom: 40px;
-  text-decoration: none;
-    font-weight: 300;
-}
-#generic_price_table_home .itemnametext{
-    text-align: center;
-    font-size: 20px;
-    padding-top: 5px;
-    text-transform: uppercase;
-    display: inline-block;
-}
-#generic_price_table_home .footer{
-  padding:40px 0;
-}
 
 .price-heading{
     text-align: center;
@@ -381,43 +270,8 @@ body{background-color:#eee;}
   margin: 0;
   padding: 0 0 50px 0;
 }
-.demo-button {
-    background-color: #333333;
-    color: #ffffff;
-    display: table;
-    font-size: 20px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 20px;
-    margin-bottom: 50px;
-    outline-color: -moz-use-text-color;
-    outline-style: none;
-    outline-width: medium ;
-    padding: 10px;
-    text-align: center;
-    text-transform: uppercase;
-}
-.bottom_btn{
-  background-color: #333333;
-    color: #ffffff;
-    display: table;
-    font-size: 28px;
-    margin: 60px auto 20px;
-    padding: 10px 25px;
-    text-align: center;
-    text-transform: uppercase;
-}
-.demo-button:hover{
-  background-color: #666;
-  color: #FFF;
-  text-decoration:none;
-  
-}
-.bottom_btn:hover{
-  background-color: #666;
-  color: #FFF;
-  text-decoration:none;
-}
+
+
 
 
 .question{
