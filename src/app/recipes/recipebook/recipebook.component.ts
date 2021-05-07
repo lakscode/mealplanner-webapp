@@ -39,6 +39,8 @@ export class RecipebookComponent implements OnInit, OnChanges {
 	healthlabelsList: Array<any> = [];
 	mineralsLabelsList: Array<any> = [];
 	searchmorebar:boolean = false;
+	addItem: boolean = false;
+	showNutrientsFlag: boolean = false;
 	constructor(private router: Router, private route: ActivatedRoute, private toastr: ToastrService, private pdfService: PDFService, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder, private modalService: ModalService) {
 	
 	}
