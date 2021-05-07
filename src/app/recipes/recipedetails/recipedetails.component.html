@@ -1,21 +1,21 @@
 <div class="recipes-home-body inner-page" *ngIf="searchRes">
     <div class="container">
     <div class="row">
-    <div class="col-md-7 col-lg-9">
+    <div class="col-md-8 col-lg-9">
     <div class="recipe-set ">
 
 <div class="wrapper-detail-contents detail-2">
     <div class="single-recipe-detail">
         <div class="wrapper-recipe-heading">
-            <div class="heading">
+            <div class="heading" style="width:100%">
                 <!--<h2>{{searchRes.label}}</h2>-->
                 <h2>Recipe Details</h2>
     
             </div>
-            <div *ngIf='currentUser'>
+          <!--   <div *ngIf='currentUser'>
                 <a class="copy-button" (click)="newRecipe()" href="javascript:void(0)"><i class="fa fa-copy"></i> Copy to New Draft</a>
             
-            </div>
+            </div> -->
 
              <!-- <div class="recipe-media">
               <a class="print-button" href="javascript:void(0)"><i class="fa fa-print"></i> Print Recipe</a>
