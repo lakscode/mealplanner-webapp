@@ -75,7 +75,7 @@ export class AppComponent implements OnInit {
      }
     }));
 
-   // setTimeout(function(){  parent.openModal('popupformessage'); }, 3000);
+
 
     localStorage.setItem('currentUser', "");
     this.router.events.subscribe(event => {
@@ -99,18 +99,18 @@ export class AppComponent implements OnInit {
        if(typeof(this.user["created_time"]) !== "undefined" && this.user["created_time"] !== "")
        {
         var resetsentat = new Date(this.user["created_time"].toString());
-      //  console.log(resetsentat);
+
         var currentDttm = new Date();
-     //   console.log(currentDttm);
+
         var difference = currentDttm.getTime() - resetsentat.getTime();
         var resultInMinutes = Math.round(difference / 60000);
      //   console.log(resultInMinutes);
         var resultInDays = Math.round(difference / (1000 * 3600 * 24));
-     //   console.log(resultInDays);
+  
         if(resultInDays > 30)
         {
           sessionStorage.setItem("showRenew", "true")
-       // this.openModal("popupforrenew");
+
         }
        }
       }

@@ -8,7 +8,7 @@ import { ActivatedRoute } from "@angular/router";
 import { Router } from '@angular/router';
 import { UserService } from '../../../services/user.service';
 import { ToastrService } from 'ngx-toastr';
-import { NgxSpinnerService } from "ngx-spinner";
+
 @Component({
   selector: 'app-tabspanel',
   templateUrl: './tabspanel.component.html',
@@ -50,7 +50,7 @@ export class TabspanelComponent implements OnInit, OnDestroy, AfterViewChecked, 
    recipesList: Array<any> = [];
    ratingIds: any;
    selectedTab: any;
-    constructor(private tabspanelService: TabspanelService, private spinner: NgxSpinnerService, private router: Router, private route: ActivatedRoute, private userService: UserService, private el: ElementRef, private httpService: HttpClient, private dbService: DBService, private helpService: HelpService, private toastrservice: ToastrService) {
+    constructor(private tabspanelService: TabspanelService,  private router: Router, private route: ActivatedRoute, private userService: UserService, private el: ElementRef, private httpService: HttpClient, private dbService: DBService, private helpService: HelpService, private toastrservice: ToastrService) {
     
       this.element = el.nativeElement;
  
@@ -91,7 +91,7 @@ export class TabspanelComponent implements OnInit, OnDestroy, AfterViewChecked, 
           this.currentUser["displayname"] = this.currentUser["firstname"];
           else if( this.currentUser["username"] !== "")
           this.currentUser["displayname"] = this.currentUser["username"];
-        //  console.log(this.currentUser["displayname"]);
+
         this.getUserPreferences();
         }
            
@@ -100,8 +100,6 @@ export class TabspanelComponent implements OnInit, OnDestroy, AfterViewChecked, 
      
     }
  
-
-    // remove self from modal service when component is destroyed
     ngOnDestroy(): void {
         this.tabspanelService.remove(this.id);
         this.element.remove();

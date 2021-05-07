@@ -1,92 +1,6 @@
-<!--<div class="tab-container">
-    <ul class="tabs-nav clearfix">
-        <li class="active"><a href="">Most rated</a></li>
-        <li><a href="">popular</a></li>
-        <li><a href="">random</a></li>
-    </ul>
-    <div class="tabs-container">
-    <div class="tab-content">
-        <div class="content-inner" *ngFor="let recipe1 of recipesList1; let i1= index;">
-            <div class="left-side">
-                <a href="javascript:void(0)"><img style="width:84px; height:64px" src="{{recipe1.image}}" alt="image"/></a>
-            </div>
-            <div class="right-side">
-                <h3><a href="javascript:void(0)">{{recipe1.label}}</a></h3>
-                <div class="rating-box">
-                    <span class="rating-icons"> *ngFor="let item of [1,2,3,4,5]"
-                        <i *ngIf="recipe1.displayrating >=1" class="fa fa-star"></i>
-                        <i *ngIf="recipe1.displayrating >=2" class="fa fa-star"></i>
-                        <i *ngIf="recipe1.displayrating >=3" class="fa fa-star"></i>
-                        <i *ngIf="recipe1.displayrating >=4" class="fa fa-star"></i>
-                        <i *ngIf="recipe1.displayrating >=5" class="fa fa-star"></i>
-
-                      </span>
-                    <span class="rating-figure">{{recipe1.displayrating}}</span>
-                </div>
-            </div>
-        </div>
-
-    </div>
-
-
-    <div class="tab-content">
-        <div class="content-inner" *ngFor="let recipe2 of recipesList2; let i2= index;">
-            <div class="left-side">
-                <a href="javascript:void(0)"><img style="width:84px; height:64px" src="{{recipe2.image}}" alt="image"/></a>
-            </div>
-            <div class="right-side">
-                <h3><a href="javascript:void(0)">{{recipe2.label}}</a></h3>
-                <div class="rating-box">
-                    <span class="rating-icons" >
-                        <i *ngIf="recipe2.displayrating >=1" class="fa fa-star"></i>
-                        <i *ngIf="recipe2.displayrating >=2" class="fa fa-star"></i>
-                        <i *ngIf="recipe2.displayrating >=3" class="fa fa-star"></i>
-                        <i *ngIf="recipe2.displayrating >=4" class="fa fa-star"></i>
-                        <i *ngIf="recipe2.displayrating >=5" class="fa fa-star"></i>
-
-                      </span>
-                    <span class="rating-figure">{{recipe2.displayrating}}</span>
-                </div>
-            </div>
-        </div>
-
-
-    </div>
-
-
-    <div class="tab-content">
-        <div class="content-inner" *ngFor="let recipe3 of recipesList3; let i3= index;">
-            <div class="left-side">
-                <a href="javascript:void(0)"><img style="width:84px; height:64px" src="{{recipe3.image}}" alt="image"/></a>
-            </div>
-            <div class="right-side">
-                <h3><a href="javascript:void(0)">{{recipe3.label}}</a></h3>
-                <div class="rating-box">
-                    <span class="rating-icons" >
-                        <i *ngIf="recipe3.displayrating >=1" class="fa fa-star"></i>
-                        <i *ngIf="recipe3.displayrating >=2" class="fa fa-star"></i>
-                        <i *ngIf="recipe3.displayrating >=3" class="fa fa-star"></i>
-                        <i *ngIf="recipe3.displayrating >=4" class="fa fa-star"></i>
-                        <i *ngIf="recipe3.displayrating >=5" class="fa fa-star"></i>
-
-                      </span>
-                    <span class="rating-figure">{{recipe3.displayrating}}</span>
-                </div>
-            </div>
-        </div>
-
-    </div>
-
-    </div>
-    </div>
-
--->
-
 <div class="tabcontainer">
     <div class="tabs-heading">
-     <!--    <p style="background: #e6e0dd;padding:10px;text-align: center;font-weight:900;font-size:12px">Most Rated</p> -->
-       <!--  <div [ngClass]="selectedTab == 1?'tab ':'tab'" (click)="setData(1)"><a  href="javascript:void(0)">Most rated</a></div> -->
-        <div [ngClass]="selectedTab == 1?'tab active':'tab'" (click)="setData(1)"><a  href="javascript:void(0)">Most rated</a></div>
+         <div [ngClass]="selectedTab == 1?'tab active':'tab'" (click)="setData(1)"><a  href="javascript:void(0)">Most rated</a></div>
         <div [ngClass]="selectedTab == 2?'tab active':'tab'" (click)="setData(2)"><a   href="javascript:void(0)">Popular</a></div>
         <div [ngClass]="selectedTab == 3?'tab active':'tab'" (click)="setData(3)"><a  href="javascript:void(0)">Random</a></div> 
     </div>
@@ -108,8 +22,7 @@
                         <i *ngIf="recipe.displayrating >=5" class="fa fa-star"></i>
 
                       </span>
-                    <!-- <span *ngIf="recipe.displayrating" class="rating-figure">{{recipe.displayrating}}</span> -->
-                </div>
+                 </div>
             </div>
         </div>
 
@@ -117,4 +30,4 @@
 
     </div>
     </div>
-    <!--<ngx-spinner></ngx-spinner>-->
+  

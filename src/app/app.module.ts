@@ -16,15 +16,9 @@ import { RouterModule } from '@angular/router';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 
-/* import { DragDropModule } from '@angular/cdk/drag-drop'; */
-
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 import { HttpClientModule } from '@angular/common/http';
-
-/* import { CollapseModule } from 'ngx-bootstrap/collapse'; */
-
-/* import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown'; */
 
 import {ToastrModule } from 'ngx-toastr';
 
@@ -70,10 +64,8 @@ import { PasslostModule } from './password/passlost/passlost.module';
 
 import { ResetpassModule } from './password/resetpass/resetpass.module';
 
-/* import { NgxSpinnerModule } from "ngx-spinner"; */
-
 import { ModalModule } from './shared/modules'; 
-/* import { AdminModule } from './admin/admin.module';  */
+
 import { QuestionnaireModule } from './questionnaire/questionnaire.module'; 
 import { ProgressModule } from './progress/progress.module'; 
 import { RecipebooksModule } from './recipes/recipebooks/recipebooks.module'; 
@@ -107,10 +99,6 @@ import { FaqsModule } from './faqs/faqs.module';
 	AngularFontAwesomeModule,
 	HttpClientModule,
 	NgbModule.forRoot(),	
-//	NgxSpinnerModule,
-//	DragDropModule,
-//	CollapseModule.forRoot(),
-//	NgMultiSelectDropDownModule.forRoot(),
 	HighchartsChartModule,
 	HomeModule,
 	FeaturesModule,
@@ -131,7 +119,6 @@ import { FaqsModule } from './faqs/faqs.module';
 	AutherizeModule,
 	PasslostModule, 
 	ResetpassModule,
-//	AdminModule,
 	HighchartsChartModule,
 	QuestionnaireModule,
 	ProgressModule,
