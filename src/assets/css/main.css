@@ -584,6 +584,7 @@ span.sign-in-buttons .login {
 .nav-collapse ul li:hover > a, .nav-collapse ul li.active > a  {
   color: #6ebe3b;
   text-decoration: none;
+  font-weight:bold;
 }
 .nav-collapse ul li.active
 {
