@@ -7,7 +7,7 @@
   
     
   
-    <div *ngIf="questions[currentQuestion]['type'] == 'text'">
+    <div *ngIf="questions[currentQuestion]['type'] == 'text'" style="text-align:center;">
   
       <input class="input-text" type="text" (keyup)="setAnswerText(questions[currentQuestion])" placeholder="Please enter value" style="font-size:14px" name = "question{{currentQuestion}}" [(ngModel)]="questions[currentQuestion]['answer']">
       <span style='margin-left: 10px; font-size: 14px;' *ngIf="questions[currentQuestion].textlabel">{{questions[currentQuestion].textlabel}}</span>
