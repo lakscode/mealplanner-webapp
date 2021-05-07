@@ -48,3 +48,17 @@ padding:15px;
 
     text-transform: capitalize;
 }
+
+
+.overflow-text {
+  max-width:40ch;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.overflow-text:hover{
+  overflow: visible; 
+  white-space: normal; 
+  width: auto;
+}
+
