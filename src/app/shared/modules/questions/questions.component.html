@@ -9,7 +9,7 @@
   
     <div *ngIf="questions[currentQuestion]['type'] == 'text'">
   
-      <input class="input-text" type="text" (keyup)="setAnswerText(questions[currentQuestion])" placeholder="Please enter value" name = "question{{currentQuestion}}" [(ngModel)]="questions[currentQuestion]['answer']">
+      <input class="input-text" type="text" (keyup)="setAnswerText(questions[currentQuestion])" placeholder="Please enter value" style="font-size:14px" name = "question{{currentQuestion}}" [(ngModel)]="questions[currentQuestion]['answer']">
       <span style='margin-left: 10px; font-size: 14px;' *ngIf="questions[currentQuestion].textlabel">{{questions[currentQuestion].textlabel}}</span>
   
       <div class="opts" *ngIf="questions[currentQuestion] && questions[currentQuestion].options &&  questions[currentQuestion].options.length > 0">
