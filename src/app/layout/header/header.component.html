@@ -20,13 +20,13 @@
                             </ul>
 
                             <span style="border:0px;">
-                                <a class="login" *ngIf="!currentUser.loggedIn" (click)="gotopage('login')">Login</a>
+                                <a class="login" *ngIf="!loggedIn" (click)="gotopage('login')">Login</a>
                                 
                                <!-- <a class="login"   (click)="showProfile = !showProfile">MENU</a>-->
-                                <div class="dropdown1 " *ngIf="currentUser.loggedIn">
+                                <div class="dropdown1 " *ngIf="loggedIn">
                                     <a href="javascript:void(0)" class="dropbtn1"><i class="fa fa-user"></i></a>
                                     <div class="dropdown1-content">
-                                        <span *ngIf="currentUser.loggedIn"
+                                        <span *ngIf="loggedIn"
                                 style="margin-right:10px; margin-bottom:10px; font-size:14px;color:var(--green) ">Welcome
                                 <strong>{{SetFLU(userName)}}</strong></span>
                                 <p  style="margin-right:10px; margin-bottom:10px; font-size:14px;color:red " *ngIf='isTrialExpired'>Your Trial version expired.</p>
@@ -41,7 +41,7 @@
                         </div>
                         <div class="wrapper-main-nav ">
                             <nav class="nav-collapse responsive-menu">
-                                <ul class="main-menu" *ngIf="!currentUser.loggedIn">
+                                <ul class="main-menu" *ngIf="!loggedIn">
                                     <li (click)="setMenuActive();" [ngClass]="menu.active == true?'active':''"  *ngFor="let menu of menuItems; let m = index">
                                         <a *ngIf="menu.link !== 'home'" (click)="gotopage(menu.link)">{{menu.menu}}</a>
                                         <a *ngIf="menu.link == 'home'" (click)="gotopage('home')">{{menu.menu}}</a>
@@ -52,7 +52,7 @@
                                         </ul>
                                     </li>
                                 </ul>
-                                <ul class="main-menu" *ngIf="currentUser.loggedIn">
+                                <ul class="main-menu" *ngIf="loggedIn">
                                     <li  (click)="setMenuActive();" [ngClass]="menu1.active  == true?'active':''" *ngFor="let menu1 of menuItems1; let m = index">
                                         <a (click)="gotopage(menu1.link)">{{menu1.menu}}</a>
                                         <ul *ngIf="menu1.children && menu1.children.length > 0">
@@ -91,8 +91,8 @@
         </div>
         <div class="col-12  menu-mob" *ngIf="showMenu">
         
-            <p class="username" *ngIf="currentUser.loggedIn">Welcome <strong>{{userName}}</strong></p>
-            <ul class="main-menu-mob" *ngIf="!currentUser.loggedIn">
+            <p class="username" *ngIf="loggedIn">Welcome <strong>{{userName}}</strong></p>
+            <ul class="main-menu-mob" *ngIf="!loggedIn">
                 <li *ngFor="let menu of menuItems; let m = index">
                     <a (click)="mobilemenu(menu)" >{{menu.menu}}</a>
                     <ul class="submenu" *ngIf="menu.expand && menu.children && menu.children.length > 0">
@@ -104,7 +104,7 @@
                 </li>
                 <li><a (click)="showMenu= !showMenu;  gotopage('login')">Login</a></li>
             </ul>
-            <ul class="main-menu-mob" *ngIf="currentUser.loggedIn">
+            <ul class="main-menu-mob" *ngIf="loggedIn">
                 <li *ngFor="let menu1 of menuItems1; let m = index">
                     <a (click)="mobilemenu(menu1)">{{menu1.menu}}</a>
                     <ul *ngIf="menu1.expand && menu1.children && menu1.children.length > 0">
