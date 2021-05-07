@@ -587,6 +587,8 @@ submitcomment()
 }
 showResponse(msg)
 {
+	this.comment = {"userid":"", "message":"", "image":"", "video":"", "status":"0", "created_time": new Date()};
+	
 	setTimeout(() => {
 		this.commentSubmitMsg = "";
 	}, 2000);
