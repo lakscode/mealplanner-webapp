@@ -186,4 +186,9 @@ this.showhideTimeFlag = false;
 
     return retImage;
   }
+
+  gotopage(page){
+    this.router.navigate([page]);
+  }
+
 }

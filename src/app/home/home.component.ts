@@ -35,6 +35,19 @@ popupforquestions: boolean =false;
 
 		this.loadSteps(); 
 		this.loadTestimonials();
+
+		this.currentUser =this.helpService.getCurrentUser();
+		if(this.currentUser !== null)
+		{
+			this.userName = this.currentUser;
+		  if( this.currentUser["firstname"] !== "")
+		  this.currentUser["displayname"] = this.currentUser["firstname"];
+		  else if( this.currentUser["username"] !== "")
+		  this.currentUser["displayname"] = this.currentUser["username"];
+		//  console.log(this.currentUser["displayname"]);
+		}
+
+		/*
     	this.userService.loggedinUser().subscribe(userdata => setTimeout(() => {
 			if (userdata !== null && typeof (userdata['loggedIn']) !== "undefined") {
 				if (userdata['loggedIn'] == false) {
@@ -50,7 +63,7 @@ popupforquestions: boolean =false;
 				}
 			}
 		}, 0));
-  
+		*/
 	}
 
 

@@ -131,7 +131,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
 		
 		this.companylogo = 'assets/logo-dark.png';
 		
-
+	
+	
 		this.userService.loggedinUser().subscribe(userdata => setTimeout(() => {
 			this.setIconMenu();
 			this.loggedIn = false;
@@ -180,13 +181,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
 		if(typeof(this.currentUser["uniqueid"]) == "undefined" || this.currentUser["uniqueid"] == "")
         {
           var uniqueid =  localStorage.getItem("uniqueid");
-          console.log(uniqueid);
+
           if(typeof(uniqueid) !== "undefined" && uniqueid !== null && uniqueid !== "")
           {
             var params = {};
             params["id"] = this.currentUser["id"];
             params["uniqueid"] = uniqueid;
-            console.log(params);
+   
             var res =   this.dbService.updateDataByTable("users", params).subscribe(invData => setTimeout(() => 
             {
 
@@ -197,13 +198,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
         if(typeof(this.currentUser["user_ipaddress"]) == "undefined" || this.currentUser["user_ipaddress"] == "")
         {
           var ipaddress =  localStorage.getItem("ipaddress");
-          console.log(ipaddress);
+ 
           if(typeof(ipaddress) !== "undefined" && ipaddress !== null && ipaddress !== "")
           {
             var params = {};
             params["id"] = this.currentUser["id"];
             params["user_ipaddress"] = ipaddress;
-            console.log(params);
+      
             var res =   this.dbService.updateDataByTable("users", params).subscribe(invData => setTimeout(() => 
             {
 
@@ -233,10 +234,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 	gotoLogin()
 	{
 	var str = this.location.path();	
-	//console.log("gotoLogin") ;
-	//console.log(str);
-	//console.log("this.router.url ") ;
-	//console.log(this.router.url);
+
 		if(!this.loggedIn && str.indexOf("resetpassword") == -1 && str.indexOf("index") == -1 && str.indexOf("home") == -1 && str.indexOf("signup") == -1 && str.indexOf("pricing") == -1 && str.indexOf("features") == -1 && str.indexOf("recipedetails") == -1)
 		{
 			var params = {};
@@ -256,15 +254,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
 	setMenuActive()
 	{
-		console.log("setMenuActive");
-		console.log(this.router.url);
-		console.log(this.menuItems);
-		console.log(this.menuItems1);
-		var mItems = ["recipes", "landing", "planner"];
+
 		for(let i=0; i < this.menuItems.length; i++)
 		{
 			this.menuItems[i]["active"] = false;
-			console.log(this.menuItems[i]["link"]);
+
 			if (this.router.url.indexOf(this.menuItems[i]["link"]) !== -1) {
 				this.menuItems[i]["active"] = true;					
 				
@@ -281,12 +275,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
 			}	
 		}
 		
-		
-		var mItems1 = ["home", "features", "pricing"];
+
 		for(let i=0; i < this.menuItems1.length; i++)
 		{
 			this.menuItems1[i]["active"] = false;
-			console.log(this.menuItems1[i]["link"]);
 			if (this.router.url.indexOf(this.menuItems1[i]["link"]) !== -1) {
 				this.menuItems1[i]["active"] = true;					
 				
