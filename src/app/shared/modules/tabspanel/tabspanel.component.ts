@@ -92,8 +92,9 @@ export class TabspanelComponent implements OnInit, OnDestroy, AfterViewChecked, 
           else if( this.currentUser["username"] !== "")
           this.currentUser["displayname"] = this.currentUser["username"];
         //  console.log(this.currentUser["displayname"]);
+        this.getUserPreferences();
         }
-            this.getUserPreferences();
+           
    
       
      

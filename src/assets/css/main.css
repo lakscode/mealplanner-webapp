@@ -564,7 +564,7 @@ span.sign-in-buttons .login {
   margin-bottom: 0;
 }
 .nav-collapse > ul > li a {
-  padding-bottom: 20px;
+  padding-bottom: 10px;
   padding-top: 20px;
 }
 .nav-collapse ul {
@@ -581,8 +581,12 @@ span.sign-in-buttons .login {
 .nav-collapse ul li a {
   color: #000000;
 }
-.nav-collapse ul li:hover > a {
+.nav-collapse ul li:hover > a, .nav-collapse ul li.active > a  {
   color: #6ebe3b;
+}
+.nav-collapse ul li.active
+{
+	border-bottom: 2px solid green;
 }
 .nav-collapse ul li ul {
   top: 100%;

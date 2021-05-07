@@ -42,21 +42,21 @@
                         <div class="wrapper-main-nav ">
                             <nav class="nav-collapse responsive-menu">
                                 <ul class="main-menu" *ngIf="!currentUser.loggedIn">
-                                    <li *ngFor="let menu of menuItems; let m = index">
+                                    <li (click)="setMenuActive();" [ngClass]="menu.active == true?'active':''"  *ngFor="let menu of menuItems; let m = index">
                                         <a *ngIf="menu.link !== 'home'" (click)="gotopage(menu.link)">{{menu.menu}}</a>
                                         <a *ngIf="menu.link == 'home'" (click)="gotopage('home')">{{menu.menu}}</a>
                                         <ul *ngIf="menu.children && menu.children.length > 0">
-                                            <li *ngFor="let submenu of menu.children; let m = index">
+                                            <li (click)="setMenuActive(submenu);" *ngFor="let submenu of menu.children; let m = index">
                                                 <a (click)="gotopage(submenu.link)">{{submenu.menu}}</a>
                                             </li>
                                         </ul>
                                     </li>
                                 </ul>
                                 <ul class="main-menu" *ngIf="currentUser.loggedIn">
-                                    <li *ngFor="let menu1 of menuItems1; let m = index">
+                                    <li  (click)="setMenuActive();" [ngClass]="menu1.active  == true?'active':''" *ngFor="let menu1 of menuItems1; let m = index">
                                         <a (click)="gotopage(menu1.link)">{{menu1.menu}}</a>
                                         <ul *ngIf="menu1.children && menu1.children.length > 0">
-                                            <li *ngFor="let submenu1 of menu1.children; let m = index">
+                                            <li (click)="setMenuActive();" *ngFor="let submenu1 of menu1.children; let m = index">
                                                 <a (click)="gotopage(submenu1.link)">{{submenu1.menu}}</a>
                                             </li>
                                         </ul>

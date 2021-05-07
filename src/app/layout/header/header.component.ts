@@ -58,11 +58,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
 			{"id":"home", "menu":"Home", "link":"/home", "display":displayMenu, "active":false,
 			"children":
 				[
-					{"id":"aboutus", "menu":"About the Team", "link":"/ourteam", "display":displayMenu, "active":false},
-					{"id":"display", "menu":"FAQs", "link":"/faqs", "display":displayMenu, "active":false},
+					{"id":"home-aboutus", "menu":"About the Team", "link":"/ourteam", "display":displayMenu, "active":false},
+					{"id":"home-display", "menu":"FAQs", "link":"/faqs", "display":displayMenu, "active":false},
 				//	{"id":"blogs", "menu":"Blogs", "link":"/blogs", "display":displayMenu, "active":false},
 				//	{"id":"testimonials", "menu":"Testimonials", "link":"/testimonials", "display":displayMenu, "active":false}
-				{"id":"questionnaire", "menu":"Questionnaire", "link":"/questionnaire", "display":displayMenu, "active":false}
+				{"id":"home-questionnaire", "menu":"Questionnaire", "link":"/questionnaire", "display":displayMenu, "active":false}
 				]
 			},
 			{"id":"features", "menu":"Features", "link":"/features", "display":displayMenu, "active":false},
@@ -71,14 +71,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
 			
 		];
 		this.menuItems1= [
-			{"id":"home", "menu":"Home", "link":"/landing", "display":displayMenu, "active":false,
+			{"id":"landing", "menu":"Home", "link":"/landing", "display":displayMenu, "active":false,
 				"children":
 				[
 				//	{"id":"howitworks", "menu":"How it works", "link":"/howitworks", "display":displayMenu, "active":false},
-				{"id":"home", "menu":"Home", "link":"/landing", "display":displayMenu, "active":false},
-					{"id":"aboutus", "menu":"Our Team", "link":"/ourteam", "display":displayMenu, "active":false},
-					{"id":"benefits", "menu":"Benefits", "link":"/benefits", "display":displayMenu, "active":false},
-					{"id":"display", "menu":"FAQs", "link":"/faqs", "display":displayMenu, "active":false},
+				{"id":"landing", "menu":"Home", "link":"/landing", "display":displayMenu, "active":false},
+					{"id":"landing-aboutus", "menu":"Our Team", "link":"/ourteam", "display":displayMenu, "active":false},
+					{"id":"landing-benefits", "menu":"Benefits", "link":"/benefits", "display":displayMenu, "active":false},
+					{"id":"landing-display", "menu":"FAQs", "link":"/faqs", "display":displayMenu, "active":false},
 				//	{"id":"blogs", "menu":"Blogs", "link":"/blogs", "display":displayMenu, "active":false},
 				//	{"id":"testimonials", "menu":"Testimonials", "link":"/testimonials", "display":displayMenu, "active":false}
 					//{"id":"questionnaire", "menu":"Questionnaire", "link":"/questionnaire", "display":displayMenu, "active":false}
@@ -88,19 +88,19 @@ export class HeaderComponent implements OnInit, OnDestroy {
 				"children":
 				[
 
-					{"id":"recipe-list", "menu":"Recipes", "link":"/recipes", "display":displayMenu, "active":false},
-					{"id":"recipe-favourites", "menu":"Favourites", "link":"/favourites", "display":displayMenu, "active":false},
-					{"id":"my-recipes", "menu":"My Recipes", "link":"/myrecipes", "display":displayMenu, "active":false},
-					{"id":"recipebooks", "menu":"Recipe Books", "link":"/recipebooks", "display":displayMenu, "active":false},
-					{"id":"recipe-submit", "menu":"Submit Recipe", "link":"/recipesubmit", "display":displayMenu, "active":false}
+					{"id":"recipes-recipe-list", "menu":"Recipes", "link":"/recipes", "display":displayMenu, "active":false},
+					{"id":"recipes-favourites", "menu":"Favourites", "link":"/favourites", "display":displayMenu, "active":false},
+					{"id":"recipes-my-recipes", "menu":"My Recipes", "link":"/myrecipes", "display":displayMenu, "active":false},
+					{"id":"recipes-recipebooks", "menu":"Recipe Books", "link":"/recipebooks", "display":displayMenu, "active":false},
+					{"id":"recipes-recipe-submit", "menu":"Submit Recipe", "link":"/recipesubmit", "display":displayMenu, "active":false}
 				]
 			},
 			{"id":"planner", "menu":"Planner", "link":"/plan-list", "display":displayMenu, "active":false,
 				"children":
 				[
 
-					{"id":"plan-list", "menu":"Plan List", "link":"/plan-list", "display":displayMenu, "active":false},
-					{"id":"plan-create", "menu":"Create Plan", "link":"/plan-create", "display":displayMenu, "active":false}
+					{"id":"planner-plan-list", "menu":"Plan List", "link":"/plan-list", "display":displayMenu, "active":false},
+					{"id":"planner-plan-create", "menu":"Create Plan", "link":"/plan-create", "display":displayMenu, "active":false}
 				]
 			}				
 		];
@@ -164,7 +164,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 				this.userRole =  this.currentUser["role"];
 				this.userRoleDet = this.currentUser["role"];
 
-				this.setIconMenu();
+				this.setMenuActive();
 				this.setUniqueid();
 				this.companylogo = 'assets/logo-dark.png';
 				this.companyname = "";
@@ -252,10 +252,66 @@ export class HeaderComponent implements OnInit, OnDestroy {
 		this.router.navigate(["login"]);			
 		}
 	}
-		gotopage(page)
+
+
+	setMenuActive()
+	{
+		console.log("setMenuActive");
+		console.log(this.router.url);
+		console.log(this.menuItems);
+		console.log(this.menuItems1);
+		var mItems = ["recipes", "landing", "planner"];
+		for(let i=0; i < this.menuItems.length; i++)
 		{
-			this.router.navigate([page]);
+			this.menuItems[i]["active"] = false;
+			console.log(this.menuItems[i]["link"]);
+			if (this.router.url.indexOf(this.menuItems[i]["link"]) !== -1) {
+				this.menuItems[i]["active"] = true;					
+				
+			}
+			if(this.menuItems[i]["children"] && this.menuItems[i]["children"]["length"] > 0)
+			{
+				for(let j=0; j < this.menuItems[i]["children"]["length"]; j++)
+				{
+					if (this.router.url.indexOf(this.menuItems[i]["children"][j]["link"]) !== -1) {
+						this.menuItems[i]["active"] = true;					
+						
+					}
+				}
+			}	
 		}
+		
+		
+		var mItems1 = ["home", "features", "pricing"];
+		for(let i=0; i < this.menuItems1.length; i++)
+		{
+			this.menuItems1[i]["active"] = false;
+			console.log(this.menuItems1[i]["link"]);
+			if (this.router.url.indexOf(this.menuItems1[i]["link"]) !== -1) {
+				this.menuItems1[i]["active"] = true;					
+				
+			}	
+			if(this.menuItems1[i]["children"] && this.menuItems1[i]["children"]["length"] > 0)
+			{
+				for(let j=0; j < this.menuItems1[i]["children"]["length"]; j++)
+				{
+					if (this.router.url.indexOf(this.menuItems1[i]["children"][j]["link"]) !== -1) {
+						this.menuItems1[i]["active"] = true;					
+						
+					}
+				}
+			}	
+		}
+		
+		
+	}
+	
+	
+	gotopage(page)
+	{
+		this.router.navigate([page]);
+	}
+
 	logout()
 	{
 
