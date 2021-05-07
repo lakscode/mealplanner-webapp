@@ -194,7 +194,7 @@ this.processing= false;
         localStorage.setItem("q_complete","true");
         localStorage.setItem("questions", JSON.stringify(params));
 
-        this.router.navigate(["welcome"]);
+        this.router.navigate(["pricing"]);
 
       }));
 
