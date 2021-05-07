@@ -253,11 +253,7 @@
         </div>
     </div>
     
-   
-    <div class="related-recipes" *ngIf="listParams">
-        <h3 class="lined">Related Recipes</h3>
-    <app-listpanel [updated] = "updated" [params] = "listParams"></app-listpanel>
-    </div>
+
     
     
     <div class="recipe-comments">
@@ -327,7 +323,11 @@
        
     </div>
     
-    
+       
+    <div class="related-recipes" style="margin-top:20px" *ngIf="listParams">
+        <h2 class="lined">Related Recipes</h2>
+    <app-listpanel [updated] = "updated" [params] = "listParams"></app-listpanel>
+    </div>
     </div>
     </div>
     </div>

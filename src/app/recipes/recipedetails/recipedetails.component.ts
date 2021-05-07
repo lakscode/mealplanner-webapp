@@ -558,6 +558,8 @@ loadComments()
 	  }));
 
 }
+
+commentSubmitMsg: any = "";
 submitcomment()
 {
 	console.log(this.comment);
