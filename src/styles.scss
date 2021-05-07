@@ -7,29 +7,12 @@
 
 
 @import "~bootstrap/dist/css/bootstrap.css";  
-//@import "styles/image.scss";
-//@import "styles/common.scss";
-//@import "styles/words.scss";
-//@import "styles/checkbox.scss";
-//@import "styles/tooltip.scss";
-//@import "styles/placeholder.scss";
+
 @import "styles/popup.scss";
 @import "styles/page.scss";
-//@import "styles/panel.scss";
-//@import "styles/dropdown.scss";
+
 @import "styles/modal.scss";
-//@import "styles/input.scss";
-//@import "styles/datetime.scss";
-// @import "styles/menu.scss";
-//@import "styles/button.scss";
-//@import "styles/table.scss";
-//@import "styles/loading.scss";
-//@import "styles/aggrid.scss";
-//@import "styles/customfile.scss";
-//@import "styles/radio.scss";
-//@import "styles/tabs.scss";
-//@import "styles/sidemenu.scss";
-//@import "styles/alertmodal.scss";
+
 //@import "styles/progressbar.scss";
 @import "styles/login.scss";
 @import "styles/custom.scss";
@@ -84,43 +67,6 @@ $font_medium: 11pt;
 $font-large:12pt;
 $font_extra_large: 14pt;
 
-/*
-
-@media only screen and (max-width: 990px) {
-      $font_extra_small : 8pt;
-        $font_small: 9pt;
-        $font_medium: 11pt; 
-        $font-large:12pt;
-        $font_extra_large: 14pt;
-    }
-    @media only screen and  (min-width: 991px) and (max-width: 1299px)  {
-        $font_extra_small : 8pt;
-        $font_small: 9pt;
-        $font_medium: 11pt; 
-        $font-large:12pt;
-        $font_extra_large: 14pt;
-        
-      }
-
-@media only screen and  (min-width: 1300px) and (max-width: 1399px)  {
-    $font_extra_small : 9pt;
-    $font_small: 10pt;
-    $font_medium: 13pt; 
-    $font-large:14pt;
-    $font_extra_large: 15pt;
-    
-  }
-  
-  @media only screen and (min-width: 1400px) {
-    $font_extra_small : 14pt;
-    $font_small: 15pt;
-    $font_medium: 16pt; 
-    $font-large:17pt;
-    $font_extra_large: 18pt;
-  }
-  
-  
-  */
 
     
 

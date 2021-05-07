@@ -248,7 +248,7 @@
         <div class="col-12" style="text-align:right">
 
             
-    <app-socialshare *ngIf="urlShare" [labeltext]="searchRes.label" [urlShare]="urlShare"></app-socialshare>
+    <app-socialshare *ngIf="urlShare && searchRes.label" [labeltext]="searchRes.label" [urlShare]="urlShare"></app-socialshare>
 
         </div>
     </div>
@@ -265,11 +265,11 @@
         <ul>
             <li *ngFor="let comment of commentsList; let c = index;">
                 <div class="avatar">
-                    <a href="javascript:void(0)" *ngIf="comment.profileimage"><img src="{{formatApiUrl(comment.profileimage)}}" alt="avatar"></a>
-                     <a href="javascript:void(0)" *ngIf="!comment.profileimage"><img src="assets/user-icon.png" alt="avatar"></a>
+                    <a href="javascript:void(0)" *ngIf="comment.profileimage"><img  style="max-width: 50px" src="{{formatApiUrl(comment.profileimage)}}" alt="avatar"></a>
+                     <a href="javascript:void(0)" *ngIf="!comment.profileimage"><img style="max-width: 50px"  src="assets/user-icon.png" alt="avatar"></a>
                 </div>
                 <div class="comment">
-                    <h5><a href="javascript:void(0)">{{formatName(comment)}}</a></h5>
+                    <h5><a style="font-size:16px" href="javascript:void(0)">{{formatName(comment)}}</a></h5>
                     <span class="time">{{comment.created_time}}</span>
                     <p>
                         {{comment.message}}
