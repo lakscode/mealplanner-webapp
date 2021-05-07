@@ -1,83 +1,36 @@
-
-
-
-
 <div class="recipes-home-body inner-page">
-
-
-
-  <!--advance search form ends-->
-
-
   <div class="container">
-  <div class="row">
-  <div class="col-md-8 col-lg-9">
-  <div class="recipe-set">
- 
-  <h2>Health Benefits of Meal planning </h2>
-  
+    <div class="row">
+      <div class="col-md-8 col-lg-9">
+        <div class="recipe-set">
+          <h2>Health Benefits of Meal planning </h2>
+            <div class="recipe-listing listing-list" style="background:#FFF;padding-top:15px;">
+              <div class="recipe-of-day">
+                  <img src="assets/bg/bg1.png" alt="health benefits">
+              </div>
 
-  <div class="recipe-listing listing-list" style="background:#FFF;padding-top:15px;">
-  
-  
- 
-  
-  
-  
-  <!--recipe of the day-->
-<div class="recipe-of-day">
-      <img src="assets/bg/bg1.png" alt="Recipe of the day">
-      <div class="recipe-contents-outer">
-          <div class="recipe-contents text-center">
-              <!-- <div class="recipe-content-inner">
-                  <span class="tag">Recipe of the Day</span>
-                  <h2><a href="#">Pasto Pizza With Fillas Cheese Topping</a></h2>
-                  <div class="short-separator"></div>
-                  <p>
-                      Nam ornare arcu turpis, nec congu
-                      Curabitur quis euismod...
-                  </p>
-                  <a class="read-more" href="#">read more</a>
-              </div> -->
-          </div>
-      </div>
-  </div>
-  <!--recipe of the day ends-->
-  
- 
-
-  <div class="site-section">
-      <div class="container" >
-         <div class="col-12" >
-            <div class=" w-1000" style="display:flex; align-items: center;padding-top:40px"> 
-               <div class="row " >
-                  <div class="col-md-12 col-lg-12 pl-5" style="padding-left:0px !important" *ngFor="let step of stepsList; let i = index;">
-                     <h1 class="text-lg-left mb-4 title">{{step.subtitle}}</h1>
-                     <p class="text-justify mb-5 description">{{step.description}}</p>
-                    
-
+              <div class="site-section">
+                <div class="container">
+                  <div class="col-12">
+                  <div class="w-1000"> 
+                    <div class="row">
+                      <div class="col-md-12 col-lg-12 pl-5" style="padding-left:0px !important" *ngFor="let step of stepsList; let i = index;">
+                        <h1 class="text-lg-left mb-4 title">{{step.subtitle}}</h1>
+                        <p class="text-justify mb-5 description">{{step.description}}</p>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-  
-  
- 
+        </div><br/>
 
- 
-
-  </div>
-
-
-  </div><br/>
-
-  <div class="banner-header text-center">
+      <div class="banner-header text-center">
       <a href="#">
           <img src="assets/images/temp-images/header-banner.jpg" alt="banner">
       </a>
-  </div>
+      </div>
   </div>
 
 
