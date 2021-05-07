@@ -562,6 +562,7 @@ loadComments()
 commentSubmitMsg: any = "";
 submitcomment()
 {
+
 	console.log(this.comment);
 	var params = {};
 	params["recipeid"] = this.routeParams.id;
@@ -577,10 +578,18 @@ submitcomment()
 	  if(rData !== null)
 	  {
 		this.loadComments();
+		this.commentSubmitMsg = "Comment submitted successfully";
+		this.showResponse('success');
 	  }
 	  
 	}));
 
+}
+showResponse(msg)
+{
+	setTimeout(() => {
+		this.commentSubmitMsg = "";
+	}, 2000);
 }
 formatApiUrl(path)
 {

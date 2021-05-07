@@ -265,7 +265,7 @@
                      <a href="javascript:void(0)" *ngIf="!comment.profileimage"><img style="max-width: 50px"  src="assets/user-icon.png" alt="avatar"></a>
                 </div>
                 <div class="comment">
-                    <h5><a style="font-size:16px" href="javascript:void(0)">{{formatName(comment)}}</a></h5>
+                    <h5><a style="font-size:18px; font-weight:bold;" href="javascript:void(0)">{{formatName(comment)}} &nbsp;</a></h5>
                     <span class="time">{{comment.created_time}}</span>
                     <p>
                         {{comment.message}}
@@ -318,7 +318,9 @@
                 <div class="col-12" style="padding:15px; text-align:right;">
                     <button (click)="submitcomment()" class="submit-comment">Submit</button>
                 </div>
-                
+                <div class='col-12'>
+                    {{commentSubmitMsg}}
+                </div>
             </div>
        
     </div>
