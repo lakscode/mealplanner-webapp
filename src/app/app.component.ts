@@ -1,43 +1,12 @@
-import { Component, OnInit, Injectable } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { UserService } from './services/user.service';
-import { ModalService } from './shared/modules/modal/modal.service';
 import { DBService } from './dbservices/db.service';
 
-import {
-  trigger,
-  state,
-  style,
-  animate,
-  transition
-} from '@angular/animations';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
-  animations: [
-    trigger(
-      'inOutAnimation',
-      [
-        transition(
-          ':enter',
-          [
-            style({ height: 0, opacity: 0 }),
-            animate('1s ease-out',
-              style({ height: 300, opacity: 1 }))
-          ]
-        ),
-        transition(
-          ':leave',
-          [
-            style({ height: 300, opacity: 1 }),
-            animate('1s ease-in',
-              style({ height: 0, opacity: 0 }))
-          ]
-        )
-      ]
-    )
-  ]
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
   showHeader = false;
@@ -51,7 +20,7 @@ export class AppComponent implements OnInit {
 
 
 
-  constructor(private router: Router, private dbService: DBService,  private activatedRoute: ActivatedRoute, private modalService: ModalService, private userService: UserService) {
+  constructor(private router: Router, private dbService: DBService,   private userService: UserService) {
     
   }
  
@@ -61,7 +30,7 @@ export class AppComponent implements OnInit {
     this.loggedIn = false;
 
     var parent = this;
-  
+    try{
     this.dbService.getLocalData("http://www.geoplugin.net/json.gp").subscribe(ipdata => setTimeout(() => 
     {
      console.log(ipdata);
@@ -74,10 +43,15 @@ export class AppComponent implements OnInit {
        }
      }
     }));
-
+  }
+  catch(error)
+  {
+    console.log(error);
+  }
 
 
     localStorage.setItem('currentUser', "");
+    /*
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         this.showHeader = this.activatedRoute.firstChild.snapshot.data.showHeader !== false;
@@ -85,6 +59,7 @@ export class AppComponent implements OnInit {
         this.showFooter = this.activatedRoute.firstChild.snapshot.data.showFooter !== false;
       }
     });
+    */
     this.userService.loggedinUser().subscribe(userdata => setTimeout(() => {
      // console.log(userdata);
       this.loggedIn = false;
@@ -119,21 +94,6 @@ export class AppComponent implements OnInit {
       }
     }, 0));
   }
-  gotopage(page)
-  {
-    this.closeModal("popupforrenew")
-    this.router.navigate([page]);
-  }
-  openModal(id)
-  {
-    this.modalService.open(id);
-  }
-  closeModal(id)
-  {
-this.modalService.close(id);
-  }
-  subscribeEmail()
-  {
-
-  }
+ 
+ 
 }
