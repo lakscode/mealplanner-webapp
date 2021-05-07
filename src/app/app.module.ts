@@ -77,7 +77,8 @@ import { AdminModule } from './admin/admin.module';
 import { QuestionnaireModule } from './questionnaire/questionnaire.module'; 
 import { ProgressModule } from './progress/progress.module'; 
 import { RecipebooksModule } from './recipes/recipebooks/recipebooks.module'; 
-import { RecipebookModule } from './recipes/recipebook/recipebook.module'; 
+import { RecipebookModule } from './recipes/recipebook/recipebook.module';
+import { FaqsModule } from './faqs/faqs.module';  
 
 
 @NgModule({
@@ -135,7 +136,8 @@ import { RecipebookModule } from './recipes/recipebook/recipebook.module';
 	QuestionnaireModule,
 	ProgressModule,
 	RecipebooksModule,
-	RecipebookModule
+	RecipebookModule,
+	FaqsModule
   ],
   schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
   providers: [UserService],
