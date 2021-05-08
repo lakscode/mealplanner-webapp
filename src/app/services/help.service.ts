@@ -26,6 +26,22 @@ export class HelpService {
 	constructor(private httpService: HttpClient, private router: Router, private route: ActivatedRoute, private dbService: DBService, private userService: UserService, private modalservice: ModalService) {
 
 	}
+
+	GenerateUniqueId(idlength) {
+		var result = '';
+		var characters= 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+	//	var characters = '1234567890';
+		var charactersLength = characters.length;
+		for (var i = 0; i < idlength; i++) {
+			if (i !== 0) {
+				if (i % 4 == 0 && i !== idlength)
+					result += "-";
+			}
+			result += characters.charAt(Math.floor(Math.random() * charactersLength));
+		}
+		return result;
+	}
+
 	GeneratePassword(idlength) {
 		var characters = "abcdefghijklmnopqrstuvwxyz@#%^&*ABCDEFGHIJKLMNOP1234567890";
 		var password = "";

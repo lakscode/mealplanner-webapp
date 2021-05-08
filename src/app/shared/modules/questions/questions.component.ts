@@ -177,6 +177,12 @@ this.processing= false;
     {
       params["user_uniqueid"] = uniqueid;
     }
+    else
+    {
+      var uniqueid = this.helpService.GenerateUniqueId(20);
+      params["user_uniqueid"] = uniqueid;
+      localStorage.setItem("uniqueid",uniqueid);
+    }
 
     var ipaddress =  localStorage.getItem("ipaddress");
     if(typeof(ipaddress) !== "undefined" && ipaddress !== null && ipaddress !== "")

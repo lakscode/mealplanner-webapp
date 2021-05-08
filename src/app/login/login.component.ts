@@ -158,8 +158,8 @@ export class LoginComponent implements OnInit {
 	clearError(type)
 	{
 
-		if(type == "signup")
-		this.errorSignup = "";
+	//	if(type == "signup")
+		//this.errorSignup = "";
 	}
 	forgot() {
 		this.gotopage('forgot-password');
