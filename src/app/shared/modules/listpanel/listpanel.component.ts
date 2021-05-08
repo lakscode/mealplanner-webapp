@@ -133,7 +133,7 @@ loadRelatedRecipes()
     }
   console.log(dietLabels);
   }
-  var query = "select * from recipes where s_instructions != ''";
+  var query = "select id, image, label, dietLabels from recipes where s_instructions != ''";
 if(dietLabels !== "(")
 query += " AND " + dietLabels + ") ";
 query += " order by rand() limit 6";

@@ -175,7 +175,7 @@ export class RecipesComponent implements OnInit {
 	  }
   
 	  params["instructions"] = "notempty";
-	  params["returnfields"] = " id, label, image, healthLabels, s_instructions, dietLabels, calories,s_instructions ";
+	  params["returnfields"] = " id, label, image, healthLabels,  dietLabels, calories ";
 	  console.log(JSON.stringify(params));
 	 var res =   this.dbService.getDatabyFields("recipes", params).subscribe(invData => setTimeout(() => {
   
