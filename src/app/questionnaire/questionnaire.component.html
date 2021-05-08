@@ -14,14 +14,14 @@
           <h2></h2>
 
           <div id="answer" *ngIf="errorMessage"><span style="color:red">{{errorMessage}}</span></div>
-          <!--<p>Take this questionnaire to let us know your choices!</p>   --> 
+       
 
           <div class="row">
           <form id="quiz">
               <ng-container *ngFor="let question of questionsList; let i =index;">
                 <div class="col-12 col-lg-4 col-md-4" >
                   <div [ngClass]="question.type == 'text'?'question-box h120':'question-box h200' ">
-                    <!-- Question {{i+1}} -->
+                  
                     <h4 class="question-name">{{question.question}} <span class="mandatory">&#42;</span></h4>
                     <ng-container *ngIf="question.type == 'text'">
 
@@ -71,7 +71,7 @@
             <button type="submit" id="submit" (click)="saveAnswers()">Submit Your Answers</button>
           </div>
         </div>
-          <!-- <div id="answer">Your result will show up here!</div> -->
+         
         </div>
     </div>  
   </div>
