@@ -406,13 +406,25 @@ text-align:center;
   background:url("../../assets/bg/diet2.jpg");
   background-size:cover;
 }
+
+.popupwidth
+{
+  width:40%;
+}
 @media only screen and (max-width: 767px)
 {
   .chefs-banner
-{
-  background:#D4E2E3 !important;
-
-}
+  {
+    background:#D4E2E3 !important;
+  }
+  .popupwidth
+  {
+    width:100% !important;
+  }
+  .popupforquestions
+  {
+    left:0% !important;
+  }
 }
 .popupforquestions
 {

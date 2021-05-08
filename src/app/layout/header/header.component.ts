@@ -60,6 +60,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 				[
 					{"id":"home-aboutus", "menu":"About the Team", "link":"/ourteam", "display":displayMenu, "active":false},
 					{"id":"home-display", "menu":"FAQs", "link":"/faqs", "display":displayMenu, "active":false},
+					{"id":"home-benefits", "menu":"Benefits", "link":"/benefits", "display":displayMenu, "active":false},
 				//	{"id":"blogs", "menu":"Blogs", "link":"/blogs", "display":displayMenu, "active":false},
 				//	{"id":"testimonials", "menu":"Testimonials", "link":"/testimonials", "display":displayMenu, "active":false}
 				{"id":"home-questionnaire", "menu":"Questionnaire", "link":"/questionnaire", "display":displayMenu, "active":false}
@@ -236,7 +237,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 	{
 	var str = this.location.path();	
 
-		if(!this.loggedIn && str.indexOf("resetpassword") == -1 && str.indexOf("index") == -1 && str.indexOf("home") == -1 && str.indexOf("signup") == -1 && str.indexOf("pricing") == -1 && str.indexOf("features") == -1 && str.indexOf("recipedetails") == -1)
+		if(!this.loggedIn && str.indexOf("resetpassword") == -1 && str.indexOf("index") == -1 && str.indexOf("home") == -1 && str.indexOf("signup") == -1 && str.indexOf("pricing") == -1 && str.indexOf("features") == -1 && str.indexOf("recipedetails") == -1 && str.indexOf("benefits") == -1)
 		{
 			var params = {};
 			if( this.router.url.indexOf("login") > -1)
