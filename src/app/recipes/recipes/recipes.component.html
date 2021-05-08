@@ -4,13 +4,7 @@
         <div class="row">
             <div class="col-md-8 col-lg-9">
                 <div class="wrapper-search">
-                   <!--  <div class="container-tags">
-                        <span class="tag">
-                            <span class="tag-inner">Find Recipes <i
-                                    class="fa fa-angle-down"></i></span>
-                        </span>
-    
-                    </div> -->
+                   
                 <div class="row" >
                     <div class="col-12 "  style="margin:0; padding-left:0px; padding-right:0px;">
                         <div style="background:#FFF;  padding-left: 10px; padding-right: 10px;">
@@ -179,16 +173,11 @@
                                 </p>
                                 <p>Calories: {{recipe1.calories}} Kcal</p>
                                 <div class="meta-listing">
-                                    <!--<div style="display:block;color: #5e676b;">
-                                        Calories: {{recipe1.calories}} Kcal
-                                    </div>-->
+                                   
                                     <div *ngIf="showNutrientsFlag" style="display:inline-block;color: #5e676b;">
                                         Calories per Serving: {{formatValuePServing(recipe1.calories, recipe1.yield)}} Kcal
                                     </div>
-                                    <!--<ul class="post-meta">
-                  <li>Calories: {{recipe1.calories}}</li>
-                 <li class="calendar">{{recipe1.created_at}}</li>
-              </ul>-->
+                       
                                     <div class="rating-box">
                                         <span class="rating-icons" *ngFor="let item of [1,2,3,4,5]">
                                             <i [ngClass]="item <= recipe1.displayrating?'fa fa-star rating-h':'fa fa-star rating'"></i>
@@ -201,25 +190,8 @@
 
 
 
-                        <!--recipe of the day-->
-                       <!-- <div class="recipe-of-day">
-                            <img src="assets/images/temp-images/recipe-of-the-day.jpg" alt="Recipe of the day">
-                            <div class="recipe-contents-outer">
-                                <div class="recipe-contents text-center">
-                                    <div class="recipe-content-inner">
-                                        <span class="tag">Recipe of the Day</span>
-                                        <h2><a href="javascript:void(0)">Pasto Pizza With Fillas Cheese Topping</a></h2>
-                                        <div class="short-separator"></div>
-                                        <p>
-                                            Nam ornare arcu turpis, nec congu
-                                            Curabitur quis euismod...
-                                        </p>
-                                        <a class="read-more" href="javascript:void(0)">read more</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>-->
-                        <!--recipe of the day ends-->
+                      
+
 
                         <div class="banner-header text-center">
                             <a href="javascript:void(0)">
@@ -228,33 +200,7 @@
                         </div>
 
 
-<!--
-                        <div class="listing" *ngFor="let recipe2 of recipesList2; let i = index;">
-                            <div class="image">
-                                <a (click)="gotoRecipeDetails(recipe2.id)">
-                                    <img src="{{formatImage(recipe2.image, 'm')}}" alt="image">
-                                </a>
-                            </div>
-                            <div class="detail">
-                                <h4><a (click)="gotoRecipeDetails(recipe2.id)">{{recipe2.label}}</a></h4>
-                                <p innerHTML="{{limitTo(recipe2.s_instructions, 200)}}">
 
-                                </p>
-                                <div class="meta-listing">
-                                    <div style="display:inline-block;color: #5e676b;">
-                                        Calories: {{recipe2.calories}} Kcal
-                                    </div>
-                                 
-                                    <div class="rating-box">
-                                        <span class="rating-icons" *ngFor="let item of [1,2,3,4,5]">
-                                            <i class="fa fa-star"></i>
-                                        </span>
-                                        <span class="rating-figure">{{recipe2.displayrating}}</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    -->
 
 
                         <ul class="pagination hidden-xs" *ngIf="totalPage >= 10">
