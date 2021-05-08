@@ -266,6 +266,44 @@ background-color: $orange;
   content:" Add to Recipe Book";  
 }
 
+.recipe-item1:hover .recipe-view
+{
+  display:block;
+}
+
+.recipe-view
+{
+  position: absolute;
+  right: 5px;
+  top: 45px;
+  width: 20px;
+  text-align: center;
+  height: 22px;
+  background: #Eee;
+  color: #555;
+  font-size: 13px;
+  box-shadow: 3px 3px 3px 0px #ccc;
+  padding: 0px;
+  border-radius: 4px;
+  padding-top: 2px;
+  padding-left: 1px;
+  padding-bottom:2px;
+  display:none;
+}
+
+
+.recipe-view:hover
+{
+  background:$orange;
+  color:#FFF;
+  width:100px;
+}
+
+
+.recipe-view:hover::after
+{
+  content:" View Recipe";  
+}
 
 
 
@@ -556,4 +594,13 @@ padding-right:11px;
   border: 1px solid #ccc;
   outline: none;
   width:100%;
+}
+
+.view-details
+{
+  margin-right:5px !important;
+  .head
+  {
+    font-weight:bold;
+  }
 }

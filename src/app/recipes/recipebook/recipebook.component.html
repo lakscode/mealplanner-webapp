@@ -160,6 +160,8 @@
                                             <!--<p><b><em>Diet Labels</em></b>: {{recipe.dietLabels}} </p>-->
 
                                             <div class="recipe-add" (click)="addRecipe(recipe)"><i class="fa fa-plus" aria-hidden="true"></i></div>
+
+                                            <div class="recipe-view" (click)="viewRecipe(recipe)"><i class="fa fa-eye" aria-hidden="true"></i></div> 
                                         </div>                                       
                                     </div>
                                 </div>
@@ -192,6 +194,7 @@
                                 </div>
                                 <div class="col-12" *ngIf="recipe.dietLabels">
                                     <p><b><em>Diet Labels</em></b>: {{recipe.dietLabels}} </p>
+                                    <div class="recipe-remove" (click)="viewRecipe(recipe)">Details</div>
                                 
                                 </div>
                                
@@ -228,37 +231,73 @@
     </div>
     </div>
 
-    <jw-modal id="addnew">
+    <jw-modal id="viewrecipe">
     
     <form name="form"  #uf="ngForm" novalidate class="popup-panel">
         <div class="modal-header" style="background:#FFF;">
-            <h4>
-                <span>Add Recipe</span>
-                
+            <h2 style="margin:15px; ">
+                <span>View Recipe Details</span>           
 
-            </h4>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeModal('addnew');">
+            </h2>
+            <button style="font-size: 30px;padding:5px;" type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeModal('viewrecipe');">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
-        <div class="modal-body" style="background:#FFF;" *ngIf="addItem">
+        <div class="modal-body" style="background:#FFF;" *ngIf="selectedRecipe">
 
             <div class="row">
-                <div class='col-12 col-lg-12'>
-                    <div class="form-group">
-                     
+                <div class='col-12 col-lg-12' style="max-height: 300px; overflow: auto;">
+                    <div class="row">
+                        <div class="col-12 col-lg-9">
+                            <div class="form-group">
+                                <h2>{{selectedRecipe.label}}</h2>
+                        
+                                <p style="display:inline-block; " class="view-details"><span class="head">Servings:</span> {{selectedRecipe.yield}}, </p>    
+                                <p style="display:inline-block; "  class="view-details"><span class="head">Calories:</span> {{selectedRecipe.calories}}, </p>  
+                                <p style="display:inline-block; "  class="view-details"><span class="head">Calories per Serving:</span> {{selectedRecipe.calories/selectedRecipe.yield}}, </p>  
                                 
+                                <p style="display:inline-block; "  class="view-details"><span class="head">Calories per Serving:</span> {{selectedRecipe.calories/selectedRecipe.yield}}, </p>  
+                                
+                                <p style="display:inline-block; "  class="view-details"><span class="head">Total Weight:</span> {{formatLimit(selectedRecipe.totalWeight)}}, </p>  
+                               
+                                <p style="display:inline-block; " class="view-details"><span class="head">Diet Labels:</span> {{formatlabels(selectedRecipe.dietLabels)}}, </p> 
+
+                                <p style="display:inline-block; " class="view-details"><span class="head">Health Labels:</span> {{formatlabels(selectedRecipe.healthLabels)}}</p> 
+
+        
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-3">
+                           <img src="{{selectedRecipe.image}}" width="90%" />
+                        </div>
+
+                        <div class="col-12">
+                            <div class="form-group">
+                                <p class="view-details"><span class="head">Nutrients:</span> </p> 
+                                <p style="display:inline-block;" class="view-details" *ngFor="let nutrient of selectedRecipe.formatNutrients| keyvalue; "><span class="head">{{nutrient.value.label}}:</span> {{formatLimit(nutrient.value.quantity)}} {{formatUnit(nutrient.value.unit)}}, </p> 
+        
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="form-group">
+                                <p class="view-details"><span class="head">Nutrients per Serving:</span> </p> 
+                                <p style="display:inline-block;" class="view-details" *ngFor="let nutrient of selectedRecipe.formatNutrients| keyvalue; "><span class="head">{{nutrient.value.label}}:</span> {{formatLimit(nutrient.value.quantity)/selectedRecipe.yield}} {{formatUnit(nutrient.value.unit)}}, </p> 
+        
+                            </div>
+                        </div>
                     </div>
+                   
                    
 
                 </div>
                
-
+<!--
                 <div class='col-12'>
                     <div class="form-group">
                         <button class="defaultbtn" type="submit">Save</button>
                     </div>
-                </div>
+                </div>-->
             </div>
 
         </div>

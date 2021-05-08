@@ -186,7 +186,7 @@ loadRecipes(idslist = "")
 	params["content"] = this.searchparam.q;
 
 	//params["instructions"] = "notempty";
-	params["returnfields"] = " id, label, image, healthLabels, dietLabels, calories, yield ";
+	params["returnfields"] = " id, label, image, healthLabels, dietLabels, calories, yield, totalWeight, totalNutrients, digest ";
   
   console.log(JSON.stringify(params));
 
@@ -234,7 +234,7 @@ if(typeof(this.maxcalories) !== "undefined" && this.maxcalories > 0)
 params["instructions"]="notempty";
 }
 
-params["returnfields"] = " id, label, image, healthLabels, dietLabels, calories, yield";
+params["returnfields"] = " id, label, image, healthLabels, dietLabels, calories, yield, digest, totalNutrients, totalWeight";
 
  var dietlabels = "";
  for(let m=0; m <this.dietLabelsList.length; m++)
@@ -316,7 +316,7 @@ if(mQuery !== "")
 {
   var params1 = {};
 
-  var query = "select id, label, image, healthLabels, dietLabels, calories, yield from recipes ";
+  var query = "select id, label, image, healthLabels, dietLabels, calories, yield, digest, totalWeight, totalNutrients, cautions from recipes ";
   var where = " where totalNutrients != '' AND digest != ''  AND s_instructions != '' " ;
   if(this.maxcalories > 0)
   where +=  " AND calories >= " + this.maxcalories
@@ -677,16 +677,7 @@ formatVal(str)
 		}
   }
 
-  toggleRecipeAdd: boolean = false;
 
-   addNew() {
-    
-    this.toggleRecipeAdd = !this.toggleRecipeAdd;
-
-  }
-  closeModal(id) {
-    this.modalService.close(id);
-  }
 
   nutrientDbFields:Array<any>=[];
   getNutrientsMaxMin()
@@ -727,7 +718,64 @@ formatVal(str)
 	  }
 	  return retValue;
   }
-  
+
+  addNew() {
+   
+	this.toggleRecipeAdd = !this.toggleRecipeAdd;
+ 
+  }
+
+  selectedRecipe: any ;
+ 
+  viewRecipe(recipe)
+  {
+	  this.selectedRecipe = recipe;
+	  console.log(this.selectedRecipe);
+
+	  this.selectedRecipe["formatNutrients"] = JSON.parse(this.selectedRecipe.totalNutrients);
+	  console.log(this.selectedRecipe);
+	 this.modalService.open('viewrecipe');
+	  console.log("view details");
+  }
+
+  toggleRecipeAdd: boolean = false;
+
+ 
+ closeModal(id) {
+
+   this.modalService.close(id);
+ }
+ formatLimit(str)
+ {
+	 var retval = str;
+	 if(str !== "")
+	 {
+ 		retval = parseFloat(str).toFixed(2);
+	 }
+	 return retval;
+ }
+ formatlabels(str)
+ {
+	 var retval = str;
+	 if(str !== "")
+	 {
+		retval = str.replace(/~/g, ', ');
+	 }
+	 return retval;
+ }
+ formatUnit(unit)
+ {
+	 var retval = unit;
+	 if(unit !== "")
+	 {
+		if(unit.indexOf("u00b5") !== -1)
+		{
+			retval = unit.replace("u00b5", "\u00b5");
+		}
+	 }
+	 return retval;
+
+ }
 }
 
 	

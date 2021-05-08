@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
   apiUrl:"https://www.dentavacation.com/mobileapp/api",
-  appUrl:"https://www.medicaltourismco.com/utility/mealapp",
+  appUrl:"https://www.medicaltourismco.com/utility/mealapp/v1",
   accessToken:"",
   fromname: "Team MTC",
   fromemail:"<contact@medicaltourismco.com>",
