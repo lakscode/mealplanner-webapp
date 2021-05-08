@@ -524,3 +524,17 @@ font-size:13pt;
 		display:none;
 	}
 }
+
+.image-animate {
+  display: block;
+  overflow: hidden
+}
+
+.image-animate img {
+  transform: scale(1);
+  transition: all ease .8s
+}
+
+.image-animate:hover img {
+  transform: scale(1.1)
+}
