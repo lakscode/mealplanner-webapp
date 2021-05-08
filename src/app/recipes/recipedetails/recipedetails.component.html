@@ -12,15 +12,7 @@
                 <h2>Recipe Details</h2>
     
             </div>
-          <!--   <div *ngIf='currentUser'>
-                <a class="copy-button" (click)="newRecipe()" href="javascript:void(0)"><i class="fa fa-copy"></i> Copy to New Draft</a>
-            
-            </div> -->
-
-             <!-- <div class="recipe-media">
-              <a class="print-button" href="javascript:void(0)"><i class="fa fa-print"></i> Print Recipe</a>
-                <a class="copy-button" (click)="newRecipe()" href="javascript:void(0)"><i class="fa fa-copy"></i> Copy to New Draft</a>
-            </div>-->
+         
         </div>
         <div class="row fadeInLeft animated newanim recipeDay-outer" *ngIf='searchRes'>
             <div class="col-12 col-lg-6" style="padding-left:0px; padding-right:0px;">
@@ -77,27 +69,7 @@
             </div>
         </div>
     
-       <div class="slider-recipe-detail2 recipe-of-day animated wow fadeInLeft" style="display:none">
-
-            <div class="wrapper-slider-detail" *ngIf="searchRes.image">
-                <img src="{{searchRes.image}}" alt="slide" style='width:400px;height:400px'>            
-            </div>
-            <div class="recipe-details-outer">
-                    <div class="recipe-contents text-center">
-                        <div class="recipe-content-inner">
-                            <span class="tag">Recipe of the Day</span>
-                            <h2><a href="javascript:void(0)">Pasto Pizza With Fillas Cheese Topping</a></h2>
-                            <div class="short-separator"></div>
-                            <p>
-                                Nam ornare arcu turpis, nec congu
-                                Curabitur quis euismod...
-                            </p>
-                            <a class="read-more" href="javascript:void(0)">read more</a>
-                        </div>
-                    </div>
-                </div>
-            <!--<a href="https://vimeo.com/15306847" class="swipebox slider-video-button">Watch Video</a>-->
-        </div>
+     
     </div>
     
     
@@ -108,37 +80,13 @@
           </span>
         <span class="rating-figure">({{ratingObj['displayrating']}} / 5)</span>
     </div>
-    <!--<ul class="pre-tags">
-        <li><span>Cuisine : </span>Chinese</li>
-        <li><span>Course : </span>Side Dish</li>
-        <li><span>Skill Level : </span>Advanced</li>
-    </ul>-->
+   
     <div class="separator-post"></div>
     <p>
-      <!--  Rinse the chicken pieces in cold water and pat dry. Place the chicken in a large, resealable zip-top bag and pour in the marinade. Toss the chicken inside the bag to cover evenly with the marinade and refrigerate for 12 hours or as long as overnight icken pieces in cold water and pat dry.-->
+      
     </p>
     <br>
-   <!--  <div class="ingredients-checkbox">
-       
-        <div class="nutritional">
-            <h3>Nutritional 12</h3>
-            <ng-container *ngFor="let macro of paramMicro; let m=index; let even = even">
-                <div *ngIf="even" class="nutrition-detail">
-                    <div class="left-box">
-                        {{paramMicro[m].label}}
-                        <br>
-                        <span>{{paramMicro[m].totalP}}{{paramMicro[m].unit}}</span>
-                    </div>
-                    <div class="right-box" *ngIf="paramMicro[m+1]">
-                        {{paramMicro[m+1].label}}
-                        <br>
-                        <span> {{paramMicro[m+1].totalP}}{{paramMicro[m+1].unit}}</span>
-                    </div>
-                </div>
-                <div *ngIf="even" class="separator-post"></div>
-            </ng-container>
-        </div>
-    </div> -->
+   
     
 
     <div class="ingredients-checkbox" style="min-height:400px">
@@ -149,8 +97,7 @@
                 <li>
  
                     <label>
-                       <!--<img src="assets/images/tick.png" style='width:30px; height:30px; display:inline-block'>-->
-                        <!--<input type="checkbox">-->
+                     
                         {{ingr.text}}
                     </label>
                 </li>
@@ -166,13 +113,9 @@
                         <br>
                         <span>{{paramMicro[m].totalP}}{{paramMicro[m].unit}}</span>
                     </div>
-                    <!--<div class="right-box" *ngIf="paramMicro[m+1]">
-                        {{paramMicro[m+1].label}}
-                        <br>
-                        <span> {{paramMicro[m+1].totalP}}{{paramMicro[m+1].unit}}</span>
-                    </div>-->
+                   
                 </div>
-                <!--<div *ngIf="even" class="separator-post"></div>-->
+             
             </ng-container>
         </div>
     </div>
@@ -196,18 +139,7 @@
     
     </div>
     
-   <!-- 
-    <div class="tips-variations">
-        <h3>Tips &amp; variations</h3>
-        <ul>
-            <li *ngFor="let instr of searchRes['instructions']; let j=index">
-                <p>
-                   {{instr}}
-                </p>
-            </li>
-        </ul>
-    </div>
--->
+  
     <div class="separator-post"></div>
 
     <div class="tags-icons">
@@ -270,7 +202,7 @@
                     <p>
                         {{comment.message}}
                     </p>
-                    <!--<a href="javascript:void(0)" class="reply-button">Reply</a>-->
+                  
                 </div>
     
             </li>

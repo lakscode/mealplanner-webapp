@@ -62,10 +62,7 @@
                                     <div style="display:inline-block;color: #5e676b;">
                                         Calories: {{recipe1.calories}} Kcal
                                     </div>
-                                    <!--<ul class="post-meta">
-                  <li>Calories: {{recipe1.calories}}</li>
-                 <li class="calendar">{{recipe1.created_at}}</li>
-              </ul>-->
+                              
                                     <div class="rating-box">
                                         <span class="rating-icons" *ngFor="let item of [1,2,3,4,5]">
                                             <i [ngClass]="item <= recipe1.displayrating?'fa fa-star rating-h':'fa fa-star rating'"></i>
