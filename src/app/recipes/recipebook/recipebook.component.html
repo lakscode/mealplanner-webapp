@@ -193,7 +193,7 @@
                                     <div class="recipe-remove" (click)="removeRecipe(recipe)">Remove</div>
                                 </div>
                                 <div class="col-12">
-                                    <p><b><em>Diet Labels</em></b>: {{recipe.dietLabels}} </p>
+                                    <p *ngIf="recipe.dietLabels"><b><em>Diet Labels</em></b>: {{recipe.dietLabels}} </p>
                                     <div class="recipe-remove" (click)="viewRecipe(recipe)">Details</div>
                                 
                                 </div>
@@ -254,15 +254,13 @@
                         
                                 <p style="display:inline-block; " class="view-details"><span class="head">Servings:</span> {{selectedRecipe.yield}}, </p>    
                                 <p style="display:inline-block; "  class="view-details"><span class="head">Calories:</span> {{selectedRecipe.calories}}, </p>  
-                                <p style="display:inline-block; "  class="view-details"><span class="head">Calories per Serving:</span> {{selectedRecipe.calories/selectedRecipe.yield}}, </p>  
-                                
-                                <p style="display:inline-block; "  class="view-details"><span class="head">Calories per Serving:</span> {{selectedRecipe.calories/selectedRecipe.yield}}, </p>  
-                                
+                                <p style="display:inline-block; "  class="view-details"><span class="head">Calories per Serving:</span> {{formatCalories(selectedRecipe.calories, selectedRecipe.yield)}}, </p>  
+                                                                
                                 <p style="display:inline-block; "  class="view-details"><span class="head">Total Weight:</span> {{formatLimit(selectedRecipe.totalWeight)}}, </p>  
                                
-                                <p style="display:inline-block; " class="view-details"><span class="head">Diet Labels:</span> {{formatlabels(selectedRecipe.dietLabels)}}, </p> 
+                                <p style="display:inline-block; " class="view-details"><span class="head"  *ngIf="selectedRecipe.dietLabels">Diet Labels:</span> {{formatlabels(selectedRecipe.dietLabels)}}, </p> 
 
-                                <p style="display:inline-block; " class="view-details"><span class="head">Health Labels:</span> {{formatlabels(selectedRecipe.healthLabels)}}</p> 
+                                <p style="display:inline-block; " class="view-details"><span class="head" *ngIf="selectedRecipe.healthLabels">Health Labels:</span> {{formatlabels(selectedRecipe.healthLabels)}}</p> 
 
         
                             </div>
@@ -271,15 +269,14 @@
                            <img src="{{selectedRecipe.image}}" width="90%" />
                         </div>
 
-                        <div class="col-12">
+                        <div class="col-12 col-lg-6">
                             <div class="form-group">
                                 <p class="view-details"><span class="head">Nutrients:</span> </p> 
                                 <p style="display:inline-block;" class="view-details" *ngFor="let nutrient of selectedRecipe.formatNutrients| keyvalue; "><span class="head">{{nutrient.value.label}}:</span> {{formatLimit(nutrient.value.quantity)}} {{formatUnit(nutrient.value.unit)}}, </p> 
-        
                             </div>
                         </div>
 
-                        <div class="col-12">
+                        <div class="col-12 col-lg-6">
                             <div class="form-group">
                                 <p class="view-details"><span class="head">Nutrients per Serving:</span> </p> 
                                 <p style="display:inline-block;" class="view-details" *ngFor="let nutrient of selectedRecipe.formatNutrients| keyvalue; "><span class="head">{{nutrient.value.label}}:</span> {{formatLimit(nutrient.value.quantity)/selectedRecipe.yield}} {{formatUnit(nutrient.value.unit)}}, </p> 

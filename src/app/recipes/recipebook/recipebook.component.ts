@@ -776,6 +776,18 @@ formatVal(str)
 	 return retval;
 
  }
+ formatCalories(calories, yeild)
+ {
+	 console.log(calories);
+	 console.log(yeild);
+	var retval = calories;
+	if(calories !== "")
+	{
+		retval = (parseFloat(calories)/parseFloat(yeild)).toFixed(2);
+	}
+	return retval;
+ }
+ 
 }
 
 	
