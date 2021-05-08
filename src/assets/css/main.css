@@ -3165,7 +3165,7 @@ a.mean-expand {
   margin-right: 15px;
 }
 .latest-news-widget .thumb a:hover {
-  opacity: .7;
+ // opacity: .7;
 }
 .latest-news-widget .thumb img {
   width: 66px;
