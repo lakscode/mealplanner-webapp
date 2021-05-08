@@ -3571,7 +3571,7 @@ div.widget-measurements .default-btn {
   transition: all 0.3s;
 }
 .tabs-container .left-side img:hover {
-  opacity: 0.8;
+  //opacity: 0.8;
 }
 .tabs-container .right-side {
   overflow: hidden;
