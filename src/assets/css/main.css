@@ -4760,7 +4760,7 @@ div.widget-measurements .default-btn {
   background-color: rgba(228, 228, 228, 0.5);
 }
 .listing .image a:hover {
-  opacity: .7;
+ // opacity: .7;
 }
 .listing .image img {
   max-width: 100%;
