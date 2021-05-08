@@ -26,7 +26,6 @@ export class LoginComponent implements OnInit {
 	userObj:any;
 	users: any;
 	errorPassMatch: any;
-	errorSignup: any;
 	errorLogin: any;
 	constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
 		this.userName = ""; this.passWord = "";
@@ -165,10 +164,6 @@ export class LoginComponent implements OnInit {
 	forgot() {
 		this.gotopage('forgot-password');
 
-	}
-	signup()
-	{
-		//this.router.navigate(['register']);
 	}
 
 
