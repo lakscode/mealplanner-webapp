@@ -279,7 +279,7 @@
                         <div class="col-12 col-lg-6">
                             <div class="form-group">
                                 <p class="view-details"><span class="head">Nutrients per Serving:</span> </p> 
-                                <p style="display:inline-block;" class="view-details" *ngFor="let nutrient of selectedRecipe.formatNutrients| keyvalue; "><span class="head">{{nutrient.value.label}}:</span> {{formatLimit(nutrient.value.quantity)/selectedRecipe.yield}} {{formatUnit(nutrient.value.unit)}}, </p> 
+                                <p style="display:inline-block;" class="view-details" *ngFor="let nutrient of selectedRecipe.formatNutrients| keyvalue; "><span class="head">{{nutrient.value.label}}:</span> {{formatLimit(nutrient.value.quantity/selectedRecipe.yield)}} {{formatUnit(nutrient.value.unit)}}, </p> 
         
                             </div>
                         </div>
