@@ -7,7 +7,7 @@
     <div class="tabs-container">
     <div class="tab-content">
         <div class="content-inner" style="min-height:100px;" *ngFor="let recipe of recipesList; let i1= index;">
-            <div class="left-side">
+            <div class="left-side image-animate">
                 <a (click)="gotoRecipeDetails(recipe.id)"><img style="width:84px; height:64px;cursor:pointer" src="{{formatImage(recipe.image, 's')}}" alt="image for {{recipe.label}}"/></a>
             </div>
             <div class="right-side">

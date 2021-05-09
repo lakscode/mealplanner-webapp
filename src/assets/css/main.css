@@ -3165,7 +3165,7 @@ a.mean-expand {
   margin-right: 15px;
 }
 .latest-news-widget .thumb a:hover {
-  opacity: .7;
+ // opacity: .7;
 }
 .latest-news-widget .thumb img {
   width: 66px;
@@ -3571,7 +3571,7 @@ div.widget-measurements .default-btn {
   transition: all 0.3s;
 }
 .tabs-container .left-side img:hover {
-  opacity: 0.8;
+  //opacity: 0.8;
 }
 .tabs-container .right-side {
   overflow: hidden;
@@ -4760,7 +4760,7 @@ div.widget-measurements .default-btn {
   background-color: rgba(228, 228, 228, 0.5);
 }
 .listing .image a:hover {
-  opacity: .7;
+ // opacity: .7;
 }
 .listing .image img {
   max-width: 100%;
