@@ -1,6 +1,8 @@
 export const constants = {
   companyName:"Meal Planner",
-  copyright:"Copyright © 2021",
+  copyright:" Copyright 2021 All Rights Reserved by",
+  contactNo:"0123456789",
+  contactEmail:"support@email.com",
   minerals : ["calcium", "phosphorus", "potassium", "sodium", "chloride", "magnesium", "iron", "zinc", "iodine", "chromium", "copper", "fluoride", "sulfur", "molybdenum", "manganese","selenium", "fat", "protein", "carbs" ],
   dietLabels: ["Balanced", "High-Fiber","High-Protein", "Low-Carb", "Low-Fat", "Low-Sodium"],
   healthLabels: ["Vegetarian", "Vegan","Peanut-free", "Low potassium", "Alcohol-free"],
@@ -53,3 +55,5 @@ export const constants = {
       ["#2CA02C", "#BCBD22", "#1F77B4", "#D62728","#9467BD","#F9CB9C","#FF9900"]
       ],
 };
+
+

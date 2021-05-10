@@ -15,7 +15,8 @@ export class FooterComponent implements OnInit {
 
   ngOnInit() {
     this.subscribe["email"] ="";
-    this.labels={"companyName":this.helpService.getConstants("companyName"), "copyright":this.helpService.getConstants("copyright")};
+    this.labels={"companyName":this.helpService.getConstants("companyName"), "copyright":this.helpService.getConstants("copyright"), "contactNo":this.helpService.getConstants("contactNo"), contactEmail:this.helpService.getConstants("contactEmail") };
+
   }
   subscribeEmail()
   {
