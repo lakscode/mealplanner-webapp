@@ -11,6 +11,8 @@ import { takeUntil } from 'rxjs/operators';
 
 import { DomSanitizer } from '@angular/platform-browser';
 import { HttpHeaders } from '@angular/common/http';
+import {NgbDateStruct, NgbCalendar} from '@ng-bootstrap/ng-bootstrap';
+
 @Component({
 	selector: 'app-myinfo',
 	templateUrl: './myinfo.component.html',
@@ -29,10 +31,16 @@ export class MyinfoComponent implements OnInit {
   profileImage: any;
   apiURL : any;
   profilePath: any;
-	constructor(private router: Router, private route: ActivatedRoute, private sanitizer: DomSanitizer, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
+  model: NgbDateStruct;
+date: {year: number, month: number};
+
+	constructor(private router: Router, private route: ActivatedRoute, private sanitizer: DomSanitizer, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder, private calendar: NgbCalendar) {
 	
 	}
-
+	selectToday() {
+		this.model = this.calendar.getToday();
+	  }
+	
 	ngOnInit() {
 
 		this.setDefaults();
@@ -42,7 +50,7 @@ export class MyinfoComponent implements OnInit {
 	{
 	  this.apiURL = environment.apiUrl;
 	  this.profilePath = this.apiURL.replace("/api","");
-	  this.profileImage = "assets/user.jpg";
+	  this.profileImage = "assets/user-icon.png";
 	 // this.tracktypes = constants.tracktypes;
 	
 	  this.currentUserInfo = {"dob":"", "age":"", "gender":"", "weight":"", "height":""};

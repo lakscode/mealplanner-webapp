@@ -194,6 +194,7 @@
                                 </div>
                                 <div class="col-12">
                                     <p *ngIf="recipe.dietLabels"><b><em>Diet Labels</em></b>: {{recipe.dietLabels}} </p>
+                                    <p *ngIf="!recipe.dietLabels">&nbsp;</p>
                                     <div class="recipe-remove" (click)="viewRecipe(recipe)">Details</div>
                                 
                                 </div>

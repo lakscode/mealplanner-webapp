@@ -1,4 +1,4 @@
-<div class="recipes-home-body inner-page">
+<div class="myinfo recipes-home-body inner-page">
     <div class="row w-1200 bg-white">  
 
 <div class="col-12 col-md-6 col-lg-6">  
@@ -38,18 +38,21 @@
     <div class="input-label" >Date of Birth</div>
     <!--<ion-datetime (ionChange)="changeInfo('dob')" [(ngModel)] = "currentUser['dob']"  placeholder="None"></ion-datetime>-->
     <!--<input (blur)="changeInfo('dob')" [(ngModel)] = "currentUser['dob']"></input>-->
+
+    <input type="date" id="dob" name="dob" (blur)="changeInfo('dob')" [(ngModel)] = "currentUser['dob']" >
+
   </div>
 </div>
 <div class="col-12 col-md-6 col-lg-6">  
   <div class="form-group">
     <div class="input-label">Age</div>
-    <input type="text"  class="input-text"  (ionBlur)="changeInfo('age')" [(ngModel)] = "currentUser['age']" />
+    <input type="text"  class="input-text"  (blur)="changeInfo('age')" [(ngModel)] = "currentUser['age']" />
   </div>
 </div>
 <div class="col-12 col-md-6 col-lg-6">  
   <div class="form-group">
     <div class="input-label">Gender</div>
-    <select style="width:150px" lass="input-text" (change)="changeInfo('gender')" [(ngModel)]="currentUser['gender']" >
+    <select class="select input-text" (change)="changeInfo('gender')" [(ngModel)]="currentUser['gender']" >
       <option value="f">Female</option>
       <option value="m">Male</option>
     </select>

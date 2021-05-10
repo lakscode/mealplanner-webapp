@@ -772,6 +772,8 @@ formatVal(str)
 		{
 			retval = unit.replace("u00b5", "\u00b5");
 		}
+
+		
 	 }
 	 return retval;
 

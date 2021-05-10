@@ -6,8 +6,10 @@ import { MyinfoComponent } from './myinfo.component';
 import { FlexLayoutModule} from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+
 @NgModule({
   imports: [
+    
     CommonModule,
     MyinfoRoutingModule,
     FlexLayoutModule,

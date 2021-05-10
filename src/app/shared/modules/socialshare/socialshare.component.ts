@@ -11,6 +11,7 @@ import {environment} from "../../../../environments/environment"
 export class SocialshareComponent implements OnInit {
   @Input() urlShare: string;
   @Input() labeltext: string;
+  @Input() imageurl: string;
   @Output() returnData: EventEmitter<any> = new EventEmitter();
   labels: any;
 
