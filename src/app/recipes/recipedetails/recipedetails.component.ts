@@ -696,6 +696,18 @@ getBase64(file) {
 }
 
 
+formatText(str)
+{
+	var retVal = str;
+
+	if(str !== "")
+	{
+		retVal = str.replace("u00bd", "\u00bd");
+		retVal = retVal.replace("u00bc", "\u00bc");
+		retVal = retVal.replace("u00be", "\u00be");
+	}
+	return retVal;
+}
 }
 
 

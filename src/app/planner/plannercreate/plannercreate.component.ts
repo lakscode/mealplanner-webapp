@@ -1248,7 +1248,7 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 			}));
 	  	}
 	}
-	calculateTotalCalory(col)
+	calculateTotalNutrient(col)
 	{
 
 		var mMacro1 = [];
@@ -1261,6 +1261,14 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 			
 			if(typeof(dItem["recipe"]) !== "undefined" && dItem["recipe"] !== null)
 			{
+
+				var fIndex1s = mMacro1.findIndex(x1=>(x1.name == "calories"));
+				if(fIndex1s > -1)
+				mMacro1[fIndex1s]["value"] = parseFloat(mMacro1[fIndex1s]["value"]) +parseFloat(dItem["recipe"]["calories"]);
+				else
+				mMacro1.push({"name" : "calories", "value" : parseFloat(dItem["recipe"]["calories"]), "unit" : "Kcal"});
+		
+
 				/*
 				if(typeof(dItem["recipe"]["paramMicro"]) !== "undefined")
 				{
@@ -1306,7 +1314,7 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 	}
 
 
-	calculateTotalCaloryPServing(col)
+	calculateTotalNutrientPServing(col)
 	{
 	//	console.log(this.loadedPlan);
 		var mMacro = [];
