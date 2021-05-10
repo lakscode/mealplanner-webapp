@@ -491,4 +491,21 @@ h1 { font-size: 1.5em; margin: 10px; }
 {
   font-weight:normal;
   font-size:14px;
+
 }
+
+.submit-comment {
+    height: 42px;
+    background: #ccc;
+    font-family: 'Lora', serif;
+    font-size: 16px;
+    color: #ffffff;
+    padding: 0 35px;
+    border: none;
+    transition: 0.2s all ease-in-out;
+}
+
+.submit-comment.active {
+ background: #6ebe3b;
+ }
+

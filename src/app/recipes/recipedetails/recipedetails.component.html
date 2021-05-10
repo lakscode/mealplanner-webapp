@@ -249,7 +249,7 @@
             </div>
             <div class="row">
                 <div class="col-12" style="padding:15px; text-align:right;">
-                    <button (click)="submitcomment()" class="submit-comment">Submit</button>
+                    <button [disabled] = "comment.message == ''" [ngClass]="comment.message !== ''?'submit-comment active':'submit-comment'" (click)="submitcomment()" >Submit</button>
                 </div>
                 <div class='col-12'>
                     {{commentSubmitMsg}}
