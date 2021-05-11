@@ -1418,9 +1418,7 @@ ul {
   transition: 0.2s all ease-in-out;
   fill: #4C8924;
 }
-.side-bar-home .widget h2:after {
-  background: #6ebe3b;
-}
+
 .widget-get-social ul {
   display: flex;
   justify-content: space-between;
@@ -1471,59 +1469,8 @@ ul {
 .widget-get-social ul .google-plus {
   background: #dd4b39;
 }
-div.widget-measurements {
-  font-family: 'Lato', sans-serif;
-  font-weight: 400;
-  font-size: 15px;
-  color: #000000;
-}
-div.widget-measurements h2 {
-  margin-bottom: 20px !important;
-}
-div.widget-measurements ul li {
-  display: block;
-  position: relative;
-  padding-left: 15px;
-  padding-top: 9px;
-  padding-bottom: 9px;
-  border-bottom: 1px solid #ebe8e6;
-  margin-bottom: 0 !important;
-}
-div.widget-measurements ul li:before {
-  content: "\f101";
-  font-family: FontAwesome;
-  display: inline-block;
-  position: absolute;
-  left: 0;
-}
-div.widget-measurements .default-btn {
-  font-size: 14px;
-}
-.widget-overlay figure {
-  position: relative;
-  display: inline-block;
-  overflow: hidden;
-}
-.widget-overlay figure img {
-  width: 100%;
-}
-.widget-overlay figure:hover figcaption {
-  background: #000000;
-}
-.widget-overlay figcaption {
-  position: absolute;
-  bottom: 0;
-  transition: 0.2s all ease-in-out;
-  background: rgba(0, 0, 0, 0.8);
-  color: #ffffff;
-  font-family: 'Lato', sans-serif;
-  font-weight: 700;
-  text-transform: uppercase;
-  text-align: center;
-  padding-top: 13px;
-  padding-bottom: 13px;
-  width: 100%;
-}
+
+
 /*--------------------*/
 /* footer widgets styles
 /*--------------------*/
