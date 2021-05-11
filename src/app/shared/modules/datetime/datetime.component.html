@@ -1,8 +1,0 @@
-<div class="popup-datetime" *ngIf="dt">
-    <ngb-datepicker style="display:inline-block;" class="calclose" #dp [(ngModel)]="dt['date']" (navigate)="date = $event.next" (click) = 'save()' [minDate]="minDt" [maxDate]="maxDt"></ngb-datepicker> 
-    <span *ngIf="showhideTimeFlag">&nbsp;</span> 
-    <div style="display:inline-block; text-align:right;margin-left:4px;" class="calclose">
-           <button *ngIf="showhideTimeFlag" id="toggle" class="btnCloseCal calclose"  (click)="closeCal()"><i class="fa fa-close"></i></button>	
-        <ngb-timepicker *ngIf="showhideTimeFlag" style="display:block" class="calclose" [(ngModel)]="dt['time']" (click) = 'save()' (change)= 'save()' (blur) = 'save()' [minuteStep]="1" [meridian]="meridian"></ngb-timepicker><!-- {{minDt}}-->
-    </div>
-</div>

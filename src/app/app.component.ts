@@ -31,6 +31,7 @@ export class AppComponent implements OnInit {
 
     
     var parent = this;
+    setTimeout(() => {
     try{
     this.dbService.getLocalData("http://www.geoplugin.net/json.gp").subscribe(ipdata => setTimeout(() => 
     {
@@ -49,7 +50,7 @@ export class AppComponent implements OnInit {
   {
     console.log(error);
   }
-
+    }, 6000);
 
     localStorage.setItem('currentUser', "");
     /*

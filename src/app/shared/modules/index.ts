@@ -1,4 +1,4 @@
-export * from './datetime/datetime.module';
+
 export * from './modal/modal.module';
 export * from './tabspanel/tabspanel.module';
 //export * from './searchbar/searchbar.module';
