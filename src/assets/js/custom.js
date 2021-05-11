@@ -9,27 +9,7 @@
     }
 
 
-   
 
-    /*-----------------------------------------------------------------------------------*/
-    /* Mean Menu
-    /*-----------------------------------------------------------------------------------*/
-    function menuDrop(target){
-        var mainMenuItem = $(target);
-        mainMenuItem.on( 'mouseenter',
-            function () {
-                $(this).children('ul').slideDown(200);
-            });
-
-        mainMenuItem.on( 'mouseleave',
-            function () {
-                $(this).children('ul').stop(true).slideUp(200);
-            }
-        );
-    }
-
-    menuDrop(".top-nav ul li");
-    menuDrop(".nav-collapse ul li");
 
 
     if($(".header").hasClass("header-var1")){
@@ -40,27 +20,9 @@
         $('.responsive-menu').html("<ul>" + navList + "</ul>");
     }
 
-    if (jQuery().meanmenu) {
-        $('.responsive-menu').meanmenu({
-            meanScreenWidth: "991"
-        });
-    }
+   
 
-
-
-    /*-----------------------------------------------------------------------------------*/
-    /* add ingredients
-    /*-----------------------------------------------------------------------------------*/
-    if (jQuery().meanmenu) {
-        var list_sortable = $(".list-sortable");
-        list_sortable.parents("body").addClass("visible-overflow");
-        //  sortable
-        list_sortable.sortable({
-            forcePlaceholderSize: true,
-            placeholder: "detail-placeholder",
-            handle: ".handler-list"
-        });
-    }
+   
 
 
     $('.add-button.add-ing').on("click",function(event){
@@ -132,30 +94,8 @@ $('.add-button.add-nutrient').on("click",function(event){
 
 
 
-    /*-----------------------------------------------------------------------------------*/
-    /* Listing list end grid buttons
-    /*-----------------------------------------------------------------------------------*/
-
-/*    $('.listing-buttons span').on("click",function(){
-        $('.listing-buttons span').removeClass("current");
-        if( $(this).hasClass("grid")){
-            $(this).addClass("current");
-            if($(".recipe-listing").hasClass("listing-list")){
-                $(".recipe-listing").removeClass("listing-list").addClass("listing-grid");
-            }
-
-        }
-        if( $(this).hasClass("list")){
-            $(this).addClass("current");
-            $(".recipe-listing").removeClass("listing-grid").addClass("listing-list");
-
-        }
-    });*/
 
 
-    /*-----------------------------------------------------------------------------------*/
-    /* Tabs
-    /*-----------------------------------------------------------------------------------*/
     var $tabsNav = $('.tabs-nav'),
         $tabsNavLis = $tabsNav.children('li');
 
@@ -197,76 +137,10 @@ $('.add-button.add-nutrient').on("click",function(event){
         }
     });
 
-    /*-----------------------------------------------------------------------------------*/
-    /* swipebox
-    /*-----------------------------------------------------------------------------------*/
-    if (jQuery().swipebox) {
-        $('.swipebox').swipebox();
-    }
+    
 
 
 
-    /*-----------------------------------------------------------------------------------*/
-    /* Alert close
-     /*-----------------------------------------------------------------------------------*/
-    $(".close-alert").on("click",function(){
-        $(this).parent(".alert").slideUp();
-    });
-
-    /*----------------------------------------------------------------------------------*/
-    /* Contact Form AJAX validation and submission
-    /*---------------------------------------------------------------------------------- */
-    if (jQuery().validate && jQuery().ajaxSubmit) {
-        // Contact Form Handling
-        var contact_options = {
-            target: '#message-sent',
-            beforeSubmit: function () {
-                $('#contact-loader').fadeIn('fast');
-                $('#message-sent').fadeOut('fast');
-            },
-            success: function () {
-                $('#contact-loader').fadeOut('fast');
-                $('#message-sent').fadeIn('fast');
-                $('#contact-form').resetForm();
-            }
-        };
-
-    /*    $('#contact-form').validate({
-            errorLabelContainer: $("div.error-container"),
-            submitHandler: function (form) {
-                   $(form).ajaxSubmit(contact_options);
-            }
-        });*/
-    }
-
-
-    $(window).load(function () {
-        /*-----------------------------------------------------------------------------------*/
-        /* page loader
-         /*-----------------------------------------------------------------------------------*/
-        $(".loadr").fadeOut();
-        jQuery(".preloader").delay(200).fadeOut("slow").delay(200, function(){
-            jQuery(this).remove();
-        });
-
-        /*-----------------------------------------------------------------------------------*/
-        /* animation on page load
-         /*-----------------------------------------------------------------------------------*/
-
-        $('.fade-load-left').queue(function(){
-            $(this).addClass("fadeInLeft");
-        });
-
-        $('.fade-load-right').queue(function(){
-            $(this).addClass("fadeInRight");
-        });
-        $('.fade-load-up').queue(function(){
-            $(this).addClass("fadeInUp");
-        });
-        $('.fade-load-down').queue(function(){
-            $(this).addClass("fadeInDown");
-        });
-    });
 
 })(jQuery);
 
