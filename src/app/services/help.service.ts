@@ -14,6 +14,7 @@ import { constants } from '../jsonfiles/constants.js';
 import { ignorewordsArr } from '../jsonfiles/ignorewords.js';
 import * as CryptoJS from 'crypto-js';
 import { AES, enc } from "crypto-js";
+
 @Injectable({ providedIn: 'root' })
 export class HelpService {
 	adalConfig: any;
@@ -824,4 +825,12 @@ SendEmailPasswordReset(email,data) {
 		
 		}));		
 	}
+
+	scrape_recipe() {
+	console.log("scrape recipe");
+	
+		
+	  }
+
+	  
 }

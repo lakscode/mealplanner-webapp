@@ -251,11 +251,11 @@
                     font-family: 'Lato', sans-serif;
                     font-weight: 400;
                     font-size: 16px;">Show Nutrients
-                        <input (change)="showhidenutrients()" [(ngModel)] = 'showhidenutrientsFlag' type="checkbox">
+                        <input class="showhidenut" id="showhidenut" (change)="showhidenutrients()" [(ngModel)] = 'showhidenutrientsFlag' type="checkbox">
                         <span class="checkmark"></span>
                     </label>
                     <a class="copy-button" (click)="downloadplan()" title="Download PDF"><i class="fa fa-download"></i> Download</a>
-                    &nbsp; <a  class="copy-button" (click)="getIngredientsList()" title="Ingredients List"><i class="fa fa-download"></i> Ingredients </a>
+                    &nbsp; <a  class="copy-button" (click)="getIngredientsList()" title="Ingredients List"><i class="fa fa-download"></i> Grocery List </a>
                     &nbsp;  
                     </div>
                     <div style="display:block" *ngIf="showhidenutrientsFlag">

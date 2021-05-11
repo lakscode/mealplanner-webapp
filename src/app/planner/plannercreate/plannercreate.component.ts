@@ -58,7 +58,11 @@ export class PlannercreateComponent implements OnInit {
 	showNutrients: boolean = true;
 	showImages: boolean = true;
 	showNutrientsFlag: boolean = false;
+	
+	showNutrientsPServing: boolean = false;
+	showhidenutrientsFlag: boolean = false;
 	role: any = {};
+
 	constructor(private router: Router, private route: ActivatedRoute, private modalService: ModalService, private pdfService: PDFService, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
 	
 	}
@@ -70,6 +74,8 @@ export class PlannercreateComponent implements OnInit {
 			 this.showNutrients= false;
 	 this.page_num = 1;
 this.loadedPlan = false;
+
+	
 		window.addEventListener("scroll", this.scrollFunc);
 		this.getNutrientsMaxMin(); 
 		
@@ -1093,10 +1099,11 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 	*/
 
   }
-  showNutrientsPServing: boolean = false;
-  showhidenutrientsFlag: boolean = false;
+
   showhidenutrients()
   {
+	  console.log("showhidenutrients");
+	  console.log(" showhidenutrientsFlag " + this.showhidenutrientsFlag);
 	if(!this.showhidenutrientsFlag)
 	{
 		this.showNutrientsPServing = false;
@@ -1173,23 +1180,37 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 
 
 	 scrollFunc(){
-	//	console.log("scrolling");
+		console.log("scrolling");
 		if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
 		//	mybutton.style.display = "block";
 		  } else {
 		//	mybutton.style.display = "none";
 		  }
-		  var checkVal  = 2300;;
+		  var checkVal  = 1300;
+
+		  var showhidenut = document.getElementById('showhidenut');
+		  console.log("showhidenut " );
+		  console.log(showhidenut);
+		  if(showhidenut !== null)
+		  {
+			  if(showhidenut["checked"])
+			  {
+				checkVal = 2400;
+			  }
+		  }
+
+
+		  console.log("checkVal " + checkVal)
 		  var btncalculateCaloryFlag = document.getElementById('calculateCaloryFlag');
 		  if(btncalculateCaloryFlag !== null)
 		  {
-	//	  console.log(btncalculateCaloryFlag.offsetTop);
+		  console.log(btncalculateCaloryFlag.offsetTop);
 		  if(typeof(btncalculateCaloryFlag.offsetTop) !== "undefined" && btncalculateCaloryFlag.offsetTop !== null && btncalculateCaloryFlag.offsetTop)
 		  {
 			checkVal = btncalculateCaloryFlag.offsetTop - 300;
 		  }
 		  }
-	//	  console.log(document.documentElement.scrollTop);
+		  console.log(document.documentElement.scrollTop);
 		  var btnsaveplan= document.getElementById('btnsaveplan');
 		  if(btnsaveplan !== null)
 		  { 

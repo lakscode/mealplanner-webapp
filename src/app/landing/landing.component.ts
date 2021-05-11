@@ -43,6 +43,7 @@ constructor(private router: Router, private httpClient : HttpClient, private rou
 		}
 		
 	
+	//	this.helpService.scrape_recipe();
 
 		this.getPlanStatus();
 		this.count++;

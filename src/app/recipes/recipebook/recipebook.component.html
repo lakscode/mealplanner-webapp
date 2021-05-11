@@ -189,11 +189,11 @@
                                   
                                 </div>
                                 <div class="col-12">
-                                    <p><b><em>Calories</em></b>: {{recipe.calories}} Kcal, <b><em>Servings</em></b>: {{recipe.yield}}</p>
+                                    <p><b>Calories</b>: {{recipe.calories}} Kcal, <b>Servings</b>: {{recipe.yield}}</p>
                                     <div class="recipe-remove" (click)="removeRecipe(recipe)">Remove</div>
                                 </div>
                                 <div class="col-12">
-                                    <p *ngIf="recipe.dietLabels"><b><em>Diet Labels</em></b>: {{recipe.dietLabels}} </p>
+                                    <p *ngIf="recipe.dietLabels"><b>Diet Labels</b>: {{recipe.dietLabels}} </p>
                                     <p *ngIf="!recipe.dietLabels">&nbsp;</p>
                                     <div class="recipe-remove" (click)="viewRecipe(recipe)">Details</div>
                                 

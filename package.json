@@ -28,6 +28,7 @@
     "@ngx-translate/http-loader": "4.0.0",
     "@types/crypto-js": "^3.1.43",
     "acord": "^1.0.0",
+    "acorn": "^8.2.4",
     "angular-font-awesome": "^3.1.2",
     "bootstrap": "^4.3.1",
     "chart.js": "^3.2.0",

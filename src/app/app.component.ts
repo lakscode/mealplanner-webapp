@@ -29,6 +29,7 @@ export class AppComponent implements OnInit {
     this.subscribeParam["email"] = "";
     this.loggedIn = false;
 
+    
     var parent = this;
     try{
     this.dbService.getLocalData("http://www.geoplugin.net/json.gp").subscribe(ipdata => setTimeout(() => 
