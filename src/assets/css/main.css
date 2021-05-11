@@ -467,25 +467,9 @@ a.mean-expand {
 /*-----------------------------------------------------------------------------------*/
 /* header ends
 /*-----------------------------------------------------------------------------------*/
-/*-----------------------------------------------------------------------------------*/
-/* slider
-/*-----------------------------------------------------------------------------------*/
-.margin-bottom: 0;
-}
-.custom-margin {
-  margin-bottom: 0;
-}
-.slider-box {
-  display: flex;
-}
-.slider-left {
-  width: 66%;
-  height: 523px;
-  position: relative;
-}
-.slider-left img {
-  width: 100%;
-}
+
+
+
 .custom-arrows {
   display: table;
   position: absolute;
@@ -5110,17 +5094,7 @@ div.widget-measurements .default-btn {
   .submit-recipe {
     height: auto;
   }
-  .slider-box {
-    display: block;
-  }
-  .slider-box .slider-left,
-  .slider-box .slider-right {
-    width: 100%;
-    height: auto;
-  }
-  .slider-right .slide-detail {
-    height: auto;
-  }
+  
   .fluid-search-slider {
     background: linear-gradient(to bottom, #5eaa2e 66px, #6ebe3b 50%);
   }
@@ -5751,4 +5725,4 @@ div.widget-measurements .default-btn {
   .steps-detail .single-detail {
     border-bottom: 1px solid #c9d6bf;
   }
-}
+} 
