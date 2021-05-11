@@ -1581,79 +1581,13 @@ ul {
 .read-more:hover {
   color: #c1452b;
 }
-/*--------------------*/
-/*
-/*--------------------*/
-.tabs-bordered .tab-container {
-  width: 100%;
-}
-.tabs-bordered .tabs-nav {
-  border: 1px solid #e6e0dd;
-  border-bottom: none;
-}
-.tabs-bordered .tab-container {
-  border: 1px solid #e6e0dd;
-  border-top: none;
-}
-.tab-container {
-  border: 1px solid #ffffff;
-  border-top: none;
-}
-.tab-container .icon-container {
-  width: 20px;
-}
-.tab-container .icon-svg {
-  fill: #6ebe3b;
-}
-.tab-container ul {
-  display: flex;
-  justify-content: flex-end;
-  margin-bottom: 0;
-  margin-left: -1px;
-  margin-right: -1px;
-}
-.tab-container ul li {
-  transition: 0.2s all ease-in-out;
-  cursor: pointer;
-  display: inline-block;
-  width: 33.33%;
-  background: #e6e0dd;
-  border-right: 1px solid #f2eeec;
-  text-align: center;
-  padding-top: 9px;
-  padding-bottom: 9px;
-}
-.tab-container ul li a {
-  display: inline-block;
-  text-transform: uppercase;
-  font-family: 'Lato', sans-serif;
-  font-weight: 400;
-  color: #736a65;
-  border-bottom: 3px solid transparent;
-  padding-top: 5px;
-  padding-bottom: 5px;
-}
-.tab-container ul li:last-child {
-  border-right: 0;
-}
-.tab-container ul li.active,
-.tab-container ul li:hover {
-  background: #ffffff;
-}
-.tab-container ul li.active a,
-.tab-container ul li:hover a {
-  font-family: 'Lato', sans-serif;
-  font-weight: 900;
-  color: #000000;
-  border-color: #6ebe3b;
-}
+
+
 .custom-row-food-tabs,
 .custom-col-food-tabs {
   display: flex;
 }
-.tab-container {
-  background: #ffffff;
-}
+
 .tabs-container .tab-content {
   padding: 24px 25px;
 }
@@ -1703,10 +1637,7 @@ ul {
   position: relative;
   z-index: 2;
 }
-.bg-corner-tabs {
-  right: -282px;
-  bottom: -73px;
-}
+
 /*-----------------------------------------------------------------------------------*/
 /* food tans end
 /*-----------------------------------------------------------------------------------*/
@@ -3099,31 +3030,7 @@ ul {
 .typography h6 {
   font-size: 14px;
 }
-.tab-container.tab-shortcode ul li.active {
-  background: #c1452b;
-}
-.tab-container.tab-shortcode ul li.active a {
-  color: #ffffff;
-}
-.tab-container.tab-shortcode ul li:hover {
-  background: #c1452b;
-}
-.tab-container.tab-shortcode ul li:hover a {
-  color: #ffffff;
-}
-.tab-container.tab-shortcode ul li a {
-  border: none;
-  font-weight: 700;
-}
-.tab-container.tab-shortcode .tab-content {
-  padding: 25px;
-}
-.tab-container.tab-shortcode .tab-content p {
-  font-family: 'Lato', sans-serif;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 26px;
-}
+
 .accordion dt {
   background: #dddddd;
   font-family: 'Lato', sans-serif;
@@ -4156,13 +4063,7 @@ ul {
     right: 0;
     margin-top: 20px;
   }
-  .tab-container ul {
-    flex-direction: column;
-  }
-  .tab-container ul li {
-    border-bottom: 1px solid #ffffff;
-    width: 100%;
-  }
+  
   .our-chefs .chef-single {
     width: 100%;
   }
