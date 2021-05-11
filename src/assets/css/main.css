@@ -2040,32 +2040,7 @@ ul {
 .steps-list .step-detail h3 {
   margin-top: 5px;
 }
-.tips-variations {
-  border: 1px solid #c9d6bf;
-  background-color: #eff9e8;
-  padding: 32px;
-  background-image: url("../images/bg-tips.png");
-  background-repeat: no-repeat;
-  background-position: right bottom;
-  margin-bottom: 44px;
-}
-.tips-variations h3 {
-  margin-top: 0;
-}
-.tips-variations li {
-  padding-left: 25px;
-  position: relative;
-  margin-bottom: 25px;
-}
-.tips-variations li:before {
-  font-family: FontAwesome;
-  content: "\f00c";
-  display: inline-block;
-  font-size: 15px;
-  position: absolute;
-  left: 0;
-  line-height: 26px;
-}
+
 .tags-icons span {
   font-size: 16px;
   font-family: 'Lora', serif;
@@ -2300,83 +2275,10 @@ ul {
 .recipe-set .slider-recipe-detail2:hover .custom-arrows {
   opacity: 1 !important;
 }
-.recipe-specs-2 {
-  display: flex;
-  background: #000000;
-  color: #ffffff;
-  flex-wrap: wrap;
-}
-.recipe-specs-2 li {
-  min-width: 144px;
-  font-family: 'Lato', sans-serif;
-  font-weight: 400;
-  flex: 1;
-  text-align: center;
-  border-right: 1px solid #2c2c2c;
-  border-bottom: 1px solid #2c2c2c;
-  padding: 16px 0;
-  font-size: 16px;
-  transition: 0.2s all ease-in-out;
-}
-.recipe-specs-2 li:last-child {
-  border-right: none;
-}
-.recipe-specs-2 li span {
-  color: #aa9f9a;
-}
-.recipe-specs-2 li:hover {
-  background: #333333;
-}
-.steps-tabs .tab {
-  outline: none;
-  height: 40px;
-  text-align: center;
-  border-bottom: 1px solid #e4d9d1;
-  border-right: 1px solid #e4d9d1;
-  padding-top: 3px;
-  padding-bottom: 10px;
-  font-family: 'Lora', serif;
-  font-style: italic;
-  font-weight: 400;
-  font-size: 16px;
-  color: #000000;
-  cursor: pointer;
-}
 
-.buttons-steps {
-  display: inline-block;
-  border: 1px solid #e4d9d1;
-  width: 82px;
-}
-.buttons-steps span {
-  width: 40px;
-  height: 38px;
-  line-height: 36px;
-  text-align: center;
-  display: table-cell;
-  cursor: pointer;
-  transition: 0.2s all ease-in-out;
-}
-.buttons-steps span:hover {
-  background: #f6f2ee;
-}
-.buttons-steps .prev-step {
-  border-right: 1px solid #e4d9d1;
-}
-.steps-detail .single-detail {
-  outline: none;
-  padding-top: 50px;
-  padding-bottom: 50px;
-}
-.steps-detail .single-detail p {
-  font-family: 'Lato', sans-serif;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 26px;
-}
-.steps-detail .single-detail img {
-  max-width: 100%;
-}
+
+
+
 .recipe-steps .accordion dt {
   background: none;
   border: 1px solid #eeeeee;
@@ -2561,14 +2463,7 @@ ul {
 .listing-grid .listing .detail .meta-listing .post-meta {
   margin-bottom: 15px;
 }
-.banner-add {
-  text-align: center;
-  width: 100%;
-  margin-bottom: 40px;
-}
-.banner-add img {
-  max-width: 100%;
-}
+
 
 .recipe-set .listing-buttons {
   float: right;
@@ -2604,78 +2499,9 @@ ul {
   border-color: #6ebe3b;
   color: #ffffff;
 }
-/*-----------------------------------------------------------------------------------*/
-/* Listing list & grid ends
-/*-----------------------------------------------------------------------------------*/
-/*-----------------------------------------------------------------------------------*/
-/* shortcodes
-/*-----------------------------------------------------------------------------------*/
-.shortcodes-wrapper h2 {
-  font-family: 'Lato', sans-serif;
-  font-weight: 900;
-  font-size: 24px;
-  text-transform: uppercase;
-  font-style: normal;
-}
-.shortcodes-wrapper h3 {
-  font-family: 'Lato', sans-serif;
-  font-weight: 700;
-  font-size: 18px;
-  font-style: normal;
-}
-.bottom-short-line {
-  position: relative;
-  padding-bottom: 15px;
-}
-.bottom-short-line:after {
-  content: "";
-  display: inline-block;
-  width: 50px;
-  height: 3px;
-  background: #6ebe3b;
-  position: absolute;
-  left: 0;
-  bottom: 0;
-}
-.wrapper-columns {
-  margin-bottom: 40px;
-  font-family: 'Lato', sans-serif;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 26px;
-}
-.typography {
-  margin-bottom: 100px;
-}
-.typography h1,
-.typography h2,
-.typography h3,
-.typography h4,
-.typography h5,
-.typography h6 {
-  font-family: 'Lato', sans-serif;
-  font-weight: 700;
-  text-transform: none;
-  font-style: normal;
-}
-.typography h1 {
-  font-size: 36px;
-}
-.typography h2 {
-  font-size: 30px;
-}
-.typography h3 {
-  font-size: 24px;
-}
-.typography h4 {
-  font-size: 18px;
-}
-.typography h5 {
-  font-size: 16px;
-}
-.typography h6 {
-  font-size: 14px;
-}
+
+
+
 
 .accordion dt {
   background: #dddddd;
@@ -2735,76 +2561,7 @@ ul {
   top: 5px;
   cursor: pointer;
 }
-.default-btn {
-  display: inline-block;
-  font-family: 'Lora', serif;
-  font-style: italic;
-  font-weight: 400;
-  font-size: 16px;
-  text-transform: capitalize;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  margin-right: 5px;
-  margin-bottom: 8px;
-  border: 1px solid transparent;
-}
-.default-btn.theme-color {
-  background: #6ebe3b;
-  color: #ffffff;
-}
-.default-btn.theme-tag-color {
-  background: #c1452b;
-  color: #ffffff;
-}
-.default-btn.light-color {
-  background: #a1a1a1;
-  color: #ffffff;
-}
-.default-btn.dark-color {
-  background: #000000;
-  color: #ffffff;
-}
-.default-btn.dark-color:hover {
-  background: #ffffff;
-  border-color: #000000;
-  color: #000000;
-}
-.default-btn.theme-color:hover,
-.default-btn.theme-tag-color:hover,
-.default-btn.light-color:hover {
-  background: #000000;
-  color: #ffffff;
-}
-.default-btn.theme-border {
-  border-color: #6ebe3b;
-}
-.default-btn.theme-border:hover {
-  background: #6ebe3b;
-}
-.default-btn.tag-border {
-  border-color: #c1452b;
-}
-.default-btn.tag-border:hover {
-  background: #c1452b;
-}
-.default-btn.light-border {
-  border-color: #a1a1a1;
-}
-.default-btn.light-border:hover {
-  background: #a1a1a1;
-}
-.default-btn.dark-border {
-  border-color: #000000;
-}
-.default-btn.dark-border:hover {
-  background: #000000;
-}
-.default-btn.theme-border:hover,
-.default-btn.tag-border:hover,
-.default-btn.light-border:hover,
-.default-btn.dark-border:hover {
-  color: #ffffff;
-}
+
 .small-button {
   padding-left: 19px;
   padding-right: 19px;
