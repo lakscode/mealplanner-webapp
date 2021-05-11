@@ -901,142 +901,9 @@ ul {
 .wrapper-hot-recipe-var2 {
   position: relative;
 }
-/*--------------------*/
-/* hot recipe var3
-/*--------------------*/
-.hot-recipes-var2.ext-var3 {
-  padding-top: 0px;
-}
-/*-----------------------------------------------------------------------------------*/
-/* hot recipes ends
-/*-----------------------------------------------------------------------------------*/
 
-/*-----------------------------------------------------------------------------------*/
-/*-----------------------------------------------------------------------------------*/
-/* our chefs
-/*-----------------------------------------------------------------------------------*/
-.wrapper-chefs {
-  display: flex;
-  position: relative;
-  margin-bottom: 45px;
-}
-.our-chefs .chef-single {
-  overflow: hidden;
-  transition: 0.2s all ease-in-out;
-  width: 25%;
-}
-.our-chefs .chef-single img {
-  width: 100%;
-  transition: 0.2s all ease-in-out;
-}
-.our-chefs .chef-single .chef-intro {
-  padding: 15px 25px;
-}
-.our-chefs .chef-single .chef-intro h4 {
-  font-size: 21px;
-  color: #ffffff;
-  font-family: 'Lora', serif;
-  font-style: italic;
-  font-weight: 400;
-}
-.our-chefs .chef-single .chef-intro h4 a {
-  transition: 0.2s all ease-in-out;
-}
-.our-chefs .chef-single .chef-intro h4 a:hover {
-  color: #ffffff;
-  opacity: .7;
-}
-.our-chefs .chef-single .chef-intro span {
-  font-family: 'Lato', sans-serif;
-  font-weight: 700;
-  font-size: 13px;
-  line-height: 30px;
-  text-transform: uppercase;
-  transition: 0.2s all ease-in-out;
-}
-.our-chefs .chef-single:hover {
-  background: #c1452b;
-}
-.our-chefs .chef-single:hover img {
-  transform: scale(1.08);
-}
-.our-chefs .chef-single:hover span {
-  color: #F6F6F6;
-}
-.bg-colorA {
-  background: #68645d;
-}
-.bg-colorA span {
-  color: #a5a094;
-}
-.bg-colorB {
-  background: #79756e;
-}
-.bg-colorB span {
-  color: #bfbaaf;
-}
-.bg-colorC {
-  background: #949088;
-}
-.bg-colorC span {
-  color: #bfbaaf;
-}
-.bg-colorD {
-  background: #a8a49d;
-}
-.bg-colorD span {
-  color: #d8d4cb;
-}
-.chef-bg {
-  right: -317px;
-  bottom: -103px;
-}
-/*--------------------*/
-/* our chefs variation 1
-/*--------------------*/
-.homo-4-col h3 {
-  margin-top: 35px;
-  font-size: 18px;
-  margin-bottom: 15px;
-}
-.homo-4-col .graphic-box {
-  transition: 0.2s all ease-in-out;
-}
-.homo-4-col .graphic-box img {
-  width: 100%;
-}
-.homo-4-col p {
-  font-family: 'Karla', sans-serif;
-  margin-bottom: 15px;
-}
-.homo-4-col .chef-designation {
-  display: inline-block;
-  text-transform: uppercase;
-  font-family: 'Lato', sans-serif;
-  font-weight: 700;
-  font-size: 13px;
-}
-.homo-4-col .col-single {
-  padding-bottom: 20px;
-}
-.homo-4-col .col-single:hover .chef-image {
-  opacity: .8;
-}
-.homo-4-col .col-single:hover .graphic-box {
-  opacity: .8;
-}
-.homo-4-col .post-meta {
-  margin-bottom: 30px;
-}
-.homo-4-col .post-meta li {
-  color: #000000;
-}
-/*-----------------------------------------------------------------------------------*/
-/* our chefs ends
-/*-----------------------------------------------------------------------------------*/
-/*-----------------------------------------------------------------------------------*/
-/* our chefs page
-/*-----------------------------------------------------------------------------------*/
+
+
 .wrapper-main-contents.all-chefs {
   padding-top: 40px;
 }
@@ -1309,26 +1176,7 @@ ul {
   position: relative;
   overflow: hidden;
 }
-.chefs-banner .bg-chef-video {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  margin: auto;
-  width: 100%;
-  z-index: 10;
-}
-.wrapper-bg-video {
-  position: absolute;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  margin: auto;
-  width: 100%;
-  background: #ffffff;
-}
+
 .chefs-card {
   position: relative;
   z-index: 12;
@@ -1365,145 +1213,14 @@ ul {
   margin-bottom: 25px;
   margin-top:15px;
 }
-/*-----------------------------------------------------------------------------------*/
-/* our chefs ends
-/*-----------------------------------------------------------------------------------*/
-/*-----------------------------------------------------------------------------------*/
-/* latest news
-/*-----------------------------------------------------------------------------------*/
+
 .latest-news {
   margin-bottom: 120px;
 }
-.wrapper-latest-news {
-  display: flex;
-  position: relative;
-  flex-wrap: wrap;
-}
-.wrapper-latest-news .latest-news-bg {
-  left: -246px;
-  bottom: -120px;
-}
-.news-single {
-  width: 25%;
-  transition: 0.2s all ease-in-out;
-}
-.news-single p,
-.news-single .more,
-.news-single .news-post-meta li::before {
-  transition: 0.2s all ease-in-out;
-}
-.news-single img {
-  width: 100%;
-}
-.news-single .news-detail {
-  padding: 21px 25px 25px ;
-}
-.news-single .news-detail h4 {
-  margin-top: 4px;
-  font-family: 'Lora', serif;
-  font-style: italic;
-  font-size: 18px;
-  line-height: 24px;
-  font-weight: 400;
-}
-.news-single .news-detail h4 a:hover {
-  color: #c1452b;
-  opacity: .7;
-}
-.news-single .news-detail .news-post-meta li {
-  font-weight: 400;
-  font-size: 13px;
-  color: #4b4841;
-}
-.news-single .news-detail .news-post-meta.sb-line {
-  margin-bottom: 40px;
-}
-.news-single .news-detail .news-post-meta.sb-line:after {
-  transition: 0.2s all ease-in-out;
-  background: #d6b76e;
-  bottom: -22px;
-}
-.news-single .news-detail p {
-  color: #918c82;
-}
-.news-single .news-detail .more {
-  text-transform: uppercase;
-  font-family: 'Lato', sans-serif;
-  font-weight: 700;
-  font-size: 13px;
-  color: #4b4841;
-}
-.news-single .news-detail .more:after {
-  content: "\f101";
-  font-family: FontAwesome;
-  margin-left: 5px;
-}
-.news-single .news-detail .more:hover {
-  color: #c1452b !important;
-}
-.news-single:nth-of-type(odd) {
-  background: #f4f1ea;
-}
-.news-single:nth-of-type(even) {
-  background: #f9f7f2;
-}
-.news-single .news-visuals {
-  height: 183px;
-  overflow: hidden;
-}
-.news-single:hover {
-  background: #F1EBDD !important;
-}
-.homo-4-col h3 a:hover {
-  color: #6ebe3b;
-}
 
-.news-visuals iframe {
-  width: 100%;
-  height: 100%;
-  border: none;
-}
-/*--------------------*/
-/* latest news var2
-/*--------------------*/
-.homo-4-col.news-variation2 {
-  padding-top: 30px;
-  padding-bottom: 50px;
-}
-.homo-4-col.news-variation2 h2,
-.homo-4-col.news-variation2 h3 {
-  text-transform: uppercase;
-  font-style: normal;
-}
-.homo-4-col.news-variation2 h2 {
-  font-family: 'Lato', sans-serif;
-  font-weight: 900;
-}
-.homo-4-col.news-variation2 h3 {
-  font-family: 'Lato', sans-serif;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 30px;
-  margin-bottom: 20px;
-}
-.homo-4-col.news-variation2 .short-separator {
-  margin-bottom: 20px;
-}
-.homo-4-col.news-variation2 .read-more-bordered {
-  margin-top: 20px;
-}
-.homo-4-col.news-variation2 .post-meta {
-  margin-bottom: 20px;
-}
-.homo-4-col .video-post {
-  height: 184px;
-}
-/*-----------------------------------------------------------------------------------*/
-/* Latest news ends
-/*-----------------------------------------------------------------------------------*/
-/*-----------------------------------------------------------------------------------*/
-/* recipe banner
-/*-----------------------------------------------------------------------------------*/
+
+
+
 .recipe-banner {
   background: #6ebe3b;
   position: relative;
