@@ -131,22 +131,6 @@ $('.add-button.add-nutrient').on("click",function(event){
 
 
 
-    /*-----------------------------------------------------------------------------------*/
-    /* advance search toggle
-     /*-----------------------------------------------------------------------------------*/
-
-    $('.advance-search .tag-inner').on("click",function(){
-        if ($(".advance-search").hasClass("open")){
-            $(".advance-search").removeClass("open");
-            $(".outer-advance-search").slideUp();
-        }
-        else{
-            $(".advance-search").addClass("open");
-            $(".outer-advance-search").slideDown();
-        }
-
-
-    });
 
     /*-----------------------------------------------------------------------------------*/
     /* Listing list end grid buttons
@@ -247,12 +231,12 @@ $('.add-button.add-nutrient').on("click",function(event){
             }
         };
 
-        $('#contact-form').validate({
+    /*    $('#contact-form').validate({
             errorLabelContainer: $("div.error-container"),
             submitHandler: function (form) {
                    $(form).ajaxSubmit(contact_options);
             }
-        });
+        });*/
     }
 
 

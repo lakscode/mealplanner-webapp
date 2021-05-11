@@ -1638,12 +1638,7 @@ ul {
   z-index: 2;
 }
 
-/*-----------------------------------------------------------------------------------*/
-/* food tans end
-/*-----------------------------------------------------------------------------------*/
-/*-----------------------------------------------------------------------------------*/
-/* recipes home page variation 4 & 5
-/*-----------------------------------------------------------------------------------*/
+
 .recipes-home-body {
   background: #f8f6f5;
   padding-top: 85px;
@@ -1747,79 +1742,8 @@ ul {
 .boxed-recipes .detail a:hover {
   color: #c1452b;
 }
-/*-----------------------------------------------------------------------------------*/
-/* recipes home page variation 4 & 5 ends
-/*-----------------------------------------------------------------------------------*/
-/*-----------------------------------------------------------------------------------*/
-/* advance search form
-/*-----------------------------------------------------------------------------------*/
-.advance-search {
-  //border-bottom: 1px solid #e4d9d1;
-}
-.advance-search.open .wrapper-search .tag-inner {
-  background: #c1452b;
-}
-.advance-search.open .wrapper-search .tag-inner:before {
-  background: #c1452b;
-}
-.advance-search.open .wrapper-search .tag-inner i {
-  transform: rotateX(180deg);
-}
-.advance-search.search-main .outer-advance-search {
-  display: block;
-}
-.advance-search button {
-  width: 42px;
-  height: 38px;
-  line-height: 34px;
-  text-align: center;
-  color: #ffffff;
-  background-color: #6ebe3b;
-  border: none;
-  transition: 0.2s all ease-in-out;
-}
-.advance-search button:hover {
-  background-color: #000000;
-}
-.advance-search label {
-  font-family: 'Lato', sans-serif;
-  font-weight: 700;
-  color: #000000;
-  text-transform: capitalize;
-  font-size: 14px;
-}
-.advance-search .selectric {
-  background: #ffffff;
-  height: 38px;
-  border-color: #e4d9d1;
-}
-.advance-search .selectric p {
-  font-family: 'Lora', serif;
-  font-style: italic;
-  font-weight: 400;
-  color: #000000;
-  font-size: 14px;
-}
-.advance-search .selectric .button {
-  font: FontAwesome;
-}
-.advance-search .selectric .button:after {
-  height: 38px;
-  width: 38px;
-  line-height: 38px;
-  border: none;
-  content: "\f107";
-  font-family: FontAwesome;
-}
-.advance-search .selectric-items .selectric-scroll {
-  font-family: 'Lora', serif;
-  font-style: italic;
-  font-weight: 400;
-}
-.outer-advance-search {
-  padding-top:22px;
-  display: none;
-}
+
+
 .wrapper-search {
   position: relative;
 }
@@ -1853,205 +1777,13 @@ ul {
   display: inline-block;
   vertical-align: middle;
 }
-.inner-advance-search {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-}
-.inner-advance-search .form-field {
-  margin-right: 15px;
-  flex: 1;
-}
-.inner-advance-search .form-field input {
-  width: 100%;
-  height: 38px;
-}
-/*-----------------------------------------------------------------------------------*/
-/* advance search form ends
-/*-----------------------------------------------------------------------------------*/
-/*-----------------------------------------------------------------------------------*/
-/* contact page
-/*-----------------------------------------------------------------------------------*/
+
+
 .recipes-home-body.inner-page {
   padding-top: 20px;
 }
-.contact-container {
-  background: #ffffff;
-  padding: 30px;
-}
-.contact-container h3 {
-  font-family: 'Lato', sans-serif;
-  font-weight: 700;
-  font-style: normal;
-  font-size: 16px;
-  color: #514b49;
-  margin-bottom: 40px;
-  position: relative;
-}
-.contact-container h3:after {
-  content: "";
-  display: inline-block;
-  width: 48px;
-  height: 3px;
-  background: #5eaa2e;
-  position: absolute;
-  left: 0;
-  bottom: -20px;
-}
-.contact-container p,
-.contact-container .contact-options {
-  font-family: 'Lato', sans-serif;
-  font-weight: 400;
-  font-size: 15px;
-  color: #514b49;
-}
-.contact-container .contact-options {
-  margin-top: 30px;
-}
-.contact-container .contact-options span {
-  font-weight: 700;
-}
-.contact-container .contact-options li {
-  padding-left: 30px;
-  position: relative;
-  margin-bottom: 13px;
-}
-.contact-container .contact-options li:before {
-  font-family: FontAwesome;
-  position: absolute;
-  left: 0;
-  top: 0;
-  line-height: 20px;
-  font-size: 21px;
-}
-.contact-container .contact-options .phone:before {
-  content: "\f098";
-}
-.contact-container .contact-options .fax:before {
-  content: "\f1ac";
-  font-size: 18px;
-}
-.contact-container .contact-options .email:before {
-  content: "\f199";
-}
-.contact-option-single {
-  margin-bottom: 50px;
-}
-#contact-form {
-  padding-right: 35px;
-}
-#contact-form ::-webkit-input-placeholder {
-  font-family: 'Lato', sans-serif;
-  font-weight: 700;
-  color: #514b49;
-}
-#contact-form :-moz-placeholder {
-  /* Firefox 18- */
-  font-family: 'Lato', sans-serif;
-  font-weight: 700;
-  color: #514b49;
-}
-#contact-form ::-moz-placeholder {
-  /* Firefox 19+ */
-  font-family: 'Lato', sans-serif;
-  font-weight: 700;
-  color: #514b49;
-}
-#contact-form :-ms-input-placeholder {
-  font-family: 'Lato', sans-serif;
-  font-weight: 700;
-  color: #514b49;
-}
-#contact-form input,
-#contact-form textarea {
-  width: 100%;
-  margin-bottom: 29px;
-  border: 1px solid #e4d9d1;
-  outline: none;
-  padding-left: 15px;
-  padding-right: 15px;
-  font-size: 16px;
-}
-#contact-form input:focus,
-#contact-form textarea:focus {
-  border-color: #c1452b;
-}
-#contact-form .required::-webkit-input-placeholder:after {
-  content: "*";
-  color: #e60000;
-}
-#contact-form .required::-moz-placeholder:after {
-  content: "*";
-  color: #e60000;
-}
-#contact-form .required:-ms-input-placeholder:after {
-  content: "*";
-  color: #e60000;
-}
-#contact-form .requiredinput:-moz-placeholder:after {
-  content: "*";
-  color: #e60000;
-}
-#contact-form input {
-  height: 40px;
-}
-#contact-form textarea {
-  padding-top: 15px;
-  padding-bottom: 15px;
-  height: 90px;
-  resize: none;
-}
-#contact-form button {
-  background: #6ebe3b;
-  color: #ffffff;
-  font-family: 'Lora', serif;
-  font-style: italic;
-  font-weight: 400;
-  font-size: 16px;
-  text-transform: capitalize;
-  outline: none;
-  border: none;
-  padding: 9px 38px;
-  transition: 0.2s all ease-in-out;
-}
-#contact-form button:hover {
-  background: #000000;
-}
-#contact-form .error {
-  border-color: #c1452b;
-}
-#map_canvas {
-  height: 368px;
-}
-.error-container {
-  margin-top: 20px;
-}
-.error-container .error {
-  display: block;
-  color: #c1452b;
-  font-family: 'Lato', sans-serif;
-  font-size: 14px;
-  text-transform: capitalize;
-}
-#contact-loader {
-  display: none;
-  vertical-align: -7px;
-  margin-left: 5px;
-}
-#message-sent {
-  margin-top: 20px;
-  display: block;
-  color: #6ebe3b;
-  font-family: 'Lato', sans-serif;
-  font-size: 14px;
-  text-transform: capitalize;
-}
-/*-----------------------------------------------------------------------------------*/
-/* contact page ends
-/*-----------------------------------------------------------------------------------*/
-/*-----------------------------------------------------------------------------------*/
-/* recipe detail page
-/*-----------------------------------------------------------------------------------*/
+
+
 .recipe-set .single-recipe-detail h2 {
   margin-top: 5px;
   margin-bottom: 5px;
@@ -2171,70 +1903,7 @@ ul {
 .wrapper-recipe-heading .rating-box .icon-svg {
   fill: #6ebe3b;
 }
-.slider-recipe-detail {
-  display: flex;
-  justify-content: space-between;
-}
-.slider-recipe-detail .wrapper-slider-detail {
-  width: 80%;
-  position: relative;
-}
-.slider-recipe-detail .wrapper-slider-detail .flexslider {
-  border: none;
-  margin-bottom: 0;
-}
-.slider-recipe-detail .wrapper-slider-detail .wrapper-slider-nav {
-  position: relative;
-}
-.slider-recipe-detail .wrapper-slider-detail .wrapper-slider-nav .slider-nav li {
-  margin-right: 15px;
-}
-.slider-recipe-detail .wrapper-slider-detail .wrapper-slider-nav .slider-nav .flex-direction-nav {
-  position: absolute;
-}
-.slider-recipe-detail .recipe-specs {
-  margin-bottom: 0;
-  width: 20%;
-  background: #ffffff;
-  display: flex;
-  flex-direction: column;
-  padding: 11px;
-}
-.slider-recipe-detail .recipe-specs li {
-  flex: 1;
-  border: 1px solid #e4d9d1;
-  border-bottom: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  color: #000000;
-}
-.slider-recipe-detail .recipe-specs li:last-child {
-  border: 1px solid #e4d9d1;
-}
-.slider-recipe-detail .recipe-specs li span {
-  display: inline-block;
-}
-.slider-recipe-detail .recipe-specs li .count {
-  font-family: 'Lora', serif;
-  font-weight: 700;
-  font-size: 24px;
-}
-.slider-recipe-detail .recipe-specs li .count span {
-  font-weight: 400;
-  font-size: 21px;
-}
-.slider-recipe-detail .recipe-specs li .text {
-  font-family: 'Lato', sans-serif;
-}
-.wrapper-slider-nav {
-  position: relative;
-  z-index: 999;
-  margin: 0;
-  padding: 14px 59px;
-  background: rgba(0, 0, 0, 0.83);
-}
+
 
 .single-recipe-detail {
   margin-bottom: 30px;
@@ -2270,31 +1939,8 @@ ul {
 .recipe-detail-body .rating-box .icon-svg {
   fill: #6ebe3b;
 }
-.pre-tags {
-  display: inline-block;
-}
-.pre-tags li {
-  display: inline-block;
-  font-family: 'Lato', sans-serif;
-  font-weight: 700;
-  font-size: 16px;
-  margin-right: 30px;
-}
-.pre-tags span {
-  font-weight: 400;
-}
-.print-button {
-  display: inline-block;
-  font-family: 'Lato', sans-serif;
-  font-weight: 400;
-  font-size: 16px;
-}
-.print-button i {
-  margin-right: 5px;
-}
-.print-button:hover {
-  color: #c1452b;
-}
+
+
 .ingredients-checkbox {
   margin-bottom: 52px;
   border: 1px solid #e4d9d1;
@@ -3494,10 +3140,7 @@ ul {
   .boxed-recipes .recipe-single {
     width: 47%;
   }
-  .wrapper-slider-nav {
-    height: 61px;
-    margin-top: -61px;
-  }
+ 
   .slider-recipe-detail .recipe-specs li .count {
     font-size: 20px;
   }
@@ -3755,10 +3398,7 @@ ul {
   #contact-form {
     padding-right: 0;
   }
-  .wrapper-slider-nav {
-    height: 70px;
-    margin-top: -70px;
-  }
+  
   .listing-grid .listing {
     width: 47%;
   }
@@ -3833,10 +3473,7 @@ ul {
   .inner-advance-search button {
     width: 80%;
   }
-  .wrapper-slider-nav {
-    height: auto;
-    margin-top: 0;
-  }
+  
   .wrapper-recipe-heading {
     flex-direction: column;
   }
