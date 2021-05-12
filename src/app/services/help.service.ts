@@ -28,6 +28,21 @@ export class HelpService {
 
 	}
 
+	isMobile()
+	{
+		var isMobile = false;
+		var innerWidth = window.innerWidth;
+		console.log("innerWidth " + innerWidth);
+		if(innerWidth > 640)
+		{
+			isMobile = false;
+		}
+		else
+		{
+			isMobile = true;
+		}
+		return isMobile;
+	}
 	GenerateUniqueId(idlength) {
 		var result = '';
 		var characters= 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';

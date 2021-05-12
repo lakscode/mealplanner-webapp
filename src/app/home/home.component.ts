@@ -19,7 +19,7 @@ stepsList: Array<any> = [];
 testimonialsList: Array<any> = [];
 
 popupforquestions: boolean =false;
-
+isMobile: boolean = false;
 
   constructor(private router: Router, private modalService: ModalService,  private helpService: HelpService) {
 	this.labels={"companyName":this.helpService.getConstants("companyName")};
@@ -30,7 +30,8 @@ popupforquestions: boolean =false;
 		console.log("Home NgOninit");
 		this.loadSteps(); 
 	//	this.loadTestimonials();
-
+		this.isMobile = this.helpService.isMobile();
+		console.log(this.isMobile);
 		this.currentUser =this.helpService.getCurrentUser();
 		if(this.currentUser !== null)
 		{
