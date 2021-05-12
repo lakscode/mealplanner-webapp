@@ -29,7 +29,7 @@
          </div>
          <div class="image-side  wow zoomIn animated hidden-xs" style="visibility: visible; animation-name: zoomIn;">
             <div class="home-sec-image">
-               <img src="assets/images/temp-images/good-food.jpg" alt="image">
+               <img [lazyLoad]="images['goodfood']" alt="good food image">
             </div>
          </div>
       </div>
@@ -57,7 +57,7 @@
 			            </div>
 		            </div>
 		            <div class="col-12 col-lg-6" style="text-align:center;">
-				         <img alt="background image" src="{{step.image}}" style=" height: 250px" class="rounded-bg specialty-image w-80">
+				         <img alt="background image" [lazyLoad]="step.image" style=" height: 250px" class="rounded-bg specialty-image w-80">
 		             </div>
 	            </div>
 	            <div class="row">
@@ -81,16 +81,16 @@
                 
                   <div  class="storeImgDiv">
                      <a href="javascript:void(0)">
-                        <img src="assets/app-store.png" alt="Download on the App Store" class="storeImg"></a>
+                        <img [lazyLoad]="images['appstore']" alt="Download on the App Store" class="storeImg"></a>
                      <a href="javascript:void(0)">
-                        <img src="assets/play-store.png" alt="Get it on Google Play" class="storeImg"></a>
+                        <img [lazyLoad]="images['playstore']" alt="Get it on Google Play" class="storeImg"></a>
                   </div>
                  
               </div>
          </div>
          <div *ngIf="!isMobile" class="image-side  wow zoomIn animated hidden-xs" style="visibility: visible; animation-name: zoomIn;margin-bottom:40px">
             <div class="home-sec-image">
-               <img src="assets/mtc_s.jpg" style="width:610px;height:425px" alt="mobile screen">
+               <img [lazyLoad]="images['mobilescreens']"  style="width:610px;height:425px" alt="mobile screen">
                </div>
             <!--<div class="home-sec-image image-outer">
                <img src="assets/mtc1_s.jpg" style="width:210px;height:425px" alt="image">

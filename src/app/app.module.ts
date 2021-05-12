@@ -68,6 +68,7 @@ import { RecipebooksModule } from './recipes/recipebooks/recipebooks.module';
 import { RecipebookModule } from './recipes/recipebook/recipebook.module';
 import { FaqsModule } from './faqs/faqs.module';  
 
+import { LazyLoadImageModule } from 'ng-lazyload-image'; 
 
 @NgModule({
   declarations: [
@@ -120,7 +121,8 @@ import { FaqsModule } from './faqs/faqs.module';
 	ProgressModule,
 	RecipebooksModule,
 	RecipebookModule,
-	FaqsModule
+	FaqsModule,
+	LazyLoadImageModule
   ],
   schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
   providers: [],
