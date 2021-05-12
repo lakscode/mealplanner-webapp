@@ -18,13 +18,9 @@
                       <li><span style="font-size:24px"> <i class="fa fa-clock-o" aria-hidden="true"></i></span><a href="javascript:void(0)">Save Planning Time</a></li>
                       <li><span style="font-size:24px">  <i class="fa fa-cutlery" aria-hidden="true"></i></span><a href="javascript:void(0)">Personalize Your Diet</a></li>
                       <li><span style="font-size:24px"> <i class="fa fa-list" aria-hidden="true"></i></span><a href="javascript:void(0)">Tailor Grocery List</a></li>
-
-                      <!--<li><span><img src="assets/images/burger-icon.png" alt="icon"></span><a href="javascript:void(0)">Save Planning Time</a></li>
-                      <li><span><img src="assets/images/grapes-icon.png" alt="icon"></span><a href="javascript:void(0)">Personalize Your Diet</a></li>
-                      <li><span><img src="assets/images/salt-pot-icon.png" alt="icon"></span><a href="javascript:void(0)">Tailor Grocery List</a></li>-->
                   </ul>
-                  <!--<a class="button-default theme-filled video-button swipebox" href="javascript:void(0)">Watch our Video</a>-->
-                  <a class="button-default theme-filled hollow-button" (click)="gotopage('pricing')" href="javascript:void(0)">Know more About Us</a>
+                <!--  <a class="buttonGreen video-button swipebox" href="javascript:void(0)">Watch our Video</a> -->
+                  <a class="buttonGreen" (click)="gotopage('pricing')" href="javascript:void(0)">Know more About Us</a>
               </div>
          </div>
          <div class="image-side  wow zoomIn animated hidden-xs" style="visibility: visible; animation-name: zoomIn;">
@@ -44,8 +40,6 @@
                      <h2  class="heading-big-1" style="">Easy steps</h2>
 	           <div class="row secL" *ngFor="let step of stepsList; let i = index;">
 		            <div class="col-12 col-lg-6">
-                     <!--<span style='    font-size: 24px;' class="heading-small">How to start?</span>
-                     <h2  style="font-size: 38px;">Easy steps</h2>-->
 			            <h1 class="text-lg-left mb-4 title">{{step.label}}</h1>
 			            <h3 class="subtitle">{{step.subtitle}}</h3>
 			            <p class="text-justify mb-5 description"  style=" direction: ltr;">{{step.description}}</p>
