@@ -1499,3 +1499,6 @@ background-color: $orange;
   white-space: normal; 
   width: auto;
 }
+
+.infoModal .items {background-color: #FFF;}
+.infoModal .items:nth-child(even) {background-color: #f2f2f2;}

@@ -455,7 +455,7 @@
 
 
 
-<jw-modal id="popuppanel" style="display:none;">
+<jw-modal id="popuppanel" style="display:none;" [width]="40">
     <div class="" style="min-height:400px;padding:25px;">
     
     <div style="border:1px solid #ccc; border-radius:15px; padding:15px">
@@ -471,7 +471,7 @@
         <div class="row" >
             <div class="col-12 col-lg-12 col-xl-12 infoModal" style='max-height:400px; border:0px;margin-top:0px; text-align:center'>
                 <ng-container *ngFor="let item of shoppingList; let i = index">
-                <div *ngIf='item.quantity > 0' style="margin-top:20px;text-align:left;" >
+                <div class="items" *ngIf='item.quantity > 0' style="padding:10px;text-align:left;" >
                     <div style='float:left'>{{setFLU(item.name)}}</div>
                     <div style='float:right'>{{formatNumber(item.quantity)}}  {{item.measure}}</div>  
                     <div style='clear:both'></div>
