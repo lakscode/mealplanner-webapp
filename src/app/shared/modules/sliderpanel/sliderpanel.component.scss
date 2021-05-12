@@ -5,6 +5,10 @@
             animation: flip-in-ver-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
 
+.read-more-bordered:hover {
+   color: #FFF !important;
+}
+
  @-webkit-keyframes flip-in-ver-left {
     0% {
       -webkit-transform: rotateY(80deg);
@@ -55,19 +59,6 @@
 .slide-detail-inner p {
 font-family: 'Lato', sans-serif;
 }
-.slide-detail-inner .read-more-bordered {
-    margin-top: 15px;
-    display: inline-block;
-    height: 30px;
-    line-height: 28px;
-    font-family: 'Lato', serif;
-    font-style: italic;
-    font-weight: 700;
-    padding: 0 15px;
-    text-transform: capitalize;
-    border: 1px solid #000000;
-    font-size:16px;
-}
 
 a:hover {
   color:var(--green);
@@ -108,14 +99,7 @@ a:hover {
   {
     font-size: 20px;
   }
-  .slide-detail-inner .read-more-bordered
-  {
-    border:0px;
-    background: $green;
-    color: #FFF;
-    font-family: 'Lato', serif;
-    font-size:16px;
-  }
+
   .carousel-indicators
   {
     display:none;

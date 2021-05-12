@@ -1,5 +1,35 @@
 @import "../_variables.scss";
 
+.buttonGreen {
+	height: 40px;
+    line-height: 40px;
+    text-align: center;
+    display: inline-block;
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: 16px;
+    min-width: 193px;
+    vertical-align: middle;
+    margin-right: 5px;
+    margin-bottom: 10px;
+    background: #6ebe3b;
+    color: #ffffff;
+    border: 1px solid #000000;
+}
+
+.buttonGreen:hover {
+	background: #000;
+	text-decoration:none;
+	color:#fff;
+}
+
+.video-button:before {
+ 	font-family: FontAwesome;
+  	content: "\f16a";
+    font-style: normal;
+    margin-right: 10px;
+}
+
 .title-green
 {
 	color: $third;

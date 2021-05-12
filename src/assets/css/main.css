@@ -98,40 +98,13 @@ ul {
 /* buttons
 /*-----------------------------------------------------------------------------------*/
 
-.button-default {
-  height: 40px;
-  line-height: 40px;
-  text-align: center;
-  display: inline-block;
-  font-family: 'Lora', serif;
-  font-style: italic;
-  font-size: 16px;
-  min-width: 193px;
-  vertical-align: middle;
-  margin-right: 5px;
-  margin-bottom: 10px;
-}
-.theme-filled {
-  background: #6ebe3b;
-  color: #ffffff;
-}
-.theme-filled:hover {
-  background: #000000;
-  color: #ffffff;
-}
 .video-button:before {
   font-family: FontAwesome;
   content: "\f16a";
   font-style: normal;
   margin-right: 10px;
 }
-.hollow-button {
-  border: 1px solid #000000;
-}
-.hollow-button:hover {
-  background: #000000;
-  color: #ffffff;
-}
+
 .read-more-bordered {
   display: inline-block;
   height: 30px;
@@ -143,6 +116,8 @@ ul {
   text-transform: capitalize;
   border: 1px solid #000000;
   color:#77C14B;
+  font-size:16px;
+  margin:15px 0 25px;
 }
 .read-more-bordered:hover {
   background: #000000;
@@ -595,9 +570,6 @@ ul {
 .wrapper-home-slider.variation-two .slide-detail-inner p {
   font-family: 'Karla', sans-serif;
   margin-bottom: 20px;
-}
-.wrapper-home-slider.variation-two .slide-detail-inner .read-more-bordered {
-  margin-top: 15px;
 }
 .wrapper-home-slider.variation-two .slide-detail-inner .rating-box {
   margin-bottom: 5px;
@@ -1209,10 +1181,7 @@ ul {
   font-family: 'Karla', sans-serif;
   margin-bottom: 25px;
 }
-.chefs-card-inner .read-more-bordered {
-  margin-bottom: 25px;
-  margin-top:15px;
-}
+
 
 .latest-news {
   margin-bottom: 120px;
