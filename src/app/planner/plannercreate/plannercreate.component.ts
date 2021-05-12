@@ -1160,7 +1160,19 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 		}
 		return retValue;
 	}
-
+	formatNumber(num)
+	{
+	var retVal = num;
+		if(num %1 ==0)
+		{
+			retVal= num;
+		}
+		else
+		{
+			retVal =num.toFixed(2);
+		}
+		return retVal;
+	}
 	checkData(item)
 	{
 		var retValue = false;
@@ -1414,10 +1426,10 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 			console.log(itemmeal);
 		  if(typeof(itemday) !== "undefined" && typeof(itemmeal["recipe"]) !== "undefined" && itemmeal["recipe"] !== null)
 		  {
-		  console.log(itemmeal["recipe"]["ingredients"]);
-					if(typeof(itemmeal["recipe"]["ingredients"]) !== "undefined" && itemmeal["recipe"]["ingredients"] !== "")
-		  {
-			  console.log(itemmeal["recipe"]["ingredients"]);
+		 // console.log(itemmeal["recipe"]["ingredients"]);
+			if(typeof(itemmeal["recipe"]["ingredients"]) !== "undefined" && itemmeal["recipe"]["ingredients"] !== "")
+		   {
+			//  console.log(itemmeal["recipe"]["ingredients"]);
 			
 			  if(itemmeal["recipe"]["ingredients"].length  < 4999)
 			  {
@@ -1427,44 +1439,80 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 					for(let k=0; k < tempA.length; k++)
 					{
 					  ingredientsList.push(tempA[k]['text'])
-					  var t = tempA[k]['text'];
-					  if(t.indexOf('cups') > -1)
-					  {
-						var t1 = t.split('cups');
-						var cIndex = consList.findIndex(x => (x.name.trim()  === t1[1].trim()));
-						if(cIndex > -1)
-						{
-						  consList[cIndex]['quantity'] = parseFloat(consList[cIndex]['quantity']) +  parseFloat(t1[0].trim());
+					  var t1 = this.formatText(tempA[k]['text']);
+						var t = tempA[k]['food']
+
+						if(tempA[k]['food'] == 'vegetable oil')
+						console.log(tempA[k]);
+
+					  	var fIndex = consList.findIndex(x=>(x.name.toLowerCase().trim() ===  t.toLowerCase().trim()));
+						  if(fIndex > -1)
+						  {
+							consList[fIndex]['quantity'] =  parseFloat(consList[fIndex]['quantity' ] ) +  tempA[k]['quantity'];
+						  }
+						  else
+						  {
+							  var unit = "";
+							  if( tempA[k]['measure'] !== "<unit>")
+							  unit = tempA[k]['measure'];
+
+							consList.push({"name": tempA[k]['food'].toLowerCase(), 'quantity':  tempA[k]['quantity'], 'measure': unit})
+						  }
+						 
+						  
+
+
+					  /*
+					   var t2= t1.split("plus");
+
+					   for(let l1 = 0; l1 < t2.length; l1++)
+					   {
+						   	var t = t2[l1].trim();
+	
+							
+								console.log(t);
+																
+									var findWord = "";
+									if(t.indexOf('tbsp') > -1) 
+										findWord = "tbsp";
+									else if(t.indexOf('cup') > -1) 
+									findWord = "cup";
+									if(findWord !== "")
+									{
+										console.log(" findWord " + findWord);
+										var tem1 = t.split(findWord)
+										var fIndex = consList.findIndex(x=>(x.name.trim() === t.trim()));
+
+										if(tem1.length > 1)
+										{
+											console.log(tem1);
+											if(fIndex == -1)
+											{
+												consList.push({"name":tem1[1], 'quantity': tem1[0], 'measure':findWord})
+											}
+											else
+											{
+												
+												consList[fIndex]['quantity'] += tem1[0]  + "~"
+											}
+										}
+										else
+										{
+											consList.push({"name":t, 'quantity': '', 'measure':""})
+										}
+									}
+									else
+									{
+										console.log(t);
+										consList.push({"name":t, 'quantity': '', 'measure':""})
+									}
+								
+							
 						}
-						else
-						{
-						  consList.push({"name":t1[1].trim(), 'quantity': t1[0].trim(), 'measure':"cups"})
-						}
-		
-					  }
-					  else if(t.indexOf('cup') > -1)
-					  {
-						var t1 = t.split('cup');
-						//var cIndex = shoppingList.findIndex(x => (x.name  === t1[1]));
-						var cIndex = consList.findIndex(x => (x.name.trim()  === t1[1].trim()));
-						if(cIndex > -1)
-						{
-						  consList[cIndex]['quantity'] = parseFloat(consList[cIndex]['quantity']) +  parseFloat(t1[0].trim());
-						}
-						else
-						{
-						  consList.push({"name":t1[1].trim(), 'quantity': t1[0].trim(), 'measure':"cups"})
-						}
-			
-					
-					  }
-					  else
-					  {
-						var fIndex = consList.findIndex(x=>(x.name.trim() === t.trim()));
-						if(fIndex == -1)
-						consList.push({"name":t, 'quantity': '', 'measure':""})
-					  }
+
+						*/
 					}
+					
 				  }
 				  catch(error)
 				  {
@@ -1481,13 +1529,52 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 	//  console.log(ingredientsList);
 	 // console.log(shoppingList);
 	//  console.log(consList);
+		consList = consList.sort(this.sortArraybyIndex);
 	  this.shoppingList = consList
 	  //console.log(JSON.stringify(shoppingList));
-	  console.log(JSON.stringify(consList));
+	//  console.log(JSON.stringify(consList));
 	 // sessionStorage.setItem("list",JSON.stringify(consList));
 	  this.openModal("popuppanel");
 	}
 
+	sortArraybyIndex(a, b) {
+		if ( a['name'] < b['name'] ){
+			return -1;
+		  }
+		  if ( a['name'] > b['name'] ){
+			return 1;
+		  }
+		  return 0;
+	}
+
+	formatText(str)
+	{
+		var retStr = str;
+		if(str !== "")
+		{
+			//retStr = str.replaceAll("tsp", "tbsp");
+			retStr = str.replace(/tsp/gi, 'tbsp')
+			retStr = retStr.replace(/teaspoons/gi, 'tbsp')
+			retStr = retStr.replace(/teaspoon/gi, 'tbsp')
+			retStr = retStr.replace(/tablespoons/gi, 'tbsp')
+			retStr = retStr.replace(/tablespoon/gi, 'tbsp')
+			retStr = retStr.replace(/cups/gi, 'cup')
+			
+			/* retStr = retStr.replace("teaspoons", "tbsp"); 
+			retStr = retStr.replace("teaspoon", "tbsp"); 
+			retStr = retStr.replace("tablespoons", "tbsp"); 
+			retStr = retStr.replace("tablespoon", "tbsp");  */
+
+			retStr = retStr.replace("u2013", "-"); 
+			 
+			retStr = retStr.replace("u00bc", " 1/4");
+			retStr = retStr.replace("u00bc", " 1/2");
+			retStr = retStr.replace("u00bd", " 3/4");
+			retStr = retStr.replace("u2153", " 1/3");
+			retStr = retStr.replaceAll("  ", " ");
+		}
+		return retStr;
+	}
 	openModal(id)
 	{
 		this.modalService.open(id);
