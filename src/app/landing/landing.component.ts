@@ -1,11 +1,10 @@
 import { Component, OnInit,OnDestroy  } from '@angular/core';
-import { Router, ActivatedRoute, NavigationEnd } from "@angular/router";
-import { UserService } from '../services/user.service';
-import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router} from "@angular/router";
+
 import { DBService } from '../dbservices/db.service';
 import { HelpService } from '../services/help.service';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../environments/environment';
+import { DomSanitizer } from '@angular/platform-browser';
 import {constants} from "../jsonfiles/constants"
 @Component({
 	selector: 'app-landing',
@@ -21,12 +20,14 @@ export class LandingComponent implements OnInit {
 	currentUser: any ;
 	showNutrientsFlag: boolean = false;
 	role: any = {"isTrialExpired":false, "isPremium":false, "isProfessional":false};
-constructor(private router: Router, private httpClient : HttpClient, private route: ActivatedRoute, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
+	
+
+constructor(private router: Router, private httpClient : HttpClient, private sanitizer: DomSanitizer , public dbService: DBService, public helpService: HelpService) {
 	this.RecipeoftheDay = [];
 	}
 
 	ngOnInit() {
-		console.log("ngOnInit");
+		console.log("landing ngOnInit");
 		this.currentUser =this.helpService.getCurrentUser();
 		if(this.currentUser !== null)
 		{
@@ -34,12 +35,12 @@ constructor(private router: Router, private httpClient : HttpClient, private rou
 		  this.currentUser["displayname"] = this.currentUser["firstname"];
 		  else if( this.currentUser["username"] !== "")
 		  this.currentUser["displayname"] = this.currentUser["username"];
-		//  console.log(this.currentUser["displayname"]);
+		//  //console.log(this.currentUser["displayname"]);
 		this.getUserPreferences();
 		this.role = this.helpService.getRoleStatus(this.currentUser);
 		this.showNutrientsFlag = this.helpService.showorhideNutritions(this.role);
 
-		console.log(this.showNutrientsFlag);
+		//console.log(this.showNutrientsFlag);
 		}
 		
 	
@@ -64,7 +65,7 @@ constructor(private router: Router, private httpClient : HttpClient, private rou
 			  if(recipeoftheday){
 				this.RecipeoftheDay = [];
 				this.RecipeoftheDay.push(recipeoftheday);
-				console.log(this.RecipeoftheDay);
+				//console.log(this.RecipeoftheDay);
 			  }else{
 				this.defaultRecipeofTheDay();
 			  }
@@ -80,7 +81,7 @@ constructor(private router: Router, private httpClient : HttpClient, private rou
 	  var query = "select id, label, image, s_instructions, dietLabels, healthLabels from recipes  ";
 	  var qWhere = " where s_instructions != '' AND label != '' AND image != '' ";
 
-	  console.log(this.userPref);
+	  //console.log(this.userPref);
 	  if(typeof(this.userPref) !== "undefined" && this.userPref !== null && typeof(this.userPref["dietLabels"]) !== "undefined" && this.userPref["dietLabels"] !== null && this.userPref["dietLabels"] !== "")
 	  {
 		qWhere += " AND dietLabels = '" + this.userPref["dietLabels"] + "' AND dietLabels != ''  ";
@@ -89,7 +90,7 @@ constructor(private router: Router, private httpClient : HttpClient, private rou
 
 	  var res =   this.dbService.getDatabyQuery("recipes", params).subscribe(invData => setTimeout(() => {
    
-	  console.log(invData);
+	  //console.log(invData);
    
 	   if(invData !== null && typeof(invData["body"]) !== "undefined" && invData["body"] !== null && invData["body"]["length"] > 0)
 		 {
@@ -101,7 +102,7 @@ constructor(private router: Router, private httpClient : HttpClient, private rou
 		   }
 		
 		 }
-	//	 console.log(this.recommendedRecipes);
+	//	 //console.log(this.recommendedRecipes);
 	   }
 	 
 	  ));
@@ -118,7 +119,7 @@ constructor(private router: Router, private httpClient : HttpClient, private rou
 
     //params["query"] = "select id, image, label, dietLabels, s_instructions from recipes where s_instructions != '' order by rand() limit 1";
 	params["query"] = "select * from recipeoftheday where datetime = '" + tempDt + "'";
-		console.log(params["query"]);
+		//console.log(params["query"]);
 	 var res =   this.dbService.getDatabyTablebyQuery("recipes", params).subscribe(invData => setTimeout(() => {
    
 	  if(invData !== null && typeof(invData["body"]) !== "undefined" && invData["body"] !== null && invData["body"]["length"] > 0)
@@ -131,14 +132,14 @@ constructor(private router: Router, private httpClient : HttpClient, private rou
 		{
 			this.loadRecipeoftheDay("");
 		}
-   	console.log(this.RecipeoftheDay);
+   	//console.log(this.RecipeoftheDay);
 	 }));
   
 	}
 	loadRecipeoftheDay(id="")
 	{
-		console.log("loadRecipeoftheDay");
-		console.log("id-" + id + "-");
+		//console.log("loadRecipeoftheDay");
+		//console.log("id-" + id + "-");
 	  this.RecipeoftheDay = [];
 	  var params = {};
 	 
@@ -157,7 +158,7 @@ constructor(private router: Router, private httpClient : HttpClient, private rou
 		  	if(id == "") 
 			  this.setRecipeoftheDay(this.RecipeoftheDay[0]);
 		}
-   		console.log(this.RecipeoftheDay);
+   		//console.log(this.RecipeoftheDay);
 	 }));
   
 	}
@@ -173,7 +174,7 @@ constructor(private router: Router, private httpClient : HttpClient, private rou
   
 
 	  	params["query"] = "select * from recipeoftheday where datetime = '" + tempDt + "'";
-		  console.log(params["query"]);
+		  //console.log(params["query"]);
 	   var res =   this.dbService.getDatabyTablebyQuery("recipes", params).subscribe(invData => setTimeout(() => {
 
 		if(invData !== null && typeof(invData["body"]) !== "undefined" && invData["body"] !== null && invData["body"]["length"] > 0)
@@ -191,7 +192,7 @@ constructor(private router: Router, private httpClient : HttpClient, private rou
 			tempDt = tempDt2.month + "-" + tempDt2.day + "-"  + tempDt2.year ;
 	  
 		  params1["query"] = "INSERT into recipeoftheday (recipeid, datetime) values(" + recipe["id"] + ", '" + tempDt + "')";
-			  console.log(params1['query']);
+			  //console.log(params1['query']);
 	  
 		   var res =   this.dbService.getDatabyTablebyQuery("recipes", params1).subscribe(invData => setTimeout(() => {
 			  
@@ -203,7 +204,7 @@ constructor(private router: Router, private httpClient : HttpClient, private rou
 	  
 				  }));
 		  }
-		 console.log(this.RecipeoftheDay);
+		 //console.log(this.RecipeoftheDay);
 	   }));
 	 
 
@@ -254,7 +255,7 @@ constructor(private router: Router, private httpClient : HttpClient, private rou
 						  img = "assets/menu/balanced-diet.png";
 						}
 						*/
-					 //   console.log(img);
+					 //   //console.log(img);
 					  this.healthLabels.push({"label":arrLabel[l]["name"], "image":arrLabel[l]["image"]});
 					  
 					
@@ -271,12 +272,12 @@ constructor(private router: Router, private httpClient : HttpClient, private rou
 	  var params = {};
 	  
 	  params["returnfields"]=" healthLabels ";
-	  // console.log(JSON.stringify(params));
+	  // //console.log(JSON.stringify(params));
 	  //params["instructions"] = "notempty";
   
 	  var res =   this.dbService.getDatabyFields("recipes", params).subscribe(invData => setTimeout(() => {
 	 
-	  // console.log(invData);
+	  // //console.log(invData);
    
 	   if(invData !== null && typeof(invData["body"]) !== "undefined" && invData["body"] !== null && invData["body"]["length"] > 0)
 		 {
@@ -294,7 +295,7 @@ constructor(private router: Router, private httpClient : HttpClient, private rou
 				 {
 				   for(let l=0; l < arrLabel.length; l++)
 				   {
-					//console.log(arrLabel[l].toString().toLowerCase());
+					////console.log(arrLabel[l].toString().toLowerCase());
 					 var indexLbl = this.healthLabels.findIndex(x=> x.label == arrLabel[l])
 			   
 					 if(indexLbl == -1)
@@ -324,7 +325,7 @@ constructor(private router: Router, private httpClient : HttpClient, private rou
 						{
 						  img = "assets/menu/balanced-diet.png";
 						}
-					 //   console.log(img);
+					 //   //console.log(img);
 					  this.healthLabels.push({"label":arrLabel[l], "image":img, "count":1});
 					  
 					 }
@@ -340,7 +341,7 @@ constructor(private router: Router, private httpClient : HttpClient, private rou
 			 
 		   }
 		 }
-		 console.log(this.healthLabels);
+		 //console.log(this.healthLabels);
 	   }
    
 	  ));
@@ -354,14 +355,14 @@ constructor(private router: Router, private httpClient : HttpClient, private rou
 
 	formatImage(image, type)
 	{
-	//  console.log(image);
+	//  //console.log(image);
 	  var retImage = image;
 	  if(image !== "" && type !== "")
 	  {
 		retImage = this.helpService.formatImage(image, type);
 		
 	  }
-	//  console.log(retImage);
+	//  //console.log(retImage);
 	  return retImage;
 	}
 
@@ -375,7 +376,7 @@ constructor(private router: Router, private httpClient : HttpClient, private rou
 	gotopage(page, id) {
 		if(page == "schedule")
 		{
-			console.log(this.planStatus[0]);
+			//console.log(this.planStatus[0]);
 			this.router.navigate([page, {id:id, mum_id:this.planStatus[0]["mum_id"], userid: this.currentUser["id"]}]);
 		}
 		else
@@ -385,18 +386,18 @@ constructor(private router: Router, private httpClient : HttpClient, private rou
 	}
 	formatValue(str)
 {
-//	console.log(str);
+//	//console.log(str);
 	var retValue = str;
 	if(str !== "")
 	{
 		retValue = parseFloat(str).toFixed(2);
 	}
-//	console.log(retValue);
+//	//console.log(retValue);
 	return retValue;
 }
 formatLabels(str)
 {
-//	console.log(str);
+//	//console.log(str);
 	var retArr = [];
 	retArr.push(str);
 	if(str !== "")
@@ -417,7 +418,7 @@ loadMealPlan()
     this.mealplans = [];
    // this.recipes = recipesList;
     var params = {"query": "SELECT * FROM mealplan where status=1 ORDER BY RAND() LIMIT 1"};
-    // //console.log(JSON.stringify(params));
+    // ////console.log(JSON.stringify(params));
     var res =   this.dbService.getDatabyTablebyQuery("mealplan", params).subscribe(invData => setTimeout(() => {
   
      if(invData !== null && typeof(invData["body"]) !== "undefined" && invData["body"] !== null && invData["body"]["length"] > 0)
@@ -426,7 +427,7 @@ loadMealPlan()
          for(let i=0; i < invData["body"]["length"] ; i++)
          {
            this.mealplans.push(invData["body"][i]);
-           console.log(  this.mealplans);
+           //console.log(  this.mealplans);
          }
        }
      }
@@ -438,15 +439,15 @@ loadMealPlan()
   planStatus: Array<any>= []; 
 getPlanStatus()
 {
-	console.log("in getPlanstatus");
-	console.log(this.currentUser);
+	//console.log("in getPlanstatus");
+	//console.log(this.currentUser);
  // var params = {};
   if(this.currentUser && this.currentUser["id"] !== null && this.currentUser["id"] !== "")
   {
 
 	var params = {"query": "SELECT mum.id mum_id, mp.id id, mp.name mpname, mp.tags FROM mealplan_user_mapping mum, mealplan mp where mum.userid = " + this.currentUser["id"] + " AND mp.id = mum.mealplanid AND mp.status=1 AND mum.status = 1 "};
 
-	console.log(params);
+	//console.log(params);
 	  var res =   this.dbService.getDatabyTablebyQuery("mealplan_user_mapping", params).subscribe(invData => setTimeout(() => {
    
 	if(invData !== null)
@@ -455,7 +456,7 @@ getPlanStatus()
 	  if(invData["body"]["length"] > 0)
 	  {
 		this.planStatus = invData["body"];
-	  	console.log(this.planStatus);
+	  	//console.log(this.planStatus);
 	  }
 	  else
 	  {
@@ -536,7 +537,12 @@ getUserPreferences()
   }
 }
 
-
+transform(value: any) {
+	console.log(value);
+	var retvalue = this.sanitizer.bypassSecurityTrustHtml(value);
+	console.log(retvalue);
+    return retvalue;
+  }
 }
 
 	

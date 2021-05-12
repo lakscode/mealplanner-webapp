@@ -1,6 +1,6 @@
 <!--slider main-->
 
-<ngb-carousel *ngIf="images" style="width:100%; min-height: 210px;">
+<ngb-carousel *ngIf="sliderList" style="width:100%; min-height: 210px;">
     <ng-template ngbSlide *ngFor="let item of sliderList; let i=index">
       <div class="picsum-img-wrapper">
         <img class="desktoponly" [src]="item.image" alt="{{item.title}}"  style="width:100%;min-height: 200px;">

@@ -35,7 +35,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 	subscribeCompanyService: any;
 	companylogo : any;
 	collapsed: boolean  = true;
-	constructor(private router :Router, private userService: UserService, private helpService: HelpService,  private dbService: DBService, private location: Location) {
+	constructor(private router :Router, public userService: UserService, public helpService: HelpService,  private dbService: DBService, private location: Location) {
 
 	var currentUrl = this.router.url;
 	currentUrl = currentUrl.replace("/","");
@@ -130,6 +130,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 	}
 	ngOnInit() {
 
+		console.log("header ngOnInit");
 		this.companylogo = 'assets/logo-dark.png';
 	
 		

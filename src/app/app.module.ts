@@ -16,13 +16,11 @@ import { RouterModule } from '@angular/router';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 
-import { AngularFontAwesomeModule } from 'angular-font-awesome';
+/*import { AngularFontAwesomeModule } from 'angular-font-awesome';*/
 
 import { HttpClientModule } from '@angular/common/http';
 
 import {ToastrModule } from 'ngx-toastr';
-
-
 
 import { LayoutModule } from './layout/layout.module';
 
@@ -96,7 +94,7 @@ import { FaqsModule } from './faqs/faqs.module';
 		preventDuplicates: true,
 	}),
 
-	AngularFontAwesomeModule,
+//	AngularFontAwesomeModule,
 	HttpClientModule,
 	NgbModule.forRoot(),	
 	HighchartsChartModule,
@@ -127,7 +125,7 @@ import { FaqsModule } from './faqs/faqs.module';
 	FaqsModule
   ],
   schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
-  providers: [UserService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

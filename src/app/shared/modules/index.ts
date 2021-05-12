@@ -1,7 +1,6 @@
 
 export * from './modal/modal.module';
 export * from './tabspanel/tabspanel.module';
-//export * from './searchbar/searchbar.module';
 export * from './sliderpanel/sliderpanel.module';
 export * from './popular/popular.module';
 export * from './sidebar/sidebar.module';

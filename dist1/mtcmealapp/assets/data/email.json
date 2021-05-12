@@ -1,0 +1,30 @@
+{
+    "emails":   {        
+		"resetpasswordToken":{
+            "type": "resetpasswordToken",
+            "subject": "Password reset request for MTC Meal Planner",
+            "content": "<br /><br />Hello <username>,<br /><br />Someone has requested that the password be reset for the following account: <br /><br /> Email: <email><br /><br /> If this was you, your password can be reset using the following link: <br /><br /> <a href='<resetlink>'>Click here to reset your password</a> <br /><br />If you did not initiate this change, we suggest you change your password to prevent access. Please contact us if you have questions or concerns at customerservice@mtc.com.<br /><br />Thank You, <br />Team MTC"
+        },
+        "adduser":{
+            "type":"adduser",
+            "subject":"You have been added",
+			"content":"Hello <strong><username></strong>,<br /><br />You have been added as <role> user in <companyname>. <br /><br /><b>Your login information</b> <br />  <ul><li><b>User Name: </b><username></li> <li><b>Password: </b><password></li> </ul><br />"
+        },	
+        "resetpassAdmin":{
+            "type":"resetpassAdmin",
+            "subject":"Password reset by Admin",
+			"content":"<br /><br />Hello!, <br /><br /> Based on your request admin has been reset your account the password.<br /><b>Your login information</b> <br />  <ul><li><b>User Name: </b><username></li> <li><b>Password: </b><password></li> </ul> <br />Thank You, <br />"
+        },
+		"sharemealplan":{
+            "type":"sharemealplan",
+            "subject":"Introducing <mealplan>",
+			"content":"Hello!,<br /><br />This New meal plan  might excite you. <br /><br /><a href='<link>' target='_blank'><mealplan></a><br /><br />Thanks, <br />Team MTC"
+        },
+		"sharerecipebook":{
+            "type":"sharerecipebook",
+            "subject":"Introducing <recipebook>",
+			"content":"Hello!,<br /><br /><description> <br /><br />This New recipe book  might excite you. <br /><br /><a href='<link>' target='_blank'><recipebook></a><br /><br />Thanks, <br />Team MTC"
+        }
+    }
+}
+

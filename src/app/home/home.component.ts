@@ -1,12 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from "@angular/router";
+
 import { Router } from '@angular/router';
-import { UserService } from '../services/user.service';
-import { HttpClient } from '@angular/common/http';
-import { HttpErrorResponse } from '@angular/common/http';
-import { DBService } from '../dbservices/db.service';
+
 import { HelpService } from '../services/help.service';
-import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
+
 import { ModalService } from '../shared/modules/modal/modal.service';
 
 @Component({
@@ -24,15 +21,13 @@ testimonialsList: Array<any> = [];
 popupforquestions: boolean =false;
 
 
-  constructor(private router: Router, private modalService: ModalService, private route: ActivatedRoute, private userService: UserService, private helpService: HelpService, private dbService: DBService, private config: NgbCarouselConfig) {
+  constructor(private router: Router, private modalService: ModalService,  private helpService: HelpService) {
 	this.labels={"companyName":this.helpService.getConstants("companyName")};
-	config.interval = 8000;
-	config.showNavigationIndicators = true;
-	config.showNavigationArrows = true; 
+
 	}
 
   	ngOnInit() {
-
+		console.log("Home NgOninit");
 		this.loadSteps(); 
 	//	this.loadTestimonials();
 
