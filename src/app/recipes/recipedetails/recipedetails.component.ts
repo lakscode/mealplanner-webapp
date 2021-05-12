@@ -11,6 +11,7 @@ import { Subject } from 'rxjs';
 import { constants } from './../../jsonfiles/constants';
 import { HttpHeaders } from '@angular/common/http';
 import { env } from 'process';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
 	selector: 'app-recipedetails',
@@ -46,12 +47,18 @@ apiUrl: any = "";
 role: any = {};
 showNutrientsFlag: boolean = false;
 urlShare : any = "";
-	constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
+urlTweet : any;
+urlWhatsApp: any;
+msg: any = "";
+labeltext: any = "";
+	constructor(private router: Router, private route: ActivatedRoute, private sanitize: DomSanitizer, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
 	
 	}
 
 	ngOnInit() {
 		this.apiUrl = environment.apiUrl;
+
+
 
 		this.urlShare = window.location.href;
 		
@@ -106,6 +113,21 @@ urlShare : any = "";
 
 	}
 	
+	loadShareValue()
+	{
+		var appUrl = environment.appUrl;
+		this.urlShare = window.location.href;
+		
+		this.msg = "Tried this recipe today: " +  this.searchRes["label"];
+		
+			if (this.urlShare.indexOf("localhost") !== -1) {
+				this.urlShare = this.urlShare.replace("http://localhost:4200", appUrl)
+			}
+			this.urlTweet = "https://twitter.com/share?text=" + this.msg + "&url=" + encodeURIComponent(this.urlShare);
+		//this.urlWhatsApp = this.transform("whatsapp://send?" + this.urlShare);
+		this.urlWhatsApp = this.transform("https://api.whatsapp.com/send?text=" + this.msg + " " + this.urlShare);
+		
+	}
 loadRecipe(id)
 {
   console.log("In load Recipe");
@@ -247,6 +269,9 @@ this.updated++;
 this.listParams= {};
 this.listParams["dietLabels"] = this.searchRes['dietLabels'];
 	  console.log(this.listParams);
+
+	  this.loadShareValue();
+
 	}
   }));
   }
@@ -708,6 +733,14 @@ formatText(str)
 	}
 	return retVal;
 }
+
+
+
+
+transform(value: any, args?: any): any {
+return this.sanitize.bypassSecurityTrustHtml(value);
+}
+
 }
 
 

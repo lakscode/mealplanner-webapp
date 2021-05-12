@@ -1,12 +1,11 @@
 import { Component, OnInit,OnDestroy  } from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
 import { UserService } from '../services/user.service';
-import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {  FormBuilder } from '@angular/forms';
 import { DBService } from '../dbservices/db.service';
 import { HelpService } from '../services/help.service';
 import { constants } from '../jsonfiles/constants';
-import { environment } from './../../environments/environment';
-import { FitBitService } from '../services/fitbit.service';
+
 import * as Highcharts from 'highcharts';
 
 require('highcharts/modules/exporting')(Highcharts);  
@@ -48,7 +47,7 @@ export class ProgressComponent implements OnInit {
 	showhealthChart: any = {};
 	diffInMs: any;
 	
-	constructor(private router: Router, private route: ActivatedRoute, private fitBitService: FitBitService, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
+	constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
 	
 	}
 
@@ -92,11 +91,7 @@ export class ProgressComponent implements OnInit {
       }
       console.log("access ");
       console.log(access);
-    //  this.fitBitService.loadFitBitDatacalories(access);
-
-    //  this.fitBitService.loadFitBitData(access);
-
-    //  this.fitBitService.loadFitBitDatadistance(access);
+   
 
       setTimeout(() => 
       {

@@ -35,7 +35,7 @@ export class AppComponent implements OnInit {
     try{
     this.dbService.getLocalData("http://www.geoplugin.net/json.gp").subscribe(ipdata => setTimeout(() => 
     {
-     console.log(ipdata);
+     //console.log(ipdata);
      if(typeof(ipdata) !== "undefined" && ipdata !== null && typeof(ipdata['geoplugin_request']) !== "undefined" && ipdata['geoplugin_request'] !== "")
      {
        var ipaddress = ipdata['geoplugin_request'];
@@ -48,7 +48,7 @@ export class AppComponent implements OnInit {
   }
   catch(error)
   {
-    console.log(error);
+    //console.log(error);
   }
     }, 6000);
 */
@@ -73,7 +73,7 @@ export class AppComponent implements OnInit {
 
         var difference = currentDttm.getTime() - resetsentat.getTime();
         var resultInMinutes = Math.round(difference / 60000);
-     //   console.log(resultInMinutes);
+     //   //console.log(resultInMinutes);
         var resultInDays = Math.round(difference / (1000 * 3600 * 24));
   
         if(resultInDays > 30)

@@ -181,7 +181,31 @@
         <div class="col-12" style="text-align:right">
 
             
-    <app-socialshare *ngIf="urlShare && searchRes.label" [imageurl]="searchRes.image" [labeltext]="searchRes.label" [urlShare]="urlShare"></app-socialshare>
+  
+    <div class="component-bg">
+        <div class="share-recipe">
+          Share :  
+      
+      
+          <div class="fb-share-button social-icon fb" 
+          data-href="https://developers.facebook.com/docs/plugins/" data-layout="button" data-size="large">
+          <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?quote={{msg}}&u={{urlShare}}/" class=" fa fa-facebook"></a>
+          </div>
+          <div class="social-icon twitter">
+            <a href="{{urlTweet}}" target="_blank" class=" fa fa-twitter"></a>
+          </div>
+      
+          <div class="social-icon whatsapp">
+            <!--<a href="{{urlWhatsApp}}" target="_blank" data-action="share/whatsapp/share" class=" fa fa-whatsapp"></a>-->
+            <a href="https://api.whatsapp.com/send?text={{urlShare}}" target="_blank" data-action="share/whatsapp/share" class=" fa fa-whatsapp"></a>
+          </div>
+      
+          <div class="social-icon print">
+            <a href="javascript:void()" target="_blank" class=" fa fa-print"></a>
+          </div>
+        </div>
+      </div>
+
 
         </div>
     </div>

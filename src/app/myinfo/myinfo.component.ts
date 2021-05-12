@@ -164,11 +164,7 @@ date: {year: number, month: number};
 	connect2Fitbit()
 	{
 	  var access_token = "";
-	// this.fitbitService.authoriseWithFitbit(access_token);
-  
-  
-  
-	// this.fitbitService.initialize();
+
   /*
 	 const browser = this.iab.create('https://www.fitbit.com/oauth2/authorize?response_type=token&client_id=' + this.client_id + '&redirect_uri=' + this.redirect_uri + '&scope=activity%20nutrition%20heartrate%20location%20nutrition%20profile%20settings%20sleep%20social%20weight');
    
@@ -301,32 +297,7 @@ date: {year: number, month: number};
 	{
 		
 	}
-	/*
-	uploadimage()
-	{
-	  this.camera.getPicture(this.options).then((imageData) => {
-		// imageData is either a base64 encoded string or a file URI
-		// If it's base64 (DATA_URL):
-		let base64Image = 'data:image/jpeg;base64,' + imageData;
-		console.log(base64Image);
-		this.profileImage = base64Image;
-		this.uploadedImage = base64Image;
-		this.base64Image = imageData;
-		if(base64Image == "")
-		{
-		  this.uploadedImage = constants.img;
-  
-		  this.uploadedImage = this.sanitizer.bypassSecurityTrustUrl(constants.img.replace("unsafe:",""));
-  
-		}
-		this.beforeImage = this.uploadedImage;
-		this.afterImage = "assets/transform/after.jpg";
-		console.log(this.beforeImage);
-	   }, (err) => {
-		// Handle error
-	   });
-	}
-  */
+
 	
 	/********************************** */
   

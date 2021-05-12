@@ -31,14 +31,14 @@ images: any;
 		  this.images = {};
 		  this.images["appstore"]  = "assets/app-store.png"; 
 		  this.images["playstore"]  = "assets/play-store.png";
-		  this.images['mobilescreens'] ="assets/mtc_s.jpg";
+		  this.images["mobilescreens"] ="assets/mtc_s.jpg";
 		  this.images['goodfood']  = "assets/images/temp-images/good-food.jpg";
 
 		  this.images['step1']  = "";
 		  this.images['step2']  = "";
 		  this.images['step3']  = "";
 		  this.images['step4']  = "";
-		  
+
 		console.log("Home NgOninit");
 		this.loadSteps(); 
 	//	this.loadTestimonials();

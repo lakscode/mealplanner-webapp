@@ -1402,11 +1402,11 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 	{
 	  console.log(this.plan);
 	  var ingredientsList = [];
-	  var shoppingList = [];
+
 	  var consList = [];
 	  for(let i=0; i < this.plan["days"]["length"]; i++)
 	  {
-	  //  console.log(this.plan["days"][i]);
+
 		var itemday = this.plan["days"][i];
 		for(let j=0; j < this.plan["days"][i]["meals"].length; j++)
 		{
@@ -1415,8 +1415,7 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 		  if(typeof(itemday) !== "undefined" && typeof(itemmeal["recipe"]) !== "undefined" && itemmeal["recipe"] !== null)
 		  {
 		  console.log(itemmeal["recipe"]["ingredients"]);
-		//  console.log(itemday[this.mealTypeList[j]]["ingredientLines"]);
-			if(typeof(itemmeal["recipe"]["ingredients"]) !== "undefined" && itemmeal["recipe"]["ingredients"] !== "")
+					if(typeof(itemmeal["recipe"]["ingredients"]) !== "undefined" && itemmeal["recipe"]["ingredients"] !== "")
 		  {
 			  console.log(itemmeal["recipe"]["ingredients"]);
 			
@@ -1432,7 +1431,7 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 					  if(t.indexOf('cups') > -1)
 					  {
 						var t1 = t.split('cups');
-						var cIndex = consList.findIndex(x => (x.name  === t1[1].trim()));
+						var cIndex = consList.findIndex(x => (x.name.trim()  === t1[1].trim()));
 						if(cIndex > -1)
 						{
 						  consList[cIndex]['quantity'] = parseFloat(consList[cIndex]['quantity']) +  parseFloat(t1[0].trim());
@@ -1441,13 +1440,13 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 						{
 						  consList.push({"name":t1[1].trim(), 'quantity': t1[0].trim(), 'measure':"cups"})
 						}
-						shoppingList.push({"name":t1[1].trim(), 'quantity': t1[0].trim() + " cups"})
+		
 					  }
 					  else if(t.indexOf('cup') > -1)
 					  {
 						var t1 = t.split('cup');
 						//var cIndex = shoppingList.findIndex(x => (x.name  === t1[1]));
-						var cIndex = consList.findIndex(x => (x.name  === t1[1].trim()));
+						var cIndex = consList.findIndex(x => (x.name.trim()  === t1[1].trim()));
 						if(cIndex > -1)
 						{
 						  consList[cIndex]['quantity'] = parseFloat(consList[cIndex]['quantity']) +  parseFloat(t1[0].trim());
@@ -1457,11 +1456,12 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 						  consList.push({"name":t1[1].trim(), 'quantity': t1[0].trim(), 'measure':"cups"})
 						}
 			
-						shoppingList.push({"name":t1[1].trim(), 'quantity': t1[0].trim() + " cup"})
+					
 					  }
 					  else
 					  {
-						shoppingList.push({"name":t, 'quantity': " "})
+						var fIndex = consList.findIndex(x=>(x.name.trim() === t.trim()));
+						if(fIndex == -1)
 						consList.push({"name":t, 'quantity': '', 'measure':""})
 					  }
 					}

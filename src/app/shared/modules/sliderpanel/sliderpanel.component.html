@@ -13,13 +13,7 @@
                     <h2><a href="javascript:void(0)">{{item.title}}</a></h2>
 
                     <div class="short-separator"></div>
-                    <div class="rating-box" *ngIf="item.rating">
-                        <span class="rating-icons" *ngFor="let item of [1,2,3,4,5]">
-                          <i class="fa fa-star"></i>
-                        </span>
-                        <br>
-                        <span class="rating-figure">{{item.rating}}</span>
-                    </div>
+
                     <p style="color:#000" innerHTML = "{{item.description}}">
                     </p>
                     <a class="read-more-bordered" (click)="gotopage('features')" href="javascript:void(0)">Learn More</a>
