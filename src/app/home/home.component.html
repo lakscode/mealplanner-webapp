@@ -15,9 +15,13 @@
                   <h2>Easy customized nutrition</h2>
                   <span class="desc">Get access to a diet that was planned by keeping your comfort in mind. Build a healthy, personalized meal plan with our easy-to-navigate platform. This one-stop destination offers comparable benefits for a price lower than what a dietician may cost you!</span>
                   <ul class="home-sec-list">
-                      <li><span><img src="assets/images/burger-icon.png" alt="icon"></span><a href="javascript:void(0)">Save Planning Time</a></li>
+                      <li><span style="font-size:24px"> <i class="fa fa-clock-o" aria-hidden="true"></i></span><a href="javascript:void(0)">Save Planning Time</a></li>
+                      <li><span style="font-size:24px">  <i class="fa fa-cutlery" aria-hidden="true"></i></span><a href="javascript:void(0)">Personalize Your Diet</a></li>
+                      <li><span style="font-size:24px"> <i class="fa fa-list" aria-hidden="true"></i></span><a href="javascript:void(0)">Tailor Grocery List</a></li>
+
+                      <!--<li><span><img src="assets/images/burger-icon.png" alt="icon"></span><a href="javascript:void(0)">Save Planning Time</a></li>
                       <li><span><img src="assets/images/grapes-icon.png" alt="icon"></span><a href="javascript:void(0)">Personalize Your Diet</a></li>
-                      <li><span><img src="assets/images/salt-pot-icon.png" alt="icon"></span><a href="javascript:void(0)">Tailor Grocery List</a></li>
+                      <li><span><img src="assets/images/salt-pot-icon.png" alt="icon"></span><a href="javascript:void(0)">Tailor Grocery List</a></li>-->
                   </ul>
                   <!--<a class="button-default theme-filled video-button swipebox" href="javascript:void(0)">Watch our Video</a>-->
                   <a class="button-default theme-filled hollow-button" (click)="gotopage('pricing')" href="javascript:void(0)">Know more About Us</a>
@@ -46,14 +50,14 @@
 			            <h3 class="subtitle">{{step.subtitle}}</h3>
 			            <p class="text-justify mb-5 description"  style=" direction: ltr;">{{step.description}}</p>
 			            <div *ngIf="i %2 ==0"  class="arrowimg" style="text-align:right;">
-			               <img style=" height: 150px" src="assets/images/temp-images/arrow-right.svg" />
+			               <img alt="arrow image right" style=" height: 150px" src="assets/images/temp-images/arrow-right.svg" />
 			            </div>
 			            <div *ngIf="i %2 ==1" class="arrowimg" style="text-align:left">
-			               <img style=" height: 150px" src="assets/images/temp-images/arrow-left.svg" />
+			               <img alt="arrow image left" style=" height: 150px" src="assets/images/temp-images/arrow-left.svg" />
 			            </div>
 		            </div>
 		            <div class="col-12 col-lg-6" style="text-align:center;">
-				         <img src="{{step.image}}" style=" height: 250px" class="rounded-bg specialty-image w-80">
+				         <img alt="background image" src="{{step.image}}" style=" height: 250px" class="rounded-bg specialty-image w-80">
 		             </div>
 	            </div>
 	            <div class="row">
@@ -74,8 +78,8 @@
             <div class="home-sec-intro">
                <span class="heading-small">Download for Free!</span>
                   <h2>Meal planning made easy...</h2>
-                 
-                  <div class="storeImgDiv">
+                
+                  <div  class="storeImgDiv">
                      <a href="javascript:void(0)">
                         <img src="assets/app-store.png" alt="Download on the App Store" class="storeImg"></a>
                      <a href="javascript:void(0)">
@@ -85,7 +89,10 @@
               </div>
          </div>
          <div *ngIf="!isMobile" class="image-side  wow zoomIn animated hidden-xs" style="visibility: visible; animation-name: zoomIn;margin-bottom:40px">
-            <div class="home-sec-image image-outer">
+            <div class="home-sec-image">
+               <img src="assets/mtc_s.jpg" style="width:610px;height:425px" alt="mobile screen">
+               </div>
+            <!--<div class="home-sec-image image-outer">
                <img src="assets/mtc1_s.jpg" style="width:210px;height:425px" alt="image">
            </div>&nbsp;&nbsp;&nbsp;
                <div class="home-sec-image image-outer">               
@@ -93,7 +100,7 @@
             </div>&nbsp;&nbsp;&nbsp;
             <div class="home-sec-image image-outer">               
                <img src="assets/mtc3_s.jpg" style="width:210px;height:425px" alt="image">
-            </div>
+            </div>-->
          </div>
       </div>
       

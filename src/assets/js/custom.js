@@ -129,14 +129,14 @@ $('.add-button.add-nutrient').on("click",function(event){
     /*	Animation CSS integrated with wow.js Plugin
      /*----------------------------------------------------------------------------------*/
 
-   /* new WOW().init({ });
+    new WOW().init({ });
 
     $(function (){
         if (!$(".footer").hasClass("animate-footer")) {
             $(".footer").find(".wow").addClass("disable-wow");
         }
     });
-*/
+
     
 
 
