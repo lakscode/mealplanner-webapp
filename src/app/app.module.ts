@@ -30,8 +30,6 @@ import { LoginModule } from './login/login.module';
 
 import { SignupModule } from './signup/signup.module'; 
 
-import { UserService } from './services/user.service';
-
 import { HighchartsChartModule } from 'highcharts-angular';
 
 import { HomeModule } from './home/home.module'; 

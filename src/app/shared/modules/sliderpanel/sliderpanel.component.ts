@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, Output, OnInit, OnDestroy, EventEmitter } from '@angular/core';
+import { Component, ElementRef, Input, Output, OnInit, OnDestroy, EventEmitter, HostListener } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 import { SliderpanelService } from './sliderpanel.service';
@@ -32,6 +32,11 @@ export class SliderpanelComponent implements OnInit, OnDestroy {
    elementId : any;
    date: any; 
    images: any;
+
+   isMobile: boolean = false;
+
+  
+
     constructor(config: NgbCarouselConfig, private router: Router, private sliderpanelService: SliderpanelService, private el: ElementRef) {
       this.router.routeReuseStrategy.shouldReuseRoute = function(){
         return false;
@@ -40,7 +45,7 @@ export class SliderpanelComponent implements OnInit, OnDestroy {
    //  config.showNavigationArrows = true;
      config.showNavigationIndicators = true;
      
-
+    
      this.router.events.subscribe((evt) => {
         if (evt instanceof NavigationEnd) {
            // trick the Router into believing it's last link wasn't previously loaded
@@ -78,9 +83,16 @@ export class SliderpanelComponent implements OnInit, OnDestroy {
    
         // customize default values of carousels used by this component tree
      
-    
-
-     this.images = [944, 1011, 984].map((n) => `https://picsum.photos/id/${n}/900/500`);
+       var innerWidth = window.innerWidth;
+      console.log("innerWidth " + innerWidth);
+      if(innerWidth > 640)
+      {
+        this.isMobile = false;
+      }
+      else
+      {
+        this.isMobile = true;
+      }
      this.loadSliders();
    this.elementId= this.element.id;
 if(this.showhidetime == false)
@@ -88,29 +100,7 @@ this.showhideTimeFlag = false;
 
 //console.log(this.showhidetime);
 //console.log(this.showhideTimeFlag);
-
-    var d = new Date();
-    if(this.elementId == "interviewDate" || this.elementId == "hearingSchedule"){
-      this.tempDt = "";
-      this.maxDt=""
-      this.minDt = {year: d.getFullYear(), month: d.getMonth()+1, day: d.getDate()};     
-      this.tempTm = {hour: d.getHours(), minute: d.getMinutes(), second: d.getSeconds()};
-    }
-    else if(this.elementId == "incidentDate" || this.elementId == "complaintDate") {
-      this.tempDt = "";
-      this.maxDt={year: d.getFullYear(), month: d.getMonth()+1, day: d.getDate()};
-      this.minDt = '';
-      this.tempTm = {hour: d.getHours(), minute: d.getMinutes(), second: d.getSeconds()};
-    }
-    else {
-      this.maxDt = "";
-      this.minDt = '';
-      this.tempDt = {year: d.getFullYear(), month: d.getMonth()+1, day: d.getDate()};
-		  this.tempTm = {hour: d.getHours(), minute: d.getMinutes(), second: d.getSeconds()};
-    }	
-    this.dt = {"date":this.tempDt, "time":this.tempTm};
-    if(this.minDate == "")
-    this.minDate = "";        
+    
     }
 
     ngAfterViewInit()
@@ -129,13 +119,7 @@ this.showhideTimeFlag = false;
         this.element.style.display = 'block';
         document.body.classList.add('dt-modal-open');
 
-		var d = new Date();
-		
-		this.tempDt = {year: d.getFullYear(), month: d.getMonth()+1, day: d.getDate()};
-		this.tempTm = {hour: d.getHours(), minute: d.getMinutes(), second: d.getSeconds()};
-		
-		this.dt = {"date":this.tempDt, "time":this.tempTm};
-		this.returnData.emit(this.dt);
+	//	this.returnData.emit(this.dt);
     this.sliderpanelService.add(this);
     }
 
@@ -149,20 +133,7 @@ this.showhideTimeFlag = false;
 	save()
 	{
 
-  if(this.dt.date == null || this.dt.date == "")
-  {
-    var d = new Date();
-		this.tempDt = {year: d.getFullYear(), month: d.getMonth()+1, day: d.getDate()};
-		this.dt["date"] = this.tempDt; //, "time":this.tempTm};
-  }
-
-  if(this.dt.time == null || this.dt.time == "")
-  {
-    var d = new Date();	
-    this.tempTm = {hour: d.getHours(), minute: d.getMinutes(), second: d.getSeconds()};
-		this.dt["time"] = this.tempTm;
-  }
-
+ 
 
     this.returnData.emit(this.dt);
 

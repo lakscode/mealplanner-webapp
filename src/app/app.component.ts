@@ -31,7 +31,7 @@ export class AppComponent implements OnInit {
 
     
     var parent = this;
-    setTimeout(() => {
+  /*  setTimeout(() => {
     try{
     this.dbService.getLocalData("http://www.geoplugin.net/json.gp").subscribe(ipdata => setTimeout(() => 
     {
@@ -51,19 +51,11 @@ export class AppComponent implements OnInit {
     console.log(error);
   }
     }, 6000);
-
+*/
     localStorage.setItem('currentUser', "");
-    /*
-    this.router.events.subscribe(event => {
-      if (event instanceof NavigationEnd) {
-        this.showHeader = this.activatedRoute.firstChild.snapshot.data.showHeader !== false;
-        this.showSidebar = this.activatedRoute.firstChild.snapshot.data.showSidebar !== false;
-        this.showFooter = this.activatedRoute.firstChild.snapshot.data.showFooter !== false;
-      }
-    });
-    */
+
     this.userService.loggedinUser().subscribe(userdata => setTimeout(() => {
-     // console.log(userdata);
+
       this.loggedIn = false;
       if (typeof (userdata) !== "undefined" && userdata !== null) {
         this.user = userdata;

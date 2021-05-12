@@ -168,7 +168,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 				this.userRoleDet = this.currentUser["role"];
 
 				this.setMenuActive();
-				this.setUniqueid();
+			
 				this.companylogo = 'assets/logo-dark.png';
 				this.companyname = "";
 				this.isTrialExpired = this.helpService.isTrialExpired(this.currentUser);
@@ -176,9 +176,23 @@ export class HeaderComponent implements OnInit, OnDestroy {
 			
 		//	console.log(this.loggedIn);
 		}, 0));
-		
+			this.checkCurrentUser();
 	}
 	
+	checkCurrentUser()
+	{
+		if(typeof(this.currentUser) !== "undefined" && this.currentUser !== null)
+		{
+			this.setUniqueid();
+		}
+		else
+		{
+		setTimeout(() => 
+            {
+				this.checkCurrentUser();
+            }, 5000);
+		}
+	}
 	setUniqueid()
 	{
 		if(typeof(this.currentUser["uniqueid"]) == "undefined" || this.currentUser["uniqueid"] == "")
