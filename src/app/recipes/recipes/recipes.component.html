@@ -80,18 +80,18 @@
                                                             <span class="checkmark"></span>
                                                         </label>
                                                     </div>
-                                                    <div class="col-5 paddinglr0" *ngIf="mlabel.selected">
+                                                    <div class="col-5 paddinglr0" style="margin-bottom:15px;" *ngIf="mlabel.selected">
                                                       
                                                             <input class="mineral-input" type='text' name="minerals_{{m}}_min" [(ngModel)]="mlabel.min" placeholder="min" />
                                                             <span class="maxmin">{{formatVal(mlabel.t_min)}}</span>
                                                     
                                                     </div>
-                                                    <div class="col-5 paddinglr0" *ngIf="mlabel.selected">
+                                                    <div class="col-5 paddinglr0" style="margin-bottom:15px;"  *ngIf="mlabel.selected">
                                                         <input class="mineral-input" type='text' name="minerals_{{m}}_max" [(ngModel)]="mlabel.max" placeholder="max" />
                                                         <span class="maxmin">{{formatVal(mlabel.t_max)}}</span>
 
                                                     </div>
-                                                    <div class="col-2 paddinglr0" *ngIf="mlabel.selected"> {{mlabel.unit}}</div>
+                                                    <div class="col-2 paddinglr0" style="margin-bottom:15px;"  *ngIf="mlabel.selected"> {{mlabel.unit}}</div>
                                                 </div>
                                               
                                                
