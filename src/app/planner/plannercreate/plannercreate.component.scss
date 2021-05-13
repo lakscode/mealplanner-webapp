@@ -1520,5 +1520,20 @@ background-color: $orange;
   width: auto;
 }
 
+
+.overflow-text1 {
+  //width: 100px;
+  max-width:20ch !important;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.overflow-text1:hover{
+  overflow: visible; 
+  white-space: normal; 
+  width: auto;
+}
+
+
 .infoModal .items {background-color: #FFF;}
 .infoModal .items:nth-child(even) {background-color: #f2f2f2;}
