@@ -318,13 +318,16 @@
                         <div class="meal-plan-row">
                          
                             <div [ngClass]="showNutrients || showNutrientsPServing?'meal-plan-slot mealplan-col':'meal-plan-slot mealplan-col20'" *ngFor="let meal of item.meals; let c= index;" >
-                                <div *ngIf="meal.recipe">
+                                <div class="panelr" *ngIf="meal.recipe">
                                     <div draggable="true">
                                         <div class="recipe-image-wrapper ">
                                             <div class="recipe-image-card card">
                                                 <div class="recipe-image-card-content card-body">
                                                     <div class="image-card-container">
                                                         <div class="recipe-remove" (click)="removeRecipe(r, c)"><i class="fa fa-trash" aria-hidden="true"></i></div>
+                                                        <div class="recipe-show" (click)="viewRecipe(r, c)"><i class="fa fa-cutlery" aria-hidden="true"></i></div>
+                                                        
+
                                                         <div class="recipe-name-box">{{meal.recipe.label}}</div><img *ngIf="showImages"
                                                             class="recipe-image-card recipe-image-card__img open-fist-cursor"
                                                             style="opacity: 1;" id="picture-5c252abdb834861eec5388f3"

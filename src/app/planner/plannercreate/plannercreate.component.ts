@@ -575,6 +575,19 @@ this.loadColorCodes();
 		this.plan["days"][r]["meals"][c]["recipe"] =  null;
 		this.SavePlanData(r, c);
 	}
+	viewRecipe(r, c)
+	{
+		var recipe = this.plan["days"][r]["meals"][c]["recipe"];
+		window.open("/recipedetails/" + recipe.id)
+	//	window.open("/recipedetails/" + recipe.id,'popup','width=600,height=600');
+
+	//	var link = document.createElement('a');
+	//	link.href = "/recipedetails/" + recipe.id;
+	//	link.target = "_blank";
+			
+	//	link.click();
+
+	}
 	drop(ev, r, c) {
 		console.log("Drop function");
 		console.log(ev);
