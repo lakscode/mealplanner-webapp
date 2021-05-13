@@ -60,7 +60,7 @@ export class RecipesComponent implements OnInit {
 		{
 			this.cuisineTypeList.push({"name":constants.cusineTypeList[c], "selected":false})
 		}
-		
+
 		this.dietLabelsList= [];
 		for(let d=0; d < constants.dietLabels.length; d++)
 		{
@@ -402,6 +402,19 @@ endIndex = startIndex+ endIndex;
 		healthlabels=  healthlabels.slice(0, -1);
 	 }
 	
+	 var cuisinetypes = "";
+	 for(let c=0; c <this.cuisineTypeList.length; c++)
+	 {
+		 if(this.cuisineTypeList[c]["selected"])
+		 cuisinetypes += this.cuisineTypeList[c]["name"] + "~";
+	 }
+
+	 if( cuisinetypes !== "")
+	 {
+		cuisinetypes=  cuisinetypes.slice(0, -1);
+	 }
+	 
+
 	 var minerals = "";
 	 var mQuery = "";
 	 for(let m=0; m <this.mineralsLabelsList.length; m++)
@@ -445,6 +458,15 @@ endIndex = startIndex+ endIndex;
     params["healthLabels"] = healthlabels
 	this.helpService.saveSearchHistory(healthlabels, "healthLabels", "recipes", this.currentUser["id"]);
    } 
+
+   if(typeof(cuisinetypes ) !== "undefined" && cuisinetypes !== "")
+   {
+    params["cuisineType"] = cuisinetypes
+	this.helpService.saveSearchHistory(cuisinetypes, "cuisineType", "recipes", this.currentUser["id"]);
+   } 
+
+   
+
 
    if(typeof(minerals ) !== "undefined" && minerals  !== "")
    {
