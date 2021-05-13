@@ -39,7 +39,7 @@ export class RecipesComponent implements OnInit {
 	nutrientDbFields : Array<any> = [];
 	role: any = {};
 	showNutrientsFlag: boolean = false;
-
+	cuisineTypeList : Array<any> = [];
 	constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
 	
 	}
@@ -49,10 +49,18 @@ export class RecipesComponent implements OnInit {
 			this.animClass = "searchbaranim";
 	}
 	ngOnInit() {
+		console.log("ngOnInit");
 		this.searchmorebar = false;
 	//	this.dietLabelsList = constants.dietLabels;
 		this.getNutrientsMaxMin(); 
 
+
+		this.cuisineTypeList = [];
+		for(let c=0; c < constants.cusineTypeList.length; c++)
+		{
+			this.cuisineTypeList.push({"name":constants.cusineTypeList[c], "selected":false})
+		}
+		
 		this.dietLabelsList= [];
 		for(let d=0; d < constants.dietLabels.length; d++)
 		{
@@ -139,24 +147,7 @@ export class RecipesComponent implements OnInit {
 	
 	}
 
-	loadTempRecipes()
-    {
-      this.recipesList.push({"title":"pasto pizza with cheesey dip", "image":"assets/images/temp-images/listing-1.jpg","rating":"(4.1 / 5)", "description":"Nam ornare arcu turpis, nec congues with us     <br/>Curabitur quis euismod mauris. Nulls<br/>eget semper vulputate.", "author":"Peter Stiles", "created_at":"23/10/2015"});
 
-      this.recipesList.push({"title":"pasto pizza with juicy dip", "image":"assets/images/temp-images/listing-2.jpg","rating":"(4.1 / 5)", "description":"Nam ornare arcu turpis, nec congues with us     <br/>Curabitur quis euismod mauris. Nulls<br/>eget semper vulputate.", "author":"Peter Stiles", "created_at":"23/10/2015"});
-
-
-
-      this.recipesList.push({"title":"pasto pizza with extra topping", "image":"assets/images/temp-images/listing-3.jpg","rating":"(4.1 / 5)", "description":"Nam ornare arcu turpis, nec congues with us     <br/>Curabitur quis euismod mauris. Nulls<br/>eget semper vulputate.", "author":"Peter Stiles", "created_at":"23/10/2015"});
-
-
-	  this.recipesList.push({"title":"pasto pizza with extra topping", "image":"assets/images/temp-images/listing-4.jpg","rating":"(4.1 / 5)", "description":"Nam ornare arcu turpis, nec congues with us     <br/>Curabitur quis euismod mauris. Nulls<br/>eget semper vulputate.", "author":"Peter Stiles", "created_at":"23/10/2015"});
-
-	  this.recipesList.push({"title":"pasto pizza with juicy dip", "image":"assets/images/temp-images/listing-2.jpg","rating":"(4.1 / 5)", "description":"Nam ornare arcu turpis, nec congues with us     <br/>Curabitur quis euismod mauris. Nulls<br/>eget semper vulputate.", "author":"Peter Stiles", "created_at":"23/10/2015"});
-
-      this.recipesList.push({"title":"pasto pizza with extra topping", "image":"assets/images/temp-images/listing-3.jpg","rating":"(4.1 / 5)", "description":"Nam ornare arcu turpis, nec congues with us     <br/>Curabitur quis euismod mauris. Nulls<br/>eget semper vulputate.", "author":"Peter Stiles", "created_at":"23/10/2015"});
-
-    }
 
 	loadRecipes()
 	{
@@ -175,6 +166,8 @@ export class RecipesComponent implements OnInit {
 	  }
   
 	  params["instructions"] = "notempty";
+
+	  params["cuisineType"] = "american";
 	  params["returnfields"] = " id, label, image, healthLabels,  dietLabels, calories ";
 	  console.log(JSON.stringify(params));
 	 var res =   this.dbService.getDatabyFields("recipes", params).subscribe(invData => setTimeout(() => {
@@ -383,8 +376,9 @@ endIndex = startIndex+ endIndex;
     }
     params["instructions"]="notempty";
    }
-
-   params["returnfields"] = " id, label, image, healthLabels, s_instructions, dietLabels, calories, yield";
+   
+  // params["cuisineType"] = "american";
+   params["returnfields"] = " id, label, image, cuisineType, healthLabels, dietLabels, calories, yield";
 
 	 var dietlabels = "";
 	 for(let m=0; m <this.dietLabelsList.length; m++)
@@ -466,7 +460,7 @@ endIndex = startIndex+ endIndex;
   {
 	  var params1 = {};
 
-	  var query = "select id, label, image, healthLabels, s_instructions, dietLabels, calories, yield from recipes ";
+	  var query = "select id, label, image, cuisineType, healthLabels, dietLabels, calories, yield from recipes ";
 	  var where = " where totalNutrients != '' AND digest != ''  AND s_instructions != '' " ;
 	  if(this.maxcalories > 0)
 	  where +=  " AND calories >= " + this.maxcalories
@@ -620,6 +614,14 @@ endIndex = startIndex+ endIndex;
 
     var retVal = this.helpService.formatValuePServing(str, servings);
     return retVal;
+  }
+  formatlabels(str)
+  {
+	  var ret = str;
+	  if(str !== "")
+	  ret = str.replaceAll("~", ", ");
+
+	  return ret;
   }
 }
 

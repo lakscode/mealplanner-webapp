@@ -51,13 +51,14 @@ urlTweet : any;
 urlWhatsApp: any;
 msg: any = "";
 labeltext: any = "";
+perServingFlag: boolean = true;
 	constructor(private router: Router, private route: ActivatedRoute, private sanitize: DomSanitizer, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
 	
 	}
 
 	ngOnInit() {
 		this.apiUrl = environment.apiUrl;
-
+		this.perServingFlag = true;
 
 
 		this.urlShare = window.location.href;
@@ -739,6 +740,14 @@ formatText(str)
 
 transform(value: any, args?: any): any {
 return this.sanitize.bypassSecurityTrustHtml(value);
+}
+
+gotoRecipes(label, type) {
+	if(type == "diet")
+	this.router.navigate(['recipes', {dietLabels:label}]);
+	if(type == "health")
+	this.router.navigate(['recipes', {healthLabels:label}]);
+	
 }
 
 }

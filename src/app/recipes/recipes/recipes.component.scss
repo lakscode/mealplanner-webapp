@@ -85,6 +85,11 @@ a:hover {
 }
 
 
+
+.listfixedheight
+{
+  display:inline-block; height:145px !important; width: 90%; max-height:145px; overflow:auto;
+}
   .listSection{
            // border: solid 1px #888;
             //border-radius: 4px;
@@ -177,7 +182,7 @@ a:hover {
 .container {
   display: block;
   position: relative;
-  padding-left: 35px;
+  padding-left: 20px;
   margin-bottom: 12px;
   cursor: pointer;
   font-size: 16px;
@@ -202,8 +207,8 @@ a:hover {
   position: absolute;
   top: 0;
   left: 0;
-  height: 20px;
-  width: 20px;
+  height: 16px;
+  width: 16px;
   background-color: #FFF;
    //border-radius: 50%;
    border:1px solid $orange;
@@ -236,10 +241,11 @@ background-color: $orange;
 
 /* Style the checkmark/indicator */
 .container .checkmark:after {
-  left: 7px;
+  left: 5px;
   top: 3px;
-  width: 5px;
-  height: 10px;
+  width: 4px;
+  height: 8px;
+
   border: solid white;
   border-width: 0 3px 3px 0;
   -webkit-transform: rotate(45deg);
@@ -448,4 +454,26 @@ color:#FFF;
   font-style: italic;
   color: #CCC;
   display:none;
+}
+
+
+.divoverflow::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+.divoverflow::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey; 
+  border-radius: 5px;
+}
+ 
+/* Handle */
+.divoverflow::-webkit-scrollbar-thumb {
+  background: $orange1; 
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+.divoverflow::-webkit-scrollbar-thumb:hover {
+  background: $orange; 
 }

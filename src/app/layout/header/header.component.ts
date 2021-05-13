@@ -39,7 +39,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
 	var currentUrl = this.router.url;
 	currentUrl = currentUrl.replace("/","");
-	//console.log(currentUrl);
+	////console.log(currentUrl);
 	var displayMenu =  true;
 
 		this.currentUser = new User();
@@ -120,8 +120,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
 	isTrialExpired: boolean  = false;
 	mobilemenu(item)
 	{
-		console.log("mobilemenu");
-		console.log(item);
+		//console.log("mobilemenu");
+		//console.log(item);
 		item.expand = !item.expand; 
 		this.gotopage(item.link);
 		if(typeof(item.children) == "undefined" || item.children.length == 0)
@@ -130,16 +130,16 @@ export class HeaderComponent implements OnInit, OnDestroy {
 	}
 	ngOnInit() {
 
-		console.log("header ngOnInit");
+		//console.log("header ngOnInit");
 		this.companylogo = 'assets/logo-dark.png';
 	
 		
-
+		console.log("ngOninit");
 		this.userService.loggedinUser().subscribe(userdata => setTimeout(() => {
 			this.setIconMenu();
 			this.loggedIn = false;
 			
-			//console.log(userdata);
+			////console.log(userdata);
 			if(typeof(userdata) !== "undefined" && userdata !== null)
 			{
 				this.currentUser = userdata;
@@ -174,7 +174,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 				this.isTrialExpired = this.helpService.isTrialExpired(this.currentUser);
 			}
 			
-		//	console.log(this.loggedIn);
+		//	//console.log(this.loggedIn);
 		}, 0));
 			this.checkCurrentUser();
 	}
@@ -232,7 +232,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 	}
 	setIconMenu()
 	{
-	//	console.log("In setIconMenu");
+	//	//console.log("In setIconMenu");
 		for(let i=0; i < this.menuItems.length; i++)
 		{
 			this.menuItems[i]["active"] = false;

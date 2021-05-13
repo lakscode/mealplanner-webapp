@@ -203,14 +203,14 @@ background-image: linear-gradient(to right, #1A2980 0%, #26D0CE  51%, #1A2980  1
 .newitem:nth-child(10)
 {
   top: 250px;
-  left: 80px;
+  left: 100px;
   background: $bgcolornew10;
 } 
 
 .newitem:nth-child(11)
 {
-  top:250px;
-  left: 150px;
+  top:270px;
+  left: 190px;
   background: $bgcolornew11;
 } 
 
@@ -340,7 +340,7 @@ background-image: linear-gradient(to right, #1A2980 0%, #26D0CE  51%, #1A2980  1
   float: left;
   margin-right: 10px;
 }
-.recipe-details-group .hlabel
+.recipe-details-group .hlabel, .hlabel
 {
 float:left;
 padding:2px 5px;
@@ -355,7 +355,7 @@ text-align:center;
 font-size:12px;
 }
 
-.recipe-details-group .hlabel:hover
+.recipe-details-group .hlabel:hover, .hlabel:hover
 {
   //color:$green;
   font-weight:bold;
@@ -508,4 +508,149 @@ h1 { font-size: 1.5em; margin: 10px; }
 .submit-comment.active {
  background: #6ebe3b;
  }
+
+
+
+
+ .container {
+  display: block;
+  position: relative;
+  padding-left: 30px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 16px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  font-weight:normal;
+}
+
+/* Hide the browser's default checkbox */
+.container input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+
+ 
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: #FFF;
+   //border-radius: 50%;
+   border:1px solid $orange;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input[type="checkbox"] ~ .checkmark {
+  background-color: #FFF;
+}
+
+/* When the checkbox is checked, add a blue background */
+.container input[type="checkbox"]:checked ~ .checkmark {
+background-color: $orange;
+  border:1px solid $orange;
+  //background-color: #66bb6a;
+  //border:1px solid #66bb6a;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+  left: 7px;
+  top: 3px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+
+
+/**********8 share recipe */
+
+
+.share-recipe
+{
+ 
+ //   border-top:1px solid #CCC;
+ //   border-bottom:1px solid #CCC;
+  padding-top:10px;
+  padding-bottom:10px;
+    font-size:16px;
+    margin:15px;
+   text-align:right;
+
+}
+
+.social-icon
+{
+    background:#ccc;
+    border-radius:50%;
+    color:#FFF;
+    width:32px;
+    height:32px;
+      display:inline-block;  
+      margin:0 auto;
+      text-align:center;
+      margin-right:10px;
+}
+.social-icon a
+{
+    padding-top:8px;
+    width:100%;
+    text-align:center;
+    color:#FFF;
+    text-decoration: none;
+    opacity:0.7;
+}
+.social-icon a:hover
+{
+   text-decoration: none;
+    opacity: 1;
+}
+.print
+{
+  background-color: #222222;
+}
+
+.whatsapp
+{
+  background-color: #25d366;;
+}
+
+
+.fb
+{
+  background-color: #4267B2;
+}
+
+
+.twitter
+{
+  background-color: #55acee;
+}
+
 

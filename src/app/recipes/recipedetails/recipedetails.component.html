@@ -35,33 +35,29 @@
                             </div>
                             <p style="clear:both"></p>
                             <div class="recipe-details" *ngIf="searchRes.calories">
-                            <p>Calories:</p>
-                            <p style="display:block;">
-                                <a href="javascript:void(0);"  class="hlabel">{{formatValue(searchRes.calories)}} kcal</a> 
-                            </p>
-                        </div>
+                                <p>Calories:</p>
+                                <p style="display:block;">
+                                    <a href="javascript:void(0);"  class="hlabel">{{formatValue(searchRes.calories)}} kcal</a> 
+                                </p>
+                            </div>
                             <p style="clear:both"></p>
-                        <div class="recipe-details" *ngIf="searchRes.yield">
-                            <p>Servings:  </p>
-                            <p style="display:block;">
-                                <a href="javascript:void(0);"  class="hlabel">{{searchRes.yield}}</a> 
-                            </p>
-                        </div>
+                            <div class="recipe-details" *ngIf="searchRes.calories">
+                                <p>Calories per Serving:</p>
+                                <p style="display:block;">
+                                    <a href="javascript:void(0)"  class="hlabel">{{formatValue(searchRes.calories/searchRes.yield)}} kcal</a> 
+                                </p>
+                            </div>
                             <p style="clear:both"></p>
-                        <div class="recipe-details" *ngIf="searchRes.dietLabels">
-                            <p>Diet Labels:</p>
-                            <p style="display:block;">
-                                <a href="recipes;diet={{dlabel}}"  class="hlabel" *ngFor="let dlabel of formatLabels(searchRes.dietLabels)">{{dlabel}}</a> 
-                            </p>
-                        </div>
+                            <div class="recipe-details" *ngIf="searchRes.yield">
+                                <p>Servings:  </p>
+                                <p style="display:block;">
+                                    <a href="javascript:void(0);"  class="hlabel">{{searchRes.yield}}</a> 
+                                </p>
+                            </div>
+                           
                             <p style="clear:both"></p>
                             
-                            <div class="recipe-details" *ngIf="searchRes.healthLabels">
-                            <p>Health Labels:</p>
-                            <p style="display:inline-block;  max-height: 100px; overflow:auto;"  >
-                                <a href="recipes;health={{hlabel}}" class="hlabel" *ngFor="let hlabel of formatLabels(searchRes.healthLabels)">{{hlabel}}</a> 
-                            </p>
-                        </div>
+                           
                             <p style="clear:both; padding-bottom:10px;"></p>
                         </div>
                     </div>
@@ -71,7 +67,7 @@
     
      
     </div>
-    
+   
     
     <div class="recipe-detail-body" *ngIf="searchRes && searchRes.label">
     <div class="rating-box">
@@ -82,13 +78,28 @@
     </div>
    
     <div class="separator-post"></div>
-    <p>
-      
-    </p>
-    <br>
-   
-    
+    <p style="clear:both"></p>
+  
+        <div class="innerbox">
+    <div class="recipe-details" *ngIf="searchRes.dietLabels">
+        <p>Diet Labels:</p>
+        <p style="display:block;">
+             <a (click)="gotoRecipes(dlabel, 'diet')" href="javascript:void(0)"  class="hlabel" *ngFor="let dlabel of formatLabels(searchRes.dietLabels)">{{dlabel}}</a> 
+        </p>
+    </div>
 
+    <p style="clear:both"></p>     
+    <div class="recipe-details" *ngIf="searchRes.healthLabels">
+        <p>Health Labels:</p>
+        <p style="display:inline-block;"  >
+             <a (click)="gotoRecipes(hlabel, 'health')" href="javascript:void(0)" class="hlabel" *ngFor="let hlabel of formatLabels(searchRes.healthLabels)">{{hlabel}}</a> 
+        </p>
+     </div>
+   
+    </div>
+    <p style="clear:both"></p>
+    <div class="separator-post"></div>
+    <p style="clear:both"></p>
     <div class="ingredients-checkbox" style="min-height:400px">
         <div class="ingredients">
             <h3>Ingredients</h3>
@@ -106,13 +117,26 @@
              <div style="height: 70px ; width:100%; display:block;"></div>
         </div>
         <div *ngIf='showNutrientsFlag' class="nutritional newitems">
-            <h3>Nutritional</h3>
+            <h3>Nutrients</h3><p style="clear:both"></p>
+            <div style="display:block">
+                <label class="container" style=" text-align: left;
+                    display: inline-block;
+                    width: 155px;
+                    font-family: 'Lato', sans-serif;
+                    font-weight: 400;
+                    font-size: 16px;">Per Serving
+                        <input class="showhidenut" id="showhidenut" [(ngModel)] = 'perServingFlag' type="checkbox">
+                        <span class="checkmark"></span>
+                </label>
+            </div>
             <ng-container *ngFor="let macro of paramMicro; let m=index; ">
                 <div class="nutrition-detail newitem">
                     <div class="left-box">
                         {{paramMicro[m].label}}
                         <br>
-                        <span>{{paramMicro[m].totalP}}{{paramMicro[m].unit}}</span>
+                        <span *ngIf="!perServingFlag">{{paramMicro[m].totalP}}{{paramMicro[m].unit}}</span>
+                        <span *ngIf="perServingFlag">{{(paramMicro[m].totalP/searchRes.yield).toFixed(1)}}{{paramMicro[m].unit}}</span>
+                        
                     </div>
                    
                 </div>

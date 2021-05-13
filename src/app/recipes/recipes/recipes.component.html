@@ -18,11 +18,14 @@
                 
                         <div *ngIf="searchmorebar && showNutrientsFlag" class="searchmorebar {{animClass}}">
                             <div class="row">
+
+                                
+
                                 <div class="col-12 col-md-6 col-lg-3 paddinglr0">
                                     <div class="form-group">
 
                                         <label class="form-control-placeholder fcs">Health Labels </label>
-                                        <div class="listSection" id="healthLabels" style="display:inline-block;">
+                                        <div class="listSection  divoverflow listfixedheight" id="healthLabels" >
 
                                             <ng-container *ngFor="let hlabel of healthlabelsList; let h = index">
                                                 <label class="container" style="font-size:12px">{{hlabel.name}}
@@ -37,7 +40,7 @@
                                 <div class="col-12 col-md-6  col-lg-3 paddinglr0">
                                     <div class="form-group">
                                         <label class="form-control-placeholder fcs">Diet Labels</label> 
-                                        <div class="listSection" id="diethLabels" style="display:inline-block;">
+                                        <div class="listSection  divoverflow listfixedheight" id="diethLabels" >
                                            
                                             <ng-container *ngFor="let dlabel of dietLabelsList; let h = index">
                                                 <label class="container" style="font-size:12px">{{dlabel.name}}
@@ -49,11 +52,26 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+                                <div class="col-12 col-md-6 col-lg-3 paddinglr0">
+                                    <div class="form-group">
+
+                                        <label class="form-control-placeholder fcs">Cuisine Type </label>
+                                        <div class="listSection divoverflow listfixedheight" id="cuisineType">
+
+                                            <ng-container *ngFor="let clabel of cuisineTypeList; let c = index">
+                                                <label class="container" style="font-size:12px">{{setFLU(clabel.name)}}
+                                                    <input [(ngModel)] ="clabel.selected" type="checkbox" [checked]="c == 0?'checked':''">
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                            </ng-container>
+
+                                        </div>
+                                    </div>
+                                </div>
                                   <div class="col-12  col-md-6 col-lg-3 paddinglr0">
                                     <div class="form-group">
                                         <label class="form-control-placeholder fcs">Nutrients</label> 
-                                        <div class="listSection"  style="display:inline-block; height:145px; width: 90%; max-height:145px; overflow:auto;">
+                                        <div class="listSection divoverflow listfixedheight" >
                                             <ng-container *ngFor="let mlabel of mineralsLabelsList; let m = index">
                                                 <div class="row paddinglr0">
                                                     <div class="col-12 paddinglr0">
@@ -82,7 +100,7 @@
                                         </div>
                                     </div>
                                   </div>
-                                  <div class="col-12 col-lg-3 paddinglr0">
+                                  <div class="col-12 paddinglr0">
                                     <div class="form-group">
                                         <label class="form-control-placeholder fcs">Calories</label> 
                                         <div class="listSection"  style="display:inline-block;">
@@ -162,20 +180,27 @@
                         <div class="listing" *ngFor="let recipe1 of displayList; let i = index;">
                             <div class="image image-animate">
                                 <a (click)="gotoRecipeDetails(recipe1.id)">
-                                    <img class="tstbite-animation" src="{{formatImage(recipe1.image, 'm')}}"
+                                    <img style="max-width:200px; max-height:200px" class="tstbite-animation" src="{{formatImage(recipe1.image, 'm')}}"
                                         alt="image">
                                 </a>
                             </div>
                             <div class="detail">
                                 <h4><a (click)="gotoRecipeDetails(recipe1.id)">{{recipe1.label}}</a></h4>
-                                <p innerHTML="{{limitTo(recipe1.s_instructions, 200)}}">
+                                <!--<p innerHTML="{{limitTo(recipe1.s_instructions, 200)}}">
 
+                                </p>-->
+                                <p *ngIf="recipe1.dietLabels">
+                                    Diet Labels: <span style="font-size:12px;">{{formatlabels(recipe1.dietLabels)}}</span>
                                 </p>
-                                <p>Calories: {{recipe1.calories}} Kcal</p>
+                                <!--<p *ngIf="recipe1.healthLabels">
+                                    Health Labels: <span style="font-size:12px;">{{formatlabels(recipe1.healthLabels)}}</span>
+                                </p>-->
+
+                                <p>Calories: <span style="font-size:12px;">{{recipe1.calories}} Kcal</span></p>
                                 <div class="meta-listing">
                                    
                                     <div *ngIf="showNutrientsFlag" style="display:inline-block;color: #5e676b;">
-                                        Calories per Serving: {{formatValuePServing(recipe1.calories, recipe1.yield)}} Kcal
+                                        Calories per Serving:<span style="font-size:12px;">{{formatValuePServing(recipe1.calories, recipe1.yield)}} Kcal</span>
                                     </div>
                        
                                     <div class="rating-box">
