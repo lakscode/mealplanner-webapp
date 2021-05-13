@@ -70,6 +70,9 @@ import { FaqsModule } from './faqs/faqs.module';
 
 import { LazyLoadImageModule } from 'ng-lazyload-image'; 
 
+import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
+import { GoogleLoginProvider } from 'angularx-social-login';
+
 @NgModule({
   declarations: [
 		AppComponent
@@ -122,10 +125,24 @@ import { LazyLoadImageModule } from 'ng-lazyload-image';
 	RecipebooksModule,
 	RecipebookModule,
 	FaqsModule,
-	LazyLoadImageModule
+	LazyLoadImageModule,
+	SocialLoginModule
   ],
   schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
-  providers: [],
+  providers: [{
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              '933469234487-bqim9o4ts1ce5lujmpthvd370qhe7iir.apps.googleusercontent.com'
+            )
+          }
+        ]
+      } as SocialAuthServiceConfig,
+    }    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

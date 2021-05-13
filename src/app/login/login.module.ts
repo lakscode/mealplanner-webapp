@@ -5,6 +5,8 @@ import { LoginRoutingModule } from './login-routing.module';
 import { LoginComponent } from './login.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
+import { GoogleLoginProvider } from 'angularx-social-login';
 
 @NgModule({
   imports: [
@@ -12,7 +14,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     LoginRoutingModule,
     FlexLayoutModule,
 	FormsModule,
-	ReactiveFormsModule
+	ReactiveFormsModule,
+	SocialLoginModule
   ],
   declarations: [LoginComponent]
 })
