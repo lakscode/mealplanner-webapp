@@ -70,7 +70,7 @@ import { FaqsModule } from './faqs/faqs.module';
 
 import { LazyLoadImageModule } from 'ng-lazyload-image'; 
 
-import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
+import { SocialLoginModule, SocialAuthServiceConfig, FacebookLoginProvider } from 'angularx-social-login';
 import { GoogleLoginProvider } from 'angularx-social-login';
 
 @NgModule({
@@ -139,7 +139,11 @@ import { GoogleLoginProvider } from 'angularx-social-login';
             provider: new GoogleLoginProvider(
               '933469234487-bqim9o4ts1ce5lujmpthvd370qhe7iir.apps.googleusercontent.com'
             )
-          }
+          },
+           {
+    		id: FacebookLoginProvider.PROVIDER_ID,
+    		provider: new FacebookLoginProvider('286839523118020')
+  			}
         ]
       } as SocialAuthServiceConfig,
     }    ],
