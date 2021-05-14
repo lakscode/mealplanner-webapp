@@ -142,15 +142,15 @@ export class LoginComponent implements OnInit {
 	}
 
 
-  loginWithGoogle(): void {
-    this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID);
-    this.socialLogin();
-  }
+  	loginWithGoogle(): void {
+    	this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID);
+    	this.socialLogin();
+  	}
 
-  signInWithFB(): void {
-  this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID);
-  this.socialLogin();
-}
+  	signInWithFB(): void {
+  		this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID);
+  		this.socialLogin();
+	}
 
 	socialLogin(){
 	 this.socialAuthService.authState.subscribe((user) => {
@@ -171,51 +171,38 @@ export class LoginComponent implements OnInit {
 		this.dbService.checkIfExists("users", params1).subscribe(userDataObj => setTimeout(() => {
 			console.log(userDataObj);
 			if (userDataObj['body']['length'] > 0) {
-			var userDataSocial = userDataObj['body'][0];
-			if(userDataSocial["social_id"] == "") {
-			 var paramsUpdate = {};
+				var userDataSocial = userDataObj['body'][0];
+					if(userDataSocial["social_id"] == "") {
+						var paramsUpdate = {};
 			
-            paramsUpdate["social_id"] = this.socialUser.id;
-            paramsUpdate["social_provider"] = this.socialUser.provider;
-             paramsUpdate["image"] = this.socialUser.photoUrl;
+            			paramsUpdate["social_id"] = this.socialUser.id;
+            			paramsUpdate["social_provider"] = this.socialUser.provider;
+            			paramsUpdate["image"] = this.socialUser.photoUrl;
       
-           var res =   this.dbService.updateDataByTable("users", paramsUpdate).subscribe(invData => setTimeout(() => 
-            {
-            console.log("successfully updated");
-
-            }));
-            }else {
-            
-            sessionStorage.setItem("currentUser", JSON.stringify(userDataSocial));
+           				var res =   this.dbService.updateDataByTable("users", paramsUpdate).subscribe(invData => setTimeout(() => {
+            				console.log("successfully updated");
+						}));
+            		}
+            		sessionStorage.setItem("currentUser", JSON.stringify(userDataSocial));
 					let username = this.userService.setUser(userDataSocial);
 					this.gotopage("landing");
-            }
-            }
-            
-            else {
-
-              var res =   this.dbService.postData("users", params).subscribe(invData => setTimeout(() => 
-        {
-          console.log(invData);
-          if(invData !== null)
-          {
-            if(typeof(invData["result"]) !== "undefined" && invData["result"] == "success")
-            {
-              console.log("user has been successfully ceated");
-              var parent = this;
-                setTimeout(function(){
-                // sessionStorage.setItem("currentUser", JSON.stringify(invData));
-					//let username = this.userService.setUser(invData); 
-                 this.gotopage("landing");
-                }, 3000);
-            }
-          }
-        }));
-
-            }
-		}));
-
-      
+            } else {
+              	var res =   this.dbService.postData("users", params).subscribe(invData => setTimeout(() => {
+          			console.log(invData);
+          			if(invData !== null){
+            			if(typeof(invData["result"]) !== "undefined" && invData["result"] == "success"){
+              				console.log("user has been successfully ceated");
+              				var parent = this;
+                			
+                				sessionStorage.setItem("currentUser", JSON.stringify(invData));
+								let username = this.userService.setUser(invData); 
+                  				this.gotopage("landing");
+                		
+           				}
+          			}
+       			}));
+			}
+		}));      
     });
 	}
 
