@@ -476,7 +476,11 @@
                 <ng-container *ngFor="let item of shoppingList; let i = index">
                 <div class="items" *ngIf='item.quantity > 0' style="padding:10px;text-align:left;" >
                     <div style='float:left'>{{setFLU(item.name)}}</div>
-                    <div style='float:right'>{{formatNumber(item.quantity)}}  {{item.measure}}</div>  
+                   <div style='float:right'>
+                    {{formatNumber(item.quantity)}}  {{item.unit}}<br>
+                    {{formatweight(item.weight)}} lbs<br>
+                    {{item.weight.toFixed(2)}} grams<br>
+                    </div> 
                     <div style='clear:both'></div>
                 </div>
             </ng-container>

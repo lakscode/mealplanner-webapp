@@ -34,16 +34,11 @@ images: any;
 		  this.images["mobilescreens"] ="assets/mtc_s.jpg";
 		  this.images['goodfood']  = "assets/images/temp-images/good-food.jpg";
 
-		  this.images['step1']  = "";
-		  this.images['step2']  = "";
-		  this.images['step3']  = "";
-		  this.images['step4']  = "";
-
-		console.log("Home NgOninit");
+		//console.log("Home NgOninit");
 		this.loadSteps(); 
 	//	this.loadTestimonials();
 		this.isMobile = this.helpService.isMobile();
-		console.log(this.isMobile);
+		//console.log(this.isMobile);
 		this.currentUser =this.helpService.getCurrentUser();
 		if(this.currentUser !== null)
 		{
@@ -52,7 +47,7 @@ images: any;
 		  this.currentUser["displayname"] = this.currentUser["firstname"];
 		  else if( this.currentUser["username"] !== "")
 		  this.currentUser["displayname"] = this.currentUser["username"];
-		//  console.log(this.currentUser["displayname"]);
+		//  //console.log(this.currentUser["displayname"]);
 		}
 
 		/*
@@ -115,7 +110,7 @@ images: any;
 			}
 		
 		}
-		console.log(this.testimonialsList);
+		//console.log(this.testimonialsList);
 	}
 	*/
 
@@ -128,7 +123,7 @@ images: any;
 	{
 
 		this.popupforquestions  = true;
-		console.log(this.popupforquestions);
+		//console.log(this.popupforquestions);
 	}
 
 	closeModal(id)

@@ -1173,6 +1173,20 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 		}
 		return retValue;
 	}
+
+	formatweight(num)
+	{
+		var ret = 0;
+		var pound = 0.00220462;
+		var onekg = 2.2046; // one kg is 2.2046 pounds
+		var onegram = 2.2046/1000;
+		if(num !== "" && num > 0)
+		{
+			ret = num * pound;
+
+		}
+		return ret.toFixed(2);
+	}
 	formatNumber(num)
 	{
 	var retVal = num;
@@ -1462,6 +1476,8 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 						  if(fIndex > -1)
 						  {
 							consList[fIndex]['quantity'] =  parseFloat(consList[fIndex]['quantity' ] ) +  tempA[k]['quantity'];
+							consList[fIndex]['weight'] =  parseFloat(consList[fIndex]['weight' ] ) +  tempA[k]['weight'];
+
 						  }
 						  else
 						  {
@@ -1469,7 +1485,7 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 							  if( tempA[k]['measure'] !== "<unit>")
 							  unit = tempA[k]['measure'];
 
-							consList.push({"name": tempA[k]['food'].toLowerCase(), 'quantity':  tempA[k]['quantity'], 'measure': unit})
+							consList.push({"name": tempA[k]['food'].toLowerCase(), 'quantity':  tempA[k]['quantity'], 'weight': tempA[k]['weight'], 'unit': unit})
 						  }
 						 
 						  

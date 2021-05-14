@@ -89,7 +89,7 @@ export class LoginComponent implements OnInit {
 	}
 
 	login() {
-		console.log("in login");
+		//console.log("in login");
 		this.submitted = true;
 
 		if (this.rememberMe === true) {
@@ -102,7 +102,7 @@ export class LoginComponent implements OnInit {
 		var params = {'username':  this.userObj.username, 'emailphone':this.userObj.username}
 
 		this.dbService.checkIfExists("users", params).subscribe(userDataObj => setTimeout(() => {
-			console.log(userDataObj);
+			//console.log(userDataObj);
 			if (userDataObj['body']['length'] > 0) {
 				var userData = userDataObj['body'][0];
 			
@@ -126,7 +126,7 @@ export class LoginComponent implements OnInit {
 				this.errorMessage = "Invalid Username and Password";
 				return;
 			}
-			console.log("navigation");
+			//console.log("navigation");
 			if (this.redirecturl == "")
 			{
 				
