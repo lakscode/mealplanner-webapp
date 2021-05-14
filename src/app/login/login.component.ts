@@ -6,6 +6,7 @@ import { DBService } from '../dbservices/db.service';
 import { HelpService } from '../services/help.service';
 
 import { environment } from './../../environments/environment';
+import { SocialAuthService, GoogleLoginProvider, SocialUser } from 'angularx-social-login'
 
 @Component({
 	selector: 'app-login',
@@ -27,7 +28,8 @@ export class LoginComponent implements OnInit {
 	users: any;
 	errorPassMatch: any;
 	errorLogin: any;
-	constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
+	socialUser: SocialUser;
+	constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder,  private socialAuthService: SocialAuthService) {
 		this.userName = ""; this.passWord = "";
 			this.errorPassMatch = "";
 
@@ -36,6 +38,71 @@ export class LoginComponent implements OnInit {
 
 	ngOnInit() {
 	this.errorMessage = "";
+
+	 this.socialAuthService.authState.subscribe((user) => {
+      this.socialUser = user;
+      //this.isLoggedin = (user != null);
+      console.log(this.socialUser);
+        var params = {
+          "username":this.socialUser.name,
+          "email":this.socialUser.email,
+          "social_id": this.socialUser.id,
+          "social_provider": "google"
+
+        }
+        console.log(params);
+        var params1 = {'email':  this.socialUser.email};
+
+		this.dbService.checkIfExists("users", params1).subscribe(userDataObj => setTimeout(() => {
+			console.log(userDataObj);
+			if (userDataObj['body']['length'] > 0) {
+			var userDataSocial = userDataObj['body'][0];
+			if(userDataSocial["social_id"] == "") {
+			 var params2 = {};
+			
+            params2["social_id"] = this.socialUser.id;
+            params2["social_provider"] = "google";
+      
+           var res =   this.dbService.updateDataByTable("users", params2).subscribe(invData => setTimeout(() => 
+            {
+            console.log("successfully updated");
+
+            }));
+            }else {
+            
+            sessionStorage.setItem("currentUser", JSON.stringify(userDataSocial));
+					let username = this.userService.setUser(userDataSocial);
+					this.gotopage("landing");
+            }
+            }
+            
+            else {
+
+              var res =   this.dbService.postData("users", params).subscribe(invData => setTimeout(() => 
+        {
+          console.log(invData);
+          if(invData !== null)
+          {
+            if(typeof(invData["result"]) !== "undefined" && invData["result"] == "success")
+            {
+              console.log("user has been successfully ceated");
+              var parent = this;
+                setTimeout(function(){
+                // sessionStorage.setItem("currentUser", JSON.stringify(invData));
+					//let username = this.userService.setUser(invData); 
+                 this.gotopage("landing");
+                }, 3000);
+            }
+          }
+        }));
+
+            }
+		}));
+
+      
+    });
+
+
 		this.rememberMe = true;
 		this.users = JSON.parse(sessionStorage.getItem("user"));
 		this.redirecturl = "";
@@ -138,6 +205,10 @@ export class LoginComponent implements OnInit {
 		
 	}
 
+
+  loginWithGoogle(): void {
+    this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID);
+  }
 
 
 	closeerror()
