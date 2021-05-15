@@ -178,15 +178,16 @@
                         <div class="col-12">
                             <label for="recipes">Recipes</label>
                         </div>
-                        <div class="col-12 col-lg-4 col-md-4" *ngFor="let recipe of recipesList; let i = index;">
-                            <div class="recipe-item" style="background-size:cover; margin-bottom:10px; background-position:center; width:100%; height:100%; " [ngStyle]="{'background-image':'url(' + recipe.image + ')'}">
-                             
-                            <div class='row toggleremove' style='color:#FFF;'>
-                             
+                        <div style="margin-bottom:10px" class="col-12 col-lg-4 col-md-4" *ngFor="let recipe of recipesList; let i = index;">
+                            <div class="recipe-item" style="background-size:cover;  background-position:center; width:100%; height:100%; " [ngStyle]="{'background-image':'url(' + recipe.image + ')'}">
+                                <div style="position:absolute; width:calc(100% - 60px); height: 150px; background:#f1f2f3; opacity: 0.5"></div>
+                            <div class='row toggleremove' style='color:#000;'>
+                               
                                 <!--<div class="col-4">
                                     <img style="width:100%" src="{{recipe.image}}" />
                                 </div>-->
                                 <div class="col-12">
+                                    
                                     <h1 class="recipe-label">{{recipe.label}}</h1>                                  
                                   
                                 </div>
