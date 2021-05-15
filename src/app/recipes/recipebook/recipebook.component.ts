@@ -790,6 +790,10 @@ formatVal(str)
 	return retval;
  }
  
+ formatImage(img)
+ {
+	 return img.trim();
+ }
 }
 
 	
