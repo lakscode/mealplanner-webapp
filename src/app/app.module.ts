@@ -68,6 +68,11 @@ import { RecipebooksModule } from './recipes/recipebooks/recipebooks.module';
 import { RecipebookModule } from './recipes/recipebook/recipebook.module';
 import { FaqsModule } from './faqs/faqs.module';  
 
+
+import { CommunitiesModule } from './recipes/communities/communities.module'; 
+import { CommunityModule } from './recipes/community/community.module';
+
+
 import { LazyLoadImageModule } from 'ng-lazyload-image'; 
 
 import { SocialLoginModule, SocialAuthServiceConfig, FacebookLoginProvider } from 'angularx-social-login';
@@ -126,7 +131,9 @@ import { GoogleLoginProvider } from 'angularx-social-login';
 	RecipebookModule,
 	FaqsModule,
 	LazyLoadImageModule,
-	SocialLoginModule
+	SocialLoginModule,
+	CommunitiesModule,
+	CommunityModule
   ],
   schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
   providers: [{
