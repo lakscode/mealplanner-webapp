@@ -2,7 +2,7 @@
     
     <div class="container" style="padding-left:0px; padding-right:0px;">
         <div class="row">
-            <div class="col-md-8 col-lg-9">
+            <div class="col-md-12 col-lg-9">
                
                 <div style= 'width:100%'></div>
                 <div class="recipe-set">
@@ -61,7 +61,7 @@
                                 </a>
                             </div>
                             <div class="detail">
-                                <h4><a (click)="gotopage('recipebook', {'id':recipe1.id});">{{recipe1.recipebook_name}}</a></h4>
+                                <h4><a (click)="gotopage('community', {'id':recipe1.id});">{{recipe1.recipebook_name}}</a></h4>
                                 <p innerHTML="{{limitTo(recipe1.description, 200)}}">
 
                                 </p>  

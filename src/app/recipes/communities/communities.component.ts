@@ -236,7 +236,7 @@ endIndex = startIndex+ endIndex;
 
 
 	gotoRecipebook(id){
-	this.router.navigate(['recipebook', id]);
+	this.router.navigate(['community', id]);
 	}
 
  gotopage(page , params = null)

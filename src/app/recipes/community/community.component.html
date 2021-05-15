@@ -1,7 +1,7 @@
 <div class="recipes-home-body inner-page">
     <div class="container"  style="padding-left:0px; padding-right:0px;">
     <div class="row">
-    <div class="col-12 col-md-12 col-lg-9">
+    <div class="col-12 col-md-12 col-lg-12">
         <div class="recipe-set submit-recipe-set">
             <h2>Community</h2>
             <p>Recipe book is selection of the recipes based on ingredients,  health labels or nutrients from our list of recipes.  </p>
@@ -10,16 +10,19 @@
             </div>    
             <div class="submit-recipe-form">
                 <form action="#" method="post">
+
+                    <div class="row">
+                        <div class="col-12 col-md-6 col-lg-6">
                     <label for="title">Recipe book Title</label>
                     <input type="text" name="title" id="title" [(ngModel)]="searchRes.recipebook_name">
                     <br>
                     <label for="description">Description</label>
                     <textarea class="short-text" name="description" [(ngModel)]='searchRes.description' id="description" cols="30" rows="10"></textarea>
  
-                   
+                   </div>
                  
                     
-                    <div class="row">
+                  
                         <div class="col-12 col-md-6 col-lg-6">
                             <label  class='comment-label'>Upload Image</label>
                             <button (click)="fileupload()" class="upload-comment">
@@ -27,7 +30,7 @@
                            <div>
                                <input id="inputuploadrecipe" hidden type="file" name="inputuploadrecipe" (change)="onFileSelect($event)" />
                              </div>
-                             <img *ngIf="searchRes.image" src="{{searchRes.image}}"  style="width: 90%; max-width: 200px;" />
+                             <img *ngIf="searchRes.image" src="{{searchRes.image}}"  style="width: 90%; max-width: 300px;" />
                      
                              
                           </div>
@@ -155,13 +158,13 @@
                                             <img style="width:100%" src="{{recipe.image}}" />
                                         </div>-->
                                         <div class="col-12">
-                                            <h1 class="recipe-label1">{{recipe.label}}</h1>                                  
-                                            <p><b><em>Calories</em></b>: {{recipe.calories}} Kcal, <b><em>Servings</em></b>: {{recipe.yield}}</p>
+                                            <h1 class="recipe-label1" style='color:#FFF'>{{recipe.label}}</h1>                                  
+                                            <p style='color:#FFF'><b><em>Calories</em></b>: {{recipe.calories}} Kcal, <b><em>Servings</em></b>: {{recipe.yield}}</p>
                                             <!--<p><b><em>Diet Labels</em></b>: {{recipe.dietLabels}} </p>-->
 
-                                            <div class="recipe-add" (click)="addRecipe(recipe)"><i class="fa fa-plus" aria-hidden="true"></i></div>
+                                            <div style='color:#FFF' class="recipe-add" (click)="addRecipe(recipe)"><i class="fa fa-plus" aria-hidden="true"></i></div>
 
-                                            <div class="recipe-view" (click)="viewRecipe(recipe)"><i class="fa fa-eye" aria-hidden="true"></i></div> 
+                                            <div style='color:#FFF' class="recipe-view" (click)="viewRecipe(recipe)"><i class="fa fa-eye" aria-hidden="true"></i></div> 
                                         </div>                                       
                                     </div>
                                 </div>
@@ -178,7 +181,7 @@
                         <div class="col-12">
                             <label for="recipes">Recipes</label>
                         </div>
-                        <div style="margin-bottom:10px" class="col-12 col-lg-4 col-md-4" *ngFor="let recipe of recipesList; let i = index;">
+                        <div style="margin-bottom:10px" class="col-12 col-lg-3 col-md-4" *ngFor="let recipe of recipesList; let i = index;">
                             <div class="recipe-item" style="background-size:cover;  background-position:center; width:100%; height:100%; " [ngStyle]="{'background-image':'url(' + recipe.image + ')'}">
                                 <!--<div style="position:absolute; width:calc(100% - 60px); height: 150px; background:#f1f2f3; opacity: 0.5"></div>-->
                             <div class='row toggleremove' style='color:#000;'>
@@ -191,7 +194,7 @@
                                     <h1 class="recipe-label">{{recipe.label}}</h1>                                  
                                   
                                 </div>
-                                <div class="col-12">
+                                <div class="col-12" style='color:#FFF'>
                                     <p><b>Calories</b>: {{recipe.calories}} Kcal, <b>Servings</b>: {{recipe.yield}}</p>
                                     <div class="recipe-remove" (click)="removeRecipe(recipe)">Remove</div>
                                 </div>
@@ -219,17 +222,18 @@
             </div>
         </div>
     </div>
+    <!---
     <div class="col-12  col-md-4 col-lg-3">
     <aside>
     <div class="side-bar">
    
-    <!--popular recipes widget-->
+ 
     <app-sidebar></app-sidebar>
-    <!--popular recipes widget ends-->
+ 
     
     </div>
     </aside>
-    </div>
+    </div>-->
     </div>
     
     </div>
