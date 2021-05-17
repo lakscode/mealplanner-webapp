@@ -19,32 +19,47 @@
 						<input id="passl" name="passl" [(ngModel)]="userObj.password"   type="password" class="input" data-type="password" required (keyup.enter)="login()">
 					</div>
 					<div class="group">
-						<input id="check" type="checkbox"checked>
-						<label for="check">&nbsp;Keep me Signed in</label>
+						<div style="display:inline-block; width:50%;">
+							<input id="check" type="checkbox" checked>
+							<label for="check">&nbsp;Keep me Signed in</label>
+						</div>
+						<div style="display:inline-block; width:50%;text-align:right;" class="foot-lnk">
+							<label for="tab-1"> <a style="cursor:pointer;" (click)="gotopage('forgot-password')" class="copy-button">Forgot Password?</a></label>
+						</div>
+
 					</div>
+
+
 					<div *ngIf="errorMessage !== ''" class="group">
 					<p class="loginerror">{{errorMessage}}</p>
 					</div>
 					<div class="group">
 						<input type="button" (click)="login()" class="button" value="Sign In">
 					</div>
-					<div class="hr"></div>
 					
+
+					<div class="hr"></div>
+					<p class="hrline"><span>OR</span></p>			
+					<div class="hr" style="display:block;margin-top:30px">
+						<div class="group" style='text-align:center;'>
+							<a href="#" (click)="signInWithFB()" class="login100-social-item bg1">
+								<i class="fa fa-facebook"></i>
+								</a>
+								<a href="#" (click)="loginWithGoogle()" class="login100-social-item bg3">
+									<i class="fa fa-google"></i>
+									</a>	
+						<!--<button type="button" (click)="loginWithGoogle()" class="btn btn-danger">Login with Google</button>
+						</div>
+						<div class="hr"></div>
+						<div class="group">
+						<button type="button" (click)="signInWithFB()">Sign In With Facebook</button>	-->
+						</div>
+					</div>
+				
+					<div class="foot-lnk">
+						<label for="tab-1">Not a member? <a style="cursor:pointer" class="copy-button" (click)="gotopage('pricing')">Sign Up Now</a></label>
+					</div>
 					
-					<div class="foot-lnk">
-						<label for="tab-1">Forgot Password? <a style="cursor:pointer;" (click)="gotopage('forgot-password')" class="copy-button">Reset</a></label>
-					</div>
-					<div class="foot-lnk">
-						<label for="tab-1">Don't have an account? <a style="cursor:pointer" class="copy-button" (click)="gotopage('pricing')">Sign Up</a></label>
-					</div>
-					<div class="hr"></div>
-					<div class="group">
-					 <button type="button" (click)="loginWithGoogle()" class="btn btn-danger">Login with Google</button>
-					</div>
-					<div class="hr"></div>
-					<div class="group">
-					  <button type="button" (click)="signInWithFB()">Sign In With Facebook</button>	
-					</div>
 
 				</div>				
 			</div>
