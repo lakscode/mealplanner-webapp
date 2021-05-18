@@ -13,7 +13,9 @@ export const environment = {
    contactToName:"Admin",
   contactEmail: "contact@medicaltourismco.com",
   edamameId: "eaec56cb",
-  edamameKey: "a9fec70780e435632a893d2d10eee322"
+  edamameKey: "a9fec70780e435632a893d2d10eee322",
+  google_clientId:"269097500191-nieo8fcaf4vlbrl30mg9c6p60c2spl5i.apps.googleusercontent.com",
+  facebook_appid: "286839523118020"
 };
 
 /*

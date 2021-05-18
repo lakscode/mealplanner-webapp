@@ -177,8 +177,11 @@ export class LoginComponent implements OnInit {
 						paramsUpdate["id"] = userDataSocial["id"];
             			paramsUpdate["social_id"] = this.socialUser.id;
             			paramsUpdate["social_provider"] = this.socialUser.provider;
+						
+						if(userDataSocial["image"] =="")
             			paramsUpdate["image"] = this.socialUser.photoUrl;
       
+						console.log(paramsUpdate);
            				var res =   this.dbService.updateDataByTable("users", paramsUpdate).subscribe(invData => setTimeout(() => {
             				console.log("successfully updated");
 						}));

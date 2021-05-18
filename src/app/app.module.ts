@@ -77,7 +77,7 @@ import { LazyLoadImageModule } from 'ng-lazyload-image';
 
 import { SocialLoginModule, SocialAuthServiceConfig, FacebookLoginProvider } from 'angularx-social-login';
 import { GoogleLoginProvider } from 'angularx-social-login';
-
+import {environment} from "../environments/environment"
 @NgModule({
   declarations: [
 		AppComponent
@@ -143,13 +143,14 @@ import { GoogleLoginProvider } from 'angularx-social-login';
         providers: [
           {
             id: GoogleLoginProvider.PROVIDER_ID,
-            provider: new GoogleLoginProvider(
-              '933469234487-bqim9o4ts1ce5lujmpthvd370qhe7iir.apps.googleusercontent.com'
+            provider: new GoogleLoginProvider(environment.google_clientId
+            //  '933469234487-bqim9o4ts1ce5lujmpthvd370qhe7iir.apps.googleusercontent.com'
             )
           },
            {
     		id: FacebookLoginProvider.PROVIDER_ID,
-    		provider: new FacebookLoginProvider('286839523118020')
+			provider: new FacebookLoginProvider(environment.facebook_appid)
+    		//provider: new FacebookLoginProvider('286839523118020')
     		//provider: new FacebookLoginProvider('541089030229736')
     		
   			}

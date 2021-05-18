@@ -105,6 +105,11 @@ date: {year: number, month: number};
 		  if(this.currentUser["image"] !== "")
 		  {
 		  
+		//	this.profileImage = this.profilePath + this.currentUser["image"] ;
+
+			if( this.currentUser["image"].indexOf("http://") !== -1 ||  this.currentUser["image"].indexOf("https://") !== -1)
+			this.profileImage = this.currentUser["image"] ;
+			else
 			this.profileImage = this.profilePath + this.currentUser["image"] ;
 		  }
 		}
