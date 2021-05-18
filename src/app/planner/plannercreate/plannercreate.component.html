@@ -1,5 +1,5 @@
-<div class="recipes-home-body inner-page">
-<div class="row w-1200" style="text-align:center; margin:0 auto;">
+<div class="recipes-home-body inner-page" style="padding-top:0px">
+<div class="row page-max-width" style="text-align:center; margin:0 auto;">
 
         <div class='leftblock'>
 
@@ -10,7 +10,7 @@
             <div class="filter-bar--side-version">
                 <div class="filter-bar__search-container">
                     <form class="recipe-search false" (submit) ="loadRecipes()">
-                        <div class="form-group">
+                        <div class="form-group-plan">
                             <div class="input-group">
                                 <div class="hm-typeahead " data-test="typeahead-input">
                                     <div class="rbt clearfix open" style="position: relative;" tabindex="-1">
@@ -56,7 +56,7 @@
                         <div class="row "  style="padding-left:0; padding-right:0px">
                           
                             <div class="col-12">
-                                <div class="form-group">
+                                <div class="form-group-plan">
 
                                     <label class="form-control-placeholder fcs">Health Labels </label>
                                     <div class="listSection" id="healthLabels" style="display:inline-block;">
@@ -75,7 +75,7 @@
                                 </div>
                             </div>
                             <div class="col-12 ">
-                                <div class="form-group">
+                                <div class="form-group-plan">
                                     <label class="form-control-placeholder fcs">Diet Labels</label> 
                                     <div class="listSection" id="diethLabels" style="display:inline-block;">
                                         <div class="row">
@@ -92,7 +92,7 @@
                                 </div>
                             </div>
                             <div class="col-12">
-                                <div class="row form-group" style="padding-left:15px">
+                                <div class="row form-group-plan" style="padding-left:15px">
                                     <label class="form-control-placeholder fcs">Calories</label> 
                                     <div class="listSection"  style="display:inline-block;">
                                         <span>Max calories&nbsp;&nbsp;</span>
@@ -102,7 +102,7 @@
                                 </div>
                             </div>
                               <div class="col-12">
-                                <div class="form-group">
+                                <div class="form-group-plan">
                                     <label class="form-control-placeholder fcs">Nutrients</label> 
                                     <div class="listSection"  style="display:inline-block; height:145px; max-height:145px;overflow-x: hidden;">
                                         <div class="row">
@@ -241,54 +241,68 @@
        
 
         <div class="meal-plans-content">
-             <div class="submit-recipe-form" style="text-align:left; padding-bottom:10px;  background-color: #f8f6f5;">
-                <div style='text-align:right;'>
-                    <div style="display:inline-block;text-align:right;width: 400px">
-                    <div style="display:block">
-                    <label *ngIf="showNutrientsFlag"  class="container" style=" text-align: left;
-                    display: inline-block;
-                    width: 155px;
-                    font-family: 'Lato', sans-serif;
-                    font-weight: 400;
-                    font-size: 16px;">Show Nutrients
-                        <input class="showhidenut" id="showhidenut" (change)="showhidenutrients()" [(ngModel)] = 'showhidenutrientsFlag' type="checkbox">
-                        <span class="checkmark"></span>
-                    </label>
-                    <a class="copy-button" (click)="downloadplan()" title="Download PDF"><i class="fa fa-download"></i> Download</a>
-                    &nbsp; <a  class="copy-button" (click)="getIngredientsList()" title="Ingredients List"><i class="fa fa-download"></i> Grocery List </a>
-                    &nbsp;  
-                    </div>
-                    <div style="display:block" *ngIf="showhidenutrientsFlag">
-                    <label class="container" style=" text-align: left;
-                    display: inline-block;
-                    width: 200px;
-                    font-family: 'Lato', sans-serif;
-                    font-weight: 400;
-                    font-size: 16px;">Nutrients per Serving
-                        <input (change)="toggleNutrients('perserving')" [(ngModel)] = 'showNutrientsPServing' type="checkbox">
-                        <span class="checkmark"></span>
-                    </label>
-                    <label class="container" style=" text-align: left;
-                    display: inline-block;
-                    width: 155px;
-                    font-family: 'Lato', sans-serif;
-                    font-weight: 400;
-                    font-size: 16px;">Total Nutrients
-                        <input (change)="toggleNutrients('total')" [(ngModel)] = 'showNutrients' type="checkbox">
-                        <span class="checkmark"></span>
-                    </label>
-                </div>
-                    </div>
-                   
+             <div class="submit-recipe-form" style="text-align:left; padding-top:10px; padding-bottom:10px;  background-color: #f8f6f5;">
                
-                </div>
+                <div class="row">
+                    <div class="col-12 col-lg-4">
+                        <label for="title">Meal Plan Name</label>
+                        <textarea rows=2 type="text" name="tiplannametle" id="planname" [(ngModel)] ="plan.name" (blur)="saveMealPlan()" style="margin-bottom:5px"></textarea>
+                        <span *ngIf="errorMessage && !plan.name" style="color:red;font-size:12px">{{errorMessage}}</span>
+                       
+                    </div>
+                    <div class="col-12 col-lg-4">
+                        <label for="short-description">Tags</label>
+                        <textarea rows=2 type="text" style="margin-bottom:0px" class="short-text" name="plantags" id="plantags" [(ngModel)] ="plan.tags" (blur)="saveMealPlan() "></textarea>
+                
+                    </div>
+                    <div class="col-12 col-lg-4">
+                        <div style='text-align:left;'>
+                            <div style="display:block; margin:0 auto;text-align:left;width: 100%">
+                            <div style="display:block; margin-bottom:10px;">
+                            
+                            <a class="copy-button" (click)="downloadplan()" title="Download PDF"><i class="fa fa-download"></i> Download</a>
+                            &nbsp; <a  class="copy-button" (click)="getIngredientsList()" title="Ingredients List"><i class="fa fa-download"></i> Grocery List </a>
+                            &nbsp;  
+                            </div>
+                            <label *ngIf="showNutrientsFlag"  class="container" style=" text-align: left;
+                            display: block;
+                            width: 100%;
+                            font-family: 'Lato', sans-serif;
+                            font-weight: 400;
+                            font-size: 16px;">Show Nutrients
+                                <input class="showhidenut" id="showhidenut" (change)="showhidenutrients()" [(ngModel)] = 'showhidenutrientsFlag' type="checkbox">
+                                <span class="checkmark"></span>
+                            </label>
 
-                <label for="title">Meal Plan Name</label>
-                <input type="text" name="tiplannametle" id="planname" [(ngModel)] ="plan.name" (blur)="saveMealPlan()" style="margin-bottom:5px">
-                <span *ngIf="errorMessage && !plan.name" style="color:red;font-size:12px">{{errorMessage}}</span>
-                <br>
-                <label for="short-description">Tags</label>
-                <textarea style="margin-bottom:0px" class="short-text" name="plantags" id="plantags" cols="30" rows="3" [(ngModel)] ="plan.tags" (blur)="saveMealPlan()"></textarea>
+                            <div style="    display: inline-block;
+                            width: 100%;
+                            text-align: left;" *ngIf="showhidenutrientsFlag">
+                            <label class="container" style=" text-align: left;
+                            display: inline-block;
+                            width: 140px;
+                            font-family: 'Lato', sans-serif;
+                            font-weight: 400;
+                            font-size: 16px;">Per Serving
+                                <input (change)="toggleNutrients('perserving')" [(ngModel)] = 'showNutrientsPServing' type="checkbox">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="container" style=" text-align: left;
+                            display: inline-block;
+                            width: 120px;
+                            font-family: 'Lato', sans-serif;
+                            font-weight: 400;
+                            font-size: 16px;">Total
+                                <input (change)="toggleNutrients('total')" [(ngModel)] = 'showNutrients' type="checkbox">
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                            </div>
+                           
+                       
+                        </div>
+                    </div>
+                </div>
+               <br>
                 
                 <ng-container *ngIf="showNutrients || showNutrientsPServing" >
                     <div style='float:left; padding:5px; margin-right:5px;display:flex; align-items: center;' *ngFor="let ccode of colorCodes | keyvalue;"> <div [ngStyle] ="{'background-color':ccode.value}" style="display:inline-block; width:20px; height:20px;  margin-right:5px; "></div>{{setFLU(ccode.key)}} 
@@ -298,6 +312,7 @@
 
             </div>
             <div style="clear:both"></div>
+            
             <div class="meal-row-wrapper meal-row__week-days">
                 <div class="dayname" style="border-bottom:0px"></div>
                 <div class="meal-plan-row row">
@@ -309,12 +324,12 @@
                     </div>
                 </div>
             </div>
-           
+            <div class="divoverflow" style='width:100%; max-height:360px; overflow: auto;'>
                 <ng-container *ngFor="let item of plan['days']; let r = index;">
                     <div class="meal-row-wrapper">
                   
                    <div class="dayname"><span>{{item.name}}</span></div>
-                    <div class="meal-plan-column-container" style="background-color:#fff">
+                    <div class="meal-plan-column-container">
                         <div class="meal-plan-row">
                          
                             <div [ngClass]="showNutrients || showNutrientsPServing?'meal-plan-slot mealplan-col':'meal-plan-slot mealplan-col20'" *ngFor="let meal of item.meals; let c= index;" >
@@ -430,7 +445,7 @@
 
                     
                 </ng-container>
-                
+            </div>
             <!--<div class="meal-row-wrapper meal-row__calories" id="calculateCaloryFlag" *ngIf="calculateCaloryFlag">
                 <div class="dayname"></div>
                 <div id="total-calories-row" class="meal-plan-row" style="flex-wrap: nowrap;">

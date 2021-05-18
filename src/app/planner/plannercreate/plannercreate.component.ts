@@ -1225,7 +1225,7 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 		  } else {
 		//	mybutton.style.display = "none";
 		  }
-		  var checkVal  = 1300;
+		  var checkVal  = 1200;
 
 		  var showhidenut = document.getElementById('showhidenut');
 		  console.log("showhidenut " );
@@ -1234,7 +1234,7 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 		  {
 			  if(showhidenut["checked"])
 			  {
-				checkVal = 2400;
+				checkVal = 2000;
 			  }
 		  }
 
@@ -1259,7 +1259,8 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 		  }
 		  else
 		  {
-			btnsaveplan.setAttribute("class", "saveplan floatbtn")
+			//btnsaveplan.setAttribute("class", "saveplan floatbtn")
+			btnsaveplan.setAttribute("class", "saveplan")
 		  }
 		  }
 
@@ -1275,8 +1276,9 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 		  {
 			
 			  var leftP = (w - 1200)/2;
-			  btnsaveplan1.style.left = leftP + "px";
-			btnsaveplan1.setAttribute("class", "container-fluid side-recipes floatpanel")
+			 // btnsaveplan1.style.left = leftP + "px";
+			//btnsaveplan1.setAttribute("class", "container-fluid side-recipes floatpanel")
+			btnsaveplan1.setAttribute("class", "container-fluid side-recipes")
 		  }
 		  else
 		  {

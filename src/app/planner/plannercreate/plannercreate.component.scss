@@ -386,17 +386,17 @@ font-weight:bold;
 }
 
 
-.recipe-search .form-group {
+.recipe-search .form-group-plan {
   margin-bottom: 0;
   width: 100%;
 }
 
-.form-group {
+.form-group-plan {
   margin-bottom: 1rem;
 }
 
 
-.recipe-search .form-group .input-group {
+.recipe-search .form-group-plan .input-group {
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
@@ -427,12 +427,12 @@ font-weight:bold;
 
 
 
-.recipe-search .form-group .rbt-input-main {
+.recipe-search .form-group-plan .rbt-input-main {
   border-top-right-radius: 0 !important;
   border-bottom-right-radius: 0 !important;
   border: 1px solid $gray;
 }
-.side-recipes .hm-typeahead .rbt-input-main, .side-recipes .recipe-search .form-group .btn-secondary {
+.side-recipes .hm-typeahead .rbt-input-main, .side-recipes .recipe-search .form-group-plan .btn-secondary {
   height: 30px;
 }
 .hm-typeahead .rbt-input-main {
@@ -466,7 +466,7 @@ input.form-control {
 }
 
 
-.recipe-search .form-group .rbt-input-hint {
+.recipe-search .form-group-plan .rbt-input-hint {
   overflow: hidden;
   text-overflow: ellipsis;
   width: 100%;
@@ -545,7 +545,7 @@ input.form-control {
   margin: 10px;
 }
 
-.recipe-search .form-group .dropdown-item {
+.recipe-search .form-group-plan .dropdown-item {
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -819,13 +819,13 @@ mark, .mark {
 }
 
 
-.recipe-search .form-group {
+.recipe-search .form-group-plan {
   margin-bottom: 0;
   width: 100%;
 }
 
 
-.recipe-search .form-group .input-group {
+.recipe-search .form-group-plan .input-group {
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
@@ -854,12 +854,12 @@ mark, .mark {
 }
 
 
-.recipe-search .form-group .rbt-input-main {
+.recipe-search .form-group-plan .rbt-input-main {
   border-top-right-radius: 0 !important;
   border-bottom-right-radius: 0 !important;
   border: 1px solid $gray;
 }
-.side-recipes .hm-typeahead .rbt-input-main, .side-recipes .recipe-search .form-group .btn-secondary {
+.side-recipes .hm-typeahead .rbt-input-main, .side-recipes .recipe-search .form-group-plan .btn-secondary {
   height: 30px;
 }
 .hm-typeahead .rbt-input-main {
@@ -893,7 +893,7 @@ input.form-control {
 }
 
 
-.recipe-search .form-group .rbt-input-hint {
+.recipe-search .form-group-plan .rbt-input-hint {
   overflow: hidden;
   text-overflow: ellipsis;
   width: 100%;
@@ -912,7 +912,7 @@ input.form-control {
 .side-recipes .input-group > .input-group-append > .btn {
   padding: 5px 10px;
 }
-.side-recipes .hm-typeahead .rbt-input-main, .side-recipes .recipe-search .form-group .btn-secondary {
+.side-recipes .hm-typeahead .rbt-input-main, .side-recipes .recipe-search .form-group-plan .btn-secondary {
   height: 30px;
 }
 .filter-bar--side-version .recipe-search .input-group-append button {
@@ -925,7 +925,7 @@ input.form-control {
 .btn:not(:disabled):not(.disabled) {
   cursor: pointer;
 }
-.recipe-search .form-group .btn-secondary {
+.recipe-search .form-group-plan .btn-secondary {
   height: 35px;
   line-height: 20px;
   background-color: $gray;
@@ -1183,7 +1183,7 @@ button, html [type="button"], [type="reset"], [type="submit"] {
   display: inline-block;
 }
 
-.recipe-search .form-group {
+.recipe-search .form-group-plan {
   margin-bottom: 0;
   width: 100%;
 }
@@ -1199,12 +1199,12 @@ button, html [type="button"], [type="reset"], [type="submit"] {
 }
 
 
-.recipe-search .form-group .rbt-input-main {
+.recipe-search .form-group-plan .rbt-input-main {
   border-top-right-radius: 0 !important;
   border-bottom-right-radius: 0 !important;
   border: 1px solid #adadad;
 }
-.side-recipes .hm-typeahead .rbt-input-main, .side-recipes .recipe-search .form-group .btn-secondary {
+.side-recipes .hm-typeahead .rbt-input-main, .side-recipes .recipe-search .form-group-plan .btn-secondary {
   height: 30px;
 }
 .hm-typeahead .rbt-input-main {
@@ -1229,7 +1229,7 @@ button, html [type="button"], [type="reset"], [type="submit"] {
 .side-recipes .input-group > .input-group-append > .btn {
   padding: 5px 10px;
 }
-.side-recipes .hm-typeahead .rbt-input-main, .side-recipes .recipe-search .form-group .btn-secondary {
+.side-recipes .hm-typeahead .rbt-input-main, .side-recipes .recipe-search .form-group-plan .btn-secondary {
   height: 30px;
 }
 .filter-bar--side-version .recipe-search .input-group-append button {
@@ -1242,7 +1242,7 @@ button, html [type="button"], [type="reset"], [type="submit"] {
 .btn:not(:disabled):not(.disabled) {
   cursor: pointer;
 }
-.recipe-search .form-group .btn-secondary {
+.recipe-search .form-group-plan .btn-secondary {
   height: 35px;
   line-height: 20px;
   background-color: #adadad;
@@ -1287,6 +1287,7 @@ button, html [type="button"], [type="reset"], [type="submit"] {
   right:10px;
 }
 .saveplan {
+  margin-top:20px;
  outline:0;
  border:0px;
   width: 50px;
@@ -1537,3 +1538,6 @@ background-color: $orange;
 
 .infoModal .items {background-color: #FFF;}
 .infoModal .items:nth-child(even) {background-color: #f2f2f2;}
+
+.divoverflow .meal-row-wrapper .meal-plan-column-container {background-color: #FFF;}
+.divoverflow .meal-row-wrapper:nth-child(even) .meal-plan-column-container {background-color: #f2f2f2;}
