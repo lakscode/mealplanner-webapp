@@ -558,6 +558,7 @@ newRecipe()
 /************ comments functions  */
 loadComments()
 {
+	 this.commentsList = [];
 	console.log("loadComments");
 /*	var params = {};
 	params["recipeid"] = this.routeParams.id;
