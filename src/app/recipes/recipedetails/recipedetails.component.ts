@@ -579,6 +579,15 @@ loadComments()
 		{
 			if(rData['body']['length'] > 0)
 			this.commentsList = rData['body'];
+			for(let c=0; c < this.commentsList.length; c++)
+			{
+				var item = this.commentsList[c];
+				if( item["profileimage"].indexOf("http://") !== -1 ||  item["profileimage"].indexOf("https://") !== -1)
+				this.commentsList[c]["profileimage"] = item["profileimage"] ;
+				else
+				this.commentsList[c]["profileimage"] = this.formatApiUrl(item["profileimage"]) 
+
+			}
 			this.commentsCount = rData['body']['length'];
 		}
 	  }));

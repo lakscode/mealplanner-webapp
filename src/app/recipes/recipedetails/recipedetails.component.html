@@ -242,7 +242,7 @@
         <ul>
             <li *ngFor="let comment of commentsList; let c = index;">
                 <div class="avatar">
-                    <a href="javascript:void(0)" *ngIf="comment.profileimage"><img  style="max-width: 50px" src="{{formatApiUrl(comment.profileimage)}}" alt="avatar"></a>
+                    <a href="javascript:void(0)" *ngIf="comment.profileimage"><img  style="max-width: 50px" src="{{comment.profileimage}}" alt="avatar"></a>
                      <a href="javascript:void(0)" *ngIf="!comment.profileimage"><img style="max-width: 50px"  src="assets/user-icon.png" alt="avatar"></a>
                 </div>
                 <div class="comment">
