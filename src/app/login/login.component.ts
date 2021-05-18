@@ -37,8 +37,8 @@ export class LoginComponent implements OnInit {
 	}
 
 	ngOnInit() {
-	this.errorMessage = "";
-
+		this.errorMessage = "";
+		sessionStorage.setItem("socialLogin", "");
 		this.rememberMe = true;
 		this.users = JSON.parse(sessionStorage.getItem("user"));
 		this.redirecturl = "";
@@ -165,6 +165,8 @@ export class LoginComponent implements OnInit {
           "image":this.socialUser.photoUrl
 
         }
+
+		sessionStorage.setItem("socialLogin", this.socialUser.provider);
         console.log(params);
         var params1 = {'email':  this.socialUser.email};
 
@@ -181,6 +183,7 @@ export class LoginComponent implements OnInit {
 						if(userDataSocial["image"] =="")
             			paramsUpdate["image"] = this.socialUser.photoUrl;
       
+						
 						console.log(paramsUpdate);
            				var res =   this.dbService.updateDataByTable("users", paramsUpdate).subscribe(invData => setTimeout(() => {
             				console.log("successfully updated");

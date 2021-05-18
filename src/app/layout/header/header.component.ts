@@ -5,6 +5,9 @@ import { DBService } from '../../dbservices/db.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { Location } from '@angular/common';
 import { HelpService } from '../../services/help.service';
+import { SocialAuthService, GoogleLoginProvider, SocialUser, FacebookLoginProvider } from 'angularx-social-login'
+
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -35,7 +38,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 	subscribeCompanyService: any;
 	companylogo : any;
 	collapsed: boolean  = true;
-	constructor(private router :Router, public userService: UserService, public helpService: HelpService,  private dbService: DBService, private location: Location) {
+	constructor(private router :Router, private socialAuthService: SocialAuthService, public userService: UserService, public helpService: HelpService,  private dbService: DBService, private location: Location) {
 
 	var currentUrl = this.router.url;
 	currentUrl = currentUrl.replace("/","");
@@ -331,6 +334,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
 		sessionStorage.setItem('currentUser', "");
 		
+		var socialLogin = sessionStorage.getItem("socialLogin")
+		if(socialLogin !== "")
+		{
+			this.socialAuthService.signOut();
+		}
 		this.gotopage('login');
 	}
 	
