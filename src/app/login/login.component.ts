@@ -174,7 +174,7 @@ export class LoginComponent implements OnInit {
 				var userDataSocial = userDataObj['body'][0];
 					if(userDataSocial["social_id"] == "") {
 						var paramsUpdate = {};
-			
+						paramsUpdate["id"] = userDataSocial["id"];
             			paramsUpdate["social_id"] = this.socialUser.id;
             			paramsUpdate["social_provider"] = this.socialUser.provider;
             			paramsUpdate["image"] = this.socialUser.photoUrl;
