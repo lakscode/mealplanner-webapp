@@ -56,7 +56,7 @@
                         <div class="row "  style="padding-left:0; padding-right:0px">
                           
                             <div class="col-12">
-                                <div class="form-group-plan">
+                                <div class="form-group">
 
                                     <label class="form-control-placeholder fcs">Health Labels </label>
                                     <div class="listSection" id="healthLabels" style="display:inline-block;">
@@ -75,13 +75,13 @@
                                 </div>
                             </div>
                             <div class="col-12 ">
-                                <div class="form-group-plan">
+                                <div class="form-group">
                                     <label class="form-control-placeholder fcs">Diet Labels</label> 
                                     <div class="listSection" id="diethLabels" style="display:inline-block;">
                                         <div class="row">
                                         <ng-container *ngFor="let dlabel of dietLabelsList; let h = index">
                                             <div class="col-12 col-lg-6">
-                                            <label class="container" style="font-size:12px">{{dlabel.name}}
+                                            <label class="container" style="font-size:12px;text-align:left">{{dlabel.name}}
                                                 <input [(ngModel)] ="dlabel.selected" type="checkbox" [checked]="h == 0?'checked':''">
                                                 <span class="checkmark"></span>
                                             </label>
@@ -92,7 +92,7 @@
                                 </div>
                             </div>
                             <div class="col-12">
-                                <div class="row form-group-plan" style="padding-left:15px">
+                                <div class="row form-group" style="padding-left:15px">
                                     <label class="form-control-placeholder fcs">Calories</label> 
                                     <div class="listSection"  style="display:inline-block;">
                                         <span>Max calories&nbsp;&nbsp;</span>
@@ -102,7 +102,7 @@
                                 </div>
                             </div>
                               <div class="col-12">
-                                <div class="form-group-plan">
+                                <div class="form-group">
                                     <label class="form-control-placeholder fcs">Nutrients</label> 
                                     <div class="listSection"  style="display:inline-block; height:145px; max-height:145px;overflow-x: hidden;">
                                         <div class="row">
@@ -113,13 +113,13 @@
                                                 <span class="checkmark"></span>
                                             </label>
                                             </div>
-                                            <div class="col-5 paddinglr0" *ngIf="mlabel.selected">
+                                            <div class="col-5 paddinglr0" style="margin-bottom:15px;" *ngIf="mlabel.selected">
                                                             
                                                     <input class="mineral-input" type='text' name="minerals_{{m}}_min" [(ngModel)]="mlabel.min" placeholder="min" />
                                                     <span class="maxmin">{{formatVal(mlabel.t_min)}}</span>
                                             
                                             </div>
-                                            <div class="col-5 paddinglr0" *ngIf="mlabel.selected">
+                                            <div class="col-5 paddinglr0" style="margin-bottom:15px;" *ngIf="mlabel.selected">
                                                 <input class="mineral-input" type='text' name="minerals_{{m}}_max" [(ngModel)]="mlabel.max" placeholder="max" />
                                                 <span class="maxmin">{{formatVal(mlabel.t_max)}}</span>
 
