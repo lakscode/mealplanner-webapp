@@ -150,6 +150,8 @@ import { GoogleLoginProvider } from 'angularx-social-login';
            {
     		id: FacebookLoginProvider.PROVIDER_ID,
     		provider: new FacebookLoginProvider('286839523118020')
+    		//provider: new FacebookLoginProvider('541089030229736')
+    		
   			}
         ]
       } as SocialAuthServiceConfig,
