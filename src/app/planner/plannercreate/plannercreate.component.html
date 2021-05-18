@@ -49,20 +49,24 @@
                             class="fa fa-trash" aria-hidden="true"></i>Clear</button>
                     </div>
                 </div>
-                <div *ngIf="filtersOpt">
+                <div *ngIf="filtersOpt" class="filterpopup boxshadow " >
                 
-                    <div class="" style="max-height:300px; overflow:auto; width:95%">
-                      
-                        <div class="row "  style="padding-left:0; padding-right:0px">
-                          
+                    <div style=" width:97%">
+                        <div class="row">
                             <div class="col-12">
+                                <h1 style="text-align:left">Search Recipes:</h1>
+                            </div>
+                        </div>
+                        <div class="row divoverflow"  style="padding-left:0; padding-right:0px; max-height:330px; overflow:auto;">
+                          
+                            <div class="col-12 col-lg-3 col-md-3">
                                 <div class="form-group">
 
                                     <label class="form-control-placeholder fcs">Health Labels </label>
                                     <div class="listSection" id="healthLabels" style="display:inline-block;">
                                         <div class="row">
                                         <ng-container *ngFor="let hlabel of healthlabelsList; let h = index">
-                                            <div class="col-12 col-lg-6">
+                                            <div class="col-12" style="padding-right:0px;">
                                             <label class="container" style="font-size:12px;text-align:left">{{hlabel.name}}
                                                 <input [(ngModel)] ="hlabel.selected" type="checkbox" [checked]="h == 0?'checked':''">
                                                 <span class="checkmark"></span>
@@ -74,13 +78,13 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12 ">
+                            <div class="col-12  col-lg-3 col-md-3">
                                 <div class="form-group">
                                     <label class="form-control-placeholder fcs">Diet Labels</label> 
                                     <div class="listSection" id="diethLabels" style="display:inline-block;">
                                         <div class="row">
                                         <ng-container *ngFor="let dlabel of dietLabelsList; let h = index">
-                                            <div class="col-12 col-lg-6">
+                                            <div class="col-12">
                                             <label class="container" style="font-size:12px;text-align:left">{{dlabel.name}}
                                                 <input [(ngModel)] ="dlabel.selected" type="checkbox" [checked]="h == 0?'checked':''">
                                                 <span class="checkmark"></span>
@@ -91,21 +95,21 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12">
-                                <div class="row form-group" style="padding-left:15px">
+                            <div class="col-12  col-lg-2 col-md-2">
+                                <div class="row form-group" style="padding-left:0px">
                                     <label class="form-control-placeholder fcs">Calories</label> 
-                                    <div class="listSection"  style="display:inline-block;">
+                                    <div class="listSection"  style="display:inline-block;width:100%; text-align:left;">
                                         <span>Max calories&nbsp;&nbsp;</span>
-                                      <input type="text" class="inputbox-fullwidth"  [(ngModel)] ="searchparam.calories"/>
+                                      <input type="text" style="width:100%;" class="inputbox-fullwidth"  [(ngModel)] ="searchparam.calories"/>
 
                                     </div>
                                 </div>
                             </div>
-                              <div class="col-12">
-                                <div class="form-group">
+                              <div class="col-12   col-lg-4 col-md-4">
+                                <div class="form-group" style="text-align:left;">
                                     <label class="form-control-placeholder fcs">Nutrients</label> 
-                                    <div class="listSection"  style="display:inline-block; height:145px; max-height:145px;overflow-x: hidden;">
-                                        <div class="row">
+                                    <div class="listSection "> <!--  style="width:90%; display:inline-block; height:145px; max-height:145px;overflow-x: hidden;">-->
+                                        <div class="row divoverflow" style="padding-left:0px; padding-right:0px; max-height: 200px; overflow:auto;">
                                         <ng-container *ngFor="let mlabel of mineralsLabelsList; let m = index">
                                            <div class="col-12 col-lg-12">
                                             <label class="container" style="font-size:12px;text-align:left;">{{setFLU(mlabel.name)}}
@@ -131,16 +135,18 @@
                                     </div>
                                 </div>
                               </div>
-
+                             
    
             
-                            <div class="col-12">
-                                <input type="button" (click)="filtersOpt= false; searchFilters()" style="margin-bottom:10px;" class="defaultbtn searchbtn bg-orange" id="header-submit-search-pro" name="submit" value="Search">
-            
-                            </div>
+                            
             
                         </div>
-                        
+                            <div class="row">
+                                <div class="col-12" style='text-align:right;'>
+                                    <input  type="button" (click)="filtersOpt= false; searchFilters()" style="margin-bottom:10px;" class="defaultbtn searchbtn bg-orange" id="header-submit-search-pro" name="submit" value="Search">
+                
+                                </div>
+                            </div>
                           
                     
                     </div>
