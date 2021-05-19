@@ -35,8 +35,8 @@
                        
                     </div>
                     <div class="row">
-                        <div class="col-12" style="text-align:right">
-                            <button class="add-recipe" (click)="addNew()" >Add Recipe</button>
+                        <div class="col-12" style="text-align:right; margin-bottom:20px;">
+                            <button class="defaultbtn bg-orange" (click)="addNew()" >Add Recipe</button>
                         </div>
                         <div class="col-12 add-recipe-panel" *ngIf="toggleRecipeAdd">
                             <div class="row">
@@ -147,9 +147,9 @@
                         
                             </div>
                             <div class="col-12"  *ngIf="recipesList1 && recipesList1.length > 0">
-                                <div class="row" style="max-height:300px; overflow:auto;">
-                                <div style="padding-left:0px; padding-right:0px" class="col-12 col-lg-6 col-md-6" *ngFor="let recipe of recipesList1; let i = index;">
-                                    <div class="recipe-item1" style="background-size:cover; background-position:center;" [ngStyle]="{'background-image':'linear-gradient(
+                                <div class="row divoverflow" style="max-height:300px; overflow:auto;">
+                                <div style="padding-left:0px; padding-right:0px;" class="col-12 col-lg-4 col-md-4" *ngFor="let recipe of recipesList1; let i = index;">
+                                    <div class="recipe-item1" style="background-size:cover; background-position:center; min-height:150px;" [ngStyle]="{'background-image':'linear-gradient(
                                         rgba(0, 0, 0, 0.3),
                                         rgba(0, 0, 0, 0.3)
                                       ), url(' + recipe.image + ')'}">
@@ -160,20 +160,19 @@
             rgba(0, 0, 0, 0.5)
           ),
                                         -->
-                                    <div class='row'>
-                                        <!--<div class="col-2" style="padding-right:0px;">
-                                            <img style="width:100%" src="{{recipe.image}}" />
-                                        </div>-->
-                                        <div class="col-12">
-                                            <h1 class="recipe-label1">{{recipe.label}}</h1>                                  
+                                        <div class="recipe-add" (click)="addRecipe(recipe)"><i class="fa fa-plus" aria-hidden="true"></i></div>
+
+                                        <div class="recipe-view" (click)="viewRecipe(recipe)"><i class="fa fa-eye" aria-hidden="true"></i></div> 
+                                        <div style="position:absolute;     bottom: 15px;
+                                        width: 85%;
+                                        left: 20px;">
+                                            <h1 class="recipe-label1">{{recipe.label.toLowerCase()}}</h1>                                  
                                             <p style="color:#fff"><b><em>Calories</em></b>: {{recipe.calories}} Kcal, <b><em>Servings</em></b>: {{recipe.yield}}</p>
                                             <!--<p><b><em>Diet Labels</em></b>: {{recipe.dietLabels}} </p>-->
 
-                                            <div class="recipe-add" (click)="addRecipe(recipe)"><i class="fa fa-plus" aria-hidden="true"></i></div>
-
-                                            <div class="recipe-view" (click)="viewRecipe(recipe)"><i class="fa fa-eye" aria-hidden="true"></i></div> 
+                                          
                                         </div>                                       
-                                    </div>
+                                    
                                 </div>
                                    
         
@@ -188,35 +187,28 @@
                         <div class="col-12 paddinglr0">
                             <label for="recipes">Recipes</label>
                         </div>
-                        <div style="margin-bottom:10px;padding-left:0px" class="col-12 col-lg-4 col-md-4 toggleremove" *ngFor="let recipe of recipesList; let i = index;">
+                        <div style="margin-bottom:10px;padding-left:0px;min-height:220px;" class="col-12 col-lg-4 col-md-4 toggleremove" *ngFor="let recipe of recipesList; let i = index;">
                             <div class="recipe-item" style="background-size:cover;  background-position:center; width:100%; height:100%; " [ngStyle]="{'background-image':'linear-gradient(
                                 rgba(0, 0, 0, 0.3),
                                 rgba(0, 0, 0, 0.3)
                               ),url(' + recipe.image + ')'}">
                                 <!--<div style="position:absolute; width:calc(100% - 60px); height: 150px; background:#f1f2f3; opacity: 0.5"></div>-->
-                            <div class='row ' style='color:#000;'>
+                          
                                
                                 <!--<div class="col-4">
                                     <img style="width:100%" src="{{recipe.image}}" />
                                 </div>-->
-                                <div class="col-12">
-                                    
-                                    <h1 class="recipe-label">{{recipe.label}}</h1>                                  
-                                  
-                                </div>
-                                <div class="col-12">
-                                    <p style="color:#fff"><b>Calories</b>: {{recipe.calories}} Kcal, <b>Servings</b>: {{recipe.yield}}</p>
-                                    
-                                </div>
-                                <div class="col-12">
-                                    <p *ngIf="recipe.dietLabels" style="color:#fff">  <b>Diet Labels</b>: {{recipe.dietLabels}} </p>
-                                    <p *ngIf="!recipe.dietLabels">&nbsp;</p>
-                                   
-                                
-                                </div>
                                 <div class="recipe-remove" (click)="removeRecipe(recipe)">Remove</div>
                                 <div class="recipe-remove" style="right:85px" (click)="viewRecipe(recipe)">Details</div>
-                            </div>
+
+                             
+                                  <div style='position:absolute; bottom:10px; width:90%; left:25px'>
+                                    <h1 class="recipe-label">{{recipe.label.toLowerCase()}}</h1>                                  
+                                    <p style="color:#fff"><b>Calories</b>: {{recipe.calories}} Kcal, <b>Servings</b>: {{recipe.yield}}</p>
+                                    <p *ngIf="recipe.dietLabels" style="color:#fff">  <b>Diet Labels</b>: {{formatHiphen(recipe.dietLabels)}} </p>
+                                </div>
+                             
+                           
                            
                         </div>
                            

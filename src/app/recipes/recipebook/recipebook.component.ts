@@ -794,6 +794,16 @@ formatVal(str)
  {
 	 return img.trim();
  }
+ formatHiphen(str)
+ {
+	 var ret = str;
+	 if(str !== "" )
+	 {
+		 ret = str.replaceAll("~", ", ");
+
+	 }
+	 return ret;
+ }
 }
 
 	
