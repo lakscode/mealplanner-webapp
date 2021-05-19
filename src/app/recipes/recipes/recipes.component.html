@@ -200,14 +200,14 @@
                                 <div class="meta-listing">
                                    
                                     <div *ngIf="showNutrientsFlag" style="display:inline-block;color: #5e676b;">
-                                        Calories per Serving:<span style="font-size:12px;">{{formatValuePServing(recipe1.calories, recipe1.yield)}} Kcal</span>
+                                        Per Serving: <span style="font-size:12px;">{{formatValuePServing(recipe1.calories, recipe1.yield)}} Kcal</span>
                                     </div>
                        
                                     <div class="rating-box">
                                         <span class="rating-icons" *ngFor="let item of [1,2,3,4,5]">
                                             <i [ngClass]="item <= recipe1.displayrating?'fa fa-star rating-h':'fa fa-star rating'"></i>
                                         </span>
-                                        <span class="rating-figure">{{recipe1.displayrating}}</span>
+                                        <!--<span class="rating-figure">{{recipe1.displayrating}}</span>-->
                                     </div>
                                 </div>
                             </div>
