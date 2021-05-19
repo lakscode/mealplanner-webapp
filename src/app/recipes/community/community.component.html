@@ -14,10 +14,10 @@
                     <div class="row">
                         <div class="col-12 col-md-6 col-lg-6">
                     <label for="title">Recipe book Title</label>
-                    <input type="text" name="title" id="title" [(ngModel)]="searchRes.recipebook_name">
+                    <input type="text" name="title" id="title" [(ngModel)]="community.recipebook_name">
                     <br>
                     <label for="description">Description</label>
-                    <textarea class="short-text" name="description" [(ngModel)]='searchRes.description' id="description" cols="30" rows="10"></textarea>
+                    <textarea class="short-text" name="description" [(ngModel)]='community.description' id="description" cols="30" rows="10"></textarea>
  
                    </div>
                  
@@ -30,7 +30,7 @@
                            <div>
                                <input id="inputuploadrecipe" hidden type="file" name="inputuploadrecipe" (change)="onFileSelect($event)" />
                              </div>
-                             <img *ngIf="searchRes.image" src="{{searchRes.image}}"  style="width: 90%; max-width: 300px;" />
+                             <img *ngIf="community.image" src="{{community.image}}"  style="width: 90%; max-width: 300px;" />
                      
                              
                           </div>
@@ -214,7 +214,7 @@
                     </div>
                     <br>
                     <label for="notes">Notes</label>
-                    <textarea class="short-text" name="notes" [(ngModel)]='searchRes.notes' id="notes" cols="30" rows="10"></textarea>
+                    <textarea class="short-text" name="notes" [(ngModel)]='community.notes' id="notes" cols="30" rows="10"></textarea>
                     <div class="text-center">
                         <button type="submit" (click)="saveRecipebook()"  class="recipe-submit-btn">Save Your Recipe Book</button>
                     </div>

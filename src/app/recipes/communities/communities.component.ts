@@ -216,7 +216,7 @@ endIndex = startIndex+ endIndex;
 		var params = {"limit": 100};
 	   // params["createdby"] = this.currentUser["id"];
 		console.log(params);
-		var res =   this.dbService.getDataByTable("recipebook", params).subscribe(invData => setTimeout(() => {
+		var res =   this.dbService.getDataByTable("community", params).subscribe(invData => setTimeout(() => {
 	
 		  console.log(invData);
 		  if(invData !== null)

@@ -10,7 +10,7 @@ import { constants } from './../../jsonfiles/constants';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { HttpHeaders } from '@angular/common/http';
-import { recipe } from '../../jsonfiles/recipestructure';
+
 import { PDFService } from '../../services/pdf.service';
 import { ModalService } from '../../shared/modules/modal/modal.service';
 import { ToastrService } from 'ngx-toastr';
@@ -23,7 +23,7 @@ export class CommunityComponent implements OnInit, OnChanges {
 	private onDestroy$: Subject<void> = new Subject<void>();
 	nutrientsList: Array<any> =[];
 	routeParams: any = {};
-	searchRes: any;
+	community: any;
 	loading:any = 0;
 	paramMicro: Array<any> =[];
 	mineralsList: Array<any> =[];
@@ -99,17 +99,17 @@ loadDefaults()
 		  if (typeof (this.routeParams.id) !== "undefined") {
 			console.log(this.routeParams.id);
 			this.setDefaults();
-			this.loadRecipebook(this.routeParams.id);
+			this.loadCommunity(this.routeParams.id);
 		  }    
 		  else
 		  {
 			  this.setDefaults();
-		   this.searchRes = recipe;
+		   
 	   
 		  }
 		  if (typeof (this.routeParams.draft) !== "undefined") {
 		   console.log(this.routeParams.draft);
-		   this.loadRecipebook(this.routeParams.draft);
+		   this.loadCommunity(this.routeParams.draft);
 		 }  
 		   console.log(this.routeParams);
 	}); 
@@ -123,19 +123,19 @@ setDefaults()
 {
 
 	
-	this.searchRes = {};
+	this.community = {};
 
 
 }
 existingIngCount:any = 0;
-loadRecipebook(id)
+loadCommunity(id)
 {
-  console.log("In load loadRecipebook");
+  console.log("In load community");
   console.log(id);
   this.loading++;
   console.log(this.loading);
 
-  this.searchRes = [];
+  this.community = [];
  var params = {}
  if(id)
  {
@@ -146,7 +146,7 @@ loadRecipebook(id)
  
  if(this.loading)
   {
-  var res =   this.dbService.getDataByTable("recipebook", params).subscribe(rbookData => setTimeout(() => {
+  var res =   this.dbService.getDataByTable("community", params).subscribe(rbookData => setTimeout(() => {
 
 	console.log(rbookData);
 
@@ -154,12 +154,12 @@ loadRecipebook(id)
 	{
 	  if(typeof(rbookData["body"]) !== "undefined" && rbookData["body"] !== null && rbookData["body"]["length"] > 0)
 	  {
-		this.searchRes = rbookData["body"][0];
-		this.loadRecipes(this.searchRes["recipes"]);
+		this.community = rbookData["body"][0];
+		this.loadRecipes();
 	  }
 	
 
-	console.log(this.searchRes);
+	console.log(this.community);
 	}
   }));
   }
@@ -173,24 +173,14 @@ loadRecipes(idslist = "")
 	this.recipesList = [];
   var params = {};
 
-
-
-	if(idslist !== "")
-	{
 	
-		
-	params["idslist"] = idslist;
-
-	}
-	else if(this.searchparam.q !== "")
-	params["content"] = this.searchparam.q;
 
 	//params["instructions"] = "notempty";
-	params["returnfields"] = " id, label, image, healthLabels, dietLabels, calories, yield, totalWeight, totalNutrients, digest ";
+	params["query"] = " select id, label, image, healthLabels, dietLabels, calories, yield, totalWeight, totalNutrients, digest from recipes where id in (select recipe_id from recipe_mapping where community_id = " + this.routeParams.id  + ")";
   
   console.log(JSON.stringify(params));
 
- var res =   this.dbService.getDatabyFields("recipes", params).subscribe(invData => setTimeout(() => {
+ var res =   this.dbService.getDatabyQuery("recipes", params).subscribe(invData => setTimeout(() => {
 	console.log(invData);
   if(invData !== null && typeof(invData["body"]) !== "undefined" && invData["body"] !== null && invData["body"]["length"] > 0)
 	{
@@ -356,6 +346,10 @@ if(mQuery !== "")
 	}
 	
 }
+
+// id, community_id , userid, created_at - community_join
+// id, community_id , userid, created_at, recipeid - community_save
+
 ratingIds: any;
 formatResult(invData)
 {
@@ -478,7 +472,7 @@ removeRecipe(recipe)
 	{
 		console.log(fIndex);
 		this.recipesList.splice(fIndex, 1);
-		this.searchRes["recipes"] ="";
+		this.community["recipes"] ="";
 		var recipeids = "";
 		for(let r=0; r < this.recipesList.length; r++)
 		{
@@ -487,10 +481,10 @@ removeRecipe(recipe)
 		if(recipeids !== "")
 		{
 			recipeids = recipeids.substring(0, recipeids.length-1);	
-			this.searchRes["recipes"] = recipeids;
+			this.community["recipes"] = recipeids;
 		}
 		console.log(this.recipesList);
-		console.log(this.searchRes);
+		console.log(this.community);
 	}
 	//this.toastr.error('Removed Recipe from Recipe Book', 'Recipe Book!');	
 }
@@ -503,7 +497,7 @@ addRecipe(recipe)
 	if(fIndex == -1)
 	{
 		this.recipesList.push(recipe);
-		this.searchRes["recipes"] ="";
+		this.community["recipes"] ="";
 		var recipeids = "";
 		for(let r=0; r < this.recipesList.length; r++)
 		{
@@ -512,10 +506,10 @@ addRecipe(recipe)
 		if(recipeids !== "")
 		{
 			recipeids = recipeids.substring(0, recipeids.length-1);	
-			this.searchRes["recipes"] = recipeids;
+			this.community["recipes"] = recipeids;
 		}
 		console.log(this.recipesList);
-		console.log(this.searchRes);
+		console.log(this.community);
 	}
 	this.toggleRecipeAdd = false;
 	this.searchparam["q"] ="";
@@ -524,38 +518,38 @@ addRecipe(recipe)
 saveRecipebook()
 {
 	console.log("saveRecipebook");
-	console.log(this.searchRes);
+	console.log(this.community);
 	var params = {};
 	
-	if(this.searchRes["recipebook_name"] !== "")
-    params["recipebook_name"] = this.searchRes["recipebook_name"];
+	if(this.community["recipebook_name"] !== "")
+    params["recipebook_name"] = this.community["recipebook_name"];
    
-    if(this.searchRes["description"] !== "")
-    params["description"] = this.searchRes["description"];
+    if(this.community["description"] !== "")
+    params["description"] = this.community["description"];
 
-    if(this.searchRes["notes"] !== "")
-    params["notes"] = this.searchRes["notes"];
+    if(this.community["notes"] !== "")
+    params["notes"] = this.community["notes"];
 
-	if(this.searchRes["image"] !== "")
-    params["image"] = this.searchRes["image"];
+	if(this.community["image"] !== "")
+    params["image"] = this.community["image"];
 
-    if(this.searchRes["recipes"] !== "")
-    params["recipes"] = this.searchRes["recipes"];
+    if(this.community["recipes"] !== "")
+    params["recipes"] = this.community["recipes"];
 
-	if(typeof(this.searchRes["createdby"]) =="undefined" || this.searchRes["createdby"] == "" || this.searchRes["createdby"] == "0")
+	if(typeof(this.community["createdby"]) =="undefined" || this.community["createdby"] == "" || this.community["createdby"] == "0")
     {
       if(typeof(this.currentUser["id"]) !== "undefined" && this.currentUser["id"] !== "")
       params["createdby"] = this.currentUser["id"];
     }   
-		if(typeof(this.searchRes.id) !== "undefined"  && this.searchRes.id !== "")
+		if(typeof(this.community.id) !== "undefined"  && this.community.id !== "")
 		{
 			console.log("updating");
-			params["id"] = this.searchRes.id;
+			params["id"] = this.community.id;
 			console.log(params);
 			var res =   this.dbService.updateDataByTable("recipebook", params).subscribe(recipeData => setTimeout(() => {
 				console.log(recipeData);
 				//this.toastr.success('Updated Recipe Book!', 'Recipe Book!');	
-				this.loadRecipebook(this.searchRes.id);
+				this.loadRecipebook(this.community.id);
 				
 			}));
 		}
@@ -616,9 +610,9 @@ console.log("type " + type);
 			{
 				var urlapi = this.apiUrl.replace("/api","");
 
-			  this.searchRes["image"] = urlapi + resultData["name"];
+			  this.community["image"] = urlapi + resultData["name"];
 			console.log(type);	
-			  console.log(this.searchRes)
+			  console.log(this.community)
 			}
 		  }
 		}));
@@ -656,15 +650,15 @@ formatVal(str)
 
   downloadplan()
 	{
-	  if(typeof(this.searchRes["id"]) !== "undefined" && this.searchRes["id"] !== "")
+	  if(typeof(this.community["id"]) !== "undefined" && this.community["id"] !== "")
 	  {
-		  this.pdfService.createrecipebookpdf(this.searchRes["id"]).subscribe(dData => setTimeout(() => {
+		  this.pdfService.createrecipebookpdf(this.community["id"]).subscribe(dData => setTimeout(() => {
 
 			  console.log(dData);
 			  if(dData !== null )
 			  {
 			  var recipeBook ={};
-			  recipeBook["recipebook"] = this.searchRes["recipebook_name"];
+			  recipeBook["recipebook"] = this.community["recipebook_name"];
 			  recipeBook["link"] = environment.apiUrl + "/" + dData["filename"];
 			  var link = document.createElement('a');
 			  link.href = recipeBook["link"];

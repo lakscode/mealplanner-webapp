@@ -56,16 +56,16 @@
                             <div class="image">
                                 <a (click)="gotoRecipebook(recipe1.id)">
                                     <img style="max-height:140px;" *ngIf="recipe1.image !== ''" class="tstbite-animation" src="{{recipe1.image}}"
-                                        alt="{{recipe1.recipebook_name}} image">
+                                        alt="{{recipe1.community_name}} image">
                                     <img *ngIf="recipe1.image == ''" class="tstbite-animation"  src="assets/notavailable.png" alt="{{recipe1.recipebook_name}} image">
                                 </a>
                             </div>
                             <div class="detail">
-                                <h4><a (click)="gotopage('community', {'id':recipe1.id});">{{recipe1.recipebook_name}}</a></h4>
+                                <h4><a (click)="gotopage('community', {'id':recipe1.id});">{{recipe1.community_name}}</a></h4>
                                 <p innerHTML="{{limitTo(recipe1.description, 200)}}">
 
                                 </p>  
-                                <p>{{countrecipes(recipe1.recipes)}} Recipes </p>
+                                <!--<p>{{countrecipes(recipe1.recipes)}} Recipes </p>-->
                                
                               </div>
                         </div>
