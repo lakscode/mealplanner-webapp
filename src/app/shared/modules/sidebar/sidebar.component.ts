@@ -3,6 +3,7 @@ import { Router, ActivatedRoute, NavigationEnd } from "@angular/router";
 import { SidebarService } from './sidebar.service';
 import { DBService } from './../../../dbservices/db.service';
 import { HelpService } from './../../../services/help.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-sidebar',
@@ -15,7 +16,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
     @Input() setDate: any;
     @Input() minDate: any;
     @Input() showhidetime: any = true;
-
+    adsList: Array<any> = [];
     sliderList: Array<any> = [];
      element: any;
      showhideTimeFlag: any;
@@ -33,7 +34,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
    elementId : any;
    date: any; 
    
-    constructor(private sidebarService: SidebarService, private el: ElementRef, private dbService: DBService, private helpService: HelpService, private router: Router, private route: ActivatedRoute) {
+    constructor(private sidebarService: SidebarService,private httpClient: HttpClient, private el: ElementRef, private dbService: DBService, private helpService: HelpService, private router: Router, private route: ActivatedRoute) {
     this.element = el.nativeElement;
     //this.showhideTime = true;  
     this.id = "";
@@ -44,6 +45,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
 
     ngOnInit(): void {
+      this.adsList =[];
+      this.getTheAds();
      this.loadRecipes();
    this.elementId= this.element.id;
 if(this.showhidetime == false)
@@ -183,4 +186,26 @@ this.showhideTimeFlag = false;
   gotoRecipeDetails(id){
   this.router.navigate(['recipedetails', id]);
   }
+
+  selectedAd: any;
+	getTheAds()
+	{
+		this.httpClient.get('assets/data/ads.json').subscribe(
+			ads => {        
+			  if(ads && ads["data"]){
+				this.adsList = [];
+				this.adsList = ads["data"];
+       // console.log(this.adsList);
+        if(this.adsList.length > 0)
+        {
+          const rndInt = Math.floor(Math.random() * this.adsList.length) + 1
+          console.log(rndInt)
+          if(typeof(this.adsList[rndInt]) !== "undefined" && this.adsList[rndInt] !== null)
+          this.selectedAd = this.adsList[rndInt];
+          else
+          this.selectedAd = this.adsList[0];
+        }
+			  }
+			});  
+	}
 }

@@ -22,10 +22,21 @@
 
     </ul>
 </div>
-<div class="widget">
-    <a href="javascript:void(0)">
-        <img src="assets/images/temp-images/add-side.jpg" alt="Add">
-    </a>
+<div class="widget" *ngIf="selectedAd">
+    <div  class="adpanel" [ngStyle]="{'background-image':'linear-gradient(
+                                        rgba(0, 0, 0, 0.3),
+                                        rgba(0, 0, 0, 0.3)
+                                      ), url(' + selectedAd.image + ')'}">
+    <p class="adtitle" >
+       {{selectedAd.title}}
+    </p>
+    <p class="adsubtitle"> {{selectedAd.subtitle}}</p>
+<br>
+    <a class="adbutton" href="{{selectedAd.url}}" target="_blank">
+        Get Details
+     </a>
+     
+    </div>
 </div>
 <!--latest news widget ends-->
 <!--get social-->
