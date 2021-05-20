@@ -1,3 +1,4 @@
+@import "../../_variables.scss";
 .myinfo
 {
     font-family: 'Lato', sans-serif;
@@ -71,7 +72,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 input[type="date"] {
     appearance: none;
     -webkit-appearance: none;
-    color: #000;
+    color:$text-gray;
     font-size: 16px;
     border:1px solid #999;
     background:#FFF;
@@ -82,7 +83,7 @@ input[type="date"] {
 }
 
 input[type="date"], focus {
-    color: #000;
+    color:$text-gray;
     box-shadow: none;
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
