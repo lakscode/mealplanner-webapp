@@ -78,7 +78,7 @@ constructor(private router: Router, private httpClient : HttpClient, private san
   
 	  var params = {"limit": "4"};
 
-	  var query = "select id, label, image, s_instructions, dietLabels, healthLabels from recipes  ";
+	  var query = "select id, label, image, calories, yield, source, dietLabels, healthLabels from recipes  ";
 	  var qWhere = " where s_instructions != '' AND label != '' AND image != '' ";
 
 	  //console.log(this.userPref);

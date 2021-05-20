@@ -11,35 +11,7 @@
                 </div>
                 <div class="col-8 col-lg-10">
                     <div class="outer-nav">
-                        <div class="wrapper-links">
-                            
-                            <!--<ul class="header-social-icons">
-                                <li><a href="javascript:void(0)"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="javascript:void(0)"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="javascript:void(0)"><i class="fa fa-google-plus"></i></a></li>
-                            </ul>-->
-
-                            <span style="border:0px;">
-                                <a class="signin" *ngIf="!loggedIn" (click)="gotopage('login')">Sign In</a>
-                                <a class="getapp" *ngIf="!loggedIn" (click)="gotopage('download')">Get the Free App</a>
-                               <!-- <a class="login"   (click)="showProfile = !showProfile">MENU</a>-->
-                                <div class="dropdown1 " *ngIf="loggedIn">
-                                    <a href="javascript:void(0)" class="droplink"><i class="fa fa-user dropbtn1"></i> <strong>{{SetFLU(userName)}}</strong></a>
-                                    <div class="dropdown1-content">
-                                        <!--<span *ngIf="loggedIn"
-                                style="margin-right:10px; margin-bottom:10px; font-size:14px;color:var(--green) ">Welcome
-                                <strong>{{SetFLU(userName)}}</strong></span>-->
-                                <p  style="margin-right:10px; margin-bottom:10px; font-size:14px;color:red " *ngIf='isTrialExpired'>Your Trial version expired.</p>
-
-                                      <a href="javascript:void(0);" (click)="gotopage('myinfo')">Settings</a>
-                                      <a href="javascript:void(0);" (click)="gotopage('progress')">Progress</a>
-                                      <a  (click)="logout()" href="javascript:void(0)">Logout</a>
-                                    </div>
-                                  </div>
-                                
-                            </span>
-                        </div>
-                        <div class="wrapper-main-nav ">
+                        <div class="wrapper-main-nav " style="display:inline-block;">
                             <nav class="nav-collapse responsive-menu">
                                 <ul class="main-menu" *ngIf="!loggedIn">
                                     <li (click)="setMenuActive();" [ngClass]="menu.active == true?'active':''"  *ngFor="let menu of menuItems; let m = index">
@@ -68,6 +40,35 @@
                             </nav>
 
                         </div>
+                        <div class="wrapper-links"  style="display:inline-block;">
+                            
+                            <!--<ul class="header-social-icons">
+                                <li><a href="javascript:void(0)"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="javascript:void(0)"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="javascript:void(0)"><i class="fa fa-google-plus"></i></a></li>
+                            </ul>-->
+
+                            <span style="border:0px;">
+                                <a class="signin" *ngIf="!loggedIn" (click)="gotopage('login')">Sign In</a>
+                                <a class="getapp" *ngIf="!loggedIn" (click)="gotopage('download')">Get the Free App</a>
+                               <!-- <a class="login"   (click)="showProfile = !showProfile">MENU</a>-->
+                                <div class="dropdown1 " *ngIf="loggedIn">
+                                    <a href="javascript:void(0)" class="droplink"><i class="fa fa-user dropbtn1"></i> <strong>{{SetFLU(userName)}}</strong></a>
+                                    <div class="dropdown1-content">
+                                        <!--<span *ngIf="loggedIn"
+                                style="margin-right:10px; margin-bottom:10px; font-size:14px;color:var(--green) ">Welcome
+                                <strong>{{SetFLU(userName)}}</strong></span>-->
+                                <p  style="margin-right:10px; margin-bottom:10px; font-size:14px;color:red " *ngIf='isTrialExpired'>Your Trial version expired.</p>
+
+                                      <a href="javascript:void(0);" (click)="gotopage('myinfo')">Settings</a>
+                                      <a href="javascript:void(0);" (click)="gotopage('progress')">Progress</a>
+                                      <a  (click)="logout()" href="javascript:void(0)">Logout</a>
+                                    </div>
+                                  </div>
+                                
+                            </span>
+                        </div>
+                       
                     </div>
                 </div>
             </div>

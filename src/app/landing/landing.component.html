@@ -38,10 +38,11 @@
                                   </div>-->
                                   <p style="clear:both;margin-top:10px;"></p>
                                   <div class="recipe-details" *ngIf="RecipeoftheDay[0].calories">
-                                    <p>Calories:</p>
+                                    <!--<p>Calories:</p>
                                     <p style="display:block;">
                                         <a href="javascript:void(0);" class="hlabel">{{formatValue(RecipeoftheDay[0].calories)}} Kcal</a> 
-                                    </p>
+                                    </p>-->
+                                
                                   <p>Calories per Serving:</p>
                                   <p style="display:block;">
                                       <a href="javascript:void(0);" class="hlabel">{{formatValuePServing(RecipeoftheDay[0].calories, RecipeoftheDay[0].yield)}} Kcal</a> 
@@ -166,7 +167,11 @@
                            <div class="intro-inner ">
                               <h3><a style="cursor:pointer" (click)="gotoRecipeDetails(rRecipe.id)">{{rRecipe.label}}</a></h3>
                               <div class="short-separator"></div>
-                              <p>{{limitTo(rRecipe.s_instructions, 150)}}</p>
+                              <p style="text-align:left;">Calories: {{rRecipe.calories}}</p>
+                              <br>
+                              <p style="text-align:left;">Diet Labels: {{rRecipe.dietLabels}}</p>
+                              <br>
+                              <div class="short-separator"></div>
                               <a class="read-more" (click)="gotoRecipeDetails(rRecipe.id)">read more</a>
                            </div>
                         </div>
