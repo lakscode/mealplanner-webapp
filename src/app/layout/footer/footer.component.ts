@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HelpService } from '../../services/help.service';
 import { DBService } from '../../dbservices/db.service';
+import { Router, ActivatedRoute } from "@angular/router";
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',
@@ -9,7 +10,7 @@ import { DBService } from '../../dbservices/db.service';
 export class FooterComponent implements OnInit {
   labels: any;
   subscribe: any = {};
-  constructor(private helpService:HelpService, private dbService: DBService) {
+  constructor(private helpService:HelpService, private dbService: DBService, private router: Router, private route: ActivatedRoute) {
     //console.log('Footer constructor called');
   }
 
@@ -37,4 +38,11 @@ export class FooterComponent implements OnInit {
     }
     
   }
+
+   gotopage(page)
+    {
+    console.log(page);
+        this.router.navigate([page]);
+    
+    }
 }

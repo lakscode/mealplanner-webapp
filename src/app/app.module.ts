@@ -30,7 +30,7 @@ import { LoginModule } from './login/login.module';
 
 import { SignupModule } from './signup/signup.module'; 
 
-import { HighchartsChartModule } from 'highcharts-angular';
+/*import { HighchartsChartModule } from 'highcharts-angular';*/
 
 import { HomeModule } from './home/home.module'; 
 import { FeaturesModule } from './features/features.module'; 
@@ -71,6 +71,8 @@ import { FaqsModule } from './faqs/faqs.module';
 
 import { CommunitiesModule } from './recipes/communities/communities.module'; 
 import { CommunityModule } from './recipes/community/community.module';
+import { PrivacyModule } from './privacy/privacy.module';
+import { TermsModule } from './terms/terms.module';
 
 
 import { LazyLoadImageModule } from 'ng-lazyload-image'; 
@@ -104,7 +106,7 @@ import {environment} from "../environments/environment"
 //	AngularFontAwesomeModule,
 	HttpClientModule,
 	NgbModule.forRoot(),	
-	HighchartsChartModule,
+	//HighchartsChartModule,
 	HomeModule,
 	FeaturesModule,
 	RecipesModule,
@@ -124,7 +126,7 @@ import {environment} from "../environments/environment"
 	AutherizeModule,
 	PasslostModule, 
 	ResetpassModule,
-	HighchartsChartModule,
+	//HighchartsChartModule,
 	QuestionnaireModule,
 	ProgressModule,
 	RecipebooksModule,
@@ -133,7 +135,9 @@ import {environment} from "../environments/environment"
 	LazyLoadImageModule,
 	SocialLoginModule,
 	CommunitiesModule,
-	CommunityModule
+	CommunityModule,
+	PrivacyModule,
+	TermsModule
   ],
   schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
   providers: [{
