@@ -579,3 +579,46 @@ padding-right:11px;
     font-weight:bold;
   }
 }
+
+.morebtn
+{
+  position:absolute;
+  top:20px;
+  right:15px;
+
+  color:#000;
+
+ 
+}
+.morebtn .menu
+{
+  background: #FFF;
+    border-radius:5px;
+  padding:5px;
+  border-radius: 10px;
+}
+.moremenu
+{
+  font-family: 'Lato', sans-serif;
+  display:none;
+  position: absolute;
+  top: 0px;
+  right: 0;
+  width: 215px;
+    height: 100px;
+    background: #FFF;
+    color: #555;
+    padding: 10px;
+    font-size: 14px;
+    /* border: 1px solid #555; */
+    border-radius: 10px;
+}
+.moremenu a
+{
+
+  display:block;
+}
+.morebtn:hover .moremenu
+{
+display:block;
+}

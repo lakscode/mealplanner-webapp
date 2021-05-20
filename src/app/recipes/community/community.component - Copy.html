@@ -4,17 +4,17 @@
     <div class="col-12 col-md-12 col-lg-12">
         <div class="recipe-set submit-recipe-set">
             <h2>Community</h2>
-            <p style="margin-bottom:20px">You'll find endless inspiration at the free to use Recipe Community with recipes from Consultants, owners, chefs, and our own recipe development team.  </p>
-           <!-- <div style="width:100%; text-align:right">
+            <p>Recipe book is selection of the recipes based on ingredients,  health labels or nutrients from our list of recipes.  </p>
+            <div style="width:100%; text-align:right">
                 <a class="copy-button" (click)="downloadplan()" title="Download PDF"><i class="fa fa-download"></i> Download</a>
-            </div>    -->
+            </div>    
             <div class="submit-recipe-form">
                 <form action="#" method="post">
 
-                    <div class="row" *ngIf="communityOwner"  >
+                    <div class="row">
                         <div class="col-12 col-md-6 col-lg-6">
-                    <label for="title">Community Title</label>
-                    <input type="text" name="title" id="title" [(ngModel)]="community.community_name">
+                    <label for="title">Recipe book Title</label>
+                    <input type="text" name="title" id="title" [(ngModel)]="community.recipebook_name">
                     <br>
                     <label for="description">Description</label>
                     <textarea class="short-text" name="description" [(ngModel)]='community.description' id="description" cols="30" rows="10"></textarea>
@@ -34,30 +34,6 @@
                      
                              
                           </div>
-
-                       
-                    </div>
-
-                    <div class="row" *ngIf="!communityOwner"  >
-                      <div class="col-12 col-md-6 col-lg-6">
-                     
-                      <img *ngIf="community.image" src="{{community.image}}"  style="height:200px;width: 90%;" />
-                     
-                             
-                    </div>  
-                      <div class="col-12 col-md-4 col-lg-4">
-                    <label for="title">Recipe book Title</label>
-                    <p>{{community.community_name}}</p>
-                    <br>
-                    <label for="description">Description</label>
-                    <p>{{community.description}}</p>
- 
-                   </div>
-                   <div class="col-12 col-md-2 col-lg-2">
-                    <button *ngIf="!communityOwner" class="add-recipe">Invite</button>
-                    <button *ngIf="!communityOwner" class="add-recipe">Join</button>
- 
-                   </div>
 
                        
                     </div>
@@ -207,26 +183,28 @@
                         </div>
                         <div style="margin-bottom:10px" class="col-12 col-lg-3 col-md-4" *ngFor="let recipe of recipesList; let i = index;">
                             <div class="recipe-item" style="background-size:cover;  background-position:center; width:100%; height:100%; " [ngStyle]="{'background-image':'url(' + recipe.image + ')'}">
+                                <!--<div style="position:absolute; width:calc(100% - 60px); height: 150px; background:#f1f2f3; opacity: 0.5"></div>-->
                             <div class='row toggleremove' style='color:#000;'>
-
+                               
+                                <!--<div class="col-4">
+                                    <img style="width:100%" src="{{recipe.image}}" />
+                                </div>-->
                                 <div class="col-12">
                                     
-                                <h1 class="recipe-label">{{recipe.label}}</h1>
-                                   <p><b>Calories</b>: {{recipe.calories}} Kcal, <b>Servings</b>: {{recipe.yield}}</p>
-                                
+                                    <h1 class="recipe-label">{{recipe.label}}</h1>                                  
+                                  
+                                </div>
+                                <div class="col-12" style='color:#FFF'>
+                                    <p><b>Calories</b>: {{recipe.calories}} Kcal, <b>Servings</b>: {{recipe.yield}}</p>
+                                    <div class="recipe-remove" (click)="removeRecipe(recipe)">Remove</div>
+                                </div>
+                                <div class="col-12">
                                     <p *ngIf="recipe.dietLabels"><b>Diet Labels</b>: {{recipe.dietLabels}} </p>
                                     <p *ngIf="!recipe.dietLabels">&nbsp;</p>
-                                    
+                                    <div class="recipe-remove" (click)="viewRecipe(recipe)">Details</div>
                                 
                                 </div>
-                                <div class="morebtn"><a class="menu" href="javscript:void(0)"><i class="fa fa-caret-down" aria-hidden="true"></i></a>
-                                <div class="moremenu">
-                                    <a href="javscript:void(0)" (click)="setFavouriteRecipe(recipe)"><i class="fa fa-heart" aria-hidden="true"></i> Set Favourite</a>
-
-                                    <a href="javscript:void(0)" (click)="removeRecipe(recipe)"><i class="fa fa-trash" aria-hidden="true"></i> Remove Recipe</a>
-                                    <a href="javscript:void(0)" (click)="viewRecipe(recipe)"><i class="fa fa-list-ul" aria-hidden="true"></i> Details</a>
-                                </div>
-                                </div>
+                               
                             </div>
                            
                         </div>

@@ -41,6 +41,7 @@ export class CommunityComponent implements OnInit, OnChanges {
 	searchmorebar:boolean = false;
 	addItem: boolean = false;
 	showNutrientsFlag: boolean = false;
+	communityOwner: boolean  = false;
 	constructor(private router: Router, private route: ActivatedRoute, private toastr: ToastrService, private pdfService: PDFService, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder, private modalService: ModalService) {
 	
 	}
@@ -54,6 +55,7 @@ ngOnChanges()
 	}
 loadDefaults()
 {
+	this.communityOwner = false;
 
 	this.getNutrientsMaxMin(); 
 
@@ -149,16 +151,19 @@ loadCommunity(id)
   var res =   this.dbService.getDataByTable("community", params).subscribe(rbookData => setTimeout(() => {
 
 	console.log(rbookData);
-
+	this.communityOwner = false;
+	 
 	if(rbookData !== null)
 	{
 	  if(typeof(rbookData["body"]) !== "undefined" && rbookData["body"] !== null && rbookData["body"]["length"] > 0)
 	  {
 		this.community = rbookData["body"][0];
+		if(this.currentUser['id'] == this.community['created_by'])
+	  	this.communityOwner = true;
+
 		this.loadRecipes();
 	  }
-	
-
+ 
 	console.log(this.community);
 	}
   }));
@@ -176,8 +181,8 @@ loadRecipes(idslist = "")
 	
 
 	//params["instructions"] = "notempty";
-	params["query"] = " select id, label, image, healthLabels, dietLabels, calories, yield, totalWeight, totalNutrients, digest from recipes where id in (select recipe_id from recipe_mapping where community_id = " + this.routeParams.id  + ")";
-  
+//	params["query"] = " select id, label, image, healthLabels, dietLabels, calories, yield, totalWeight, totalNutrients, digest from recipes where id in (select recipe_id from recipe_mapping where community_id = " + this.routeParams.id  + ")";
+	params["query"] = "select recipes.label, recipes.image, recipes.calories, recipes.dietLabels, recipes.yield as servings, users.email, users.firstname, users.lastname, users.id as userid from recipes join recipe_mapping on recipes.id = recipe_mapping.recipe_id join users on recipe_mapping.created_by = users.id where recipe_mapping.community_id = " + this.routeParams.id  + "" ;
   console.log(JSON.stringify(params));
 
  var res =   this.dbService.getDatabyQuery("recipes", params).subscribe(invData => setTimeout(() => {
@@ -787,6 +792,10 @@ formatVal(str)
  formatImage(img)
  {
 	 return img.trim();
+ }
+ setFavouriteRecipe(recipe)
+ {
+	 //set favourite code to be added from recipe details page
  }
 }
 
