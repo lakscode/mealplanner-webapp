@@ -207,7 +207,7 @@ recipesList1:Array<any>=[];
 searchProps()
 {
 
-//console.log('searchProps');
+console.log('searchProps');
 
 
 var params = {}
@@ -306,7 +306,7 @@ checkMinerals = true;
 
 } 
 
-// console.log(params);
+ console.log(params);
 if(mQuery !== "")
 {
   var params1 = {};
@@ -344,6 +344,8 @@ if(mQuery !== "")
 	}
 	else
 	{
+		console.log(params);
+		params["limit"] = "20";
 	var res =   this.dbService.getDatabyFields("recipes", params).subscribe(invData => setTimeout(() => {
 		console.log(invData);
 		this.formatResult(invData);
@@ -519,6 +521,26 @@ addRecipe(recipe)
 	this.toggleRecipeAdd = false;
 	this.searchparam["q"] ="";
 	//this.toastr.success('Added Recipe to Recipe Book', 'Recipe Book!');	
+
+	var paramsr = {};
+    paramsr["community_id"] = this.community["id"];
+    paramsr["recipe_id"] = recipe["id"];
+    paramsr["created_by"] = this.currentUser["id"];
+
+    var res =   this.dbService.getDataByTable("recipe_mapping", paramsr).subscribe(invData => setTimeout(() => {
+     
+      if(invData !== null && invData["body"]["length"] > 0)
+      {
+
+      }
+      else
+      {
+        var res =   this.dbService.postDataByTable("recipe_mapping", paramsr).subscribe(invData => setTimeout(() => {
+     
+        }));
+      }
+    }));
+
 }
 saveRecipebook()
 {
@@ -538,8 +560,8 @@ saveRecipebook()
 	if(this.community["image"] !== "")
     params["image"] = this.community["image"];
 
-    if(this.community["recipes"] !== "")
-    params["recipes"] = this.community["recipes"];
+   // if(this.community["recipes"] !== "")
+  //  params["recipes"] = this.community["recipes"];
 
 	if(typeof(this.community["createdby"]) =="undefined" || this.community["createdby"] == "" || this.community["createdby"] == "0")
     {
@@ -554,7 +576,7 @@ saveRecipebook()
 			var res =   this.dbService.updateDataByTable("recipebook", params).subscribe(recipeData => setTimeout(() => {
 				console.log(recipeData);
 				//this.toastr.success('Updated Recipe Book!', 'Recipe Book!');	
-				this.loadRecipebook(this.community.id);
+				this.loadCommunity(this.community.id);
 				
 			}));
 		}
@@ -568,7 +590,7 @@ saveRecipebook()
 				//this.toastr.success('Saved Recipe Book!', 'Recipe Book!');
 				if(recipeData['inserted_id'] !== "undefined" && recipeData['inserted_id'] !== "")
 				{
-					this.loadRecipebook(recipeData['inserted_id']);	
+					this.loadCommunity(recipeData['inserted_id']);	
 				}
 			}));
 		}

@@ -599,7 +599,7 @@ padding-right:11px;
 }
 .moremenu
 {
-  font-family: 'Lato', sans-serif;
+  
   display:none;
   position: absolute;
   top: 0px;
@@ -612,12 +612,20 @@ padding-right:11px;
     font-size: 14px;
     /* border: 1px solid #555; */
     border-radius: 10px;
-}
-.moremenu a
-{
 
-  display:block;
+    a
+    {
+      font-family: 'Lato', sans-serif;
+      text-decoration: none;
+      margin-bottom: 5px;
+      display:block;
+    }
+     a i
+     {
+       margin-right:5px;
+     }
 }
+
 .morebtn:hover .moremenu
 {
 display:block;
