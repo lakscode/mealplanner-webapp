@@ -54,7 +54,7 @@
 
                         <div class="listing boxshadow5" *ngFor="let recipe1 of recipebooks; let i = index;">
                             <div class="image">
-                                <a (click)="gotoRecipebook(recipe1.id)">
+                                <a (click)="gotopage('community', {'id':recipe1.id});">
                                     <img style="max-height:140px;" *ngIf="recipe1.image !== ''" class="tstbite-animation" src="{{recipe1.image}}"
                                         alt="{{recipe1.community_name}} image">
                                     <img *ngIf="recipe1.image == ''" class="tstbite-animation"  src="assets/notavailable.png" alt="{{recipe1.recipebook_name}} image">
@@ -70,11 +70,11 @@
                               </div>
                         </div>
 
-                        <div class="banner-header text-center">
+                        <!--<div class="banner-header text-center">
                             <a href="javascript:void(0)">
                                 <img src="assets/images/temp-images/header-banner.jpg" alt="banner">
                             </a>
-                        </div>
+                        </div>-->
 
 
                         <ul class="pagination" *ngIf="totalPage >= 10">

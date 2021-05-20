@@ -182,7 +182,7 @@ loadRecipes(idslist = "")
 
 	//params["instructions"] = "notempty";
 //	params["query"] = " select id, label, image, healthLabels, dietLabels, calories, yield, totalWeight, totalNutrients, digest from recipes where id in (select recipe_id from recipe_mapping where community_id = " + this.routeParams.id  + ")";
-	params["query"] = "select recipes.label, recipes.image, recipes.calories, recipes.dietLabels, recipes.yield as servings, users.email, users.firstname, users.lastname, users.id as userid from recipes join recipe_mapping on recipes.id = recipe_mapping.recipe_id join users on recipe_mapping.created_by = users.id where recipe_mapping.community_id = " + this.routeParams.id  + "" ;
+	params["query"] = "select recipes.label, recipes.image, recipes.calories, recipes.healthLabels, recipes.dietLabels, recipes.yield, recipes.totalNutrients, users.email, users.firstname, users.lastname, users.id as userid from recipes join recipe_mapping on recipes.id = recipe_mapping.recipe_id join users on recipe_mapping.created_by = users.id where recipe_mapping.community_id = " + this.routeParams.id  + "" ;
   console.log(JSON.stringify(params));
 
  var res =   this.dbService.getDatabyQuery("recipes", params).subscribe(invData => setTimeout(() => {
@@ -786,6 +786,7 @@ formatVal(str)
  }
  formatUnit(unit)
  {
+	 console.log(this.selectedRecipe);
 	 var retval = unit;
 	 if(unit !== "")
 	 {
@@ -801,6 +802,7 @@ formatVal(str)
  }
  formatCalories(calories, yeild)
  {
+	console.log(this.selectedRecipe);
 	 console.log(calories);
 	 console.log(yeild);
 	var retval = calories;

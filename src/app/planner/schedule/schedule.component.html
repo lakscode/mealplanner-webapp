@@ -83,7 +83,7 @@
          
         <label *ngFor = "let item of itemcat['details']; let j=index">
           <div class='nutriitem'>
-            <p class="nut-col1" style="display:inline-block;color:#000; margin-right:5px;font-weight:bold;">{{item.name}}</p>
+            <p class="nut-col1" style="display:inline-block;color:$text-gray; margin-right:5px;font-weight:bold;">{{item.name}}</p>
           <p class="nut-col2" style="display:inline-block;color:#000" >{{formatValue(item.value)}} {{item.unit}}</p>
           </div>
         

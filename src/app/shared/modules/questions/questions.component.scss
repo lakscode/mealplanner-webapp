@@ -20,7 +20,7 @@ background-size: cover;
 {
     margin-top:30px;
     margin-bottom:30px;
-    color:#000;
+    color:$text-gray;
     font-weight:bold;
 }
 .input-text
@@ -43,7 +43,7 @@ background-size: cover;
     width:100%;
     background:#ffffff;
     border:2px solid #999;
-    color:#000;
+    color:$text-gray;
     border-radius:5px;
     margin-bottom:20px;
   //  background:var(--orange);
@@ -55,7 +55,7 @@ background-size: cover;
 {
     width:100%;
     background:#FFF;
-    color:#000;
+    color:$text-gray;
     border: 2px solid $orange;
 }
 
@@ -163,7 +163,7 @@ background-size: cover;
 .opt
 {
   padding:5px 10px;
-  color:#000;
+  color:$text-gray;
   background:#eee;
   display:inline-block;
   font-size: 14px;

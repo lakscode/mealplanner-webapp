@@ -415,7 +415,7 @@
     text-decoration: none;
     font-size: $font_medium;
 
-	  color:#000;
+	  color:$text-gray;
     display: block;
    
 	text-align: center;
@@ -504,3 +504,4 @@ color:$third;
 background: linear-gradient(17deg, $orange1 0%, $orange 100%);
 color:#FFF;
 }
+

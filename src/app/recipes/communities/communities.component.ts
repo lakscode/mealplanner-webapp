@@ -26,6 +26,8 @@ export class CommunitiesComponent implements OnInit {
 	currentUser: any;
 	searchparam: any ; 
 	ratingIds: any;
+
+
 	ratingsArr: Array<any> = [];
 	listorgrid: any = {};
 	private onDestroy$: Subject<void> = new Subject<void>();
@@ -48,7 +50,9 @@ export class CommunitiesComponent implements OnInit {
 	
 	ngOnInit() {
 	
-				this.listorgrid = {"menu":"list", "panel":"listing-list"}
+				this.listorgrid = {"menu":"grid", "panel":"listing-grid"}
+
+
 	 $('.listing-buttons span').on("click",function(){
         $('.listing-buttons span').removeClass("current");
         if( $(this).hasClass("grid")){
