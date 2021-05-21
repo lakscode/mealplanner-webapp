@@ -55,7 +55,7 @@
                    </div>
                    <div class="col-12 col-md-2 col-lg-2">
                     <button *ngIf="!communityOwner" class="add-recipe">Invite</button>
-                    <button *ngIf="!communityOwner" class="add-recipe">Join</button>
+                    <button (click)="joinCommunity()" *ngIf="!communityOwner" class="add-recipe">Join</button>
  
                    </div>
 

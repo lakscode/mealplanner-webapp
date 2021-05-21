@@ -52,21 +52,23 @@
                     <div class="recipe-listing {{listorgrid.panel}}">
 
 
-                        <div class="listing boxshadow5" *ngFor="let recipe1 of recipebooks; let i = index;">
+                        <div class="listing boxshadow5" *ngFor="let cItem of communitiesList; let i = index;">
                             <div class="image">
-                                <a (click)="gotopage('community', {'id':recipe1.id});">
-                                    <img style="max-height:140px;" *ngIf="recipe1.image !== ''" class="tstbite-animation" src="{{recipe1.image}}"
-                                        alt="{{recipe1.community_name}} image">
-                                    <img *ngIf="recipe1.image == ''" class="tstbite-animation"  src="assets/notavailable.png" alt="{{recipe1.recipebook_name}} image">
+                                <a (click)="gotopage('community', {'id':cItem.id});">
+                                    <img style="max-height:140px;" *ngIf="cItem.image !== ''" class="tstbite-animation" src="{{cItem.image}}"
+                                        alt="{{cItem.community_name}} image">
+                                    <img *ngIf="cItem.image == ''" class="tstbite-animation"  src="assets/notavailable.png" alt="{{cItem.community_name}} image">
                                 </a>
                             </div>
-                            <div class="detail">
-                                <h4><a (click)="gotopage('community', {'id':recipe1.id});">{{recipe1.community_name}}</a></h4>
-                                <p innerHTML="{{limitTo(recipe1.description, 200)}}">
+                            <div class="detail" style='color:#555'>
+                                <h4><a (click)="gotopage('community', {'id':cItem.id});">{{cItem.community_name}}</a></h4>
+                                <p innerHTML="{{limitTo(cItem.description, 200)}}">
 
                                 </p>  
                                 <!--<p>{{countrecipes(recipe1.recipes)}} Recipes </p>-->
-                               
+                               <div style="font-size: 14px;"><span *ngIf="cItem.userscount > 0">{{cItem.userscount}} Members Joined, </span>
+                               <span *ngIf="cItem.recipecount > 0">{{cItem.recipecount}} Recipes</span>
+                                </div>
                               </div>
                         </div>
 
