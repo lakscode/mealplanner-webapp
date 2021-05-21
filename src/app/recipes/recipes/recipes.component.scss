@@ -182,15 +182,16 @@ a:hover {
 .container {
   display: block;
   position: relative;
-  padding-left: 20px;
+  padding-left: 24px;
   margin-bottom: 12px;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 14px;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
   font-weight:normal;
+  color:$text-gray;
 }
 
 /* Hide the browser's default checkbox */
@@ -459,11 +460,11 @@ color:#FFF;
 
 .filterlabel
 {
-  color: #555;
+  color: $text-gray;
     padding: 10px 15px;
     background: #f1f1f2;
     border: 1px solid #eee;
-    border-radius: 10px;
+    border-radius: 5px;
     margin-right:15px;
 }
 
@@ -472,4 +473,16 @@ color:#FFF;
 
   background: $orange;
   color:#FFF;
+  text-decoration: none;
+}
+
+.filter-title
+{
+  color: $text-gray;
+  font-size:$font-large;
+}
+
+.filter-group
+{
+  margin-top:10px;
 }

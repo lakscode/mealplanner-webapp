@@ -55,7 +55,8 @@ export const constants = {
       ["#2CA02C", "#BCBD22", "#1F77B4", "#D62728","#9467BD","#F9CB9C","#FF9900"]
       ],
   "cusineType":["american","british","caribbean","central europe","chinese","eastern europe","italian","korean","bulgogi","mediterranean","nordic","south american","south east asian","asian","central europe","indian","japanese","middle eastern","south east asian","french","greek","italian","mexican","kosher"],
-  "cusineTypeList":["american","asian","chinese","french","italian","indian","japanese","kosher","mexican","korean"]
+  "cusineTypeList":["american","asian","chinese","french","italian","indian","japanese","kosher","mexican","korean"],
+  "mealTypeList":["breakfast","snack","lunch","teatime","dinner"]
 };
 
 

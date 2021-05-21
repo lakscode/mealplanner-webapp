@@ -31,6 +31,7 @@ export class RecipesComponent implements OnInit {
 	dietLabelsList: Array<any> = [];
 	healthlabelsList: Array<any> = [];
 	mineralsLabelsList: Array<any> = [];
+	mealTypeList: Array<any> = [];
 	searchmorebar: boolean = false;
 	animClass: any = "";
 	page_num: any = 0;
@@ -73,7 +74,7 @@ export class RecipesComponent implements OnInit {
 		this.searchFilterLabels.push({"label":"Cuisine Type", "selected":false});
 		this.searchFilterLabels.push({"label":"Meal Type", "selected":false});
 		this.searchFilterLabels.push({"label":"Nutrients", "selected":false});
-
+		this.searchFilterLabels.push({"label":"Calories", "selected":false});
 
 		this.cuisineTypeList = [];
 		for(let c=0; c < constants.cusineTypeList.length; c++)
@@ -86,6 +87,14 @@ export class RecipesComponent implements OnInit {
 		{
 			this.dietLabelsList.push({"name":constants.dietLabels[d], "selected":false})
 		}
+
+		
+		this.mealTypeList= [];
+		for(let d=0; d < constants.mealTypeList.length; d++)
+		{
+			this.mealTypeList.push({"name":constants.mealTypeList[d], "selected":false})
+		}
+
 
 		//this.healthlabelsList = constants.healthLabels;
 		this.healthlabelsList= [];
