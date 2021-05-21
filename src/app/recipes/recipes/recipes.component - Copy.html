@@ -15,75 +15,63 @@
                             <input  type="button"  (click)="searchProps()" style="margin-bottom:10px;" 
                             [ngClass]="searchmorebar?'defaultbtn searchbtn hideonmobile bg-orange' :' defaultbtn searchbtn  bg-orange'" id="header-submit-search-pro" name="submit" value="Search">
                         </div>
-                      
                         
                         <div *ngIf="searchmorebar && showNutrientsFlag" class="searchmorebar {{animClass}}">
                             <div class="row">
-                                <div class="col-12 ">
-                                 
-                                     <ng-container *ngFor="let lab of searchFilterLabels; let l = index;">
-                                            <a [ngClass]="lab.selected?'filterlabel active': 'filterlabel'" href="javascript:void(0)" (click)="showLabels(lab)">
-                                              {{lab.label}}
-                                            </a>
-                                    </ng-container>
-   
-                                </div>
-                                <div *ngIf="searchFilterLabels[0]['selected']" class="col-12 paddinglr0">
+
+                                
+
+                                <div class="col-12 col-md-6 col-lg-3 paddinglr0">
                                     <div class="form-group">
 
                                         <label class="form-control-placeholder fcs">Health Labels </label>
-                                        
+                                        <div class="listSection  divoverflow listfixedheight" id="healthLabels" >
+
                                             <ng-container *ngFor="let hlabel of healthlabelsList; let h = index">
-                                                <div class="listSection  " id="healthLabels" >
-                                                    <label class="container" style="font-size:12px">{{hlabel.name}}
+                                                <label class="container" style="font-size:12px">{{hlabel.name}}
                                                     <input [(ngModel)] ="hlabel.selected" type="checkbox" [checked]="h == 0?'checked':''">
                                                     <span class="checkmark"></span>
                                                 </label>
-                                            </div>
                                             </ng-container>
 
-                                       
+                                        </div>
                                     </div>
                                 </div>
-                                <div *ngIf="searchFilterLabels[1]['selected']" class="col-12 paddinglr0">
+                                <div class="col-12 col-md-6  col-lg-3 paddinglr0">
                                     <div class="form-group">
                                         <label class="form-control-placeholder fcs">Diet Labels</label> 
-                                      
+                                        <div class="listSection  divoverflow listfixedheight" id="diethLabels" >
                                            
                                             <ng-container *ngFor="let dlabel of dietLabelsList; let h = index">
-                                                <div class="listSection  " id="diethLabels" >
                                                 <label class="container" style="font-size:12px">{{dlabel.name}}
                                                     <input [(ngModel)] ="dlabel.selected" type="checkbox" [checked]="h == 0?'checked':''">
                                                     <span class="checkmark"></span>
-                                                </label> 
-                                            </div>
+                                                </label>
                                             </ng-container>
 
-                                       
+                                        </div>
                                     </div>
                                 </div>
-                                <div *ngIf="searchFilterLabels[2]['selected']" class="col-12  paddinglr0">
+                                <div class="col-12 col-md-6 col-lg-3 paddinglr0">
                                     <div class="form-group">
 
                                         <label class="form-control-placeholder fcs">Cuisine Type </label>
-                                      
+                                        <div class="listSection divoverflow listfixedheight" id="cuisineType">
 
                                             <ng-container *ngFor="let clabel of cuisineTypeList; let c = index">
-                                                <div class="listSection " id="cuisineType">
                                                 <label class="container" style="font-size:12px">{{setFLU(clabel.name)}}
                                                     <input [(ngModel)] ="clabel.selected" type="checkbox" [checked]="c == 0?'checked':''">
                                                     <span class="checkmark"></span>
                                                 </label>
-                                            </div>
                                             </ng-container>
 
-                                      
+                                        </div>
                                     </div>
                                 </div>
-                                  <div *ngIf="searchFilterLabels[3]['selected']" class="col-12  paddinglr0">
+                                  <div class="col-12  col-md-6 col-lg-3 paddinglr0">
                                     <div class="form-group">
                                         <label class="form-control-placeholder fcs">Nutrients</label> 
-                                        <div class="listSection " >
+                                        <div class="listSection divoverflow listfixedheight" >
                                             <ng-container *ngFor="let mlabel of mineralsLabelsList; let m = index">
                                                 <div class="row paddinglr0">
                                                     <div class="col-12 paddinglr0">

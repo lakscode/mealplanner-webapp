@@ -41,6 +41,8 @@ export class RecipesComponent implements OnInit {
 	role: any = {};
 	showNutrientsFlag: boolean = false;
 	cuisineTypeList : Array<any> = [];
+
+	searchFilterLabels: Array<any> = [];
 	constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
 	
 	}
@@ -49,11 +51,28 @@ export class RecipesComponent implements OnInit {
 		if (this.searchmorebar)
 			this.animClass = "searchbaranim";
 	}
+	showLabels(label)
+	{
+		for(let l=0; l < this.searchFilterLabels.length; l++)
+		{
+			if( this.searchFilterLabels[l]["label"] == label.label)
+			this.searchFilterLabels[l]['selected'] = true;
+			else
+			this.searchFilterLabels[l]['selected'] = false;
+		}
+	}
 	ngOnInit() {
 		console.log("ngOnInit");
 		this.searchmorebar = false;
 	//	this.dietLabelsList = constants.dietLabels;
 		this.getNutrientsMaxMin(); 
+
+		this.searchFilterLabels = [];
+		this.searchFilterLabels.push({"label":"Health Labels", "selected":false});
+		this.searchFilterLabels.push({"label":"Diet Labels", "selected":false});
+		this.searchFilterLabels.push({"label":"Cuisine Type", "selected":false});
+		this.searchFilterLabels.push({"label":"Meal Type", "selected":false});
+		this.searchFilterLabels.push({"label":"Nutrients", "selected":false});
 
 
 		this.cuisineTypeList = [];

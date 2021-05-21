@@ -457,3 +457,19 @@ color:#FFF;
 }
 
 
+.filterlabel
+{
+  color: #555;
+    padding: 10px 15px;
+    background: #f1f1f2;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    margin-right:15px;
+}
+
+.filterlabel:hover, .filterlabel.active
+{
+
+  background: $orange;
+  color:#FFF;
+}
