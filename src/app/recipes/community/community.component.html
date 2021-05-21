@@ -228,7 +228,7 @@
                                     <p *ngIf="recipe.favcount && recipe.favcount> 0">{{recipe.favcount}} Members Saved</p>
                                     <p *ngIf="recipe.dietLabels"><b>Diet Labels</b>: {{recipe.dietLabels}} </p>
                                     <p *ngIf="!recipe.dietLabels">&nbsp;</p>
-                                    
+                                    <p class="favactive" style='text-align:right;' *ngIf="recipe.UserFavStatus"><i class="fa fa-heart"></i></p>
                                 
                                 </div>
                                 <div class="morebtn"><a class="menu" href="javascript:void(0)"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></a>
