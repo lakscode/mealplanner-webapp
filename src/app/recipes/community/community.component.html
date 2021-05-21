@@ -193,7 +193,7 @@
                                         </div>                                       
                                         <div class="morebtn"><a class="menu" href="javascript:void(0)"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></a>
                                             <div class="moremenu">
-                                                <a href="javascript:void(0)" (click)="setFavouriteRecipe(recipe)"><i class="fa fa-heart" aria-hidden="true"></i> Set Favourite</a>
+                                                <a href="javascript:void(0)" (click)="setFavourite(recipe)"><i class="fa fa-heart" aria-hidden="true"></i> Set Favourite</a>
             
                                                 <a href="javascript:void(0)" (click)="addRecipe(recipe)"><i class="fa fa-plus" aria-hidden="true"></i> Add Recipe</a>
                                                 <a href="javascript:void(0)" (click)="viewRecipe(recipe)"><i class="fa fa-list-ul" aria-hidden="true"></i> Details</a>
@@ -225,16 +225,16 @@
                                 <h1 class="recipe-label">{{recipe.label}}</h1>
                                    <p><b>Calories</b>: {{recipe.calories}} Kcal</p>
                                    <p><b>Servings</b>: {{recipe.yield}}</p>
-                                
+                                    <p *ngIf="recipe.favcount && recipe.favcount> 0">{{recipe.favcount}} Members Saved</p>
                                     <p *ngIf="recipe.dietLabels"><b>Diet Labels</b>: {{recipe.dietLabels}} </p>
                                     <p *ngIf="!recipe.dietLabels">&nbsp;</p>
                                     
                                 
                                 </div>
                                 <div class="morebtn"><a class="menu" href="javascript:void(0)"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></a>
-                                <div class="moremenu">
-                                    <a href="javascript:void(0)" *ngIf="setFav" (click)="removeFavourite(recipe.id)" style="color:orange"><i class="fa fa-heart" aria-hidden="true"></i> Remove Favourite {{setFav}}</a>
-                                     <a href="javascript:void(0)" *ngIf="!setFav" (click)="setFavourite(recipe.id)" ><i class="fa fa-heart" aria-hidden="true"></i> Set Favourite {{setFav}}</a>
+                                <div class="moremenu"> 
+                                    <a href="javascript:void(0)" *ngIf="recipe.UserFavStatus" (click)="removeFavourite(recipe.id)" style="color:orange"><i class="fa fa-heart" aria-hidden="true"></i> Remove Favourite </a>
+                                     <a href="javascript:void(0)" *ngIf="!recipe.UserFavStatus" (click)="setFavourite(recipe.id)" ><i class="fa fa-heart" aria-hidden="true"></i> Set Favourite</a>
 
                                     <a href="javascript:void(0)" *ngIf="currentUser['id'] == recipe['userid']"  (click)="removeRecipe(recipe)"><i class="fa fa-trash" aria-hidden="true"></i> Remove Recipe</a>
                                     <a href="javascript:void(0)" (click)="viewRecipe(recipe)"><i class="fa fa-list-ul" aria-hidden="true"></i> Details</a>

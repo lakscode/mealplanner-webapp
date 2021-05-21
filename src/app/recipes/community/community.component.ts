@@ -188,7 +188,7 @@ loadRecipes(idslist = "")
 
 	//params["instructions"] = "notempty";
 //	params["query"] = " select id, label, image, healthLabels, dietLabels, calories, yield, totalWeight, totalNutrients, digest from recipes where id in (select recipe_id from recipe_mapping where community_id = " + this.routeParams.id  + ")";
-	params["query"] = "select recipes.label, recipes.image, recipes.calories, recipes.healthLabels, recipes.dietLabels, recipes.yield, recipes.totalNutrients, users.email, users.firstname, users.lastname, users.id as userid from recipes join recipe_mapping on recipes.id = recipe_mapping.recipe_id join users on recipe_mapping.created_by = users.id where recipe_mapping.community_id = " + this.routeParams.id  + "" ;
+	params["query"] = "select recipes.id, recipes.label, recipes.image, recipes.calories, recipes.healthLabels, recipes.dietLabels, recipes.yield, recipes.totalNutrients, users.email, users.firstname, users.lastname, users.id as userid from recipes join recipe_mapping on recipes.id = recipe_mapping.recipe_id join users on recipe_mapping.created_by = users.id where recipe_mapping.community_id = " + this.routeParams.id  + "" ;
   console.log(JSON.stringify(params));
 
  var res =   this.dbService.getDatabyQuery("recipes", params).subscribe(invData => setTimeout(() => {
@@ -198,8 +198,8 @@ loadRecipes(idslist = "")
 		this.recipesList = [];
 
 		this.recipesList = invData["body"];
-	//	console.log(this.recipesList);
-	
+		console.log(this.recipesList);
+		this.getFavouriteStatus();
 	}
 	 
   }
@@ -830,47 +830,84 @@ formatVal(str)
   var params = {};
   if(typeof(this.currentUser["id"]) !== "undefined" && this.currentUser["id"] !== null && this.currentUser["id"] !== "" && typeof(this.routeParams.id) !== "undefined" && this.routeParams.id !== null && this.routeParams.id !== "")
   {
-	params["userid"] = this.currentUser["id"];
-	params["recipeid"] = this.routeParams.id;
-	params["created_at"] = new Date();
-	params["id"] = id;
+//	params["userid"] = this.currentUser["id"];
+//	params["recipeid"] = id;
+//	params["created_at"] = new Date();
+//	params["community_id"] = this.routeParams.id;
 //	console.log(params);
- 
-	var res =   this.dbService.postDataByTable("favourites", params).subscribe(invData => setTimeout(() => {
-	  if(invData !== null)
-	  {
-	    this.setFav = true;
-		  this.getFavouriteStatus();
-	   
-	  }
-	}));
+var params = {};
+//params["created_by"]  = this.currentUser["id"];
+console.log(params);
+params ['query'] = "select * from favourites where recipeid = " + id + " AND userid = " + this.currentUser["id"];
+var res =   this.dbService.getDatabyTablebyQuery("favourites", params).subscribe(invData => setTimeout(() => {
+
+  console.log(invData);
+  if(invData !== null && invData["body"]["length"] > 0)
+  {
+
+  }
+  else
+
+  {
+	  var params1 = {};
+	  params1["recipeid"] = id;
+	  params1["userid"] = this.currentUser["id"];
+	  
+	var res =   this.dbService.postDataByTable("favourites", params1).subscribe(invData => setTimeout(() => {
+		if(invData !== null)
+		{
+			alert("favourite has been set");
+		 
+		}
+	  }));
+  }
+}));
+
+	
   }
 }
+
+
 favStatus:any;
  getFavouriteStatus()
 {
   console.log("get FavouriteStatus");
   console.log(this.setFav);
-
+  var idslist = "";
+  for(let i=0; i< this.recipesList.length; i++)
+  {
+	this.recipesList[i]["UserFavStatus"]= false;
+	  idslist += this.recipesList[i]["id"] + ",";
+  }
+  if(idslist !== "")
+  {
+	idslist = idslist.substring(0, idslist.length-1);
+  }
   var params = {};
   this.favStatus = null;
-  if(typeof(this.currentUser["id"]) !== "undefined" && this.currentUser["id"] !== null && this.currentUser["id"] !== "" && typeof(this.routeParams) !== "undefined" && this.routeParams !== null && typeof(this.routeParams.id) !== "undefined" && this.routeParams.id !== null && this.routeParams.id !== "")
+  if(typeof(this.currentUser["id"]) !== "undefined" && this.currentUser["id"] !== null && idslist !== "")
   {
-	params["userid"] = this.currentUser["id"];
-	params["recipeid"] = this.routeParams.id;
+	//params["userid"] = this.currentUser["id"];
+//	params["recipeid"] = this.routeParams.id;
  
-	var res =   this.dbService.getDataByTable("favourites", params).subscribe(invData => setTimeout(() => {
+	params["query"] = "SELECT recipeid, count(*) as favcount FROM `favourites` where recipeid in (" + idslist + ")group by recipeid"
+	var res =   this.dbService.getDatabyTablebyQuery("favourites", params).subscribe(invData => setTimeout(() => {
 	   if(invData !== null)
 	  {
 	  console.log(invData);
 
 		if(invData["body"]['length'] > 0)
 		{
-		  this.favStatus = invData["body"][0];
-		  console.log("favStatus ");
-		  console.log(this.favStatus);
-		  this.setFav = true;
+			for(let k=0; k < invData["body"]['length']; k++)
+			{
+				var fIndex = this.recipesList.findIndex(x=>(x["id"] === invData["body"][k]["recipeid"]));
+				if(fIndex > -1)
+				{
+					this.recipesList[fIndex]["favcount"] =  invData["body"][k]["favcount"];
+				}
+			}
 		}
+		this.getFavouriteStatusForCurrentUser(idslist);
 	  }
 	}));
   }
@@ -883,6 +920,49 @@ favStatus:any;
   }
 
 }
+
+getFavouriteStatusForCurrentUser(idslist)
+{
+  console.log("get getFavouriteStatusForCurrentUser");
+  console.log(this.setFav);
+ 
+  var params = {};
+
+  if(typeof(this.currentUser["id"]) !== "undefined" && this.currentUser["id"] !== null && idslist !== "")
+  {
+ 
+	params["query"] = "SELECT * FROM `favourites` where recipeid in (" + idslist + ") and userid=" + this.currentUser["id"];
+	var res =   this.dbService.getDatabyTablebyQuery("favourites", params).subscribe(invData => setTimeout(() => {
+	   if(invData !== null)
+	  {
+	  console.log(invData);
+
+		if(invData["body"]['length'] > 0)
+		{
+			for(let k=0; k < invData["body"]['length']; k++)
+			{
+				var fIndex = this.recipesList.findIndex(x=>(x["id"] === invData["body"][k]["recipeid"]));
+				if(fIndex > -1)
+				{
+					this.recipesList[fIndex]["UserFavStatus"] = true;
+				}
+				
+			}
+		}
+		console.log(this.recipesList);
+	  }
+	}));
+  }
+  else
+  {
+	var parent = this;
+	setTimeout(function(){ 
+		parent.getFavouriteStatus(); 
+	}, 1000);
+  }
+
+}
+
 toggleFav()
 {
 	if(this.setFav )
