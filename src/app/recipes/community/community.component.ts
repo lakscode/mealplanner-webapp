@@ -906,7 +906,7 @@ removeFavourite()
 	  {
 		this.getFavouriteStatus();
 	  }
-	  console.log(this.setFav);
+	  //console.log(this.setFav);
 	}));
   }  
 }
