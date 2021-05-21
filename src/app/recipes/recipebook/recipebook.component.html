@@ -160,18 +160,24 @@
             rgba(0, 0, 0, 0.5)
           ),
                                         -->
-                                        <div class="recipe-add" (click)="addRecipe(recipe)"><i class="fa fa-plus" aria-hidden="true"></i></div>
+                                        <!-- <div class="recipe-add" (click)="addRecipe(recipe)"><i class="fa fa-plus" aria-hidden="true"></i></div>
 
-                                        <div class="recipe-view" (click)="viewRecipe(recipe)"><i class="fa fa-eye" aria-hidden="true"></i></div> 
-                                        <div style="position:absolute;     bottom: 15px;
-                                        width: 85%;
-                                        left: 20px;">
-                                            <h1 class="recipe-label1">{{recipe.label.toLowerCase()}}</h1>                                  
+                                        <div class="recipe-view" (click)="viewRecipe(recipe)"><i class="fa fa-eye" aria-hidden="true"></i></div>  -->
+                                        <div>
+                                            <h1 class="recipe-label1" style='color:#FFF'>{{recipe.label.toLowerCase()}}</h1>                                  
                                             <p style="color:#fff"><b><em>Calories</em></b>: {{recipe.calories}} Kcal, <b><em>Servings</em></b>: {{recipe.yield}}</p>
                                             <!--<p><b><em>Diet Labels</em></b>: {{recipe.dietLabels}} </p>-->
 
                                           
-                                        </div>                                       
+                                        </div>  
+                                         <div class="morebtn"><a class="menu" href="javascript:void(0)"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></a>
+                                            <div class="moremenu">
+                                                <a href="javascript:void(0)" (click)="setFavouriteRecipe(recipe)"><i class="fa fa-heart" aria-hidden="true"></i> Set Favourite</a>
+            
+                                                <a href="javascript:void(0)" (click)="addRecipe(recipe)"><i class="fa fa-plus" aria-hidden="true"></i> Add Recipe</a>
+                                                <a href="javascript:void(0)" (click)="viewRecipe(recipe)"><i class="fa fa-list-ul" aria-hidden="true"></i> Details</a>
+                                            </div>
+                                            </div>                                     
                                     
                                 </div>
                                    
@@ -198,14 +204,24 @@
                                 <!--<div class="col-4">
                                     <img style="width:100%" src="{{recipe.image}}" />
                                 </div>-->
-                                <div class="recipe-remove" (click)="removeRecipe(recipe)">Remove</div>
-                                <div class="recipe-remove" style="right:85px" (click)="viewRecipe(recipe)">Details</div>
+                               <!--  <div class="recipe-remove" (click)="removeRecipe(recipe)">Remove</div>
+                                <div class="recipe-remove" style="right:85px" (click)="viewRecipe(recipe)">Details</div> -->
 
                              
-                                  <div style='position:absolute; bottom:10px; width:90%; left:25px'>
+                                <!--   <div style='position:absolute; bottom:10px; width:90%; left:25px'> -->
+                                    <div>
                                     <h1 class="recipe-label">{{recipe.label.toLowerCase()}}</h1>                                  
                                     <p style="color:#fff"><b>Calories</b>: {{recipe.calories}} Kcal, <b>Servings</b>: {{recipe.yield}}</p>
                                     <p *ngIf="recipe.dietLabels" style="color:#fff">  <b>Diet Labels</b>: {{formatHiphen(recipe.dietLabels)}} </p>
+                                </div>
+
+                                <div class="morebtn"><a class="menu" href="javascript:void(0)"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></a>
+                                <div class="moremenu">
+                                    <a href="javascript:void(0)" (click)="setFavouriteRecipe(recipe)"><i class="fa fa-heart" aria-hidden="true"></i> Set Favourite</a>
+
+                                    <a href="javascript:void(0)" (click)="removeRecipe(recipe)"><i class="fa fa-trash" aria-hidden="true"></i> Remove Recipe</a>
+                                    <a href="javascript:void(0)" (click)="viewRecipe(recipe)"><i class="fa fa-list-ul" aria-hidden="true"></i> Details</a>
+                                </div>
                                 </div>
                              
                            

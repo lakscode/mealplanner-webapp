@@ -1,10 +1,9 @@
 <!--header when not logged in -->
-
 <header class="desktoponly">
     <div class="header header-main header-var2 fade-load-down">
-        <div class="container">
+        <div class="container " style="padding-left:0px;" >
             <div class="row">
-                <div class="col-4 col-lg-2">
+                <div class="col-4 col-lg-2" style="padding-left:0px;">
                     <div class="logo-wrapper">
                         <a href="index.html"><img style='max-height: 90px;' src="assets/logo-new1.png" alt="logo" /></a>
                     </div>
@@ -13,7 +12,7 @@
                     <div class="outer-nav">
                         <div class="wrapper-main-nav " style="    display: inline-block;
                         float: left;
-                        margin-left: 50px;">
+                        margin-left: 200px;">
                             <nav class="nav-collapse responsive-menu">
                                 <ul class="main-menu" *ngIf="!loggedIn">
                                     <li (click)="setMenuActive();" [ngClass]="menu.active == true?'active':''"  *ngFor="let menu of menuItems; let m = index">
@@ -78,7 +77,6 @@
         </div>
     </div>
 </header>
-
 <!--header ends-->
 <!-- Mobile menu starts -->
 <header class="mobileonly">
