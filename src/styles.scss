@@ -117,6 +117,7 @@ font-size:24px;
     font-size: 16px;
   }
 
+  /*
   .carousel-item
   {
     transform: translateX(-100%);
@@ -134,7 +135,7 @@ font-size:24px;
     animation: slide-out 0.5s forwards;
     -webkit-animation: slide-out 0.5s forwards;
 }
-    
+    */
 @keyframes slide-in {
     100% { transform: translateX(0%); }
 }

@@ -11,7 +11,9 @@
                 </div>
                 <div class="col-8 col-lg-10">
                     <div class="outer-nav">
-                        <div class="wrapper-main-nav " style="display:inline-block;">
+                        <div class="wrapper-main-nav " style="    display: inline-block;
+                        float: left;
+                        margin-left: 50px;">
                             <nav class="nav-collapse responsive-menu">
                                 <ul class="main-menu" *ngIf="!loggedIn">
                                     <li (click)="setMenuActive();" [ngClass]="menu.active == true?'active':''"  *ngFor="let menu of menuItems; let m = index">
@@ -40,7 +42,8 @@
                             </nav>
 
                         </div>
-                        <div class="wrapper-links"  style="display:inline-block;">
+                        <div class="wrapper-links"  style="display:inline-block;float: right;
+                        margin-top: 15px;">
                             
                             <!--<ul class="header-social-icons">
                                 <li><a href="javascript:void(0)"><i class="fa fa-facebook"></i></a></li>
