@@ -34,6 +34,7 @@ export class RecipesComponent implements OnInit {
 	searchmorebar: boolean = false;
 	animClass: any = "";
 	page_num: any = 0;
+	page_length: any = 10;
 	totalPage: any = 0;
 	displayList: Array<any> = [];
 	nutrientDbFields : Array<any> = [];
@@ -126,6 +127,7 @@ export class RecipesComponent implements OnInit {
 	
 	  this.totalPage = 1;
 	 this.page_num = 0;
+	 this.page_length= 12;
 	  this.searchparam = {"q":"", "range":{}}
 	
   
@@ -183,7 +185,7 @@ export class RecipesComponent implements OnInit {
 			this.recipesList1.push(invData["body"][i]);
 			this.ratingIds += invData["body"][i]["id"] + ",";
 		  }
-		  this.totalPage = this.recipesList1["length"] /10;
+		  this.totalPage = this.recipesList1["length"] / this.page_length;
 		  this.counter(this.totalPage);
 		  console.log(this.recipesList1);
 		 
@@ -229,8 +231,8 @@ export class RecipesComponent implements OnInit {
 	//	console.log(this.recipesList1);
 	//	console.log(this.page_num);
 		this.displayList=[];
-		var startIndex= this.page_num*10;
-		var endIndex = 10;
+		var startIndex= this.page_num*this.page_length;
+		var endIndex = this.page_length;
 
 		if(startIndex + endIndex > this.recipesList1["length"])
 		{

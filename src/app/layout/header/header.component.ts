@@ -104,7 +104,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 				"children":
 				[
 
-					{"id":"planner-plan-list", "menu":"Plan List", "link":"/plan-list", "display":displayMenu, "active":false},
+					{"id":"planner-plan-list", "menu":"Plan List", "link":"/plans", "display":displayMenu, "active":false},
 					{"id":"planner-plan-create", "menu":"Create Plan", "link":"/plan-create", "display":displayMenu, "active":false}
 				]
 			}				

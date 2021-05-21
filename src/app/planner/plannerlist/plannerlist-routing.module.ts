@@ -4,7 +4,7 @@ import { PlannerlistComponent } from './plannerlist.component';
 
 const routes: Routes = [
   { 
-    path: 'plan-list', 
+    path: 'plans', 
     component: PlannerlistComponent,
     data: { showSidebar: false } 
   }

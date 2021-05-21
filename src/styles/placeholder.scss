@@ -281,3 +281,61 @@ text-decoration: line-through;
 {
 display:block;
 }
+
+
+
+
+.add2mealplan
+{
+  position:absolute;
+  top:20px;
+  right:15px;
+
+  color:$text-gray;
+
+ 
+}
+.add2mealplan .menu
+{
+ 
+  background: #FFF;
+  border-radius: 5px;
+  padding: 5px 12px ;
+//  border-radius: 50%;
+ // width: 30px;
+  height: 30px;
+
+}
+.add2mealplanmenu
+{
+  
+  //display:none;
+  position: absolute;
+  top: 0px;
+  right: 0;
+  width: 400px;
+    height: 200px;
+    background: #FFF;
+    color: #555;
+    padding: 10px;
+    font-size: 14px;
+     border: 1px solid #eee; 
+    border-radius: 10px;
+z-index:999;
+    a
+    {
+      font-family: 'Lato', sans-serif;
+      text-decoration: none;
+      margin-bottom: 5px;
+      display:block;
+    }
+     a i
+     {
+       margin-right:5px;
+     }
+}
+
+.add2mealplan:hover .moremenu
+{
+//display:block;
+}

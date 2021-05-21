@@ -178,17 +178,26 @@
 
 
                         <div class="listing" *ngFor="let recipe1 of displayList; let i = index;">
+                            
+
                             <div class="image image-animate">
+                                
                                 <a (click)="gotoRecipeDetails(recipe1.id)">
                                     <img style="max-width:200px; max-height:200px" class="tstbite-animation" src="{{formatImage(recipe1.image, 'm')}}"
                                         alt="image">
                                 </a>
                             </div>
                             <div class="detail">
-                                <h4><a (click)="gotoRecipeDetails(recipe1.id)">{{recipe1.label}}</a></h4>
+
+                                <h4><a (click)="gotoRecipeDetails(recipe1.id)">{{recipe1.label}}</a>
+                                    
+                                </h4>
                                 <!--<p innerHTML="{{limitTo(recipe1.s_instructions, 200)}}">
 
                                 </p>-->
+
+                                
+
                                 <p *ngIf="recipe1.dietLabels">
                                     Diet Labels: <span style="font-size:12px;">{{formatlabels(recipe1.dietLabels)}}</span>
                                 </p>
@@ -209,6 +218,8 @@
                                         </span>
                                         <!--<span class="rating-figure">{{recipe1.displayrating}}</span>-->
                                     </div>
+
+                                    
                                 </div>
                             </div>
                         </div>

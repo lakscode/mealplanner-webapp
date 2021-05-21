@@ -10,7 +10,28 @@
             <div class="heading" style="width:100%">
                 <!--<h2>{{searchRes.label}}</h2>-->
                 <h2>Recipe Details</h2>
-    
+                <div class="add2mealplan" *ngIf="plansList.length > 0">
+                    <a class="menu" (click)="showAdd2MP = true " href="javascript:void(0)">Add to Meal Plan</a>
+                    <div *ngIf='showAdd2MP' class="add2mealplanmenu">
+                        <a style="float:right" href="javascript:void(0)" (click)="showAdd2MP = false;"><i class="fa fa-close" aria-hidden="true"></i> </a>
+                        <p>Choose Meal Plan</p>
+                        <select [(ngModel)] ="plan.id">
+                            <option value="{{plan.id}}" *ngFor='let plan of plansList; let i = index'>{{plan.name}}</option>
+                        </select>
+                        <p>Choose Day</p>
+                        <select [(ngModel)] ="plan.day">
+                            <option value="{{day.id}}" *ngFor='let day of daysList; let i = index'>{{day.name}}</option>
+                        </select>
+                        <p>Choose Meal Type</p>
+                        <select [(ngModel)] ="plan.mealType">
+                            <option value="{{mealtype.code}}" *ngFor='let mealtype of mealTypesList; let i = index'>{{mealtype.name}}</option>
+                        </select>
+                        <a href="javascript:void(0)" (click)="add2Plan()"><i class="fa fa-heart" aria-hidden="true"></i> Add to Plan</a>
+
+                        <!--<a href="javascript:void(0)" (click)="addRecipe(recipe)"><i class="fa fa-plus" aria-hidden="true"></i> Add Recipe</a>-->
+                        
+                    </div>
+                    </div>
             </div>
          
         </div>
