@@ -55,7 +55,7 @@ ngOnChanges()
 		this.loadDefaults();
 
 		this.setFav = false;
-		this.getFavouriteStatus();
+	//	this.getFavouriteStatus();
 	}
 loadDefaults()
 {
@@ -109,6 +109,7 @@ loadDefaults()
 		  }    
 		  else
 		  {
+			this.communityOwner = true;
 			  this.setDefaults();
 		   
 	   
@@ -116,6 +117,7 @@ loadDefaults()
 		  if (typeof (this.routeParams.draft) !== "undefined") {
 		   console.log(this.routeParams.draft);
 		   this.loadCommunity(this.routeParams.draft);
+		   this.communityOwner = true;
 		 }  
 		   console.log(this.routeParams);
 	}); 
@@ -552,32 +554,33 @@ saveRecipebook()
 	console.log(this.community);
 	var params = {};
 	
-	if(this.community["recipebook_name"] !== "")
-    params["recipebook_name"] = this.community["recipebook_name"];
-   
-    if(this.community["description"] !== "")
-    params["description"] = this.community["description"];
+	if(this.community["community_name"] !== "")
+	{
+		params["community_name"] = this.community["community_name"];
+	
+		if(typeof(this.community["description"]) !== "undefined" && this.community["description"] !== "")
+		params["description"] = this.community["description"];
 
-    if(this.community["notes"] !== "")
-    params["notes"] = this.community["notes"];
+		if(typeof(this.community["notes"]) !== "undefined" && this.community["notes"] !== "")
+		params["notes"] = this.community["notes"];
 
-	if(this.community["image"] !== "")
-    params["image"] = this.community["image"];
+		if(typeof(this.community["image"]) !== "undefined" && this.community["image"] !== "")
+		params["image"] = this.community["image"];
 
-   // if(this.community["recipes"] !== "")
-  //  params["recipes"] = this.community["recipes"];
+		// if(this.community["recipes"] !== "")
+		//  params["recipes"] = this.community["recipes"];
 
-	if(typeof(this.community["createdby"]) =="undefined" || this.community["createdby"] == "" || this.community["createdby"] == "0")
-    {
-      if(typeof(this.currentUser["id"]) !== "undefined" && this.currentUser["id"] !== "")
-      params["createdby"] = this.currentUser["id"];
-    }   
+		if(typeof(this.community["created_by"]) =="undefined" || this.community["created_by"] == "" || this.community["created_by"] == "0")
+		{
+		if(typeof(this.currentUser["id"]) !== "undefined" && this.currentUser["id"] !== "")
+		params["created_by"] = this.currentUser["id"];
+		}   
 		if(typeof(this.community.id) !== "undefined"  && this.community.id !== "")
 		{
 			console.log("updating");
 			params["id"] = this.community.id;
 			console.log(params);
-			var res =   this.dbService.updateDataByTable("recipebook", params).subscribe(recipeData => setTimeout(() => {
+			var res =   this.dbService.updateDataByTable("community", params).subscribe(recipeData => setTimeout(() => {
 				console.log(recipeData);
 				//this.toastr.success('Updated Recipe Book!', 'Recipe Book!');	
 				this.loadCommunity(this.community.id);
@@ -589,7 +592,7 @@ saveRecipebook()
 		
 			console.log("adding");
 			console.log(params);
-			var res =   this.dbService.postDataByTable("recipebook", params).subscribe(recipeData => setTimeout(() => {
+			var res =   this.dbService.postDataByTable("community", params).subscribe(recipeData => setTimeout(() => {
 				console.log(recipeData);
 				//this.toastr.success('Saved Recipe Book!', 'Recipe Book!');
 				if(recipeData['inserted_id'] !== "undefined" && recipeData['inserted_id'] !== "")
@@ -598,7 +601,7 @@ saveRecipebook()
 				}
 			}));
 		}
-	
+	}	
 
 }
 
@@ -831,7 +834,7 @@ formatVal(str)
 	params["recipeid"] = this.routeParams.id;
 	params["created_at"] = new Date();
 	params["id"] = id;
-	console.log(params);
+//	console.log(params);
  
 	var res =   this.dbService.postDataByTable("favourites", params).subscribe(invData => setTimeout(() => {
 	  if(invData !== null)
@@ -843,7 +846,7 @@ formatVal(str)
 	}));
   }
 }
-
+favStatus:any;
  getFavouriteStatus()
 {
   console.log("get FavouriteStatus");
@@ -888,7 +891,7 @@ toggleFav()
 	}
 	else
 	{
-		this.setFavourite();
+	//	this.setFavourite();
 	}
 }
 
@@ -910,6 +913,36 @@ removeFavourite()
 	}));
   }  
 }
+
+joinCommunity()
+{
+
+	var params = {};
+	//params["created_by"]  = this.currentUser["id"];
+	console.log(params);
+	params ['query'] = "select * from community_join where community_id = " + this.community["id"] + " AND userid = " + this.currentUser["id"];
+	var res =   this.dbService.getDatabyTablebyQuery("community_join", params).subscribe(invData => setTimeout(() => {
+
+	  console.log(invData);
+	  if(invData !== null && invData["body"]["length"] > 0)
+	  {
+		
+	  }
+	  else
+	  {
+		var params = {};
+		params["community_id"] =this.community["id"];
+		params["userid"] =this.currentUser["id"];
+		
+		var res =   this.dbService.postDataByTable("community_join", params).subscribe(dData => setTimeout(() => {
+			alert("Joined community ");
+		}));
+
+	  }
+	}));
+
+}
+
 }
 
 	

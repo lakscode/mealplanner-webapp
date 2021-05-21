@@ -212,24 +212,27 @@ endIndex = startIndex+ endIndex;
 
 
   /******** recipes api serach */
-  recipebooks: Array<any> = [];
+  communitiesList: Array<any> = [];
 	searchProps()
 	{
 
-		this.recipebooks = [];
-		var params = {"limit": 100};
+		this.communitiesList = [];
+//	var params = {"limit": 100};
 	   // params["createdby"] = this.currentUser["id"];
 		console.log(params);
-		var res =   this.dbService.getDataByTable("community", params).subscribe(invData => setTimeout(() => {
+		var params = {"query": "SELECT c.*, COUNT(rm.id) AS recipecount, u.email, u.firstname, u.lastname FROM community AS c LEFT JOIN recipe_mapping AS rm ON c.id = rm.community_id LEFT JOIN users AS u ON c.created_by = u.id GROUP BY c.id"};
+
+		var res =   this.dbService.getDatabyTablebyQuery("community", params).subscribe(invData => setTimeout(() => {
 	
 		  console.log(invData);
 		  if(invData !== null)
 		  {
 			var obj = invData["body"]["length"];
 			console.log(invData["body"]);
-			this.recipebooks = invData["body"];
+			this.communitiesList = invData["body"];
 			
-			console.log(this.recipebooks);
+			console.log(this.communitiesList);
+			this.loaduserCount();
 		  }
 		}));
 	
@@ -277,6 +280,42 @@ endIndex = startIndex+ endIndex;
 	}
 
 	  return retval;
+  }
+
+  loaduserCount()
+  {
+	  /*
+	SELECT c.id, COUNT(cj.id) AS usercount
+	FROM community AS c
+	LEFT JOIN community_join AS cj ON c.id = cj.community_id
+	GROUP BY c.id, cj.community_id
+
+	*/
+
+	console.log("in loadusercount");
+	var params = {"query": "SELECT c.id, COUNT(cj.id) AS usercount 	FROM community AS c LEFT JOIN  community_join AS cj ON c.id = cj.community_id GROUP BY c.id, cj.community_id"};
+
+	var res =   this.dbService.getDatabyTablebyQuery("community", params).subscribe(invData => setTimeout(() => {
+
+	  console.log(invData);
+	  if(invData !== null)
+	  {
+		var obj = invData["body"];
+		for(let o=0; o < obj.length; o++)
+		{
+			var fIndex = this.communitiesList.findIndex(x=>(x.id === obj[o]["id"]));
+			console.log(fIndex);
+			if(fIndex > -1)
+			{
+				console.log(obj[o]["usercount"])
+				this.communitiesList[fIndex]["userscount"] = obj[o]["usercount"];
+				console.log(this.communitiesList[fIndex]["userscount"] );
+			}
+		}
+		console.log(this.communitiesList);
+	  }
+	}));
+
   }
 }
 
