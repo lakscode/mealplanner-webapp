@@ -197,7 +197,7 @@ export class RecipesComponent implements OnInit {
   
 	  params["instructions"] = "notempty";
 
-	  params["cuisineType"] = "american";
+	 // params["cuisineType"] = "american";
 	  params["returnfields"] = " id, label, image, healthLabels,  dietLabels, calories ";
 	  console.log(JSON.stringify(params));
 	 var res =   this.dbService.getDatabyFields("recipes", params).subscribe(invData => setTimeout(() => {
@@ -381,7 +381,7 @@ endIndex = startIndex+ endIndex;
 
 
   /******** recipes api serach */
-  maxcalories: any = 0;
+  maxcalories: any = "";
 	searchProps()
 	{
 
@@ -675,6 +675,38 @@ endIndex = startIndex+ endIndex;
 
 	  return ret;
   }
+
+
+clearFilters(){
+
+	for(let l=0; l < this.searchFilterLabels.length; l++){
+		this.searchFilterLabels[l]['selected'] = false;
+	}
+	
+	for(let m=0; m < this.mealTypeList.length; m++){
+		this.mealTypeList[m]['selected'] = false;
+	}
+
+	for(let m=0; m < this.healthlabelsList.length; m++){
+		this.healthlabelsList[m]['selected'] = false;
+	}
+
+	for(let m=0; m < this.dietLabelsList.length; m++){
+		this.dietLabelsList[m]['selected'] = false;
+	}
+
+	for(let m=0; m < this.cuisineTypeList.length; m++){
+		this.cuisineTypeList[m]['selected'] = false;
+	}
+
+	for(let m=0; m < this.mineralsLabelsList.length; m++){
+		this.mineralsLabelsList[m]['selected'] = false;
+	}
+	this.loadRecipes();
+	this.maxcalories = "";
+	this.searchparam = {"q":""};
+}
+
 }
 
 	

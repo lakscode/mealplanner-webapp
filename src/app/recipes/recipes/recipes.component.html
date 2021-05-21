@@ -14,7 +14,7 @@
                             <input type="text" [(ngModel)]="searchparam.q" class="inputbox" placeholder="Search Recipes..." />
                             <input  type="button"  (click)="searchProps()" style="margin-bottom:10px;" 
                             [ngClass]="searchmorebar?'defaultbtn searchbtn hideonmobile bg-orange' :' defaultbtn searchbtn  bg-orange'" id="header-submit-search-pro" name="submit" value="Search">
-                            <input  type="button"  (click)="searchProps()" style="margin-bottom:10px;" 
+                            <input  type="button"  (click)="clearFilters()" style="margin-bottom:10px;" 
                             [ngClass]="searchmorebar?'defaultbtn searchbtn hideonmobile bg-orange' :' defaultbtn searchbtn  bg-orange'" id="header-submit-search-pro" name="submit" value="Clear">
                         </div>
                       
@@ -49,6 +49,8 @@
                                 </div>
                                 <div *ngIf="searchFilterLabels[1]['selected']" class="col-12 paddinglr0">
                                     <div class="filter-group">
+
+
                                         <!--<label class="filter-title">Diet Labels</label> -->
                                       
                                            
@@ -109,7 +111,7 @@
                                          
                                                 <div class="row paddinglr0">
                                                     <ng-container *ngFor="let mlabel of mineralsLabelsList; let m = index">
-                                                        <div class=" " >
+                                                       
                                                     <div class="col-12 col-lg-3 col-md-3 paddinglr0">
                                                         <div class="row">
 
@@ -134,7 +136,7 @@
                                                     <div class="col-2 paddinglr0" style="margin-bottom:15px;"  *ngIf="mlabel.selected"> {{mlabel.unit}}</div>
                                                 </div>
                                             </div> 
-                                        </div>
+                                        
                                         </ng-container>
                                                
                                               
@@ -149,7 +151,7 @@
                                         <!--<label class="filter-title">Calories (Max)</label> -->
                                         <div class="listSection"  style="display:inline-block;margin:0px">
                                            <!--  <span>Max calories</span> -->
-                                          <input [(ngModel)]="maxcalories" placeholder="Enter maximum calories" type="text" class="inputbox-fullwidth" style="margin-top:0px" />
+                                          <input [(ngModel)]="maxcalories" placeholder="Enter maximum calories" type="text" class="inputbox" style="margin-top:0px;width:200px" />
 
                                         </div>
                                     </div>
