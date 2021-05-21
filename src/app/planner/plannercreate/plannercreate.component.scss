@@ -1558,3 +1558,25 @@ background-color: $orange;
   border-radius:25px;
 
 }
+.morebtn .menu
+{
+ 
+  background: #FFF;
+  border-radius: 5px;
+  padding: 5px 10px ;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+
+}
+
+
+.moremenu
+{
+  width: 100px;
+  height: 60px;
+  font-size: 13px;
+  a:hover {
+  color:orange;
+  }
+}

@@ -349,16 +349,26 @@
                                             <div class="recipe-image-card card">
                                                 <div class="recipe-image-card-content card-body">
                                                     <div class="image-card-container">
-                                                        <div class="recipe-remove" (click)="removeRecipe(r, c)"><i class="fa fa-trash" aria-hidden="true"></i></div>
-                                                        <div class="recipe-show" (click)="viewRecipe(r, c)"><i class="fa fa-cutlery" aria-hidden="true"></i></div>
-                                                        
+                                                       <!--  <div class="recipe-remove" (click)="removeRecipe(r, c)"><i class="fa fa-trash" aria-hidden="true"></i></div>
+                                                        <div class="recipe-show" (click)="viewRecipe(r, c)"><i class="fa fa-cutlery" aria-hidden="true"></i></div> -->
+                                                                      <div class="morebtn" style="margin-top:-15px;margin-right:-5px"><a class="menu" href="javascript:void(0)"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></a>
+                                <div class="moremenu">
+                                    
 
+                                    <a href="javascript:void(0)" (click)="removeRecipe(r,c)"><i class="fa fa-trash" aria-hidden="true"></i> Delete</a>
+                                    <a href="javascript:void(0)" (click)="viewRecipe(r,c)"><i class="fa fa-list-ul" aria-hidden="true"></i> Details</a>
+                                </div>
+                                </div>
+                                                        
+                                           
                                                         <div class="recipe-name-box">{{meal.recipe.label}}</div><img *ngIf="showImages"
                                                             class="recipe-image-card recipe-image-card__img open-fist-cursor"
                                                             style="opacity: 1;" id="picture-5c252abdb834861eec5388f3"
                                                             src="{{meal.recipe.image}}"
                                                             alt="Recipe image">
                                                     </div>
+
+
                                                 </div>
                                             </div>
                                         </div>
