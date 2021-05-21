@@ -472,8 +472,9 @@ color:#FFF;
 .filterlabel:hover, .filterlabel.active
 {
 
-  background: $orange;
-  color:#FFF;
+  background: #fff;
+   border: 1px solid $orange;
+  color:$text-gray;
   text-decoration: none;
 }
 
