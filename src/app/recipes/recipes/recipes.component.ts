@@ -82,7 +82,7 @@ export class RecipesComponent implements OnInit {
 		}
 
 		this.loadNutrientsMaxMin();
-		this.listorgrid = {"menu":"list", "panel":"listing-list"}
+		this.listorgrid = {"menu":"grid", "panel":"listing-grid"}
 	 $('.listing-buttons span').on("click",function(){
         $('.listing-buttons span').removeClass("current");
         if( $(this).hasClass("grid")){
