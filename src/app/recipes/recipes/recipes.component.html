@@ -6,7 +6,7 @@
                 <div class="wrapper-search">
                    
                 <div class="row" >
-                    <div class="col-12 "  style="background:#FFF;  margin:0;  padding-bottom:20px;padding-left:0px; padding-right:0px;">
+                    <div class="col-12 "  style="background:#FFF;  margin:0;  padding-bottom:20px;padding-left:0px; padding-right:0px;padding-top:15px">
                         <div style="padding-left: 10px; padding-right: 10px;">
                             <label class="searchicon ">
                                 <i class="fa fa-search" aria-hidden="true"></i>
@@ -14,12 +14,14 @@
                             <input type="text" [(ngModel)]="searchparam.q" class="inputbox" placeholder="Search Recipes..." />
                             <input  type="button"  (click)="searchProps()" style="margin-bottom:10px;" 
                             [ngClass]="searchmorebar?'defaultbtn searchbtn hideonmobile bg-orange' :' defaultbtn searchbtn  bg-orange'" id="header-submit-search-pro" name="submit" value="Search">
+                            <input  type="button"  (click)="searchProps()" style="margin-bottom:10px;" 
+                            [ngClass]="searchmorebar?'defaultbtn searchbtn hideonmobile bg-orange' :' defaultbtn searchbtn  bg-orange'" id="header-submit-search-pro" name="submit" value="Clear">
                         </div>
                       
                         
                         <div  class="searchmorebar searchbaranim">
-                            <div class="row">
-                                <div class="col-12 " style="margin-bottom:20px;padding-left:0;">
+                            <div class="row" style="margin-left:45px">
+                                <div class="col-12 " style="margin-bottom:10px;padding-left:0;">
                                  
                                      <ng-container *ngFor="let lab of searchFilterLabels; let l = index;">
                                             <a [ngClass]="lab.selected?'filterlabel active': 'filterlabel'" href="javascript:void(0)" (click)="showLabels(lab)">
@@ -108,7 +110,7 @@
                                                 <div class="row paddinglr0">
                                                     <ng-container *ngFor="let mlabel of mineralsLabelsList; let m = index">
                                                         <div class=" " >
-                                                    <div class="col-12 col-lg-3 col-md-3">
+                                                    <div class="col-12 col-lg-3 col-md-3 paddinglr0">
                                                         <div class="row">
 
                                                       
