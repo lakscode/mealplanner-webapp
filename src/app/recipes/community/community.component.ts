@@ -42,6 +42,7 @@ export class CommunityComponent implements OnInit, OnChanges {
 	addItem: boolean = false;
 	showNutrientsFlag: boolean = false;
 	communityOwner: boolean  = false;
+	setFav: boolean = false;
 	constructor(private router: Router, private route: ActivatedRoute, private toastr: ToastrService, private pdfService: PDFService, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder, private modalService: ModalService) {
 	
 	}
@@ -52,6 +53,9 @@ ngOnChanges()
 }
 	ngOnInit() {
 		this.loadDefaults();
+
+		this.setFav = false;
+		this.getFavouriteStatus();
 	}
 loadDefaults()
 {
@@ -335,7 +339,7 @@ if(mQuery !== "")
 
   where += " AND id in (select recipeid from nutrients where " + mQuery +  ")";
 
-  params1["query"] = query + where + " limit 0, 100";
+  params1["query"] = query + where + " limit 0, 30";
   console.log(params1);
 	var res =   this.dbService.getDatabyTablebyQuery("recipes", params1).subscribe(invData => setTimeout(() => {
 		console.log(invData);
@@ -393,7 +397,7 @@ loadRatings()
    this.ratingIds = this.ratingIds.substring(0, this.ratingIds.length-1);
   }
  
-	var params = {"limit": 100};
+	var params = {"limit": 30};
    
 	params["query"] = "SELECT count(rating) as totalcount, sum(rating) as totalrating, recipeid FROM `rating` where recipeid in (" + this.ratingIds + ") group by recipeid";
 	var res =   this.dbService.getDatabyTablebyQuery("rating", params).subscribe(invData => setTimeout(() => {
@@ -817,10 +821,95 @@ formatVal(str)
  {
 	 return img.trim();
  }
- setFavouriteRecipe(recipe)
- {
-	 //set favourite code to be added from recipe details page
- }
+ setFavourite(id)
+{
+  console.log("set Favourites");
+  var params = {};
+  if(typeof(this.currentUser["id"]) !== "undefined" && this.currentUser["id"] !== null && this.currentUser["id"] !== "" && typeof(this.routeParams.id) !== "undefined" && this.routeParams.id !== null && this.routeParams.id !== "")
+  {
+	params["userid"] = this.currentUser["id"];
+	params["recipeid"] = this.routeParams.id;
+	params["created_at"] = new Date();
+	params["id"] = id;
+	console.log(params);
+ 
+	var res =   this.dbService.postDataByTable("favourites", params).subscribe(invData => setTimeout(() => {
+	  if(invData !== null)
+	  {
+	    this.setFav = true;
+		  this.getFavouriteStatus();
+	   
+	  }
+	}));
+  }
+}
+
+ getFavouriteStatus()
+{
+  console.log("get FavouriteStatus");
+  console.log(this.setFav);
+
+  var params = {};
+  this.favStatus = null;
+  if(typeof(this.currentUser["id"]) !== "undefined" && this.currentUser["id"] !== null && this.currentUser["id"] !== "" && typeof(this.routeParams) !== "undefined" && this.routeParams !== null && typeof(this.routeParams.id) !== "undefined" && this.routeParams.id !== null && this.routeParams.id !== "")
+  {
+	params["userid"] = this.currentUser["id"];
+	params["recipeid"] = this.routeParams.id;
+ 
+	var res =   this.dbService.getDataByTable("favourites", params).subscribe(invData => setTimeout(() => {
+	   if(invData !== null)
+	  {
+	  console.log(invData);
+
+		if(invData["body"]['length'] > 0)
+		{
+		  this.favStatus = invData["body"][0];
+		  console.log("favStatus ");
+		  console.log(this.favStatus);
+		  this.setFav = true;
+		}
+	  }
+	}));
+  }
+  else
+  {
+	var parent = this;
+	setTimeout(function(){ 
+		parent.getFavouriteStatus(); 
+	}, 1000);
+  }
+
+}
+toggleFav()
+{
+	if(this.setFav )
+	{
+		this.removeFavourite();
+	}
+	else
+	{
+		this.setFavourite();
+	}
+}
+
+removeFavourite()
+{
+  console.log("set Favourites");
+  var params = {};
+  if(typeof(this.favStatus["id"]) !== "undefined" && this.favStatus["id"] !== null && this.favStatus["id"] !== "")
+  {
+	params["id"] = this.favStatus["id"];
+
+	var res =   this.dbService.deleteDataByTable("favourites", params).subscribe(invData => setTimeout(() => {
+		this.setFav = false;
+	  if(invData !== null)
+	  {
+		this.getFavouriteStatus();
+	  }
+	  console.log(this.setFav);
+	}));
+  }  
+}
 }
 
 	
