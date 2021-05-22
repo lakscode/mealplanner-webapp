@@ -43,6 +43,7 @@ export class CommunityComponent implements OnInit, OnChanges {
 	showNutrientsFlag: boolean = false;
 	communityOwner: boolean  = false;
 	setFav: boolean = false;
+	showActions: any = {};
 	constructor(private router: Router, private route: ActivatedRoute, private toastr: ToastrService, private pdfService: PDFService, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder, private modalService: ModalService) {
 	
 	}
@@ -60,7 +61,8 @@ ngOnChanges()
 loadDefaults()
 {
 	this.communityOwner = false;
-
+	this.showActions = {"join": true, "invite":false};
+	
 	this.getNutrientsMaxMin(); 
 
 		this.dietLabelsList= [];
@@ -139,9 +141,9 @@ existingIngCount:any = 0;
 loadCommunity(id)
 {
   console.log("In load community");
-  console.log(id);
+ // console.log(id);
   this.loading++;
-  console.log(this.loading);
+ // console.log(this.loading);
 
   this.community = [];
  var params = {}
@@ -154,7 +156,7 @@ loadCommunity(id)
  
  if(this.loading)
   {
-  var res =   this.dbService.getDataByTable("community", params).subscribe(rbookData => setTimeout(() => {
+	 var res =   this.dbService.getDataByTable("community", params).subscribe(rbookData => setTimeout(() => {
 
 	console.log(rbookData);
 	this.communityOwner = false;
@@ -166,12 +168,18 @@ loadCommunity(id)
 		this.community = rbookData["body"][0];
 		if(this.currentUser['id'] == this.community['created_by'])
 	  	this.communityOwner = true;
-
+		
+		  if(this.communityOwner)
+		  this.showActions["join"] = false;
 		this.loadRecipes();
 	  }
  
 	console.log(this.community);
+	this.getJoinStatusCommunity();
+	
+
 	}
+	this.getCommunityJoined();
   }));
   }
 
@@ -312,7 +320,7 @@ checkMinerals = true;
 
 } 
 
- console.log(params);
+ //console.log(params);
 if(mQuery !== "")
 {
   var params1 = {};
@@ -514,6 +522,7 @@ addRecipe(recipe)
 		var recipeids = "";
 		for(let r=0; r < this.recipesList.length; r++)
 		{
+			this.recipesList[r]["expand"] = false;
 			recipeids +=  this.recipesList[r]["id"] + ",";
 		}
 		if(recipeids !== "")
@@ -691,15 +700,15 @@ formatVal(str)
 			  console.log(dData);
 			  if(dData !== null )
 			  {
-			  var recipeBook ={};
-			  recipeBook["recipebook"] = this.community["recipebook_name"];
-			  recipeBook["link"] = environment.apiUrl + "/" + dData["filename"];
+			  var communityObj ={};
+			  communityObj["communityname"] = this.community["community_name"];
+			  communityObj["link"] = environment.apiUrl + "/" + dData["filename"];
 			  var link = document.createElement('a');
-			  link.href = recipeBook["link"];
+			  link.href = communityObj["link"];
 			  link.target = "_blank";
 		  //	link.download = mealPlan["link"];
 			  link.click();
-			  console.log(recipeBook["link"]);
+			  console.log(communityObj["link"]);
 			  }
 		  }));
 		}
@@ -994,6 +1003,38 @@ removeFavourite()
   }  
 }
 
+getCommunityJoined()
+{
+//	params["query"] = "select c.*, count(cj.id) as joinedcount from community c, community_join cj where cj.community_id = c.id and c.id = "  + id + " group by cj.community_id ";
+	console.log("getCommunityJoined");
+	var params = {};
+	//params["created_by"]  = this.currentUser["id"];
+	console.log(params);
+	params ['query'] = "select count(id) as joinedcount from community_join where community_id = " + this.community["id"] + " group by community_id" ;
+	var res =   this.dbService.getDatabyTablebyQuery("community_join", params).subscribe(invData => setTimeout(() => {
+		console.log(invData);
+		if(invData && invData["body"]["length"] > 0)
+		{
+			this.community["joinedcount"] = invData["body"][0]["joinedcount"];
+		}
+	 
+	  }));
+
+}
+
+getJoinStatusCommunity()
+{
+
+	var params = {};
+	//params["created_by"]  = this.currentUser["id"];
+	console.log(params);
+	params ['query'] = "select * from community_join where community_id = " + this.community["id"] + " AND userid = " + this.currentUser["id"];
+	var res =   this.dbService.getDatabyTablebyQuery("community_join", params).subscribe(invData => setTimeout(() => {
+
+	  console.log(invData);
+	  }));
+}
+
 joinCommunity()
 {
 
@@ -1023,6 +1064,33 @@ joinCommunity()
 
 }
 
+toggleMoreMenu(recipe, index, list)
+{
+	if(list == "addlist")
+	{
+		for(let i =0; i < this.recipesList1.length;i++)
+		{
+			if(this.recipesList1[i]["id"] !== recipe["id"] && index !== i)
+			{
+				this.recipesList1[i]["expand"] = false;
+			}
+		}	
+	}
+
+	if(list == "viewlist")
+	{
+		for(let i =0; i < this.recipesList.length;i++)
+		{
+			if(this.recipesList[i]["id"] !== recipe["id"] && index !== i)
+			{
+				this.recipesList[i]["expand"] = false;
+			}
+		}	
+	}
+
+	recipe["expand"] = !recipe["expand"];
+
+}
 }
 
 	

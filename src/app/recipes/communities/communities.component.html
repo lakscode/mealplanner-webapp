@@ -18,7 +18,7 @@
                     <h2>Communities</h2>
                     <div class="row" style=" width:100%; text-align:right;margin-bottom:20px;">
                         <div class="col-12">
-                            <div class="create-book" (click)="gotopage('community');">
+                            <div class="create-button anim-button btn-4" (click)="gotopage('community');">
                             <i class="fa fa-plus"></i>  Create New
                         </div>
                     </div>
@@ -55,7 +55,7 @@
                         <div class="listing boxshadow5" *ngFor="let cItem of communitiesList; let i = index;">
                             <div class="image">
                                 <a (click)="gotopage('community', {'id':cItem.id});">
-                                    <img style="max-height:140px;" *ngIf="cItem.image !== ''" class="tstbite-animation" src="{{cItem.image}}"
+                                    <img style="max-height:95px;" *ngIf="cItem.image !== ''" class="tstbite-animation" src="{{cItem.image}}"
                                         alt="{{cItem.community_name}} image">
                                     <img *ngIf="cItem.image == ''" class="tstbite-animation"  src="assets/notavailable.png" alt="{{cItem.community_name}} image">
                                 </a>

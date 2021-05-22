@@ -251,9 +251,9 @@ text-decoration: line-through;
 .moremenu
 {
   
-  display:none;
+ // display:none;
   position: absolute;
-  top: 0px;
+  top: 25px;
   right: 0;
   width: 215px;
     height: 100px;
@@ -348,4 +348,141 @@ z-index:999;
 .favnotset
 {
 color:$text-gray;
+}
+
+
+
+
+.create-button
+{
+  float: right;
+    display: inline-block;
+    background: #f8f6f5;
+    background-color:#FFAF4F;
+    color:  #FFF;
+    overflow: hidden;
+    position: relative;
+    border-radius: 5px;
+    font-size: 14px;
+    z-index: 6666;
+    padding: 10px;
+    font-family: 'Lato', sans-serif;
+    border:1px solid  #FFAF4F;
+}
+
+.anim-button
+{
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  margin: 20px 30px;
+ // background: rgba(0,0,0,0.09);
+}
+
+.anim-button span{
+  display: block;
+  padding: 25px 80px;
+}
+.anim-button::before, .anim-button::after{
+  content:"";
+  width: 0;
+  height: 2px;
+  position: absolute;
+  transition: all 0.2s linear;
+  background:  #FFF;
+}
+
+.anim-button span::before, .anim-button span::after{
+  content:"";
+  width:2px;
+  height:0;
+  position: absolute;
+  transition: all 0.2s linear;
+  background:  #FFF;
+}
+
+.anim-button:hover::before, .anim-button:hover::after{
+  width: 100%;
+}
+.anim-button:hover span::before, .anim-button:hover span::after{
+  height: 100%;
+}
+
+
+
+/*----- button 4 -----*/
+.btn-4::after{
+  right:0;
+  bottom: 0;
+  transition-duration: 0.4s;
+}
+.btn-4 span::after{
+  right:0;
+  bottom: 0;
+  transition-duration: 0.4s;
+}
+.btn-4::before{
+  left: 0;
+  top: 0;
+  transition-duration: 0.4s;
+}
+.btn-4 span::before{
+  left: 0;
+  top: 0;
+  transition-duration: 0.4s;
+}
+
+
+.create-button:hover
+{
+  cursor: pointer;
+}
+
+.trans-input
+{
+    background: transparent;
+    border: 0px !important;
+    border-bottom: 1px solid #eee !important;
+}
+
+.trans-input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: $orange1;
+  opacity: 1; /* Firefox */
+}
+
+.trans-input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: $orange1;
+}
+
+.trans-input::-ms-input-placeholder { /* Microsoft Edge */
+  color: $orange1;
+}
+
+.ribbon-container-left
+{
+  z-index: 9;
+  position: absolute;
+  width: 200px;
+  background: #FF9100;
+  color: #FFF;
+  padding: 10px;
+  right: 15px;
+  bottom: 10px;
+}
+
+.ribbon-container-right
+{
+  z-index: 9;
+  position: absolute;
+  width: 200px;
+  background: #FF9100;
+  color: #FFF;
+  padding: 10px;
+  left: 15px;
+  bottom: 10px;
+}
+
+.ribbon
+{
+
 }

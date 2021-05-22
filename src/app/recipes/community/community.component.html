@@ -1,10 +1,10 @@
 <div class="recipes-home-body inner-page">
     <div class="container"  style="padding-left:0px; padding-right:0px;">
-    <div class="row">
+    <div class="row" >
     <div class="col-12 col-md-12 col-lg-12">
         <div class="recipe-set submit-recipe-set">
             <h2>Community</h2>
-            <p style="margin-bottom:20px">You'll find endless inspiration at the free to use Recipe Community with recipes from Consultants, owners, chefs, and our own recipe development team.  </p>
+         
            <!-- <div style="width:100%; text-align:right">
                 <a class="copy-button" (click)="downloadplan()" title="Download PDF"><i class="fa fa-download"></i> Download</a>
             </div>    -->
@@ -12,18 +12,36 @@
                 <form action="#" method="post">
 
                     <div class="row" *ngIf="communityOwner"  >
-                        <div class="col-12 col-md-6 col-lg-6">
+
+                        <div class="col-12 community_panel">
+                     
+                            <img *ngIf="community.image" class="community_img" src="{{community.image}}"  style="height:200px;width: 100%;" />
+                            <img *ngIf="!community.image"  class="community_img" src="assets/notavailable1.jpg"  style="height:200px;width: 100%;" />
+                            
+                           <div class="community_details">
+                            <input id="inputuploadrecipe" hidden type="file" name="inputuploadrecipe" (change)="onFileSelect($event)" />
+                            <button  style="float:right; background:transparent; border:0px; outline:0;"  *ngIf="community.image" (click)="fileupload()" class="upload-comment">
+                                <i class="fa fa-picture-o" aria-hidden="true"></i></button>
+                            <input class="trans-input" type="text" name="title" id="title" placeholder="Type community name..." [(ngModel)]="community.community_name">
+                            <textarea class="short-text trans-input" name="description" placeholder="Type description" [(ngModel)]='community.description' id="description" cols="30" rows="10"></textarea>
+                              <br>
+               
+                           </div>
+</div>
+                       
+
+                       <!-- <div class="col-12 col-md-6 col-lg-6">
                     <label for="title">Community Title</label>
                     <input type="text" name="title" id="title" [(ngModel)]="community.community_name">
                     <br>
                     <label for="description">Description</label>
                     <textarea class="short-text" name="description" [(ngModel)]='community.description' id="description" cols="30" rows="10"></textarea>
  
-                   </div>
+                   </div>-->
                  
                     
                   
-                        <div class="col-12 col-md-6 col-lg-6">
+                       <!-- <div class="col-12 col-md-6 col-lg-6">
                             <label  class='comment-label'>Upload Image</label>
                             <button (click)="fileupload()" class="upload-comment">
                                <i class="fa fa-picture-o" aria-hidden="true"></i> Upload Image</button>
@@ -34,36 +52,38 @@
                      
                              
                           </div>
-
-                       
+                        -->
+                        <div class="text-center">
+                            <button type="submit" (click)="saveRecipebook()"  class="recipe-submit-btn">Save </button>
+                        </div>
                     </div>
 
-                    <div class="row" *ngIf="!communityOwner"  >
-                      <div class="col-12 col-md-6 col-lg-6">
-                     
-                      <img *ngIf="community.image" src="{{community.image}}"  style="height:200px;width: 90%;" />
-                     
+                    <div class="row" *ngIf="!communityOwner && community.image"  >
+                      <div class="col-12 community_panel">
+                       <div class="ribbon-container-left" *ngIf="community && community.joinedcount"><div class="ribbon">{{community.joinedcount}} member<span *ngIf="community.joinedcount > 1">s</span> joined</div></div>
+                       <div class="ribbon-container-right" *ngIf="recipesList.length > 0"><div class="ribbon">{{recipesList.length}} Recipe<span *ngIf="recipesList.length > 1">s</span> added</div></div>
+
+                      <img class="community_img" src="{{community.image}}"  style="height:200px;width: 100%;" />
+                     <div class="community_details">
+                        <p class="name">{{community.community_name}}</p>
+                        <br>
+                        <!--<label for="description">Description</label>-->
+                        <p class="details">{{community.description}}</p>
+                            <!--<p class="details" *ngIf="recipesList.length > 0">{{recipesList.length}} Recipes</p>
+                           <p class="details" *ngIf="community && community.joinedcount">{{community.joinedcount}} members joined</p>-->
+                            <button *ngIf="showActions['invite']" class="add-recipe">Invite</button>
+                            <button (click)="joinCommunity()" *ngIf="showActions['join'] " class="add-recipe">Join</button>
+         
+                     </div>
                              
                     </div>  
-                      <div class="col-12 col-md-4 col-lg-4">
-                    <label for="title">Recipe book Title</label>
-                    <p>{{community.community_name}}</p>
-                    <br>
-                    <label for="description">Description</label>
-                    <p>{{community.description}}</p>
- 
-                   </div>
-                   <div class="col-12 col-md-2 col-lg-2">
-                    <button *ngIf="!communityOwner" class="add-recipe">Invite</button>
-                    <button (click)="joinCommunity()" *ngIf="!communityOwner" class="add-recipe">Join</button>
- 
-                   </div>
+                 
 
                        
                     </div>
-                    <div class="row">
+                    <div class="row" *ngIf="community.community_name">
                         <div class="col-12" style="text-align:right">
-                            <button class="add-recipe" (click)="addNew()" >Add Recipe</button>
+                            <button class="create-button anim-button btn-4" (click)="addNew()" >Add Recipe</button>
                         </div>
                         <div class="col-12 add-recipe-panel" *ngIf="toggleRecipeAdd">
                             <div class="row">
@@ -191,8 +211,9 @@
 
                                             <div style='color:#000' class="recipe-view" (click)="viewRecipe(recipe)"><i class="fa fa-eye" aria-hidden="true"></i></div> -->
                                         </div>                                       
-                                        <div class="morebtn"><a class="menu" href="javascript:void(0)"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></a>
-                                            <div class="moremenu">
+                                        <div class="morebtn">
+                                            <a class="menu" (click)="toggleMoreMenu(recipe, i, 'addlist')" href="javascript:void(0)"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></a>
+                                            <div class="moremenu" *ngIf="recipe.expand">
                                                 <a href="javascript:void(0)" (click)="setFavourite(recipe)"><i class="fa fa-heart" aria-hidden="true"></i> Set Favourite</a>
             
                                                 <a href="javascript:void(0)" (click)="addRecipe(recipe)"><i class="fa fa-plus" aria-hidden="true"></i> Add Recipe</a>
@@ -209,8 +230,8 @@
                             </div>
                                 
                     </div>
-                    <div class="row" style="padding-left:0px; padding-right:0px;">
-                        <div class="col-12">
+                    <div class="row" style="padding-left:0px; padding-right:0px;" >
+                        <div class="col-12" *ngIf="community.community_name">
                             <label for="recipes">Recipes</label>
                         </div>
                         <div style="margin-bottom:10px" class="col-12 col-lg-3 col-md-4" *ngFor="let recipe of recipesList; let i = index;">
@@ -227,12 +248,12 @@
                                    <p><b>Servings</b>: {{recipe.yield}}</p>
                                     <p *ngIf="recipe.favcount && recipe.favcount> 0">{{recipe.favcount}} Members Saved</p>
                                     <p *ngIf="recipe.dietLabels"><b>Diet Labels</b>: {{recipe.dietLabels}} </p>
-                                    <p *ngIf="!recipe.dietLabels">&nbsp;</p>
+                                    <p *ngIf="recipe.favcount">{{favcount}} members liked</p>
                                     <p class="favactive" style='text-align:right;' *ngIf="recipe.UserFavStatus"><i class="fa fa-heart"></i></p>
                                 
                                 </div>
-                                <div class="morebtn"><a class="menu" href="javascript:void(0)"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></a>
-                                <div class="moremenu"> 
+                                <div class="morebtn"><a (click)="toggleMoreMenu(recipe, i, 'viewlist')" class="menu" href="javascript:void(0)"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></a>
+                                <div class="moremenu" *ngIf="recipe.expand">
                                     <a href="javascript:void(0)" *ngIf="recipe.UserFavStatus" (click)="removeFavourite(recipe.id)" style="color:orange"><i class="fa fa-heart" aria-hidden="true"></i> Remove Favourite </a>
                                      <a href="javascript:void(0)" *ngIf="!recipe.UserFavStatus" (click)="setFavourite(recipe.id)" ><i class="fa fa-heart" aria-hidden="true"></i> Set Favourite</a>
 
@@ -248,11 +269,9 @@
                         </div>
                     </div>
                     <br>
-                    <label for="notes">Notes</label>
-                    <textarea class="short-text" name="notes" [(ngModel)]='community.notes' id="notes" cols="30" rows="10"></textarea>
-                    <div class="text-center">
-                        <button type="submit" (click)="saveRecipebook()"  class="recipe-submit-btn">Save Your Recipe Book</button>
-                    </div>
+                    <!--<label for="notes">Notes</label>
+                    <textarea class="short-text" name="notes" [(ngModel)]='community.notes' id="notes" cols="30" rows="10"></textarea>-->
+                  
                 </form>
             </div>
         </div>

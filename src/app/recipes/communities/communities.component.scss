@@ -456,23 +456,3 @@ color:#FFF;
   color: #CCC;
   display:none;
 }
-
-.create-book
-{
-  float: right;
-    display: inline-block;
-    background: #f8f6f5;
-    background-color: #FFAF4F;
-    color: #FFF;
-    overflow: hidden;
-    position: relative;
-    border-radius: 5px;
-    font-size: 16px;
-    z-index: 6666;
-    padding: 10px
-}
-
-.create-book:hover
-{
-  cursor: pointer;
-}
