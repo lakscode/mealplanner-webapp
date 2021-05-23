@@ -104,7 +104,7 @@
   
 
 <!--hottest recipes-->
-<section class="hot-recipes-var2">
+<section class="hot-recipes-var2" *ngIf="communitiesList && communitiesList.length > 0">
    <div class="container">
        <div class="wrapper-hot-recipe-var2">
           <div class="hot-recipes-bordered">
@@ -113,9 +113,7 @@
                  <span class="heading-bell"></span>
                </div>
  
-               <div class="hot-row">
-
-                  
+               <div class="hot-row">                  
                    <div class="split-images-var2 col-size text-center" *ngFor="let cItem of communitiesList; let r=index;">
                       <div class="image-first inner-split">
                          <div class="image image-animate common-split animated wow flipInY animation-delay{{r+1*100}}ms">
@@ -127,11 +125,11 @@
                             <div class="intro-inner ">
                                <h3><a style="cursor:pointer" (click)="gotoRecipeDetails('community', cItem.id)">{{cItem.community_name}}</a></h3>
                                <div class="short-separator"></div>
-                               <p *ngIf="cItem.recipecount" style="text-align:left;">{{cItem.recipecount}} recipes</p>
+                               <p *ngIf="cItem.recipecount && cItem.recipecount >0" style="text-align:left;"><i class="fa fa-cutlery"></i> {{cItem.recipecount}} recipes</p>
                                <br>
-                               <p *ngIf="cItem.userscount" style="text-align:left;">{{cItem.userscount}} members joined</p>
+                               <p *ngIf="cItem.userscount && cItem.userscount > 0" style="text-align:left;"><i class="fa fa-user"></i> {{cItem.userscount}} members</p>
                                <br>
-                               <div class="short-separator"></div>
+                               <!--<div class="short-separator"></div>-->
                                <a class="read-more" (click)="gotoRecipeDetails('community', cItem.id)">read more</a>
                             </div>
                          </div>

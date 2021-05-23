@@ -14,6 +14,7 @@ import { HttpHeaders } from '@angular/common/http';
 import { PDFService } from '../../services/pdf.service';
 import { ModalService } from '../../shared/modules/modal/modal.service';
 import { ToastrService } from 'ngx-toastr';
+import { DomSanitizer } from '@angular/platform-browser';
 @Component({
 	selector: 'app-community',
 	templateUrl: './community.component.html',
@@ -44,7 +45,13 @@ export class CommunityComponent implements OnInit, OnChanges {
 	communityOwner: boolean  = false;
 	setFav: boolean = false;
 	showActions: any = {};
-	constructor(private router: Router, private route: ActivatedRoute, private toastr: ToastrService, private pdfService: PDFService, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder, private modalService: ModalService) {
+
+	urlShare : any = "";
+urlTweet : any;
+urlWhatsApp: any;
+msg: any = "";
+
+	constructor(private router: Router, private sanitize: DomSanitizer, private route: ActivatedRoute, private toastr: ToastrService, private pdfService: PDFService, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder, private modalService: ModalService) {
 	
 	}
 ngOnChanges()
@@ -58,8 +65,25 @@ ngOnChanges()
 		this.setFav = false;
 	//	this.getFavouriteStatus();
 	}
+	loadShareValue()
+	{
+		var appUrl = environment.appUrl;
+		this.urlShare = window.location.href;
+		
+		this.msg = "Join this community today: " +  this.community["community_name"];
+		
+			if (this.urlShare.indexOf("localhost") !== -1) {
+				this.urlShare = this.urlShare.replace("http://localhost:4200", appUrl)
+			}
+			this.urlTweet = "https://twitter.com/share?text=" + this.msg + "&url=" + encodeURIComponent(this.urlShare);
+		//this.urlWhatsApp = this.transform("whatsapp://send?" + this.urlShare);
+		this.urlWhatsApp = this.transform("https://api.whatsapp.com/send?text=" + this.msg + " " + this.urlShare);
+		
+	}
 loadDefaults()
 {
+	this.urlShare = window.location.href;
+
 	this.communityOwner = false;
 	this.showActions = {"join": true, "invite":false};
 	
@@ -180,6 +204,7 @@ loadCommunity(id)
 
 	}
 	this.getCommunityJoined();
+	this.loadShareValue();
   }));
   }
 
@@ -1091,6 +1116,9 @@ toggleMoreMenu(recipe, index, list)
 	recipe["expand"] = !recipe["expand"];
 
 }
+transform(value: any, args?: any): any {
+	return this.sanitize.bypassSecurityTrustHtml(value);
+	}
 }
 
 	

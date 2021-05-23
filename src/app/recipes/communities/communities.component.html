@@ -3,8 +3,6 @@
     <div class="container" style="padding-left:0px; padding-right:0px;">
         <div class="row">
             <div class="col-md-12 col-lg-9">
-               
-                <div style= 'width:100%'></div>
                 <div class="recipe-set">
                      <div class="listing-buttons">
                         <span (click)="setListorGrid('grid')"
@@ -66,8 +64,8 @@
 
                                 </p>  
                                 <!--<p>{{countrecipes(recipe1.recipes)}} Recipes </p>-->
-                               <div style="font-size: 14px;"><span *ngIf="cItem.userscount > 0">{{cItem.userscount}} Members Joined, </span>
-                               <span *ngIf="cItem.recipecount > 0">{{cItem.recipecount}} Recipes</span>
+                               <div style="font-size: 14px;"><span *ngIf="cItem.userscount > 0"><i class="fa fa-user"></i> {{cItem.userscount}} Members, </span>
+                               <span *ngIf="cItem.recipecount > 0"><i class="fa fa-cutlery"></i> {{cItem.recipecount}} Recipes</span>
                                 </div>
                               </div>
                         </div>
