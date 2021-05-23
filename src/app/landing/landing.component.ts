@@ -616,6 +616,32 @@ transform(value: any) {
 	}));
 
   }
+  joinCommunity(id)
+  {
+	var params = {};
+	//params["created_by"]  = this.currentUser["id"];
+	console.log(params);
+	params ['query'] = "select * from community_join where community_id = " + id + " AND userid = " + this.currentUser["id"];
+	var res =   this.dbService.getDatabyTablebyQuery("community_join", params).subscribe(invData => setTimeout(() => {
+
+	  console.log(invData);
+	  if(invData !== null && invData["body"]["length"] > 0)
+	  {
+		
+	  }
+	  else
+	  {
+		var params = {};
+		params["community_id"] =id;
+		params["userid"] =this.currentUser["id"];
+		
+		var res =   this.dbService.postDataByTable("community_join", params).subscribe(dData => setTimeout(() => {
+			alert("Joined community ");
+		}));
+
+	  }
+	}));
+  }
 }
 
 	
