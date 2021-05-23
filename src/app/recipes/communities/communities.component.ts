@@ -217,7 +217,7 @@ endIndex = startIndex+ endIndex;
 	{
 
 		this.communitiesList = [];
-//	var params = {"limit": 100};
+	   // var params = {"limit": 100};
 	   // params["createdby"] = this.currentUser["id"];
 		console.log(params);
 		var params = {"query": "SELECT c.*, COUNT(rm.id) AS recipecount, u.email, u.firstname, u.lastname FROM community AS c LEFT JOIN recipe_mapping AS rm ON c.id = rm.community_id LEFT JOIN users AS u ON c.created_by = u.id GROUP BY c.id"};
@@ -297,14 +297,14 @@ endIndex = startIndex+ endIndex;
 
 	var res =   this.dbService.getDatabyTablebyQuery("community", params).subscribe(invData => setTimeout(() => {
 
-	  console.log(invData);
+	 
 	  if(invData !== null)
 	  {
 		var obj = invData["body"];
 		for(let o=0; o < obj.length; o++)
 		{
 			var fIndex = this.communitiesList.findIndex(x=>(x.id === obj[o]["id"]));
-			console.log(fIndex);
+			
 			if(fIndex > -1)
 			{
 				console.log(obj[o]["usercount"])
@@ -312,7 +312,7 @@ endIndex = startIndex+ endIndex;
 				console.log(this.communitiesList[fIndex]["userscount"] );
 			}
 		}
-		console.log(this.communitiesList);
+
 	  }
 	}));
 

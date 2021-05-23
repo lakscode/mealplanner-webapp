@@ -20,13 +20,13 @@
                               <p style="text-align:center;margin:10px 0px;background-color: #78C04A;
                               border-radius: 5px;">
                                  
-                                  <a  class="label" (click)="gotoRecipeDetails(RecipeoftheDay[0].id)" style="cursor:pointer"> Recipe of the Day</a>
+                                  <a  class="label" (click)="gotoRecipeDetails('recipedetails',RecipeoftheDay[0].id)" style="cursor:pointer"> Recipe of the Day</a>
                               </p>
                               <div class="short-separator" style="margin-top:10px;margin-bottom:5px"></div>
                               <div class="recipe-details-group">
                                  <div class="recipe-details" *ngIf="RecipeoftheDay[0].label">
                                     <p style="display:block; text-align:center; font-size: 16px; font-weight:bold;padding-bottom:10px">
-                                       <a (click)="gotoRecipeDetails(RecipeoftheDay[0].id)"   style="cursor:pointer" class="hlabel">{{RecipeoftheDay[0].label}}</a> 
+                                       <a (click)="gotoRecipeDetails('recipedetails',RecipeoftheDay[0].id)"   style="cursor:pointer" class="hlabel">{{RecipeoftheDay[0].label}}</a> 
                                    </p>
                                    </div>
                                  
@@ -102,6 +102,48 @@
    </div>
 </div>
   
+
+<!--hottest recipes-->
+<section class="hot-recipes-var2">
+   <div class="container">
+       <div class="wrapper-hot-recipe-var2">
+          <div class="hot-recipes-bordered">
+               <div class="heading-var1 text-center animated wow flipInX">
+                   <h2><a href="javascript:void(0)">Recommended Communities</a></h2>
+                 <span class="heading-bell"></span>
+               </div>
+ 
+               <div class="hot-row">
+
+                  
+                   <div class="split-images-var2 col-size text-center" *ngFor="let cItem of communitiesList; let r=index;">
+                      <div class="image-first inner-split">
+                         <div class="image image-animate common-split animated wow flipInY animation-delay{{r+1*100}}ms">
+                            <a style="cursor:pointer" (click)="gotoRecipeDetails('community', cItem.id)">
+                              <img style="    height: 277px;
+                              width: 277px;" src="{{cItem.image}}" alt="{{cItem.community_name}} image"/></a>
+                         </div>
+                         <div class="intro common-split animated wow flipInY animation-delay{{r+2*100}}ms">
+                            <div class="intro-inner ">
+                               <h3><a style="cursor:pointer" (click)="gotoRecipeDetails('community', cItem.id)">{{cItem.community_name}}</a></h3>
+                               <div class="short-separator"></div>
+                               <p *ngIf="cItem.recipecount" style="text-align:left;">{{cItem.recipecount}} recipes</p>
+                               <br>
+                               <p *ngIf="cItem.userscount" style="text-align:left;">{{cItem.userscount}} members joined</p>
+                               <br>
+                               <div class="short-separator"></div>
+                               <a class="read-more" (click)="gotoRecipeDetails('community', cItem.id)">read more</a>
+                            </div>
+                         </div>
+                      </div>
+                   </div>
+                </div>
+          </div>
+       </div>
+    </div>
+ </section>
+ <!--hottest recipes ends-->
+
 <div>
    <div class="site-section">
       <div class="container" >
@@ -186,18 +228,18 @@
                   <div class="split-images-var2 col-size text-center" *ngFor="let rRecipe of recommendedRecipes; let r=index;">
                      <div class="image-first inner-split">
                         <div class="image image-animate common-split animated wow flipInY animation-delay{{r+1*100}}ms">
-                           <a style="cursor:pointer" (click)="gotoRecipeDetails(rRecipe.id)"><img src="{{formatImage(rRecipe.image, 'm')}}" alt="image"/></a>
+                           <a style="cursor:pointer" (click)="gotoRecipeDetails('recipedetails',rRecipe.id)"><img src="{{formatImage(rRecipe.image, 'm')}}" alt="image"/></a>
                         </div>
                         <div class="intro common-split animated wow flipInY animation-delay{{r+2*100}}ms">
                            <div class="intro-inner ">
-                              <h3><a style="cursor:pointer" (click)="gotoRecipeDetails(rRecipe.id)">{{rRecipe.label}}</a></h3>
+                              <h3><a style="cursor:pointer" (click)="gotoRecipeDetails('recipedetails',rRecipe.id)">{{rRecipe.label}}</a></h3>
                               <div class="short-separator"></div>
                               <p style="text-align:left;">Calories: {{rRecipe.calories}}</p>
                               <br>
                               <p style="text-align:left;">Diet Labels: {{rRecipe.dietLabels}}</p>
                               <br>
                               <div class="short-separator"></div>
-                              <a class="read-more" (click)="gotoRecipeDetails(rRecipe.id)">read more</a>
+                              <a class="read-more" (click)="gotoRecipeDetails('recipedetails',rRecipe.id)">read more</a>
                            </div>
                         </div>
                      </div>

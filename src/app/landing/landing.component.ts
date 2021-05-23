@@ -366,8 +366,15 @@ constructor(private router: Router, private httpClient : HttpClient, private san
 	  return retImage;
 	}
 
-	gotoRecipeDetails(id){
-	this.router.navigate(['recipedetails', id]);
+	gotoRecipeDetails(page, id){
+		if(page == "community")
+		{
+			this.router.navigate([page, {id:id}]);
+		}
+		else if(page == "recipedetails")
+		{
+			this.router.navigate([page, id]);
+		}
 	}
 
 	gotoRecipes(id) {
@@ -530,8 +537,9 @@ getUserPreferences()
 		  this.userPref["dietLabels"] = qData["body"][0]["question9"];
 		}
 	  }
+	 
+	  this.loadCommunities();
 	  this.loadRecommendedRecipes();
-		
 	} ));
 
   }
@@ -542,6 +550,71 @@ transform(value: any) {
 	var retvalue = this.sanitizer.bypassSecurityTrustHtml(value);
 	console.log(retvalue);
     return retvalue;
+  }
+  communitiesList: Array<any> = [];
+  loadCommunities()
+  {
+	   /******** recipes api serach */
+
+ 
+	  this.communitiesList = [];
+	 // var params = {"limit": 100};
+	 // params["createdby"] = this.currentUser["id"];
+	  console.log(params);
+	  var params = {"query": "SELECT c.*, COUNT(rm.id) AS recipecount, u.email, u.firstname, u.lastname FROM community AS c LEFT JOIN recipe_mapping AS rm ON c.id = rm.community_id LEFT JOIN users AS u ON c.created_by = u.id GROUP BY c.id"};
+
+	  var res =   this.dbService.getDatabyTablebyQuery("community", params).subscribe(invData => setTimeout(() => {
+  
+		console.log(invData);
+		if(invData !== null)
+		{
+		  var obj = invData["body"]["length"];
+		  console.log(invData["body"]);
+		  this.communitiesList = invData["body"];
+		  
+		  console.log(this.communitiesList);
+		  this.loaduserCount();
+		}
+	  }));
+  
+	  
+
+  }
+  
+  loaduserCount()
+  {
+	  /*
+	SELECT c.id, COUNT(cj.id) AS usercount
+	FROM community AS c
+	LEFT JOIN community_join AS cj ON c.id = cj.community_id
+	GROUP BY c.id, cj.community_id
+
+	*/
+
+	console.log("in loadusercount");
+	var params = {"query": "SELECT c.id, COUNT(cj.id) AS usercount 	FROM community AS c LEFT JOIN  community_join AS cj ON c.id = cj.community_id GROUP BY c.id, cj.community_id LIMIT 0, 4"};
+
+	var res =   this.dbService.getDatabyTablebyQuery("community", params).subscribe(invData => setTimeout(() => {
+
+	 
+	  if(invData !== null)
+	  {
+		var obj = invData["body"];
+		for(let o=0; o < obj.length; o++)
+		{
+			var fIndex = this.communitiesList.findIndex(x=>(x.id === obj[o]["id"]));
+			
+			if(fIndex > -1)
+			{
+			//	console.log(obj[o]["usercount"])
+				this.communitiesList[fIndex]["userscount"] = obj[o]["usercount"];
+			//	console.log(this.communitiesList[fIndex]["userscount"] );
+			}
+		}
+
+	  }
+	}));
+
   }
 }
 
