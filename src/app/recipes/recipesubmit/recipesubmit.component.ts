@@ -31,6 +31,7 @@ export class RecipesubmitComponent implements OnInit, OnChanges {
 	currentUser: any;
 	apiUrl: any = "";
 	ispublic: boolean = false;
+	isEdit:boolean = false;
 	constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
 	
 	}
@@ -64,6 +65,7 @@ loadDefaults()
 			console.log(this.routeParams.id);
 			this.setDefaults();
 			this.loadRecipe(this.routeParams.id);
+			this.isEdit =  true;
 		  }    
 		  else
 		  {
@@ -755,6 +757,10 @@ formatVal(str)
 		  this.ingredients.splice(index, 1);
 	  }
   }
+
+  gotopage(){        
+   this.router.navigate(["myrecipes"]);    
+}
 }
 
 	

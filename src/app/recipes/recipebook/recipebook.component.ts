@@ -804,6 +804,10 @@ formatVal(str)
 	 }
 	 return ret;
  }
+
+ gotopage(){        
+   this.router.navigate(["recipebooks"]);    
+}
 }
 
 	

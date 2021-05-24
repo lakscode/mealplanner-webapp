@@ -864,6 +864,11 @@ updateMealType()
 
 	}));
 }
+
+gotopage(){        
+   this.router.navigate(["recipes"]);    
+}
+
 }
 
 
