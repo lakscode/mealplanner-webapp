@@ -8,10 +8,10 @@
            <!-- <div style="width:100%; text-align:right">
                 <a class="copy-button" (click)="downloadplan()" title="Download PDF"><i class="fa fa-download"></i> Download</a>
             </div>    -->
-            <div class="submit-recipe-form">
+            <div class="submit-recipe-form" >
                 <form action="#" method="post">
 
-                    <div class="row" *ngIf="communityOwner"  >
+                    <div class="row" *ngIf="communityOwner" style="display:none" >
 
                         <div class="col-12 community_panel">
                      
@@ -155,7 +155,8 @@
                   
 
 
-                    <div class="row" *ngIf="!communityOwner && community.image"  >
+                   <!--  <div class="row" *ngIf="!communityOwner && community.image"  > -->
+                     <div class="row" *ngIf="community.image"  >
                         <div class="col-12 community_panel animated wow flipInX">
                          <!--<div class="ribbon-container-left" *ngIf="community && community.joinedcount"><div class="ribbon">{{community.joinedcount}} member<span *ngIf="community.joinedcount > 1">s</span> joined</div></div>
                          <div class="ribbon-container-right" *ngIf="recipesList.length > 0"><div class="ribbon">{{recipesList.length}} Recipe<span *ngIf="recipesList.length > 1">s</span> added</div></div>-->
@@ -209,7 +210,7 @@
                       </div>
 
 
-                    <div class="row" *ngIf="community.community_name">
+                    <div class="row" style="margin-top:20px" *ngIf="community.community_name">
                        
                         <div class="col-12 add-recipe-panel" *ngIf="toggleRecipeAdd">
                             <div class="row">
@@ -340,7 +341,7 @@
                                         <div class="morebtn">
                                             <a class="menu" (click)="toggleMoreMenu(recipe, i, 'addlist')" href="javascript:void(0)"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></a>
                                             <div class="moremenu" *ngIf="recipe.expand">
-                                                <a href="javascript:void(0)" (click)="setFavourite(recipe)"><i class="fa fa-heart" aria-hidden="true"></i> Set Favourite</a>
+                                                <!-- <a href="javascript:void(0)" (click)="setFavourite(recipe.id)"><i class="fa fa-heart" aria-hidden="true"></i> Set Favourite</a> -->
             
                                                 <a href="javascript:void(0)" (click)="addRecipe(recipe)"><i class="fa fa-plus" aria-hidden="true"></i> Add Recipe</a>
                                                 <a href="javascript:void(0)" (click)="viewRecipe(recipe)"><i class="fa fa-list-ul" aria-hidden="true"></i> Details</a>
@@ -383,7 +384,6 @@
                                 <div class="moremenu" *ngIf="recipe.expand">
                                     <a href="javascript:void(0)" *ngIf="recipe.UserFavStatus" (click)="removeFavourite(recipe.id)" style="color:orange"><i class="fa fa-heart" aria-hidden="true"></i> Remove Favourite </a>
                                      <a href="javascript:void(0)" *ngIf="!recipe.UserFavStatus" (click)="setFavourite(recipe.id)" ><i class="fa fa-heart" aria-hidden="true"></i> Set Favourite</a>
-
                                     <a href="javascript:void(0)" *ngIf="currentUser['id'] == recipe['userid']"  (click)="removeRecipe(recipe)"><i class="fa fa-trash" aria-hidden="true"></i> Remove Recipe</a>
                                     <a href="javascript:void(0)" (click)="viewRecipe(recipe)"><i class="fa fa-list-ul" aria-hidden="true"></i> Details</a>
                                 </div>

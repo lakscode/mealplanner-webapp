@@ -10,6 +10,8 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import * as $ from 'jquery';
 import { constants } from '../../jsonfiles/constants';
+import { ModalService } from '../../shared/modules/modal/modal.service';
+import { HttpHeaders } from '@angular/common/http';
 
 //declare var $: any;
 
@@ -26,7 +28,7 @@ export class CommunitiesComponent implements OnInit {
 	currentUser: any;
 	searchparam: any ; 
 	ratingIds: any;
-
+	community: any;
 
 	ratingsArr: Array<any> = [];
 	listorgrid: any = {};
@@ -42,15 +44,19 @@ export class CommunitiesComponent implements OnInit {
 	nutrientDbFields : Array<any> = [];
 	role: any = {};
 	showNutrientsFlag: boolean = false;
+	apiUrl: any;
 
-	constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
-	
+	constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder, private modalService: ModalService) {
+	this.community = {};
 	}
 	
 	
 	ngOnInit() {
 	
-				this.listorgrid = {"menu":"grid", "panel":"listing-grid"}
+				this.listorgrid = {"menu":"grid", "panel":"listing-grid"};
+				this.apiUrl = environment.apiUrl;
+				this.community = {};
+
 
 
 	 $('.listing-buttons span').on("click",function(){
@@ -255,7 +261,77 @@ endIndex = startIndex+ endIndex;
         this.router.navigate([page, param]);
     
     }
+
+    createNew(){
+      this.modalService.open('createNew');
+
+    }
   
+  closeModal(id) {
+
+   this.modalService.close(id);
+ }
+
+ saveRecipebook()
+{
+	console.log("saveRecipebook");
+	console.log(this.community);
+	var params = {};
+	
+	if(this.community["community_name"] !== "")
+	{
+		params["community_name"] = this.community["community_name"];
+	
+		if(typeof(this.community["description"]) !== "undefined" && this.community["description"] !== "")
+		params["description"] = this.community["description"];
+
+		//if(typeof(this.community["notes"]) !== "undefined" && this.community["notes"] !== "")
+		params["notes"] = this.community["notes"];
+
+		//if(typeof(this.community["image"]) !== "undefined" && this.community["image"] !== "")
+		params["image"] = this.community["image"];
+
+		// if(this.community["recipes"] !== "")
+		//  params["recipes"] = this.community["recipes"];
+
+		if(typeof(this.community["created_by"]) =="undefined" || this.community["created_by"] == "" || this.community["created_by"] == "0")
+		{
+		if(typeof(this.currentUser["id"]) !== "undefined" && this.currentUser["id"] !== "")
+		params["created_by"] = this.currentUser["id"];
+		}   
+		if(typeof(this.community.id) !== "undefined"  && this.community.id !== "")
+		{
+			console.log("updating");
+			params["id"] = this.community.id;
+			console.log(params);
+			var res =   this.dbService.updateDataByTable("community", params).subscribe(recipeData => setTimeout(() => {
+				console.log(recipeData);
+				//this.toastr.success('Updated Recipe Book!', 'Recipe Book!');	
+				//this.loadCommunity(this.community.id);
+				this.searchProps();
+				
+			}));
+			 this.modalService.close('createNew');
+		}
+		else
+		{
+		
+			console.log("adding");
+			console.log(params);
+			var res =   this.dbService.postDataByTable("community", params).subscribe(recipeData => setTimeout(() => {
+				console.log(recipeData);
+				//this.toastr.success('Saved Recipe Book!', 'Recipe Book!');
+				if(recipeData['inserted_id'] !== "undefined" && recipeData['inserted_id'] !== "")
+				{
+					//this.loadCommunity(recipeData['inserted_id']);
+					this.searchProps();	
+				}
+			}));
+			 this.modalService.close('createNew');
+		}
+	}	
+
+}
 
   formatVal(str)
   {
@@ -317,6 +393,61 @@ endIndex = startIndex+ endIndex;
 	}));
 
   }
+
+  fileupload()
+{
+  var obj = document.getElementById('inputuploadrecipe');
+  if(obj !== null)
+  obj.click();
+}
+onFileSelect(event) {
+	console.log("Fileselect");
+	var type = "image";
+
+console.log("type " + type);
+  if (event.target.files.length > 0) {
+	const file = event.target.files[0];
+	this.getBase64(file).then(
+	  data => {
+		console.log(data);
+
+
+		var options = {
+		  headers : new HttpHeaders({"Content-Type": "application/json"})
+		  };
+
+		var params = {};
+		
+		params["image"]= data.toString();
+
+		params["name"]= this.currentUser["id"] + "_" + new Date().getTime() + "_"  + file.name;
+	//	console.log(JSON.stringify(params));
+		this.dbService.uploadMedia(params).subscribe(resultData => setTimeout(() => {
+		  console.log(resultData);
+		  if(typeof(resultData) !== "undefined" && resultData !== null)
+		  {
+			if(typeof(resultData["name"]) !== "undefined" && resultData["name"] !== null && resultData["name"] !== "")
+			{
+				var urlapi = this.apiUrl.replace("/api","");
+
+			  this.community["image"] = urlapi + resultData["name"];
+			console.log(type);	
+			  console.log(this.community)
+			}
+		  }
+		}));
+	});
+  }
+}
+
+getBase64(file) {
+  return new Promise((resolve, reject) => {
+	const reader = new FileReader();
+	reader.readAsDataURL(file);
+	reader.onload = () => resolve(reader.result);
+	reader.onerror = error => reject(error);
+  });
+}
 }
 
 	

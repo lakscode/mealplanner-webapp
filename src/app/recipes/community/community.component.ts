@@ -579,6 +579,7 @@ addRecipe(recipe)
      
         }));
       }
+      this.loadRecipes();
     }));
 
 }
@@ -1026,7 +1027,7 @@ removeFavourite(id)
 		this.setFav = false;
 	  if(invData !== null)
 	  {
-		this.getFavouriteStatus();
+		//this.getFavouriteStatus();
 		var fIndex = this.recipesList.findIndex(x=>(x["id"] === id));
 		if(fIndex > -1)
 		{

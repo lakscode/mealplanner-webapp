@@ -16,7 +16,7 @@
                     <h2>Communities</h2>
                     <div class="row" style=" width:100%; text-align:right;margin-bottom:20px;">
                         <div class="col-12">
-                            <div class="create-button anim-button btn-4" (click)="gotopage('community');">
+                            <div class="create-button anim-button btn-4" (click)="createNew()">
                             <i class="fa fa-plus"></i>  Create New
                         </div>
                     </div>
@@ -120,3 +120,46 @@
 
     </div>
 </div>
+
+<jw-modal id="createNew" [width]="40" >
+    
+    <form name="form"  #uf="ngForm" novalidate class="popup-panel" >
+        <div class="modal-header" style="background:#FFF;">
+            <h2 style="margin:15px; ">
+                <span>Add New Community</span>           
+
+            </h2>
+            <button style="font-size: 30px;padding:5px;" type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeModal('createNew');">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body" style="background:#FFF;" > 
+             <div class="submit-recipe-form">
+                <form action="#" method="post">
+
+                    <div class="row"   >
+
+                        <div class="col-12 community_panel">
+                     
+                           <!--  <img *ngIf="community.image" class="community_img" src="{{community.image}}"  style="height:200px;width: 100%;" />
+                            <img *ngIf="!community.image"  class="community_img" src="assets/notavailable1.jpg"  style="height:200px;width: 100%;" /> -->
+                            
+                           <div class="community_details">
+                            <input id="inputuploadrecipe" hidden type="file" name="inputuploadrecipe" (change)="onFileSelect($event)" />
+                            <button  style="float:right; background:transparent; border:0px; outline:0;font-size:16px"  (click)="fileupload()" class="upload-comment">
+                                <i class="fa fa-picture-o" aria-hidden="true"></i></button>
+                            <input class="trans-input" type="text" name="title" id="title" placeholder="Type community name..." [(ngModel)]="community.community_name" style="padding-left:10px">
+                            <textarea class="short-text trans-input" name="description" placeholder="Type description" [(ngModel)]='community.description' id="description" cols="30" rows="10"></textarea>
+                              <br>
+               
+                           </div>
+</div></div>
+ <div class="text-center">
+                            <button type="submit" (click)="saveRecipebook()"  class="recipe-submit-btn">Save </button>
+                        </div>
+</form>
+</div>
+        </div>
+    </form>
+</jw-modal>
+
