@@ -360,14 +360,14 @@
                         <!--<div class="col-12" *ngIf="community.community_name">
                             <label for="recipes">Recipes</label>
                         </div>-->
-                        <div style="margin-bottom:10px" class="col-12 col-lg-3 col-md-4" *ngFor="let recipe of recipesList; let i = index;">
-                            <div class="recipe-item" style="background-size:cover;  background-position:center; width:100%; height:100%; " [ngStyle]="{'background-image':'linear-gradient(
+                        <div style="margin-bottom:10px; padding-left:0px; padding-right:0px;" class="col-12 col-lg-3 col-md-4" *ngFor="let recipe of recipesList; let i = index;">
+                            <div class="recipe-item" style="background-size:cover;  background-position:center;  height:100%; " [ngStyle]="{'background-image':'linear-gradient(
                                 rgba(0, 0, 0, 0.3),
                                 rgba(0, 0, 0, 0.3)
                               ),url(' + recipe.image + ')'}">
                             <div class='row toggleremove' style='color:#FFF;'>
 
-                                <div class="col-12">
+                                <div class="col-12" style="padding-left:0px; padding-right:0px">
                                     
                                 <h1 class="recipe-label">{{recipe.label}}</h1>
                                    <p><b>Calories</b>: {{recipe.calories}} Kcal</p>

@@ -130,8 +130,8 @@
                                <p *ngIf="cItem.userscount && cItem.userscount > 0" style="text-align:left;"><i class="fa fa-user"></i> {{cItem.userscount}} members</p>
                                <br>
                                <!--<div class="short-separator"></div>-->
-                               <a class="read-more" (click)="gotoRecipeDetails('community', cItem.id)">read more</a>
-                               <a class="read-more" style="position: absolute;
+                               <a class="read-more" (click)="gotoRecipeDetails('community', cItem.id)">view more</a>
+                               <a *ngIf="!cItem.userjoined" class="read-more" style="position: absolute;
                                bottom: 15px;
                                right: 15px;
                                padding: 5px;
@@ -204,7 +204,7 @@
                <ng-container *ngIf="mealplans.length > 0">
                   <p class="plan-name">{{mealplans[0]["name"]}} </p>
                     <p class="plan-tags">{{mealplans[0]["tags"]}} <br/>
-                  <a class="read-more-bordered" (click)="gotopage('trending', mealplans[0]['id'])" href="javascript:void(0)">Read More</a>
+                  <a class="read-more-bordered" (click)="gotopage('trending', mealplans[0]['id'])" href="javascript:void(0)">View More</a>
                </ng-container>
                <ng-container *ngIf="planStatus.length > 0">
                   <p class="plan-name">{{planStatus[0]["mpname"]}} </p>
@@ -244,7 +244,7 @@
                               <p style="text-align:left;">Diet Labels: {{rRecipe.dietLabels}}</p>
                               <br>
                               <div class="short-separator"></div>
-                              <a class="read-more" (click)="gotoRecipeDetails('recipedetails',rRecipe.id)">read more</a>
+                              <a class="read-more" (click)="gotoRecipeDetails('recipedetails',rRecipe.id)">view more</a>
                            </div>
                         </div>
                      </div>

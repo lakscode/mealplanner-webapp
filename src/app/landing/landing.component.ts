@@ -571,7 +571,10 @@ transform(value: any) {
 		  var obj = invData["body"]["length"];
 		  console.log(invData["body"]);
 		  this.communitiesList = invData["body"];
-		  
+		  for(let o=0; o <  this.communitiesList.length; o++)
+		{
+			this.communitiesList[o]["userjoined"] = false;
+		}
 		  console.log(this.communitiesList);
 		  this.loaduserCount();
 		}
@@ -613,9 +616,47 @@ transform(value: any) {
 		}
 
 	  }
+	  this.loaduserJoinedStatus();
 	}));
 
   }
+  loaduserJoinedStatus()
+  {
+	  /*
+	SELECT c.id, COUNT(cj.id) AS usercount
+	FROM community AS c
+	LEFT JOIN community_join AS cj ON c.id = cj.community_id
+	GROUP BY c.id, cj.community_id
+
+	*/
+
+	console.log("in loaduserJoinedStatus");
+	var params = {"query": "SELECT id, community_id from community_join where userid = " + this.currentUser["id"] };
+
+	var res =   this.dbService.getDatabyTablebyQuery("community", params).subscribe(invData => setTimeout(() => {
+
+	 
+	  if(invData !== null)
+	  {
+		var obj = invData["body"];
+		for(let o=0; o < obj.length; o++)
+		{
+		
+			var fIndex = this.communitiesList.findIndex(x=>(x.id === obj[o]["community_id"]));
+			
+			if(fIndex > -1)
+			{
+			//	console.log(obj[o]["usercount"])
+				this.communitiesList[fIndex]["userjoined"] = true;
+			//	console.log(this.communitiesList[fIndex]["userscount"] );
+			}
+		}
+
+	  }
+	}));
+
+  }
+
   joinCommunity(id)
   {
 	var params = {};
