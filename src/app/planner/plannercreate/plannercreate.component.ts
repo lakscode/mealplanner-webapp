@@ -1693,6 +1693,7 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 		}
 		this.loadNutrientsMaxMin();
 	}
+	maxcalories: any = "";
 	searchFilters()
 	{
 	console.log("searchfilters");
@@ -1778,7 +1779,7 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 		console.log(this.filtersParams);
 		this.loadRecipes();
 		this.closeModal('searchFiltersPopup');
-		this.clearFilters();
+		this.clearFilterValues();
 	}
 
 
@@ -1872,7 +1873,7 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 	return retVal;
   }
 
-  clearFilters(){
+  clearFilterValues(){
 
 	for(let l=0; l < this.searchFilterLabels.length; l++){
 		this.searchFilterLabels[l]['selected'] = false;
