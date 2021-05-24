@@ -3,7 +3,7 @@
     <div class="row" >
     <div class="col-12 col-md-12 col-lg-12">
         <div class="recipe-set submit-recipe-set">
-            <h2>Community</h2>
+          <h2> <a (click)="gotopage('community');"><i class="fa fa-chevron-left"></i></a> Community</h2>
          
            <!-- <div style="width:100%; text-align:right">
                 <a class="copy-button" (click)="downloadplan()" title="Download PDF"><i class="fa fa-download"></i> Download</a>
@@ -361,7 +361,7 @@
                             <label for="recipes">Recipes</label>
                         </div>-->
                         <ng-container  *ngFor="let recipe of recipesList; let i = index;">
-                        <div style="margin-bottom:10px; padding-left:0px; padding-right:0px;" class="col-12 col-lg-3 col-md-4">
+                        <div style="padding-left:0px; padding-right:0px;margin-top:15px;margin-bottom:15px" class="col-12 col-lg-3 col-md-4">
                             <div class="recipe-item" style="background-size:cover;  background-position:center;  height:100%; " [ngStyle]="{'background-image':'linear-gradient(
                                 rgba(0, 0, 0, 0.3),
                                 rgba(0, 0, 0, 0.3)
@@ -392,8 +392,8 @@
                            
                         </div>
                            
-                        <p style="padding-left:15px; font-size:12px;">Added by : <span *ngIf="recipe.firstname">{{recipe.firstname}} {{recipe.lastname}}</span><span *ngIf="!recipe.firstname">{{recipe.email}}</span>
-                           <span style="margin-left:10px" *ngIf="recipe.created_at"> {{formatDays(recipe.created_at)}} days ago </span> </p>
+                        <p style="padding-left:15px; font-size:12px;margin-bottom:5px">Added by : <span *ngIf="recipe.firstname">{{recipe.firstname}} {{recipe.lastname}}</span><span *ngIf="!recipe.firstname">{{recipe.email}}</span>
+                          <!--  <span style="margin-left:10px" *ngIf="recipe.created_at"> {{formatDays(recipe.created_at)}} days ago </span> --> </p>
                         </div>
                       
                     </ng-container>

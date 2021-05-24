@@ -994,10 +994,13 @@ var res =   this.dbService.getDatabyTablebyQuery("favourites", params).subscribe
 		if(invData !== null)
 		{
 			alert("favourite has been set");
+			//this.getFavouriteStatus();
 			var fIndex = this.recipesList.findIndex(x=>(x["id"] === id));
 			if(fIndex > -1)
 			{
 				this.recipesList[fIndex]["UserFavStatus"] =  true;
+				this.setFav = true;
+				this.recipesList[fIndex]["expand"] = !this.recipesList[fIndex]["expand"];
 			}
 		}
 	  }));
@@ -1011,11 +1014,13 @@ var res =   this.dbService.getDatabyTablebyQuery("favourites", params).subscribe
 
 removeFavourite(id)
 {
-  console.log("set Favourites");
+  console.log("remove Favourites");
+  console.log(id);
   var params = {};
   if(typeof(id) !== "undefined" && id !== null && id !== "")
   {
 	params["id"] = id;
+	//params["userid"] = this.currentUser["id"];
 
 	var res =   this.dbService.deleteDataByTable("favourites", params).subscribe(invData => setTimeout(() => {
 		this.setFav = false;
@@ -1026,6 +1031,7 @@ removeFavourite(id)
 		if(fIndex > -1)
 		{
 			this.recipesList[fIndex]["UserFavStatus"] =  false;
+			this.recipesList[fIndex]["expand"] = !this.recipesList[fIndex]["expand"];
 		}
 	  }
 	  //console.log(this.setFav);
@@ -1117,8 +1123,7 @@ toggleMoreMenu(recipe, index, list)
 			}
 		}	
 	}
-
-	recipe["expand"] = !recipe["expand"];
+	recipe["expand"] = !recipe["expand"];	
 
 }
 transform(value: any, args?: any): any {
@@ -1129,6 +1134,11 @@ transform(value: any, args?: any): any {
 	{
 		return Math.ceil(this.helpService.findDateDiff(dt));
 	}
+
+
+gotopage(){        
+   this.router.navigate(["communities"]);    
+}
 }
 
 	

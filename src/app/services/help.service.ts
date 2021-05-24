@@ -468,12 +468,12 @@ export class HelpService {
 		var ret = 0;
 		if(typeof(dt) !== "undefined" && dt  !== null)
 				{
-					console.log(dt);
-					console.log(new Date())
+					//console.log(dt);
+					//console.log(new Date())
 					var Difference_In_Time = new Date().getTime() - new Date(dt).getTime(); 
 	
 					var diff_days = Difference_In_Time / (1000 * 3600 * 24); 
-					console.log(diff_days);
+					//console.log(diff_days);
 					if(diff_days > 0)
 					ret= diff_days;
 				}
