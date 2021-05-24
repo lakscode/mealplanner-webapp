@@ -62,11 +62,23 @@ export class PlannercreateComponent implements OnInit {
 	showNutrientsPServing: boolean = false;
 	showhidenutrientsFlag: boolean = false;
 	role: any = {};
+	searchFilterLabels: Array<any> = [];
+	cuisineTypeList : Array<any> = [];
 
 	constructor(private router: Router, private route: ActivatedRoute, private modalService: ModalService, private pdfService: PDFService, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
 	
 	}
 
+	showLabels(label)
+	{
+		for(let l=0; l < this.searchFilterLabels.length; l++)
+		{
+			if( this.searchFilterLabels[l]["label"] == label.label)
+			this.searchFilterLabels[l]['selected'] = true;
+			else
+			this.searchFilterLabels[l]['selected'] = false;
+		}
+	}
 	ngOnInit() {
 			 this.totalPage = 1;
 			 this.pageCount= 5;
@@ -75,6 +87,49 @@ export class PlannercreateComponent implements OnInit {
 	 this.page_num = 1;
 this.loadedPlan = false;
 
+this.searchFilterLabels = [];
+		this.searchFilterLabels.push({"label":"Health Labels", "selected":false});
+		this.searchFilterLabels.push({"label":"Diet Labels", "selected":false});
+		this.searchFilterLabels.push({"label":"Cuisine Type", "selected":false});
+		this.searchFilterLabels.push({"label":"Meal Type", "selected":false});
+		this.searchFilterLabels.push({"label":"Nutrients", "selected":false});
+		this.searchFilterLabels.push({"label":"Calories", "selected":false});
+
+		this.cuisineTypeList = [];
+		for(let c=0; c < constants.cusineTypeList.length; c++)
+		{
+			this.cuisineTypeList.push({"name":constants.cusineTypeList[c], "selected":false})
+		}
+
+		this.dietLabelsList= [];
+		for(let d=0; d < constants.dietLabels.length; d++)
+		{
+			this.dietLabelsList.push({"name":constants.dietLabels[d], "selected":false})
+		}
+
+		
+		this.mealTypeList= [];
+		for(let d=0; d < constants.mealTypeList.length; d++)
+		{
+			this.mealTypeList.push({"name":constants.mealTypeList[d], "selected":false})
+		}
+
+
+		//this.healthlabelsList = constants.healthLabels;
+		this.healthlabelsList= [];
+		for(let h=0; h < constants.healthLabels.length; h++)
+		{
+			this.healthlabelsList.push({"name":constants.healthLabels[h], "selected":false})
+		}
+
+		//this.mineralsLabelsList = constants.minerals;
+		this.mineralsLabelsList= [];
+		for(let m=0; m <constants.minerals.length; m++)
+		{
+			this.mineralsLabelsList.push({"name":constants.minerals[m], "selected":false,  "unit":"",  "min":"", "max":"", "t_min":"", "t_max":""})
+		}
+
+		this.loadNutrientsMaxMin();
 	
 		window.addEventListener("scroll", this.scrollFunc);
 		this.getNutrientsMaxMin(); 
@@ -102,7 +157,7 @@ this.addRecipeImage = "assets/images/add-recipe.png"
 
 		console.log(this.showNutrientsFlag);
 
-		this.mealTypeList = ["breakfast", "snack1", "lunch", "snack2", "dinner"];
+		//this.mealTypeList = ["breakfast", "snack1", "lunch", "snack2", "dinner"];
 		this.recipesList = [];
 		this.routeParams = {};
 		this.sub = this.route.params.pipe(takeUntil(this.onDestroy$)).subscribe(params => {
@@ -1640,6 +1695,7 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 	}
 	searchFilters()
 	{
+	console.log("searchfilters");
 		var dietlabels = "";
 		console.log(this.dietLabelsList);
 		console.log(this.searchparam.calories);
@@ -1669,6 +1725,19 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 		   healthlabels=  healthlabels.slice(0, -1);
 		   this.filtersParams["healthlabels"] = healthlabels;
 		}
+
+		var cuisinetypes = "";
+	 for(let c=0; c <this.cuisineTypeList.length; c++)
+	 {
+		 if(this.cuisineTypeList[c]["selected"])
+		 cuisinetypes = this.cuisineTypeList[c]["name"] + "~";
+	 }
+
+	 if( cuisinetypes !== "")
+	 {
+		cuisinetypes=  cuisinetypes.slice(0, -1);
+		 this.filtersParams["cuisinetypes"] = cuisinetypes;
+	 }
 	   
 		var minerals = "";
 		var mQuery = "";
@@ -1708,6 +1777,8 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 
 		console.log(this.filtersParams);
 		this.loadRecipes();
+		this.closeModal('searchFiltersPopup');
+		this.clearFilters();
 	}
 
 
@@ -1800,6 +1871,36 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 	var retVal = this.helpService.formatValuePServing(str, serving);
 	return retVal;
   }
+
+  clearFilters(){
+
+	for(let l=0; l < this.searchFilterLabels.length; l++){
+		this.searchFilterLabels[l]['selected'] = false;
+	}
+	
+	for(let m=0; m < this.mealTypeList.length; m++){
+		this.mealTypeList[m]['selected'] = false;
+	}
+
+	for(let m=0; m < this.healthlabelsList.length; m++){
+		this.healthlabelsList[m]['selected'] = false;
+	}
+
+	for(let m=0; m < this.dietLabelsList.length; m++){
+		this.dietLabelsList[m]['selected'] = false;
+	}
+
+	for(let m=0; m < this.cuisineTypeList.length; m++){
+		this.cuisineTypeList[m]['selected'] = false;
+	}
+
+	for(let m=0; m < this.mineralsLabelsList.length; m++){
+		this.mineralsLabelsList[m]['selected'] = false;
+	}
+	this.loadRecipes();
+	this.maxcalories = "";
+	
+}
 
 }
 

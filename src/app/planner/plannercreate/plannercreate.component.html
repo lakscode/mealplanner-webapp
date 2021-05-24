@@ -37,7 +37,8 @@
                             type="button" (click)="getFavourites()" aria-haspopup="true" aria-expanded="false" class="btn btn-secondary"><i
                                 class="fa fa-heart" aria-hidden="true"></i>Favourites</button>
                     </div>
-                    <div *ngIf="showNutrientsFlag" id="advanced-filters" (click)="loadFilterLabels(); filtersOpt = !filtersOpt"
+                   <!--  <div *ngIf="showNutrientsFlag" id="advanced-filters" (click)="loadFilterLabels(); filtersOpt = !filtersOpt" -->
+                    <div *ngIf="showNutrientsFlag" id="advanced-filters" (click)=" openModal('searchFiltersPopup');"
                         class="advanced-filters btn-filter btn-filter-mb other-filters-btn   btn-group btn-group-sm"><button
                             type="button" id="advancedFilterToggle" aria-haspopup="true" aria-expanded="false"
                             class="btn btn-secondary"><i class="fa fa-plus" aria-hidden="true"></i>Filters</button>
@@ -522,6 +523,186 @@
             </div>
         </div>
         </div>
+    </div> 
+  </div>
+  </jw-modal>
+
+  <jw-modal id="searchFiltersPopup" [width]="70">
+    <div class="" style="min-height:400px;padding:25px;">
+    
+    <div style="border:1px solid #ccc; border-radius:15px; padding:15px">
+
+       <div class="modal-header" style="border-bottom:0px;">
+        <h4><b>Search Filters</b></h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+            (click)="closeModal('searchFiltersPopup');" style="font-size:40px;color:$text-gray;opacity:1">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+        <div class="modal-body" style="border-bottom:0px;min-height: 270px;">
+        <div class="row" >
+           <div  class="searchmorebar searchbaranim">
+                            <div class="row" style="margin-left:30px;">
+                                <div class="col-12 " style="margin-bottom:10px;padding-left:0;display:inline">
+                                 
+                                     <ng-container *ngFor="let lab of searchFilterLabels; let l = index;">
+                                            <a [ngClass]="lab.selected?'filterlabel active': 'filterlabel'" href="javascript:void(0)" (click)="showLabels(lab)" style="font-size:12px">
+                                            {{lab.label}}
+                                            </a>
+                                    </ng-container>  
+                                   
+                
+                               
+   
+                                </div>
+                                <div *ngIf="searchFilterLabels[0]['selected']" class="col-12 paddinglr0">
+                                    <div class="filter-group">
+
+                                        <!--<label class="filter-title">Health Labels </label>-->
+                                        
+                                            <ng-container *ngFor="let hlabel of healthlabelsList; let h = index">
+                                                <div class="listSection  " id="healthLabels" >
+                                                    <label class="container">{{hlabel.name}}
+                                                    <input [(ngModel)] ="hlabel.selected" type="checkbox" [checked]="h == 0?'checked':''">
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                            </div>
+                                            </ng-container>
+
+                                       
+                                    </div>
+                                </div>
+                                <div *ngIf="searchFilterLabels[1]['selected']" class="col-12 paddinglr0">
+                                    <div class="filter-group">
+
+
+                                        <!--<label class="filter-title">Diet Labels</label> -->
+                                      
+                                           
+                                            <ng-container *ngFor="let dlabel of dietLabelsList; let h = index">
+                                                <div class="listSection  " id="diethLabels" >
+                                                <label class="container">{{dlabel.name}}
+                                                    <input [(ngModel)] ="dlabel.selected" type="checkbox" [checked]="h == 0?'checked':''">
+                                                    <span class="checkmark"></span>
+                                                </label> 
+                                            </div>
+                                            </ng-container>
+
+                                       
+                                    </div>
+                                </div>
+                                <div *ngIf="searchFilterLabels[2]['selected']" class="col-12  paddinglr0">
+                                    <div class="filter-group">
+
+                                        <!--<label class="filter-title">Cuisine Type </label>-->
+                                      
+
+                                            <ng-container *ngFor="let clabel of cuisineTypeList; let c = index">
+                                                <div class="listSection " id="cuisineType">
+                                                <label class="container">{{setFLU(clabel.name)}}
+                                                    <input [(ngModel)] ="clabel.selected" type="checkbox" [checked]="c == 0?'checked':''">
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                            </div>
+                                            </ng-container>
+
+                                      
+                                    </div>
+                                </div>
+
+                                <div *ngIf="searchFilterLabels[3]['selected']" class="col-12  paddinglr0">
+                                    <div class="filter-group">
+
+                                        <!--<label class="filter-title">Cuisine Type </label>-->
+                                      
+
+                                            <ng-container *ngFor="let mlabel of mealTypeList; let m = index">
+                                                <div class="listSection " id="mealType">
+                                                <label class="container">{{setFLU(mlabel.name)}}
+                                                    <input [(ngModel)] ="mlabel.selected" type="checkbox" [checked]="m == 0?'checked':''">
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                            </div>
+                                            </ng-container>
+
+                                      
+                                    </div>
+                                </div>
+
+                                  <div *ngIf="searchFilterLabels[4]['selected']" class="col-12  paddinglr0">
+                                    <div class="filter-group" style="margin-left:30px">
+                                        <!--<label class="filter-title">Nutrients</label> -->
+                                        
+                                         
+                                                <div class="row paddinglr0">
+                                                    <ng-container *ngFor="let mlabel of mineralsLabelsList; let m = index">
+                                                       
+                                                    <div class="col-12 col-lg-3 col-md-3 paddinglr0">
+                                                        <div class="row">
+
+                                                      
+                                                    <div class="col-12 paddinglr0">
+                                                        <label class="container">{{setFLU(mlabel.name)}}
+                                                            <input [(ngModel)] = 'mlabel.selected' type="checkbox" [checked]="m == 0?'checked':''">
+                                                            <span class="checkmark"></span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-5 paddinglr0" style="margin-bottom:15px;" *ngIf="mlabel.selected">
+                                                      
+                                                            <input class="mineral-input" type='text' name="minerals_{{m}}_min" [(ngModel)]="mlabel.min" placeholder="min" />
+                                                            <span class="maxmin">{{formatVal(mlabel.t_min)}}</span>
+                                                    
+                                                    </div>
+                                                    <div class="col-5 paddinglr0" style="margin-bottom:15px;"  *ngIf="mlabel.selected">
+                                                        <input class="mineral-input" type='text' name="minerals_{{m}}_max" [(ngModel)]="mlabel.max" placeholder="max" />
+                                                        <span class="maxmin">{{formatVal(mlabel.t_max)}}</span>
+
+                                                    </div>
+                                                    <div class="col-2 paddinglr0" style="margin-bottom:15px;"  *ngIf="mlabel.selected"> {{mlabel.unit}}</div>
+                                                </div>
+                                            </div> 
+                                        
+                                        </ng-container>
+                                               
+                                              
+                                               
+                                           
+
+                                        </div>
+                                    </div>
+                                  </div>
+                                  <div *ngIf="searchFilterLabels[5]['selected']" class="col-12 paddinglr0">
+                                    <div class="filter-group">
+                                        <!--<label class="filter-title">Calories (Max)</label> -->
+                                        <div class="listSection"  style="display:inline-block;margin:0px">
+                                           <!--  <span>Max calories</span> -->
+                                          <input [(ngModel)]="maxcalories" placeholder="Enter maximum calories" type="text" class="inputbox" style="margin-top:0px;width:200px" />
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+       
+                
+                               
+                
+                            </div>
+                            
+                              
+                        
+                        </div>
+        </div>
+         
+
+
+      
+        </div>
+        <div class="text-center">
+          <button type="submit"  (click)="searchFilters()"  class="defaultbtn searchbtn bg-orange" >Search </button>&nbsp;&nbsp;
+          <button type="submit"  (click)="clearFilters()"  class="defaultbtn searchbtn bg-orange" >Clear</button>
+      </div>
+       
     </div> 
   </div>
   </jw-modal>
