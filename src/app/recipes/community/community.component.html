@@ -360,7 +360,8 @@
                         <!--<div class="col-12" *ngIf="community.community_name">
                             <label for="recipes">Recipes</label>
                         </div>-->
-                        <div style="margin-bottom:10px; padding-left:0px; padding-right:0px;" class="col-12 col-lg-3 col-md-4" *ngFor="let recipe of recipesList; let i = index;">
+                        <ng-container  *ngFor="let recipe of recipesList; let i = index;">
+                        <div style="margin-bottom:10px; padding-left:0px; padding-right:0px;" class="col-12 col-lg-3 col-md-4">
                             <div class="recipe-item" style="background-size:cover;  background-position:center;  height:100%; " [ngStyle]="{'background-image':'linear-gradient(
                                 rgba(0, 0, 0, 0.3),
                                 rgba(0, 0, 0, 0.3)
@@ -372,10 +373,10 @@
                                 <h1 class="recipe-label">{{recipe.label}}</h1>
                                    <p><b>Calories</b>: {{recipe.calories}} Kcal</p>
                                    <p><b>Servings</b>: {{recipe.yield}}</p>
+                                   
+                                   <!-- <p *ngIf="recipe.dietLabels"><b>Diet Labels</b>: {{recipe.dietLabels}} </p>-->
                                     <p *ngIf="recipe.favcount && recipe.favcount> 0">{{recipe.favcount}} Members Saved</p>
-                                    <p *ngIf="recipe.dietLabels"><b>Diet Labels</b>: {{recipe.dietLabels}} </p>
-                                    <p *ngIf="recipe.favcount">{{favcount}} members liked</p>
-                                    <p class="favactive" style='text-align:right;' *ngIf="recipe.UserFavStatus"><i class="fa fa-heart"></i></p>
+                                    <p class="favactive" style='text-align:right;' (click)="toggleFav(recipe.id)" *ngIf="recipe.UserFavStatus"><i class="fa fa-heart"></i></p>
                                 
                                 </div>
                                 <div class="morebtn"><a (click)="toggleMoreMenu(recipe, i, 'viewlist')" class="menu" href="javascript:void(0)"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></a>
@@ -391,8 +392,11 @@
                            
                         </div>
                            
-
+                        <p style="padding-left:15px; font-size:12px;">Added by : <span *ngIf="recipe.firstname">{{recipe.firstname}} {{recipe.lastname}}</span><span *ngIf="!recipe.firstname">{{recipe.email}}</span>
+                           <span style="margin-left:10px" *ngIf="recipe.created_at"> {{formatDays(recipe.created_at)}} days ago </span> </p>
                         </div>
+                      
+                    </ng-container>
                     </div>
                     <br>
                     <!--<label for="notes">Notes</label>

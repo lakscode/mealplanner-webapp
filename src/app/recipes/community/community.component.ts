@@ -221,7 +221,7 @@ loadRecipes(idslist = "")
 
 	//params["instructions"] = "notempty";
 //	params["query"] = " select id, label, image, healthLabels, dietLabels, calories, yield, totalWeight, totalNutrients, digest from recipes where id in (select recipe_id from recipe_mapping where community_id = " + this.routeParams.id  + ")";
-	params["query"] = "select recipes.id, recipes.label, recipes.image, recipes.calories, recipes.healthLabels, recipes.dietLabels, recipes.yield, recipes.totalNutrients, users.email, users.firstname, users.lastname, users.id as userid from recipes join recipe_mapping on recipes.id = recipe_mapping.recipe_id join users on recipe_mapping.created_by = users.id where recipe_mapping.community_id = " + this.routeParams.id  + "" ;
+	params["query"] = "select recipes.id, recipes.label, recipes.image, recipes.calories, recipes.healthLabels, recipes.dietLabels, recipes.yield, recipes.totalNutrients, users.email, users.firstname, users.lastname, recipe_mapping.created_at, users.id as userid from recipes join recipe_mapping on recipes.id = recipe_mapping.recipe_id join users on recipe_mapping.created_by = users.id where recipe_mapping.community_id = " + this.routeParams.id  + "" ;
   console.log(JSON.stringify(params));
 
  var res =   this.dbService.getDatabyQuery("recipes", params).subscribe(invData => setTimeout(() => {
@@ -858,51 +858,9 @@ formatVal(str)
  {
 	 return img.trim();
  }
- setFavourite(id)
-{
-  console.log("set Favourites");
-  var params = {};
-  if(typeof(this.currentUser["id"]) !== "undefined" && this.currentUser["id"] !== null && this.currentUser["id"] !== "" && typeof(this.routeParams.id) !== "undefined" && this.routeParams.id !== null && this.routeParams.id !== "")
-  {
-//	params["userid"] = this.currentUser["id"];
-//	params["recipeid"] = id;
-//	params["created_at"] = new Date();
-//	params["community_id"] = this.routeParams.id;
-//	console.log(params);
-var params = {};
-//params["created_by"]  = this.currentUser["id"];
-console.log(params);
-params ['query'] = "select * from favourites where recipeid = " + id + " AND userid = " + this.currentUser["id"];
-var res =   this.dbService.getDatabyTablebyQuery("favourites", params).subscribe(invData => setTimeout(() => {
-
-  console.log(invData);
-  if(invData !== null && invData["body"]["length"] > 0)
-  {
-
-  }
-  else
-
-  {
-	  var params1 = {};
-	  params1["recipeid"] = id;
-	  params1["userid"] = this.currentUser["id"];
-	  
-	var res =   this.dbService.postDataByTable("favourites", params1).subscribe(invData => setTimeout(() => {
-		if(invData !== null)
-		{
-			alert("favourite has been set");
-		 
-		}
-	  }));
-  }
-}));
-
-	
-  }
-}
 
 
-favStatus:any;
+
  getFavouriteStatus()
 {
   console.log("get FavouriteStatus");
@@ -918,7 +876,7 @@ favStatus:any;
 	idslist = idslist.substring(0, idslist.length-1);
   }
   var params = {};
-  this.favStatus = null;
+
   if(typeof(this.currentUser["id"]) !== "undefined" && this.currentUser["id"] !== null && idslist !== "")
   {
 	//params["userid"] = this.currentUser["id"];
@@ -997,31 +955,78 @@ getFavouriteStatusForCurrentUser(idslist)
 
 }
 
-toggleFav()
+toggleFav(id)
 {
 	if(this.setFav )
 	{
-		this.removeFavourite();
+		this.removeFavourite(id);
 	}
 	else
 	{
-	//	this.setFavourite();
+		this.setFavourite(id);
 	}
 }
 
-removeFavourite()
+setFavourite(id)
 {
   console.log("set Favourites");
   var params = {};
-  if(typeof(this.favStatus["id"]) !== "undefined" && this.favStatus["id"] !== null && this.favStatus["id"] !== "")
+  if(typeof(this.currentUser["id"]) !== "undefined" && this.currentUser["id"] !== null && this.currentUser["id"] !== "" && typeof(this.routeParams.id) !== "undefined" && this.routeParams.id !== null && this.routeParams.id !== "")
   {
-	params["id"] = this.favStatus["id"];
+var params = {};
+console.log(params);
+params ['query'] = "select * from favourites where recipeid = " + id + " AND userid = " + this.currentUser["id"];
+var res =   this.dbService.getDatabyTablebyQuery("favourites", params).subscribe(invData => setTimeout(() => {
+
+  console.log(invData);
+  if(invData !== null && invData["body"]["length"] > 0)
+  {
+
+  }
+  else
+
+  {
+	  var params1 = {};
+	  params1["recipeid"] = id;
+	  params1["userid"] = this.currentUser["id"];
+	  
+	var res =   this.dbService.postDataByTable("favourites", params1).subscribe(invData => setTimeout(() => {
+		if(invData !== null)
+		{
+			alert("favourite has been set");
+			var fIndex = this.recipesList.findIndex(x=>(x["id"] === id));
+			if(fIndex > -1)
+			{
+				this.recipesList[fIndex]["UserFavStatus"] =  true;
+			}
+		}
+	  }));
+  }
+}));
+
+	
+  }
+}
+
+
+removeFavourite(id)
+{
+  console.log("set Favourites");
+  var params = {};
+  if(typeof(id) !== "undefined" && id !== null && id !== "")
+  {
+	params["id"] = id;
 
 	var res =   this.dbService.deleteDataByTable("favourites", params).subscribe(invData => setTimeout(() => {
 		this.setFav = false;
 	  if(invData !== null)
 	  {
 		this.getFavouriteStatus();
+		var fIndex = this.recipesList.findIndex(x=>(x["id"] === id));
+		if(fIndex > -1)
+		{
+			this.recipesList[fIndex]["UserFavStatus"] =  false;
+		}
 	  }
 	  //console.log(this.setFav);
 	}));
@@ -1118,6 +1123,11 @@ toggleMoreMenu(recipe, index, list)
 }
 transform(value: any, args?: any): any {
 	return this.sanitize.bypassSecurityTrustHtml(value);
+	}
+
+	formatDays(dt)
+	{
+		return Math.ceil(this.helpService.findDateDiff(dt));
 	}
 }
 
