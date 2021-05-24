@@ -143,19 +143,28 @@
                      
                            <!--  <img *ngIf="community.image" class="community_img" src="{{community.image}}"  style="height:200px;width: 100%;" />
                             <img *ngIf="!community.image"  class="community_img" src="assets/notavailable1.jpg"  style="height:200px;width: 100%;" /> -->
+                          
                             
                            <div class="community_details">
-                            <input id="inputuploadrecipe" hidden type="file" name="inputuploadrecipe" (change)="onFileSelect($event)" />
+                           <!--  <input id="inputuploadrecipe"  type="file" name="inputuploadrecipe" (change)="onFileSelect($event)" />
                             <button  style="float:right; background:transparent; border:0px; outline:0;font-size:16px"  (click)="fileupload()" class="upload-comment">
-                                <i class="fa fa-picture-o" aria-hidden="true"></i></button>
+                                <i class="fa fa-picture-o" aria-hidden="true"></i></button> -->
                             <input class="trans-input" type="text" name="title" id="title" placeholder="Type community name..." [(ngModel)]="community.community_name" style="padding-left:10px">
                             <textarea class="short-text trans-input" name="description" placeholder="Type description" [(ngModel)]='community.description' id="description" cols="30" rows="10"></textarea>
                               <br>
+
+                                <label  class='comment-label'>  Upload Image</label>
+                     <button (click)="fileupload()" class="upload-comment">
+                        <i class="fa fa-picture-o" aria-hidden="true"></i> Upload Image</button>
+                    <div>
+                        <input id="inputuploadrecipe" hidden type="file" name="inputuploadrecipe" (change)="onFileSelect($event)" />
+                      </div>
+                      <img *ngIf="community.image" src="{{community.image}}"  style="width: 80%" />
                
                            </div>
 </div></div>
  <div class="text-center">
-                            <button type="submit" (click)="saveRecipebook()"  class="recipe-submit-btn">Save </button>
+                            <button type="submit" [disabled] = "community.community_name == '' && community.image ==''? true:false" [ngClass]="community.community_name !== '' && community.image !==''?'submit-comment active':'submit-comment'" (click)="saveRecipebook()"  class="recipe-submit-btn">Save </button>
                         </div>
 </form>
 </div>

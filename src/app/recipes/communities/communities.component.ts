@@ -288,7 +288,7 @@ endIndex = startIndex+ endIndex;
 		//if(typeof(this.community["notes"]) !== "undefined" && this.community["notes"] !== "")
 		params["notes"] = this.community["notes"];
 
-		//if(typeof(this.community["image"]) !== "undefined" && this.community["image"] !== "")
+		if(typeof(this.community["image"]) !== "undefined" && this.community["image"] !== "")
 		params["image"] = this.community["image"];
 
 		// if(this.community["recipes"] !== "")

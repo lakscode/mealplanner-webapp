@@ -456,3 +456,38 @@ color:#FFF;
   color: #CCC;
   display:none;
 }
+
+
+.upload-comment
+{
+  margin-left: 20px;
+  height: 36px;
+  background: #ffffff;
+  font-family: "Lora", serif;
+  font-size: 14px;
+  color: #6ebe3b;
+  padding: 0 25px;
+  border: 1px solid #6ebe3b;
+  -webkit-transition: 0.2s all ease-in-out;
+  transition: 0.2s all ease-in-out;
+}
+.upload-comment:hover
+{
+  background: #6ebe3b;
+  color: #ffffff  ;
+}
+
+.submit-comment {
+    height: 42px;
+    background: #ccc;
+    font-family: 'Lora', serif;
+    font-size: 16px;
+    color: #ffffff;
+    padding: 0 35px;
+    border: none;
+    transition: 0.2s all ease-in-out;
+}
+
+.submit-comment.active {
+ background: #6ebe3b;
+ }
