@@ -10,6 +10,14 @@
 .desktoponly
 {
   display:block;
+  display: block;
+  position: fixed;
+  height: 100px;
+  left: 0;
+  top: 0px;
+  width: 100%;
+  background: #FFF;
+  z-index: 999;
 }
 .mobileonly
 {
