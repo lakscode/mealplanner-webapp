@@ -296,7 +296,8 @@ this.loadColorCodes();
 	  }
   
 	//  params["instructions"] = "notempty";
-	 params["returnfields"] = " id, label, image, healthLabels,ingredients,  dietLabels, totalNutrients, digest,calories, yield ";
+	console.log(this.filtersParams);
+	 params["returnfields"] = " id, label, image, cuisineType, mealType, healthLabels,ingredients,  dietLabels, totalNutrients, digest,calories, yield ";
 	 if(typeof(this.filtersParams.dietlabels) !== "undefined" && this.filtersParams.dietlabels  !== "")
 	 {
 	  params["dietLabels"] = this.filtersParams.dietlabels;
@@ -306,8 +307,14 @@ this.loadColorCodes();
 	 {
 	  params["healthLabels"] = this.filtersParams.healthlabels;
 	 } 
-
-
+	 if(typeof(this.filtersParams.mealtypes ) !== "undefined" && this.filtersParams.mealtypes !== "")
+	 {
+	  params["mealType"] = this.filtersParams.mealtypes;
+	 } 
+	 if(typeof(this.filtersParams.cuisinetypes ) !== "undefined" && this.filtersParams.cuisinetypes !== "")
+	 {
+	  params["cuisineType"] = this.filtersParams.cuisinetypes;
+	 } 
 	 if(typeof(this.filtersParams.mineralsquery ) !== "undefined" && this.filtersParams.mineralsquery !== "")
 	 {
 	  params["nutrients"] = this.filtersParams.mineralsquery;
@@ -323,7 +330,7 @@ this.loadColorCodes();
 	  this.calculateCaloryFlag = false;
 	 var res =   this.dbService.getDatabyFields("recipes", params).subscribe(invData => setTimeout(() => {
   
-	//  console.log(invData);
+	 console.log(invData);
  var count = 0;
 	  if(invData !== null && typeof(invData["body"]) !== "undefined" && invData["body"] !== null && invData["body"]["length"] > 0)
 		{
@@ -1274,7 +1281,7 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 
 
 	 scrollFunc(){
-		console.log("scrolling");
+	//	console.log("scrolling");
 		if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
 		//	mybutton.style.display = "block";
 		  } else {
@@ -1283,8 +1290,8 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 		  var checkVal  = 1200;
 
 		  var showhidenut = document.getElementById('showhidenut');
-		  console.log("showhidenut " );
-		  console.log(showhidenut);
+	//	  console.log("showhidenut " );
+	//	  console.log(showhidenut);
 		  if(showhidenut !== null)
 		  {
 			  if(showhidenut["checked"])
@@ -1294,17 +1301,17 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 		  }
 
 
-		  console.log("checkVal " + checkVal)
+		//  console.log("checkVal " + checkVal)
 		  var btncalculateCaloryFlag = document.getElementById('calculateCaloryFlag');
 		  if(btncalculateCaloryFlag !== null)
 		  {
-		  console.log(btncalculateCaloryFlag.offsetTop);
+		//  console.log(btncalculateCaloryFlag.offsetTop);
 		  if(typeof(btncalculateCaloryFlag.offsetTop) !== "undefined" && btncalculateCaloryFlag.offsetTop !== null && btncalculateCaloryFlag.offsetTop)
 		  {
 			checkVal = btncalculateCaloryFlag.offsetTop - 300;
 		  }
 		  }
-		  console.log(document.documentElement.scrollTop);
+		//  console.log(document.documentElement.scrollTop);
 		  var btnsaveplan= document.getElementById('btnsaveplan');
 		  if(btnsaveplan !== null)
 		  { 
@@ -1700,7 +1707,7 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 		var dietlabels = "";
 		console.log(this.dietLabelsList);
 		console.log(this.searchparam.calories);
-		if(this.searchparam.calories !== ""){
+		if(typeof(this.searchparam.calories) !== "undefined" && this.searchparam.calories !== ""){
 		 this.filtersParams["calories"] = this.searchparam.calories;
 		}
 		for(let m=0; m <this.dietLabelsList.length; m++)
@@ -1740,6 +1747,19 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 		 this.filtersParams["cuisinetypes"] = cuisinetypes;
 	 }
 	   
+	 var mealtypes = "";
+	 for(let c=0; c <this.mealTypeList.length; c++)
+	 {
+		 if(this.mealTypeList[c]["selected"])
+		 mealtypes = this.mealTypeList[c]["name"] + "~";
+	 }
+
+	 if( mealtypes !== "")
+	 {
+		mealtypes=  mealtypes.slice(0, -1);
+		 this.filtersParams["mealtypes"] = mealtypes;
+	 }
+
 		var minerals = "";
 		var mQuery = "";
 		for(let m=0; m <this.mineralsLabelsList.length; m++)
@@ -1777,7 +1797,7 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 		
 
 		console.log(this.filtersParams);
-		this.loadRecipes();
+		this.loadRecipes('', true);
 		this.closeModal('searchFiltersPopup');
 		this.clearFilterValues();
 	}
