@@ -339,7 +339,10 @@ endIndex = startIndex+ endIndex;
   
 		}
 	}
-
+	gotopage(page)
+	{
+		this.router.navigate([page]);
+	}
 	gotoRecipeDetails(id){
 	this.router.navigate(['recipesubmit', {id:id}]);
 	}

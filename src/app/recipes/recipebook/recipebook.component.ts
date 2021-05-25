@@ -808,6 +808,10 @@ formatVal(str)
  gotopage(){        
    this.router.navigate(["recipebooks"]);    
 }
+setFavouriteRecipe(recipe)
+{
+
+}
 }
 
 	
