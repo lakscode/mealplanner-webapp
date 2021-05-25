@@ -63,7 +63,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 				[
 					{"id":"home-aboutus", "menu":"About the Team", "link":"/ourteam", "display":displayMenu, "active":false},
 					{"id":"home-display", "menu":"FAQs", "link":"/faqs", "display":displayMenu, "active":false},
-					{"id":"home-benefits", "menu":"Benefits", "link":"/benefits", "display":displayMenu, "active":false},
+					//{"id":"home-benefits", "menu":"Benefits", "link":"/benefits", "display":displayMenu, "active":false},
 				//	{"id":"blogs", "menu":"Blogs", "link":"/blogs", "display":displayMenu, "active":false},
 				//	{"id":"testimonials", "menu":"Testimonials", "link":"/testimonials", "display":displayMenu, "active":false}
 				{"id":"home-questionnaire", "menu":"Questionnaire", "link":"/questionnaire", "display":displayMenu, "active":false}
