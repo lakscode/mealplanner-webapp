@@ -22,6 +22,13 @@
 .mobileonly
 {
   display:none;
+  position: fixed;
+  height: 80px;
+  left: 0;
+  top: 0px;
+  width: 100%;
+  background: #FFF;
+  z-index: 999;
 }
 
 .menuham
