@@ -1,30 +1,30 @@
-<div class="fixedtop" style='width:100%;background: #F8F6F5'>
+<div class="fixedtop" style='width:100%;background: #F9F9F9'>
 <div class="row">
-<!--	<div class="col-12">
-     <app-sliderpanel></app-sliderpanel>
-   </div>
-
--->
-
-   <section class="home-sec aboutus-sec"  style="padding-left:15px; padding-right:15px;background:#FFF;" >
+ <section class="home-sec aboutus-sec"  style="padding-left:15px; padding-right:15px;" >
    <div class="container col-12">
       <div class="home-sec-box">
          <div class="text-side">
             <div class="home-sec-intro">
-               <span class="heading-small">Its all about</span>
-                  <h2>Easy customized nutrition</h2>
+               <span class="heading-small">Download for Free</span>
+                  <h2>Meal Planning Made Easy...</h2>
                   <!--<span class="desc">Get access to a diet that was planned by keeping your comfort in mind. Build a healthy, personalized meal plan with our easy-to-navigate platform. This one-stop destination offers comparable benefits for a price lower than what a dietician may cost you!</span>-->
-                  <span class="desc">Build a healthy, personalized meal plan with our easy-to-navigate platform. This one-stop destination offers comparable benefits for affordable price!</span>
+                  <span class="desc">Build a healthy, personalized meal plan with our easy-to-navigate platform. </span>
                   <ul class="home-sec-list">
                       <li><span style="font-size:24px"> <i class="fa fa-clock-o" aria-hidden="true"></i></span><a href="javascript:void(0)">Save Planning Time</a></li>
                       <li><span style="font-size:24px">  <i class="fa fa-cutlery" aria-hidden="true"></i></span><a href="javascript:void(0)">Personalize Your Diet</a></li>
                       <li><span style="font-size:24px"> <i class="fa fa-list" aria-hidden="true"></i></span><a href="javascript:void(0)">Tailor Grocery List</a></li>
                   </ul>
                 <!--  <a class="buttonGreen video-button swipebox" href="javascript:void(0)">Watch our Video</a> -->
-                  <a class="buttonGreen" (click)="gotopage('pricing')" href="javascript:void(0)">Know more About Us</a>
+                 <!--  <a class="buttonGreen" (click)="gotopage('pricing')" href="javascript:void(0)">Know more About Us</a> -->
+                 <div  class="storeImgDiv" >
+                     <a href="javascript:void(0)">
+                        <img [lazyLoad]="images['appstore']" alt="Download on the App Store" class="storeImg"></a>
+                     <a href="javascript:void(0)">
+                        <img [lazyLoad]="images['playstore']" alt="Get it on Google Play" class="storeImg"></a>
+                  </div>
               </div>
          </div>
-         <div class="image-side  wow zoomIn animated hidden-xs" style=" justify-content: center;   align-items: center; visibility: visible; animation-name: zoomIn;">
+         <div class="image-side  wow zoomIn animated hidden-xs" style=" justify-content: center;   align-items: center; visibility: visible; animation-name: zoomIn; transform: rotate(5deg);" >
             <div class="home-sec-image" style="border-width: 8px;
     border-style: solid;
     border-color: #000;
@@ -39,7 +39,7 @@
    </div>
    </section>
 
-   <section class="home-sec">
+   <section class="home-sec" style="background:#fff;margin-bottom:0px">
       <div class="container">
          <div class="col-12">
 	        <div class="" style="padding-top:30px;">
@@ -72,7 +72,7 @@
    </section>
 
    
-<section class="home-sec"  style="background:#FFF;padding-bottom: 30px; margin-bottom:0px;padding-top:30px">
+<section class="home-sec"  style="background:#FFF;padding-bottom: 30px; margin-bottom:0px;padding-top:30px;display:none">
    <div class="container col-12">
       <div class="home-sec-box">
          <div class="text-side">
