@@ -228,33 +228,7 @@ constructor(private router: Router, private httpClient : HttpClient, private san
 					
 
 				
-						/*var img = "assets/menu/veg.png";
 						
-						if(arrLabel[l]["name"].toString().toLowerCase().indexOf("vegetarian") !== -1)
-						{
-						  img = "assets/menu/vegetarian1.jpg";
-						}
-						else if(arrLabel[l].toString().toLowerCase().indexOf("vegan") !== -1)
-						{
-						  img = "assets/menu/vegan.png";
-						}
-						else if(arrLabel[l].toString().toLowerCase().indexOf("peanut-free") !== -1)
-						{
-						  img = "assets/menu/peanutfree.jpg";
-						}
-						else if(arrLabel[l].toString().toLowerCase().indexOf("sugar-conscious") !== -1)
-						{
-						  img = "assets/menu/sugarfree.jpg";
-						}
-						else if(arrLabel[l].toString().toLowerCase().indexOf("alcohol-free") !== -1)
-						{
-						  img = "assets/menu/alcoholfree.png";
-						}
-						else if(arrLabel[l].toString().toLowerCase().indexOf("balanced") !== -1)
-						{
-						  img = "assets/menu/balanced-diet.png";
-						}
-						*/
 					 //   //console.log(img);
 					  this.healthLabels.push({"label":arrLabel[l]["name"], "image":arrLabel[l]["image"]});
 					  
