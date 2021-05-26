@@ -74,11 +74,11 @@ images: any;
 	{
 		this.stepsList = [];
 
-		this.stepsList.push({"label":"Select", "subtitle":"Healthy Recipes", "image":"assets/images/listing-1.jpg", "description":"We've got hundreds of delicious recipes for every taste and dietary preference. Browse them all using our search and filter tools. Choose the ones that are right for you."});
+		this.stepsList.push({"label":"Select", "subtitle":"Healthy Recipes", "image":"assets/new/search_recipes.jpg", "description":"We've got hundreds of delicious recipes for every taste and dietary preference. Browse them all using our search and filter tools. Choose the ones that are right for you."});
 
-		this.stepsList.push({"label":"Design", "subtitle":"Meal Plan","image":"assets/images/balance-meals-z.jpg", "description":"Use our meal planning tool to add recipes to your weekly meal plan. It's as simple as drag and drop (or select and place on mobile). You can add as many recipes to your calendar as you want."});
+		this.stepsList.push({"label":"Design", "subtitle":"Meal Plan","image":"assets/new/meal_plan.jpg", "description":"Use our meal planning tool to add recipes to your weekly meal plan. It's as simple as drag and drop (or select and place on mobile). You can add as many recipes to your calendar as you want."});
 
-		this.stepsList.push({"label":"Gather and Cook", "subtitle":"Meal Plan","image":"assets/images/meal-planning1.jpg", "description":"For the meal plan of your choice, get a customized grocery shopping list. Gather the ingredients and prepare your healthy happy meal. Enjoy the delicacy while we help to keep a track of your daily calorie intake."});
+		this.stepsList.push({"label":"Gather and Cook", "subtitle":"Prepare","image":"assets/new/prepare.jpg", "description":"For the meal plan of your choice, get a customized grocery shopping list. Gather the ingredients and prepare your healthy happy meal. Enjoy the delicacy while we help to keep a track of your daily calorie intake."});
 
 
 	}
