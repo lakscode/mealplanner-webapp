@@ -31,29 +31,9 @@ export class AppComponent implements OnInit {
 
     
     var parent = this;
-  /*  setTimeout(() => {
-    try{
-    this.dbService.getLocalData("http://www.geoplugin.net/json.gp").subscribe(ipdata => setTimeout(() => 
-    {
-     //console.log(ipdata);
-     if(typeof(ipdata) !== "undefined" && ipdata !== null && typeof(ipdata['geoplugin_request']) !== "undefined" && ipdata['geoplugin_request'] !== "")
-     {
-       var ipaddress = ipdata['geoplugin_request'];
-       if(typeof(ipaddress) !== "undefined" && ipaddress !== null && ipaddress !== "")
-       {
-         localStorage.setItem("ipaddress", ipaddress);
-       }
-     }
-    }));
-  }
-  catch(error)
-  {
-    //console.log(error);
-  }
-    }, 6000);
-*/
+  
     localStorage.setItem('currentUser', "");
-
+/*
     this.userService.loggedinUser().subscribe(userdata => setTimeout(() => {
 
       this.loggedIn = false;
@@ -73,8 +53,7 @@ export class AppComponent implements OnInit {
 
         var difference = currentDttm.getTime() - resetsentat.getTime();
         var resultInMinutes = Math.round(difference / 60000);
-     //   //console.log(resultInMinutes);
-        var resultInDays = Math.round(difference / (1000 * 3600 * 24));
+          var resultInDays = Math.round(difference / (1000 * 3600 * 24));
   
         if(resultInDays > 30)
         {
@@ -87,6 +66,7 @@ export class AppComponent implements OnInit {
 
       }
     }, 0));
+    */
   }
  
  
