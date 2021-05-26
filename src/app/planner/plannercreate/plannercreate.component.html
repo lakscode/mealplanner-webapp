@@ -352,11 +352,12 @@
                                                     <div class="image-card-container">
                                                        <!--  <div class="recipe-remove" (click)="removeRecipe(r, c)"><i class="fa fa-trash" aria-hidden="true"></i></div>
                                                         <div class="recipe-show" (click)="viewRecipe(r, c)"><i class="fa fa-cutlery" aria-hidden="true"></i></div> -->
-                                                                      <div class="morebtn" style="margin-top:-15px;margin-right:-5px"><a class="menu" (click)="toggleMoreMenu(meal, c)" href="javascript:void(0)"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></a>
-                                <div class="moremenu"  *ngIf="meal.expand">
+                                                                      <div class="morebtn" style="margin-top:-15px;margin-right:-5px"><a class="menu" (click)="toggleMoreMenu(meal, r,c)" href="javascript:void(0)"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></a>
+                                                                  
+                                <div class="moremenu"  *ngIf="meal.recipe['expand']">
                                     
 
-                                    <a href="javascript:void(0)" (click)="removeRecipe(r,c)"><i class="fa fa-trash" aria-hidden="true"></i> Delete</a>
+                                    <a href="javascript:void(0)" (click)="removeRecipe(r,c)"><i class="fa fa-trash" aria-hidden="true"></i> Remove</a>
                                     <a href="javascript:void(0)" (click)="viewRecipe(r,c)"><i class="fa fa-list-ul" aria-hidden="true"></i> Details</a>
                                 </div>
                                 </div>

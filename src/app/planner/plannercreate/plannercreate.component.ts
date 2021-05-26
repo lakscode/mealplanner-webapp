@@ -632,7 +632,7 @@ this.loadColorCodes();
 	//  console.log(retImage);
 	  return retImage;
 	}
-	toggleMoreMenu(meal, index)
+	toggleMoreMenu(meal, row, col)
 {
 	console.log(meal);
 	
@@ -642,14 +642,19 @@ this.loadColorCodes();
 	
 		for(let i =0; i < this.plan['days'].length;i++)
 		{
-			if(this.plan["days"][i]["meals"][i]["recipe"]["id"] !== meal.recipe["id"] && index !== i)
+			console.log(i);
+			console.log(this.plan["days"][i]["meals"]);
+			for(let j= 0; j < this.plan['days'][i]['meals']['length']; j++)
 			{
-				this.plan["days"][i]["meals"][i]["recipe"]["expand"] = false;
+				if(this.plan["days"][i]["meals"][j]["recipe"]["id"] !== meal.recipe["id"] && row !== i && col !== j)
+				{
+					this.plan["days"][i]["meals"][j]["recipe"]["expand"] = false;
+				}
 			}
 		}	
 	
 	meal.recipe["expand"] = !meal.recipe["expand"];	
-
+	console.log(meal);
 }
 	removeRecipe(r, c)
 	{
