@@ -632,6 +632,25 @@ this.loadColorCodes();
 	//  console.log(retImage);
 	  return retImage;
 	}
+	toggleMoreMenu(meal, index)
+{
+	console.log(meal);
+	
+	console.log(this.plan['days']);
+	console.log(meal.recipe);
+
+	
+		for(let i =0; i < this.plan['days'].length;i++)
+		{
+			if(this.plan["days"][i]["meals"][i]["recipe"]["id"] !== meal.recipe["id"] && index !== i)
+			{
+				this.plan["days"][i]["meals"][i]["recipe"]["expand"] = false;
+			}
+		}	
+	
+	meal.recipe["expand"] = !meal.recipe["expand"];	
+
+}
 	removeRecipe(r, c)
 	{
 		this.plan["days"][r]["meals"][c]["recipe"] =  null;
