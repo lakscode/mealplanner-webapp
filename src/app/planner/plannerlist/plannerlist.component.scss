@@ -44,22 +44,3 @@ visibility: visible;
 .listing-list .listing:nth-child(4n) .detail {
   background-image: url(../../../assets/images/cherry-icon-small.png);
 }
-.create-plan
-{
-  float: right;
-    display: inline-block;
-    background: #f8f6f5;
-    background-color: #FFAF4F;
-    color: #FFF;
-    overflow: hidden;
-    position: relative;
-    border-radius: 5px;
-    font-size: 16px;
-    z-index: 6666;
-    padding: 10px
-}
-
-.create-plan:hover
-{
-  cursor: pointer;
-}

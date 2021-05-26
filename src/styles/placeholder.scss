@@ -358,16 +358,16 @@ color:$text-gray;
   float: right;
     display: inline-block;
     background: #f8f6f5;
-    background-color:#FFAF4F;
+    background-color:$orange;
     color:  #FFF;
     overflow: hidden;
     position: relative;
     border-radius: 5px;
     font-size: 14px;
-    z-index: 6666;
+   // z-index: 6666;
     padding: 10px;
     font-family: 'Lato', sans-serif;
-    border:1px solid  #FFAF4F;
+    border:1px solid  $orange;
     min-width:100px;
 }
 
