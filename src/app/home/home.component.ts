@@ -34,11 +34,10 @@ images: any;
 		  this.images["mobilescreens"] ="assets/mtc_s.jpg";
 		  this.images['goodfood']  = "assets/images/temp-images/good-food.jpg";
 
-		//console.log("Home NgOninit");
 		this.loadSteps(); 
-	//	this.loadTestimonials();
+
 		this.isMobile = this.helpService.isMobile();
-		//console.log(this.isMobile);
+
 		this.currentUser =this.helpService.getCurrentUser();
 		if(this.currentUser !== null)
 		{
@@ -47,28 +46,9 @@ images: any;
 		  this.currentUser["displayname"] = this.currentUser["firstname"];
 		  else if( this.currentUser["username"] !== "")
 		  this.currentUser["displayname"] = this.currentUser["username"];
-		//  //console.log(this.currentUser["displayname"]);
 		}
 
-		/*
-    	this.userService.loggedinUser().subscribe(userdata => setTimeout(() => {
-			if (userdata !== null && typeof (userdata['loggedIn']) !== "undefined") {
-				if (userdata['loggedIn'] == false) {
-				//	this.router.navigate(["login", { redirectUrl: encodeURI(this.router.url) }]);
-				}
-				else if (userdata['loggedIn'] == true) {
-					this.userName = userdata;
-					this.currentUser = userdata;
-					//window.location.href="/landing1";
-				}
-				else {
-				//	this.router.navigate(["login", { redirectUrl: encodeURI(this.router.url) }]);
-				}
-			}
-		}, 0));
-		*/
 	}
-
 
 	loadSteps()
 	{
@@ -80,39 +60,7 @@ images: any;
 
 		this.stepsList.push({"label":"Gather and Cook", "subtitle":"Prepare","image":"assets/new/prepare.jpg", "description":"For the meal plan of your choice, get a customized grocery shopping list. Gather the ingredients and prepare your healthy happy meal. Enjoy the delicacy while we help to keep a track of your daily calorie intake."});
 
-
 	}
-/*
-	loadTestimonials()
-	{
-		this.testimonialsList = [];
-		var count = 0;
-		var child = [];
-		for(let i=0; i < 10; i++)
-		{
-			
-			if(count < 3)
-			{
-				child.push({"id":i, 
-				"name":"Andrew Neel " + i, 
-				"image":"assets/images/temp-images/white-bg.jpg",
-				"testimonial":"Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo omnis voluptatem consectetur quam tempore " + i,
-				"location":"Bangalore",
-				"created_at":""})
-				count++;
-			}
-			else
-			{
-				var temp = JSON.parse(JSON.stringify(child));
-				this.testimonialsList.push({"id":i,"child": temp});
-				child = [];
-				count = 0;
-			}
-		
-		}
-		//console.log(this.testimonialsList);
-	}
-	*/
 
 	gotopage(page)
 	{
@@ -121,9 +69,7 @@ images: any;
 
 	openModal(id)
 	{
-
 		this.popupforquestions  = true;
-		//console.log(this.popupforquestions);
 	}
 
 	closeModal(id)
