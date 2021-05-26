@@ -66,7 +66,18 @@ this.loadPlans()
         var param = {};
         if(params !== null)
         param = params;
-        this.router.navigate([page, param]);
+        if(page == "plan-create")
+        {
+            if(window.screen.width > 768 || window.innerWidth > 768)
+            {
+                this.router.navigate([page, param]);
+            }
+            else
+            {
+                this.router.navigate(["plan-createm", param]);
+            }
+        }
+       
     
     }
     setFLU(str)

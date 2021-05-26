@@ -46,6 +46,7 @@ import { RecipesubmitModule } from './recipes/recipesubmit/recipesubmit.module';
 import { TestimonialsModule } from './testimonials/testimonials.module'; 
 import { PlannerlistModule } from './planner/plannerlist/plannerlist.module'; 
 import { PlannercreateModule } from './planner/plannercreate/plannercreate.module'; 
+import { PlancreatemModule } from './planner/plancreatem/plancreatem.module'; 
 import { ScheduleModule } from './planner/schedule/schedule.module'; 
 import { TrendingModule } from './planner/trending/trending.module'; 
 
@@ -117,6 +118,7 @@ import {environment} from "../environments/environment"
 	TestimonialsModule,
 	PlannerlistModule,
 	PlannercreateModule,
+	PlancreatemModule,
 	ScheduleModule,
 	TrendingModule,
 	PricingModule,

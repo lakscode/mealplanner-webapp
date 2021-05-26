@@ -1,0 +1,402 @@
+@import "../../../_variables.scss";
+
+.modalpopup
+{
+    /*display:none; */
+    position:fixed; 
+    top: 0;
+    height:auto; 
+    min-height:100%; 
+    width:100%; 
+    left:0;
+    background:#FFFFFF;
+    /*padding:10px; */
+    color:#000;
+   // border-radius: 15px;
+    box-shadow: 8px 8px 4px #aaaaaa;
+  //  border: 1px solid #aaaaaa;
+    z-index: 999;
+}
+
+
+
+.closebtn
+{
+    padding: 10px;
+    position: absolute;
+   // top: -16px;
+    right: 0px;
+    z-index: 9999;
+    width: 36px;
+  //  border-radius: 50%;
+    height: 36px;
+    color:#000;
+    background:transparent;
+   // color:rgb(29,85,169);
+   font-size: 20px;
+  //  border:1px solid rgb(29,85,169);
+}
+.item-day
+{
+
+
+}
+
+.item-heading
+{
+    font-size: 18px;
+  /*  margin-top:15px;*/
+    color:#000;
+ //  border-top-left-radius: 15px;
+//border-top-right-radius: 15px;
+}
+
+
+.panel
+{
+    padding-bottom: 15px;
+   // background: #FFF;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    border-radius:25px;
+}
+
+.mainlist .alternate_ion_item:nth-child(even) {background: #F1f2f2; --background: #F1f2f2}
+
+.mainlist .alternate_ion_item:nth-child(odd) {background: #FFF} 
+
+.odditem {background: #F1f2f2; --background: #F1f2f2}
+
+.evenitem {background: #FFF} 
+
+
+/*
+.segment{
+  width: 40px;
+  background:var(--green1);
+  color:#FFF;
+
+  border-radius:20px;
+  height:70px;
+  margin:0px 5px;
+  }
+*/
+  .segment-button-checked 
+  {
+
+    width: 40px !important;
+    background: $green !important;
+    color:#FFF !important;
+  
+    border-radius:20px;
+    height:70px;
+    margin:0px 5px;
+    --color: transparent !important;
+    --color-checked: transparent !important;
+    .day
+    {
+      font-family: 'Lato', sans-serif;
+    }
+
+    .segmentDay
+    {
+    font-size:10px;
+    }
+
+    .segmentDayNum
+    {
+      width:32px !important;
+      height:32px !important;
+      padding-top:5px;
+      text-align:center;
+      background:#FFF !important;
+      border-radius:50%;
+      color: $green !important;
+
+    }
+
+  }
+.day-active
+{
+  background: $green !important;
+    color:#FFF !important;
+
+    .segmentDayNum
+    {
+      background:#FFF !important;
+
+    }
+}
+  .day-panel
+  {
+    width: 40px !important;
+   // background: #f1f2f3;
+    color:#000;
+    display:inline-block;
+    border-radius:20px;
+    height:70px;
+    margin:0px 3px;
+    .day
+    {
+      font-family: 'Lato', sans-serif;
+      margin-top:10px;
+    }
+
+    .segmentDay
+    {
+    font-size:10px;
+    margin-bottom:10px;
+    }
+
+    .segmentDayNum
+    {
+      width:30px !important;
+      height:30px !important;
+      padding-top:10px;
+      text-align:center;
+     //
+      border-radius:50%;
+      color:$green !important;
+      margin: 0 auto;
+    }
+  }
+
+  .segment-button-has-label
+  {
+
+    width: 35px;
+    background:transparent;
+    color:$green;
+    height:70px;
+    margin:0px 5px;
+    
+    .day
+    {
+      font-family: 'Lato', sans-serif;
+    }
+
+    .segmentDay
+    {
+    font-size:10px;
+    }
+
+    .segmentDayNum
+    {
+      width:24px;
+      text-align:center;
+      background:transparent;
+    color:$green;
+     
+
+    }
+
+  }
+
+
+  .meal-type
+  {
+    background: #FFF;
+    border-radius: 5px;
+  //  box-shadow: 5px 5px 3px #aaaaaa;
+  //  border: 1px solid #CCC;
+    margin-top: 10px;
+    margin-bottom: 15px;
+  }
+
+  .mealtype-separator
+  {
+height: 2px;
+width:100%;
+background: #aaaaaa;
+
+  }
+
+.labl
+{
+  font-family: 'Lato', sans-serif, "Courier New", Courier, monospace !important;
+  font-size: 20px;
+  line-height: 28px;
+  
+}
+ 
+.ratingPanel
+{
+  position: fixed;
+  top: 25%;
+  left: 10px;
+  right: 10px;
+  background: #FFF;
+  //display: none;
+  height: 350px;
+  color:$orange1;
+
+}
+
+
+/**** Filters */
+
+
+
+
+.filters
+{
+  padding:10px;
+  border-radius: 15px;
+  background: #f1f2f3;
+  color:#000;
+  width: 100%;
+    text-align: center;
+    align-items: center;
+    vertical-align: middle;
+    display: flex;
+}
+
+.filters.active
+{
+  background: $green;
+  color:#FFF;
+}
+
+.filters a
+{
+text-align:center;
+text-decoration:none;
+text-transform: uppercase;
+font-size:16px;
+display: flex;
+vertical-align: middle;
+align-items: center;
+color:#000;
+}
+.filters.active a
+{
+  color:#FFF;
+}
+.filters a ion-icon
+{
+font-size:20px;
+margin-right:10px;
+}
+
+.filterheading
+{
+  font-weight:bold;
+   ion-label
+   {
+     font-size: 14px;
+   }
+
+   ion-avatar
+   {
+     font-size: 24px;
+   }
+  
+
+}
+
+.filteritem
+{
+  font-size: 16px;
+  line-height: 24px;
+}
+.maxmin
+{
+  font-size: 12px;
+  font-style: italic;
+  color:#CCC;
+  display:none;
+}
+.mineral-input
+{
+  width: 90%;
+  background: transparent;
+  border: 0;
+  border-bottom: 2px solid #CCC;
+  text-align: center;
+  outline:0;
+}
+.mineral-input:focus
+{
+  border-bottom: 2px solid $orange;
+
+}
+.bg-trans
+{
+  background: transparent;
+  --background: transparent;
+}
+.custom-item
+{
+  width:100%;
+  padding:10px;
+  background:transparent;
+  font-size: 20px;
+  line-height: 24px;
+  .left{
+    width: 10%;
+    float:left;
+    text-align:left;
+  }
+
+  .center{
+    width: 80%;
+    float:left;
+    text-align:left;
+    font-weight:bold
+  }
+  
+
+  .right{
+    width: 10%;
+    float:left;
+    text-align:right;
+    img{
+      width: 16px;
+      height: 10px;
+    }
+  }
+  
+}
+
+
+.item-heading {
+  font-size: 18px;
+  color: #000;
+}
+
+.bg-green {
+  background: $green;
+  background: linear-gradient(17deg, $green 0%, $green 100%);
+  color: #FFF;
+}
+
+.mealtypelbl
+{
+  font-family: 'Lora', sans-serif, "Courier New", Courier, monospace !important;
+  font-size: 18px;
+  line-height: 24px;
+  color:#FFF; 
+}
+.labl {
+  font-family: 'Lato', sans-serif, "Courier New", Courier, monospace !important;
+  font-size: 20px;
+  line-height: 28px;
+  color:#FFF;
+}
+
+
+.recipe-item
+{
+  border: solid 2px #fff;
+  box-shadow: 0 1rem 1.5rem rgb(0 0 0 / 25%);
+  border-radius:10px;
+  min-height:130px;
+  margin:10px;
+  padding:10px;
+}
+
+.recipe-item:hover
+{
+  box-shadow: 0 1rem 1.5rem rgb(255 145 0 / 25%);
+
+}

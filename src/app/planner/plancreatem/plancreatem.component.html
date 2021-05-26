@@ -1,0 +1,422 @@
+<div class="fixedtop submit-recipe-form" style="padding:15px">
+
+  
+          <p class="title-black ion-header-center">Create Plan</p>
+        
+          <!--
+        <ion-fab  vertical="bottom" horizontal="end" slot="fixed">
+          <ion-fab-button> 
+            
+            <img src="assets/more_light.png" width="30px" />
+          </ion-fab-button>
+          <ion-fab-list side="top" style="width: 100px; --border-radius: 5px;">
+            
+          <div *ngIf="showNutrientsFlag && plan['created_by'] == currentUser['id']" (click)="updateMealPlanStatus()" class="fablistbtn right">
+            <span name="cloud-upload-outline"></span> <p class="fab-icon">Update Status</p>
+          </div>
+          <div *ngIf="showNutrientsFlag"  (click)="getIngredientsList()" class="fablistbtn right">
+            <span name="cart"></span> <p class="fab-icon">Grocery List</p>
+          </div>
+          <div  (click)="downloadPlan()" class="fablistbtn right">
+            <span name="download"></span> <p class="fab-icon">Download Plan</p>
+          </div>
+          <div  (click)="showSharePanel()" class="fablistbtn right">
+            <span name="share"></span> <p class="fab-icon">Share Plan</p>
+          </div>
+          </ion-fab-list>
+      
+        </ion-fab>-->
+      
+      
+        <div *ngIf="plan">
+      
+          <div class="element-group">
+            <label  class="heading">Meal Plan Name</label>
+             <textarea  [disabled]="viewMode" id="planname" name="planname" style="width:100%" class="left" rows="1" autocomplete="off" [(ngModel)]= "plan.name" (keyup)="resize('planname')"  type="text" placeholder="Meal Plan Name" (blur)="onNameChange('name')">
+             </textarea>
+             <div *ngIf="errorMessage && !plan.name" style="color:red">{{errorMessage}}</div>
+           </div>
+           <div class="element-group">
+            <label  class="heading">Tags <span style="font-size:12px; font-style:italic">(comma seperated)</span></label>
+             <textarea  [disabled]="viewMode"  id="tags" name="tags" style="width:100%" class="left" rows="1" autocomplete="off" [(ngModel)]= "plan.tags" (keyup)="resize('tags')"  (focus)="resize('tags')" type="text" placeholder="Tags" (blur)="onNameChange('name')">
+             </textarea>
+           </div>
+          
+       
+          <div style="    margin: 0 auto;   text-align: center;">
+            <ng-container *ngFor="let itemday of plan['days']; let i = index ">
+              <div [ngClass]="i == selDayIndex?'day-panel day-active':'day-panel'"  (click)="setDayIndex(i, itemday)">
+      
+              <div class="day">
+              <div class="segmentDay">Day</div>
+              <div class="segmentDayNum">{{showDay(i)}}</div>
+            </div>
+              </div>
+          </ng-container>
+          </div>
+          
+          <div style='width:100%; height:10px'></div>
+          <div *ngIf="selDay && plan.name !== '' " class="panel">
+          <div class="item-day">
+            <div class="mainlist" style="background:transparent; --background: transparent;">
+          <div class='item-heading bg-green'>
+            <p style="color:#FFF">For {{selDay.name}}</p>
+            <div *ngIf="planDay.totalCalories" slot="end" style="width:100px; padding-top:10px; font-size:14px;">
+              Calories:{{planDay.totalCalories}}
+            </div>
+          </div>
+          <div  class='bg-green' *ngIf="showNutrientsFlag && planDay">
+            <p>Nutritions   <span (click)="formatMinerals(planDay)" id="icon_{{selDayIndex}}_{{mealType}}tm" class="btnicon" name="chevron-down-outline"><img src= "assets/arrow-down.png" style="max-height: 60px;" /></span></p>
+          </div>
+          <div class='bg-green' *ngIf="planDay && planDay['mexpand']">
+            <div style=" width:100%;   padding-top: 10px;
+            padding-bottom: 10px; 
+          background-color: white;color:#000;" >    
+            <ng-container *ngFor="let tmineral of totalMineralsForDay; let i = index;">
+         
+                <p>
+                  {{getFLU(tmineral.name)}}  <span style="float:right; width:100%; text-align:right"><span style="color:var(--blue)">{{formatVal(tmineral["value"],2)}}</span> {{tmineral["unit"]}}</span>
+                </p>
+               
+      
+            </ng-container>
+            </div>
+      
+          </div>
+          <ng-container *ngFor="let mealType of mealTypeList; let i = index">
+            
+            <div class="meal-type">
+
+       <div class="recipe-item" style="background-size:cover;  background-position:center;  height:100%; " [ngStyle]="{'background-image':'linear-gradient(
+        rgba(0, 0, 0, 0.3),
+        rgba(0, 0, 0, 0.3)
+      ),url(' + planDay[mealType].image + ')'}">
+            
+        <div *ngIf="plan['created_by'] == currentUser['id']" style="position: absolute;
+        right: 10px;"> 
+        <span style='color:#FFF' class="btnicon"  (click)="addMeal(mealType)">
+            <img  src= "assets/arrow-down.png" style="max-height: 60px;" /></span> </div>
+        <h2 style='color:#FFF;'>{{getFLU(mealType)}}</h2>
+        <ng-container *ngIf="!planDay[mealType].label">
+          <div (click)="addMeal(mealType)" style="max-height: 60px; margin:0 auto; width:100%;text-align:center;">
+          <img  src= "assets/add-recipe.png" style="max-height: 60px;" />
+        </div>
+        </ng-container>
+      <ng-container *ngIf="planDay[mealType].label">
+        <h2 class='labl' >{{getFLU(planDay[mealType].label)}}</h2>
+        <p  style="color:#FFF;" >
+           <span *ngIf="planDay[mealType].calories"><em>Calories:</em> {{planDay[mealType].calories}} Kcal<br>
+           </span>
+           <span *ngIf="planDay[mealType].totalWeight">
+            <em>Total Weight:</em> {{toFixed(planDay[mealType].totalWeight)}} gms<br>
+           </span>
+        </p>
+        <p *ngIf='showNutrientsFlag' style="color:#000; text-align:right; "  >
+         <span (click)="toggleNutrients(selDayIndex, mealType)" style="background:#f1f2f3;border-radius:5px; padding:5px;color:#000;">Show Nutrients</span>
+      
+        </p>
+      </ng-container>
+   
+      </div>
+      <div id="nutrients_{{selDayIndex}}_{{mealType}}" *ngIf="planDay[mealType]['expand']" style='--background:transparent;'>
+           
+        <div style=" width:100%;   padding-top: 10px;
+        padding-bottom: 10px; color:#000;
+      background-color: white; margin-bottom:10px;" >
+          <p style="padding-left:10px;"><strong>Nutritions:</strong></p>
+      
+            <p>
+              {{getFLU("calories")}}   <span style="width:100%; text-align:right"><span style="color:var(--blue)">{{planDay[mealType]["calories"]}}</span> Kcal</span>
+            </p>
+          
+          <ng-container *ngFor="let mitem2 of planDay[mealType]['paramMicro']">
+           
+              <p>
+                {{getFLU(mitem2["label"])}}  <span style="float:right; width:100%; text-align:right"><span style="color:var(--blue)">{{formatVal(mitem2["totalP"],2)}}</span> {{mitem2["unit"]}}</span>
+              </p>
+           
+          </ng-container>
+      
+        <ng-container *ngIf="planDay && planDay[mealType] &&  planDay[mealType]['minerals'] && planDay[mealType]['minerals']['length'] > 0">
+        
+          <ng-container *ngFor="let mitem1 of planDay[mealType]['minerals']">
+              <p>
+                {{getFLU(mitem1["name"])}}  <span style="float:right; width:100%; text-align:right"><span style="color:var(--blue)">{{formatVal(mitem1["value"],2)}}</span> {{mitem1["unit"]}}</span>
+              </p>
+          </ng-container>
+          
+        </ng-container>
+        </div>
+      
+      </div>
+      
+      
+           
+          <div  *ngIf="planDay[mealType] && planDay[mealType].label" class="alternate_ion_item" style="--inner-padding-end: 0px;
+          --padding-start: 0px;-border-style: none; display:none;
+          width: 100%;">
+            <div [ngClass]="'odditem'" style="
+            --padding-start: 0px;  margin: 0; padding: 0; --inner-padding-end: 0px; width: 100%;">
+      
+              <div style="--background:transparent;-border-style: none;">
+      
+                <div slot="start" *ngIf="planDay[mealType] && planDay[mealType].image">
+                  <img style='width:40px; height:40px' src="{{planDay[mealType].image}}" />
+                </div>
+                <div *ngIf="planDay[mealType].label">
+                  <h2>{{getFLU(planDay[mealType].label)}}</h2>
+                  <p>
+                     <span *ngIf="planDay[mealType].calories"><em>Calories:</em> {{planDay[mealType].calories}} Kcal<br>
+                     </span>
+                     <span *ngIf="planDay[mealType].totalWeight">
+                      <em>Total Weight:</em> {{toFixed(planDay[mealType].totalWeight)}} gms<br>
+                     </span>
+                  </p>
+                </div>
+                <div *ngIf='showNutrientsFlag'  (click)="toggleNutrients(selDayIndex, mealType)" slot="end">
+                  <span id="icon_{{selDayIndex}}_{{mealType}}" class="btnicon" name="chevron-down-outline">down arrow</span>
+                </div>
+              </div>
+              <div id="nutrients_{{selDayIndex}}_{{mealType}}" *ngIf="planDay[mealType]['expand']" style='--background:transparent;'>
+           
+                <div style=" width:100%;   padding-top: 10px;
+                padding-bottom: 10px;
+          background-color: white; margin-bottom:10px;" >
+                  <p style="padding-left:10px;color:#000;"><strong>Nutritions:</strong></p>
+              
+                    <p>
+                      {{getFLU("calories")}}
+                      <span style="width:100%; float:right; text-align:right"><span style="color:var(--blue)">{{planDay[mealType]["calories"]}}</span> Kcal</span>
+                    </p>
+                
+                  <ng-container *ngFor="let mitem2 of planDay[mealType]['paramMicro']">
+                     <p>
+                        {{getFLU(mitem2["label"])}}
+                        <span style="width:100%; text-align:right; float:right;"><span style="color:var(--blue)">{{formatVal(mitem2["totalP"],2)}}</span> {{mitem2["unit"]}}</span>
+                    </p>
+                  
+                  </ng-container>
+      
+                <ng-container *ngIf="planDay && planDay[mealType] &&  planDay[mealType]['minerals'] && planDay[mealType]['minerals']['length'] > 0">
+                
+                  <ng-container *ngFor="let mitem1 of planDay[mealType]['minerals']">
+                    <div>
+                      <p>
+                        {{getFLU(mitem1["name"])}}
+                      </p>
+                      <div   slot="end" style="width: 90px; display: flex; align-items: center; margin-top:0px; margin-bottom:0px;text-align:right;">
+                       <span style="width:100%; text-align:right"><span style="color:var(--blue)">{{formatVal(mitem1["value"],2)}}</span> {{mitem1["unit"]}}</span>
+      
+                      </div>
+                    </div>
+                  </ng-container>
+                  
+                </ng-container>
+                </div>
+             
+              </div>
+      
+              </div>
+      
+          </div>
+        </div>
+      
+        <!--<div class="mealtype-separator"></div>-->
+          </ng-container> 
+      
+          </div>
+          </div>
+      
+          </div>
+          
+        </div>  
+      
+    
+      
+      
+      <div id="addMeal" class="modalpopup" *ngIf='addMealFlag && modalText'>
+        <button class="closebtn" (click)="closeModal()">X
+        </button>
+        <div style="margin-top:0px;" class='item-heading' >Add {{getFLU(modalText)}}</div>
+        <div>
+          <p>For all remaining days {{getFLU(modalText)}}</p>
+          <input type="checkbox" slot="start" [(ngModel)]="planDay['forall'][modalText]">
+        </div>
+      
+        <div *ngIf="planDay[modalText]">
+      <p position="floating">Search Recipe</p>
+      <textarea  style="border-bottom: 1px solid #CCC;--padding-bottom: line-height:150%;  width:calc(100% - 50px);"  id="{{modalText}}" (blur)="getItems($event, modalText)" [(ngModel)] = "planDay[modalText].label"></textarea>
+      <button slot="end" class="micbtnend" (click)=" startListening(modalText)"><span name="mic-outline"></span></button>
+      </div>
+      <div>
+        <div size="6">
+          <div [ngClass]="filterFlag?'filters active':'filters'">
+            <a href="javascript:void(0)" (click)="setFilters()">
+                <i class="fa fa-sliders" aria-hidden="true"></i> 
+              Filters
+            </a>
+          </div>
+        </div>
+        <div size="6">
+          <div class='filters'>
+            <a href="javascript:void(0)" (click)="clearFilters()">
+                <i class="fa fa-times" aria-hidden="true"></i>
+              Clear
+            </a>
+          </div>
+        </div>
+      
+        <div style="    max-height: 280px;
+        overflow: auto;">
+          <ng-container *ngIf="filterFlag && filters && filters['dietLabels'] && filters['dietLabels']['data'] && filters['dietLabels']['data']['length'] > 0">
+            <div class="custom-item" (click)="filters['dietLabels']['expand'] = !filters['dietLabels']['expand']">
+              <div class="left">
+                <span  name="restaurant"></span>
+              </div>
+              <div class="center">
+                {{filters['dietLabels']['label']}} 
+              </div>
+              <div class="right" >
+                <img src="assets/menu/arrow-down.png" *ngIf="!filters['dietLabels']['expand']" />
+                <img src="assets/menu/arrow-up.png" *ngIf="filters['dietLabels']['expand']" />
+                <!--<span *ngIf="!filters['dietLabels']['expand']" name="arrow-down"></span>
+                <span *ngIf="filters['dietLabels']['expand']" name="arrow-up"></span>-->
+              </div>
+          </div>
+          <div style="clear:both"></div>
+            <div class="bg-trans">           
+              <ng-container *ngIf="filters['dietLabels']['expand']">
+      
+                <div>
+                  <div style="display:flex; align-items:center" size="6" *ngFor="let dItem of filters['dietLabels']['data']; let h = index;">
+                    <input type="checkbox"  class="checkbox marginr10" name="filterD[]" [(ngModel)]="dItem.selected"> <div style="display:inline-block" (click)="selectDeselect(dItem)" class="filteritem">{{dItem.name}}</div>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+         
+          </ng-container>
+         
+      
+      
+          <ng-container *ngIf="filterFlag && filters && filters['healthLabels'] && filters['healthLabels']['data'] && filters['healthLabels']['data']['length'] > 0">
+            <div class="custom-item" (click)="filters['healthLabels']['expand'] = !filters['healthLabels']['expand']">
+              <div class="left">
+                <span  name="restaurant"></span>
+              </div>
+              <div class="center">
+                {{filters['healthLabels']['label']}} 
+              </div>
+              <div class="right" >
+                <img src="assets/menu/arrow-down.png" *ngIf="!filters['healthLabels']['expand']" />
+                <img src="assets/menu/arrow-up.png" *ngIf="filters['healthLabels']['expand']" />
+                <!--<span *ngIf="!filters['healthLabels']['expand']" name="arrow-down"></span>
+                <span *ngIf="filters['healthLabels']['expand']" name="arrow-up"></span>-->
+              </div>
+          </div>
+           <div style="clear:both"></div>
+            <div class="bg-trans">
+            <ng-container *ngIf="filters['healthLabels']['expand']">
+      
+                <div>
+                  <div style="display:flex; align-items:center" size="6" *ngFor="let hItem of filters['healthLabels']['data']; let h = index;">
+                    <input type="checkbox"  class="checkbox marginr10" name="filtersH[]" [(ngModel)]="hItem.selected"> <span (click)="selectDeselect(hItem)"  class="filteritem">{{hItem.name}}</span>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+         
+          </ng-container>
+      
+          <ng-container *ngIf="filterFlag && filters && filters['minerals'] && filters['minerals']['data'] && filters['minerals']['data']['length'] > 0">
+        
+            <div class="custom-item" (click)="filters['minerals']['expand'] = !filters['minerals']['expand']">
+                <div class="left">
+                  icon
+                </div>
+                <div class="center">
+                  {{filters['minerals']['label']}} 
+                </div>
+                <div class="right">
+                  <!--<span *ngIf="!filters['minerals']['expand']"  name="arrow-down"></span>
+                  <span *ngIf="filters['minerals']['expand']"  name="arrow-up"></span>-->
+                  <img src="assets/menu/arrow-down.png" *ngIf="!filters['minerals']['expand']" />
+                  <img src="assets/menu/arrow-up.png" *ngIf="filters['minerals']['expand']" />
+                </div>
+            </div>
+            <div style="clear:both"></div>
+            <div class="bg-trans">
+              
+              <ng-container *ngIf="filters['minerals']['expand']">
+                <div *ngFor="let mItem of filters['minerals']['data']; let m = index;">
+                  <div style="display:flex; align-items:center" size="5" >
+                    <input type="checkbox"  class="checkbox marginr10" name="filtersM[]" [(ngModel)]="mItem.selected"> <span (click)="selectDeselect(mItem)"  class="filteritem">{{mItem.name.label}}</span>
+                  </div>
+                  <div *ngIf="mItem.selected"  size="3" >
+                    <input class="mineral-input" type='text' name="minerals_{{m}}_min" [(ngModel)]="mItem.min" placeholder="min" />
+                    <span class="maxmin">{{formatVal(mItem.t_min)}}</span>
+                  </div>
+                  <div  *ngIf="mItem.selected"  size="3" >
+                    <input class="mineral-input" type='text' name="minerals_{{m}}_max" [(ngModel)]="mItem.max" placeholder="max" />
+                    <span class="maxmin">{{formatVal(mItem.t_max)}}</span>
+                  </div>
+                  <div style="padding-left: 0px; padding-right: 0px;" *ngIf="mItem.selected"  size="1" >
+                  {{mItem.name.unit}}
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+         
+          </ng-container>
+      
+        </div>
+        <div size='12' *ngIf="filterFlag" style="text-align:right">
+          <button style="width: 100%;" class='button-round-corner bg-orange search-button' (click)="filterFlag= false; searchFilters($event, modalText)" >Search</button>
+        </div>
+      
+      </div>
+        <div *ngIf="planDay.selected ==  modalText && items.length > 0 && isItemAvailable" style="height: 300px; overflow-y: auto;">   
+          <div>
+            <div  (click)="setrecipe(planDay, modalText, item)" *ngFor="let item of items">
+              <p slot="start">
+                <img class="bxshadow" src='{{item.image}}' style="width:90%">
+              
+              </p>
+              <p>{{item.label}} <br>
+                <span class="small_text"><span name="flame-outline"></span> {{item.calories}}</span> <br>
+              </p>
+            </div>
+          </div>
+        </div>
+      
+      
+      
+      </div>
+      
+      
+      
+      <div id="emailPanel" *ngIf='showemailPanel' style="background:#FFF; z-index:999; position:absolute; top:0; left:0; width:100%; height:100%" > <!--</div> class="ratingPanel bxshadow">-->
+        <div style="text-align:right; width:100%; position:absolute;">
+            <div style="font-size:28px;margin-top: 10px;
+            margin-right: 10px;" (click)="showSharePanel()">
+            <!--<span  class="bxshadow1" name="close-outline"></span>-->
+            <h1 style="margin-top:0px;"> X </h1>
+          </div>
+        </div>
+        <div style="text-align:center; margin-top:40px;">
+          <img style="max-width:150px; width:50%;" src="assets/recipebook.png" />
+        </div>
+        <div style="text-align:center; padding:10px;">
+          <h2>Do you want to share the Meal Plan?</h2>
+        </div>
+      
+        <div class='element-group' style="font-size:20px;text-align:center">
+          <input  type="text" [(ngModel)]="sharemeal.email" name="shareemail" id='shareemail' >
+        </div>
+        <div style="font-size: 20px; text-align: right; margin-right: 20px; margin-top: 20px;    margin: 20px;">
+          <button style="width: 100%; " class='button-round-corner bg-orange search-button' (click)="sharePlan()">Ok</button>
+        </div>
+
+      </div>
+      
+    </div>
