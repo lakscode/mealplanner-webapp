@@ -646,9 +646,12 @@ this.loadColorCodes();
 			console.log(this.plan["days"][i]["meals"]);
 			for(let j= 0; j < this.plan['days'][i]['meals']['length']; j++)
 			{
+				if(this.plan["days"][i]["meals"][j]["recipe"] !== null)
+				{
 				if(this.plan["days"][i]["meals"][j]["recipe"]["id"] !== meal.recipe["id"] && row !== i && col !== j)
 				{
 					this.plan["days"][i]["meals"][j]["recipe"]["expand"] = false;
+				}
 				}
 			}
 		}	
