@@ -41,7 +41,7 @@ testimonialsList: Array<any> = [];
 
 		this.stepsList.push({"label":"Design", "subtitle":"Progress Tracker","image":"assets/new/progress_tracker.jpg", "description":"Progress graphs show number of steps taken, calories burned, distance covered, weight changes, blood pressure and BMI fluctuations calculated per day. The tracker allows you to compare this data for 15 days in one sight."});
 
-		/*this.stepsList.push({"label":"Design", "subtitle":"Image Transformation","image":"assets/images/temp-images/Meal-Planning.jpg", "description":"Just take a snapshot of your face and have us detect your current BMI. From here, the image transformation feature allows you to look at a future, healthier version of you with the desired BMI."});*/
+		/*this.stepsList.push({"label":"Design", "subtitle":"Image Transformation","image":"assets/new/salad.jpg", "description":"Just take a snapshot of your face and have us detect your current BMI. From here, the image transformation feature allows you to look at a future, healthier version of you with the desired BMI."});*/
 
 
 	}
