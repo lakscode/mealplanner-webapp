@@ -1,19 +1,5 @@
 @import "../../../variables";
 
-.tstbite-animation {
-  display: block;
-  overflow: hidden
-}
-
-.tstbite-animation img {
-  transform: scale(1);
-  transition: all ease .8s
-}
-
-.tstbite-animation:hover img {
-  transform: scale(1.1)
-}
-
 .py-3 {
     padding-top: 1rem!important;
     padding-bottom: 1rem!important;
