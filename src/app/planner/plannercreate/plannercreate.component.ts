@@ -131,7 +131,7 @@ this.searchFilterLabels = [];
 
 		this.loadNutrientsMaxMin();
 	
-		window.addEventListener("scroll", this.scrollFunc);
+	//	window.addEventListener("scroll", this.scrollFunc);
 		this.getNutrientsMaxMin(); 
 		
 		this.searchparam['q'] = "";
@@ -634,21 +634,14 @@ this.loadColorCodes();
 	}
 	toggleMoreMenu(meal, row, col)
 {
-	console.log(meal);
-	
-	console.log(this.plan['days']);
-	console.log(meal.recipe);
 
-	
 		for(let i =0; i < this.plan['days'].length;i++)
 		{
-			console.log(i);
-			console.log(this.plan["days"][i]["meals"]);
 			for(let j= 0; j < this.plan['days'][i]['meals']['length']; j++)
 			{
 				if(this.plan["days"][i]["meals"][j]["recipe"] !== null)
 				{
-				if(this.plan["days"][i]["meals"][j]["recipe"]["id"] !== meal.recipe["id"] && row !== i && col !== j)
+				if(this.plan["days"][i]["meals"][j]["recipe"]["id"] !== meal.recipe["id"])
 				{
 					this.plan["days"][i]["meals"][j]["recipe"]["expand"] = false;
 				}
@@ -657,7 +650,7 @@ this.loadColorCodes();
 		}	
 	
 	meal.recipe["expand"] = !meal.recipe["expand"];	
-	console.log(meal);
+
 }
 	removeRecipe(r, c)
 	{
@@ -668,20 +661,9 @@ this.loadColorCodes();
 	{
 		var recipe = this.plan["days"][r]["meals"][c]["recipe"];
 		window.open("/recipedetails/" + recipe.id)
-	//	window.open("/recipedetails/" + recipe.id,'popup','width=600,height=600');
-
-	//	var link = document.createElement('a');
-	//	link.href = "/recipedetails/" + recipe.id;
-	//	link.target = "_blank";
-			
-	//	link.click();
-
 	}
 	drop(ev, r, c) {
-		console.log("Drop function");
-		console.log(ev);
-		console.log(r);
-		console.log(c);
+	
 		ev.preventDefault();
 		var index = sessionStorage.getItem("dragstartindex");
 		
@@ -692,7 +674,7 @@ this.loadColorCodes();
 		console.log("index " + index);
 		console.log("page_num " + this.page_num);
 		console.log("r_index " + r_index);
-		//var recipeItem = this.recipesList[r_index];
+
 		var recipeItem = this.displayList[index];
 
 		var data = ev.dataTransfer.getData("text");
@@ -741,15 +723,12 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 
 	  calculateCalory(mealtype, index)
 	  {
-		//	console.log(this.plan);
-			//console.log(mealtype);
-		//	console.log(index);
+	
 		  var totalCalories = 0;
 		  if(mealtype !== "")
 		  {
 				  for(let r =0; r < this.plan['days'].length; r++)
 			  {
-				 // console.log( this.plan["days"][r]["meals"]);
 				  var item = this.plan["days"][r]["meals"][index];
 				
 				  if(typeof(item['recipe']) !== 'undefined' && item["recipe"] !== null)
@@ -769,13 +748,11 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 	  {
 		  this.filtersOpt = false;
 		this.favouritesList = [];
-		//var params = {"limit": 100};
+
 		var params ={};
-	//	console.log(params);
+
 		params["query"] = "select id, label, image, healthLabels, ingredients, dietLabels, calories, yield from recipes  where id in (select recipeid from favourites where userid ='" + this.currentUser["id"] + "')";
 		 var res =   this.dbService.getDatabyQuery("recipes", params).subscribe(invData => setTimeout(() => {
-	
-	  console.log(invData);
 	  	
 	  if(invData !== null && typeof(invData["body"]) !== "undefined" && invData["body"] !== null && invData["body"]["length"] > 0)
 		{
@@ -792,40 +769,15 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 		  this.getDisplayList();
 		 
 		}
-		/*  if(invData !== null)
-		  {
-			var obj = invData["body"]["length"];
-			this.favouritesList = invData["body"];
-			var idslist = "";
-			for(let i=0; i < this.favouritesList.length; i++)
-			{
-				if(idslist.indexOf(this.favouritesList[i]["recipeid"] + ",") > -1)
-				{
 
-				}
-				else
-				{
-			  		idslist += this.favouritesList[i]["recipeid"] + ",";
-				}
-			  this.favouritesList[i]["recipe"]= null;
-			}
-			if(idslist !== "")
-			{			
-			  idslist = idslist.substring(0, idslist.length-1);
-			  this.loadRecipes(idslist, false);
-			}
-		  }*/
 	
 		}));
 	  }
 
 
-	  /************************ from app  */
-
 	  loadDaysData()
   {
-  //  console.log("in loadDaysData");
-//	console.log(this.plan);
+
     if(typeof(this.plan["id"]) !== "undefined" && this.plan["id"] !== "")
     {
       var params = {};
@@ -865,7 +817,6 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 				{
 					this.plan["days"][item["day_num"]]["meals"][1]["recipe"] = {};
 				this.plan["days"][item["day_num"]]["meals"][1]["recipe"]["id"] = item["snack1"];
-				//idslist += item["snack1"] + ",";
 				if(idslist.indexOf(item["snack1"] + ",") > -1)
 				{
 
@@ -880,8 +831,6 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 				{
 					this.plan["days"][item["day_num"]]["meals"][2]["recipe"] = {};
 				this.plan["days"][item["day_num"]]["meals"][2]["recipe"]["id"] = item["lunch"];
-				//idslist += item["lunch"] + ",";
-
 					if(idslist.indexOf(item["lunch"] + ",") > -1)
 					{
 
@@ -896,7 +845,6 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 				{
 					this.plan["days"][item["day_num"]]["meals"][3]["recipe"] = {};
 				this.plan["days"][item["day_num"]]["meals"][3]["recipe"]["id"] = item["snack2"];
-				//idslist += item["snack2"] + ",";
 
 					if(idslist.indexOf(item["snack2"] + ",") > -1)
 					{
@@ -912,7 +860,6 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 				{
 					this.plan["days"][item["day_num"]]["meals"][4]["recipe"] = {};
 				this.plan["days"][item["day_num"]]["meals"][4]["recipe"]["id"] = item["dinner"];
-				//idslist += item["dinner"] + ",";
 				if(idslist.indexOf(item["dinner"] + ",") > -1)
 					{
 
@@ -924,25 +871,15 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 
 				}
 
-
-				
-            //  this.plan["days"][i]= dData["body"][i];
             }
-         //   console.log(this.selDay['day_num']);
-         //   this.planDay = this.plan['days'][this.selDay['day_num']];
-         ////   this.planDay['forall']= {};
-          //  console.log(this.planDay);
-          //  this.selDay = this.plan["days"][0];
 		  this.loadedPlan = true;
           }
           else{
-          //  this.initializeDays();
-          //  this.createDay();
+
           }
         }
         else{
-        //  this.initializeDays();
-        //  this.createDay();
+
         }
         console.log(this.plan);
 		if(idslist !== "")
@@ -980,8 +917,6 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 
 		var res =   this.dbService.updateDataByTable("mealplan", params).subscribe(invData => setTimeout(() => {
 
-		console.log(invData);
-
 			if(invData !== null)
 			{
 				this.updatingFlag = false;
@@ -993,8 +928,6 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 		{
 
 		var res =   this.dbService.postDataByTable("mealplan", params).subscribe(invData => setTimeout(() => {
-
-			console.log(invData);
 
 			if(invData !== null)
 			{
@@ -1097,10 +1030,6 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 		var rowItem = this.plan["days"][r]["meals"];
 
       var params = {};
-       
-      //  params["meal_plan_id"] = this.plan["id"];
-      //  params["day_num"] = r;
-     //   params["name"] = "Day " + (r +1);
 
         params["breakfast"] = "";
         if(typeof(rowItem[0]["recipe"]) !== "undefined" && rowItem[0]["recipe"] !== null && typeof(rowItem[0]["recipe"]["id"]) !== "undefined")
@@ -1188,24 +1117,10 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 	this.colorCodes["protein"] ="#800000";
 	this.colorCodes["carbs"] ="#008000";
 
-	/*
-	Red	#FF0000	White	#FFFFFF
-	Cyan	#00FFFF	Silver	#C0C0C0
-	Blue	#0000FF	Gray or Grey	#808080
-	DarkBlue	#0000A0	Black	#000000
-	LightBlue	#ADD8E6	Orange	#FFA500
-	Purple	#800080	Brown	#A52A2A
-	Yellow	#FFFF00	Maroon	#800000
-	Lime	#00FF00	Green	#008000
-	Magenta	#FF00FF	Olive	#808000
-	*/
-
   }
 
   showhidenutrients()
   {
-	  console.log("showhidenutrients");
-	  console.log(" showhidenutrientsFlag " + this.showhidenutrientsFlag);
 	if(!this.showhidenutrientsFlag)
 	{
 		this.showNutrientsPServing = false;
@@ -1219,13 +1134,8 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
   }
   toggleNutrients(opt)
   {
-	console.log("opt " + opt);
-    console.log("showTotal " + this.showNutrients);
-    console.log("showPerServing " + this.showNutrientsPServing);
-
     if(opt == "total" && this.showNutrients)
-    this.showNutrientsPServing = false;
-    
+    this.showNutrientsPServing = false;    
     
     if(opt == "perserving" && this.showNutrientsPServing)
     this.showNutrients = false;
@@ -1233,8 +1143,7 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
   }
   getColorCode(param)
   {
-	//  console.log("getColorCode")
-	//  console.log(param);
+
 	  var retVal = "#778ba5";
 	  if(param !== null)
 	  {
@@ -1267,7 +1176,7 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 	{
 		var ret = 0;
 		var pound = 0.00220462;
-		var onekg = 2.2046; // one kg is 2.2046 pounds
+		var onekg = 2.2046; 
 		var onegram = 2.2046/1000;
 		if(num !== "" && num > 0)
 		{
@@ -1292,7 +1201,7 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 	checkData(item)
 	{
 		var retValue = false;
-		//	console.log(item);
+
 		if(item["meals"]["length"] > 0)
 		{
 			for(let m=0; m < item["meals"]["length"]; m++)
@@ -1301,14 +1210,14 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 				retValue = true;
 			}
 		}
-		//	console.log("retValue " + retValue);
+
 		return retValue;
 	}
 
 
 
 	 scrollFunc(){
-	//	console.log("scrolling");
+
 		if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
 		//	mybutton.style.display = "block";
 		  } else {
@@ -1382,8 +1291,6 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 		{
 		//	var path = "https://dentavacation.com/mobileapp/api/generate_pdf.php?id=" + this.plan["id"];
 			this.pdfService.createpdf(this.plan["id"]).subscribe(dData => setTimeout(() => {
-
-				console.log(dData);
 				if(dData !== null )
 				{
 				var mealPlan ={};
@@ -1392,9 +1299,8 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 				var link = document.createElement('a');
 				link.href = mealPlan["link"];
 				link.target = "_blank";
-			//	link.download = mealPlan["link"];
 				link.click();
-				console.log(mealPlan["link"]);
+
 				}
 			}));
 	  	}
@@ -1419,32 +1325,12 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 				else
 				mMacro1.push({"name" : "calories", "value" : parseFloat(dItem["recipe"]["calories"]), "unit" : "Kcal"});
 		
-
-				/*
-				if(typeof(dItem["recipe"]["paramMicro"]) !== "undefined")
-				{
-				for(let j=0; j < dItem["recipe"]["paramMicro"]["length"]; j++)
-				{
-					var dmItem = dItem["recipe"]["paramMicro"][j];
-			
-					var lbl2 = dmItem["label"].toLowerCase();
-					var fIndex1 = mMacro1.findIndex(x1=>(x1.name.toLowerCase() == lbl2.toLowerCase()));
-
-					if(fIndex1 > -1)
-					mMacro1[fIndex1]["value"] =  parseFloat(mMacro1[fIndex1]["value"]) + dmItem["total"];
-					else
-					mMacro1.push({"name" : lbl2, "value" : dmItem["total"], "unit" : dmItem["unit"]});
-			
-				}
-				}*/
-
-		
 				if(typeof(dItem["recipe"]["minerals"]) !== "undefined")
 				{
 				for(let j=0; j < dItem["recipe"]["minerals"]["length"]; j++)
 				{
 					var dmItem1 = dItem["recipe"]["minerals"][j];
-				//	console.log(dmItem1);
+			
 					var lbl1 = dmItem1["name"].toLowerCase();
 
 					var fIndex1 = mMacro1.findIndex(x1=>(x1.name.toLowerCase() == lbl1));
@@ -1452,8 +1338,7 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 					mMacro1[fIndex1]["value"] = parseFloat(mMacro1[fIndex1]["value"]) + dmItem1["value"];
 					else
 					mMacro1.push({"name" : lbl1, "value" : dmItem1["value"], "unit" : dmItem1["unit"]});
-								
-				//	console.log(mMacro);
+
 				}
 				}
 				
@@ -1467,15 +1352,15 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 
 	calculateTotalNutrientPServing(col)
 	{
-	//	console.log(this.loadedPlan);
+
 		var mMacro = [];
-	//	console.log(this.plan["days"][col]);
+
 		if(this.loadedPlan)
 		{
 		for(let i=0; i < this.plan["days"][col]["meals"]["length"]; i++)
 		{
 			var dItem = this.plan["days"][col]["meals"][i];
-		//	console.log(dItem);
+
 			if(dItem["recipe"] !== null)
 			{
 			
@@ -1490,7 +1375,7 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 				for(let j=0; j < dItem["recipe"]["minerals"]["length"]; j++)
 				{
 					var dmItem1 = dItem["recipe"]["minerals"][j];
-					//console.log(dmItem1);
+
 					var lbl1 = dmItem1["name"].toLowerCase();
 
 					var fIndex1 = mMacro.findIndex(x1=>(x1.name == lbl1));
@@ -1504,15 +1389,8 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 			}
 		}
 	}
-	else
-	{
-	//	setTimeout(() => {
+	
 
-		//	this.calculateTotalCalory(col);
-	//	},300);
-	}
-	//console.log ("day " + col);
-	//console.log(mMacro);
 	return mMacro;
 	}
 
@@ -1530,7 +1408,7 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 
 	getIngredientsList()
 	{
-	  console.log(this.plan);
+
 	  var ingredientsList = [];
 
 	  var consList = [];
@@ -1544,24 +1422,20 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 			console.log(itemmeal);
 		  if(typeof(itemday) !== "undefined" && typeof(itemmeal["recipe"]) !== "undefined" && itemmeal["recipe"] !== null)
 		  {
-		 // console.log(itemmeal["recipe"]["ingredients"]);
+		
 			if(typeof(itemmeal["recipe"]["ingredients"]) !== "undefined" && itemmeal["recipe"]["ingredients"] !== "")
 		   {
-			//  console.log(itemmeal["recipe"]["ingredients"]);
-			
+		
 			  if(itemmeal["recipe"]["ingredients"].length  < 4999)
 			  {
 				  try{
 					var tempA = JSON.parse(itemmeal["recipe"]["ingredients"]);
-					console.log(tempA);
+			
 					for(let k=0; k < tempA.length; k++)
 					{
 					  ingredientsList.push(tempA[k]['text'])
 					  var t1 = this.formatText(tempA[k]['text']);
 						var t = tempA[k]['food']
-
-						if(tempA[k]['food'] == 'vegetable oil')
-						console.log(tempA[k]);
 
 					  	var fIndex = consList.findIndex(x=>(x.name.toLowerCase().trim() ===  t.toLowerCase().trim()));
 						  if(fIndex > -1)
@@ -1581,56 +1455,6 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 						 
 						  
 
-
-					  /*
-					   var t2= t1.split("plus");
-
-					   for(let l1 = 0; l1 < t2.length; l1++)
-					   {
-						   	var t = t2[l1].trim();
-	
-							
-								console.log(t);
-																
-									var findWord = "";
-									if(t.indexOf('tbsp') > -1) 
-										findWord = "tbsp";
-									else if(t.indexOf('cup') > -1) 
-									findWord = "cup";
-									if(findWord !== "")
-									{
-										console.log(" findWord " + findWord);
-										var tem1 = t.split(findWord)
-										var fIndex = consList.findIndex(x=>(x.name.trim() === t.trim()));
-
-										if(tem1.length > 1)
-										{
-											console.log(tem1);
-											if(fIndex == -1)
-											{
-												consList.push({"name":tem1[1], 'quantity': tem1[0], 'measure':findWord})
-											}
-											else
-											{
-												
-												consList[fIndex]['quantity'] += tem1[0]  + "~"
-											}
-										}
-										else
-										{
-											consList.push({"name":t, 'quantity': '', 'measure':""})
-										}
-									}
-									else
-									{
-										console.log(t);
-										consList.push({"name":t, 'quantity': '', 'measure':""})
-									}
-								
-							
-						}
-
-						*/
 					}
 					
 				  }
@@ -1646,14 +1470,10 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 		  }
 		}
 	  }
-	//  console.log(ingredientsList);
-	 // console.log(shoppingList);
-	//  console.log(consList);
+
 		consList = consList.sort(this.sortArraybyIndex);
 	  this.shoppingList = consList
-	  //console.log(JSON.stringify(shoppingList));
-	//  console.log(JSON.stringify(consList));
-	 // sessionStorage.setItem("list",JSON.stringify(consList));
+
 	  this.openModal("popuppanel");
 	}
 
@@ -1672,19 +1492,14 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 		var retStr = str;
 		if(str !== "")
 		{
-			//retStr = str.replaceAll("tsp", "tbsp");
+		
 			retStr = str.replace(/tsp/gi, 'tbsp')
 			retStr = retStr.replace(/teaspoons/gi, 'tbsp')
 			retStr = retStr.replace(/teaspoon/gi, 'tbsp')
 			retStr = retStr.replace(/tablespoons/gi, 'tbsp')
 			retStr = retStr.replace(/tablespoon/gi, 'tbsp')
 			retStr = retStr.replace(/cups/gi, 'cup')
-			
-			/* retStr = retStr.replace("teaspoons", "tbsp"); 
-			retStr = retStr.replace("teaspoon", "tbsp"); 
-			retStr = retStr.replace("tablespoons", "tbsp"); 
-			retStr = retStr.replace("tablespoon", "tbsp");  */
-
+		
 			retStr = retStr.replace("u2013", "-"); 
 			 
 			retStr = retStr.replace("u00bc", " 1/4");
@@ -1712,14 +1527,14 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 			this.dietLabelsList.push({"name":constants.dietLabels[d], "selected":false})
 		}
 
-		//this.healthlabelsList = constants.healthLabels;
+		
 		this.healthlabelsList= [];
 		for(let h=0; h < constants.healthLabels.length; h++)
 		{
 			this.healthlabelsList.push({"name":constants.healthLabels[h], "selected":false})
 		}
 
-		//this.mineralsLabelsList = constants.minerals;
+	
 		this.mineralsLabelsList= [];
 		for(let m=0; m <constants.minerals.length; m++)
 		{
@@ -1730,10 +1545,9 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 	maxcalories: any = "";
 	searchFilters()
 	{
-	console.log("searchfilters");
+
 		var dietlabels = "";
-		console.log(this.dietLabelsList);
-		console.log(this.searchparam.calories);
+	
 		if(typeof(this.searchparam.calories) !== "undefined" && this.searchparam.calories !== ""){
 		 this.filtersParams["calories"] = this.searchparam.calories;
 		}
@@ -1787,13 +1601,13 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 		 this.filtersParams["mealtypes"] = mealtypes;
 	 }
 
-		var minerals = "";
+
 		var mQuery = "";
 		for(let m=0; m <this.mineralsLabelsList.length; m++)
 		{
 			if(this.mineralsLabelsList[m]["selected"])
 			{
-			minerals += this.mineralsLabelsList[m]["name"] + "~";
+	
 			var item = this.mineralsLabelsList[m];
             if(item["selected"])
             {
@@ -1820,10 +1634,7 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 			}
 			}
 
-		
-		
-
-		console.log(this.filtersParams);
+	
 		this.loadRecipes('', true);
 		this.closeModal('searchFiltersPopup');
 		this.clearFilterValues();
@@ -1833,14 +1644,10 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 	
 	loadNutrientsMaxMin()
   {
-    console.log("loadNutrientsMaxMin");
-    console.log(this.mineralsLabelsList);
-    console.log(this.nutrientDbFields);
-
+   
     if(this.mineralsLabelsList["length"] > 0 && this.nutrientDbFields["length"] > 0)
     {
-      console.log(this.mineralsLabelsList);
-      console.log(this.nutrientDbFields);
+    
       for(let m =0; m < this.mineralsLabelsList["length"]; m++)
       {
         var lbl = this.mineralsLabelsList[m]["name"].toLowerCase();
@@ -1860,7 +1667,7 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
         }
 
       }
-      console.log(this.mineralsLabelsList);
+     
     }
     else
     {
@@ -1874,10 +1681,10 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 
   getNutrientsMaxMin()
   {
-    console.log("getNutrientsMaxMin");
+
     var params1 = {};
     var nutrientFields = constants.nutrientDbFields;
-  //  console.log( params1["query"])
+ 
     var query = "";
     for(let i=0; i < nutrientFields.length; i++)
     {
@@ -1886,17 +1693,17 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
       query += " min(" + lbl + ") min" + lbl +", ";
       query += " max(" + lbl + ") max" + lbl + ", ";
     }
-  //  console.log(query);
+
     query = query.slice(0, -2);
     params1["query"] = "Select " + query + " from nutrients";
-    console.log(params1);
+
    var res =   this.dbService.getDatabyQuery("recipes", params1).subscribe(invData => setTimeout(() => {
 
-	console.log(invData);
+
     if(invData["body"]["length"] > 0)
     {
       this.nutrientDbFields = invData["body"];
-      console.log(this.nutrientDbFields);
+
     }
    }))
   
