@@ -380,7 +380,7 @@
                               right: 12px;
                               padding-right: 10px;
                               border-bottom-left-radius: 15px;
-                              border-bottom-right-radius: 15px;' (click)="toggleFav(recipe.id)" *ngIf="recipe.UserFavStatus"><i class="fa fa-heart"></i> <span *ngIf="recipe.favcount && recipe.favcount> 0" style='margin-left:10px;font-size:16px;color:#FFF'>{{recipe.favcount}}</span></p>
+                              border-bottom-right-radius: 15px;' (click)="toggleFav(recipe)"><i [ngClass]="recipe.UserFavStatus? 'favactive':'favnotsetw'" class="fa fa-heart"></i> <span *ngIf="recipe.favcount && recipe.favcount> 0" style='margin-left:10px;font-size:16px;color:#FFF'>{{recipe.favcount}}</span></p>
                             <div class='row toggleremove' style='color:#FFF;'>
 
                                 <div class="col-12" style="padding-left:0px; padding-right:0px">

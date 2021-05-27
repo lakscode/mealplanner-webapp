@@ -956,16 +956,64 @@ getFavouriteStatusForCurrentUser(idslist)
 
 }
 
-toggleFav(id)
+toggleFav(recipe)
 {
-	if(this.setFav )
-	{
-		this.removeFavourite(id);
-	}
-	else
-	{
-		this.setFavourite(id);
-	}
+	console.log(recipe);
+
+	if(typeof(recipe.id) !== "undefined" && recipe.id !== null && recipe.id !== "")
+  {
+var params = {};
+
+params ['query'] = "select * from favourites where recipeid = " + recipe.id + " AND userid = " + this.currentUser["id"];
+var res =   this.dbService.getDatabyTablebyQuery("favourites", params).subscribe(invData => setTimeout(() => {
+
+  console.log(invData);
+  if(invData !== null && invData["body"]["length"] > 0)
+  {
+	console.log("removing record");
+params = {};
+	params["id"] = invData["body"][0]["id"];
+
+	var res =   this.dbService.deleteDataByTable("favourites", params).subscribe(invData => setTimeout(() => {
+		console.log(invData);
+	 
+		var fIndex = this.recipesList.findIndex(x=>(x["id"] === recipe.id));
+		console.log(fIndex);
+		if(fIndex > -1)
+		{
+			this.recipesList[fIndex]["UserFavStatus"] =  false;
+			this.recipesList[fIndex]["favcount"] = parseInt(this.recipesList[fIndex]["favcount"]) - 1;
+		}
+
+	 
+	
+	}));
+  }
+  else
+{
+	console.log("Creating record");
+	var params1 = {};
+	params1["recipeid"] = recipe.id;
+	params1["userid"] = this.currentUser["id"];
+	
+  var res =   this.dbService.postDataByTable("favourites", params1).subscribe(invData => setTimeout(() => {
+	  if(invData !== null)
+	  {
+		  //alert("Recipe has been set as favourite.");
+		  //this.getFavouriteStatus();
+		  var fIndex = this.recipesList.findIndex(x=>(x["id"] ===  recipe.id));
+		  if(fIndex > -1)
+		  {
+			  this.recipesList[fIndex]["UserFavStatus"] =  true;
+			  this.recipesList[fIndex]["favcount"] = parseInt(this.recipesList[fIndex]["favcount"]) + 1;
+		  }
+	  }
+	}));
+
+	
+  }  
+}));
+  }
 }
 
 setFavourite(id)
@@ -982,7 +1030,7 @@ var res =   this.dbService.getDatabyTablebyQuery("favourites", params).subscribe
   console.log(invData);
   if(invData !== null && invData["body"]["length"] > 0)
   {
-
+	 
   }
   else
 
@@ -1020,8 +1068,19 @@ removeFavourite(id)
   var params = {};
   if(typeof(id) !== "undefined" && id !== null && id !== "")
   {
-	params["id"] = id;
+
+//	params["id"] = id;
 	//params["userid"] = this.currentUser["id"];
+var params = {};
+console.log(params);
+params ['query'] = "select * from favourites where recipeid = " + id + " AND userid = " + this.currentUser["id"];
+var res =   this.dbService.getDatabyTablebyQuery("favourites", params).subscribe(invData => setTimeout(() => {
+
+  console.log(invData);
+  if(invData !== null && invData["body"]["length"] > 0)
+  {
+params = {};
+	params["id"] = invData["body"][0]["id"];
 
 	var res =   this.dbService.deleteDataByTable("favourites", params).subscribe(invData => setTimeout(() => {
 		this.setFav = false;
@@ -1037,6 +1096,11 @@ removeFavourite(id)
 	  }
 	  //console.log(this.setFav);
 	}));
+  }
+
+}));
+
+	
   }  
 }
 
