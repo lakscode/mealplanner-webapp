@@ -2425,7 +2425,7 @@ ul {
   background: #f8f6f5;
   overflow: hidden;
   position: relative;
-  z-index: 6666 ;
+  z-index: 1 ;
   margin-bottom: 20px;
   padding-left: 20px;
 }
