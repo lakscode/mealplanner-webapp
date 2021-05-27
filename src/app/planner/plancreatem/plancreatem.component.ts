@@ -578,7 +578,7 @@ export class PlancreatemComponent implements OnInit {
 				 if(temp["length"] > 0)
 				 {
 				  this.plan["days"][index][type] =  this.formatRecipe(temp[0]);
-				  console.log(this.planDay);
+				//  console.log(this.planDay);
 				 //  this.planDay[type]= this.plan["days"][index][type];
 				 }
 				

@@ -60,12 +60,10 @@
           <div class="item-day">
             <div class="mainlist" style="background:transparent; --background: transparent;">
           <div class='item-heading'>
-            <p class="title-black1" >{{selDay.name}} <span style='float:right' (click)="formatMinerals(planDay)" id="icon_{{selDayIndex}}_tm" class="btnicon"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></span></p>           
+            <p class="title-black1" >{{selDay.name}} <span style='float:right; font-size:24px;' (click)="formatMinerals(planDay)" id="icon_{{selDayIndex}}_tm" class="btnicon"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></span></p>           
           </div>
-          <!--<div  class='bg-green' *ngIf="showNutrientsFlag && planDay">
-            <p>Nutritions   <span (click)="formatMinerals(planDay)" id="icon_{{selDayIndex}}_{{mealType}}tm" class="btnicon"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></span></p>
-          </div>-->
-          <div class='bg-green' *ngIf="planDay && planDay['mexpand']">
+
+          <div class='' *ngIf="planDay && planDay['mexpand']">
               
             <div style=" width:100%;   padding-top: 10px;
             padding-bottom: 10px; 
@@ -90,13 +88,13 @@
         rgba(0, 0, 0, 0.3),
         rgba(0, 0, 0, 0.3)
       ),url(' + planDay[mealType].image + ')'}">
-            
+      
         <div *ngIf="plan['created_by'] == currentUser['id']" style="position: absolute;
         right: 10px;"> 
-        <span style='color:#FFF' class="btnicon"  (click)="addMeal(mealType)">
+        <span style='color:#000' class="btnicon"  (click)="addMeal(mealType)">
             <i class="fa fa-plus" aria-hidden="true"></i></span> </div>
-        <h2 style='color:#FFF;'>{{getFLU(mealType)}}</h2>
-        <ng-container *ngIf="!planDay[mealType].label">
+        <h2 style='color:#000;'>{{getFLU(mealType)}}</h2>
+        <ng-container > <!--*ngIf="!planDay[mealType].label"-->
           <div (click)="addMeal(mealType)" style="max-height: 60px; margin:0 auto; width:100%;text-align:center;">
             <i class="fa fa-plus" aria-hidden="true"></i>
         </div>
@@ -150,74 +148,6 @@
       </div>
       
       
-           
-          <div  *ngIf="planDay[mealType] && planDay[mealType].label" class="alternate_ion_item" style="--inner-padding-end: 0px;
-          --padding-start: 0px;-border-style: none; display:none;
-          width: 100%;">
-            <div [ngClass]="'odditem'" style="
-            --padding-start: 0px;  margin: 0; padding: 0; --inner-padding-end: 0px; width: 100%;">
-      
-              <div style="--background:transparent;-border-style: none;">
-      
-                <div slot="start" *ngIf="planDay[mealType] && planDay[mealType].image">
-                  <img style='width:40px; height:40px' src="{{planDay[mealType].image}}" />
-                </div>
-                <div *ngIf="planDay[mealType].label">
-                  <h2>{{getFLU(planDay[mealType].label)}}</h2>
-                  <p>
-                     <span *ngIf="planDay[mealType].calories"><em>Calories:</em> {{planDay[mealType].calories}} Kcal<br>
-                     </span>
-                     <span *ngIf="planDay[mealType].totalWeight">
-                      <em>Total Weight:</em> {{toFixed(planDay[mealType].totalWeight)}} gms<br>
-                     </span>
-                  </p>
-                </div>
-                <div *ngIf='showNutrientsFlag'  (click)="toggleNutrients(selDayIndex, mealType)" slot="end">
-                  <span id="icon_{{selDayIndex}}_{{mealType}}" class="btnicon" name="chevron-down-outline">down arrow</span>
-                </div>
-              </div>
-              <div id="nutrients_{{selDayIndex}}_{{mealType}}" *ngIf="planDay[mealType]['expand']" style='--background:transparent;'>
-           
-                <div style=" width:100%;   padding-top: 10px;
-                padding-bottom: 10px;
-          background-color: white; margin-bottom:10px;" >
-                  <p style="padding-left:10px;color:#000;"><strong>Nutritions:</strong></p>
-              
-                    <p>
-                      {{getFLU("calories")}}
-                      <span style="width:100%; float:right; text-align:right"><span style="color:var(--blue)">{{planDay[mealType]["calories"]}}</span> Kcal</span>
-                    </p>
-                
-                  <ng-container *ngFor="let mitem2 of planDay[mealType]['paramMicro']">
-                     <p>
-                        {{getFLU(mitem2["label"])}}
-                        <span style="width:100%; text-align:right; float:right;"><span style="color:var(--blue)">{{formatVal(mitem2["totalP"],2)}}</span> {{mitem2["unit"]}}</span>
-                    </p>
-                  
-                  </ng-container>
-      
-                <ng-container *ngIf="planDay && planDay[mealType] &&  planDay[mealType]['minerals'] && planDay[mealType]['minerals']['length'] > 0">
-                
-                  <ng-container *ngFor="let mitem1 of planDay[mealType]['minerals']">
-                    <div>
-                      <p>
-                        {{getFLU(mitem1["name"])}}
-                      </p>
-                      <div   slot="end" style="width: 90px; display: flex; align-items: center; margin-top:0px; margin-bottom:0px;text-align:right;">
-                       <span style="width:100%; text-align:right"><span style="color:var(--blue)">{{formatVal(mitem1["value"],2)}}</span> {{mitem1["unit"]}}</span>
-      
-                      </div>
-                    </div>
-                  </ng-container>
-                  
-                </ng-container>
-                </div>
-             
-              </div>
-      
-              </div>
-      
-          </div>
         </div>
       
         <!--<div class="mealtype-separator"></div>-->

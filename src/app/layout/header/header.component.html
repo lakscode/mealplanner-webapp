@@ -111,8 +111,9 @@
                     <a (click)="mobilemenu(menu1)">{{menu1.menu}}</a>
                     <ul *ngIf="menu1.expand && menu1.children && menu1.children.length > 0">
                         <li *ngFor="let submenu1 of menu1.children; let m = index">
-                            <a (click)="mobilemenu(submenu1)" *ngIf = "submenu1.menu == 'Create Plan'" class="hidden-xs">{{submenu1.menu}}</a>
-                            <a *ngIf = "submenu1.menu != 'Create Plan'" (click)="mobilemenu(submenu1)">{{submenu1.menu}}</a>
+                           <!-- <a (click)="mobilemenu(submenu1)" *ngIf = "submenu1.menu == 'Create Plan'" class="hidden-xs">{{submenu1.menu}}</a>
+                            <a *ngIf = "submenu1.menu != 'Create Plan'" (click)="mobilemenu(submenu1)">{{submenu1.menu}}</a>-->
+                            <a (click)="mobilemenu(submenu1)">{{submenu1.menu}}</a>
                         </li>
                     </ul>
                 </li>
