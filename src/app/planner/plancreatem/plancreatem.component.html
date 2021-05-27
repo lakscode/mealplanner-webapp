@@ -60,7 +60,7 @@
           <div class="item-day">
             <div class="mainlist" style="background:transparent; --background: transparent;">
           <div class='item-heading'>
-            <p class="title-black1" >{{selDay.name}} <span style='float:right' (click)="formatMinerals(planDay)" id="icon_{{selDayIndex}}_{{mealType}}tm" class="btnicon"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></span></p>           
+            <p class="title-black1" >{{selDay.name}} <span style='float:right' (click)="formatMinerals(planDay)" id="icon_{{selDayIndex}}_tm" class="btnicon"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></span></p>           
           </div>
           <!--<div  class='bg-green' *ngIf="showNutrientsFlag && planDay">
             <p>Nutritions   <span (click)="formatMinerals(planDay)" id="icon_{{selDayIndex}}_{{mealType}}tm" class="btnicon"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></span></p>
@@ -353,11 +353,11 @@
                   </div>
                   <div *ngIf="mItem.selected"  size="3" >
                     <input class="mineral-input" type='text' name="minerals_{{m}}_min" [(ngModel)]="mItem.min" placeholder="min" />
-                    <span class="maxmin">{{formatVal(mItem.t_min)}}</span>
+                    <span class="maxmin">{{formatVal(mItem.t_min, 0)}}</span>
                   </div>
                   <div  *ngIf="mItem.selected"  size="3" >
                     <input class="mineral-input" type='text' name="minerals_{{m}}_max" [(ngModel)]="mItem.max" placeholder="max" />
-                    <span class="maxmin">{{formatVal(mItem.t_max)}}</span>
+                    <span class="maxmin">{{formatVal(mItem.t_max, 0)}}</span>
                   </div>
                   <div style="padding-left: 0px; padding-right: 0px;" *ngIf="mItem.selected"  size="1" >
                   {{mItem.name.unit}}
