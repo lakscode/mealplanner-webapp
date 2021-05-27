@@ -258,7 +258,7 @@
 
     
     
-    <div class="recipe-comments" *ngIf="searchRes && searchRes.label">
+    <div class="recipe-comments" *ngIf="searchRes && searchRes.label && commentsList && commentsList.length">
         <h3 class="lined">Comments <span *ngIf="commentsCount">({{commentsCount}})</span></h3>
         <ul>
             <li *ngFor="let comment of commentsList; let c = index;">
