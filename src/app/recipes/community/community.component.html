@@ -176,8 +176,8 @@
                             <span style="margin-left:10px" class="details" *ngIf="community && community.joinedcount"><i class="fa fa-user"></i> {{community.joinedcount}} member<span *ngIf="community.joinedcount > 1">s</span></span>
                             
                        </div>
-                        <div style="position:absolute; bottom:0px; right:0px;">
-                            <div class="component-bg" style="display:inline-block;">
+                        <div class="onlydesktop" style="position:absolute; bottom:0px; right:0px;">
+                            <!--<div class="component-bg" style="display:inline-block;">
                                 <div class="share-recipe">
                                   Share :  
                               
@@ -198,7 +198,7 @@
                                     <a href="javascript:void()" target="_blank" class=" fa fa-print"></a>
                                   </div>
                                 </div>
-                              </div>
+                              </div>-->
                             <!--<button *ngIf="showActions['invite']" class="create-button anim-button btn-4">Invite</button>-->
                             <button (click)="joinCommunity()" *ngIf="showActions['join'] " class="create-button anim-button btn-4">Join</button>
                             <button class="create-button anim-button btn-4" (click)="addNew()" >Add Recipe</button>
@@ -210,8 +210,11 @@
                       </div>
 
 
-                    <div class="row" style="margin-top:20px" *ngIf="community.community_name">
-                       
+                    <div class="row " style="margin-top:20px" *ngIf="community.community_name">
+                       <div class="col-12 onlymobile">
+                            <button (click)="joinCommunity()" *ngIf="showActions['join'] " class="create-button anim-button btn-4">Join</button>
+                            <button class="create-button anim-button btn-4" (click)="addNew()" >Add Recipe</button>          
+                       </div>
                         <div class="col-12 add-recipe-panel" *ngIf="toggleRecipeAdd">
                             <div class="row">
                         <div class="col-12 " style="margin:0; padding-left:0px; padding-right:0px;">
@@ -367,6 +370,17 @@
                                 rgba(0, 0, 0, 0.3),
                                 rgba(0, 0, 0, 0.3)
                               ),url(' + recipe.image + ')'}">
+                              <p class="favactive" style='    text-align: right;
+                              position: absolute;
+                              bottom: -9px;
+                              background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+                              /* color: #FFF; */
+                              /* width: 100%; */
+                              left: 12px;
+                              right: 12px;
+                              padding-right: 10px;
+                              border-bottom-left-radius: 15px;
+                              border-bottom-right-radius: 15px;' (click)="toggleFav(recipe.id)" *ngIf="recipe.UserFavStatus"><i class="fa fa-heart"></i> <span *ngIf="recipe.favcount && recipe.favcount> 0" style='margin-left:10px;font-size:16px;color:#FFF'>{{recipe.favcount}}</span></p>
                             <div class='row toggleremove' style='color:#FFF;'>
 
                                 <div class="col-12" style="padding-left:0px; padding-right:0px">
@@ -376,9 +390,9 @@
                                    <p><b>Servings</b>: {{recipe.yield}}</p>
                                    
                                    <!-- <p *ngIf="recipe.dietLabels"><b>Diet Labels</b>: {{recipe.dietLabels}} </p>-->
-                                    <p *ngIf="recipe.favcount && recipe.favcount> 0">{{recipe.favcount}} Members Saved</p>
-                                    <p class="favactive" style='text-align:right;' (click)="toggleFav(recipe.id)" *ngIf="recipe.UserFavStatus"><i class="fa fa-heart"></i></p>
-                                
+                                   <!-- <p *ngIf="recipe.favcount && recipe.favcount> 0">{{recipe.favcount}} Members Saved</p>
+                                    <p class="favactive" style='text-align:right;' (click)="toggleFav(recipe.id)" *ngIf="recipe.UserFavStatus"><i class="fa fa-heart"></i></p>-->
+                                   
                                 </div>
                                 <div class="morebtn"><a (click)="toggleMoreMenu(recipe, i, 'viewlist')" class="menu" href="javascript:void(0)"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></a>
                                 <div class="moremenu" *ngIf="recipe.expand">

@@ -600,3 +600,24 @@ font-size:13pt;
 .image-animate:hover img {
   transform: scale(1.1)
 }
+
+.onlydesktop
+	{
+	  display:block;
+	}
+	.onlymobile
+	{
+	  display:none;
+	}
+@media only screen and (max-width: 767px) {
+	.onlydesktop
+	{
+	  display:none;
+	}
+	.onlymobile
+	{
+	  display:block;
+	}
+
+
+}

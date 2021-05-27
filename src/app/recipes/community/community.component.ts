@@ -1094,6 +1094,7 @@ joinCommunity()
 		
 		var res =   this.dbService.postDataByTable("community_join", params).subscribe(dData => setTimeout(() => {
 			alert("Joined community ");
+			this.showActions['join'] = true;
 		}));
 
 	  }
