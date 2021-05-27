@@ -3000,12 +3000,15 @@ ul {
     flex-direction: column;
   }
   .ingredients-checkbox .ingredients {
-    background-position: top right;
+    background-position: bottom right;
   }
   .ingredients-checkbox .ingredients,
   .ingredients-checkbox .nutritional {
     width: 100%;
   }
+ .ingredients-checkbox .nutritional {
+    height: 400px;
+}
   .steps-list .step-image {
     float: none;
     width: auto;
