@@ -266,7 +266,12 @@ endIndex = startIndex+ endIndex;
       this.modalService.open('createNew');
 
     }
+	editCommunity(cItem){
+		
+		this.community = cItem; 
+		this.modalService.open('createNew');
   
+	  }
   closeModal(id) {
 
    this.modalService.close(id);
