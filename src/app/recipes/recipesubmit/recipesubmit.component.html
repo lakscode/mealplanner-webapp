@@ -72,11 +72,11 @@
                             <label for="servings">Servings</label>
                             <input type="text" name="s_servings" id="s_servings" [(ngModel)]="searchRes.s_servings" >
                         </div>
-                        <div class="col-12 col-lg-4">
+                        <div class="col-12 col-lg-4" style="padding-left:0px;">
                             <label for="calorietags">Calories in kcal</label>
                             <input type="text"  [(ngModel)]="searchRes.calories" name="calorieLabels" id="calorieLabels" />
                         </div> 
-                        <div class="col-12 col-lg-4">
+                        <div class="col-12 col-lg-4" style="padding-left:0px;">
                             <label for="weighttag">Total Weight in gms</label>
                             <input type="text"  [(ngModel)]="searchRes.totalWeight" name="weighttag" id="weighttag" />
                         </div>
@@ -103,7 +103,7 @@
                             <label for="healthtags">Health Labels</label>
                             <div class="row" style="max-height: 200px;
                             overflow: auto;">
-                                <div class="col-12 col-lg-6" *ngFor="let healthLabel of healthlabelsList; let h=index;">
+                                <div class="col-12 col-lg-6" *ngFor="let healthLabel of healthlabelsList; let h=index;" style="padding-left:0px;">
                                     <label class="container" style=" text-align: left;
                                     display: inline-block;
                                     font-family: 'Lato', sans-serif;
@@ -121,7 +121,7 @@
                       
                         <div  >
                         <div class="col-12 col-lg-6" style="padding-left:0px;margin-top:10px">
-                            <label for="mealtype">Meal Type</label>            
+                            <label for="mealtype">Meal Type&nbsp;</label>            
                             <select name="mealtype" [(ngModel)]="searchRes.mealType" (change)="mtypeChange()" id="mealtype" class="advance-selectable" tabindex="0">
                                 <option value="" selected="selected">None</option>
                                 <option value="breakfast">Breakfast</option>
@@ -131,7 +131,7 @@
                                 <option value="dinner">Dinner</option>
                             </select>   
                         </div>
-                        <div class="col-12 col-lg-6" style="margin-top:10px">
+                        <div class="col-12 col-lg-6" style="padding-left:0px;margin-top:10px">
                             <label for="ispublic">Available in Search Listing?</label>            
                             <label class="container" style=" text-align: left;
                             display: inline-block;
@@ -152,9 +152,9 @@
 
                     <div class="row">
                         <div class="col-12 col-md-6 col-lg-6" style="padding-left:0px;">
-                            <label  class='comment-label'>Upload Image </label>
+                            <label  class='comment-label'>Upload Image&nbsp;&nbsp;</label>
                             <button (click)="uploadmedia('image')" class="upload-comment">
-                               <i class="fa fa-picture-o" aria-hidden="true"></i> Upload Image</button>
+                               <i class="fa fa-picture-o" aria-hidden="true"></i>Upload Image</button>
                            <div>
                                <input id="inputuploadrecipe" hidden type="file" name="inputuploadrecipe" (change)="onFileSelect($event)" />
                              </div>
@@ -163,10 +163,10 @@
                              
                           </div>
 
-                        <div class="col-12 col-md-6 col-lg-6">
+                        <div class="col-12 col-md-6 col-lg-6" style="padding-left:0px;">
                          
 
-                                <label class='comment-label'>Upload Video </label>
+                                <label class='comment-label'>Upload Video&nbsp;&nbsp;</label>
                                     <button (click)="uploadmedia('video')" class="upload-comment">
                                         <i class="fa fa-file-video-o" aria-hidden="true"></i> Upload Video</button>
                                     <div *ngIf="searchRes.video" style="width:100%; display:block">
