@@ -124,22 +124,7 @@ ul {
   color: #ffffff;
   text-decoration: none;
 }
-.button-dark {
-  background: #000000;
-  font-family: 'Lora', serif;
-  font-style: italic;
-  font-weight: 700;
-  font-size: 16px;
-  color: #ffffff;
-  display: inline-block;
-  height: 40px;
-  line-height: 40px;
-  padding: 0 36px;
-}
-.button-dark:hover {
-  background: #c1452b;
-  color: #ffffff;
-}
+
 
 /*-----------------------------------------------------------------------------------*/
 /* header
@@ -2135,13 +2120,13 @@ ul {
 .comment-form
 {
       background: #FFF;
-    padding: 25px;
+    padding: 15px;
   color: #000000;
    font-size: 16px;
 }
 .comment-form form {
   background-color: #ffffff;
-  padding: 25px;
+  padding: 15px;
   color: #000000;
 }
 .comment-form form ::-webkit-input-placeholder {
@@ -3289,18 +3274,7 @@ ul {
 } 
 
 
-/******* combined css ************/
 
-
-
-@charset "UTF-8";
-
-/*!
-Animate.css - http://daneden.me/animate
-Licensed under the MIT license - http://opensource.org/licenses/MIT
-
-Copyright (c) 2015 Daniel Eden
-*/
 
 .animated {
   -webkit-animation-duration: 1s;

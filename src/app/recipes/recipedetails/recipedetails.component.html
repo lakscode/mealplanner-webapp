@@ -1,5 +1,5 @@
 <div class="fixedtop recipes-home-body inner-page">
-    <div class="container">
+    <div class="container" style="padding-left:0px;padding-right:0px">
     <div class="row">
     <div class="col-md-8 col-lg-9">
     <div class="recipe-set ">
@@ -90,7 +90,7 @@
     </div>
    
     
-    <div class="recipe-detail-body" *ngIf="searchRes && searchRes.label">
+    <div class="recipe-detail-body" *ngIf="searchRes && searchRes.label" style="margin-bottom:0px">
     <div class="rating-box">
         <span class="rating-icons" style="font-size:16px" *ngFor="let item of [1,2,3,4,5]">
             <i [ngClass]="ratingObj['displayrating'] >= item?'fa fa-star set':'fa fa-star unset'"></i>
