@@ -211,10 +211,20 @@
                                 <!--   <div style='position:absolute; bottom:10px; width:90%; left:25px'> -->
                                     <div>
                                     <h1 class="recipe-label">{{recipe.label.toLowerCase()}}</h1>                                  
-                                    <p style="color:#fff"><b>Calories</b>: {{recipe.calories}} Kcal, <b>Servings</b>: {{recipe.yield}}</p>
-                                    <p *ngIf="recipe.dietLabels" style="color:#fff">  <b>Diet Labels</b>: {{formatHiphen(recipe.dietLabels)}} </p>
-                                     <p *ngIf="recipe.favcount && recipe.favcount> 0">{{recipe.favcount}} Members Saved</p>
-                                    <p class="favactive" style='text-align:right;' (click)="toggleFav(recipe.id)" *ngIf="recipe.UserFavStatus"><i class="fa fa-heart"></i></p>
+                                    <p style="color:#fff"><b>Calories</b>: {{recipe.calories}}<br> <b>Servings</b>: {{recipe.yield}}</p>
+                                    <!--<p *ngIf="recipe.dietLabels" style="color:#fff">  <b>Diet Labels</b>: {{formatHiphen(recipe.dietLabels)}} </p>-->
+                                     <!--<p *ngIf="recipe.favcount && recipe.favcount> 0">{{recipe.favcount}} Members Saved</p>-->
+                                    <p class="favactive" style='    text-align: right;
+                                    position: absolute;
+                                    bottom: -9px;
+                                    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+                                    /* color: #FFF; */
+                                    /* width: 100%; */
+                                    left: 12px;
+                                    right: 12px;
+                                    padding-right: 10px;
+                                    border-bottom-left-radius: 15px;
+                                    border-bottom-right-radius: 15px;' (click)="toggleFav(recipe.id)" *ngIf="recipe.UserFavStatus"><i class="fa fa-heart"></i> <span *ngIf="recipe.favcount && recipe.favcount> 0" style='color:#FFF'>{{recipe.favcount}}</span></p>
                                 </div>
 
                                 <div class="morebtn"><a class="menu" (click)="toggleMoreMenu(recipe, i, 'viewlist')" href="javascript:void(0)"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></a>
