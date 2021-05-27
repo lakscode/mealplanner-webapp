@@ -417,8 +417,8 @@ export class PlancreatemComponent implements OnInit {
 		  }
 		  selectDay(ev)
 		  {
-			console.log(ev);
-			console.log(this.selDay);
+		//	console.log(ev);
+		//	console.log(this.selDay);
 			this.selDayIndex = this.selDay['day_num'];
 			//console.log(this.selDay);
 		   // console.log(this.plan);
@@ -435,7 +435,7 @@ export class PlancreatemComponent implements OnInit {
 			}
 		  //  console.log(this.plan['days']);
 			
-		   console.log(this.planDay);
+		//   console.log(this.planDay);
 		  }
 		  showDay(index)
 		  {
@@ -484,12 +484,12 @@ export class PlancreatemComponent implements OnInit {
 		
 		   } 
 		   this.advanceFilters["minerals"]
-		   console.log(this.advanceFilters);
+		//   console.log(this.advanceFilters);
 		 }
 		 params["returnfields"] = " id, label, image, healthLabels, dietLabels, calories,totalNutrients, digest";
-		 console.log(params);
+		// console.log(params);
 			var res =   this.dbService.getDatabyFields("recipes", params).subscribe(invData => setTimeout(() => {
-			  console.log(invData);
+			//  console.log(invData);
 			  if(invData !== null)
 			  {
 				if(typeof(invData["body"]) !== "undefined" && invData["body"] !== null && invData["body"]["length"] > 0)
@@ -522,7 +522,7 @@ export class PlancreatemComponent implements OnInit {
 		 
 		  loadRecipesToDays()
 		  {
-			console.log(this.recipeList);
+		//	console.log(this.recipeList);
 			for(let i=0; i < this.plan["days"]['length'] ; i++)
 			{
 			  var obj = this.plan["days"][i];
@@ -531,10 +531,10 @@ export class PlancreatemComponent implements OnInit {
 			  
 				if(this.plan["days"][i][this.mealTypeList[j]] !== "")
 				{
-				  console.log("day "+ i);
-				  console.log(this.plan["days"][i][this.mealTypeList[j]])
+			//	  console.log("day "+ i);
+			//	  console.log(this.plan["days"][i][this.mealTypeList[j]])
 				  var bIndex = this.recipeList.findIndex(x => (x.id === this.plan["days"][i][this.mealTypeList[j]]));
-				  console.log(bIndex);
+			//	  console.log(bIndex);
 				  if(bIndex > -1)
 				  {
 					this.plan["days"][i][this.mealTypeList[j]] =  this.formatRecipe(this.recipeList[bIndex]);
@@ -544,10 +544,10 @@ export class PlancreatemComponent implements OnInit {
 				  else if(this.plan["days"][i][this.mealTypeList[j]] !== "" && bIndex == -1)
 				  {
 				  
-					console.log ("calling recipe by id");
+				//	console.log ("calling recipe by id");
 					if(typeof(this.plan["days"][i][this.mealTypeList[j]]["id"]) == "undefined" && typeof(this.plan["days"][i][this.mealTypeList[j]]["label"]) == "undefined")
 					{
-					  console.log("recipe id " + this.plan["days"][i][this.mealTypeList[j]]);
+				//	  console.log("recipe id " + this.plan["days"][i][this.mealTypeList[j]]);
 					  this.getRecipeById(i, this.mealTypeList[j], this.plan["days"][i][this.mealTypeList[j]]);
 					}
 				   
@@ -558,9 +558,9 @@ export class PlancreatemComponent implements OnInit {
 		  }
 		 getRecipeById(index, type, id)
 		 {
-		   console.log("getRecipeById")
-		   console.log("index " + index);
-		   console.log(id);
+		//   console.log("getRecipeById")
+		//   console.log("index " + index);
+		//   console.log(id);
 		   var params = {'id':id}
 		  // console.log(params);
 		
@@ -568,7 +568,7 @@ export class PlancreatemComponent implements OnInit {
 		  params["returnfields"] = " id, label, image, healthLabels, ingredients, dietLabels, calories, totalNutrients, digest";
 		  var res =   this.dbService.getDatabyFields("recipes", params).subscribe(invData => setTimeout(() => {
 		
-			 console.log(invData);
+		//	 console.log(invData);
 		   
 			 if(invData !== null)
 			 {
@@ -594,11 +594,11 @@ export class PlancreatemComponent implements OnInit {
 		 items:Array<any> = [];
 		isSearching: boolean = false;
 		 getItems(ev: any, prop) {
-		  console.log("in getItems);")
-		  console.log(this.planDay);
+	//	  console.log("in getItems);")
+	//	  console.log(this.planDay);
 		
-		  console.log(this.modalText);
-		  console.log(prop);
+	//	  console.log(this.modalText);
+	//	  console.log(prop);
 		
 		  if(!this.isSearching)
 		  {
@@ -1431,6 +1431,8 @@ export class PlancreatemComponent implements OnInit {
 			 //     console.log(this.nutrientDbFields);
 				  for(let m =0; m < this.filters["minerals"]["data"]["length"]; m++)
 				  {
+					  if(typeof(this.filters["minerals"]["data"][m]["name"]["label"]) !== "undefined")
+					  {
 					var lbl = this.filters["minerals"]["data"][m]["name"]["label"].toLowerCase();
 					if(lbl.indexOf(" ") > -1)
 					{
@@ -1446,7 +1448,7 @@ export class PlancreatemComponent implements OnInit {
 					{
 					  this.filters["minerals"]["data"][m]["t_max"] = this.nutrientDbFields[0]["max"+lbl];
 					}
-			
+				}
 				  }
 			 //     console.log(this.filters["minerals"]["data"]);
 				}

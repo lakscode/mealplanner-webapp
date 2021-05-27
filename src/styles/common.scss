@@ -38,6 +38,24 @@
     font-weight: 300;
 }
 
+.title-black1
+{
+  font-size: $font-large  !important;
+  font-family: 'Lato', serif;
+  color:$text-gray  !important;
+  text-align:left;
+  font-weight:700;
+  padding-bottom:10px;
+}
+.title-black2
+{
+  font-size:$font_medium  !important;
+  font-family: 'Lora', serif;
+  color:$text-gray  !important;
+  text-align:left;
+  font-weight:500;
+  padding-bottom:10px;
+}
 p
 {
 	font-size:$font-large;
