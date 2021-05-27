@@ -462,11 +462,30 @@ color:#FFF;
   margin-top:10px;
 }
 
+.mleft {
+  margin-left:45px;
+}
+
  @media (max-width: 767px) {
  
   .inputbox {
   width: 80%;
   }
+
+  .filterlabel
+{
+  color: $text-gray;
+    padding: 5px;
+    background: #f1f1f2;
+    border: 1px solid #eee;
+    border-radius: 1px;
+    margin-right:5;
+    line-height:3;
+}
+
+.mleft {
+  margin-left:0px;
+}
 
   
 }

@@ -2,13 +2,13 @@
     
     <div class="container" style="padding-left:0; padding-right:0;">
         <div class="row">
-            <div class="col-md-8 col-lg-9">
+            <div class="col-md-8 col-lg-9 col-xs-12">
                 <div class="wrapper-search">
                    
                 <div class="row" >
                     <div class="col-12 "  style="background:#FFF;  margin:0;  padding-bottom:20px;padding-left:0px; padding-right:0px;padding-top:15px">
-                        <div style="padding-left: 10px; padding-right: 10px;">
-                            <label class="searchicon ">
+                        <div style="padding-left: 10px; padding-right: 10px;" class="col-12">
+                            <label class="searchicon">
                                 <i class="fa fa-search" aria-hidden="true"></i>
                             </label>
                             <input type="text" [(ngModel)]="searchparam.q" class="inputbox" placeholder="Search Recipes..." />
@@ -20,10 +20,10 @@
                       
                         
                         <div  class="searchmorebar searchbaranim">
-                            <div class="row" style="margin-left:45px">
-                                <div class="col-12 " style="margin-bottom:10px;padding-left:0;">
+                            <div class="row mleft" >
+                                <div class="col-12 col-xs-12" style="margin-bottom:10px;padding-left:0;">
                                  
-                                     <ng-container *ngFor="let lab of searchFilterLabels; let l = index;">
+                                     <ng-container class="col-xs-12" *ngFor="let lab of searchFilterLabels; let l = index;">
                                             <a [ngClass]="lab.selected?'filterlabel active': 'filterlabel'" href="javascript:void(0)" (click)="showLabels(lab)">
                                               {{lab.label}}
                                             </a>
