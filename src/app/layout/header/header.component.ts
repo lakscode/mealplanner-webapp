@@ -104,18 +104,19 @@ export class HeaderComponent implements OnInit, OnDestroy {
 					{"id":"recipes-favourites", "menu":"Favourites", "link":"/favourites", "display":displayMenu, "active":false},
 					{"id":"recipes-my-recipes", "menu":"My Recipes", "link":"/myrecipes", "display":displayMenu, "active":false},
 					{"id":"recipes-recipebooks", "menu":"Recipe Books", "link":"/recipebooks", "display":displayMenu, "active":false},
-					{"id":"recipes-communities", "menu":"Communities", "link":"/communities", "display":displayMenu, "active":false},
-					{"id":"recipes-recipe-submit", "menu":"Submit Recipe", "link":"/recipesubmit", "display":displayMenu, "active":false}
+				//	{"id":"recipes-communities", "menu":"Communities", "link":"/communities", "display":displayMenu, "active":false},
+				//	{"id":"recipes-recipe-submit", "menu":"Submit Recipe", "link":"/recipesubmit", "display":displayMenu, "active":false}
 				]
 			},
 			{"id":"planner", "menu":"Planner", "link":"/plans", "display":displayMenu, "active":false,
 				"children":
 				[
 
-					{"id":"planner-plan-list", "menu":"Plan List", "link":"/plans", "display":displayMenu, "active":false},
+					{"id":"planner-plan-list", "menu":"Meal Plans", "link":"/plans", "display":displayMenu, "active":false},
 					{"id":"planner-plan-create", "menu":"Create Plan", "link":this.planLink, "display":displayMenu, "active":false}
 				]
-			}				
+			}	,
+			{"id":"communities", "menu":"Communities", "link":"/communities", "display":displayMenu, "active":false}			
 		];
 
 	}

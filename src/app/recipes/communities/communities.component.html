@@ -68,7 +68,7 @@
                                <div style="font-size: 14px;"><span *ngIf="cItem.userscount > 0"><i class="fa fa-user"></i> {{cItem.userscount}} Members, </span>
                                <span *ngIf="cItem.recipecount > 0"><i class="fa fa-cutlery"></i> {{cItem.recipecount}} Recipes</span>
                                 </div>
-                                 <a href="javascript:void(0)" (click)="editCommunity(cItem)" class="editicon"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                 <a *ngIf="cItem.created_by == currentUser['id']" href="javascript:void(0)" (click)="editCommunity(cItem)" class="editicon"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                               </div>
                         </div>
 
