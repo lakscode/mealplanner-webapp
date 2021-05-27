@@ -38,6 +38,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 	subscribeCompanyService: any;
 	companylogo : any;
 	collapsed: boolean  = true;
+	planLink:any;
 	constructor(private router :Router, private socialAuthService: SocialAuthService, public userService: UserService, public helpService: HelpService,  private dbService: DBService, private location: Location) {
 
 	var currentUrl = this.router.url;
@@ -45,13 +46,20 @@ export class HeaderComponent implements OnInit, OnDestroy {
 	////console.log(currentUrl);
 	var displayMenu =  true;
 
+            if(window.screen.width > 768 || window.innerWidth > 768)
+            {
+               this.planLink = "/plan-create";
+            }
+            else
+            {
+                this.planLink = "/plan-createm";
+            }
 		this.currentUser = new User();
 		this.userName = "";
 		this.loggedIn = false;
 		this.userRole = "";
 		this.currentUser.userName = "";
-		this.currentUser.loggedIn = false;
-
+		this.currentUser.loggedIn = false;     
 		this.menuItemsCustom = [
 				{"id":"dashboard", "menu":"Dashboard", "display":displayMenu, "active": false},
 				{"id":"admin", "menu":"Admin", "display":displayMenu, "active": false},
@@ -105,7 +113,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 				[
 
 					{"id":"planner-plan-list", "menu":"Plan List", "link":"/plans", "display":displayMenu, "active":false},
-					{"id":"planner-plan-create", "menu":"Create Plan", "link":"/plan-create", "display":displayMenu, "active":false}
+					{"id":"planner-plan-create", "menu":"Create Plan", "link":this.planLink, "display":displayMenu, "active":false}
 				]
 			}				
 		];
@@ -132,7 +140,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 		this.showMenu = false;
 		
 	}
-	ngOnInit() {
+	ngOnInit() {	
 
 		//console.log("header ngOnInit");
 		this.companylogo = 'assets/logo-dark.png';
