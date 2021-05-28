@@ -447,3 +447,21 @@ text-align:center;
   border: 2px solid #CCC;
 }
 
+
+
+.subscribe-sec
+{
+  background:$green;
+  h2
+  {
+    color:#FFF;
+    font-size:40px;
+    font-weight:700;
+    font-family: 'Lato', sans-serif;
+    font-style:normal;
+  }
+  p
+  {
+    font-size:20px;
+  }
+}

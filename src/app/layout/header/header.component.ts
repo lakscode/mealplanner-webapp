@@ -265,7 +265,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 	{
 	var str = this.location.path();	
 
-		if(!this.loggedIn && str.indexOf("resetpassword") == -1 && str.indexOf("index") == -1 && str.indexOf("home") == -1 && str.indexOf("signup") == -1 && str.indexOf("pricing") == -1 && str.indexOf("features") == -1 && str.indexOf("recipedetails") == -1  && str.indexOf("community") == -1 && str.indexOf("benefits") == -1)
+		if(!this.loggedIn && str.indexOf("resetpassword") == -1 && str.indexOf("index") == -1 && str.indexOf("home") == -1 && str.indexOf("signup") == -1 && str.indexOf("pricing") == -1 && str.indexOf("features") == -1 && str.indexOf("recipedetails") == -1  && str.indexOf("privacy") == -1 && str.indexOf("benefits") == -1)
 		{
 			var params = {};
 			if( this.router.url.indexOf("login") > -1)
