@@ -186,10 +186,14 @@ font-size:24px;
 .fixedtop
 {
   margin-top:100px;
+  background:#f8f8f8;
+  width:100%;
 }
 @media only screen and (max-width: 767px) {
   .fixedtop
   {
     margin-top:80px;
+    background:#f8f8f8;
+    width:100%;
   }
 }

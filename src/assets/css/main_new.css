@@ -2417,7 +2417,9 @@ ul {
 .listing-grid .listing .detail .meta-listing .post-meta {
   margin-bottom: 15px;
 }
-
+ a {
+  cursor:pointer;
+ }
 
 .recipe-set .listing-buttons {
   float: right;
