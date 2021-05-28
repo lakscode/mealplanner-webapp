@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { HelpService } from '../services/help.service';
 
 import { ModalService } from '../shared/modules/modal/modal.service';
-
+import { DBService } from '../dbservices/db.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -22,7 +22,7 @@ popupforquestions: boolean =false;
 isMobile: boolean = false;
 images: any;
 
-  constructor(private router: Router, private modalService: ModalService,  private helpService: HelpService) {
+  constructor(private router: Router, private dbService: DBService,  private modalService: ModalService,  private helpService: HelpService) {
 	this.labels={"companyName":this.helpService.getConstants("companyName")};
 
 	}
@@ -35,7 +35,7 @@ images: any;
 		  this.images['goodfood']  = "assets/images/temp-images/good-food.jpg";
 
 		this.loadSteps(); 
-
+		this.loadCommunities();
 		this.isMobile = this.helpService.isMobile();
 
 		this.currentUser =this.helpService.getCurrentUser();
@@ -76,6 +76,128 @@ images: any;
 	{
 		this.modalService.close(id);
 	}
+
+
+
+	communitiesList: Array<any> = [];
+	loadCommunities()
+	{
+		 /******** recipes api serach */
+  
+   
+		this.communitiesList = [];
+	   // var params = {"limit": 100};
+	   // params["createdby"] = this.currentUser["id"];
+		console.log(params);
+		var params = {"query": "SELECT c.*, COUNT(rm.id) AS recipecount, u.email, u.firstname, u.lastname FROM community AS c LEFT JOIN recipe_mapping AS rm ON c.id = rm.community_id LEFT JOIN users AS u ON c.created_by = u.id GROUP BY c.id limit 0, 4"};
+  
+		var res =   this.dbService.getDatabyTablebyQuery("community", params).subscribe(invData => setTimeout(() => {
+	
+		  console.log(invData);
+		  if(invData !== null)
+		  {
+			var obj = invData["body"]["length"];
+			console.log(invData["body"]);
+			this.communitiesList = invData["body"];
+			for(let o=0; o <  this.communitiesList.length; o++)
+		  {
+			  this.communitiesList[o]["userjoined"] = false;
+		  }
+			console.log(this.communitiesList);
+			this.loaduserCount();
+		  }
+		}));
+	
+		
+  
+	}
+	
+	loaduserCount()
+	{
+		/*
+	  SELECT c.id, COUNT(cj.id) AS usercount
+	  FROM community AS c
+	  LEFT JOIN community_join AS cj ON c.id = cj.community_id
+	  GROUP BY c.id, cj.community_id
+  
+	  */
+  
+	  console.log("in loadusercount");
+	  var params = {"query": "SELECT c.id, COUNT(cj.id) AS usercount 	FROM community AS c LEFT JOIN  community_join AS cj ON c.id = cj.community_id GROUP BY c.id, cj.community_id LIMIT 0, 4"};
+  
+	  var res =   this.dbService.getDatabyTablebyQuery("community", params).subscribe(invData => setTimeout(() => {
+  
+	   
+		if(invData !== null)
+		{
+		  var obj = invData["body"];
+		  for(let o=0; o < obj.length; o++)
+		  {
+			  var fIndex = this.communitiesList.findIndex(x=>(x.id === obj[o]["id"]));
+			  
+			  if(fIndex > -1)
+			  {
+			  //	console.log(obj[o]["usercount"])
+				  this.communitiesList[fIndex]["userscount"] = obj[o]["usercount"];
+			  //	console.log(this.communitiesList[fIndex]["userscount"] );
+			  }
+		  }
+  
+		}
+		this.loaduserJoinedStatus();
+	  }));
+  
+	}
+	loaduserJoinedStatus()
+	{
+		/*
+	  SELECT c.id, COUNT(cj.id) AS usercount
+	  FROM community AS c
+	  LEFT JOIN community_join AS cj ON c.id = cj.community_id
+	  GROUP BY c.id, cj.community_id
+  
+	  */
+		if( typeof( this.currentUser) !== "undefined" && this.currentUser !== null && typeof( this.currentUser["id"]) !== "undefined" && this.currentUser["id"] !== null )
+		{
+	  console.log("in loaduserJoinedStatus");
+	  var params = {"query": "SELECT id, community_id from community_join where userid = " + this.currentUser["id"] };
+  
+	  var res =   this.dbService.getDatabyTablebyQuery("community", params).subscribe(invData => setTimeout(() => {
+  
+	   
+		if(invData !== null)
+		{
+		  var obj = invData["body"];
+		  for(let o=0; o < obj.length; o++)
+		  {
+		  
+			  var fIndex = this.communitiesList.findIndex(x=>(x.id === obj[o]["community_id"]));
+			  
+			  if(fIndex > -1)
+			  {
+			  //	console.log(obj[o]["usercount"])
+				  this.communitiesList[fIndex]["userjoined"] = true;
+			  //	console.log(this.communitiesList[fIndex]["userscount"] );
+			  }
+		  }
+  
+		}
+	  }));
+	}
+	}
+	gotoRecipeDetails(page, id){
+		if(page == "community")
+		{
+		//	this.router.navigate([page, {id:id}]);
+		}
+		else if(page == "recipedetails")
+		{
+		//	this.router.navigate([page, id]);
+		}
+	}
+
+	subscribe: any = {};
+
 }
 
 

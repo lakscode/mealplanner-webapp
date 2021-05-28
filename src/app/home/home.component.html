@@ -71,7 +71,45 @@
       </div>
    </section>
 
-   
+  
+<!--hottest recipes-->
+<section class="hot-recipes-var2" *ngIf="communitiesList && communitiesList.length > 0">
+   <div class="container">
+       <div class="wrapper-hot-recipe-var2">
+          <div class="hot-recipes-bordered">
+               <div class="heading-var1 text-center animated wow flipInX">
+                   <h2><a href="javascript:void(0)">Recommended Communities</a></h2>
+                 <span class="heading-bell"></span>
+               </div>
+ 
+               <div class="hot-row">                  
+                   <div class="split-images-var2 col-size text-center" *ngFor="let cItem of communitiesList; let r=index;">
+                      <div class="image-first inner-split">
+                         <div class="image image-animate common-split animated wow flipInY animation-delay{{r+1*100}}ms">
+                            <a style="cursor:pointer" (click)="gotoRecipeDetails('community', cItem.id)">
+                              <img style="    height: 277px;
+                              width: 277px;" src="{{cItem.image}}" alt="{{cItem.community_name}} image"/></a>
+                         </div>
+                         <div class="intro common-split animated wow flipInY animation-delay{{r+2*100}}ms">
+                            <div class="intro-inner ">
+                               <h3><a style="cursor:pointer" (click)="gotoRecipeDetails('community', cItem.id)">{{cItem.community_name}}</a></h3>
+                               <div class="short-separator"></div>
+                               <p *ngIf="cItem.recipecount && cItem.recipecount >0" style="text-align:left;"><i class="fa fa-cutlery"></i> {{cItem.recipecount}} recipes</p>
+                               <br>
+                               <p *ngIf="cItem.userscount && cItem.userscount > 0" style="text-align:left;"><i class="fa fa-user"></i> {{cItem.userscount}} members</p>
+                               <br>
+                               <!--<div class="short-separator"></div>-->
+                               <!--<a class="read-more" (click)="gotoRecipeDetails('community', cItem.id)">view more</a>-->
+                            </div>
+                         </div>
+                      </div>
+                   </div>
+                </div>
+          </div>
+       </div>
+    </div>
+ </section>
+ <!--hottest recipes ends--> 
 <section class="home-sec"  style="background:#FFF;padding-bottom: 30px; margin-bottom:0px;padding-top:30px;display:none">
    <div class="container col-12">
       <div class="home-sec-box">
@@ -109,7 +147,25 @@
 
    </section>
    
+   <div class="row">
+      <div class="container">
+          <div class="col-12 text-center wow animated bounceInDown">
+              <div class="chefs-card-inner" style="margin-bottom:40px;">
+                  <h2> Subscribe to our newsletter</h2>
+                  <div class="short-separator"></div>
+                  <p>
+                     It's easy, just write your email address and we'll send you information. No spam!
+                   </p>
+                   <div class="email-field">
+                     <input type="email" [(ngModel)] ="subscribe.email" name="email" placeholder="Enter your email address"/>
+                     <button (click)="subscribeEmail()"><i class="fa fa-paper-plane-o"></i></button>
+                 </div>
 
+                 
+              </div>
+          </div>
+      </div>
+    </div>
 
  <div class="chefs-banner">
   <div class="container">
