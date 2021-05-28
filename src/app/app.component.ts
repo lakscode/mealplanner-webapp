@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from './services/user.service';
 import { DBService } from './dbservices/db.service';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 @Component({
   selector: 'app-root',
