@@ -197,7 +197,25 @@ images: any;
 	}
 
 	subscribe: any = {};
-
+	subscribeEmail()
+	{
+	  console.log(this.subscribe);
+	  if(this.subscribe.email)
+	  {
+		//this.helpService.savesubscribeemail(this.subscribe.email);
+		var params={};
+		params["email"] = this.subscribe.email;
+  
+		console.log(params);
+		var res =   this.dbService.postDataByTable("subscriptions", params).subscribe(recipeData => setTimeout(() => {
+		  console.log(recipeData);
+		  
+		
+		}));	
+  
+	  }
+	  
+	}
 }
 
 
