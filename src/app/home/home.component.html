@@ -82,29 +82,51 @@
                  <span class="heading-bell"></span>
                </div>
  
-               <div class="hot-row">                  
-                   <div class="split-images-var2 col-size text-center" *ngFor="let cItem of communitiesList; let r=index;">
-                      <div class="image-first inner-split">
-                         <div class="image image-animate common-split animated wow flipInY animation-delay{{r+1*100}}ms">
-                            <a style="cursor:pointer" (click)="gotoRecipeDetails('community', cItem.id)">
-                              <img style="    height: 277px;
-                              width: 277px;" src="{{cItem.image}}" alt="{{cItem.community_name}} image"/></a>
-                         </div>
-                         <div class="intro common-split animated wow flipInY animation-delay{{r+2*100}}ms">
-                            <div class="intro-inner ">
-                               <h3><a style="cursor:pointer" (click)="gotoRecipeDetails('community', cItem.id)">{{cItem.community_name}}</a></h3>
-                               <div class="short-separator"></div>
-                               <p *ngIf="cItem.recipecount && cItem.recipecount >0" style="text-align:left;"><i class="fa fa-cutlery"></i> {{cItem.recipecount}} recipes</p>
-                               <br>
-                               <p *ngIf="cItem.userscount && cItem.userscount > 0" style="text-align:left;"><i class="fa fa-user"></i> {{cItem.userscount}} members</p>
-                               <br>
-                               <!--<div class="short-separator"></div>-->
-                               <!--<a class="read-more" (click)="gotoRecipeDetails('community', cItem.id)">view more</a>-->
-                            </div>
-                         </div>
+               <div class="row" style="padding-left:0px; padding-right:0px; margin-bottom:15px !important" >
+                  <!--<div class="col-12" *ngIf="community.community_name">
+                      <label for="recipes">Recipes</label>
+                  </div>-->
+                  <ng-container  *ngFor="let cItem of communitiesList; let i = index;">
+                  <div style="padding-left:0px; padding-right:0px;margin-top:15px;margin-bottom:15px" class="col-12 col-lg-3 col-md-4">
+                      <div class="recipe-item" style="min-height:200px;background-size:cover;  background-position:center;  " [ngStyle]="{'background-image':'linear-gradient(
+                          rgba(0, 0, 0, 0.3),
+                          rgba(0, 0, 0, 0.3)
+                        ),url(' + cItem.image + ')'}">
+                        <!--<p class="favactive" style='    text-align: right;
+                        position: absolute;
+                        bottom: -9px;
+                        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+                        left: 12px;
+                        right: 12px;
+                        padding-right: 10px;
+                        border-bottom-left-radius: 15px;
+                        border-bottom-right-radius: 15px;'><span><i class="fa fa-cutlery"></i> {{cItem.recipecount}} recipes</span></p>-->
+                      <div class='row toggleremove' style='color:#FFF;'>
+
+                          <div class="col-12" style="padding-left:0px; padding-right:0px">
+                              
+                          <h1 class="recipe-label" style="font-size:20px; line-height: 32px;">{{cItem.community_name}}</h1>
+                          <!--<p *ngIf="cItem.recipecount && cItem.recipecount >0" style="text-align:left;"><i class="fa fa-cutlery"></i> {{cItem.recipecount}} recipes</p>
+                          <br>
+                          <p *ngIf="cItem.userscount && cItem.userscount > 0" style="text-align:left;"><i class="fa fa-user"></i> {{cItem.userscount}} members</p>-->
+                       
+                          </div>
+
                       </div>
-                   </div>
-                </div>
+                     
+                  </div>
+                  <p style="text-align:left; font-size:14px;color:#888">
+                     <span style="margin-left:20px" *ngIf="cItem.recipecount && cItem.recipecount >0" ><i class="fa fa-cutlery"></i> {{cItem.recipecount}} Recipes</span>
+                     <span style='float:right;margin-right:20px' *ngIf="cItem.userscount && cItem.userscount > 0" ><i class="fa fa-user"></i> {{cItem.userscount}} Members </span>
+                  </p>
+         
+                  <!--<p *ngIf="cItem.userscount && cItem.userscount > 0" style="text-align:left;"></p> -->
+                  <p style="padding-left:15px; font-size:12px;margin-bottom:15px">Added by : <span *ngIf="cItem.firstname">{{cItem.firstname}} {{cItem.lastname}}</span><span *ngIf="!cItem.firstname">{{recipe.email}}</span>
+                    <!--  <span style="margin-left:10px" *ngIf="recipe.created_at"> {{formatDays(recipe.created_at)}} days ago </span> --> </p>
+                  </div>
+                
+              </ng-container>
+              </div>
           </div>
        </div>
     </div>
@@ -150,14 +172,14 @@
    <div class="row subscribe-sec">
       <div class="container">
           <div class="col-12 text-center wow animated bounceInDown">
-              <div class="chefs-card-inner" style="margin-bottom:40px;">
+              <div class="chefs-card-inner " style="margin-bottom:40px;margin-top:40px;">
                   <h2> Subscribe to our newsletter</h2>
                   <div class="short-separator"></div>
                   <p>
                      It's easy, just write your email address and we'll send you information. No spam!
                    </p>
-                   <div class="email-field">
-                     <input type="email" [(ngModel)] ="subscribe.email" name="email" placeholder="Enter your email address"/>
+                   <div class="email-field subscribe">
+                     <input class="inputtext" type="email" [(ngModel)] ="subscribe.email" name="email" placeholder="Enter your email address"/>
                      <button (click)="subscribeEmail()"><i class="fa fa-paper-plane-o"></i></button>
                  </div>
 

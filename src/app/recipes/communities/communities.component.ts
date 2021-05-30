@@ -236,7 +236,11 @@ endIndex = startIndex+ endIndex;
 			var obj = invData["body"]["length"];
 			console.log(invData["body"]);
 			this.communitiesList = invData["body"];
-			
+			for(let o=0; o < this.communitiesList.length; o++)
+			{
+			this.communitiesList[o]["image"] =encodeURI( this.communitiesList[o]["image"]);
+			}
+
 			console.log(this.communitiesList);
 			this.loaduserCount();
 		  }

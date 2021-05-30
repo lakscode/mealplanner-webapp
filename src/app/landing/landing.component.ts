@@ -548,7 +548,9 @@ transform(value: any) {
 		  for(let o=0; o <  this.communitiesList.length; o++)
 		{
 			this.communitiesList[o]["userjoined"] = false;
+			this.communitiesList[o]["image"] =encodeURI( this.communitiesList[o]["image"]);
 		}
+
 		  console.log(this.communitiesList);
 		  this.loaduserCount();
 		}

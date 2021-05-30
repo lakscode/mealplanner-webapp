@@ -133,12 +133,15 @@ images: any;
 		  var obj = invData["body"];
 		  for(let o=0; o < obj.length; o++)
 		  {
+				this.communitiesList[o]["image"] =encodeURI( this.communitiesList[o]["image"]);
+
 			  var fIndex = this.communitiesList.findIndex(x=>(x.id === obj[o]["id"]));
 			  
 			  if(fIndex > -1)
 			  {
 			  //	console.log(obj[o]["usercount"])
 				  this.communitiesList[fIndex]["userscount"] = obj[o]["usercount"];
+				  
 			  //	console.log(this.communitiesList[fIndex]["userscount"] );
 			  }
 		  }

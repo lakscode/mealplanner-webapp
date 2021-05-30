@@ -81,7 +81,7 @@ import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { SocialLoginModule, SocialAuthServiceConfig, FacebookLoginProvider } from 'angularx-social-login';
 import { GoogleLoginProvider } from 'angularx-social-login';
 import {environment} from "../environments/environment";
-import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+//import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 @NgModule({
   declarations: [
 		AppComponent
@@ -160,8 +160,7 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
     		//provider: new FacebookLoginProvider('286839523118020')
     		//provider: new FacebookLoginProvider('541089030229736')
     		
-  			},
-  			 {provide: LocationStrategy, useClass: HashLocationStrategy}
+  			}
         ]
       } as SocialAuthServiceConfig,
     }    ],

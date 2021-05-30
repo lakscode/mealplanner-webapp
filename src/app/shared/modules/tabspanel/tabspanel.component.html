@@ -12,7 +12,7 @@
             </div>
             <div class="right-side">
                 <h3 class="overflow-text" style="cursor:pointer" (click)="gotoRecipeDetails(recipe.id)">{{recipe.label}}</h3>
-                <p>Calories/serving: <b>{{formatValuePServing(recipe.calories, recipe.yield)}}</b></p>
+                <p style="font-size:12px;">Calories: <b>{{formatValuePServing(recipe.calories, recipe.yield)}}</b></p>
                 <div class="rating-box" style="color:orange" *ngIf="recipe.displayrating">
                     <span class="rating-icons" >
                         <i *ngIf="recipe.displayrating >=1" class="fa fa-star"></i>
