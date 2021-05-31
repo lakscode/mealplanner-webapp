@@ -71,15 +71,16 @@
       </div>
    </section>
 
-  
+
 <!--hottest recipes-->
 <section class="hot-recipes-var2" style="margin-bottom:30px;padding-bottom:0px;" *ngIf="communitiesList && communitiesList.length > 0">
    <div class="container">
        <div class="wrapper-hot-recipe-var2">
           <div class="hot-recipes-bordered">
                <div class="heading-var1 text-center animated wow flipInX">
-                   <h2><a href="javascript:void(0)">Recommended Communities</a></h2>
+                   <h2><a href="javascript:void(0)">You're in a good company</a></h2>
                  <span class="heading-bell"></span>
+                 <p>Join people who are already using Fitaholic to help their clients.</p>
                </div>
  
                <div class="row" style="padding-left:0px; padding-right:0px; margin-bottom:15px !important" >
@@ -87,7 +88,7 @@
                       <label for="recipes">Recipes</label>
                   </div>-->
                   <ng-container  *ngFor="let cItem of communitiesList; let i = index;">
-                  <div style="padding-left:0px; padding-right:0px;margin-top:15px;margin-bottom:15px" class="col-12 col-lg-3 col-md-4">
+                  <div (click)="gotopage('pricing')" style="padding-left:0px; padding-right:0px;margin-top:15px;margin-bottom:15px" class="col-12 col-lg-3 col-md-4">
                       <div class="recipe-item  animated wow flipInX" style="min-height:200px;background-size:cover;  background-position:center;  " [ngStyle]="{'background-image':'linear-gradient(
                           rgba(0, 0, 0, 0.3),
                           rgba(0, 0, 0, 0.3)

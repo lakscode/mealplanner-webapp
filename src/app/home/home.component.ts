@@ -197,6 +197,10 @@ images: any;
 		{
 		//	this.router.navigate([page, id]);
 		}
+		else if( page == "signup")
+		{
+			this.router.navigate([page]);
+		}
 	}
 
 	subscribe: any = {};
