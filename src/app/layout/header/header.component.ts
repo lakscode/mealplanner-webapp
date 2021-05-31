@@ -113,10 +113,17 @@ export class HeaderComponent implements OnInit, OnDestroy {
 				[
 
 					{"id":"planner-plan-list", "menu":"Meal Plans", "link":"/plans", "display":displayMenu, "active":false},
-					{"id":"planner-plan-create", "menu":"Create Plan", "link":this.planLink, "display":displayMenu, "active":false}
+				//	{"id":"planner-plan-create", "menu":"Create Plan", "link":this.planLink, "display":displayMenu, "active":false}
 				]
 			}	,
-			{"id":"communities", "menu":"Communities", "link":"/communities", "display":displayMenu, "active":false}			
+			{"id":"communities", "menu":"Communities", "link":"/communities", "display":displayMenu, "active":false,
+				"children":
+				[
+
+					{"id":"groups-communities", "menu":"Communities", "link":"/communities", "display":displayMenu, "active":false},
+					{"id":"groups-groups", "menu":"Groups", "link":"/groups", "display":displayMenu, "active":false}
+				]
+			}			
 		];
 
 	}
@@ -265,7 +272,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 	{
 	var str = this.location.path();	
 
-		if(!this.loggedIn && str.indexOf("resetpassword") == -1 && str.indexOf("index") == -1 && str.indexOf("home") == -1 && str.indexOf("signup") == -1 && str.indexOf("pricing") == -1 && str.indexOf("features") == -1 && str.indexOf("recipedetails") == -1  && str.indexOf("privacy") == -1 && str.indexOf("benefits") == -1)
+		if(!this.loggedIn && str.indexOf("resetpassword") == -1 && str.indexOf("index") == -1 && str.indexOf("home") == -1 && str.indexOf("signup") == -1 && str.indexOf("pricing") == -1 && str.indexOf("features") == -1 && str.indexOf("recipedetails") == -1  && str.indexOf("group") == -1 && str.indexOf("privacy") == -1 && str.indexOf("benefits") == -1)
 		{
 			var params = {};
 			if( this.router.url.indexOf("login") > -1)

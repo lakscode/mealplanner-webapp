@@ -1,0 +1,63 @@
+@import "../../../variables.scss";
+
+
+.community_panel, .community_img
+{
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
+.community_details
+{
+  position: absolute;
+  margin-bottom: 10px;
+  top:0px;
+  left: 15px;
+  right: 15px;
+
+  padding: 10px;
+  background-position: center;
+  height: 100%;
+  background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) );
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  color:#FFF;
+  font-family: 'Lato', sans-serif;
+  .name
+  {
+    font-weight: 700;
+    font-size: 32px;
+    margin-top: 20px;
+    margin-left: 20px;
+    text-align: left;
+}
+  
+  .details
+  {
+    font-size: 16px;
+    font-family: 'Lato', sans-serif;  color:#FFF;
+  }
+}
+
+
+
+
+
+.commentitem
+{
+  .userimage
+  {
+    display:inline-block; width: 30px; height:30px; 
+      img
+      {
+        border-radius:50%;
+      }
+  }
+  .commenttext
+  {
+    display:inline-block;
+    background: $white-half;
+    padding:10px;
+  }
+
+}

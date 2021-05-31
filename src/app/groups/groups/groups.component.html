@@ -1,0 +1,176 @@
+<div class="fixedtop recipes-home-body inner-page">
+    
+    <div class="container" style="padding-left:0px; padding-right:0px;">
+        <div class="row">
+            <div class="col-md-12 col-lg-9">
+                <div class="recipe-set">
+                     <div class="listing-buttons">
+                        <span (click)="setListorGrid('grid')"
+                            [ngClass]="listorgrid.menu == 'grid'?'grid current':'grid' "><i
+                                class="fa fa-th-large"></i></span>
+                        <span (click)="setListorGrid('grid')"
+                            [ngClass]="listorgrid.menu == 'list'?'list current':'list'"><i
+                                class="fa fa-bars"></i></span>
+                    </div> 
+                   
+                    <h2>Groups</h2>
+                    <div class="row" style=" width:100%; text-align:right;margin-bottom:20px;">
+                        <div class="col-12">
+                            <div class="create-button anim-button btn-4" (click)="createNew()">
+                            <i class="fa fa-plus"></i>  Create New
+                        </div>
+                    </div>
+                    </div>
+                    <ul class="pagination" *ngIf="totalPage >= 10">
+                        <li (click)="currentPage(0)" class="">
+                            <a href="javascript:void(0)">
+                                <i class="fa fa-angle-double-left"></i>
+                            </a>
+                        </li>
+                        <li (click)="prevPage()" class="">
+                            <a href="javascript:void(0)">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        </li>
+                        
+                        <li (click)="currentPage(i)" [ngClass]="i == page_num?'current':''" *ngFor='let in of counter(totalPage) ;let i = index'>
+                            <a href="javascript:void(0)">{{i+1}}</a>
+                        </li>
+                        <li (click)="nextPage()" class="">
+                            <a href="javascript:void(0)">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </li>
+                        <li (click)="currentPage(totalPage-1)" class="">
+                            <a href="javascript:void(0)">
+                                <i class="fa fa-angle-double-right"></i>
+                            </a>
+                        </li>   
+                    </ul>
+                    <div class="recipe-listing {{listorgrid.panel}}">
+
+
+                        <div class="listing boxshadow5" *ngFor="let cItem of communitiesList; let i = index;">
+                           
+                            <div class="image image-animate">
+                                <a (click)="gotopage('group', {'id':cItem.id});">
+                                    <img style="max-height:95px;" *ngIf="cItem.image !== ''" src="{{cItem.image}}"
+                                        alt="{{cItem.group_name}} image">
+                                    <img *ngIf="cItem.image == ''"  src="assets/notavailable.png" alt="{{cItem.group_name}} image">
+                                </a>
+                            </div>
+                            <div class="detail" style='color:#555'>
+                                <h4><a (click)="gotopage('group', {'id':cItem.id});">{{cItem.group_name}}</a></h4>
+                                <p innerHTML="{{limitTo(cItem.description, 200)}}">
+
+                                </p>  
+                                <!--<p>{{countrecipes(recipe1.recipes)}} Recipes </p>-->
+                               <div style="font-size: 14px;"><span *ngIf="cItem.userscount > 0"><i class="fa fa-user"></i> {{cItem.userscount}} Members </span>
+                               <!--<span *ngIf="cItem.recipecount > 0"><i class="fa fa-cutlery"></i> {{cItem.recipecount}} Recipes</span>-->
+                                </div>
+                                 <a *ngIf="cItem.created_by == currentUser['id']" href="javascript:void(0)" (click)="editGroup(cItem)" class="editicon"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                              </div>
+                        </div>
+
+                        <!--<div class="banner-header text-center">
+                            <a href="javascript:void(0)">
+                                <img src="assets/images/temp-images/header-banner.jpg" alt="banner">
+                            </a>
+                        </div>-->
+
+
+                        <ul class="pagination" *ngIf="totalPage >= 10">
+                            <li (click)="currentPage(0)" class="">
+                                <a href="javascript:void(0)">
+                                    <i class="fa fa-angle-double-left"></i>
+                                </a>
+                            </li>
+                            <li (click)="prevPage()" class="">
+                                <a href="javascript:void(0)">
+                                    <i class="fa fa-angle-left"></i>
+                                </a>
+                            </li>
+                            
+                            <li (click)="currentPage(i)" [ngClass]="i == page_num?'current':''" *ngFor='let in of counter(totalPage) ;let i = index'>
+                                <a href="javascript:void(0)">{{i+1}}</a>
+                            </li>
+                            <li (click)="nextPage()" class="">
+                                <a href="javascript:void(0)">
+                                    <i class="fa fa-angle-right"></i>
+                                </a>
+                            </li>
+                            <li (click)="currentPage(totalPage-1)" class="">
+                                <a href="javascript:void(0)">
+                                    <i class="fa fa-angle-double-right"></i>
+                                </a>
+                            </li>   
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-lg-3">
+                <aside>
+                    <div class="side-bar">
+
+                        <app-sidebar></app-sidebar>
+
+
+                    </div>
+                </aside>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<jw-modal id="createNew" [width]="40" >
+    
+    <form name="form"  #uf="ngForm" novalidate class="popup-panel" >
+        <div class="modal-header" style="background:#FFF;">
+            <h2 style="margin:15px; ">
+                <span>Add New Group</span>           
+
+            </h2>
+            <button style="font-size: 30px;padding:5px;" type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeModal('createNew');">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body" style="background:#FFF;" > 
+             <div class="submit-recipe-form">
+                <form action="#" method="post">
+
+                    <div class="row"   >
+
+                        <div class="col-12 community_panel">
+                     
+                           <!--  <img *ngIf="community.image" class="community_img" src="{{community.image}}"  style="height:200px;width: 100%;" />
+                            <img *ngIf="!community.image"  class="community_img" src="assets/notavailable1.jpg"  style="height:200px;width: 100%;" /> -->
+                          
+                            
+                           <div class="community_details">
+                           <!--  <input id="inputuploadrecipe"  type="file" name="inputuploadrecipe" (change)="onFileSelect($event)" />
+                            <button  style="float:right; background:transparent; border:0px; outline:0;font-size:16px"  (click)="fileupload()" class="upload-comment">
+                                <i class="fa fa-picture-o" aria-hidden="true"></i></button> -->
+                            <input class="trans-input" type="text" name="title" id="title" placeholder="Type group name..." [(ngModel)]="group.group_name" style="padding-left:10px">
+                            <textarea class="short-text trans-input" name="description" placeholder="Type description" [(ngModel)]='group.description' id="description" cols="30" rows="10"></textarea>
+                              <br>
+
+                                <label  class='comment-label'>  Upload Image</label>
+                     <button (click)="fileupload()" class="upload-comment">
+                        <i class="fa fa-picture-o" aria-hidden="true"></i> Upload Image</button>
+                    <div>
+                        <input id="inputuploadrecipe" hidden type="file" name="inputuploadrecipe" (change)="onFileSelect($event)" />
+                      </div>
+                      <img *ngIf="group.image" src="{{group.image}}"  style="width: 80%" />
+               
+                           </div>
+</div></div>
+ <div class="text-center">
+                            <button type="submit" [disabled] = "group.group_name == '' && group.image ==''? true:false" [ngClass]="group.group_name !== '' && group.image !==''?'submit-comment active':'submit-comment'" (click)="saveGroup()"  class="recipe-submit-btn">Save </button>
+                        </div>
+</form>
+</div>
+        </div>
+    </form>
+</jw-modal>
+

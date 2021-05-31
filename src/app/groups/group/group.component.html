@@ -1,0 +1,178 @@
+<div class="recipes-home-body inner-page">
+    <div class="container"  style="padding-left:0px; padding-right:0px;">
+    <div class="fixedtop row" >
+    <div class="col-12 col-md-12 col-lg-12">
+        <div class="recipe-set submit-recipe-set">
+          <h2> <a (click)="gotopage();"><i class="fa fa-chevron-left"></i></a> Group</h2>
+         
+           <!-- <div style="width:100%; text-align:right">
+                <a class="copy-button" (click)="downloadplan()" title="Download PDF"><i class="fa fa-download"></i> Download</a>
+            </div>    -->
+            <div class="submit-recipe-form" >
+                <form action="#" method="post">
+
+
+                   <!--  <div class="row" *ngIf="!communityOwner && community.image"  > -->
+                     <div class="row" *ngIf="group.image"  >
+                        <div class="col-12 community_panel animated wow flipInX">
+                          
+                        <img class="community_img " src="{{group.image}}"  style="height:200px;width: 100%;" />
+                       <div class="community_details" style="position: absolute;
+                       top: 0px;background-size:cover;  background-position:center;  height:100%; " [ngStyle]="{'background-image':'linear-gradient(
+                                rgba(0, 0, 0, 0.3),
+                                rgba(0, 0, 0, 0.3)
+                              )'}">
+                          <p class="name">{{group.group_name}}</p>
+                          <br>
+                   
+                          <div style="position:absolute; bottom:10px; padding:15px;" class="recipe-details" *ngIf="group">
+                                             
+                            <p class="details" *ngIf="commentsList.length > 0"><i class="fa fa-cutlery"></i> {{commentsList.length}} Recipe<span *ngIf="commentsList.length > 1">s</span>
+                            <span style="margin-left:10px" class="details" *ngIf="group && group.joinedcount"><i class="fa fa-user"></i> {{group.joinedcount}} member<span *ngIf="group.joinedcount > 1">s</span></span>
+                            
+                       </div>
+                        <div class="onlydesktop" style="position:absolute; bottom:0px; right:0px;">
+                            <!--<div class="component-bg" style="display:inline-block;">
+                                <div class="share-recipe">
+                                  Share :  
+                              
+                              
+                                  <div class="fb-share-button social-icon fb" 
+                                  data-href="https://developers.facebook.com/docs/plugins/" data-layout="button" data-size="large">
+                                  <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?quote={{msg}}&u={{urlShare}}/" class=" fa fa-facebook"></a>
+                                  </div>
+                                  <div class="social-icon twitter">
+                                    <a href="{{urlTweet}}" target="_blank" class=" fa fa-twitter"></a>
+                                  </div>
+                              
+                                  <div class="social-icon whatsapp">
+                                    <a href="https://api.whatsapp.com/send?text={{urlShare}}" target="_blank" data-action="share/whatsapp/share" class=" fa fa-whatsapp"></a>
+                                  </div>
+                              
+                                  <div class="social-icon print">
+                                    <a href="javascript:void()" target="_blank" class=" fa fa-print"></a>
+                                  </div>
+                                </div>
+                              </div>-->
+                            <!--<button *ngIf="showActions['invite']" class="create-button anim-button btn-4">Invite</button>-->
+                            <button (click)="joinCommunity()" *ngIf="showActions['join'] " class="create-button anim-button btn-4">Join</button>
+                            <button class="create-button anim-button btn-4" (click)="addNew()" >Add Recipe</button>
+                      </div>
+           
+                       </div>
+                               
+                      </div>  
+                      </div>
+
+                    <div *ngIf="commentsList && commentsList.length > 0" class="row" style="padding-left:0px; padding-right:0px;" >
+                        <ng-container  *ngFor="let comment of commentsList; let i = index;">
+                        <div *ngIf="comment.message" style="padding-left:0px; padding-right:0px;margin-top:15px;margin-bottom:15px" class="col-12 commentitem">
+                        <div class='userimage'>
+                        <img style="width:100%" src="{{comment.userimage}}" /> </div> 
+                        <div class="commenttext">
+                            {{comment.username}} {{comment.message}}
+                        </div>
+                           
+                           
+                        </div>
+                
+                      
+                    </ng-container>
+                    <div style="padding-left:0px; padding-right:0px;margin-top:15px;margin-bottom:15px" class="col-12">
+                        <textarea (keyup.enter)="saveComment()" name="newcomment" id="newcomment" [(ngModel)] = "newcomment.message"></textarea>
+                         
+                         
+                      </div>
+                    </div>
+                  
+                </form>
+            </div>
+        </div>
+    </div>
+    <!---
+    <div class="col-12  col-md-4 col-lg-3">
+    <aside>
+    <div class="side-bar">
+   
+ 
+    <app-sidebar></app-sidebar>
+ 
+    
+    </div>
+    </aside>
+    </div>-->
+    </div>
+    
+    </div>
+    </div>
+
+    <jw-modal id="viewrecipe">
+    
+    <form name="form"  #uf="ngForm" novalidate class="popup-panel">
+        <div class="modal-header" style="background:#FFF;">
+            <h2 style="margin:15px; ">
+                <span>View Recipe Details</span>           
+
+            </h2>
+            <button style="font-size: 30px;padding:5px;" type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeModal('viewrecipe');">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body" style="background:#FFF;" *ngIf="selectedRecipe">
+
+            <div class="row">
+                <div class='col-12 col-lg-12' style="max-height: 300px; overflow: auto;">
+                    <div class="row">
+                        <div class="col-12 col-lg-9">
+                            <div class="form-group">
+                                <h2>{{selectedRecipe.label}}</h2>
+                        
+                                <p style="display:inline-block; " class="view-details"><span class="head">Servings:</span> {{selectedRecipe.yield}}, </p>    
+                                <p style="display:inline-block; "  class="view-details"><span class="head">Calories:</span> {{selectedRecipe.calories}}, </p>  
+                                <p style="display:inline-block; "  class="view-details"><span class="head">Calories per Serving:</span> {{formatCalories(selectedRecipe.calories, selectedRecipe.yield)}}, </p>  
+                                                                
+                                <p style="display:inline-block; "  class="view-details"><span class="head">Total Weight:</span> {{formatLimit(selectedRecipe.totalWeight)}}, </p>  
+                               
+                                <p style="display:inline-block; " class="view-details"><span class="head"  *ngIf="selectedRecipe.dietLabels">Diet Labels:</span> {{formatlabels(selectedRecipe.dietLabels)}}, </p> 
+
+                                <p style="display:inline-block; " class="view-details"><span class="head" *ngIf="selectedRecipe.healthLabels">Health Labels:</span> {{formatlabels(selectedRecipe.healthLabels)}}</p> 
+
+        
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-3">
+                           <img src="{{selectedRecipe.image}}" width="90%" />
+                        </div>
+
+                        <div class="col-12 col-lg-6">
+                            <div class="form-group">
+                                <p class="view-details"><span class="head">Nutrients:</span> </p> 
+                                <p style="display:inline-block;" class="view-details" *ngFor="let nutrient of selectedRecipe.formatNutrients| keyvalue; "><span class="head">{{nutrient.value.label}}:</span> {{formatLimit(nutrient.value.quantity)}} {{formatUnit(nutrient.value.unit)}}, </p> 
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-6">
+                            <div class="form-group">
+                                <p class="view-details"><span class="head">Nutrients per Serving:</span> </p> 
+                                <p style="display:inline-block;" class="view-details" *ngFor="let nutrient of selectedRecipe.formatNutrients| keyvalue; "><span class="head">{{nutrient.value.label}}:</span> {{formatLimit(nutrient.value.quantity/selectedRecipe.yield)}} {{formatUnit(nutrient.value.unit)}}, </p> 
+        
+                            </div>
+                        </div>
+                    </div>
+                   
+                   
+
+                </div>
+               
+<!--
+                <div class='col-12'>
+                    <div class="form-group">
+                        <button class="defaultbtn" type="submit">Save</button>
+                    </div>
+                </div>-->
+            </div>
+
+        </div>
+
+    </form>
+</jw-modal>

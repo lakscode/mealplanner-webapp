@@ -70,8 +70,13 @@ import { RecipebookModule } from './recipes/recipebook/recipebook.module';
 import { FaqsModule } from './faqs/faqs.module';  
 
 
-import { CommunitiesModule } from './recipes/communities/communities.module'; 
-import { CommunityModule } from './recipes/community/community.module';
+import { CommunitiesModule } from './groups/communities/communities.module'; 
+import { CommunityModule } from './groups/community/community.module';
+
+import { GroupsModule } from './groups/groups/groups.module'; 
+import { GroupModule } from './groups/group/group.module';
+
+
 import { PrivacyModule } from './privacy/privacy.module';
 import { TermsModule } from './terms/terms.module';
 
@@ -139,6 +144,8 @@ import {environment} from "../environments/environment";
 	SocialLoginModule,
 	CommunitiesModule,
 	CommunityModule,
+	GroupsModule,
+	GroupModule,
 	PrivacyModule,
 	TermsModule
   ],
