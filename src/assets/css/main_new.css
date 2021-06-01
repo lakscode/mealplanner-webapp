@@ -2518,7 +2518,11 @@ ul {
   cursor: pointer;
 }
 
-
+.menuTitle {
+  display: inline-block;
+                        float: left;
+                        margin-left: 200px;
+                      }
 
 
 /*-----------------------------------------------------------------------------------*/
@@ -2764,10 +2768,21 @@ ul {
 }
 @media (max-width: 991px) {
   .logo-wrapper {
-    margin-top: 40px;
+   // margin-top: 40px;
     margin-bottom: 40px;
     text-align: center;
   }
+
+  .menuTitle {
+  display: inline-block;
+                        float: left;
+                        margin-left: 0px;
+                      }
+
+  .dropdown1 .name {
+    display: none;
+  }
+
   .wrapper-links {
     text-align: center !important;
   }
