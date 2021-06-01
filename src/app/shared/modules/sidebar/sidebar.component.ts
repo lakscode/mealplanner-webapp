@@ -162,7 +162,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
     return retImage;
   }
 
-  gotoRecipeDetails(page, id){
+  gotopage(page, id){
   this.router.navigate([page, id]);
   }
 

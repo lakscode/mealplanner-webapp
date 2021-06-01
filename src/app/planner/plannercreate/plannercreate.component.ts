@@ -10,8 +10,9 @@ import { constants } from '../../jsonfiles/constants';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { environment} from "../../../environments/environment";
-
+import { ToastrService } from 'ngx-toastr';
 import { ModalService } from './../../shared/modules/modal/modal.service';
+import { type } from 'jquery';
 @Component({
 	selector: 'app-plannercreate',
 	templateUrl: './plannercreate.component.html',
@@ -65,7 +66,7 @@ export class PlannercreateComponent implements OnInit {
 	searchFilterLabels: Array<any> = [];
 	cuisineTypeList : Array<any> = [];
 
-	constructor(private router: Router, private route: ActivatedRoute, private modalService: ModalService, private pdfService: PDFService, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
+	constructor(private router: Router, private toastr: ToastrService,  private route: ActivatedRoute, private modalService: ModalService, private pdfService: PDFService, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
 	
 	}
 
@@ -662,12 +663,36 @@ this.loadColorCodes();
 		var recipe = this.plan["days"][r]["meals"][c]["recipe"];
 		window.open("/recipedetails/" + recipe.id)
 	}
+	maxcaloryperday: any = 0;
 	drop(ev, r, c) {
 	
+		console.log(this.maxcaloryperday);
+
+		
 		ev.preventDefault();
 		var index = sessionStorage.getItem("dragstartindex");
-		
+		var recipeItem = this.displayList[index];
+		console.log(recipeItem);
+		var totalCals = 0;
+		for(let i=0; i <this.plan["days"][r]["meals"]["length"]; i++)
+		{
+			console.log(this.plan["days"][r]["meals"][i]);
+			if(typeof(this.plan["days"][r]["meals"][i]["calories"]) !== "undefined")
+			{
+				console.log( parseInt(this.plan["days"][r]["meals"][i]));
+				totalCals += parseInt(this.plan["days"][r]["meals"][i]["calories"]) / parseInt(this.plan["days"][r]["meals"][i]["yield"]);
+			}
+		}
 
+		totalCals += parseInt(recipeItem["calories"])/parseInt(recipeItem["yield"]);
+		console.log("totalCals " + totalCals);
+
+		if(this.maxcaloryperday > 0 && totalCals > this.maxcaloryperday  )
+		{
+			alert("Per day calories is more than your maximum calory consumption for the day");
+		}
+		else
+		{
 		var r_index = parseInt(index);
 		if(this.page_num > 1)
 		r_index = parseInt(index) + (this.page_num-1 * this.pageCount)
@@ -675,7 +700,7 @@ this.loadColorCodes();
 		console.log("page_num " + this.page_num);
 		console.log("r_index " + r_index);
 
-		var recipeItem = this.displayList[index];
+		
 
 		var data = ev.dataTransfer.getData("text");
 this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
@@ -705,7 +730,7 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 					this.SavePlanData(r, c);
 				}, 1000);
 			}
-			
+		}
 		
 	  }
 	
@@ -892,7 +917,31 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
     }
  
   }
- 
+ saveMealPlanStatus()
+ {
+	this.toastr.success('Meal Plan has been saved!!!', 'Meal Plan!');
+	//this.toastr.error('Meal Plan has been saved!!!', 'Meal Plan!');
+		 this.updatingFlag = true;
+		var params = {};
+		params["status"] = "1";
+		if(typeof(this.plan["mealplanid"]) !== "undefined" && this.plan["mealplanid"] !== "")
+		{
+		params["id"]  =  this.plan["mealplanid"] 
+
+		console.log(params);
+		var res =   this.dbService.updateDataByTable("mealplan", params).subscribe(invData => setTimeout(() => {
+console.log(invData);
+			if(invData !== null)
+			{
+				this.updatingFlag = false;
+			//	this.toastr.success('Meal Plan has been saved!!!', 'Meal Plan!');
+			}
+
+		}));
+		}
+
+			
+ }
   saveMealPlan()
   { 
   this.errorMessage ="";

@@ -759,7 +759,7 @@ formatVal(str)
   }
 
   gotopage(){        
-   this.router.navigate(["myrecipes"]);    
+   this.router.navigate(["recipes"]);    
 }
 }
 

@@ -6,7 +6,7 @@ import { PlannercreateComponent } from './plannercreate.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {SidebarModule, ModalModule } from "../../shared/modules"
-
+import {ToastrModule } from 'ngx-toastr';
 @NgModule({
   imports: [
     CommonModule,
@@ -15,7 +15,8 @@ import {SidebarModule, ModalModule } from "../../shared/modules"
 	FormsModule,
 	ReactiveFormsModule,
   SidebarModule,
-  ModalModule
+  ModalModule,
+  ToastrModule
   ],
   declarations: [PlannercreateComponent]
 })

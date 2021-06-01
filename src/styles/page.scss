@@ -275,16 +275,20 @@ margin-bottom:10px;
    }
 
    .toast-success {
-	  background:$text_light !important;
-	  color: $third !important;
+	  background:$green !important;
+	  color: $white !important;
    }
 
    .toast-info {
      background:blue !important;
    }
-
+   .toast-title
+   {
+	   font-size:20px;
+   }
    .toast-message {
-	color: #FFF;
+	color: #FFF; 
+	font-size:16px;
  }
 
 }
