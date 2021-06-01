@@ -116,13 +116,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
 					{"id":"planner-plan-create", "menu":"Create Plan", "link":this.planLink, "display":displayMenu, "active":false}
 				]
 			}	,
-			{"id":"communities", "menu":"Communities", "link":"/communities", "display":displayMenu, "active":false,
-				"children":
+			{"id":"communities", "menu":"Communities", "link":"/communities", "display":displayMenu, "active":false
+			/*,	"children":
 				[
 
 					{"id":"groups-communities", "menu":"Communities", "link":"/communities", "display":displayMenu, "active":false},
 					{"id":"groups-groups", "menu":"Groups", "link":"/groups", "display":displayMenu, "active":false}
 				]
+				*/
 			}			
 		];
 
