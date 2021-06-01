@@ -81,7 +81,6 @@
                       </div>
                     <div *ngIf="commentsList && commentsList.length > 0" class="row" style="padding-left:0px; padding-right:0px;" >
                         <ng-container  *ngFor="let comment of commentsList; let i = index;">
-                            
                             <div *ngIf="comment.message" style="padding-left:0px; padding-right:0px;margin-top:0px;margin-bottom:0px" class="col-12 ">
                                 <div class="commentitem">
                                 <div class="userimage">
@@ -96,113 +95,25 @@
                                                 </p>
                                                 <p class="msg">{{comment.message}}</p>
 
-                                                <span  style='position:absolute; right:0'>
-                                                    {{comment.likescount}}
-                                                </span>
+                                               
 
                                            
                                         </div>
                                     </div>
                                     <div class="actions"> 
-                                        <span class="action" [ngClass]="comment.userlikeStatus?'action active':'action'" (click)="toggleLike(comment)">Like <span *ngIf="comment.likescount">{{comment.likescount}}</span></span>
+                                        <span *ngIf="comment.likescount">{{comment.likescount}}</span>
+                                        <span class="action" [ngClass]="comment.userlikeStatus?'action active':'action'" (click)="toggleLike(comment)">Like </span>
                                         <span class="action" (click)="comment.reply = !comment.reply;addChild(comment)">Reply</span>
                                         <span class="action">Share</span>
                                        
                                     </div>
                                     <app-comment [comment]= "comment"></app-comment>
-                                   <!-- <div *ngIf="comment.children && comment.children.length > 0" class="row" style="padding-left:20px; padding-right:0px;" >
-                                        <ng-container  *ngFor="let commentc of comment.children; let i = index;">
-                                        <div *ngIf="commentc.message" style="padding-left:0px; padding-right:0px;margin-top:15px;margin-bottom:15px" class="col-12 commentitem">
-                                            <div class="userimage">
-                                                <img style="width:100%" src="{{commentc.userimage}}" /> 
-                                            </div> 
-                                            <div class="commenttext">
-                                                <div class="commentmsg">
-                                                    <p class="name">{{commentc.username}}</p>
-                                                    <p class="msg">{{commentc.message}}</p> 
-                                                </div>
-                                                <div class="actions">
-                                                    <span class="action">Like</span>
-                                                    <span class="action" (click)="comment.reply = !comment.reply; addChild(commentc)">Reply</span>
-                                                    <span class="action">Share</span>
-                                                </div>
-                                            </div>                           
-                                        </div>              
-                                        </ng-container>
-                
-                                        <div *ngIf="currentUser && comment.reply" style="padding-left:0px; padding-right:0px;margin-top:15px;margin-bottom:15px" class="col-12">
-                                            <div style="padding-left:0px; padding-right:0px;margin-top:15px;margin-bottom:15px" class="commentitem">
-                                                <div class="userimage">
-                                                    <img style="width:100%" src="{{currentUser.image}}" /> 
-                                                </div> 
-                                                <div style="width: calc(100% - 40px);">
-                                                    <div class="commentmsg">
-                                                        <textarea (keyup.enter)="saveComment('newcomment', comment)" name="newcomment{{commentsList.length}}" id="newcomment{{commentsList.length}}" [(ngModel)] = "newcomment.message" (keyup)="resize('newcomment', commentsList.length)"  (focus)="resize('newcomment',commentsList.length)"></textarea>  
-                                                    </div>
-                
-                                                </div>                           
-                                            </div>
-    
-                                                                   
-                                        </div>
-                                    </div>-->
+                                
                                 </div>    
                                 </div>
 
                             </div> 
-                            
-                       <!-- <div *ngIf="comment.message" style="padding-left:0px; padding-right:0px;margin-top:15px;margin-bottom:15px" class="col-12 commentitem">
-                            <div class="userimage">
-                                <img style="width:100%" src="{{comment.userimage}}" /> 
-                            </div> 
-                            <div class="commenttext">
-                                <div class="commentmsg">
-                                    <p class="name">{{comment.username}}</p>
-                                    <p class="msg">{{comment.message}}</p> 
-                                </div>
-                                <div class="actions">
-                                    <span class="action">Like</span>
-                                    <span class="action" (click)="comment.reply = !comment.reply;addChild(comment)">Reply</span>
-                                    <span class="action">Share</span>
-                                </div>
-                                <div *ngIf="comment.children && comment.children.length > 0" class="row" style="padding-left:20px; padding-right:0px;" >
-                                    <ng-container  *ngFor="let commentc of comment.children; let i = index;">
-                                    <div *ngIf="commentc.message" style="padding-left:0px; padding-right:0px;margin-top:15px;margin-bottom:15px" class="col-12 commentitem">
-                                        <div class="userimage">
-                                            <img style="width:100%" src="{{commentc.userimage}}" /> 
-                                        </div> 
-                                        <div class="commenttext">
-                                            <div class="commentmsg">
-                                                <p class="name">{{commentc.username}}</p>
-                                                <p class="msg">{{commentc.message}}</p> 
-                                            </div>
-                                            <div class="actions">
-                                                <span class="action">Like</span>
-                                                <span class="action" (click)="comment.reply = !comment.reply; addChild(commentc)">Reply</span>
-                                                <span class="action">Share</span>
-                                            </div>
-                                        </div>                           
-                                    </div>              
-                                    </ng-container>
-            
-                                    <div *ngIf="currentUser && comment.reply" style="padding-left:0px; padding-right:0px;margin-top:15px;margin-bottom:15px" class="col-12">
-                                        <div style="padding-left:0px; padding-right:0px;margin-top:15px;margin-bottom:15px" class="commentitem">
-                                            <div class="userimage">
-                                                <img style="width:100%" src="{{currentUser.image}}" /> 
-                                            </div> 
-                                            <div style="width: calc(100% - 40px);">
-                                                <div class="commentmsg">
-                                                    <textarea (keyup.enter)="saveComment('newcomment', comment)" name="newcomment{{commentsList.length}}" id="newcomment{{commentsList.length}}" [(ngModel)] = "newcomment.message" (keyup)="resize('newcomment', commentsList.length)"  (focus)="resize('newcomment',commentsList.length)"></textarea>  
-                                                </div>
-            
-                                            </div>                           
-                                        </div>
-
-                                                               
-                                    </div>
-                                </div>
-                            </div>                           
-                        </div>        -->      
+                    
                         </ng-container>
 
                         <div *ngIf="currentUser"  style="padding-left:0px; padding-right:0px;margin-top:15px;margin-bottom:15px" class="commentitem">
