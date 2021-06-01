@@ -11,9 +11,9 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit, OnDestroy {
-	recipesList: Array<any> = [];
+	contentList: Array<any> = [];
     @Input() id: string;
-    @Input() setDate: any;
+    @Input() type: any = "recipes";
     @Input() minDate: any;
     @Input() showhidetime: any = true;
     adsList: Array<any> = [];
@@ -47,36 +47,17 @@ export class SidebarComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
       this.adsList =[];
       this.getTheAds();
-     this.loadRecipes();
+      console.log("tyoe " + this.type);
+      if(typeof(this.type) == "undefined" || this.type == null || this.type == "" || this.type == "recipes")
+      {
+        this.loadRecipes();
+      }
+    else if(this.type == 'groups')
+    {
+      this.loadGroups();
+    }
    this.elementId= this.element.id;
-if(this.showhidetime == false)
-this.showhideTimeFlag = false;
-
-//console.log(this.showhidetime);
-//console.log(this.showhideTimeFlag);
-
-    var d = new Date();
-    if(this.elementId == "interviewDate" || this.elementId == "hearingSchedule"){
-      this.tempDt = "";
-      this.maxDt=""
-      this.minDt = {year: d.getFullYear(), month: d.getMonth()+1, day: d.getDate()};     
-      this.tempTm = {hour: d.getHours(), minute: d.getMinutes(), second: d.getSeconds()};
-    }
-    else if(this.elementId == "incidentDate" || this.elementId == "complaintDate") {
-      this.tempDt = "";
-      this.maxDt={year: d.getFullYear(), month: d.getMonth()+1, day: d.getDate()};
-      this.minDt = '';
-      this.tempTm = {hour: d.getHours(), minute: d.getMinutes(), second: d.getSeconds()};
-    }
-    else {
-      this.maxDt = "";
-      this.minDt = '';
-      this.tempDt = {year: d.getFullYear(), month: d.getMonth()+1, day: d.getDate()};
-		  this.tempTm = {hour: d.getHours(), minute: d.getMinutes(), second: d.getSeconds()};
-    }	
-    this.dt = {"date":this.tempDt, "time":this.tempTm};
-    if(this.minDate == "")
-    this.minDate = "";        
+      
     }
 
     ngAfterViewInit()
@@ -95,12 +76,7 @@ this.showhideTimeFlag = false;
         this.element.style.display = 'block';
         document.body.classList.add('dt-modal-open');
 
-		var d = new Date();
-		
-		this.tempDt = {year: d.getFullYear(), month: d.getMonth()+1, day: d.getDate()};
-		this.tempTm = {hour: d.getHours(), minute: d.getMinutes(), second: d.getSeconds()};
-		
-		this.dt = {"date":this.tempDt, "time":this.tempTm};
+	
 		this.returnData.emit(this.dt);
     this.sidebarService.add(this);
     }
@@ -114,22 +90,6 @@ this.showhideTimeFlag = false;
 	
 	save()
 	{
-
-  if(this.dt.date == null || this.dt.date == "")
-  {
-    var d = new Date();
-		this.tempDt = {year: d.getFullYear(), month: d.getMonth()+1, day: d.getDate()};
-		this.dt["date"] = this.tempDt; //, "time":this.tempTm};
-  }
-
-  if(this.dt.time == null || this.dt.time == "")
-  {
-    var d = new Date();	
-    this.tempTm = {hour: d.getHours(), minute: d.getMinutes(), second: d.getSeconds()};
-		this.dt["time"] = this.tempTm;
-  }
-
-
     this.returnData.emit(this.dt);
 
 	}	
@@ -141,7 +101,7 @@ this.showhideTimeFlag = false;
 	}	
   loadRecipes()
 	{
-	  this.recipesList = [];
+	  this.contentList = [];
 	  var params = {};
     params["query"] = "select id, image, label, dietLabels from recipes where s_instructions != '' order by rand() limit 8";
 
@@ -149,16 +109,35 @@ this.showhideTimeFlag = false;
    
 	  if(invData !== null && typeof(invData["body"]) !== "undefined" && invData["body"] !== null && invData["body"]["length"] > 0)
 		{
-      this.recipesList = [];
+      this.contentList = [];
    		for(let i=0; i < invData["body"]["length"] ; i++)
 		  {			
-			  this.recipesList.push(invData["body"][i]);		
+			  this.contentList.push(invData["body"][i]);		
 		  }
     //  console.log(this.recipesList);
 		}
 	 }));
   
 	}
+  loadGroups()
+  {
+    this.contentList = [];
+	  var params = {};
+    params["query"] = "SELECT c.*, COUNT(rm.id) AS userscount, u.email, u.firstname, u.lastname FROM groups AS c LEFT JOIN group_join AS rm ON c.id = rm.groupid LEFT JOIN users AS u ON c.created_by = u.id GROUP BY c.id order by rand() limit 8";
+
+	 var res =   this.dbService.getDatabyTablebyQuery("groups", params).subscribe(invData => setTimeout(() => {
+   console.log(invData);
+	  if(invData !== null && typeof(invData["body"]) !== "undefined" && invData["body"] !== null && invData["body"]["length"] > 0)
+		{
+      this.contentList = [];
+   		for(let i=0; i < invData["body"]["length"] ; i++)
+		  {			
+			  this.contentList.push(invData["body"][i]);		
+		  }
+    //  console.log(this.recipesList);
+		}
+	 }));
+  }
   formatLabels(str)
   {
     
@@ -183,8 +162,8 @@ this.showhideTimeFlag = false;
     return retImage;
   }
 
-  gotoRecipeDetails(id){
-  this.router.navigate(['recipedetails', id]);
+  gotoRecipeDetails(page, id){
+  this.router.navigate([page, id]);
   }
 
   selectedAd: any;

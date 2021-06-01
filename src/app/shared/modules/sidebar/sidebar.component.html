@@ -3,18 +3,18 @@
 
 
 <!--latest news widget-->
-<div class="widget latest-news-widget">
-    <h2>Latest Recipes</h2>
+<div *ngIf="type == 'recipes'" class="widget latest-news-widget">
+    <h2 >Latest Recipes</h2>
     <ul>
-        <li *ngFor="let recipe of recipesList; let r = index;">
+        <li *ngFor="let citem of contentList; let r = index;">
             <div class="thumb image-animate">
-                <a (click)="gotoRecipeDetails(recipe.id)">
-                    <img style="cursor:pointer" src="{{formatImage(recipe.image, 's')}}" alt="thumbnail">
+                <a (click)="gotopage('recipedetails',citem.id)">
+                    <img style="cursor:pointer" src="{{formatImage(citem.image, 's')}}" alt="thumbnail">
                 </a>
             </div>
             <div class="detail" style="font-size:14px">
-                <a class="overflow-text" style="font-weight:bold;cursor:pointer" (click)="gotoRecipeDetails(recipe.id)">{{recipe.label}}</a>
-                <span class="post-date">{{formatLabels(recipe.dietLabels)}}</span>
+                <a class="overflow-text" style="font-weight:bold;cursor:pointer" (click)="gotopage('recipedetails',citem.id)">{{citem.label}}</a>
+                <span class="post-date">{{formatLabels(citem.dietLabels)}}</span>
             </div>
         </li>
 
@@ -22,6 +22,26 @@
 
     </ul>
 </div>
+<div *ngIf="type == 'groups'" class="widget latest-news-widget">
+    <h2 >Latest Groups</h2>
+    <ul>
+        <li *ngFor="let citem of contentList; let r = index;">
+            <div class="thumb image-animate">
+                <a (click)="gotopage('group',citem.id)">
+                    <img style="cursor:pointer" src="{{citem.image}}" alt="Image for group {{citem.group_name}}">
+                </a>
+            </div>
+            <div class="detail" style="font-size:14px">
+                <a class="overflow-text" style="font-weight:bold;cursor:pointer" (click)="gotopage('group',citem.id)">{{citem.group_name}}</a>
+                <span class="post-date" *ngIf="citem.userscount > 0" >{{citem.userscount}} members</span>
+            </div>
+        </li>
+
+      
+
+    </ul>
+</div>
+
 <div class="widget" *ngIf="selectedAd">
     <div  class="adpanel" [ngStyle]="{'background-image':'linear-gradient(
                                         rgba(0, 0, 0, 0.3),
@@ -38,33 +58,3 @@
      
     </div>
 </div>
-<!--latest news widget ends-->
-<!--get social-->
-<!--<div class="widget widget-get-social">
-    <h2>get social</h2>
-    <ul>
-        <li class="facebook">
-            <a href="javascript:void(0)">
-                <i class="fa fa-facebook"></i>
-                <span class="count">23.5K</span>
-                <span class="count-type">Likes</span>
-            </a>
-        </li>
-        <li class="twitter">
-            <a href="javascript:void(0)">
-                <i class="fa fa-twitter"></i>
-                <span class="count">23.5K</span>
-                <span class="count-type">Likes</span>
-            </a>
-        </li>
-        <li class="google-plus">
-            <a href="javascript:void(0)">
-                <i class="fa fa-google-plus"></i>
-                <span class="count">23.5K</span>
-                <span class="count-type">Likes</span>
-            </a>
-        </li>
-
-    </ul>
-</div>-->
-<!--get social ends-->

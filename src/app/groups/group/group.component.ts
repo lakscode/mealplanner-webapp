@@ -51,6 +51,8 @@ urlTweet : any;
 urlWhatsApp: any;
 msg: any = "";
 newcomment: any = {};
+type: any = "";
+newquestion: any = {};
 	constructor(private router: Router, private sanitize: DomSanitizer, private route: ActivatedRoute, private toastr: ToastrService, private pdfService: PDFService, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder, private modalService: ModalService) {
 	
 	}
@@ -82,13 +84,15 @@ ngOnChanges()
 	}
 loadDefaults()
 {
+	this.type = "groups";
 	this.urlShare = window.location.href;
 
 	this.communityOwner = false;
 	this.showActions = {"join": true, "invite":false};
-	
-	this.newcomment = {"message":""};
-
+	this.newcomment = {};
+	this.newquestion = {};
+	this.newcomment["message"] = "";
+	this.newquestion["message"] = "";
 	this.apiUrl = environment.apiUrl;
 	this.currentUser =this.helpService.getCurrentUser();
 	if(this.currentUser !== null)
@@ -174,11 +178,11 @@ loadgroup(id)
 	  }
  
 	console.log(this.group);
-	this.getJoinStatusCommunity();
+//	this.getJoinStatusCommunity();
 	
 
 	}
-	this.getCommunityJoined();
+//	this.getCommunityJoined();
 	this.loadShareValue();
   }));
   }
@@ -205,7 +209,29 @@ loadComments()
 	{
 		this.commentsList = [];
 
-		this.commentsList = invData["body"];
+		//this.commentsList = invData["body"];
+		
+		for(let i =0 ; i< invData["body"]["length"] ; i++)
+		{
+			var item = invData["body"][i];
+			if(item.parentid == "0")
+			{
+				this.commentsList.push(item)
+			}
+			else
+			{
+				var fIndex = this.commentsList.findIndex(x => (x.id ==  item["parentid"]));
+				if(fIndex > -1)
+				{
+					if(typeof(this.commentsList[fIndex]["children"]) == "undefined")
+					this.commentsList[fIndex]["children"] = [];
+					
+					this.commentsList[fIndex]["children"].push(item);
+				}
+			}
+			
+
+		}
 		console.log(this.commentsList);
 		this.getFavouriteStatus();
 	}
@@ -620,7 +646,7 @@ gotopage(){
 /************888 comments */
 
 
-saveComment(comment= null)
+saveComment(type, comment= null)
 {
   console.log("saveComment");
   var params = {};
@@ -634,21 +660,62 @@ saveComment(comment= null)
 	  params1["parentid"] = comment["id"];
 	  if(comment !== null)
 	  params1["message"] = comment["message"]
-
+	  if(type == "newcomment")
 	  if(this.newcomment !== null && this.newcomment["message"] !== null)
 	  {
 		 params1["message"] = this.newcomment ["message"]
 
 	  }
+	  if(type== "newquestion")
+	  if(this.newquestion !== null && this.newquestion["message"] !== null)
+	  {
+		 params1["message"] = this.newquestion ["message"]
+
+	  }
+
+	  console.log(params1);
 	var res =   this.dbService.postDataByTable("group_comments", params1).subscribe(invData => setTimeout(() => {
 		if(invData !== null)
 		{
 			console.log(invData);
+			params1["username"] = this.currentUser['displayname'];
+			params1["userimage"] = this.currentUser["image"];
+			params1["id"] = invData["inserted_id"];
+			if(type == "newquestion")
+			this.commentsList.push(params1)
+			else if(type == "newcomment")
+			{
+				var fIndex = this.commentsList.findIndex(x => (x.id ==  params1["parentid"]));
+				if(fIndex > -1)
+				{
+					this.commentsList[fIndex]["children"].push(params1);
+				}
+			}
+			this.newquestion["message"] = "";
+			this.newcomment["message"] = "";
 		}
 	  }));
   }
 
 }
+resize(field, index = null) {
+   console.log(field);
+   if(index !== null)
+   field  = field + index;
+   console.log(field);
+    var obj = document.getElementById(field);
+   // console.log(obj);
+   if(obj !== null)
+   {
+    obj.style.height = obj.scrollHeight + 'px';
+   }
+  }
+
+  addChild(comment)
+  {
+	  comment["children"] = [];
+	  comment["children"].push({"message":"", "parentid":comment.id, "userid":this.currentUser["id"], "username":this.currentUser["displayname"]})
+  }
 }
 
 	

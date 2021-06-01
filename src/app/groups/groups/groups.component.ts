@@ -227,7 +227,7 @@ endIndex = startIndex+ endIndex;
 	   // var params = {"limit": 100};
 	   // params["createdby"] = this.currentUser["id"];
 		console.log(params);
-		var params = {"query": "SELECT c.*, COUNT(rm.id) AS recipecount, u.email, u.firstname, u.lastname FROM groups AS c LEFT JOIN group_join AS rm ON c.id = rm.groupid LEFT JOIN users AS u ON c.created_by = u.id GROUP BY c.id"};
+		var params = {"query": "SELECT c.*, COUNT(rm.id) AS userscount, u.email, u.firstname, u.lastname FROM groups AS c LEFT JOIN group_join AS rm ON c.id = rm.groupid LEFT JOIN users AS u ON c.created_by = u.id GROUP BY c.id"};
 
 		var res =   this.dbService.getDatabyTablebyQuery("groups", params).subscribe(invData => setTimeout(() => {
 	
@@ -243,7 +243,7 @@ endIndex = startIndex+ endIndex;
 			}
 
 			console.log(this.communitiesList);
-			this.loaduserCount();
+			//this.loaduserCount();
 		  }
 		}));
 	
