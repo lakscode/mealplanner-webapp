@@ -84,7 +84,8 @@
                             
                             <div *ngIf="comment.message" style="padding-left:0px; padding-right:0px;margin-top:15px;margin-bottom:15px" class="col-12 commentitem">
                                 <div class="userimage">
-                                    <img style="width:100%" src="{{comment.userimage}}" /> 
+                                    <img *ngIf="comment.userimage && comment.userimage !== ''" style="width:100%" src="{{comment.userimage}}" />
+                                    <i *ngIf="comment.userimage == ''" class='fa fa-user'></i>
                                 </div> 
                                 <div class="commenttext">
                                     <div class="commentmsg">
@@ -196,7 +197,7 @@
                             </div> 
                             <div style="width: calc(100% - 40px);">
                                 <div class="commentmsg">
-                                    <textarea rows=1 style="width:100%; background:transparent; border:0px;margin-bottom:0px;padding:0px 10px;" class="msg" placeholder="Enter your question {{currentUser.displayname}}..." (keyup.enter)="saveComment('newcomment')" name="newcomment{{commentsList.length}}" id="newcomment{{commentsList.length}}" [(ngModel)] = "newcomment.message" (keyup)="resize('newcomment', commentsList.length)"  (focus)="resize('newcomment', commentsList.length)"></textarea>    
+                                    <textarea rows=1 style="width:100%; background:transparent; border:0px;margin-bottom:0px;padding:0px 10px;" class="msg" placeholder="Enter your comment {{currentUser.displayname}}..." (keyup.enter)="saveComment('newcomment')" name="newcomment{{commentsList.length}}" id="newcomment{{commentsList.length}}" [(ngModel)] = "newcomment.message" (keyup)="resize('newcomment', commentsList.length)"  (focus)="resize('newcomment', commentsList.length)"></textarea>    
                                 </div>
 
                             </div>                           

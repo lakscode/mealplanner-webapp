@@ -706,6 +706,18 @@ font-size:13pt;
       {
         border-radius:50%;
       }
+	  i
+	  {
+		border-radius: 50%;
+		background: $half-white;
+		font-size: 20px;
+		border: 1px solid $text-gray;
+		padding: 5px;
+		width: 30px;
+		height: 30px;
+		text-align: center;
+		padding-top: 3px;
+	  }
   }
   .commenttext
   {
