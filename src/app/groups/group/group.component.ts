@@ -190,6 +190,7 @@ loadgroup(id)
 }
 
 commentsList: Array<any> = [];
+allcomments: Array<any> = [];
 loadComments()
 {
 	
@@ -206,32 +207,25 @@ loadComments()
  var res =   this.dbService.getDatabyQuery("recipes", params).subscribe(invData => setTimeout(() => {
 	console.log(invData);
   if(invData !== null && typeof(invData["body"]) !== "undefined" && invData["body"] !== null && invData["body"]["length"] > 0)
-	{
+	{	
+		
 		this.commentsList = [];
 
 		//this.commentsList = invData["body"];
 		
 		for(let i =0 ; i< invData["body"]["length"] ; i++)
 		{
+			
 			var item = invData["body"][i];
+			this.allcomments.push(item);
 			if(item.parentid == "0")
 			{
 				this.commentsList.push(item)
 			}
-			else
-			{
-				var fIndex = this.commentsList.findIndex(x => (x.id ==  item["parentid"]));
-				if(fIndex > -1)
-				{
-					if(typeof(this.commentsList[fIndex]["children"]) == "undefined")
-					this.commentsList[fIndex]["children"] = [];
-					
-					this.commentsList[fIndex]["children"].push(item);
-				}
-			}
 			
 
 		}
+		this.loadChildren(this.commentsList);
 		console.log(this.commentsList);
 		this.getFavouriteStatus();
 	}
@@ -244,6 +238,25 @@ loadComments()
 
 }
 
+loadChildren(commentsList)
+{
+console.log("loadCildren");
+	for(let x=0; x < commentsList.length; x++)
+	{
+		var item = commentsList[x];
+		console.log(item);
+		var filteredArr = this.allcomments.filter(x =>(x.parentid == item.id));
+		if(filteredArr["length"] > 0)
+		{
+			commentsList[x]["children"] = [];
+		
+			commentsList[x]["children"] = filteredArr;
+
+			if(commentsList[x]["children"]["length"] > 0)
+			this.loadChildren(commentsList[x]["children"])
+		}	
+	}	
+}
 
 newComment()
 {
@@ -716,6 +729,9 @@ resize(field, index = null) {
 	  comment["children"] = [];
 	  comment["children"].push({"message":"", "parentid":comment.id, "userid":this.currentUser["id"], "username":this.currentUser["displayname"]})
   }
+
+
+
 }
 
 	

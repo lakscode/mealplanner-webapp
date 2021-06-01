@@ -1,0 +1,41 @@
+<div *ngIf="comment.children && comment.children.length > 0" class="row" style="padding-left:20px; padding-right:0px;">
+    <ng-container *ngFor="let commentc of comment.children; let i = index;">
+        <div *ngIf="commentc.message" style="padding-left:0px; padding-right:0px;margin-top:15px;margin-bottom:15px"
+            class="col-12 commentitem">
+            <div class="userimage">
+                <img style="width:100%" src="{{commentc.userimage}}" />
+            </div>
+            <div class="commenttext">
+                <div class="commentmsg">
+                    <p class="name">{{commentc.username}}</p>
+                    <p class="msg">{{commentc.message}}</p>
+                </div>
+                <div class="actions">
+                    <span class="action">Like</span>
+                    <span class="action" (click)="commentc.reply = !commentc.reply; addChild(commentc)">Reply</span>
+                    <span class="action">Share</span>
+                </div>
+                <app-comment *ngIf="commentc.children && commentc.children.length > 0" [comment]= "commentc"></app-comment>
+
+            </div>
+        </div>
+        
+    </ng-container>
+
+    <div *ngIf="currentUser && comment.reply"
+    style="padding-left:0px; padding-right:0px;margin-top:15px;margin-bottom:15px" class="col-12">
+        <div style="padding-left:0px; padding-right:0px;margin-top:15px;margin-bottom:15px" class="commentitem">
+            <div class="userimage">
+                <img style="width:100%" src="{{currentUser.image}}" />
+            </div>
+            <div style="width: calc(100% - 40px);">
+                <div class="commentmsg">
+                    <input type="text" (keyup.enter)="saveComment( comment)"
+                        name="newcomment{{comment.children.length}}" id="newcomment{{comment.children.length}}"
+                        [(ngModel)]="newcomment.message"  />
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
