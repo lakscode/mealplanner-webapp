@@ -54,10 +54,10 @@ export class CommentComponent implements OnInit, OnDestroy {
 	  this.currentUser["displayname"] = this.currentUser["firstname"];
 	  else if( this.currentUser["username"] !== "")
 	  this.currentUser["displayname"] = this.currentUser["username"];
-	  console.log( this.currentUser["displayname"]);
+	 // console.log( this.currentUser["displayname"]);
 	}
 
-	  console.log(this.comment);
+	 // console.log(this.comment);
 
    this.elementId= this.element.id;
       
@@ -186,4 +186,81 @@ saveComment(comment= null)
   }
 
 }
+toggleLike(comment)
+{
+  if(typeof(this.currentUser["id"]) !== "undefined" && this.currentUser["id"] !== null && this.currentUser["id"] !== "" && typeof(this.comment.id) !== "undefined" && this.comment.id !== null && this.comment.id !== "")
+  {
+	  var params1 = {};
+	  params1["groupid"] = this.comment.groupid ;
+	  params1["userid"] = this.currentUser["id"];
+	  
+    if(comment !== null)
+	  params1["commentid"] = comment["id"];	  
+
+	  console.log(params1);
+	  var res =   this.dbService.getDataByTable("group_like", params1).subscribe(invData => setTimeout(() => {
+		
+      if(invData !== null && invData["body"] && invData["body"]["length"] > 0)
+      {
+        this.deleteLike(invData["body"][0], comment)
+        if(comment.likescount)
+        comment.likescount = comment.likescount - 1;
+      }
+      else
+      {
+        if(comment.likescount)
+        comment.likescount = comment.likescount + 1;
+        else
+        comment.likescount = 1;
+        this.saveLike(comment);
+      }
+    }));
+
+  }
+
+}
+
+saveLike(comment)
+{
+  if(typeof(this.currentUser["id"]) !== "undefined" && this.currentUser["id"] !== null && this.currentUser["id"] !== "" && typeof(this.comment.id) !== "undefined" && this.comment.id !== null && this.comment.id !== "")
+  {
+	  var params1 = {};
+	  params1["groupid"] = this.comment.groupid ;
+	  params1["userid"] = this.currentUser["id"];
+	  
+    if(comment !== null)
+	  params1["commentid"] = comment["id"];	  
+
+	  console.log(params1);
+	  var res =   this.dbService.postDataByTable("group_like", params1).subscribe(invData => setTimeout(() => {
+		
+      if(invData !== null)
+      {
+
+      }
+    }));
+
+  }
+}
+
+deleteLike(obj, comment)
+{
+  if(typeof(this.currentUser["id"]) !== "undefined" && this.currentUser["id"] !== null && this.currentUser["id"] !== "" && typeof(this.comment.id) !== "undefined" && this.comment.id !== null && this.comment.id !== "")
+  {
+	  var params1 = {};
+
+	  params1["id"] = obj["id"];	  
+
+	  console.log(params1);
+	  var res =   this.dbService.deleteDataByTable("group_like", params1).subscribe(invData => setTimeout(() => {
+		
+      if(invData !== null)
+      {
+
+      }
+    }));
+
+  }
+}
+
 }

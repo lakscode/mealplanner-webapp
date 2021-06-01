@@ -8,7 +8,7 @@
            <!-- <div style="width:100%; text-align:right">
                 <a class="copy-button" (click)="downloadplan()" title="Download PDF"><i class="fa fa-download"></i> Download</a>
             </div>    -->
-            <div class="submit-recipe-form" >
+            <div class="submit-recipe-form" style="padding:10px;" >
                 <form action="#" method="post">
 
 
@@ -56,7 +56,7 @@
                               </div>-->
                             <!--<button *ngIf="showActions['invite']" class="create-button anim-button btn-4">Invite</button>-->
                             <button (click)="joinCommunity()" *ngIf="showActions['join'] " class="create-button anim-button btn-4">Join</button>
-                            <button class="create-button anim-button btn-4" (click)="addNew()" >Add Recipe</button>
+                            <!--<button class="create-button anim-button btn-4" (click)="addNew()" >Add Recipe</button>-->
                       </div>
            
                        </div>
@@ -82,24 +82,32 @@
                     <div *ngIf="commentsList && commentsList.length > 0" class="row" style="padding-left:0px; padding-right:0px;" >
                         <ng-container  *ngFor="let comment of commentsList; let i = index;">
                             
-                            <div *ngIf="comment.message" style="padding-left:0px; padding-right:0px;margin-top:15px;margin-bottom:15px" class="col-12 commentitem">
+                            <div *ngIf="comment.message" style="padding-left:0px; padding-right:0px;margin-top:0px;margin-bottom:0px" class="col-12 ">
+                                <div class="commentitem">
                                 <div class="userimage">
                                     <img *ngIf="comment.userimage && comment.userimage !== ''" style="width:100%" src="{{comment.userimage}}" />
                                     <i *ngIf="comment.userimage == ''" class='fa fa-user'></i>
                                 </div> 
                                 <div class="commenttext">
                                     <div class="commentmsg">
-                                        <p class="name">
-                                            {{ comment.firstname !== '' ? comment.firstname : comment.username }}
-                                            
-                                        <!--{{comment.firstname}}-->
-                                        </p>
-                                        <p class="msg">{{comment.message}}</p> 
+                                        <div style="width:auto;">
+                                            <p class="name" style='display:block;'> {{ comment.firstname !== '' ? comment.firstname : comment.username }}
+
+                                                </p>
+                                                <p class="msg">{{comment.message}}</p>
+
+                                                <span  style='position:absolute; right:0'>
+                                                    {{comment.likescount}}
+                                                </span>
+
+                                           
+                                        </div>
                                     </div>
-                                    <div class="actions">
-                                        <span class="action">Like</span>
+                                    <div class="actions"> 
+                                        <span class="action" [ngClass]="comment.userlikeStatus?'action active':'action'" (click)="toggleLike(comment)">Like <span *ngIf="comment.likescount">{{comment.likescount}}</span></span>
                                         <span class="action" (click)="comment.reply = !comment.reply;addChild(comment)">Reply</span>
                                         <span class="action">Share</span>
+                                       
                                     </div>
                                     <app-comment [comment]= "comment"></app-comment>
                                    <!-- <div *ngIf="comment.children && comment.children.length > 0" class="row" style="padding-left:20px; padding-right:0px;" >
@@ -138,7 +146,9 @@
                                                                    
                                         </div>
                                     </div>-->
-                                </div>                           
+                                </div>    
+                                </div>
+
                             </div> 
                             
                        <!-- <div *ngIf="comment.message" style="padding-left:0px; padding-right:0px;margin-top:15px;margin-bottom:15px" class="col-12 commentitem">

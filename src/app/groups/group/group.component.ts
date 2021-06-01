@@ -212,11 +212,12 @@ loadComments()
 		this.commentsList = [];
 
 		//this.commentsList = invData["body"];
-		
+		var idslist = "";
 		for(let i =0 ; i< invData["body"]["length"] ; i++)
 		{
 			
 			var item = invData["body"][i];
+			idslist += item["id"] + ",";
 			this.allcomments.push(item);
 			if(item.parentid == "0")
 			{
@@ -225,9 +226,14 @@ loadComments()
 			
 
 		}
-		this.loadChildren(this.commentsList);
+		if(idslist !== "")
+		{
+		  idslist = idslist.substring(0, idslist.length-1);
+		}
+		
 		console.log(this.commentsList);
-		this.getFavouriteStatus();
+		//this.getFavouriteStatus();
+		this.getLikes(idslist);
 	}
 
 	this.newComment();
@@ -378,22 +384,53 @@ formatVal(str)
 	 return img.trim();
  }
 
+ getLikes(idslist)
+ {
+	console.log("get likes");
+	var params = {};
 
+	if(typeof(this.currentUser["id"]) !== "undefined" && this.currentUser["id"] !== null && idslist !== "")
+	{
+	  //params["userid"] = this.currentUser["id"];
+  //	params["recipeid"] = this.routeParams.id;
+   
+	  params["query"] = "SELECT commentid, count(*) as likescount FROM group_like where commentid in (" + idslist + ") group by commentid"
+	  var res =   this.dbService.getDatabyTablebyQuery("group_like", params).subscribe(invData => setTimeout(() => {
+		 if(invData !== null)
+		{
+		console.log(invData);
+  
+		  if(invData["body"]['length'] > 0)
+		  {
+			  for(let k=0; k < invData["body"]['length']; k++)
+			  {
+				  var fIndex = this.commentsList.findIndex(x=>(x["id"] === invData["body"][k]["commentid"]));
+				  if(fIndex > -1)
+				  {
+					  this.commentsList[fIndex]["likescount"] =  invData["body"][k]["likescount"];
+				  }
 
- getFavouriteStatus()
+				  var fIndex1 = this.allcomments.findIndex(x=>(x["id"] === invData["body"][k]["commentid"]));
+				  if(fIndex1 > -1)
+				  {
+					  this.allcomments[fIndex1]["likescount"] =  invData["body"][k]["likescount"];
+				  }
+				  
+			  }
+			  console.log(this.commentsList);
+		  }
+		
+		  this.getLikeStatus(idslist)
+		}
+	  }));
+	}
+ }
+
+ getLikeStatus(idslist)
 {
-  console.log("get FavouriteStatus");
-  console.log(this.setFav);
-  var idslist = "";
-  for(let i=0; i< this.commentsList.length; i++)
-  {
-	this.commentsList[i]["UserFavStatus"]= false;
-	  idslist += this.commentsList[i]["id"] + ",";
-  }
-  if(idslist !== "")
-  {
-	idslist = idslist.substring(0, idslist.length-1);
-  }
+  console.log("get getLikeStatus");
+
+  
   var params = {};
 
   if(typeof(this.currentUser["id"]) !== "undefined" && this.currentUser["id"] !== null && idslist !== "")
@@ -401,8 +438,8 @@ formatVal(str)
 	//params["userid"] = this.currentUser["id"];
 //	params["recipeid"] = this.routeParams.id;
  
-	params["query"] = "SELECT recipeid, count(*) as favcount FROM `favourites` where recipeid in (" + idslist + ")group by recipeid"
-	var res =   this.dbService.getDatabyTablebyQuery("favourites", params).subscribe(invData => setTimeout(() => {
+	params["query"] = "SELECT commentid FROM group_like where commentid in (" + idslist + ") AND userid = " + this.currentUser["id"];
+	var res =   this.dbService.getDatabyTablebyQuery("group_like", params).subscribe(invData => setTimeout(() => {
 	   if(invData !== null)
 	  {
 	  console.log(invData);
@@ -411,13 +448,14 @@ formatVal(str)
 		{
 			for(let k=0; k < invData["body"]['length']; k++)
 			{
-				var fIndex = this.commentsList.findIndex(x=>(x["id"] === invData["body"][k]["recipeid"]));
+				var fIndex = this.allcomments.findIndex(x=>(x["id"] === invData["body"][k]["commentid"]));
 				if(fIndex > -1)
 				{
-					this.commentsList[fIndex]["favcount"] =  invData["body"][k]["favcount"];
+					this.allcomments[fIndex]["userlikeStatus"] =  true;
 				}
 			}
 		}
+		this.loadChildren(this.commentsList);
 		//this.getFavouriteStatusForCurrentUser(idslist);
 	  }
 	}));
@@ -426,7 +464,7 @@ formatVal(str)
   {
 	var parent = this;
 	setTimeout(function(){ 
-		parent.getFavouriteStatus(); 
+		parent.getLikeStatus(idslist); 
 	}, 1000);
   }
 
@@ -731,6 +769,82 @@ resize(field, index = null) {
   }
 
 
+  toggleLike(comment)
+  {
+	if(typeof(this.currentUser["id"]) !== "undefined" && this.currentUser["id"] !== null && this.currentUser["id"] !== "" && typeof(comment.id) !== "undefined" && comment.id !== null && comment.id !== "")
+	{
+		var params1 = {};
+		params1["groupid"] = comment.groupid ;
+		params1["userid"] = this.currentUser["id"];
+		
+	  if(comment !== null)
+		params1["commentid"] = comment["id"];	  
+  
+		console.log(params1);
+		var res =   this.dbService.getDataByTable("group_like", params1).subscribe(invData => setTimeout(() => {
+		  console.log(invData);
+		if(invData !== null && invData["body"] && invData["body"]["length"] > 0)
+		{
+		  this.deleteLike(invData["body"][0], comment)
+		  if(comment.likescount)
+        	comment.likescount = comment.likescount - 1;
+		}
+		else
+		{
+		  this.saveLike(comment);
+		  if(comment.likescount)
+        	comment.likescount = comment.likescount + 1;
+			else
+			comment.likescount = 1;
+		}
+	  }));
+  
+	}
+  
+  }
+  
+  saveLike(comment)
+  {
+	if(typeof(this.currentUser["id"]) !== "undefined" && this.currentUser["id"] !== null && this.currentUser["id"] !== "" && typeof(comment.id) !== "undefined" && comment.id !== null && comment.id !== "")
+	{
+		var params1 = {};
+		params1["groupid"] = comment.groupid ;
+		params1["userid"] = this.currentUser["id"];
+		
+	  if(comment !== null)
+		params1["commentid"] = comment["id"];	  
+  
+		console.log(params1);
+		var res =   this.dbService.postDataByTable("group_like", params1).subscribe(invData => setTimeout(() => {
+		  
+		if(invData !== null)
+		{
+  
+		}
+	  }));
+  
+	}
+  }
+  
+  deleteLike(obj, comment)
+  {
+	if(typeof(this.currentUser["id"]) !== "undefined" && this.currentUser["id"] !== null && this.currentUser["id"] !== "" && typeof(comment.id) !== "undefined" && comment.id !== null && comment.id !== "")
+	{
+		var params1 = {};
+  
+		params1["id"] = obj["id"];	  
+  
+		console.log(params1);
+		var res =   this.dbService.deleteDataByTable("group_like", params1).subscribe(invData => setTimeout(() => {
+		  
+		if(invData !== null)
+		{
+  
+		}
+	  }));
+  
+	}
+  }
 
 }
 
