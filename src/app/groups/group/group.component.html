@@ -89,7 +89,11 @@
                                 </div> 
                                 <div class="commenttext">
                                     <div class="commentmsg">
-                                        <p class="name">{{comment.firstname}}</p>
+                                        <p class="name">
+                                            {{ comment.firstname !== '' ? comment.firstname : comment.username }}
+                                            
+                                        <!--{{comment.firstname}}-->
+                                        </p>
                                         <p class="msg">{{comment.message}}</p> 
                                     </div>
                                     <div class="actions">
