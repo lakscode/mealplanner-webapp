@@ -341,7 +341,7 @@
                                                 [(ngModel)]='showNutrientsPServing' type="checkbox">
                                             <span class="checkmark"></span>
                                         </label>
-                                        <label class="container" style=" text-align: left;
+                                       <!--<label class="container" style=" text-align: left;
                             display: inline-block;
                             width: 120px;
                             font-family: 'Lato', sans-serif;
@@ -350,7 +350,7 @@
                                             <input (change)="toggleNutrients('total')" [(ngModel)]='showNutrients'
                                                 type="checkbox">
                                             <span class="checkmark"></span>
-                                        </label>
+                                        </label>-->
                                     </div>
                                 </div>
 
@@ -432,7 +432,7 @@
                                                 <span *ngIf="showNutrients">
                                                     <a href="javascript:void(0)"
                                                         title="Calories : {{meal.recipe.calories}} Kcal">
-                                                        {{meal.recipe.calories}} Kcal </a><br>
+                                                        {{meal.recipe.calories}} cal </a><br>
                                                     <!--Calories {{meal.recipe.calories}} Kcal <br>-->
                                                     Servings {{meal.recipe.yield}}
                                                 </span>
@@ -440,7 +440,7 @@
                                                     <a href="javascript:void(0)"
                                                         title="Calories per Serving : {{formatValPServing(meal.recipe.calories, meal.recipe.yield)}}">
                                                         {{formatValPServing(meal.recipe.calories, meal.recipe.yield)}}
-                                                        Kcal </a>
+                                                        cal </a>
                                                     <!--Calories<br> per Serving<br>{{formatValPServing(meal.recipe.calories, meal.recipe.yield)}} Kcal -->
                                                 </span>
                                             </div>
@@ -509,7 +509,7 @@
                                         <div class="minerals" *ngIf="showNutrients">
                                             <div style="clear:both"></div>
                                             <div style="display:block">
-                                                <p style="font-weight:bold">Total Nutrients<br>
+                                                <p class="totalnutrientstitle">Total Nutrients<br>
                                                     per day</p>
                                             </div>
                                             <div style="clear:both"></div>
@@ -528,7 +528,7 @@
                                         <div class="minerals" *ngIf="showNutrientsPServing">
                                             <div style="clear:both"></div>
                                             <div style="display:block">
-                                                <p style="font-weight:bold">Total Nutrients <br>
+                                                <p class="totalnutrientstitle">Total Nutrients <br>
                                                     per Day <br>
                                                     per serving</p>
                                             </div>
@@ -559,23 +559,20 @@
 
                 </div>
 
-                <div class="meal-row-wrapper meal-row__calories" style="display: block;
+                <div *ngIf="showNutrients || showNutrientsPServing" class="meal-row-wrapper meal-row__calories" style="display: block;
                 height: 100px;
                 text-align: left;
                 width: 100%;
                 margin-left: 50px;
                 margin-top: 10px;">
                 <em>Note:</em> <br>
-                    <ng-container *ngIf="showNutrients || showNutrientsPServing">
                         <div style='float:left; padding:5px; margin-right:5px;display:flex; align-items: center;'
                             *ngFor="let ccode of colorCodes | keyvalue;">
                             <div [ngStyle]="{'background-color':ccode.value}"
                                 style="display:inline-block; width:20px; height:20px;  margin-right:5px; "></div>
                             {{setFLU(ccode.key)}}
     
-                        </div>
-                    </ng-container>
-                   
+                        </div>                  
 
                 </div>
 

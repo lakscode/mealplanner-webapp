@@ -117,13 +117,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
 				]
 			}	,
 			{"id":"communities", "menu":"Communities", "link":"/communities", "display":displayMenu, "active":false
-			/*,	"children":
+			,	"children":
 				[
 
 					{"id":"groups-communities", "menu":"Communities", "link":"/communities", "display":displayMenu, "active":false},
 					{"id":"groups-groups", "menu":"Groups", "link":"/groups", "display":displayMenu, "active":false}
 				]
-				*/
+				
 			}			
 		];
 

@@ -1,26 +1,29 @@
-<div *ngIf="comment.children && comment.children.length > 0" class="row" style="padding-left:20px; padding-right:0px;">
+<div *ngIf="comment.children && comment.children.length > 0" class="row" >
     <ng-container *ngFor="let commentc of comment.children; let i = index;">
-        <div *ngIf="commentc.message" style="padding-left:0px; padding-right:0px;margin-top:0px;margin-bottom:0px"
-            class="col-12 commentitem">
-            <div class="userimage">
-                <img *ngIf="commentc.userimage && commentc.userimage !== ''" style="width:100%" src="{{commentc.userimage}}" />
-                <i *ngIf="commentc.userimage == ''" class='fa fa-user'></i>
-            </div>
-            <div class="commenttext">
-                <div class="commentmsg">
-                    <p class="name">{{commentc.firstname}}</p>
-                    <p class="msg">{{commentc.message}}</p>
+        <div *ngIf="commentc.message" class="col-12 ">
+            <div class="commentitem">
+                <div class="userimage">
+                    <img *ngIf="commentc.userimage && commentc.userimage !== ''" style="width:100%" src="{{commentc.userimage}}" />
+                    <i *ngIf="commentc.userimage == ''" class='fa fa-user'></i>
                 </div>
-                <div class="actions">
-                    <span class="action" (click)="saveLike(commentc)">Like <span *ngIf="commentc.likescount">{{commentc.likescount}}</span></span>
-                    <span class="action" (click)="commentc.reply = !commentc.reply; addChild(commentc)">Reply</span>
-                    <span class="action">Share</span>
+                <div class="commenttext">
+                    <div class="commentmsg">
+                        <p class="name">{{commentc.firstname}}</p>
+                        <p class="msg">{{commentc.message}}</p>
+                    </div>
+                    <div class="actions">
+                        <span class="action" (click)="saveLike(commentc)">Like <span *ngIf="commentc.likescount">{{commentc.likescount}}</span></span>
+                        <span class="action" (click)="commentc.reply = !commentc.reply; addChild(commentc)">Reply</span>
+                        <span class="action">Share</span>
+                    </div>
+                   
                 </div>
-                <app-comment *ngIf="commentc.children && commentc.children.length > 0" [comment]= "commentc"></app-comment>
-
             </div>
         </div>
-        
+        <div class="col-12">
+            <app-comment *ngIf="commentc.children && commentc.children.length > 0" [comment]= "commentc"></app-comment>
+
+        </div>
     </ng-container>
 
     <div *ngIf="currentUser && comment.reply"

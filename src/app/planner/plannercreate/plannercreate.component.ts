@@ -1070,10 +1070,45 @@ console.log(invData);
 	}
 
   }
+
+  CheckStatus()
+  {
+//	  console.log("Check Status");
+//	console.log(this.plan);
+	var retvalue = 0;
+	var mealcount = 0;
+	var recipecount = 0;
+	if(this.plan)
+	{
+		if(this.plan["days"] && this.plan["days"]["length"] > 0)
+		{
+			for(let i=0; i < this.plan["days"]["length"]; i++)
+			{
+				if(this.plan["days"][i]["meals"] && this.plan["days"][i]["meals"]["length"] > 0)
+				{
+					for(let j=0; j < this.plan["days"][i]["meals"]["length"]; j++)
+					{
+						mealcount++;
+						if(this.plan["days"][i]["meals"][j] && this.plan["days"][i]["meals"][j]["recipe"] !== null)
+						{
+							recipecount++
+						}
+					}
+				}
+			}
+		}
+	}
+//	console.log("mealcount " + mealcount);
+//	console.log("recipecount " +  recipecount);
+	if(mealcount == recipecount)
+	retvalue = 1;
+	  return retvalue;
+
+  }
   SavePlanData(r, c)
   {
 
-
+	
     if(typeof(this.plan["id"]) !== "undefined" && this.plan["id"] !== "")
     {
 		var rowItem = this.plan["days"][r]["meals"];
@@ -1102,7 +1137,8 @@ console.log(invData);
 
         params["created_by"] = "";
         params["created_at"] = new Date();
-        params["status"] = 1;
+
+        params["status"] = this.CheckStatus();
 
  
       if(typeof(this.plan["days"][r]['dayid']) == "undefined" || this.plan["days"][r]['dayid'] == "")
@@ -1183,12 +1219,18 @@ console.log(invData);
   }
   toggleNutrients(opt)
   {
-    if(opt == "total" && this.showNutrients)
-    this.showNutrientsPServing = false;    
-    
+  //  if(opt == "total" && this.showNutrients)
+  //  this.showNutrientsPServing = false;    
+    /*
     if(opt == "perserving" && this.showNutrientsPServing)
     this.showNutrients = false;
-   
+	*/
+	if(this.showNutrientsPServing)
+    this.showNutrients = false;
+	else
+	this.showNutrients = true;
+	console.log(this.showNutrients);
+	
   }
   getColorCode(param)
   {
@@ -1372,7 +1414,7 @@ console.log(invData);
 				if(fIndex1s > -1)
 				mMacro1[fIndex1s]["value"] = parseFloat(mMacro1[fIndex1s]["value"]) +parseFloat(dItem["recipe"]["calories"]);
 				else
-				mMacro1.push({"name" : "calories", "value" : parseFloat(dItem["recipe"]["calories"]), "unit" : "Kcal"});
+				mMacro1.push({"name" : "calories", "value" : parseFloat(dItem["recipe"]["calories"]), "unit" : "cal"});
 		
 				if(typeof(dItem["recipe"]["minerals"]) !== "undefined")
 				{
@@ -1417,7 +1459,7 @@ console.log(invData);
 					if(fIndex1s > -1)
 					mMacro[fIndex1s]["value"] = parseFloat(mMacro[fIndex1s]["value"]) +parseFloat(dItem["recipe"]["calories"])/ dItem["recipe"]["yield"];
 					else
-					mMacro.push({"name" : "calories", "value" : parseFloat(dItem["recipe"]["calories"])/ dItem["recipe"]["yield"], "unit" : "Kcal", "yield":dItem["recipe"]["yield"]});
+					mMacro.push({"name" : "calories", "value" : parseFloat(dItem["recipe"]["calories"])/ dItem["recipe"]["yield"], "unit" : "cal", "yield":dItem["recipe"]["yield"]});
 			
 				if(typeof(dItem["recipe"]["minerals"]) !== "undefined")
 				{
