@@ -2314,7 +2314,7 @@ ul {
   padding: 20px 25px;
 }
 .listing .detail h4 {
-  line-height: 30px;
+  line-height: 25px;
   margin-top: 0;
   font-family: 'Lato', sans-serif;
   font-weight: 900;
@@ -2322,7 +2322,7 @@ ul {
   text-transform: uppercase;
   font-style: normal;
   position: relative;
-  padding-bottom: 20px;
+  padding-bottom: 15px;
 }
 .listing .detail h4:after {
   content: "";

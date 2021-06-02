@@ -42,6 +42,7 @@ export class RecipesComponent implements OnInit {
 	role: any = {};
 	showNutrientsFlag: boolean = false;
 	cuisineTypeList : Array<any> = [];
+	noResult: boolean = false;
 
 	searchFilterLabels: Array<any> = [];
 	splitcontent : boolean = false;
@@ -610,8 +611,10 @@ endIndex = startIndex+ endIndex;
 
 	formatResult(invData)
 	{
-		if(invData !== null)
+	console.log(invData.count);
+		if(invData.count > 0)
 		{
+		this.noResult =  false;
 		  if(typeof(invData["body"]) !== "undefined" && invData["body"] !== null && invData["body"]["length"] > 0)
 		  {
 			this.recipesList1 = [];
@@ -633,6 +636,9 @@ endIndex = startIndex+ endIndex;
 		  this.getDisplayList();
 		  this.loadRatings();
   
+		} else {
+			this.recipesList1 = [];
+			this.noResult =  true;
 		}
 	}
 
@@ -733,6 +739,7 @@ endIndex = startIndex+ endIndex;
 
 
 clearFilters(){
+	this.noResult =  false;
 
 	for(let l=0; l < this.searchFilterLabels.length; l++){
 		this.searchFilterLabels[l]['selected'] = false;
