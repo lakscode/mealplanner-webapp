@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } 
 import { DBService } from '../../dbservices/db.service';
 import { HelpService } from '../../services/help.service';
 
-import { environment } from './../../../environments/environment';
+import { environment } from '../../../environments/environment';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import * as $ from 'jquery';
@@ -16,11 +16,11 @@ import { HttpHeaders } from '@angular/common/http';
 //declare var $: any;
 
 @Component({
-	selector: 'app-communities',
-	templateUrl: './communities.component.html',
-	styleUrls: ['./communities.component.scss']
+	selector: 'app-collections',
+	templateUrl: './collections.component.html',
+	styleUrls: ['./collections.component.scss']
 })
-export class CommunitiesComponent implements OnInit {
+export class CollectionsComponent implements OnInit {
 	recipesList: Array<any> = [];
 	recipesList1: Array<any> = [];
 	recipesList2: Array<any> = [];
@@ -28,7 +28,7 @@ export class CommunitiesComponent implements OnInit {
 	currentUser: any;
 	searchparam: any ; 
 	ratingIds: any;
-	community: any;
+	collection: any;
 
 	ratingsArr: Array<any> = [];
 	listorgrid: any = {};
@@ -47,7 +47,7 @@ export class CommunitiesComponent implements OnInit {
 	apiUrl: any;
 
 	constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder, private modalService: ModalService) {
-	this.community = {};
+	this.collection = {};
 	}
 	
 	
@@ -55,7 +55,7 @@ export class CommunitiesComponent implements OnInit {
 	
 				this.listorgrid = {"menu":"grid", "panel":"listing-grid"};
 				this.apiUrl = environment.apiUrl;
-				this.community = {};
+				this.collection = {};
 
 
 
@@ -226,9 +226,9 @@ endIndex = startIndex+ endIndex;
 	   // var params = {"limit": 100};
 	   // params["createdby"] = this.currentUser["id"];
 		console.log(params);
-		var params = {"query": "SELECT c.*, COUNT(rm.id) AS recipecount, u.email, u.firstname, u.lastname FROM community AS c LEFT JOIN recipe_mapping AS rm ON c.id = rm.community_id LEFT JOIN users AS u ON c.created_by = u.id GROUP BY c.id"};
+		var params = {"query": "SELECT c.*, COUNT(rm.id) AS recipecount, u.email, u.firstname, u.lastname FROM collection AS c LEFT JOIN recipe_mapping AS rm ON c.id = rm.collection_id LEFT JOIN users AS u ON c.created_by = u.id GROUP BY c.id"};
 
-		var res =   this.dbService.getDatabyTablebyQuery("community", params).subscribe(invData => setTimeout(() => {
+		var res =   this.dbService.getDatabyTablebyQuery("collection", params).subscribe(invData => setTimeout(() => {
 	
 		  console.log(invData);
 		  if(invData !== null)
@@ -253,7 +253,7 @@ endIndex = startIndex+ endIndex;
 
 
 	gotoRecipebook(id){
-	this.router.navigate(['community', id]);
+	this.router.navigate(['collection', id]);
 	}
 
  gotopage(page , params = null)
@@ -270,9 +270,9 @@ endIndex = startIndex+ endIndex;
       this.modalService.open('createNew');
 
     }
-	editCommunity(cItem){
+	editcollection(cItem){
 		
-		this.community = cItem; 
+		this.collection = cItem; 
 		this.modalService.open('createNew');
   
 	  }
@@ -284,39 +284,39 @@ endIndex = startIndex+ endIndex;
  saveRecipebook()
 {
 	console.log("saveRecipebook");
-	console.log(this.community);
+	console.log(this.collection);
 	var params = {};
 	
-	if(this.community["community_name"] !== "")
+	if(this.collection["collection_name"] !== "")
 	{
-		params["community_name"] = this.community["community_name"];
+		params["collection_name"] = this.collection["collection_name"];
 	
-		if(typeof(this.community["description"]) !== "undefined" && this.community["description"] !== "")
-		params["description"] = this.community["description"];
+		if(typeof(this.collection["description"]) !== "undefined" && this.collection["description"] !== "")
+		params["description"] = this.collection["description"];
 
-		//if(typeof(this.community["notes"]) !== "undefined" && this.community["notes"] !== "")
-		params["notes"] = this.community["notes"];
+		//if(typeof(this.collection["notes"]) !== "undefined" && this.collection["notes"] !== "")
+		params["notes"] = this.collection["notes"];
 
-		if(typeof(this.community["image"]) !== "undefined" && this.community["image"] !== "")
-		params["image"] = this.community["image"];
+		if(typeof(this.collection["image"]) !== "undefined" && this.collection["image"] !== "")
+		params["image"] = this.collection["image"];
 
-		// if(this.community["recipes"] !== "")
-		//  params["recipes"] = this.community["recipes"];
+		// if(this.collection["recipes"] !== "")
+		//  params["recipes"] = this.collection["recipes"];
 
-		if(typeof(this.community["created_by"]) =="undefined" || this.community["created_by"] == "" || this.community["created_by"] == "0")
+		if(typeof(this.collection["created_by"]) =="undefined" || this.collection["created_by"] == "" || this.collection["created_by"] == "0")
 		{
 		if(typeof(this.currentUser["id"]) !== "undefined" && this.currentUser["id"] !== "")
 		params["created_by"] = this.currentUser["id"];
 		}   
-		if(typeof(this.community.id) !== "undefined"  && this.community.id !== "")
+		if(typeof(this.collection.id) !== "undefined"  && this.collection.id !== "")
 		{
 			console.log("updating");
-			params["id"] = this.community.id;
+			params["id"] = this.collection.id;
 			console.log(params);
-			var res =   this.dbService.updateDataByTable("community", params).subscribe(recipeData => setTimeout(() => {
+			var res =   this.dbService.updateDataByTable("collection", params).subscribe(recipeData => setTimeout(() => {
 				console.log(recipeData);
 				//this.toastr.success('Updated Recipe Book!', 'Recipe Book!');	
-				//this.loadCommunity(this.community.id);
+				//this.loadcollection(this.collection.id);
 				this.searchProps();
 				
 			}));
@@ -327,12 +327,12 @@ endIndex = startIndex+ endIndex;
 		
 			console.log("adding");
 			console.log(params);
-			var res =   this.dbService.postDataByTable("community", params).subscribe(recipeData => setTimeout(() => {
+			var res =   this.dbService.postDataByTable("collection", params).subscribe(recipeData => setTimeout(() => {
 				console.log(recipeData);
 				//this.toastr.success('Saved Recipe Book!', 'Recipe Book!');
 				if(recipeData['inserted_id'] !== "undefined" && recipeData['inserted_id'] !== "")
 				{
-					//this.loadCommunity(recipeData['inserted_id']);
+					//this.loadcollection(recipeData['inserted_id']);
 					this.searchProps();	
 				}
 			}));
@@ -371,16 +371,16 @@ endIndex = startIndex+ endIndex;
   {
 	  /*
 	SELECT c.id, COUNT(cj.id) AS usercount
-	FROM community AS c
-	LEFT JOIN community_join AS cj ON c.id = cj.community_id
-	GROUP BY c.id, cj.community_id
+	FROM collection AS c
+	LEFT JOIN collection_join AS cj ON c.id = cj.collection_id
+	GROUP BY c.id, cj.collection_id
 
 	*/
 
 	console.log("in loadusercount");
-	var params = {"query": "SELECT c.id, COUNT(cj.id) AS usercount 	FROM community AS c LEFT JOIN  community_join AS cj ON c.id = cj.community_id GROUP BY c.id, cj.community_id"};
+	var params = {"query": "SELECT c.id, COUNT(cj.id) AS usercount 	FROM collection AS c LEFT JOIN  collection_join AS cj ON c.id = cj.collection_id GROUP BY c.id, cj.collection_id"};
 
-	var res =   this.dbService.getDatabyTablebyQuery("community", params).subscribe(invData => setTimeout(() => {
+	var res =   this.dbService.getDatabyTablebyQuery("collection", params).subscribe(invData => setTimeout(() => {
 
 	 
 	  if(invData !== null)
@@ -439,9 +439,9 @@ console.log("type " + type);
 			{
 				var urlapi = this.apiUrl.replace("/api","");
 
-			  this.community["image"] = urlapi + resultData["name"];
+			  this.collection["image"] = urlapi + resultData["name"];
 			console.log(type);	
-			  console.log(this.community)
+			  console.log(this.collection)
 			}
 		  }
 		}));

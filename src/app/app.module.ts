@@ -70,8 +70,8 @@ import { RecipebookModule } from './recipes/recipebook/recipebook.module';
 import { FaqsModule } from './faqs/faqs.module';  
 
 
-import { CommunitiesModule } from './groups/communities/communities.module'; 
-import { CommunityModule } from './groups/community/community.module';
+import { CollectionsModule } from './groups/collections/collections.module'; 
+import { CollectionModule } from './groups/collection/collection.module';
 
 import { GroupsModule } from './groups/groups/groups.module'; 
 import { GroupModule } from './groups/group/group.module';
@@ -142,8 +142,8 @@ import {environment} from "../environments/environment";
 	FaqsModule,
 	LazyLoadImageModule,
 	SocialLoginModule,
-	CommunitiesModule,
-	CommunityModule,
+	CollectionsModule,
+	CollectionModule,
 	GroupsModule,
 	GroupModule,
 	PrivacyModule,

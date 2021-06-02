@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { CommunitiesRoutingModule } from './communities-routing.module';
-import { CommunitiesComponent } from './communities.component';
+import { CollectionRoutingModule } from './collection-routing.module';
+import { CollectionComponent } from './collection.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {SidebarModule } from "../../shared/modules";
@@ -10,13 +10,13 @@ import { ModalModule } from '../../shared/modules/modal/modal.module';
 @NgModule({
   imports: [
     CommonModule,
-    CommunitiesRoutingModule,
+    CollectionRoutingModule,
     FlexLayoutModule,
 	FormsModule,
 	ReactiveFormsModule,
   SidebarModule,
   ModalModule
   ],
-  declarations: [CommunitiesComponent]
+  declarations: [CollectionComponent]
 })
-export class CommunitiesModule { }
+export class CollectionModule { }

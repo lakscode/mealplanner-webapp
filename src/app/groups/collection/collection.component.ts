@@ -5,8 +5,8 @@ import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } 
 import { DBService } from '../../dbservices/db.service';
 import { HelpService } from '../../services/help.service';
 
-import { environment } from './../../../environments/environment';
-import { constants } from './../../jsonfiles/constants';
+import { environment } from '../../../environments/environment';
+import { constants } from '../../jsonfiles/constants';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { HttpHeaders } from '@angular/common/http';
@@ -16,15 +16,15 @@ import { ModalService } from '../../shared/modules/modal/modal.service';
 import { ToastrService } from 'ngx-toastr';
 import { DomSanitizer } from '@angular/platform-browser';
 @Component({
-	selector: 'app-community',
-	templateUrl: './community.component.html',
-	styleUrls: ['./community.component.scss']
+	selector: 'app-collection',
+	templateUrl: './collection.component.html',
+	styleUrls: ['./collection.component.scss']
 })
-export class CommunityComponent implements OnInit, OnChanges {
+export class CollectionComponent implements OnInit, OnChanges {
 	private onDestroy$: Subject<void> = new Subject<void>();
 	nutrientsList: Array<any> =[];
 	routeParams: any = {};
-	community: any;
+	collection: any;
 	loading:any = 0;
 	paramMicro: Array<any> =[];
 	mineralsList: Array<any> =[];
@@ -42,7 +42,7 @@ export class CommunityComponent implements OnInit, OnChanges {
 	searchmorebar:boolean = false;
 	addItem: boolean = false;
 	showNutrientsFlag: boolean = false;
-	communityOwner: boolean  = false;
+	collectionOwner: boolean  = false;
 	setFav: boolean = false;
 	showActions: any = {};
 
@@ -70,7 +70,7 @@ ngOnChanges()
 		var appUrl = environment.appUrl;
 		this.urlShare = window.location.href;
 		
-		this.msg = "Join this community today: " +  this.community["community_name"];
+		this.msg = "Join this collection today: " +  this.collection["collection_name"];
 		
 			if (this.urlShare.indexOf("localhost") !== -1) {
 				this.urlShare = this.urlShare.replace("http://localhost:4200", appUrl)
@@ -84,7 +84,7 @@ loadDefaults()
 {
 	this.urlShare = window.location.href;
 
-	this.communityOwner = false;
+	this.collectionOwner = false;
 	this.showActions = {"join": true, "invite":false};
 	
 	this.getNutrientsMaxMin(); 
@@ -131,19 +131,19 @@ loadDefaults()
 		  if (typeof (this.routeParams.id) !== "undefined") {
 			console.log(this.routeParams.id);
 			this.setDefaults();
-			this.loadCommunity(this.routeParams.id);
+			this.loadcollection(this.routeParams.id);
 		  }    
 		  else
 		  {
-			this.communityOwner = true;
+			this.collectionOwner = true;
 			  this.setDefaults();
 		   
 	   
 		  }
 		  if (typeof (this.routeParams.draft) !== "undefined") {
 		   console.log(this.routeParams.draft);
-		   this.loadCommunity(this.routeParams.draft);
-		   this.communityOwner = true;
+		   this.loadcollection(this.routeParams.draft);
+		   this.collectionOwner = true;
 		 }  
 		   console.log(this.routeParams);
 	}); 
@@ -157,19 +157,19 @@ setDefaults()
 {
 
 	
-	this.community = {};
+	this.collection = {};
 
 
 }
 existingIngCount:any = 0;
-loadCommunity(id)
+loadcollection(id)
 {
-  console.log("In load community");
+  console.log("In load collection");
  // console.log(id);
   this.loading++;
  // console.log(this.loading);
 
-  this.community = [];
+  this.collection = [];
  var params = {}
  if(id)
  {
@@ -180,30 +180,30 @@ loadCommunity(id)
  
  if(this.loading)
   {
-	 var res =   this.dbService.getDataByTable("community", params).subscribe(rbookData => setTimeout(() => {
+	 var res =   this.dbService.getDataByTable("collection", params).subscribe(rbookData => setTimeout(() => {
 
 	console.log(rbookData);
-	this.communityOwner = false;
+	this.collectionOwner = false;
 	 
 	if(rbookData !== null)
 	{
 	  if(typeof(rbookData["body"]) !== "undefined" && rbookData["body"] !== null && rbookData["body"]["length"] > 0)
 	  {
-		this.community = rbookData["body"][0];
-		if(this.currentUser['id'] == this.community['created_by'])
-	  	this.communityOwner = true;
+		this.collection = rbookData["body"][0];
+		if(this.currentUser['id'] == this.collection['created_by'])
+	  	this.collectionOwner = true;
 		
-		  if(this.communityOwner)
+		  if(this.collectionOwner)
 		  this.showActions["join"] = false;
 		this.loadRecipes();
 	  }
  
-	console.log(this.community);
-	this.getJoinStatusCommunity();
+	console.log(this.collection);
+	this.getJoinStatuscollection();
 	
 
 	}
-	this.getCommunityJoined();
+	this.getcollectionJoined();
 	this.loadShareValue();
   }));
   }
@@ -220,8 +220,8 @@ loadRecipes(idslist = "")
 	
 
 	//params["instructions"] = "notempty";
-//	params["query"] = " select id, label, image, healthLabels, dietLabels, calories, yield, totalWeight, totalNutrients, digest from recipes where id in (select recipe_id from recipe_mapping where community_id = " + this.routeParams.id  + ")";
-	params["query"] = "select recipes.id, recipes.label, recipes.image, recipes.calories, recipes.healthLabels, recipes.dietLabels, recipes.yield, recipes.totalNutrients, users.email, users.firstname, users.lastname, recipe_mapping.created_at, users.id as userid from recipes join recipe_mapping on recipes.id = recipe_mapping.recipe_id join users on recipe_mapping.created_by = users.id where recipe_mapping.community_id = " + this.routeParams.id  + "" ;
+//	params["query"] = " select id, label, image, healthLabels, dietLabels, calories, yield, totalWeight, totalNutrients, digest from recipes where id in (select recipe_id from recipe_mapping where collection_id = " + this.routeParams.id  + ")";
+	params["query"] = "select recipes.id, recipes.label, recipes.image, recipes.calories, recipes.healthLabels, recipes.dietLabels, recipes.yield, recipes.totalNutrients, users.email, users.firstname, users.lastname, recipe_mapping.created_at, users.id as userid from recipes join recipe_mapping on recipes.id = recipe_mapping.recipe_id join users on recipe_mapping.created_by = users.id where recipe_mapping.collection_id = " + this.routeParams.id  + "" ;
   console.log(JSON.stringify(params));
 
  var res =   this.dbService.getDatabyQuery("recipes", params).subscribe(invData => setTimeout(() => {
@@ -393,8 +393,8 @@ if(mQuery !== "")
 	
 }
 
-// id, community_id , userid, created_at - community_join
-// id, community_id , userid, created_at, recipeid - community_save
+// id, collection_id , userid, created_at - collection_join
+// id, collection_id , userid, created_at, recipeid - collection_save
 
 ratingIds: any;
 formatResult(invData)
@@ -518,7 +518,7 @@ removeRecipe(recipe)
 	{
 		console.log(fIndex);
 		this.recipesList.splice(fIndex, 1);
-		this.community["recipes"] ="";
+		this.collection["recipes"] ="";
 		var recipeids = "";
 		for(let r=0; r < this.recipesList.length; r++)
 		{
@@ -527,10 +527,10 @@ removeRecipe(recipe)
 		if(recipeids !== "")
 		{
 			recipeids = recipeids.substring(0, recipeids.length-1);	
-			this.community["recipes"] = recipeids;
+			this.collection["recipes"] = recipeids;
 		}
 		console.log(this.recipesList);
-		console.log(this.community);
+		console.log(this.collection);
 	}
 	//this.toastr.error('Removed Recipe from Recipe Book', 'Recipe Book!');	
 }
@@ -543,7 +543,7 @@ addRecipe(recipe)
 	if(fIndex == -1)
 	{
 		this.recipesList.push(recipe);
-		this.community["recipes"] ="";
+		this.collection["recipes"] ="";
 		var recipeids = "";
 		for(let r=0; r < this.recipesList.length; r++)
 		{
@@ -553,17 +553,17 @@ addRecipe(recipe)
 		if(recipeids !== "")
 		{
 			recipeids = recipeids.substring(0, recipeids.length-1);	
-			this.community["recipes"] = recipeids;
+			this.collection["recipes"] = recipeids;
 		}
 		console.log(this.recipesList);
-		console.log(this.community);
+		console.log(this.collection);
 	}
 	this.toggleRecipeAdd = false;
 	this.searchparam["q"] ="";
 	//this.toastr.success('Added Recipe to Recipe Book', 'Recipe Book!');	
 
 	var paramsr = {};
-    paramsr["community_id"] = this.community["id"];
+    paramsr["collection_id"] = this.collection["id"];
     paramsr["recipe_id"] = recipe["id"];
     paramsr["created_by"] = this.currentUser["id"];
 
@@ -586,39 +586,39 @@ addRecipe(recipe)
 saveRecipebook()
 {
 	console.log("saveRecipebook");
-	console.log(this.community);
+	console.log(this.collection);
 	var params = {};
 	
-	if(this.community["community_name"] !== "")
+	if(this.collection["collection_name"] !== "")
 	{
-		params["community_name"] = this.community["community_name"];
+		params["collection_name"] = this.collection["collection_name"];
 	
-		if(typeof(this.community["description"]) !== "undefined" && this.community["description"] !== "")
-		params["description"] = this.community["description"];
+		if(typeof(this.collection["description"]) !== "undefined" && this.collection["description"] !== "")
+		params["description"] = this.collection["description"];
 
-		if(typeof(this.community["notes"]) !== "undefined" && this.community["notes"] !== "")
-		params["notes"] = this.community["notes"];
+		if(typeof(this.collection["notes"]) !== "undefined" && this.collection["notes"] !== "")
+		params["notes"] = this.collection["notes"];
 
-		if(typeof(this.community["image"]) !== "undefined" && this.community["image"] !== "")
-		params["image"] = this.community["image"];
+		if(typeof(this.collection["image"]) !== "undefined" && this.collection["image"] !== "")
+		params["image"] = this.collection["image"];
 
-		// if(this.community["recipes"] !== "")
-		//  params["recipes"] = this.community["recipes"];
+		// if(this.collection["recipes"] !== "")
+		//  params["recipes"] = this.collection["recipes"];
 
-		if(typeof(this.community["created_by"]) =="undefined" || this.community["created_by"] == "" || this.community["created_by"] == "0")
+		if(typeof(this.collection["created_by"]) =="undefined" || this.collection["created_by"] == "" || this.collection["created_by"] == "0")
 		{
 		if(typeof(this.currentUser["id"]) !== "undefined" && this.currentUser["id"] !== "")
 		params["created_by"] = this.currentUser["id"];
 		}   
-		if(typeof(this.community.id) !== "undefined"  && this.community.id !== "")
+		if(typeof(this.collection.id) !== "undefined"  && this.collection.id !== "")
 		{
 			console.log("updating");
-			params["id"] = this.community.id;
+			params["id"] = this.collection.id;
 			console.log(params);
-			var res =   this.dbService.updateDataByTable("community", params).subscribe(recipeData => setTimeout(() => {
+			var res =   this.dbService.updateDataByTable("collection", params).subscribe(recipeData => setTimeout(() => {
 				console.log(recipeData);
 				//this.toastr.success('Updated Recipe Book!', 'Recipe Book!');	
-				this.loadCommunity(this.community.id);
+				this.loadcollection(this.collection.id);
 				
 			}));
 		}
@@ -627,12 +627,12 @@ saveRecipebook()
 		
 			console.log("adding");
 			console.log(params);
-			var res =   this.dbService.postDataByTable("community", params).subscribe(recipeData => setTimeout(() => {
+			var res =   this.dbService.postDataByTable("collection", params).subscribe(recipeData => setTimeout(() => {
 				console.log(recipeData);
 				//this.toastr.success('Saved Recipe Book!', 'Recipe Book!');
 				if(recipeData['inserted_id'] !== "undefined" && recipeData['inserted_id'] !== "")
 				{
-					this.loadCommunity(recipeData['inserted_id']);	
+					this.loadcollection(recipeData['inserted_id']);	
 				}
 			}));
 		}
@@ -679,9 +679,9 @@ console.log("type " + type);
 			{
 				var urlapi = this.apiUrl.replace("/api","");
 
-			  this.community["image"] = urlapi + resultData["name"];
+			  this.collection["image"] = urlapi + resultData["name"];
 			console.log(type);	
-			  console.log(this.community)
+			  console.log(this.collection)
 			}
 		  }
 		}));
@@ -719,22 +719,22 @@ formatVal(str)
 
   downloadplan()
 	{
-	  if(typeof(this.community["id"]) !== "undefined" && this.community["id"] !== "")
+	  if(typeof(this.collection["id"]) !== "undefined" && this.collection["id"] !== "")
 	  {
-		  this.pdfService.createrecipebookpdf(this.community["id"]).subscribe(dData => setTimeout(() => {
+		  this.pdfService.createrecipebookpdf(this.collection["id"]).subscribe(dData => setTimeout(() => {
 
 			  console.log(dData);
 			  if(dData !== null )
 			  {
-			  var communityObj ={};
-			  communityObj["communityname"] = this.community["community_name"];
-			  communityObj["link"] = environment.apiUrl + "/" + dData["filename"];
+			  var collectionObj ={};
+			  collectionObj["collectionname"] = this.collection["collection_name"];
+			  collectionObj["link"] = environment.apiUrl + "/" + dData["filename"];
 			  var link = document.createElement('a');
-			  link.href = communityObj["link"];
+			  link.href = collectionObj["link"];
 			  link.target = "_blank";
 		  //	link.download = mealPlan["link"];
 			  link.click();
-			  console.log(communityObj["link"]);
+			  console.log(collectionObj["link"]);
 			  }
 		  }));
 		}
@@ -1104,46 +1104,46 @@ params = {};
   }  
 }
 
-getCommunityJoined()
+getcollectionJoined()
 {
-//	params["query"] = "select c.*, count(cj.id) as joinedcount from community c, community_join cj where cj.community_id = c.id and c.id = "  + id + " group by cj.community_id ";
-	console.log("getCommunityJoined");
+//	params["query"] = "select c.*, count(cj.id) as joinedcount from collection c, collection_join cj where cj.collection_id = c.id and c.id = "  + id + " group by cj.collection_id ";
+	console.log("getcollectionJoined");
 	var params = {};
 	//params["created_by"]  = this.currentUser["id"];
 	console.log(params);
-	params ['query'] = "select count(id) as joinedcount from community_join where community_id = " + this.community["id"] + " group by community_id" ;
-	var res =   this.dbService.getDatabyTablebyQuery("community_join", params).subscribe(invData => setTimeout(() => {
+	params ['query'] = "select count(id) as joinedcount from collection_join where collection_id = " + this.collection["id"] + " group by collection_id" ;
+	var res =   this.dbService.getDatabyTablebyQuery("collection_join", params).subscribe(invData => setTimeout(() => {
 		console.log(invData);
 		if(invData && invData["body"]["length"] > 0)
 		{
-			this.community["joinedcount"] = invData["body"][0]["joinedcount"];
+			this.collection["joinedcount"] = invData["body"][0]["joinedcount"];
 		}
 	 
 	  }));
 
 }
 
-getJoinStatusCommunity()
+getJoinStatuscollection()
 {
 
 	var params = {};
 	//params["created_by"]  = this.currentUser["id"];
 	console.log(params);
-	params ['query'] = "select * from community_join where community_id = " + this.community["id"] + " AND userid = " + this.currentUser["id"];
-	var res =   this.dbService.getDatabyTablebyQuery("community_join", params).subscribe(invData => setTimeout(() => {
+	params ['query'] = "select * from collection_join where collection_id = " + this.collection["id"] + " AND userid = " + this.currentUser["id"];
+	var res =   this.dbService.getDatabyTablebyQuery("collection_join", params).subscribe(invData => setTimeout(() => {
 
 	  console.log(invData);
 	  }));
 }
 
-joinCommunity()
+joincollection()
 {
 
 	var params = {};
 	//params["created_by"]  = this.currentUser["id"];
 	console.log(params);
-	params ['query'] = "select * from community_join where community_id = " + this.community["id"] + " AND userid = " + this.currentUser["id"];
-	var res =   this.dbService.getDatabyTablebyQuery("community_join", params).subscribe(invData => setTimeout(() => {
+	params ['query'] = "select * from collection_join where collection_id = " + this.collection["id"] + " AND userid = " + this.currentUser["id"];
+	var res =   this.dbService.getDatabyTablebyQuery("collection_join", params).subscribe(invData => setTimeout(() => {
 
 	  console.log(invData);
 	  if(invData !== null && invData["body"]["length"] > 0)
@@ -1153,11 +1153,11 @@ joinCommunity()
 	  else
 	  {
 		var params = {};
-		params["community_id"] =this.community["id"];
+		params["collection_id"] =this.collection["id"];
 		params["userid"] =this.currentUser["id"];
 		
-		var res =   this.dbService.postDataByTable("community_join", params).subscribe(dData => setTimeout(() => {
-			alert("Joined community ");
+		var res =   this.dbService.postDataByTable("collection_join", params).subscribe(dData => setTimeout(() => {
+			alert("Joined collection ");
 			this.showActions['join'] = true;
 		}));
 

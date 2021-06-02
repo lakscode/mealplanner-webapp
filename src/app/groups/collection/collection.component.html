@@ -3,7 +3,7 @@
     <div class="fixedtop row" >
     <div class="col-12 col-md-12 col-lg-12">
         <div class="recipe-set submit-recipe-set">
-          <h2> <a (click)="gotopage();"><i class="fa fa-chevron-left"></i></a> Community</h2>
+          <h2> <a (click)="gotopage();"><i class="fa fa-chevron-left"></i></a> Collection</h2>
          
            <!-- <div style="width:100%; text-align:right">
                 <a class="copy-button" (click)="downloadplan()" title="Download PDF"><i class="fa fa-download"></i> Download</a>
@@ -11,19 +11,19 @@
             <div class="submit-recipe-form" >
                 <form action="#" method="post">
 
-                    <div class="row" *ngIf="communityOwner" style="display:none" >
+                    <div class="row" *ngIf="collectionOwner" style="display:none" >
 
-                        <div class="col-12 community_panel">
+                        <div class="col-12 collection_panel">
                      
-                            <img *ngIf="community.image" class="community_img" src="{{community.image}}"  style="height:200px;width: 100%;" />
-                            <img *ngIf="!community.image"  class="community_img" src="assets/notavailable1.jpg"  style="height:200px;width: 100%;" />
+                            <img *ngIf="collection.image" class="collection_img" src="{{collection.image}}"  style="height:200px;width: 100%;" />
+                            <img *ngIf="!collection.image"  class="collection_img" src="assets/notavailable1.jpg"  style="height:200px;width: 100%;" />
                             
-                           <div class="community_details">
+                           <div class="collection_details">
                             <input id="inputuploadrecipe" hidden type="file" name="inputuploadrecipe" (change)="onFileSelect($event)" />
-                            <button  style="float:right; background:transparent; border:0px; outline:0;"  *ngIf="community.image" (click)="fileupload()" class="upload-comment">
+                            <button  style="float:right; background:transparent; border:0px; outline:0;"  *ngIf="collection.image" (click)="fileupload()" class="upload-comment">
                                 <i class="fa fa-picture-o" aria-hidden="true"></i></button>
-                            <input class="trans-input" type="text" name="title" id="title" placeholder="Type community name..." [(ngModel)]="community.community_name">
-                            <textarea class="short-text trans-input" name="description" placeholder="Type description" [(ngModel)]='community.description' id="description" cols="30" rows="10"></textarea>
+                            <input class="trans-input" type="text" name="title" id="title" placeholder="Type collection name..." [(ngModel)]="collection.collection_name">
+                            <textarea class="short-text trans-input" name="description" placeholder="Type description" [(ngModel)]='collection.description' id="description" cols="30" rows="10"></textarea>
                               <br>
                
                            </div>
@@ -31,11 +31,11 @@
                        
 
                        <!-- <div class="col-12 col-md-6 col-lg-6">
-                    <label for="title">Community Title</label>
-                    <input type="text" name="title" id="title" [(ngModel)]="community.community_name">
+                    <label for="title">collection Title</label>
+                    <input type="text" name="title" id="title" [(ngModel)]="collection.collection_name">
                     <br>
                     <label for="description">Description</label>
-                    <textarea class="short-text" name="description" [(ngModel)]='community.description' id="description" cols="30" rows="10"></textarea>
+                    <textarea class="short-text" name="description" [(ngModel)]='collection.description' id="description" cols="30" rows="10"></textarea>
  
                    </div>-->
                  
@@ -48,7 +48,7 @@
                            <div>
                                <input id="inputuploadrecipe" hidden type="file" name="inputuploadrecipe" (change)="onFileSelect($event)" />
                              </div>
-                             <img *ngIf="community.image" src="{{community.image}}"  style="width: 90%; max-width: 300px;" />
+                             <img *ngIf="collection.image" src="{{collection.image}}"  style="width: 90%; max-width: 300px;" />
                      
                              
                           </div>
@@ -58,13 +58,13 @@
                         </div>
                     </div>
 <!--
-                    <div class="row" *ngIf="!communityOwner && community.image"  >
-                      <div class="col-12 community_panel">
-                        <div class="row fadeInLeft animated newanim recipeDay-outer" *ngIf='community' >
+                    <div class="row" *ngIf="!collectionOwner && collection.image"  >
+                      <div class="col-12 collection_panel">
+                        <div class="row fadeInLeft animated newanim recipeDay-outer" *ngIf='collection' >
                             <div class="col-12 col-md-4 col-lg-4" style="padding-left:0px; padding-right:0px;">
                                <div style="padding:10px">
                                   <div class="animated wow flipInX" style='border:1px solid #CCC; padding: 25px;'>
-                                     <img src="{{community.image}}" alt="slide" style='width:100%;max-height:440px;min-height:200px;'>  
+                                     <img src="{{collection.image}}" alt="slide" style='width:100%;max-height:440px;min-height:200px;'>  
                                 </div>     
                                </div>
                             </div>
@@ -75,19 +75,19 @@
                                     <div class="innerbox">
                                      
                                         <div class="recipe-details-group">
-                                           <div class="recipe-details" *ngIf="community.community_name">
+                                           <div class="recipe-details" *ngIf="collection.collection_name">
                                               <p style="display:block; text-align:center; font-size: 46px;
                                               font-weight: bold;                                            line-height: 60px; padding-bottom:10px">
-                                                 <a href="javascript:void(0)" style="cursor:pointer" class="hlabel">{{community.community_name}}</a> 
+                                                 <a href="javascript:void(0)" style="cursor:pointer" class="hlabel">{{collection.collection_name}}</a> 
                                              </p>
                                              </div>
                                            
                                              <div class="short-separator" style="margin-top:10px;margin-bottom:5px"></div>
                                             <p style="clear:both;margin-top:10px;"></p>
-                                            <div style="position:absolute; bottom:20px" class="recipe-details" *ngIf="community">
+                                            <div style="position:absolute; bottom:20px" class="recipe-details" *ngIf="collection">
                                              
                                                 <p class="details" *ngIf="recipesList.length > 0">{{recipesList.length}} Recipe<span *ngIf="recipesList.length > 1">s</span></p>
-                                                <p class="details" *ngIf="community && community.joinedcount">{{community.joinedcount}} member<span *ngIf="community.joinedcount > 1">s</span></p>
+                                                <p class="details" *ngIf="collection && collection.joinedcount">{{collection.joinedcount}} member<span *ngIf="collection.joinedcount > 1">s</span></p>
                                                 
                                            </div>
                                             <div style="position:absolute; bottom:20px; right:20px;">
@@ -114,7 +114,7 @@
                                                     </div>
                                                   </div>
                                                 <button *ngIf="showActions['invite']" class="create-button anim-button btn-4">Invite</button>
-                                                <button (click)="joinCommunity()" *ngIf="showActions['join'] " class="create-button anim-button btn-4">Join</button>
+                                                <button (click)="joincollection()" *ngIf="showActions['join'] " class="create-button anim-button btn-4">Join</button>
                                           </div>
                                          
                                         </div>
@@ -132,18 +132,18 @@
 <!--
                         <div class="row">
                             <div class="col-12 col-lg-6" style="padding:10px; border:1px solid #555;">
-                                <img class="community_img" src="{{community.image}}"  style="height:200px;width: 100%;" />
+                                <img class="collection_img" src="{{collection.image}}"  style="height:200px;width: 100%;" />
                             </div>
                             <div class="col-12 col-lg-6">
-                                <div class="community_details">
-                                    <p class="name">{{community.community_name}}</p>
+                                <div class="collection_details">
+                                    <p class="name">{{collection.collection_name}}</p>
                                     <br>
                                 
-                                    <p class="details">{{community.description}}</p>
+                                    <p class="details">{{collection.description}}</p>
                                        <p class="details" *ngIf="recipesList.length > 0">{{recipesList.length}} Recipe<span *ngIf="recipesList.length > 1">s</span></p>
-                                       <p class="details" *ngIf="community && community.joinedcount">{{community.joinedcount}} member<span *ngIf="community.joinedcount > 1">s</span> joined</p>
+                                       <p class="details" *ngIf="collection && collection.joinedcount">{{collection.joinedcount}} member<span *ngIf="collection.joinedcount > 1">s</span> joined</p>
                                         <button *ngIf="showActions['invite']" class="add-recipe">Invite</button>
-                                        <button (click)="joinCommunity()" *ngIf="showActions['join'] " class="add-recipe">Join</button>
+                                        <button (click)="joincollection()" *ngIf="showActions['join'] " class="add-recipe">Join</button>
                      
                                  </div>
                             </div>
@@ -155,25 +155,25 @@
                   
 
 
-                   <!--  <div class="row" *ngIf="!communityOwner && community.image"  > -->
-                     <div class="row" *ngIf="community.image"  >
-                        <div class="col-12 community_panel animated wow flipInX">
-                         <!--<div class="ribbon-container-left" *ngIf="community && community.joinedcount"><div class="ribbon">{{community.joinedcount}} member<span *ngIf="community.joinedcount > 1">s</span> joined</div></div>
+                   <!--  <div class="row" *ngIf="!collectionOwner && collection.image"  > -->
+                     <div class="row" *ngIf="collection.image"  >
+                        <div class="col-12 collection_panel animated wow flipInX">
+                         <!--<div class="ribbon-container-left" *ngIf="collection && collection.joinedcount"><div class="ribbon">{{collection.joinedcount}} member<span *ngIf="collection.joinedcount > 1">s</span> joined</div></div>
                          <div class="ribbon-container-right" *ngIf="recipesList.length > 0"><div class="ribbon">{{recipesList.length}} Recipe<span *ngIf="recipesList.length > 1">s</span> added</div></div>-->
   
-                        <img class="community_img " src="{{community.image}}"  style="height:200px;width: 100%;" />
-                       <div class="community_details" style="position: absolute;
+                        <img class="collection_img " src="{{collection.image}}"  style="height:200px;width: 100%;" />
+                       <div class="collection_details" style="position: absolute;
                        top: 0px;background-size:cover;  background-position:center;  height:100%; " [ngStyle]="{'background-image':'linear-gradient(
                                 rgba(0, 0, 0, 0.3),
                                 rgba(0, 0, 0, 0.3)
                               )'}">
-                          <p class="name">{{community.community_name}}</p>
+                          <p class="name">{{collection.collection_name}}</p>
                           <br>
                    
-                          <div style="position:absolute; bottom:10px; padding:15px;" class="recipe-details" *ngIf="community">
+                          <div style="position:absolute; bottom:10px; padding:15px;" class="recipe-details" *ngIf="collection">
                                              
                             <p class="details" *ngIf="recipesList.length > 0"><i class="fa fa-cutlery"></i> {{recipesList.length}} Recipe<span *ngIf="recipesList.length > 1">s</span>
-                            <span style="margin-left:10px" class="details" *ngIf="community && community.joinedcount"><i class="fa fa-user"></i> {{community.joinedcount}} member<span *ngIf="community.joinedcount > 1">s</span></span>
+                            <span style="margin-left:10px" class="details" *ngIf="collection && collection.joinedcount"><i class="fa fa-user"></i> {{collection.joinedcount}} member<span *ngIf="collection.joinedcount > 1">s</span></span>
                             
                        </div>
                         <div class="onlydesktop" style="position:absolute; bottom:0px; right:0px;">
@@ -200,7 +200,7 @@
                                 </div>
                               </div>-->
                             <!--<button *ngIf="showActions['invite']" class="create-button anim-button btn-4">Invite</button>-->
-                            <button (click)="joinCommunity()" *ngIf="showActions['join'] " class="create-button anim-button btn-4">Join</button>
+                            <button (click)="joincollection()" *ngIf="showActions['join'] " class="create-button anim-button btn-4">Join</button>
                             <button class="create-button anim-button btn-4" (click)="addNew()" >Add Recipe</button>
                       </div>
            
@@ -210,9 +210,9 @@
                       </div>
 
 
-                    <div class="row " style="margin-top:20px" *ngIf="community.community_name">
+                    <div class="row " style="margin-top:20px" *ngIf="collection.collection_name">
                        <div class="col-12 onlymobile">
-                            <button (click)="joinCommunity()" *ngIf="showActions['join'] " class="create-button anim-button btn-4">Join</button>
+                            <button (click)="joincollection()" *ngIf="showActions['join'] " class="create-button anim-button btn-4">Join</button>
                             <button class="create-button anim-button btn-4" (click)="addNew()" >Add Recipe</button>          
                        </div>
                         <div class="col-12 add-recipe-panel" *ngIf="toggleRecipeAdd">
@@ -361,7 +361,7 @@
                                 
                     </div>
                     <div class="row" style="padding-left:0px; padding-right:0px;" >
-                        <!--<div class="col-12" *ngIf="community.community_name">
+                        <!--<div class="col-12" *ngIf="collection.collection_name">
                             <label for="recipes">Recipes</label>
                         </div>-->
                         <ng-container  *ngFor="let recipe of recipesList; let i = index;">
@@ -414,7 +414,7 @@
                     </div>
                     <br>
                     <!--<label for="notes">Notes</label>
-                    <textarea class="short-text" name="notes" [(ngModel)]='community.notes' id="notes" cols="30" rows="10"></textarea>-->
+                    <textarea class="short-text" name="notes" [(ngModel)]='collection.notes' id="notes" cols="30" rows="10"></textarea>-->
                   
                 </form>
             </div>

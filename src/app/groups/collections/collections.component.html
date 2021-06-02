@@ -13,7 +13,7 @@
                                 class="fa fa-bars"></i></span>
                     </div> 
                    
-                    <h2>Communities</h2>
+                    <h2>Collections</h2>
                     <div class="row" style=" width:100%; text-align:right;margin-bottom:20px;">
                         <div class="col-12">
                             <div class="create-button anim-button btn-4" (click)="createNew()">
@@ -53,14 +53,14 @@
                         <div class="listing boxshadow5" *ngFor="let cItem of communitiesList; let i = index;">
                            
                             <div class="image image-animate">
-                                <a (click)="gotopage('community', {'id':cItem.id});">
+                                <a (click)="gotopage('collection', {'id':cItem.id});">
                                     <img style="max-height:95px;" *ngIf="cItem.image !== ''" src="{{cItem.image}}"
-                                        alt="{{cItem.community_name}} image">
-                                    <img *ngIf="cItem.image == ''"  src="assets/notavailable.png" alt="{{cItem.community_name}} image">
+                                        alt="{{cItem.collection_name}} image">
+                                    <img *ngIf="cItem.image == ''"  src="assets/notavailable.png" alt="{{cItem.collection_name}} image">
                                 </a>
                             </div>
                             <div class="detail" style='color:#555'>
-                                <h4><a (click)="gotopage('community', {'id':cItem.id});">{{cItem.community_name}}</a></h4>
+                                <h4><a (click)="gotopage('collection', {'id':cItem.id});">{{cItem.collection_name}}</a></h4>
                                 <p innerHTML="{{limitTo(cItem.description, 200)}}">
 
                                 </p>  
@@ -68,7 +68,7 @@
                                <div style="font-size: 14px;"><span *ngIf="cItem.userscount > 0"><i class="fa fa-user"></i> {{cItem.userscount}} Members, </span>
                                <span *ngIf="cItem.recipecount > 0"><i class="fa fa-cutlery"></i> {{cItem.recipecount}} Recipes</span>
                                 </div>
-                                 <a *ngIf="cItem.created_by == currentUser['id']" href="javascript:void(0)" (click)="editCommunity(cItem)" class="editicon"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                 <a *ngIf="cItem.created_by == currentUser['id']" href="javascript:void(0)" (click)="editcollection(cItem)" class="editicon"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                               </div>
                         </div>
 
@@ -128,7 +128,7 @@
     <form name="form"  #uf="ngForm" novalidate class="popup-panel" >
         <div class="modal-header" style="background:#FFF;">
             <h2 style="margin:15px; ">
-                <span>Add New Community</span>           
+                <span>Add New collection</span>           
 
             </h2>
             <button style="font-size: 30px;padding:5px;" type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeModal('createNew');">
@@ -141,18 +141,18 @@
 
                     <div class="row"   >
 
-                        <div class="col-12 community_panel">
+                        <div class="col-12 collection_panel">
                      
-                           <!--  <img *ngIf="community.image" class="community_img" src="{{community.image}}"  style="height:200px;width: 100%;" />
-                            <img *ngIf="!community.image"  class="community_img" src="assets/notavailable1.jpg"  style="height:200px;width: 100%;" /> -->
+                           <!--  <img *ngIf="collection.image" class="collection_img" src="{{collection.image}}"  style="height:200px;width: 100%;" />
+                            <img *ngIf="!collection.image"  class="collection_img" src="assets/notavailable1.jpg"  style="height:200px;width: 100%;" /> -->
                           
                             
-                           <div class="community_details">
+                           <div class="collection_details">
                            <!--  <input id="inputuploadrecipe"  type="file" name="inputuploadrecipe" (change)="onFileSelect($event)" />
                             <button  style="float:right; background:transparent; border:0px; outline:0;font-size:16px"  (click)="fileupload()" class="upload-comment">
                                 <i class="fa fa-picture-o" aria-hidden="true"></i></button> -->
-                            <input class="trans-input" type="text" name="title" id="title" placeholder="Type community name..." [(ngModel)]="community.community_name" style="padding-left:10px">
-                            <textarea class="short-text trans-input" name="description" placeholder="Type description" [(ngModel)]='community.description' id="description" cols="30" rows="10"></textarea>
+                            <input class="trans-input" type="text" name="title" id="title" placeholder="Type collection name..." [(ngModel)]="collection.collection_name" style="padding-left:10px">
+                            <textarea class="short-text trans-input" name="description" placeholder="Type description" [(ngModel)]='collection.description' id="description" cols="30" rows="10"></textarea>
                               <br>
 
                                 <label  class='comment-label'>  Upload Image</label>
@@ -161,12 +161,12 @@
                     <div>
                         <input id="inputuploadrecipe" hidden type="file" name="inputuploadrecipe" (change)="onFileSelect($event)" />
                       </div>
-                      <img *ngIf="community.image" src="{{community.image}}"  style="width: 80%" />
+                      <img *ngIf="collection.image" src="{{collection.image}}"  style="width: 80%" />
                
                            </div>
 </div></div>
  <div class="text-center">
-                            <button type="submit" [disabled] = "community.community_name == '' && community.image ==''? true:false" [ngClass]="community.community_name !== '' && community.image !==''?'submit-comment active':'submit-comment'" (click)="saveRecipebook()"  class="recipe-submit-btn">Save </button>
+                            <button type="submit" [disabled] = "collection.collection_name == '' && collection.image ==''? true:false" [ngClass]="collection.collection_name !== '' && collection.image !==''?'submit-comment active':'submit-comment'" (click)="saveRecipebook()"  class="recipe-submit-btn">Save </button>
                         </div>
 </form>
 </div>
