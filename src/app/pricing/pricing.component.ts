@@ -5,9 +5,6 @@ import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } 
 import { DBService } from '../dbservices/db.service';
 import { HelpService } from '../services/help.service';
 
-import { environment } from './../../environments/environment';
-declare var $: any;
-
 @Component({
 	selector: 'app-pricing',
 	templateUrl: './pricing.component.html',
@@ -20,7 +17,7 @@ export class PricingComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		this.packages.push({"name":"Standard","duration":"7 Days","payment":"FREE", "currency":"","selected":false, "options":["Try it for 7 Days", "At the end subscribe for", "either <b>Premium</b> or <b>Professional</b> Plan", "to Continue to avail the features."]});
+		this.packages.push({"name":"Standard","duration":"15 Days","payment":"FREE", "currency":"","selected":false, "options":["Try it for 7 Days", "At the end subscribe for", "either <b>Premium</b> or <b>Professional</b> Plan", "to Continue to avail the features."]});
 		this.packages.push({"name":"Premium","duration":"Monthly","payment":"9.95", "currency":"dollar","selected":false, "options":[
 			"1000 Recipes", 
 			"Suggested Meal Plans",

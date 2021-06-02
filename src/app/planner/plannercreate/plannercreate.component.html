@@ -1,5 +1,21 @@
 <div class="fixedtop recipes-home-body inner-page" style="padding-top:0px">
-    <div class="row  page-max-width" style="text-align:center; margin:0 auto;">
+    <div class="container" style="text-align:center; margin:0 auto;">
+        <div class="row">
+        <div class="col-12">
+            <div class="recipe-set">
+               <div style="float:right; background:#FFF; margin-bottom:10px;">
+
+            <a class="copy-button" (click)="downloadplan()" title="Download PDF"><i
+                    class="fa fa-file-pdf-o"></i> Export</a>
+            &nbsp; <a class="copy-button" (click)="getIngredientsList()"
+                title="Ingredients List"><i class="fa fa-download"></i> Grocery List </a>
+            &nbsp;
+        </div>                           
+          
+          <h2 style="text-align:left;">Create Plan</h2>
+          
+            </div>
+        </div>
         <div class="col-12">
             <div class="submit-recipe-form"
             style="text-align:left; padding-top:10px; padding-bottom:10px;  background-color: #f8f8f8;">
@@ -18,17 +34,10 @@
                 <div class="col-12 col-lg-3">
                     <div style='text-align:left;'>
                         <div style="display:block; margin:0 auto;text-align:left;width: 100%">
-                            <div style="display:block; margin-bottom:10px;">
-
-                                <a class="copy-button" (click)="downloadplan()" title="Download PDF"><i
-                                        class="fa fa-file-pdf-o"></i> Export</a>
-                                &nbsp; <a class="copy-button" (click)="getIngredientsList()"
-                                    title="Ingredients List"><i class="fa fa-download"></i> Grocery List </a>
-                                &nbsp;
-                            </div>
+                            
                             <label *ngIf="showNutrientsFlag" class="container" style=" text-align: left;
-                    display: block;
-                    width: 100%;
+                    display:inline-block;
+                    width: 160px;
                     font-family: 'Lato', sans-serif;
                     font-weight: 400;
                     font-size: 16px;">Show Nutrients
@@ -38,28 +47,19 @@
                             </label>
 
                             <div style="    display: inline-block;
-                    width: 100%;
+                    width: 140px;
                     text-align: left;" *ngIf="showhidenutrientsFlag">
                                 <label class="container" style=" text-align: left;
-                    display: inline-block;
-                    width: 140px;
-                    font-family: 'Lato', sans-serif;
-                    font-weight: 400;
-                    font-size: 16px;">Per Serving
-                                    <input (change)="toggleNutrients('perserving')"
-                                        [(ngModel)]='showNutrientsPServing' type="checkbox">
-                                    <span class="checkmark"></span>
-                                </label>
-                               <!--<label class="container" style=" text-align: left;
-                    display: inline-block;
-                    width: 120px;
-                    font-family: 'Lato', sans-serif;
-                    font-weight: 400;
-                    font-size: 16px;">Total
-                                    <input (change)="toggleNutrients('total')" [(ngModel)]='showNutrients'
-                                        type="checkbox">
-                                    <span class="checkmark"></span>
-                                </label>-->
+                                display: inline-block;
+                                width: 140px;
+                                font-family: 'Lato', sans-serif;
+                                font-weight: 400;
+                                font-size: 16px;">Per Serving
+                                                <input (change)="toggleNutrients('perserving')"
+                                                    [(ngModel)]='showNutrientsPServing' type="checkbox">
+                                                <span class="checkmark"></span>
+                                            </label>
+                              
                             </div>
                         </div>
 
@@ -73,7 +73,7 @@
         <div style="clear:both"></div>
         </div>
     </div>
-    <div class="row page-max-width" style="text-align:center; margin:0 auto;">
+    <div class="row" style="text-align:center; margin:0 auto;">
 
         <div class='leftblock'>
 
@@ -683,7 +683,7 @@
 
     </div>
 </div>
-
+</div>
 
 
 
