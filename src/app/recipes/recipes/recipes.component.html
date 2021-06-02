@@ -186,7 +186,7 @@
     
                 </div>
                 <div style='height:20px; width:100%'></div>
-                <div class="recipe-set">
+                <div class="recipe-set" *ngIf="!noResult">
 
                     <ul class="pagination hidden-xs" *ngIf="totalPage >= 10">
                         <li (click)="currentPage(0)" class="">
@@ -303,6 +303,9 @@
                         </ul>
 
                     </div>
+                </div>
+                <div class="recipe-set" *ngIf="noResult">
+                    <p> No Results</p>
                 </div>
             </div>
           <!--   <div class="col-md-4 col-lg-3">
