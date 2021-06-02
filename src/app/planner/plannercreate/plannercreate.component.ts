@@ -1316,7 +1316,7 @@ console.log(invData);
 		  } else {
 		//	mybutton.style.display = "none";
 		  }
-		  var checkVal  = 1200;
+		  var checkVal  = 900;
 
 		  var showhidenut = document.getElementById('showhidenut');
 	//	  console.log("showhidenut " );
@@ -1351,7 +1351,7 @@ console.log(invData);
 		  else
 		  {
 			btnsaveplan.setAttribute("class", "saveplan floatbtn")
-			btnsaveplan.setAttribute("class", "saveplan")
+		//	btnsaveplan.setAttribute("class", "saveplan")
 		  }
 		  }
 
@@ -1370,7 +1370,7 @@ console.log(invData);
 			  var leftP = (w - 1200)/2;
 			  btnsaveplan1.style.left = leftP + "px";
 			btnsaveplan1.setAttribute("class", "container-fluid side-recipes floatpanel")
-			btnsaveplan1.setAttribute("class", "container-fluid side-recipes")
+		//	btnsaveplan1.setAttribute("class", "container-fluid side-recipes")
 		  }
 		  else
 		  {
