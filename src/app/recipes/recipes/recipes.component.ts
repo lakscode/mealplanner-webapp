@@ -386,6 +386,7 @@ endIndex = startIndex+ endIndex;
 
   /******** recipes api serach */
   maxcalories: any = "";
+  loopCount: any = 0;
 	searchProps()
 	{
 
@@ -405,6 +406,7 @@ endIndex = startIndex+ endIndex;
 	   }
 	   else
 	   {
+	   this.loopCount = 0;
 		params["content"] = this.searchparam.q;
 		this.helpService.saveSearchHistory(this.searchparam.q, "text", "recipes", this.currentUser["id"]);
 	   }
@@ -578,7 +580,7 @@ endIndex = startIndex+ endIndex;
 		{
 			console.log("calling again searchprops");
 			this.splitcontent = true;
-			this.searchProps();
+			this.searchProps();			
 		}
 		else
 		{
@@ -596,7 +598,12 @@ endIndex = startIndex+ endIndex;
 		if( invData["body"]["length"] == 0)
 		{
 			this.splitcontent = true;
+			if(this.loopCount < 1){
+			this.loopCount++;
 			this.searchProps();
+
+			}
+			this.noResult =  true;
 		}
 		else
 		{
