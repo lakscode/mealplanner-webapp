@@ -62,6 +62,20 @@ getData(path){
 	map((res) => res)).pipe(share());
 
 }
+
+getRecipesbylabel(params){
+
+	var tempUrl = this.apiUrl + '/recipes/read_by_label.php'; 
+
+	var options = {
+		headers : new HttpHeaders({"Content-Type": "application/json"})
+		};
+
+	return this.httpService.post(tempUrl, JSON.stringify(params), options).pipe(
+	map((res) => res)).pipe(share());
+
+}
+
 	getDatabyQuery(path, params){
 
 		var tempUrl = this.apiUrl + '/' + path + '/read_by_query.php'; 
