@@ -532,7 +532,7 @@
                                                         <div [ngStyle]="{'background-color':getColorCode(paramN)}"
                                                             style="display:inline-block; width:10px; height:10px;  margin-right:3px; ">
                                                         </div>
-                                                        <a href="javascript:void(0)"
+                                                        <a style="font-size:12px" href="javascript:void(0)"
                                                             title="{{setFLU(paramN.name)}} {{paramN.value}} {{paramN.unit}}">{{formatVal(paramN.value,2)}}
                                                             {{paramN.unit}} </a>
 
@@ -554,7 +554,7 @@
                                                         <div [ngStyle]="{'background-color':getColorCode(paramN)}"
                                                             style="display:inline-block; width:10px; height:10px;  margin-right:3px; ">
                                                         </div>
-                                                        <a href="javascript:void(0)"
+                                                        <a style="font-size:12px"  href="javascript:void(0)"
                                                             title="Per Serving - {{setFLU(paramN.name)}} {{paramN.value}} {{paramN.unit}}">{{formatValPServing(paramN.value,meal.recipe.yield)}}
                                                             {{paramN.unit}} </a>
 
@@ -592,7 +592,7 @@
                                                 <div [ngStyle]="{'background-color':getColorCode(totalM)}"
                                                     style="display:inline-block; width:10px; height:10px;  margin-right:3px; ">
                                                 </div>
-                                                <a href="javascript:void(0)"
+                                                <a style="font-size:12px"  href="javascript:void(0)"
                                                     title="Total {{setFLU(totalM.name)}} {{formatValue(totalM.value)}} {{totalM.unit}}">{{formatValue(totalM.value)}}
                                                     {{totalM.unit}} </a>
 
@@ -612,7 +612,7 @@
                                                 <div [ngStyle]="{'background-color':getColorCode(totalM1)}"
                                                     style="display:inline-block; width:10px; height:10px;  margin-right:3px; ">
                                                 </div>
-                                                <a href="javascript:void(0)"
+                                                <a style="font-size:12px"  href="javascript:void(0)"
                                                     title="Total {{setFLU(totalM1.name)}} per Serving : {{formatValue(totalM1.value)}} {{totalM1.unit}}">{{formatValue(totalM1.value)}}
                                                     {{totalM1.unit}} </a>
 
