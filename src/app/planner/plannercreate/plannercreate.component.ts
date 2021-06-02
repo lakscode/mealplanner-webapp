@@ -1367,7 +1367,7 @@ console.log(invData);
 		  if(document.documentElement.scrollTop > 100 && document.documentElement.scrollTop < (checkVal))
 		  {
 			
-			  var leftP = (w - 1200)/2;
+			  var leftP = (w - 1300)/2;
 			  btnsaveplan1.style.left = leftP + "px";
 			btnsaveplan1.setAttribute("class", "container-fluid side-recipes floatpanel")
 		//	btnsaveplan1.setAttribute("class", "container-fluid side-recipes")
