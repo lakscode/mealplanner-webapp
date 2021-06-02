@@ -84,7 +84,7 @@
                </div>
  
                <div class="row" style="padding-left:0px; padding-right:0px; margin-bottom:15px !important" >
-                  <!--<div class="col-12" *ngIf="community.community_name">
+                  <!--<div class="col-12" *ngIf="collection.collection_name">
                       <label for="recipes">Recipes</label>
                   </div>-->
                   <ng-container  *ngFor="let cItem of communitiesList; let i = index;">
@@ -106,7 +106,7 @@
 
                           <div class="col-12" style="padding-left:0px; padding-right:0px">
                               
-                          <h1 class="recipe-label" style="font-size:20px; line-height: 32px;">{{cItem.community_name}}</h1>
+                          <h1 class="recipe-label" style="font-size:20px; line-height: 32px;">{{cItem.collection_name}}</h1>
                           <!--<p *ngIf="cItem.recipecount && cItem.recipecount >0" style="text-align:left;"><i class="fa fa-cutlery"></i> {{cItem.recipecount}} recipes</p>
                           <br>
                           <p *ngIf="cItem.userscount && cItem.userscount > 0" style="text-align:left;"><i class="fa fa-user"></i> {{cItem.userscount}} members</p>-->

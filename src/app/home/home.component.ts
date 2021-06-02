@@ -89,9 +89,9 @@ images: any;
 	   // var params = {"limit": 100};
 	   // params["createdby"] = this.currentUser["id"];
 		console.log(params);
-		var params = {"query": "SELECT c.*, COUNT(rm.id) AS recipecount, u.email, u.firstname, u.lastname FROM community AS c LEFT JOIN recipe_mapping AS rm ON c.id = rm.community_id LEFT JOIN users AS u ON c.created_by = u.id GROUP BY c.id limit 0, 4"};
+		var params = {"query": "SELECT c.*, COUNT(rm.id) AS recipecount, u.email, u.firstname, u.lastname FROM collection AS c LEFT JOIN recipe_mapping AS rm ON c.id = rm.collection_id LEFT JOIN users AS u ON c.created_by = u.id GROUP BY c.id limit 0, 4"};
   
-		var res =   this.dbService.getDatabyTablebyQuery("community", params).subscribe(invData => setTimeout(() => {
+		var res =   this.dbService.getDatabyTablebyQuery("collection", params).subscribe(invData => setTimeout(() => {
 	
 		  console.log(invData);
 		  if(invData !== null)
@@ -116,16 +116,16 @@ images: any;
 	{
 		/*
 	  SELECT c.id, COUNT(cj.id) AS usercount
-	  FROM community AS c
-	  LEFT JOIN community_join AS cj ON c.id = cj.community_id
-	  GROUP BY c.id, cj.community_id
+	  FROM collection AS c
+	  LEFT JOIN collection_join AS cj ON c.id = cj.collection_id
+	  GROUP BY c.id, cj.collection_id
   
 	  */
   
 	  console.log("in loadusercount");
-	  var params = {"query": "SELECT c.id, COUNT(cj.id) AS usercount 	FROM community AS c LEFT JOIN  community_join AS cj ON c.id = cj.community_id GROUP BY c.id, cj.community_id LIMIT 0, 4"};
+	  var params = {"query": "SELECT c.id, COUNT(cj.id) AS usercount 	FROM collection AS c LEFT JOIN  collection_join AS cj ON c.id = cj.collection_id GROUP BY c.id, cj.collection_id LIMIT 0, 4"};
   
-	  var res =   this.dbService.getDatabyTablebyQuery("community", params).subscribe(invData => setTimeout(() => {
+	  var res =   this.dbService.getDatabyTablebyQuery("collection", params).subscribe(invData => setTimeout(() => {
   
 	   
 		if(invData !== null)
@@ -155,17 +155,17 @@ images: any;
 	{
 		/*
 	  SELECT c.id, COUNT(cj.id) AS usercount
-	  FROM community AS c
-	  LEFT JOIN community_join AS cj ON c.id = cj.community_id
-	  GROUP BY c.id, cj.community_id
+	  FROM collection AS c
+	  LEFT JOIN collection_join AS cj ON c.id = cj.collection_id
+	  GROUP BY c.id, cj.collection_id
   
 	  */
 		if( typeof( this.currentUser) !== "undefined" && this.currentUser !== null && typeof( this.currentUser["id"]) !== "undefined" && this.currentUser["id"] !== null )
 		{
 	  console.log("in loaduserJoinedStatus");
-	  var params = {"query": "SELECT id, community_id from community_join where userid = " + this.currentUser["id"] };
+	  var params = {"query": "SELECT id, collection_id from collection_join where userid = " + this.currentUser["id"] };
   
-	  var res =   this.dbService.getDatabyTablebyQuery("community", params).subscribe(invData => setTimeout(() => {
+	  var res =   this.dbService.getDatabyTablebyQuery("collection", params).subscribe(invData => setTimeout(() => {
   
 	   
 		if(invData !== null)
@@ -174,7 +174,7 @@ images: any;
 		  for(let o=0; o < obj.length; o++)
 		  {
 		  
-			  var fIndex = this.communitiesList.findIndex(x=>(x.id === obj[o]["community_id"]));
+			  var fIndex = this.communitiesList.findIndex(x=>(x.id === obj[o]["collection_id"]));
 			  
 			  if(fIndex > -1)
 			  {
@@ -189,7 +189,7 @@ images: any;
 	}
 	}
 	gotoRecipeDetails(page, id){
-		if(page == "community")
+		if(page == "collection")
 		{
 		//	this.router.navigate([page, {id:id}]);
 		}
