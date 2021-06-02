@@ -742,7 +742,7 @@ ul {
 .hot-recipes-var2 {
   //padding-top: 40px;
   padding-bottom: 50px;
-  background: #f8f6f5;
+ // background: #f8f6f5;
 }
 .hot-recipes-var2 h1,
 .hot-recipes-var2 h2,
@@ -1176,7 +1176,7 @@ ul {
 
 
 .wrapper-main-contents {
-  background: #f8f6f5;
+  //background: #f8f6f5;
   padding-top: 60px;
   padding-bottom: 120px;
 }
@@ -1594,7 +1594,7 @@ ul {
 
 
 .recipes-home-body {
-  background: #f8f6f5;
+ // background: #f8f6f5;
   padding-top: 85px;
   padding-bottom: 85px;
 }
