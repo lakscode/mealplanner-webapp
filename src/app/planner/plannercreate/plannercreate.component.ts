@@ -1316,7 +1316,7 @@ console.log(invData);
 		  } else {
 		//	mybutton.style.display = "none";
 		  }
-		  var checkVal  = 900;
+		  var checkVal  = 950;
 
 		  var showhidenut = document.getElementById('showhidenut');
 	//	  console.log("showhidenut " );
@@ -1356,8 +1356,8 @@ console.log(invData);
 		  }
 
 		  var recipelistpnael = document.getElementById('recipelistpnael');
-		  console.log(recipelistpnael.offsetTop);
-		 console.log(recipelistpnael.offsetLeft);
+		//  console.log(recipelistpnael.offsetTop);
+		// console.log(recipelistpnael.offsetLeft);
 		  var w = window.innerWidth;
 		  console.log("w " + w);
 		  var btnsaveplan1= document.getElementById('recipes-container');
@@ -1367,8 +1367,12 @@ console.log(invData);
 		  if(document.documentElement.scrollTop > 100 && document.documentElement.scrollTop < (checkVal))
 		  {
 			
-			  var leftP = (w - 1300)/2;
+			  var leftP = (w - 1250)/2;
+			  if(leftP > 0)
 			  btnsaveplan1.style.left = leftP + "px";
+			  else 
+			  btnsaveplan1.style.left = "10px";
+
 			btnsaveplan1.setAttribute("class", "container-fluid side-recipes floatpanel")
 		//	btnsaveplan1.setAttribute("class", "container-fluid side-recipes")
 		  }
