@@ -1,12 +1,15 @@
 <div class="fixedtop recipes-home-body inner-page">
     
-    <div class="container" style="padding-left:0; padding-right:0;">
+    <div class="container" style="padding-left:0; padding-right:0;padding-top:20px">
         <div class="row">
             <div class="col-md-12 col-lg-12 col-xs-12">
+                <div class="recipe-set">
+                    <h2>Recipes</h2>
+                </div>
                 <div class="wrapper-search">
                    
                 <div class="row" >
-                    <div class="col-10 "  style="background:#FFF;  margin:0;  padding-bottom:20px;padding-left:0px; padding-right:0px;padding-top:15px">
+                    <div class="col-12 "  style="background:#FFF;  margin:0;  padding-bottom:20px;padding-left:0px; padding-right:0px;">
                         <div style="padding-left: 10px; padding-right: 10px;" class="col-12">
                             <label class="searchicon">
                                 <i class="fa fa-search" aria-hidden="true"></i>
@@ -184,15 +187,6 @@
                 </div>
                 <div style='height:20px; width:100%'></div>
                 <div class="recipe-set">
-                    <div class="listing-buttons">
-                        <span (click)="setListorGrid('grid')"
-                            [ngClass]="listorgrid.menu == 'grid'?'grid current':'grid' "><i
-                                class="fa fa-th-large"></i></span>
-                        <span (click)="setListorGrid('grid')"
-                            [ngClass]="listorgrid.menu == 'list'?'list current':'list'"><i
-                                class="fa fa-bars"></i></span>
-                    </div>
-                    <h2>Recipes</h2>
 
                     <ul class="pagination hidden-xs" *ngIf="totalPage >= 10">
                         <li (click)="currentPage(0)" class="">
@@ -223,10 +217,10 @@
                     <div class="recipe-listing {{listorgrid.panel}}">
 
 
-                        <div class="listing" *ngFor="let recipe1 of displayList; let i = index;">
+                        <div class="listing"  *ngFor="let recipe1 of displayList; let i = index;">
                             
 
-                            <div class="image image-animate">
+                            <div class="image image-animate detail" style="background:#f8f8f8;">
                                 
                                 <a (click)="gotoRecipeDetails(recipe1.id)">
                                     <img style="max-width:200px; max-height:200px" src="{{formatImage(recipe1.image, 'm')}}"
