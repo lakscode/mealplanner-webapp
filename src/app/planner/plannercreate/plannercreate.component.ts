@@ -1367,7 +1367,7 @@ console.log(invData);
 		  if(document.documentElement.scrollTop > 100 && document.documentElement.scrollTop < (checkVal))
 		  {
 			
-			  var leftP = (w - 1250)/2;
+			  var leftP = (w - 1275)/2;
 			  if(leftP > 0)
 			  btnsaveplan1.style.left = leftP + "px";
 			  else 

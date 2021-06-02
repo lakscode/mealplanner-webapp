@@ -63,9 +63,9 @@ getData(path){
 
 }
 
-getRecipesbylabel(params){
+getRecipesbycontent(params){
 
-	var tempUrl = this.apiUrl + '/recipes/read_by_label.php'; 
+	var tempUrl = this.apiUrl + '/recipes/read_by_content.php'; 
 
 	var options = {
 		headers : new HttpHeaders({"Content-Type": "application/json"})
