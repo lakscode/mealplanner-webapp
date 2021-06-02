@@ -132,7 +132,7 @@ this.searchFilterLabels = [];
 
 		this.loadNutrientsMaxMin();
 	
-	//	window.addEventListener("scroll", this.scrollFunc);
+		window.addEventListener("scroll", this.scrollFunc);
 		this.getNutrientsMaxMin(); 
 		
 		this.searchparam['q'] = "";
@@ -1308,7 +1308,9 @@ console.log(invData);
 
 
 	 scrollFunc(){
-
+		console.log("in scrollfunct");
+		console.log(document.documentElement.scrollTop);
+		console.log(document.body.scrollTop);
 		if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
 		//	mybutton.style.display = "block";
 		  } else {
@@ -1328,7 +1330,7 @@ console.log(invData);
 		  }
 
 
-		//  console.log("checkVal " + checkVal)
+		  console.log("checkVal " + checkVal)
 		  var btncalculateCaloryFlag = document.getElementById('calculateCaloryFlag');
 		  if(btncalculateCaloryFlag !== null)
 		  {
@@ -1342,31 +1344,32 @@ console.log(invData);
 		  var btnsaveplan= document.getElementById('btnsaveplan');
 		  if(btnsaveplan !== null)
 		  { 
-		  if(document.documentElement.scrollTop > checkVal)
+		  if(document.documentElement.scrollTop > checkVal )
 		  {
 			btnsaveplan.setAttribute("class", "saveplan ")
 		  }
 		  else
 		  {
-			//btnsaveplan.setAttribute("class", "saveplan floatbtn")
+			btnsaveplan.setAttribute("class", "saveplan floatbtn")
 			btnsaveplan.setAttribute("class", "saveplan")
 		  }
 		  }
 
 		  var recipelistpnael = document.getElementById('recipelistpnael');
-		//  console.log(recipelistpnael.offsetTop);
-		//  console.log(recipelistpnael.offsetLeft);
+		  console.log(recipelistpnael.offsetTop);
+		 console.log(recipelistpnael.offsetLeft);
 		  var w = window.innerWidth;
-		//  console.log("w " + w);
+		  console.log("w " + w);
 		  var btnsaveplan1= document.getElementById('recipes-container');
+		  console.log(btnsaveplan1);
 		  if(btnsaveplan1 !== null)
 		  { 
 		  if(document.documentElement.scrollTop > 100 && document.documentElement.scrollTop < (checkVal))
 		  {
 			
 			  var leftP = (w - 1200)/2;
-			 // btnsaveplan1.style.left = leftP + "px";
-			//btnsaveplan1.setAttribute("class", "container-fluid side-recipes floatpanel")
+			  btnsaveplan1.style.left = leftP + "px";
+			btnsaveplan1.setAttribute("class", "container-fluid side-recipes floatpanel")
 			btnsaveplan1.setAttribute("class", "container-fluid side-recipes")
 		  }
 		  else

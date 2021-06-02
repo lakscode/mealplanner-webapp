@@ -53,7 +53,7 @@
                         <div class="listing" *ngFor="let recipe1 of displayList; let i = index;">
                             <div class="image image-animate">
                                 <a (click)="gotoRecipeDetails(recipe1.id)">
-                                    <img style="max-height: 148px;" *ngIf="recipe1.image !== ''"  src="{{formatImage(recipe1.image, 'm')}}"
+                                    <img style="max-height: 148px;" *ngIf="recipe1.image !== ''"  src="{{recipe1.image}}"
                                         alt="{{recipe1.label}}">
                                     <img *ngIf="recipe1.image == ''"  src="assets/notavailable.png"
                                         alt="{{recipe1.label}}">
