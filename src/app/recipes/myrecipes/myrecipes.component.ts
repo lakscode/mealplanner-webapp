@@ -305,6 +305,7 @@ endIndex = startIndex+ endIndex;
 
 
 	params['created_by'] =  this.currentUser["id"] ;
+	console.log(params);
 	var res =   this.dbService.getDataByTable("recipes", params).subscribe(invData => setTimeout(() => {
 		console.log(invData);
 		this.formatResult(invData);
@@ -559,10 +560,13 @@ formatIngredients()
 	//this.new_recipe["ingredientLines"] = temp;
 	this.new_recipe["totalNutrients"] = JSON.stringify(this.cons_Nutrients);
 	this.new_recipe["calories"] = this.total_calories;
+	console.log(this.new_recipe);
 }
 
 formatLabels(item)
 {
+//	console.log("Formatlabels");
+//	console.log(item);
 	if(typeof(item) !== "undefined" && item !== null)
 	{
 	
@@ -628,9 +632,10 @@ formatLabels(item)
 	}
 //	console.log(this.labels);
 	}
-
-	console.log(this.new_recipe);
+//	console.log(this.labels);
+//	console.log(this.new_recipe);
 }
+
 consolidateNutrients(item)
 {
 	if(typeof(item["totalWeight"]) !== "undefined" && item['totalWeight'] !== null)
@@ -661,7 +666,7 @@ consolidateNutrients(item)
 			}
 		
 		}
-		console.log(this.cons_Nutrients); 
+	//	console.log(this.cons_Nutrients); 
 	}
 }
 

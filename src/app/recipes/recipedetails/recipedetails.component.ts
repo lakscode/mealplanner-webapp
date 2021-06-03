@@ -98,6 +98,7 @@ perServingFlag: boolean = true;
 		else if( this.currentUser["username"] !== "")
 		this.currentUser["displayname"]  = this.currentUser["username"];
 		console.log(this.currentUser);
+
 		this.comment['userid'] = this.currentUser["id"];
 
 
@@ -168,7 +169,7 @@ loadRecipe(id)
 			//  console.log(this.searchRes["digest"]);
 			  var tempDigest = this.searchRes["digest"];
 			  
-			  if(typeof(this.searchRes["digest"]) !== "undefined")
+			  if(typeof(this.searchRes["digest"]) !== "undefined" && this.searchRes["digest"] !== "")
 			  {
 				if (typeof(this.searchRes["digest"]) === 'object')
 				{
@@ -201,7 +202,15 @@ loadRecipe(id)
 			  {
 				this.searchRes["ingredients"] = this.searchRes["ingredients"].split("~");
 			  }
-			
+			  if(this.searchRes["ingredients"] == "" && this.searchRes["ingredientLines"] !== "")
+			  {
+				  var temp = this.searchRes["ingredientLines"].split("~");
+				  for(let t=0; t < temp["length"]; t++)
+				  {
+					  if(typeof(temp[t]) !== "undefined" && temp[t] !== null && temp[t] !== "")
+					this.searchRes["ingredients"].push({"text":temp[t]})
+				  }
+			  }
 			  this.searchRes["instructions"] = this.searchRes["s_instructions"];
 			 // console.log(this.searchRes["s_instructions"]);
 			  if(typeof(this.searchRes["s_instructions"]) !== "undefined" && this.searchRes["s_instructions"] !== "")
@@ -738,7 +747,7 @@ formatText(str)
 {
 	var retVal = str;
 
-	if(str !== "")
+	if(typeof(str) !== "undefined" && str !== "")
 	{
 		retVal = str.replace("u00bd", "\u00bd");
 		retVal = retVal.replace("u00bc", "\u00bc");
