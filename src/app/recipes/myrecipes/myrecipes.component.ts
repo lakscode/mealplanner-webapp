@@ -517,12 +517,16 @@ getNutrients(item)
 	var res =   this.dbService.getLocalData(apiURL).subscribe(recipeData => setTimeout(() => {
 		console.log(recipeData);
 		item["nutrients"] = recipeData;
-		this.formatIngredients();
 		
-		if(this.instructionCount < this.ingredients.length)
+		
+		if(this.instructionCount < this.ingredients.length-1)
 		{
 			this.instructionCount++;
 			this.getNutrients(this.ingredients[this.instructionCount]);
+		}
+		else
+		{
+			this.formatIngredients();
 		}
 	}));
 
@@ -622,7 +626,7 @@ formatLabels(item)
 		}
 		this.new_recipe["healthLabels"] = this.labels["healthLabels"];
 	}
-	console.log(this.labels);
+//	console.log(this.labels);
 	}
 
 	console.log(this.new_recipe);
