@@ -592,8 +592,9 @@ endIndex = startIndex+ endIndex;
 	  }
   else
   {
+	
+	  params["status"] = "1";
 	  console.log(params);
-	  params['status'] = "1";
 	var res =   this.dbService.getDatabyFields("recipes", params).subscribe(invData => setTimeout(() => {
 		console.log(invData);
 		if( invData["body"]["length"] == 0)

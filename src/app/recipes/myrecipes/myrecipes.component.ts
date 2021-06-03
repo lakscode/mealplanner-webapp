@@ -446,39 +446,221 @@ endIndex = startIndex+ endIndex;
 	*/
   }
 
+  instructionCount:any = 0;
+
   importrecipe(url)
   {
 	var params1 = {};
+	this.instructionCount= 0;
 	params1["url"]=url;
 	var apiurl = environment.scrapeurl;
 	console.log("apiurl " + apiurl);
-  var res =   this.dbService.postLocalData(apiurl, params1).subscribe(resData => setTimeout(() => {
-	  console.log(resData);
-	  if(resData && resData["result"] && resData["result"] == "Error")
-	  {
-		  alert("unable to import this url at present. Please try existing recipes ")
-	  }
-	  else{
-		this.createrecipe(resData, url)
-	  }
-	 
-  }));
+	var res =   this.dbService.postLocalData(apiurl, params1).subscribe(resData => setTimeout(() => {
+		console.log(resData);
+		if(resData && resData["result"] && resData["result"] == "Error")
+		{
+			alert("unable to import this url at present. Please try existing recipes ")
+		}
+		else{
+			this.createrecipe(resData, url)
+		}
+		
+	}));
   }
+
+  new_recipe: any = {};
+
+  ingredients :Array<any> = [];
+
   createrecipe(data, url)
   {
-	var new_recipe = {};
-	new_recipe["label"] = data["name"];
-	new_recipe["image"] = data["image"];
-	new_recipe["url"] = url;
-	new_recipe["ingredientLines"] = data["ingredients"].join("~");
-	new_recipe["s_instructions"] = data["instructions"].join("~");
-	new_recipe["created_by"] = this.currentUser["id"];
-	new_recipe["status"] = "0";
+	this.new_recipe = {};
+	this.new_recipe["label"] = data["name"];
+	this.new_recipe["image"] = data["image"];
+	this.new_recipe["url"] = url;
+	this.new_recipe["ingredientLines"] = data["ingredients"].join("~");
+	
+	this.new_recipe["s_instructions"] = data["instructions"].join("~");
+	this.new_recipe["created_by"] = this.currentUser["id"];
+	this.new_recipe["status"] = "0";
+
 	if(data["time"] && data["time"]["total"])
 	{
-		new_recipe["totalTime"] = data["time"]["total"];
+		this.new_recipe["totalTime"] = data["time"]["total"];
 	}
+
+	for(let i=0; i < data["ingredients"].length; i++)
+	{
+		this.ingredients.push({'text':data["ingredients"][i]});
+	}
+	this.instructionCount = 0;
+	this.getNutrients(this.ingredients[0])
   }
+
+
+  /************ for nutrients */
+ 
+getNutrients(item)
+{
+
+
+	console.log(item);
+	var api_id = environment.edamameId;
+	var api_key = environment.edamameKey;
+
+	console.log(api_id);
+	console.log(api_key);
+
+	var apiURL = constants.edamam_nutrient_api   +"?app_id="+ api_id + "&app_key=" + api_key + "&ingr=" + item["text"];
+
+	console.log(apiURL);
+	var res =   this.dbService.getLocalData(apiURL).subscribe(recipeData => setTimeout(() => {
+		console.log(recipeData);
+		item["nutrients"] = recipeData;
+		this.formatIngredients();
+		
+		if(this.instructionCount < this.ingredients.length)
+		{
+			this.instructionCount++;
+			this.getNutrients(this.ingredients[this.instructionCount]);
+		}
+	}));
+
+}
+cons_Nutrients: any= {};
+total_calories: any = 0;
+total_weight: any = 0;
+labels: any = {};
+formatIngredients()
+{
+	console.log(this.ingredients);
+	var temp = "";
+	var totalNutrients = {};
+	this.cons_Nutrients= {};
+	
+	if(typeof(this.new_recipe["totalNutrients"]) !== "undefined" && this.new_recipe["totalNutrients"]!== "")
+	{
+		this.cons_Nutrients = JSON.parse(this.new_recipe["totalNutrients"]);
+	}
+	for(let i=0; i < this.ingredients.length; i++)
+	{
+		temp += this.ingredients[i]["text"] + "~";
+		if(typeof(this.ingredients[i]["nutrients"]) !== "undefined")
+		this.consolidateNutrients(this.ingredients[i]["nutrients"]);
+		this.formatLabels(this.ingredients[i]["nutrients"]);
+	}
+	if(temp !== '')
+	temp=  temp.slice(0, -1);
+
+	//this.new_recipe["ingredientLines"] = temp;
+	this.new_recipe["totalNutrients"] = JSON.stringify(this.cons_Nutrients);
+	this.new_recipe["calories"] = this.total_calories;
+}
+
+formatLabels(item)
+{
+	if(typeof(item) !== "undefined" && item !== null)
+	{
+	
+	if(typeof(item["cautions"]) !== "undefined" && item['cautions'] !== null && item['cautions'] !== "")
+	{
+		var cautions  = item["cautions"]
+		if(typeof(this.labels["cautions"]) == "undefined")
+		{
+			this.labels["cautions"] = cautions.join("~");
+		}
+		else
+		{
+			for(let c=0; c < cautions.length; c++)
+			{
+				if(this.labels["cautions"].indexOf(cautions[c]) == -1)
+				{
+					cautions[c] = cautions[c].replace("_", "-");
+					this.labels["cautions"] += "~" + cautions[c];
+				}
+			}
+		}
+		this.new_recipe["cautions"] = this.labels["cautions"];
+	}
+	if(typeof(item["dietLabels"]) !== "undefined" && item['dietLabels'] !== null && item['dietLabels'] !==  "")
+	{
+		var tDiet  = item["dietLabels"];
+		if(typeof(this.labels["dietLabels"]) == "undefined")
+		{
+			this.labels["dietLabels"] = tDiet.join("~");
+		}
+		else
+		{
+			for(let c=0; c < tDiet.length; c++)
+			{
+				if(this.labels["dietLabels"].indexOf(tDiet[c]) == -1)
+				{
+					tDiet[c] = tDiet[c].replaceAll("_", "-");
+					this.labels["dietLabels"] += "~" + tDiet[c];
+				}
+			}
+		}
+		this.new_recipe["dietLabels"] = this.labels["dietLabels"];
+	}
+	if(typeof(item["healthLabels"]) !== "undefined" && item['healthLabels'] !== null && item['healthLabels'] !== "")
+	{
+		var tlabel2  = item["healthLabels"];
+		if(typeof(this.labels["healthLabels"]) == "undefined")
+		{
+			this.labels["healthLabels"] = tlabel2.join("~");
+		}
+		else
+		{
+			for(let c=0; c < tlabel2.length; c++)
+			{
+				if(this.labels["healthLabels"].indexOf(tlabel2[c]) == -1)
+				{
+					tlabel2[c] = tlabel2[c].replaceAll("_", "-");
+					this.labels["healthLabels"] += "~" + tlabel2[c];
+				}
+			}
+		}
+		this.new_recipe["healthLabels"] = this.labels["healthLabels"];
+	}
+	console.log(this.labels);
+	}
+
+	console.log(this.new_recipe);
+}
+consolidateNutrients(item)
+{
+	if(typeof(item["totalWeight"]) !== "undefined" && item['totalWeight'] !== null)
+	{
+	this.total_weight  += item["totalWeight"];
+	}
+
+	if(typeof(item["calories"]) !== "undefined" && item['calories'] !== null)
+	{
+	this.total_calories  += item["calories"];
+	}
+	if(typeof(item["totalNutrients"]) !== "undefined" && item['totalNutrients'] !== null)
+	{
+	var obj = item["totalNutrients"];
+
+	if(item)
+		{
+			for (let x in obj) {
+			
+				if(typeof(this.cons_Nutrients[x]) == "undefined")
+				{
+					this.cons_Nutrients[x] = obj[x];
+				}
+				else
+				{
+					this.cons_Nutrients[x]['quantity'] = parseFloat(this.cons_Nutrients[x]['quantity']) + obj[x]["quantity"];
+				}
+			}
+		
+		}
+		console.log(this.cons_Nutrients); 
+	}
+}
+
 }
 
 	
