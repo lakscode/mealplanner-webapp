@@ -530,7 +530,7 @@ endIndex = startIndex+ endIndex;
 	  var params1 = {};
 
 	  var query = "select id, label, image, cuisineType, healthLabels, dietLabels, calories, yield from recipes ";
-	  var where = " where totalNutrients != '' AND digest != ''  AND s_instructions != '' " ;
+	  var where = " where status = 1 AND totalNutrients != '' AND digest != ''  AND s_instructions != '' " ;
 	  if(this.maxcalories > 0)
 	  where +=  " AND calories >= " + this.maxcalories;
 
@@ -591,6 +591,7 @@ endIndex = startIndex+ endIndex;
   else
   {
 	  console.log(params);
+	  params['status'] = "1";
 	var res =   this.dbService.getDatabyFields("recipes", params).subscribe(invData => setTimeout(() => {
 		console.log(invData);
 		if( invData["body"]["length"] == 0)
