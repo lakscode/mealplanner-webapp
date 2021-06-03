@@ -10,6 +10,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import * as $ from 'jquery';
 import { constants } from '../../jsonfiles/constants';
+import { env } from 'process';
 //declare var $: any;
 
 @Component({
@@ -304,7 +305,7 @@ endIndex = startIndex+ endIndex;
 
 
 	params['created_by'] =  this.currentUser["id"] ;
-	var res =   this.dbService.getDataByTable("myrecipes", params).subscribe(invData => setTimeout(() => {
+	var res =   this.dbService.getDataByTable("recipes", params).subscribe(invData => setTimeout(() => {
 		console.log(invData);
 		this.formatResult(invData);
 	  }));
@@ -425,6 +426,58 @@ endIndex = startIndex+ endIndex;
 	  retVal = Math.ceil(parseFloat(str));
 	}
 	return retVal;
+  }
+  checkrecipeexists()
+  {
+	  var params1 = {};
+	  params1["url"]="http://www.myrecipes.com/recipe/black-cardamom-beef-sliders";
+	  this.importrecipe(params1["url"])
+	/*
+	var res =   this.dbService.getDatabyQuery("recipes", params1).subscribe(resData => setTimeout(() => {
+		if(resData !== null && resData['body']['length'] > 0)
+		{
+			alert("Recipe already in our database");
+		}
+		else
+		{
+
+		}
+	}));
+	*/
+  }
+
+  importrecipe(url)
+  {
+	var params1 = {};
+	params1["url"]=url;
+	var apiurl = environment.scrapeurl;
+	console.log("apiurl " + apiurl);
+  var res =   this.dbService.postLocalData(apiurl, params1).subscribe(resData => setTimeout(() => {
+	  console.log(resData);
+	  if(resData && resData["result"] && resData["result"] == "Error")
+	  {
+		  alert("unable to import this url at present. Please try existing recipes ")
+	  }
+	  else{
+		this.createrecipe(resData, url)
+	  }
+	 
+  }));
+  }
+  createrecipe(data, url)
+  {
+	var new_recipe = {};
+	new_recipe["label"] = data["name"];
+	new_recipe["image"] = data["image"];
+	new_recipe["url"] = url;
+	new_recipe["ingredientLines"] = data["ingredients"].join("~");
+	new_recipe["s_instructions"] = data["instructions"].join("~");
+	new_recipe["created_by"] = this.currentUser["id"];
+	new_recipe["status"] = "0";
+	if(data["time"] && data["time"]["total"])
+	{
+		new_recipe["totalTime"] = data["time"]["total"];
+	}
   }
 }
 

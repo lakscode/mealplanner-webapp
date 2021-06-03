@@ -117,7 +117,7 @@ loadRecipe(id)
  
  if(this.loading)
   {
-  var res =   this.dbService.getDataByTable("myrecipes", params).subscribe(recipeData => setTimeout(() => {
+  var res =   this.dbService.getDataByTable("recipes", params).subscribe(recipeData => setTimeout(() => {
 
 	console.log(recipeData);
 	this.searchRes["ingredients"] =[];
@@ -630,15 +630,16 @@ saveRecipe()
 	{
 		params["totalNutrients"] =this.searchRes["totalNutrients"];
 	}
-	
+	params["source"] =  "fitaholic";
+	params["created_by"] =  this.currentUser["id"];
 		if(typeof(this.searchRes.id) !== "undefined"  && this.searchRes.id !== "")
 		{
 			console.log("updating");
 			params["id"] = this.searchRes.id;
-			params["uri"] = environment.appUrl + "/recipedetails/my" + this.searchRes.id;
-			params["created_by"] =  this.currentUser["id"];
+			params["uri"] = environment.appUrl + "/recipedetails/" + this.searchRes.id;
+		
 			console.log(params);
-			var res =   this.dbService.updateDataByTable("myrecipes", params).subscribe(recipeData => setTimeout(() => {
+			var res =   this.dbService.updateDataByTable("recipes", params).subscribe(recipeData => setTimeout(() => {
 				console.log(recipeData);	
 				this.loadRecipe(this.searchRes.id);
 				
@@ -646,11 +647,10 @@ saveRecipe()
 		}
 		else
 		{
-			params["created_by"] =  this.currentUser["id"];
-			params["uri"] = environment.appUrl + "/recipedetails/my" + Math.random();
+			params["uri"] = environment.appUrl + "/recipedetails/" + Math.random();
 			console.log("adding");
 			console.log(params);
-			var res =   this.dbService.postDataByTable("myrecipes", params).subscribe(recipeData => setTimeout(() => {
+			var res =   this.dbService.postDataByTable("recipes", params).subscribe(recipeData => setTimeout(() => {
 				console.log(recipeData);
 		
 				if(recipeData['inserted_id'] !== "undefined" && recipeData['inserted_id'] !== "")

@@ -24,7 +24,19 @@ localFile: any;
 	return this.httpService.get(tempUrl).pipe(share());
 
 }
- 
+postLocalData(path, params){
+   
+	var tempUrl = path; 
+
+
+	var options = {
+		headers : new HttpHeaders({"Content-Type": "application/json"})
+		};
+
+	return this.httpService.post(tempUrl, JSON.stringify(params), options).pipe(
+	map((res) => res)).pipe(share());
+
+}
 getData(path){
 
 	var options = {
