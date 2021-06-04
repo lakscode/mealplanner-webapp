@@ -3,12 +3,13 @@
 .optionslist
 {
     list-style-type: none;
-   background:#f1f2f3;
+   //background:#f1f2f3;
     padding:10px;
+    text-align:center;
     li
     {
         display:inline-block;
-        padding:10px 20px; 
+        padding:5px 20px; 
       
         color:#555;
         text-align:center;
@@ -27,6 +28,17 @@
          box-shadow: 0 1rem 1.5rem rgb(0 0 0 / 25%);
         
     }
+}
+
+ .para1{
+font-size:12pt !important;
+padding-left:30px
+
+  }
+.calData {
+  margin-top:30px;
+  padding:15px;
+  background:#fff;
 }
 
 .buttonslist
