@@ -1,7 +1,7 @@
 <div class="fixedtop recipes-home-body inner-page">
   <div class="container" style="padding-left:0; padding-right:0;padding-top:20px">
     <div class="row">
-      <div class="col-md-8 col-lg-9">
+      <div class="col-md-12 col-lg-12">
         <div class="recipe-set">
           <h2>Calculators </h2>
           <div class="recipe-listing listing-list" style="background:#FFF;padding-top:15px;">
@@ -9,62 +9,77 @@
               <div class="col-12 col-md-6 col-lg-6 pl-5" style="padding-left:0px !important">
                 <ul class="optionslist">
                   <li [ngClass]="oitem.selected? 'active':''" (click)="setOption(oitem)"
-                    *ngFor="let oitem of optionsList; let o = index;">
+                    *ngFor="let oitem of optionsList; let o = index;" >
                     {{oitem.name}}
                   </li>
                 </ul>
-           <div class="row">
+
+               
+
+
+           <div class="row submit-recipe-form" style="background:#f8f8f8;padding:20px;border:1px solid #f1f2f3;border-radius: 10px">
               <div class="col-12 pl-5" style="padding-left:0px !important"
                 *ngIf="selectedOption && selectedOption.name.toLowerCase() == 'bmi'">
                 <div>
-                  <span >Weight (kg)</span>
-                  <input name="bmiweight" type="number" [(ngModel)]="weight" />
+                  <label for="bmiweight">Weight (kg)&nbsp;&nbsp;</label>
+                  <input name="bmiweight" id="bmiweight" type="number" [(ngModel)]="weight" />
                 </div>
                 <div>
-                  <span >Height (cm)</span>
-                  <input name="bmiheight"  type="number" [(ngModel)]="height" />
+                  <label for="bmiheight">Height (cm)&nbsp;&nbsp;</label>
+                  <input name="bmiheight" id="bmiheight" type="number" [(ngModel)]="height" />
                 </div>
-                <div>
-                  <button class="btndark" (click)="calculateBMI()">Calculate</button>
-                </div>
-                <div *ngIf="bmiValue">
-                  <p class="para1"> BMI Calculation</p>
+                 <div class="text-center">
+                        <button type="submit" (click)="calculateBMI()"  class="recipe-submit-btn" style="margin-top:10px">Calculate</button>
+                    </div>
+               
+                <div *ngIf="bmiValue" class="calData">
+                  <p  style="padding-bottom:10px"> BMI Calculation:</p>
                   <p class="para1">Weight {{this.weight}} kg </p>
                   <p class="para1">BMI: {{bmiValue}}</p>
-                  <p *ngIf="resultMessage" class="para1"><strong>You are {{resultMessage}}</strong></p>
+                  <p *ngIf="resultMessage" class="para1" style="padding-top:5px"><strong>You are {{resultMessage}}</strong></p>
                 </div>
 
               </div>
               <div class="col-12 pl-5" style="padding-left:0px !important"
                 *ngIf="selectedOption && selectedOption.name.toLowerCase() == 'bmr'">
-                <div>
+                <!-- <div>
+                  <label for="bmrgender">Meal Type&nbsp;</label> 
                   <select name="bmrgender"  [(ngModel)]="gender">
                     <option value="male">Male</option>
                     <option value="female">Female</option>
                   </select>
-                </div>
+                </div> -->
+                <div style="margin-left:90px">
+                  <!-- <label style="padding-right:40px"> &nbsp;&nbsp;</label> -->
+  <input  type="radio" name="male" id="male" value="male" [(ngModel)]="gender" >
+  <label  for="male">&nbsp;&nbsp;Male &nbsp;&nbsp;</label>
+  <input type="radio" name="female" id="female" value="female" [(ngModel)]="gender">
+  <label  for="female">&nbsp;&nbsp;Female</label>
+</div>
+
                 <div>
-                  <span >Weight (kg)</span>
+                 <label for="bmiweight">Weight (kg)&nbsp;&nbsp;</label>
                   <input name="bmrweight" y pe="number" [(ngModel)]="weight" />
                 </div>
                 <div>
-                  <span >Height (cm)</span>
+                <label for="bmiweight">Height (cm)&nbsp;&nbsp;</label>
                   <input name="bmrheight"  type="number" [(ngModel)]="height" />
                 </div>
                 <div>
-                  <span >Age (years)</span>
+                <label for="bmiweight">Age (years)&nbsp;&nbsp;</label>
                   <input name="bmrage"  type="number" [(ngModel)]="age" />
                 </div>
-
-                <div> <button class="btndark" (click)="calculateBMR()">Calculate</button>
-                </div>
-                <div *ngIf="bmrValue">
-                  <p class="para1"> BMR Calculation</p>
+                <div class="text-center">
+                        <button type="submit" (click)="calculateBMR()"  class="recipe-submit-btn" style="margin-top:10px">Calculate</button>
+                    </div>
+                
+                <div *ngIf="bmrValue" class="calData" >
+                  <p style="padding-bottom:10px">BMR Calculation</p>
                   <p class="para1">Weight {{this.weight}} kg </p>
                   <p class="para1"> Height {{this.height}} cm</p>
                   <p class="para1"> Age {{this.age}} years</p>
-                  <p class="para1">BMR: {{bmrValue.toFixed(2)}}</p>
-                  <p *ngIf="resultMessage" class="para1"><strong>You are {{resultMessage}}</strong></p>
+                  <p class="para1" style="padding-top:5px;font-weight:bold">BMR: {{bmrValue.toFixed(2)}}</p>
+                  <p *ngIf="resultMessage" class="para1" style="padding-top:5px"><strong>You are {{resultMessage}}</strong></p>
 
               </div>
               
@@ -93,7 +108,7 @@
       </div>
 </div>
 
-      <div class="col-md-4 col-lg-3">
+      <!-- <div class="col-md-4 col-lg-3">
         <aside>
           <div class="side-bar">
 
@@ -102,7 +117,7 @@
 
           </div>
         </aside>
-      </div>
+      </div> -->
     </div>
 
   </div>
