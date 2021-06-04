@@ -633,3 +633,28 @@ border:1px solid #555;
   }
 }
 */
+
+.userslist
+{
+  position: relative;
+  left: 0px;
+  width: 230px;
+  top: 0px;
+  background-color: #FFF;
+  font-size: 16px;
+  border-radius: 15px;
+  padding: 10px;
+  z-index: 10000000;
+  color: $text-gray;
+  height: 200px;
+ 
+  .profileimage
+  {
+    width:30px;
+    border-radius:50%;
+  }
+  .username
+  {
+    margin-left:10px;
+  }
+}

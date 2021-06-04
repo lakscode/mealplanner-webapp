@@ -1203,7 +1203,39 @@ transform(value: any, args?: any): any {
 
 
 gotopage(){        
-   this.router.navigate(["communities"]);    
+   this.router.navigate(["collections"]);    
+}
+
+usersList: Array<any> = [];
+showusersflag: boolean = false;
+hideusers()
+{
+	this.showusersflag = false;
+}
+showusers()
+{
+	this.showusersflag = true;
+	console.log("in showusers");
+	console.log("userslist");
+	console.log(this.usersList);
+  if(this.usersList.length == 0)
+  {
+ // var params = {"query": "SELECT c.id, COUNT(cj.id) AS usercount 	FROM users AS u LEFT JOIN  collection_join AS cj ON c.id = cj.collection_id GROUP BY c.id, cj.collection_id"};
+
+  var params = {"query": "SELECT id, firstname, lastname, email, username, image FROM users where id in (select user_id from collection_join  where collectin_id = " + this.routeParams.id + ")"};
+
+  params["query"] ="select id, username, firstname, lastname, email, image from users where id in (select userid from collection_join where collection_id = " + this.collection["id"] + ")"; 
+console.log(params);
+  var res =   this.dbService.getDatabyTablebyQuery("recipes", params).subscribe(invData => setTimeout(() => {
+	console.log(invData);
+   
+    if(invData !== null && invData["body"]["length"] > 0)
+    {
+      this.usersList = invData["body"];
+      console.log( this.usersList);
+    }
+  }));
+}
 }
 }
 
