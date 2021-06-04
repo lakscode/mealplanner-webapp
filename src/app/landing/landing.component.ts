@@ -6,7 +6,7 @@ import { HelpService } from '../services/help.service';
 import { HttpClient } from '@angular/common/http';
 import { DomSanitizer } from '@angular/platform-browser';
 import {constants} from "../jsonfiles/constants"
-import {ingredients} from "../jsonfiles/ingredients"
+//import {ingredients} from "../jsonfiles/ingredients"
 @Component({
 	selector: 'app-landing',
 	templateUrl: './landing.component.html',
