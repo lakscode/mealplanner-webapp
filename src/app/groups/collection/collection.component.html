@@ -414,7 +414,9 @@
                            
                         </div>
                            
-                        <p style="padding-left:15px; font-size:12px;margin-bottom:5px">Added by : <span *ngIf="recipe.firstname">{{recipe.firstname}} {{recipe.lastname}}</span><span *ngIf="!recipe.firstname">{{recipe.email}}</span>
+                        <p style="padding-left:15px; font-size:12px;margin-bottom:5px">Added by : <span *ngIf="recipe.firstname">{{recipe.firstname}} {{recipe.lastname}}</span>
+                        <span *ngIf="!recipe.firstname">{{recipe.email}}</span>
+                        <span *ngIf="!recipe.firstname && !recipe.email">{{recipe.username}}</span>
                           <!--  <span style="margin-left:10px" *ngIf="recipe.created_at"> {{formatDays(recipe.created_at)}} days ago </span> --> </p>
                         </div>
                       

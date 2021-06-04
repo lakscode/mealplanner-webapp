@@ -221,7 +221,7 @@ loadRecipes(idslist = "")
 
 	//params["instructions"] = "notempty";
 //	params["query"] = " select id, label, image, healthLabels, dietLabels, calories, yield, totalWeight, totalNutrients, digest from recipes where id in (select recipe_id from recipe_mapping where collection_id = " + this.routeParams.id  + ")";
-	params["query"] = "select recipes.id, recipes.label, recipes.image, recipes.calories, recipes.healthLabels, recipes.dietLabels, recipes.yield, recipes.totalNutrients, users.email, users.firstname, users.lastname, recipe_mapping.created_at, users.id as userid from recipes join recipe_mapping on recipes.id = recipe_mapping.recipe_id join users on recipe_mapping.created_by = users.id where recipe_mapping.collection_id = " + this.routeParams.id  + "" ;
+	params["query"] = "select recipes.id, recipes.label, recipes.image, recipes.calories, recipes.healthLabels, recipes.dietLabels, recipes.yield, recipes.totalNutrients, users.email, users.firstname, users.lastname, users.username, recipe_mapping.created_at, users.id as userid from recipes join recipe_mapping on recipes.id = recipe_mapping.recipe_id join users on recipe_mapping.created_by = users.id where recipe_mapping.collection_id = " + this.routeParams.id  + "" ;
   console.log(JSON.stringify(params));
 
  var res =   this.dbService.getDatabyQuery("recipes", params).subscribe(invData => setTimeout(() => {
@@ -1042,7 +1042,7 @@ var res =   this.dbService.getDatabyTablebyQuery("favourites", params).subscribe
 	var res =   this.dbService.postDataByTable("favourites", params1).subscribe(invData => setTimeout(() => {
 		if(invData !== null)
 		{
-			alert("favourite has been set");
+			this.toastr.success('Recipe has been set as favourite.', 'Collection!');	
 			//this.getFavouriteStatus();
 			var fIndex = this.recipesList.findIndex(x=>(x["id"] === id));
 			if(fIndex > -1)
@@ -1086,6 +1086,7 @@ params = {};
 		this.setFav = false;
 	  if(invData !== null)
 	  {
+
 		//this.getFavouriteStatus();
 		var fIndex = this.recipesList.findIndex(x=>(x["id"] === id));
 		if(fIndex > -1)
