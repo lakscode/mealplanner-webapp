@@ -25,6 +25,7 @@
    
 
 
+/*
     $('.add-button.add-ing').on("click",function(event){
 
         var newMajesticItem= '<li style="display: none">' +
@@ -40,7 +41,7 @@
 
         event.preventDefault();
     });
-
+*/
 $('.add-button.add-nutrient').on("click",function(event){
 
         var newMajesticItem= '<li style="">'+

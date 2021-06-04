@@ -105,9 +105,9 @@ weight: 420
 	this.showFoodCategories = false;
 	this.showMeasures = false;
 
-	this.measureList = constants.measureList;
+	this.measureList = constants.measureList.sort();
 	this.displayListMeasure = this.measureList;
-	this.foodCategoryList = constants.foodCategoryList;
+	this.foodCategoryList = constants.foodCategoryList.sort();
 	this.displayListFoodCat = this.foodCategoryList;
 	this.addRows("ins");
 	this.addRows("ing");
@@ -564,7 +564,10 @@ addRows(type)
 	console.log("add rows");
 	console.log(type);
 	console.log(JSON.stringify(this.instructions));
-	if(type=="ing") this.ingredients.push({"text":""});
+	if(type=="ing") {
+	//	this.ingredients.push({"text":""});
+	this.ingredients.push({ "food":"", "foodCategory":"", "image":"", "measure":"", "quantity":"", "text":"","weight":""});
+	}
 	if(type=="ins") this.instructions.push({"text":""});
 
 	console.log(this.instructions);

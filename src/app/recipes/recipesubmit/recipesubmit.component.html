@@ -1,7 +1,7 @@
 <div class="fixedtop recipes-home-body inner-page">
     <div class="container"  style="padding-left:0px; padding-right:0px;">
     <div class="row">
-    <div class="col-12 col-md-12 col-lg-9">
+  <div class="col-12 col-md-12 col-lg-9">
         <div class="recipe-set submit-recipe-set">
             <h2><a (click)="gotopage();" *ngIf="isEdit"><i class="fa fa-chevron-left"></i></a>  Submit Recipe</h2>
             <p>Food Recipe theme include a Recipe Submit Template. It allow users to submit a recipe with featured image and related details. </p>
@@ -9,7 +9,7 @@
             <div class="submit-recipe-form">
                 <form action="#" method="post">
                     <label for="title">Recipe Title</label>
-                    <input type="text" name="title" id="title" [(ngModel)]="searchRes.label">
+                    <input type="text" name="title" id="title"  (focus)="resetDropdown()"  [(ngModel)]="searchRes.label">
                     <br>
                    
                     <fieldset class="ingredient-set">
@@ -18,7 +18,7 @@
                             <li style="" *ngFor="let ingredient of ingredients; let i = index;">
                                 <div class="add-fields" style="border:1px solid #CCC; padding:10px; margin-bottom:10px;">
                                     <span class="handler-list ui-sortable-handle"><i class="fa fa-arrows"></i></span>
-                                    <div>
+                                    <div style="width:100%">
                                         <input type="text" placeholder="Ingredient Text" name="ingredients{{i}}"  [(ngModel)] = "ingredient.text" [disabled]="i< existingIngCount" id="ingredients{{i}}">  
                                         <input type="text" (focus)="resetDropdown()" placeholder="Image URL" name="ingredientsimg{{i}}"  [(ngModel)] = "ingredient.image" [disabled]="i< existingIngCount" id="ingredientsimg{{i}}"> 
 
@@ -28,8 +28,8 @@
                                            <input type="text" placeholder="Food Category" style="width:100%" name="ingredientsfc{{i}}" autocomplete="off" (focus)="showMeasures= false; showFoodCategories = true;"  [(ngModel)] = "ingredient.foodCategory" [disabled]="i< existingIngCount"  id="ingredientsfc{{i}}">
                                            <div *ngIf="showFoodCategories" class="autofillpanel">
                                                <ng-container *ngFor="let fc of displayListFoodCat; let fcc=index">
-                                               <p  (click)="setValue(ingredient, 'foodCategory', fc, i)" >
-                                                  <span>{{fc}}</span> 
+                                               <p style='  font-size: 16px;' (click)="setValue(ingredient, 'foodCategory', fc, i)" >
+                                                  <span style="text-transform: capitalize;">{{fc}}</span> 
                                                 </p>
                                             </ng-container>
                                            </div>
@@ -37,22 +37,27 @@
                                             <div class="col-12 col-md-3 col-lg-3">
                                             <input type="text" (focus)="resetDropdown()"  placeholder="Food name" style="width:100%" name="ingredientsf{{i}}"  [(ngModel)] = "ingredient.food" [disabled]="i< existingIngCount" id="ingredientsf{{i}}">
                                         </div>
-                                        <div class="col-12 col-md-3 col-lg-3">
+                                        <div style='padding-right:0px;'  class="col-12 col-md-2 col-lg-2">
+                                            <input type="text"  (focus)="resetDropdown()"  placeholder="Quantity" style="width:100%" name="ingredientsq{{i}}"  [(ngModel)] = "ingredient.quantity" [disabled]="i< existingIngCount"  id="ingredientsq{{i}}"  >
+                                            </div>
+                                   
+                                        
+                                        <div class="col-12 col-md-2 col-lg-2">
                                             <input type="text" placeholder="Measure" style="width:100%" name="ingredientsm{{i}}" autocomplete="off" (keyup)="filterList(ingredient, 'measure')" (focus)="showFoodCategories = false; showMeasures = true;" [(ngModel)] = "ingredient.measure" [disabled]="i< existingIngCount" id="ingredientsm{{i}}">
 
                                             <div *ngIf="showMeasures" class="autofillpanel">
                                                 <ng-container *ngFor="let m of displayListMeasure; let mc=index">
-                                                <p  (click)="setValue(ingredient, 'measure',m, i)" >
+                                                <p style='  font-size: 16px;' (click)="setValue(ingredient, 'measure',m, i)" >
                                                    <span>{{m}}</span> 
                                                  </p>
                                              </ng-container>
                                             </div>
                                         </div>
-                                        <div style='padding-right:0px;'  class="col-12 col-md-3 col-lg-3">
-                                            <input type="text" placeholder="Weight" style="width:100%" name="ingredientsw{{i}}"  [(ngModel)] = "ingredient.weight" [disabled]="i< existingIngCount"  id="ingredientsw{{i}}" (blur)="getNutrients(ingredient)" >
-                                            </div>
+                                        <div style='padding-right:0px;'  class="col-12 col-md-2 col-lg-2">
+                                            <input type="text" placeholder="Weight" style="width:100%" name="ingredientsw{{i}}" (focus)="resetDropdown()"  [(ngModel)] = "ingredient.weight" [disabled]="i< existingIngCount"  id="ingredientsw{{i}}" (blur)="getNutrients(ingredient)" >
+                                           
                                         </div>
-
+                                        </div>
                                     </div>
                                                                   
                                     <span *ngIf="i >= existingIngCount" (click)="deleteContent('ing', i)" class="del-list"><i class="fa fa-trash"></i></span>
@@ -235,7 +240,7 @@
             </div>
         </div>
     </div>
-    <div class="col-12  col-md-4 col-lg-3">
+   <div class="col-12  col-md-4 col-lg-3">
     <aside>
     <div class="side-bar">
    
