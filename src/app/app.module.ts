@@ -56,7 +56,7 @@ import { OurteamModule } from './ourteam/ourteam.module';
 import { MyinfoModule } from './myinfo/myinfo.module'; 
 import { AutherizeModule } from './autherize/autherize.module'; 
 import { BenefitsModule } from './benefits/benefits.module'; 
-
+import { CalculateModule } from './calculate/calculate.module'; 
 import { PasslostModule } from './password/passlost/passlost.module';
 
 import { ResetpassModule } from './password/resetpass/resetpass.module';
@@ -147,7 +147,8 @@ import {environment} from "../environments/environment";
 	GroupsModule,
 	GroupModule,
 	PrivacyModule,
-	TermsModule
+	TermsModule,
+	CalculateModule
   ],
   schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
   providers: [{

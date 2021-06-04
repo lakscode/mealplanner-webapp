@@ -1,0 +1,47 @@
+@import "../../variables.scss";
+
+.optionslist
+{
+    list-style-type: none;
+   background:#f1f2f3;
+    padding:10px;
+    li
+    {
+        display:inline-block;
+        padding:10px 20px; 
+      
+        color:#555;
+        text-align:center;
+        font-size: 24px;
+        border-radius:10px;
+        border:1px solid #CCC;
+        margin-right: 10px;
+    }
+    li.active 
+    { 
+         background: $orange1;
+         color:#FFF;
+         transition: 0.2s;
+         border-radius:10px;
+
+         box-shadow: 0 1rem 1.5rem rgb(0 0 0 / 25%);
+        
+    }
+}
+
+.buttonslist
+{
+text-align:center;
+margin:0 auto;
+    button
+    {
+        display:inline-block;
+        padding:10px; 
+        background: #FFF;
+        color:#555;
+        text-align:center;
+        font-size: 24px;
+        margin-right: 20px;
+        border-radius: 15px;
+    }
+}

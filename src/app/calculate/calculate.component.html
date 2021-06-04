@@ -1,0 +1,103 @@
+<div class="fixedtop recipes-home-body inner-page">
+  <div class="container" style="padding-left:0; padding-right:0;padding-top:20px">
+    <div class="row">
+      <div class="col-md-8 col-lg-9">
+        <div class="recipe-set">
+          <h2>Calculators </h2>
+          <div class="recipe-listing listing-list" style="background:#FFF;padding-top:15px;">
+            <div class="row">
+              <div class="col-12 col-md-6 col-lg-6 pl-5" style="padding-left:0px !important">
+                <ul class="optionslist">
+                  <li [ngClass]="oitem.selected? 'active':''" (click)="setOption(oitem)"
+                    *ngFor="let oitem of optionsList; let o = index;">
+                    {{oitem.name}}
+                  </li>
+                </ul>
+           <div class="row">
+              <div class="col-12 pl-5" style="padding-left:0px !important"
+                *ngIf="selectedOption && selectedOption.name.toLowerCase() == 'bmi'">
+                <div>
+                  <span >Weight (kg)</span>
+                  <input name="bmiweight" type="number" [(ngModel)]="weight" />
+                </div>
+                <div>
+                  <span >Height (cm)</span>
+                  <input name="bmiheight"  type="number" [(ngModel)]="height" />
+                </div>
+                <div>
+                  <button class="btndark" (click)="calculateBMI()">Calculate</button>
+                </div>
+                <div *ngIf="bmiValue">
+                  <p class="para1"> BMI Calculation</p>
+                  <p class="para1">Weight {{this.weight}} kg </p>
+                  <p class="para1">BMI: {{bmiValue}}</p>
+                  <p *ngIf="resultMessage" class="para1"><strong>You are {{resultMessage}}</strong></p>
+                </div>
+
+              </div>
+              <div class="col-12 pl-5" style="padding-left:0px !important"
+                *ngIf="selectedOption && selectedOption.name.toLowerCase() == 'bmr'">
+                <div>
+                  <select name="bmrgender"  [(ngModel)]="gender">
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                  </select>
+                </div>
+                <div>
+                  <span >Weight (kg)</span>
+                  <input name="bmrweight" y pe="number" [(ngModel)]="weight" />
+                </div>
+                <div>
+                  <span >Height (cm)</span>
+                  <input name="bmrheight"  type="number" [(ngModel)]="height" />
+                </div>
+                <div>
+                  <span >Age (years)</span>
+                  <input name="bmrage"  type="number" [(ngModel)]="age" />
+                </div>
+
+                <div> <button class="btndark" (click)="calculateBMR()">Calculate</button>
+                </div>
+                <div *ngIf="bmrValue">
+                  <p class="para1"> BMR Calculation</p>
+                  <p class="para1">Weight {{this.weight}} kg </p>
+                  <p class="para1"> Height {{this.height}} cm</p>
+                  <p class="para1"> Age {{this.age}} years</p>
+                  <p class="para1">BMR: {{bmrValue.toFixed(2)}}</p>
+                  <p *ngIf="resultMessage" class="para1"><strong>You are {{resultMessage}}</strong></p>
+
+              </div>
+              
+            </div>
+          </div>
+            </div>
+            <div class="col-12 col-lg-6 col-md-6 pl-5" style="padding-left:0px !important">
+              <div *ngIf="selectedOption && selectedOption.name.toLowerCase() == 'bmi'" class="recipe-of-day">
+                <img src="assets/images/bmi.jpg" alt="BMI details">
+
+
+              </div>
+            </div>
+
+
+          </div>
+        </div><br />
+
+
+      </div>
+</div>
+
+      <div class="col-md-4 col-lg-3">
+        <aside>
+          <div class="side-bar">
+
+            <app-sidebar></app-sidebar>
+
+
+          </div>
+        </aside>
+      </div>
+    </div>
+
+  </div>
+</div>
