@@ -210,6 +210,7 @@ this.processing= false;
     //  params["user_uniqueid"] = uniqueid;
       var res =   this.dbService.postDataByTable("questionnaire", params).subscribe(invData => setTimeout(() => {
         this.processing = false;
+        console.log(invData);
         localStorage.setItem("q_complete","true");
         localStorage.setItem("questions", JSON.stringify(params));
 
