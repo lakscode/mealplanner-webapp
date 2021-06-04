@@ -130,3 +130,15 @@ background-color: $orange;
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
 }
+
+.autofillpanel
+{
+  position: absolute;
+  background: #FFF;
+  padding: 10px;
+  border: 1px solid #CCC;
+  z-index: 1;
+  max-height: 200px;
+  overflow: auto;
+  padding-bottom: 20px;
+}

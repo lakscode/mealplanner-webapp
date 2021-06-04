@@ -6,6 +6,7 @@ import { HelpService } from '../services/help.service';
 import { HttpClient } from '@angular/common/http';
 import { DomSanitizer } from '@angular/platform-browser';
 import {constants} from "../jsonfiles/constants"
+import {ingredients} from "../jsonfiles/ingredients"
 @Component({
 	selector: 'app-landing',
 	templateUrl: './landing.component.html',
@@ -55,7 +56,7 @@ constructor(private router: Router, private httpClient : HttpClient, private san
 		this.loadHealthLabels();
 	
 	//	this.loadRecommendedRecipes();
-	
+	this.loadIngredients();
 	}
 
 	defaultRecipeofTheDay()
@@ -658,6 +659,74 @@ transform(value: any) {
 
 	  }
 	}));
+  }
+  foodCategory: any = {};
+  measure: any = {};
+  food: any = {};
+  loadIngredients()
+  {
+	  /*
+	  console.log(ingredients);
+	  console.log(ingredients.length);
+	  this.foodCategory ={};
+	  this.measure={};
+
+	  this.food = {};
+	for(let i= 0; i < ingredients.length; i++)
+	{
+
+		console.log("i " + i);
+		console.log(item);
+
+		if(ingredients[i]["ingredients"])
+		{
+			try
+			{
+ 			var item = JSON.parse(ingredients[i]["ingredients"]);
+			 console.log(item);
+			 for(let j=0; j < item.length; j++)
+			 {
+				 if(item[j]["foodCategory"] !== "")
+				 this.foodCategory[item[j]["foodCategory"]] = item[j]["foodCategory"];
+
+				 if(item[j]["measure"] !== "")
+				 this.measure[item[j]["measure"]] = item[j]["measure"];
+
+				 if(item[j]["food"] !== "")
+				 this.food[item[j]["food"]] = item[j]["food"];
+			 }
+			}
+			catch(error)
+			{
+				console.log(error);
+			}
+			 
+		}
+	}
+	console.log(this.foodCategory);
+	var text = "";
+	for (let x in this.foodCategory) {
+		text += "'" + x + "', ";
+	  }
+	  console.log(text);
+	console.log(this.measure);
+	var text1 = "";
+	for (let x in this.measure) {
+		text1 += "'" + x + "', ";
+	  }
+
+	  console.log(text1);
+	  console.log(this.food);
+	  var text2 = "";
+	  var foodcount = 0;
+	  for (let x in this.food) {
+		text2 += "'" + x + "', ";
+		foodcount++;
+		}
+  
+		console.log(text2);
+		console.log("foodcount " + foodcount);
+*/
   }
 }
 

@@ -56,7 +56,9 @@ export const constants = {
       ],
   "cusineType":["american","british","caribbean","central europe","chinese","eastern europe","italian","korean","bulgogi","mediterranean","nordic","south american","south east asian","asian","central europe","indian","japanese","middle eastern","south east asian","french","greek","italian","mexican","kosher"],
   "cusineTypeList":["american","asian","chinese","french","italian","indian","japanese","kosher","mexican","korean"],
-  "mealTypeList":["breakfast","snack","lunch","teatime","dinner"]
+  "mealTypeList":["breakfast","snack","lunch","teatime","dinner"],
+  "foodCategoryList":[ 'Eggs', 'sugars', 'chocolate', 'Condiments and sauces', 'Dairy', 'fruit', 'bread, rolls and tortillas', 'sugar syrups', 'vegetables', 'plant-based protein', 'Oils', 'grains', 'condiments and sauces', 'meats', 'canned vegetables', 'yogurt', '100% juice', 'water', 'Cheese', 'canned soup', 'mixed grains', 'Milk', 'null', 'Vegan products', 'quick breads and pastries', 'flavored water', 'Poultry', 'seafood', 'beer', 'ready-to-eat cereals', 'non-dairy beverages', 'savory snacks', 'candy', 'poultry', 'milk', 'wines', 'coffee and tea', 'frozen grained based', 'Plant-based protein', 'sweetened beverages', 'Cured meats', 'canned fruit', 'sugar jam', 'cocktails and liquors', 'liquors and cocktails', 'cured meats', 'pastries', 'oils', 'pizza', 'protein and nutritional powders', 'frozen treats', 'cheese', 'canned seafood', 'crackers', 'salads', 'canned grains', 'bov', 'mexican', 'mixed soup', 'cooked grains', 'canned meats'],
+   "measureList":['<unit>', 'cup', 'tablespoon', 'teaspoon', 'ounce', 'pint', 'pinch', 'pound', 'roll', 'gram', 'slice','inch', 'piece', 'handful','bowl', 'stick', 'milliliter', 'bunch', 'package', 'kilogram', 'drop', 'can', 'cube', 'fluid ounce', 'pack', 'root', 'half', 'liter', 'quart', 'bag']
 };
 
 

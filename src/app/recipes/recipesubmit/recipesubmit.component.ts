@@ -84,15 +84,37 @@ loadDefaults()
 
 
 }
-
+measureList: Array<any> =[];
+foodCategoryList: Array<any> =[];
+showFoodCategories: any = false;
+showMeasures: any = false;
+displayListMeasure: Array<any> =[];
+displayListFoodCat: Array<any> =[];
 setDefaults()
 {
+
+	/*
+food: "pears"
+foodCategory: "fruit"
+image: "https://www.edamam.com/food-img/65a/65aec51d264db28bbe27117c9fdaaca7.jpg"
+measure: "cup"
+quantity: 3
+text: "3 cups peeled, chopped, ripe Asian pears (about 3 large)"
+weight: 420
+	*/
+	this.showFoodCategories = false;
+	this.showMeasures = false;
+
+	this.measureList = constants.measureList;
+	this.displayListMeasure = this.measureList;
+	this.foodCategoryList = constants.foodCategoryList;
+	this.displayListFoodCat = this.foodCategoryList;
 	this.addRows("ins");
 	this.addRows("ing");
 	this.getLabels();
 	this.ingredients = [];
 	this.instructions= [];
-	this.ingredients.push({"text":""});
+	this.ingredients.push({ "food":"", "foodCategory":"", "image":"", "measure":"", "quantity":"", "text":"","weight":""});
 	this.searchRes = {};
 	this.nutrientsList =  constants.minerals;
 	console.log(this.nutrientsList);
@@ -433,6 +455,7 @@ formatIngredients()
 	this.searchRes["ingredientLines"] = temp;
 	this.searchRes["totalNutrients"] = JSON.stringify(this.cons_Nutrients);
 	this.searchRes["calories"] = this.total_calories;
+	this.searchRes["ingredients"] = JSON.stringify(this.ingredients);
 }
 
 formatLabels(item)
@@ -760,6 +783,68 @@ formatVal(str)
 
   gotopage(){        
    this.router.navigate(["recipes"]);    
+}
+
+setValue(item, key, value, index)
+{
+	console.log("in setValue");
+	console.log(item);
+	console.log(value);
+	item[key] = value;
+	if(key == "foodCategory")
+	this.showFoodCategories = false;
+
+	if(key == "measure")
+	this.showMeasures = false;
+
+}
+/*
+this.displayListMeasure = this.measureList;
+	this.foodCategoryList = constants.foodCategoryList;
+	this.displayListFoodCat = this.foodCategoryList;
+	*/
+
+	resetDropdown()
+	{
+		this.showFoodCategories = false; this.showMeasures = false;
+	}
+filterList(item, key)
+{
+	console.log("in filterList");
+	console.log(item);
+	console.log(key);
+	if(key == "measure")
+	{
+		this.displayListMeasure = this.measureList;
+		if(item["measure"] !== "")
+		{
+			this.displayListMeasure = [];
+			for(let m=0; m < this.measureList.length; m++)
+			{
+				if(this.measureList[m].toLowerCase().indexOf(item.measure.toLowerCase()) > -1)
+				{
+					this.displayListMeasure.push(this.measureList[m]);
+				}
+			}
+		}
+	}
+
+	if(key == "foodCategory")
+	{
+		this.displayListFoodCat = this.measureList;
+		if(item["foodCategory"] !== "")
+		{
+			this.displayListFoodCat = [];
+			for(let m=0; m < this.measureList.length; m++)
+			{
+				if(this.measureList[m].toLowerCase().indexOf(item.foodCategory.toLowerCase()) > -1)
+				{
+					this.displayListFoodCat.push(this.measureList[m]);
+				}
+			}
+		}
+	}
+
 }
 }
 
