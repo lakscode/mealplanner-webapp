@@ -84,7 +84,7 @@
         <div style="clear:both"></div>
         </div>
     </div>
-    <div class="row" style="text-align:center; margin:0 auto;">
+    <div *ngIf="plan.name" class="row" style="text-align:center; margin:0 auto;">
 
         <div class='leftblock'>
 
@@ -94,7 +94,7 @@
                     <div>
                         <div class="filter-bar--side-version">
                             <div class="filter-bar__search-container">
-                                <form class="recipe-search false" (submit)="loadRecipes()">
+                                <form class="recipe-search false">
                                     <div class="form-group-plan">
                                         <div class="input-group">
                                             <div class="hm-typeahead " data-test="typeahead-input">
@@ -105,7 +105,7 @@
                                                             aria-haspopup="listbox" autocomplete="nope" role="combobox"
                                                             name="searchq" id="searchq" [(ngModel)]="searchparam.q"
                                                             type="text" class="rbt-input-main form-control rbt-input "
-                                                            (keyup)="searchParam()" value="" placeholder="SEARCH">
+                                                            (keyup.enter)="loadRecipes()" value="" placeholder="SEARCH">
                                                     </div>
                                                     <div aria-atomic="true" aria-live="polite"
                                                         class="sr-only rbt-sr-status" role="status">0

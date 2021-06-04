@@ -75,10 +75,10 @@
         <div class="col-12 col-lg-6 col-md-6">
            
 
-            <div style="display:block"> <img src="{{profileImage}}" /></div>
+            <div style="display:block"> <img style="max-width:250px;" src="{{profileImage}}" /></div>
             <ul class="menu-options">
                 <li class="menu-option" (click)="fileupload();"> Upload Image</li>
-                <li class="menu-option" (click)="uploadimage();">Capture Image</li>
+                <!--<li class="menu-option" (click)="uploadimage();">Capture Image</li>-->
              
               </ul>
               <input id="inputuploadimage" hidden type="file" name="inputuploadimage" (change)="onFileSelect($event)" />
