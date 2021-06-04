@@ -132,11 +132,21 @@ export class QuestionsComponent implements OnInit, OnDestroy {
   
   /************ questionnaire  */
 
-
+  currentUser: any ;
   setDefaults()
   {
 
-  
+  	
+		this.currentUser =this.helpService.getCurrentUser();
+		if(this.currentUser !== null)
+		{
+		  if( this.currentUser["firstname"] !== "")
+		  this.currentUser["displayname"] = this.currentUser["firstname"];
+		  else if( this.currentUser["username"] !== "")
+		  this.currentUser["displayname"] = this.currentUser["username"];
+	
+		}
+		
 this.processing= false;
     this.params = {};
     
@@ -189,7 +199,10 @@ this.processing= false;
     {
       params["user_ipaddress"] = ipaddress;
     }
-
+    if(this.currentUser !== null && typeof(this.currentUser["id"]) !=="undefined")
+		{
+      params["userid"] = this.currentUser["id"];
+    }
     if((typeof(uniqueid) !== "undefined" && uniqueid !== null && uniqueid !== "") || (typeof(ipaddress) !== "undefined" && ipaddress !== null && ipaddress !== ""))
     {
     
