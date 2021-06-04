@@ -29,7 +29,7 @@
                                            <div *ngIf="showFoodCategories" class="autofillpanel">
                                                <ng-container *ngFor="let fc of displayListFoodCat; let fcc=index">
                                                <p  (click)="setValue(ingredient, 'foodCategory', fc, i)" >
-                                                  <span>{{fc.toUpperCase()}}</span> 
+                                                  <span>{{fc.toTitleCase()()}}</span> 
                                                 </p>
                                             </ng-container>
                                            </div>
