@@ -154,7 +154,7 @@ this.selectedOption = this.optionsList[0];
 		params["datetime"] = new Date(this.inputValue["date"]).toISOString().split('T')[0];
 		params["userid"] = this.currentUser["id"];
 	  
-		
+			console.log(params);
 		var res =   this.dbService.getDataByTable("trackings",params).subscribe(invData => setTimeout(() => 
 		{
 		 console.log(invData);
@@ -212,12 +212,18 @@ updateTrackingData(params)
   params["id"] = params["id"];
 
   console.log(params);
+  try
+  {
   var res =   this.dbService.updateDataByTable("trackings",params).subscribe(invData => setTimeout(() => 
   {
     
     
   }));
- 
+	}
+	catch (error)
+	{
+		console.log(error);
+	}
 }
 
 

@@ -215,7 +215,7 @@ export class ProgressComponent implements OnInit {
   //  this.tracktypes = constants.tracktypes;
     this.colorArray = constants.colorslist[7]; //colors;
     console.log(this.colorArray);
- 
+ this.loadChartData();
 	this.response= "";
   
    
@@ -239,11 +239,11 @@ loadChartData()
   var caloriesChart = {"labels":[], "data":[], "unit":""};;
   var distancechart = {"labels":[], "data":[], "unit":""};;
 
-  console.log(params);
+ // console.log(params);
 
  
   var date = new Date();
-date.setDate(date.getDate() -15);
+date.setDate(date.getDate() -60);
 
 var month = (date.getMonth()+1);
 var monthv= month.toString();
@@ -257,15 +257,15 @@ dat1v = "0" + dat1;
 
 
 var finalDate = date.getFullYear() + "-" + monthv + "-" + dat1v;
-console.log(finalDate);
+//console.log(finalDate);
   params["query"] = "select * from workouts where userid = '" + this.currentUser["id"] + "' AND vendor = 'health' AND DATE(starttime)  > '" + finalDate + "'";
 
-  console.log( params["query"]);
+//  console.log( params["query"]);
   var res =   this.dbService.getDatabyTablebyQuery("workouts",params).subscribe(invData => setTimeout(() => 
   {
 
 
-    console.log(invData);
+  //  console.log(invData);
     stepsChart = {"labels":[], "data":[], "unit":""};
     caloriesChart = {"labels":[], "data":[], "unit":""};
     distancechart = {"labels":[], "data":[], "unit":""};
@@ -396,9 +396,9 @@ console.log(finalDate);
     }
     }
 
-    console.log(stepsChart);
-    console.log(caloriesChart);
-    console.log(distancechart);
+  //  console.log(stepsChart);
+   // console.log(caloriesChart);
+   // console.log(distancechart);
   }));
 
   
@@ -407,6 +407,7 @@ console.log(finalDate);
 
 loadWeightChart()
 {
+
   var params = {};
   params["userid"] = this.currentUser["id"];
 
@@ -414,18 +415,18 @@ loadWeightChart()
 
   var res =   this.dbService.getDataByTable("trackings",params).subscribe(invData => setTimeout(() => 
   {
-    
+    console.log(invData);
     this.weightArr  = {"labels":[], "data":[]};
     this.bpArr = {"labels":[], "dataS":[], "dataD":[]};
     if(invData !==null && invData["body"]["length"] > 0)
     {
-      console.log(invData);
+   
       var tArr = invData["body"].sort(this.sortArray);
       for(let i=0; i < tArr['length']; i++)
       {
-        console.log(tArr[i]);
+       
         this.weightArr["labels"].push(tArr[i]["datetime"]);
-        this.weightArr["data"].push(tArr[i]["weight"]);
+        this.weightArr["data"].push(parseInt(tArr[i]["weight"]));
         if(tArr[i]["weight"] !== "")
         this.showhealthChart["weight"] = true;
 
@@ -436,19 +437,19 @@ loadWeightChart()
           if(temp.length == 2)
           {
             this.showhealthChart["bloodpressure"] = true;
-            this.bpArr["dataS"].push(temp[0].trim());
-            this.bpArr["dataD"].push(temp[1].trim());
+            this.bpArr["dataS"].push(parseInt(temp[0].trim()));
+            this.bpArr["dataD"].push(parseInt(temp[1].trim()));
           }
           else
           {
-            this.bpArr["dataS"].push("0");
-            this.bpArr["dataD"].push("0");
+            this.bpArr["dataS"].push(0);
+            this.bpArr["dataD"].push(0);
           }       
         }
         else
         {
-          this.bpArr["dataS"].push("0");
-          this.bpArr["dataD"].push("0");
+          this.bpArr["dataS"].push(0);
+          this.bpArr["dataD"].push(0);
         }
         
 
@@ -482,8 +483,8 @@ sortArray(a, b) {
     }
     if(weightchart)
     {
-     
-   
+     this.createWeightChart("Weight Chart", this.weightArr["labels"],this.weightArr["data"])
+    }
 
     var bpchart = true;
     if(typeof(this.displaycharts["bloodpressure"]) !== "undefined" && this.displaycharts["bloodpressure"] !== null)
@@ -495,17 +496,90 @@ sortArray(a, b) {
     }
     if(bpchart)
     {
-    
-  }
-  }
+      this.createBpChart("Blood Pressure", this.bpArr["labels"],this.bpArr["dataS"], this.bpArr["dataD"])
+    }
+  
 }
-  createBarChart(stepsChart) {
-
+chartOptionsWeight:any;
+  createWeightChart(chartname, labels, data) {
+    this.chartOptionsWeight = {   
+      chart: {
+         type: "spline"
+      },
+      title: {
+         text: "Weight Daily " + chartname
+      },
+      subtitle: {
+         text: ""
+      },
+      legend: {
+        align: 'right',
+        verticalAlign: 'middle',
+        layout: 'vertical'
+      },
+      xAxis:{
+         categories:labels
+      },
+      yAxis: {          
+         title:{
+          text:"No. of kgs"
+         } 
+      },
+      tooltip: {
+         valueSuffix:" "
+      },
+      series: [
+         {
+          name: 'Weight',
+          data: data
+         }
+      ]
+     }; 
   
   }
 
-  createSimpleLineChart(caloriesChart) {
-  
+  chartOptionsBp:any;
+  createBpChart(chartname, labels, datas, dataD) {
+    console.log(datas);
+    this.chartOptionsBp = {
+       chart: {
+      type: "spline"
+   },
+   title: {
+      text: "Daily " + chartname
+   },
+   subtitle: {
+      text: ""
+   },
+   legend: {
+     align: 'right',
+     verticalAlign: 'middle',
+     layout: 'vertical'
+   },
+   xAxis:{
+      categories:labels
+   },
+   yAxis: {          
+      title:{
+       text:"mg"
+      } 
+   },
+   tooltip: {
+      valueSuffix:" "
+   },
+   series: [
+      {
+       name: 'Systolic',
+       data: datas
+      },
+      {
+        name: 'Diastolic',
+        data: dataD
+       }
+   ]
+  };
+  console.log(this.chartOptionsFBDistance);
+     console.log(this.chartOptionsBp);
   }
 
   createGroupLineChart(linechart2) {
@@ -562,140 +636,302 @@ sortArray(a, b) {
 
 
 
-
-
-
-  getFitBitData()
+getFitBitData()
 {
- console.log("getFitBitData");
-  this.stepsArr = [];
-  this.distanceArr = [];
-  this.caloriesArr = [];
+  console.log("getFitBitData");
+  var fbstepsArr = [];
+ var fbdistanceArr = [];
+  var fbcaloriesArr = [];
   var params = {};
 
  
   params["userid"] = this.currentUser["id"];
   params["vendor"] = "fitbit";
   var stepsChart = {"labels":[], "data":[], "unit":""};;
-  var linechart1 = {"labels":[], "data":[], "unit":""};;
-  var linechart2 = {"labels":[], "data":[], "unit":""};;
+  var caloriesChart = {"labels":[], "data":[], "unit":""};;
+  var distancechart = {"labels":[], "data":[], "unit":""};;
 
   var res =   this.dbService.getDataByTable("workouts",params).subscribe(invData => setTimeout(() => 
   {
-   
-    stepsChart = {"labels":[], "data":[], "unit":""};;
-    linechart1 = {"labels":[], "data":[], "unit":""};;
-    linechart2 = {"labels":[], "data":[], "unit":""};;
 
-    
-    if(invData !==null && invData["body"]["length"] > 0)
+  stepsChart = {"labels":[], "data":[], "unit":""};
+  caloriesChart = {"labels":[], "data":[], "unit":""};
+  distancechart = {"labels":[], "data":[], "unit":""};
+
+  
+  if(invData !==null && invData["body"]["length"] > 0)
+  {
+  
+    stepsChart["labels"]= []; stepsChart["data"]= [];
+
+    caloriesChart["labels"]= []; caloriesChart["data"]= [];
+
+    distancechart["labels"]= []; distancechart["data"]= [];
+    var dArr = invData["body"].sort(this.sortArray);
+    for(let i=0; i < dArr['length']; i++)
     {
-    //  console.log(invData);
-      stepsChart["labels"]= []; stepsChart["data"]= [];
-
-      linechart1["labels"]= []; linechart1["data"]= [];
-
-      linechart2["labels"]= []; linechart2["data"]= [];
-      var dArr = invData["body"].sort(this.sortArray);
-      for(let i=0; i < dArr['length']; i++)
+      var datetext = dArr[i]['starttime'];
+      datetext =datetext.substr(0, 10);
+     // console.log(datetext);
+      
+      if(dArr[i]["type"] == 1)
       {
-      //console.log(dArr[i]);
-        var datetext = dArr[i]['starttime'];
-        datetext =datetext.substr(0, 10);
-       // console.log(datetext);
-       var today = new Date();
-       var startTime  = new Date(dArr[i]['starttime']);
-
-       var total_days = (today.getTime() - startTime.getTime()) / (1000 * 60 * 60 * 24);
-    //   console.log(datetext + " - " + total_days);
-       if(total_days < 16)
-       {
-        if(dArr[i]["type"] == "1")
+        var dlIndex1 = stepsChart["labels"].findIndex(x => (x == datetext));
+        if(dlIndex1 == -1)
         {
-          this.stepsArr.push(dArr[i]);
-          stepsChart["labels"].push(datetext);
-          stepsChart["data"].push(dArr[i]["measure"]);
-          stepsChart["unit"] = dArr[i]["unit"];
+        fbstepsArr.push(dArr[i]);
+        stepsChart["labels"].push(datetext);
+        stepsChart["data"].push(parseInt(dArr[i]["measure"]));
+        stepsChart["unit"] = dArr[i]["unit"];
         }
-
-        if(dArr[i]["type"] == "2")
+        else if(dArr[i]["measure"] >  stepsChart["data"][dlIndex1]["measure"] )
         {
-          this.distanceArr.push(dArr[i]);
-          linechart1["labels"].push(datetext);
-          linechart1["data"].push(dArr[i]["measure"]);
-          linechart1["unit"] = dArr[i]["unit"];
-        }
-
-        if(dArr[i]["type"] == "3")
-        {
-          this.caloriesArr.push(dArr[i]);
-          linechart2["labels"].push(datetext);
-          linechart2["data"].push((dArr[i]["measure"] * 0.001).toFixed(1));
-          linechart2["unit"] = dArr[i]["unit"];
+          stepsChart["data"][dlIndex1]["measure"] = parseInt(dArr[i]["measure"]);
         }
       }
 
+      if(dArr[i]["type"] == 2)
+      {
+        var dlIndex = caloriesChart["labels"].findIndex(x => (x == datetext));
+        if(dlIndex == -1)
+        {
+        fbdistanceArr.push(dArr[i]);
+        caloriesChart["labels"].push(datetext);
+        caloriesChart["data"].push(parseInt(dArr[i]["measure"]));
+        caloriesChart["unit"] = dArr[i]["unit"];
+        }
+        else if(dArr[i]["measure"] >  caloriesChart["data"][dlIndex]["measure"] )
+        {
+          caloriesChart["data"][dlIndex]["measure"] = parseInt(dArr[i]["measure"]);
+        }
       }
+
+      if(dArr[i]["type"] == 3)
+      {
+        var lIndex = distancechart["labels"].findIndex(x => (x == datetext));
+        if(lIndex == -1)
+        {
+        fbcaloriesArr.push(dArr[i]);
+        distancechart["labels"].push(datetext);
+        distancechart["data"].push(parseInt(dArr[i]["measure"])); // * 0.001).toFixed(1));
+        distancechart["unit"] = dArr[i]["unit"];
+        }
+        else if(dArr[i]["measure"] >  distancechart["data"][lIndex]["measure"] )
+        {
+          distancechart["data"][lIndex]["measure"] = parseInt(dArr[i]["measure"]);
+        }
+      }
+
     }
+  }
   
-    this.showfitbitChart["steps"] = false;
 
-    this.showfitbitChart["calories"] = false;
-
-    this.showfitbitChart["distance"] = false;
  
-    if(stepsChart["data"]["length"] > 0)
+  var stepschartFlag = true;
+  if(typeof(this.displaycharts["steps"]) !== "undefined" && this.displaycharts["steps"] !== null)
+  {
+    if(typeof(this.displaycharts["steps"]["display"]) !== "undefined" && this.displaycharts["steps"]["display"] !== null)
     {
-    
-      this.showfitbitChart["steps"] = true;
-      this.createFBarChart(stepsChart);
+      stepschartFlag = this.displaycharts["steps"]["display"];
     }
+  }
+  if(stepschartFlag)
+  {
+  if(stepsChart["data"]["length"] > 0)
+  {
+    this.showhealthChart["steps"] = true;
+//  this.createBarChart(stepsChart);
+this.createFBStepsChart("Steps", stepsChart["labels"],stepsChart["data"])
+  }
+  }
   
-    
-    if(linechart1["data"]["length"] > 0)
+  var calschartFlag = true;
+  if(typeof(this.displaycharts["caloriesburned"]) !== "undefined" && this.displaycharts["caloriesburned"] !== null)
+  {
+   // console.log(this.displaycharts["caloriesburned"]);
+    if(typeof(this.displaycharts["caloriesburned"]["display"]) !== "undefined" && this.displaycharts["caloriesburned"]["display"] !== null)
     {
-      this.showfitbitChart["distance"] = true;
-      this.createFSimpleLineChart(linechart1);
+      calschartFlag = this.displaycharts["caloriesburned"]["display"];
     }
-   
-    
+  }
+//  console.log("calschartFlag  " + calschartFlag);
+  if(calschartFlag)
+  {
+  if(caloriesChart["data"]["length"] > 0)
+  {
+    this.showhealthChart["calories"] = true;
+ // this.createSimpleLineChart(caloriesChart);
+this.createFBCaloriesChart("calories", caloriesChart["labels"],caloriesChart["data"])
+  }
+  }
   
-    if(linechart2["data"]["length"] > 0)
+  var distchartFlag = true;
+  if(typeof(this.displaycharts["distance"]) !== "undefined" && this.displaycharts["distance"] !== null)
+  {
+    if(typeof(this.displaycharts["distance"]["display"]) !== "undefined" && this.displaycharts["distance"]["display"] !== null)
     {
-      this.showfitbitChart["calories"] = true;
-    this.createFGroupLineChart(linechart2);
+      distchartFlag = this.displaycharts["distance"]["display"];
     }
+  }
 
+  if(distchartFlag)
+  {
+  if(distancechart["data"]["length"] > 0)
+  {
+    this.showhealthChart["distance"] = true;
+  //this.createGroupLineChart(linechart2);
+this.createFBDistanceChart("distance", distancechart["labels"],distancechart["data"])
+  }
+  }
 
-  //  console.log(stepsChart);
-  //  console.log(linechart1);
-  //  console.log(linechart2);
-  }));
+//  console.log(stepsChart);
+//  console.log(caloriesChart);
+ // console.log(distancechart);
+}));
 
-  
-  
 }
 
 
-createFBarChart(stepsChart) {
 
+chartOptionsFBDistance: any;
+chartOptionsFBSteps: any;
+chartOptionsFBCalories: any;
+
+createFBStepsChart(chartname, labels, data) {
+//  console.log("chart name " + chartname);
+//	console.log(labels);
+//	console.log(distancedata);
+ // var data = distancedata["data"];
+//	var labels = distancedata["labels"]
+	this.chartOptionsFBSteps = {   
+		chart: {
+		   type: "spline"
+		},
+		title: {
+		   text: "Fitbit Daily " + chartname
+		},
+		subtitle: {
+		   text: ""
+		},
+		legend: {
+			align: 'right',
+			verticalAlign: 'middle',
+			layout: 'vertical'
+		},
+		xAxis:{
+		   categories:labels
+		},
+		yAxis: {          
+		   title:{
+			  text:"No. of steps"
+		   } 
+		},
+		tooltip: {
+		   valueSuffix:" "
+		},
+		series: [
+		   {
+			  name: 'Steps',
+			  data: data
+		   }
+		]
+	 }; 
+console.log(this.chartOptionsFBSteps);
+console.log(this.chartOptionsBp);
 }
 
-createFSimpleLineChart(caloriesChart) {
-  
+createFBDistanceChart(chartname, labels, data) {
+//  console.log("chart name " + chartname);
+//	console.log(labels);
+//	console.log(distancedata);
+ // var data = distancedata["data"];
+//	var labels = distancedata["labels"]
+	this.chartOptionsFBDistance = {   
+		chart: {
+		   type: "spline"
+		},
+		title: {
+		   text: "Fitbit Daily " + chartname
+		},
+		subtitle: {
+		   text: ""
+		},
+		legend: {
+			align: 'right',
+			verticalAlign: 'middle',
+			layout: 'vertical'
+		},
+		xAxis:{
+		   categories:labels
+		},
+		yAxis: {          
+		   title:{
+			  text:"No. of kms"
+		   } 
+		},
+		tooltip: {
+		   valueSuffix:" "
+		},
+		series: [
+		   {
+			  name: 'Distance',
+			  data: data
+		   }
+		]
+	 }; 
+//	 console.log(this.chartOptionsFBDistance);
 }
 
-createFGroupLineChart(linechart2) {
+createFBCaloriesChart(chartname, labels, data) {
   
+//  console.log("chart name " + chartname);
+//	console.log(labels);
+//	console.log(distancedata);
+ // var data = distancedata["data"];
+//	var labels = distancedata["labels"]
+	this.chartOptionsFBCalories = {   
+		chart: {
+		   type: "spline"
+		},
+		title: {
+		   text: "Fitbit Daily " + chartname
+		},
+		subtitle: {
+		   text: ""
+		},
+		legend: {
+			align: 'right',
+			verticalAlign: 'middle',
+			layout: 'vertical'
+		},
+		xAxis:{
+		   categories:labels
+		},
+		yAxis: {          
+		   title:{
+			  text:"No. of calories"
+		   } 
+		},
+		tooltip: {
+		   valueSuffix:" "
+		},
+		series: [
+		   {
+			  name: 'Calories',
+			  data: data
+		   }
+		]
+	 }; 
+//	 console.log(this.chartOptionsFBCalories);
 }
 chartOptionsLine: any;
 
 chartOptionsSteps: any;
 createStepsChart(chartname, labels, data)
 {
-	console.log("chart name " + chartname);
-	console.log(labels);
-	console.log(data);
+//	console.log("chart name " + chartname);
+//	console.log(labels);
+//	console.log(data);
 	
 	this.chartOptionsSteps = {   
 		chart: {
@@ -730,7 +966,7 @@ createStepsChart(chartname, labels, data)
 		   }
 		]
 	 }; 
-	 console.log(this.chartOptionsLine);
+//	 console.log(this.chartOptionsLine);
 }
 
 chartOptionsCalories: any;
@@ -738,9 +974,9 @@ createCaloriesChart(chartname, labels, data)
 {
   this.updateFlag = true;
   
-	console.log("chart name " + chartname);
-	console.log(labels);
-	console.log(data);
+//	console.log("chart name " + chartname);
+//	console.log(labels);
+//	console.log(data);
 	
 	this.chartOptionsCalories = {   
 		chart: {
@@ -776,16 +1012,16 @@ createCaloriesChart(chartname, labels, data)
 		]
 	 }; 
 
-	 console.log(this.chartOptionsCalories);
+//	 console.log(this.chartOptionsCalories);
 }
 
 
 chartOptionsDistance: any;
 createDistanceChart(chartname, labels, data)
 {
-	console.log("chart name " + chartname);
-	console.log(labels);
-	console.log(data);
+//	console.log("chart name " + chartname);
+//	console.log(labels);
+//	console.log(data);
 	
 	this.chartOptionsDistance = {   
 		chart: {
@@ -821,7 +1057,7 @@ createDistanceChart(chartname, labels, data)
 		]
 	 }; 
 
-	 console.log(this.chartOptionsDistance);
+//	 console.log(this.chartOptionsDistance);
 }
 
 /*********88 additional functions */
@@ -832,21 +1068,21 @@ activitiesList: any;
     this.dbService.getLocalData('assets/data/activities.json').subscribe(
       activities => {
 				this.activitiesList = activities["activities"];
-        console.log(this.activitiesList);
+    //    console.log(this.activitiesList);
 			});
       
   }
   CalculateCB()
   {
-    console.log(this.activity);
+  //  console.log(this.activity);
     var caloriesburned =  this.activity['duration'] * ( this.activity.type * 3.5 *  this.activity.weight)/200;
-    console.log(caloriesburned)
+   // console.log(caloriesburned)
     this.inputValue["weight"]  ="";
     this.inputValue["bloodpressure"] =""
     this.inputValue["calories"] = caloriesburned;
-    console.log(this.inputValue);
+  //  console.log(this.inputValue);
    // this.saveTrackingData();
-    console.log( this.activity);
+  //  console.log( this.activity);
   }
 }
 
