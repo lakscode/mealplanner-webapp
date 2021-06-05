@@ -22,11 +22,11 @@
                 *ngIf="selectedOption && selectedOption.name.toLowerCase() == 'bmi'">
                 <div>
                   <label for="bmiweight">Weight (kg)&nbsp;&nbsp;</label>
-                  <input name="bmiweight" id="bmiweight" type="number" [(ngModel)]="weight" />
+                  <input class="inputText" name="bmiweight" id="bmiweight" type="number" [(ngModel)]="weight" />
                 </div>
                 <div>
                   <label for="bmiheight">Height (cm)&nbsp;&nbsp;</label>
-                  <input name="bmiheight" id="bmiheight" type="number" [(ngModel)]="height" />
+                  <input class="inputText" name="bmiheight" id="bmiheight" type="number" [(ngModel)]="height" />
                 </div>
                  <div class="text-center">
                         <button type="submit" (click)="calculateBMI()"  class="recipe-submit-btn" style="margin-top:10px">Calculate</button>
@@ -59,15 +59,15 @@
 
                 <div>
                  <label for="bmiweight">Weight (kg)&nbsp;&nbsp;</label>
-                  <input name="bmrweight" y pe="number" [(ngModel)]="weight" />
+                  <input class="inputText" name="bmrweight"  type="number" [(ngModel)]="weight" />
                 </div>
                 <div>
                 <label for="bmiweight">Height (cm)&nbsp;&nbsp;</label>
-                  <input name="bmrheight"  type="number" [(ngModel)]="height" />
+                  <input class="inputText" name="bmrheight"  type="number" [(ngModel)]="height" />
                 </div>
                 <div>
                 <label for="bmiweight">Age (years)&nbsp;&nbsp;</label>
-                  <input name="bmrage"  type="number" [(ngModel)]="age" />
+                  <input class="inputText" name="bmrage"  type="number" [(ngModel)]="age" />
                 </div>
                 <div class="text-center">
                         <button type="submit" (click)="calculateBMR()"  class="recipe-submit-btn" style="margin-top:10px">Calculate</button>
