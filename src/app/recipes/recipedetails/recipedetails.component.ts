@@ -254,7 +254,7 @@ loadRecipe(id)
 				}
 			  }
 
-			 /* if(tempNutrients)
+			  if(tempNutrients && this.searchRes["digest"] == "")
 			  {
 				//console.log(tempNutrients);
 				for (let x in tempNutrients) {
@@ -268,7 +268,7 @@ loadRecipe(id)
 					}
 				  }
 		
-			  } */
+			  } 
 
 		  }
 		}

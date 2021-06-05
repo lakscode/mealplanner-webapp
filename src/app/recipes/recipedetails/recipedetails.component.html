@@ -105,7 +105,9 @@
     <div class="recipe-details" *ngIf="searchRes.dietLabels">
         <p>Diet Labels:</p>
         <p style="display:block;">
-             <a (click)="gotoRecipes(dlabel, 'diet')" href="javascript:void(0)"  class="hlabel" *ngFor="let dlabel of formatLabels(searchRes.dietLabels)">{{dlabel}}</a> 
+            <ng-container *ngFor="let dlabel of formatLabels(searchRes.dietLabels)">
+             <a *ngIf="dlabel" (click)="gotoRecipes(dlabel, 'diet')" href="javascript:void(0)"  class="hlabel" >{{dlabel}}</a> 
+            </ng-container>
         </p>
     </div>
 
@@ -113,7 +115,9 @@
     <div class="recipe-details" *ngIf="searchRes.healthLabels">
         <p>Health Labels:</p>
         <p style="display:inline-block;"  >
-             <a (click)="gotoRecipes(hlabel, 'health')" href="javascript:void(0)" class="hlabel" *ngFor="let hlabel of formatLabels(searchRes.healthLabels)">{{hlabel}}</a> 
+            <ng-container *ngFor="let hlabel of formatLabels(searchRes.healthLabels)">
+             <a *ngIf="hlabel"  (click)="gotoRecipes(hlabel, 'health')" href="javascript:void(0)" class="hlabel" >{{hlabel}}</a> 
+            </ng-container>
         </p>
      </div>
    
@@ -137,7 +141,7 @@
              </ul>
              <div style="height: 70px ; width:100%; display:block;"></div>
         </div>
-        <div *ngIf='showNutrientsFlag' class="nutritional newitems">
+        <div class="nutritional newitems">
             <h3>Nutrients</h3><p style="clear:both"></p>
             <div style="display:block">
                 <label class="container" style=" text-align: left;

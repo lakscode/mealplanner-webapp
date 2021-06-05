@@ -427,9 +427,26 @@ setLabels()
 		}
 	}
 }
-formahtLabel(item)
+formatLabel()
 {
-	console.log(item);
+
+	this.searchRes["healthLabels"] = "";
+	for(let i = 0; i < this.healthlabelsList.length; i++)
+	{
+		console.log(this.healthlabelsList[i]);
+		if(this.healthlabelsList[i]["selected"])
+		{
+			this.searchRes["healthLabels"] += this.healthlabelsList[i]["name"] + "~";
+		}
+	}
+	this.searchRes["dietLabels"] = "";
+	for(let i = 0; i < this.dietLabelsList.length; i++)
+	{
+		if(this.dietLabelsList[i]["selected"])
+		{
+			this.searchRes["dietLabels"] += this.dietLabelsList[i]["name"] + "~";
+		}
+	}
 }
 getNutrients(item)
 {
@@ -466,11 +483,13 @@ formatIngredients()
 	this.searchRes["ingredients"]  = [];
 	for(let i=0; i < this.ingredients.length; i++)
 	{
+		if(this.ingredients[i]["text"] !== "")
+		{
 		temp += this.ingredients[i]["text"] + "~";
 		if(typeof(this.ingredients[i]["nutrients"]) !== "undefined")
 		this.consolidateNutrients(this.ingredients[i]["nutrients"]);
 		this.formatLabels(this.ingredients[i]["nutrients"]);
-	
+		}
 	}
 	if(temp !== '')
 	temp=  temp.slice(0, -1);
@@ -527,6 +546,7 @@ formatLabels(item)
 		}
 		this.searchRes["dietLabels"] = this.labels["dietLabels"];
 	}
+	/*
 	if(typeof(item["healthLabels"]) !== "undefined" && item['healthLabels'] !== null && item['healthLabels'] !== "")
 	{
 		var tlabel2  = item["healthLabels"];
@@ -547,6 +567,7 @@ formatLabels(item)
 		}
 		this.searchRes["healthLabels"] = this.labels["healthLabels"];
 	}
+	*/
 	console.log(this.labels);
 	}
 }
@@ -619,7 +640,7 @@ saveRecipe()
 	
 	this.searchRes.status = 0;
 	params["status"] =0;
-
+	this.formatLabel();
 	if(this.ispublic)
 	{
 		params["status"] =1;
@@ -636,12 +657,19 @@ saveRecipe()
 		var ting =[];
 		for(let n = 0; n < this.ingredients.length; n++)
 		{
-		var tempIng = JSON.parse(JSON.stringify(this.ingredients[n]));
-		delete tempIng["nutrients"];
-		ting.push(tempIng);
+			this.ingredients[n]["food"] !== ""
+			{
+				var tempIng = JSON.parse(JSON.stringify(this.ingredients[n]));
+				delete tempIng["nutrients"];
+				ting.push(tempIng);
+			}
 		}
 		console.log(ting);
+		if(ting.length > 0)
 		params["ingredients"] =JSON.stringify(ting);
+		else
+		params["ingredients"] ="";
+
 	}
 	if(typeof(this.searchRes["instructionLines"] ) !== "undefined" && this.searchRes["instructionLines"]  !== "")
 	{
@@ -695,6 +723,7 @@ saveRecipe()
 	if(typeof(this.searchRes['totalNutrients']) !== "undefined"  &&  this.searchRes["totalNutrients"] !== "")
 	{
 		params["totalNutrients"] =this.searchRes["totalNutrients"];
+	//	params["digest"] =this.searchRes["totalNutrients"];
 	}
 	params["source"] =  "fitaholic";
 	params["created_by"] =  this.currentUser["id"];
