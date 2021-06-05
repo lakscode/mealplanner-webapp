@@ -33,7 +33,7 @@ export class ProgressComponent implements OnInit {
   
 	weightArr :any = {};
 	bpArr :any = {};
-  
+  caloriesBurnedArr : any = {};
 	fablistArr : Array<any> = [];
 	selectedItem: any = null;
 	inputValue: any = {};
@@ -418,6 +418,7 @@ loadWeightChart()
     console.log(invData);
     this.weightArr  = {"labels":[], "data":[]};
     this.bpArr = {"labels":[], "dataS":[], "dataD":[]};
+    this.caloriesBurnedArr  = {"labels":[], "data":[]};
     if(invData !==null && invData["body"]["length"] > 0)
     {
    
@@ -430,6 +431,11 @@ loadWeightChart()
         if(tArr[i]["weight"] !== "")
         this.showhealthChart["weight"] = true;
 
+
+        this.caloriesBurnedArr["labels"].push(tArr[i]["datetime"]);
+        this.caloriesBurnedArr["data"].push(parseInt(tArr[i]["calories"]));
+      
+     
         this.bpArr["labels"].push(tArr[i]["datetime"]);
         if(tArr[i]["bloodpressure"] !== "")
         {
@@ -483,7 +489,7 @@ sortArray(a, b) {
     }
     if(weightchart)
     {
-     this.createWeightChart("Weight Chart", this.weightArr["labels"],this.weightArr["data"])
+     this.createWeightChart("Weight", this.weightArr["labels"],this.weightArr["data"])
     }
 
     var bpchart = true;
@@ -499,7 +505,60 @@ sortArray(a, b) {
       this.createBpChart("Blood Pressure", this.bpArr["labels"],this.bpArr["dataS"], this.bpArr["dataD"])
     }
   
+    var caloriesburnedchart = true;
+    if(typeof(this.displaycharts["caloriesburned"]) !== "undefined" && this.displaycharts["caloriesburned"] !== null)
+    {
+      if(typeof(this.displaycharts["caloriesburned"]["display"]) !== "undefined" && this.displaycharts["caloriesburned"]["display"] !== null)
+      {
+        caloriesburnedchart = this.displaycharts["caloriesburned"]["display"];
+      }
+    }
+    if(caloriesburnedchart)
+    {
+      this.createCaloriesBurnedChart("Calories Burned", this.caloriesBurnedArr["labels"],this.caloriesBurnedArr["data"])
+    }
+  
+    
 }
+
+chartOptionsCaloriesBurned:any;
+createCaloriesBurnedChart(chartname, labels, data) {
+    this.chartOptionsCaloriesBurned = {   
+      chart: {
+         type: "spline"
+      },
+      title: {
+         text: "Day-wise " + chartname
+      },
+      subtitle: {
+         text: ""
+      },
+      legend: {
+        align: 'right',
+        verticalAlign: 'middle',
+        layout: 'vertical'
+      },
+      xAxis:{
+         categories:labels
+      },
+      yAxis: {          
+         title:{
+          text:"No. of calories"
+         } 
+      },
+      tooltip: {
+         valueSuffix:" "
+      },
+      series: [
+         {
+          name: 'Calories',
+          data: data
+         }
+      ]
+     }; 
+  
+  }
+
 chartOptionsWeight:any;
   createWeightChart(chartname, labels, data) {
     this.chartOptionsWeight = {   
@@ -507,7 +566,7 @@ chartOptionsWeight:any;
          type: "spline"
       },
       title: {
-         text: "Weight Daily " + chartname
+         text: "Day-wise " + chartname
       },
       subtitle: {
          text: ""
@@ -546,7 +605,7 @@ chartOptionsWeight:any;
       type: "spline"
    },
    title: {
-      text: "Daily " + chartname
+      text: "Day-wise " + chartname
    },
    subtitle: {
       text: ""
@@ -808,7 +867,7 @@ createFBStepsChart(chartname, labels, data) {
 		   type: "spline"
 		},
 		title: {
-		   text: "Fitbit Daily " + chartname
+		   text: "Fitbit Day-wise " + chartname
 		},
 		subtitle: {
 		   text: ""
@@ -851,7 +910,7 @@ createFBDistanceChart(chartname, labels, data) {
 		   type: "spline"
 		},
 		title: {
-		   text: "Fitbit Daily " + chartname
+		   text: "Fitbit Day-wise " + chartname
 		},
 		subtitle: {
 		   text: ""
@@ -894,7 +953,7 @@ createFBCaloriesChart(chartname, labels, data) {
 		   type: "spline"
 		},
 		title: {
-		   text: "Fitbit Daily " + chartname
+		   text: "Fitbit Day-wise " + chartname
 		},
 		subtitle: {
 		   text: ""
@@ -938,7 +997,7 @@ createStepsChart(chartname, labels, data)
 		   type: "spline"
 		},
 		title: {
-		   text: "Daily " + chartname
+		   text: "Day-wise " + chartname
 		},
 		subtitle: {
 		   text: ""
@@ -983,7 +1042,7 @@ createCaloriesChart(chartname, labels, data)
 		   type: "spline"
 		},
 		title: {
-		   text: "Daily " + chartname
+		   text: "Day-wise " + chartname
 		},
 		subtitle: {
 		   text: ""
@@ -1028,7 +1087,7 @@ createDistanceChart(chartname, labels, data)
 		   type: "spline"
 		},
 		title: {
-		   text: "Daily " + chartname
+		   text: "Day-wise " + chartname
 		},
 		subtitle: {
 		   text: ""

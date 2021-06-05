@@ -59,7 +59,13 @@
         [options]="chartOptionsWeight" [(update)]="updateFlag" class="graphcommon">
         </highcharts-chart>
     </div>
-
+    
+    <div class="col-12 col-lg-4" *ngIf="chartOptionsCaloriesBurned">
+        <highcharts-chart [Highcharts]="Highcharts" [constructorType]="chartConstructor"
+        [options]="chartOptionsCaloriesBurned" [(update)]="updateFlag" class="graphcommon">
+        </highcharts-chart>
+    </div>
+    
 </div>
 </div> 
 </div> 
