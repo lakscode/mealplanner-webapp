@@ -104,7 +104,7 @@
    
             <div>
               <label class="input-label" style="font-size: 12px;">Activity</label>
-                <select  placeholder="Select One" (change)="CalculateCB()" [(ngModel)]="activity.type"  id='activityType' name="activityType" #model="ngModel">
+                <select  class="inputText" placeholder="Select One" (change)="CalculateCB()" [(ngModel)]="activity.type"  id='activityType' name="activityType" #model="ngModel">
                   <ng-container *ngFor="let activity of activitiesList; let a = index">
                   <option value='{{activity.value}}'>{{activity.activity}}</option>
                   </ng-container>
@@ -116,21 +116,20 @@
                 <label for="bmiweight">Duration (in minutes)&nbsp;&nbsp;</label>
                   <input class="inputText" name="bmrheight"  (blur)="CalculateCB()" type="number" [(ngModel)]="activity['duration']" />
                 </div>
-                <div>
+        
 
           
               <div  class='input-pnel'>
               <label class="input-label lbl"  style="font-size: 12px;" >Duration (in minutes)</label>
-              <input class="textbox" typet='text' name="activitydurationt"  (blur)="CalculateCB()" [(ngModel)] = "activity['duration']" />
+              <input  class="inputText" typet='text' name="activitydurationt"  (blur)="CalculateCB()" [(ngModel)] = "activity['duration']" />
              
               </div>
               <div   class='input-pnel'>
                 <label class="input-label lbl"  style="font-size: 12px;">Weight (in kgs)</label>
-                <input  class="textbox"  typet='text' name="activityeight"  (blur)="CalculateCB()" [(ngModel)] = "activity['weight']" />
+                <input class="inputText"  typet='text' name="activityeight"  (blur)="CalculateCB()" [(ngModel)] = "activity['weight']" />
               </div>
    
       
-            </div>
 
 
           </div>
