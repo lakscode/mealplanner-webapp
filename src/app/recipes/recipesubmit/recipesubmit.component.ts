@@ -442,12 +442,15 @@ formatIngredients()
 	{
 		this.cons_Nutrients = JSON.parse(this.searchRes["totalNutrients"]);
 	}
+	this.searchRes["ingredients"]  = [];
 	for(let i=0; i < this.ingredients.length; i++)
 	{
 		temp += this.ingredients[i]["text"] + "~";
 		if(typeof(this.ingredients[i]["nutrients"]) !== "undefined")
 		this.consolidateNutrients(this.ingredients[i]["nutrients"]);
 		this.formatLabels(this.ingredients[i]["nutrients"]);
+		var tempIng = JSON.parse(JSON.stringify(this.ingredients));
+		this.searchRes["ingredients"].push(tempIng);
 	}
 	if(temp !== '')
 	temp=  temp.slice(0, -1);
@@ -455,7 +458,8 @@ formatIngredients()
 	this.searchRes["ingredientLines"] = temp;
 	this.searchRes["totalNutrients"] = JSON.stringify(this.cons_Nutrients);
 	this.searchRes["calories"] = this.total_calories;
-	this.searchRes["ingredients"] = JSON.stringify(this.ingredients);
+	
+	this.searchRes["ingredients"] = JSON.stringify(this.searchRes["ingredients"]);
 }
 
 formatLabels(item)
@@ -584,6 +588,8 @@ formatInstructions()
 		if(this.searchRes["instructionLines"] !== "")
 		this.searchRes["instructionLines"] = this.searchRes["instructionLines"].slice(0, -1);
 	}
+
+	console.log(this.searchRes);
 }
 saveRecipe()
 {

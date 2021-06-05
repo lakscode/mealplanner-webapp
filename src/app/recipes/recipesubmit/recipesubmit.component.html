@@ -1,220 +1,254 @@
 <div class="fixedtop recipes-home-body inner-page">
-    <div class="container"  style="padding-left:0px; padding-right:0px;">
-    <div class="row">
-  <div class="col-12 col-md-12 col-lg-9">
-        <div class="recipe-set submit-recipe-set">
-            <h2><a (click)="gotopage();" *ngIf="isEdit"><i class="fa fa-chevron-left"></i></a>  Submit Recipe</h2>
-            <p>Food Recipe theme include a Recipe Submit Template. It allow users to submit a recipe with featured image and related details. </p>
-    
-            <div class="submit-recipe-form">
-                <form action="#" method="post">
-                    <label for="title">Recipe Title</label>
-                    <input type="text" name="title" id="title"  (focus)="resetDropdown()"  [(ngModel)]="searchRes.label">
-                    <br>
-                   
-                    <fieldset class="ingredient-set">
-                        <label for="ingredients">Ingredients</label>
-                        <ul class="list-sortable ingredients-list ui-sortable">
-                            <li class="ing-item" *ngFor="let ingredient of ingredients; let i = index;">
-                                <div class="add-fields" style="border:1px solid #CCC; padding:10px; margin-bottom:10px;">
-                                    <span class="handler-list ui-sortable-handle"><i class="fa fa-arrows"></i></span>
-                                    <div style="width:100%">
-                                        <input type="text" placeholder="Ingredient Text" name="ingredients{{i}}"  [(ngModel)] = "ingredient.text" [disabled]="i< existingIngCount" id="ingredients{{i}}">  
-                                        <input type="text" (focus)="resetDropdown()" placeholder="Image URL" name="ingredientsimg{{i}}"  [(ngModel)] = "ingredient.image" [disabled]="i< existingIngCount" id="ingredientsimg{{i}}"> 
+    <div class="container" style="padding-left:0px; padding-right:0px;">
+        <div class="row">
+            <div class="col-12 col-md-12 col-lg-9">
+                <div class="recipe-set submit-recipe-set">
+                    <h2><a (click)="gotopage();" *ngIf="isEdit"><i class="fa fa-chevron-left"></i></a> Submit Recipe
+                    </h2>
+                    <p>Food Recipe theme include a Recipe Submit Template. It allow users to submit a recipe with
+                        featured image and related details. </p>
 
-                                        <div class="row" style='padding-left:0px; padding-right:0px;'>                                   
-                                            <div style='padding-left:0px;' class="col-12 col-md-3 col-lg-3">
+                    <div class="submit-recipe-form">
+                        <form action="#" method="post">
+                            <label for="title">Recipe Title</label>
+                            <input type="text" name="title" id="title" (focus)="resetDropdown()"
+                                [(ngModel)]="searchRes.label">
+                            <br>
 
-                                           <input type="text" placeholder="Food Category" style="width:100%" name="ingredientsfc{{i}}" autocomplete="off" (focus)="showMeasures= false; showFoodCategories = true;"  [(ngModel)] = "ingredient.foodCategory" [disabled]="i< existingIngCount"  id="ingredientsfc{{i}}">
-                                           <div *ngIf="showFoodCategories" class="autofillpanel">
-                                               <ng-container *ngFor="let fc of displayListFoodCat; let fcc=index">
-                                               <p style='  font-size: 16px;' (click)="setValue(ingredient, 'foodCategory', fc, i)" >
-                                                  <span style="text-transform: capitalize;">{{fc}}</span> 
-                                                </p>
-                                            </ng-container>
-                                           </div>
-                                            </div>
-                                            <div class="col-12 col-md-3 col-lg-3">
-                                            <input type="text" (focus)="resetDropdown()"  placeholder="Food name" style="width:100%" name="ingredientsf{{i}}"  [(ngModel)] = "ingredient.food" [disabled]="i< existingIngCount" id="ingredientsf{{i}}">
-                                        </div>
-                                        <div style='padding-right:0px;'  class="col-12 col-md-2 col-lg-2">
-                                            <input type="text"  (focus)="resetDropdown()"  placeholder="Quantity" style="width:100%" name="ingredientsq{{i}}"  [(ngModel)] = "ingredient.quantity" [disabled]="i< existingIngCount"  id="ingredientsq{{i}}"  >
-                                            </div>
-                                   
-                                        
-                                        <div class="col-12 col-md-2 col-lg-2">
-                                            <input type="text" placeholder="Measure" style="width:100%" name="ingredientsm{{i}}" autocomplete="off" (keyup)="filterList(ingredient, 'measure')" (focus)="showFoodCategories = false; showMeasures = true;" [(ngModel)] = "ingredient.measure" [disabled]="i< existingIngCount" id="ingredientsm{{i}}">
+                            <fieldset class="ingredient-set">
+                                <label for="ingredients">Ingredients</label>
+                                <ul class="list-sortable ingredients-list ui-sortable">
+                                    <li class="ing-item" *ngFor="let ingredient of ingredients; let i = index;">
+                                        <div class="add-fields"
+                                            style="border:1px solid #CCC; padding:10px; margin-bottom:10px;">
+                                            <span class="handler-list ui-sortable-handle"><i
+                                                    class="fa fa-arrows"></i></span>
+                                            <div style="width:100%">
 
-                                            <div *ngIf="showMeasures" class="autofillpanel">
-                                                <ng-container *ngFor="let m of displayListMeasure; let mc=index">
-                                                <p style='  font-size: 16px;' (click)="setValue(ingredient, 'measure',m, i)" >
-                                                   <span>{{m}}</span> 
-                                                 </p>
-                                             </ng-container>
+                                                <input type="text" placeholder="Ingredient Text" name="ingredients{{i}}"
+                                                    [(ngModel)]="ingredient.text" autocomplete="off"
+                                                    [disabled]="i< existingIngCount" id="ingredients{{i}}">
+
+                                                <input type="text" (focus)="resetDropdown()" placeholder="Image URL"
+                                                    name="ingredientsimg{{i}}" autocomplete="off"
+                                                    [(ngModel)]="ingredient.image" [disabled]="i< existingIngCount"
+                                                    id="ingredientsimg{{i}}">
+
+                                                <div class="row" style='padding-left:0px; padding-right:0px;'>
+                                                    <div style='padding-left:0px;' class="col-12 col-md-3 col-lg-3">
+
+                                                        <input type="text" placeholder="Food Category"
+                                                            style="width:100%" name="ingredientsfc{{i}}"
+                                                            autocomplete="off"
+                                                            (focus)="showMeasures= false; showFoodCategories = true;"
+                                                            [(ngModel)]="ingredient.foodCategory"
+                                                            [disabled]="i< existingIngCount" id="ingredientsfc{{i}}">
+                                                        <div *ngIf="showFoodCategories" class="autofillpanel">
+                                                            <ng-container
+                                                                *ngFor="let fc of displayListFoodCat; let fcc=index">
+                                                                <p style='  font-size: 16px;'
+                                                                    (click)="setValue(ingredient, 'foodCategory', fc, i)">
+                                                                    <span
+                                                                        style="text-transform: capitalize;">{{fc}}</span>
+                                                                </p>
+                                                            </ng-container>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-md-3 col-lg-3">
+                                                        <input type="text" (focus)="resetDropdown()"
+                                                            placeholder="Food name" style="width:100%"
+                                                            autocomplete="off" name="ingredientsf{{i}}"
+                                                            [(ngModel)]="ingredient.food"
+                                                            [disabled]="i< existingIngCount" id="ingredientsf{{i}}">
+                                                    </div>
+                                                    <div style='padding-right:0px;' class="col-12 col-md-2 col-lg-2">
+                                                        <input type="text" (focus)="resetDropdown()"
+                                                            placeholder="Quantity" autocomplete="off" style="width:100%"
+                                                            name="ingredientsq{{i}}" [(ngModel)]="ingredient.quantity"
+                                                            [disabled]="i< existingIngCount" id="ingredientsq{{i}}">
+                                                    </div>
+
+
+                                                    <div class="col-12 col-md-2 col-lg-2">
+                                                        <input type="text" placeholder="Measure" style="width:100%"
+                                                            name="ingredientsm{{i}}" autocomplete="off"
+                                                            (keyup)="filterList(ingredient, 'measure')"
+                                                            (focus)="showFoodCategories = false; showMeasures = true;"
+                                                            [(ngModel)]="ingredient.measure"
+                                                            [disabled]="i< existingIngCount" id="ingredientsm{{i}}">
+
+                                                        <div *ngIf="showMeasures" class="autofillpanel">
+                                                            <ng-container
+                                                                *ngFor="let m of displayListMeasure; let mc=index">
+                                                                <p style='  font-size: 16px;'
+                                                                    (click)="setValue(ingredient, 'measure',m, i)">
+                                                                    <span>{{m}}</span>
+                                                                </p>
+                                                            </ng-container>
+                                                        </div>
+                                                    </div>
+                                                    <div style='padding-right:0px;' class="col-12 col-md-2 col-lg-2">
+                                                        <input type="text" autocomplete="off" placeholder="Weight"
+                                                            style="width:100%" name="ingredientsw{{i}}"
+                                                            (focus)="resetDropdown()" [(ngModel)]="ingredient.weight"
+                                                            [disabled]="i< existingIngCount" id="ingredientsw{{i}}"
+                                                            (blur)="getNutrients(ingredient)">
+
+                                                    </div>
+                                                </div>
                                             </div>
+
+                                            <span *ngIf="i >= existingIngCount" (click)="deleteContent('ing', i)"
+                                                class="del-list"><i class="fa fa-trash"></i></span>
                                         </div>
-                                        <div style='padding-right:0px;'  class="col-12 col-md-2 col-lg-2">
-                                            <input type="text" placeholder="Weight" style="width:100%" name="ingredientsw{{i}}" (focus)="resetDropdown()"  [(ngModel)] = "ingredient.weight" [disabled]="i< existingIngCount"  id="ingredientsw{{i}}" (blur)="getNutrients(ingredient)" >
-                                           
-                                        </div>
-                                        </div>
-                                    </div>
-                                                                  
-                                    <span *ngIf="i >= existingIngCount" (click)="deleteContent('ing', i)" class="del-list"><i class="fa fa-trash"></i></span>
-                                </div>
-                              
-                               
-                            </li>
-                     </ul>
-                     <!--
+
+
+                                    </li>
+                                </ul>
+                                <!--
                        "food":"", "foodCategory":"", "image":"", "measure":"", "quantity":"", "text":"","weight":""
 
                    -->
 
-                                             <span (click)="addRows('ing')" class="add-button add-ing">
-                                                <i class="fa fa-plus"></i>
-                                            </span>
-                    </fieldset>
-    
-                    <fieldset class="ingredient-set">
-                        <label for="steps">Instructions</label>
-                        <ul class="list-sortable steps ui-sortable">
-                            <li style="" *ngFor="let instruction of instructions; let i = index;">
-                                <div class="add-fields"> 
-                                <span class="handler-list"><i class="fa fa-arrows"></i></span>
-                                <textarea class="short-text" (blur)="formatInstructions()" [(ngModel)]= "instruction.text" name="steps{{i}}" id="steps{{i}}" cols="30" rows="10" >    </textarea>  <br>
-                                <span (click)="deleteContent('ins', i)" class="del-list"><i class="fa fa-trash"></i></span>
-                                </div>
-                            </li>
-                        </ul>
-                                             <span  (click)="addRows('ins')"  class="add-button add-steps">
-                                                <i class="fa fa-plus"></i>
-                                            </span>
-                    </fieldset>
-    
+                                <span (click)="addRows('ing')" class="add-button add-ing">
+                                    <i class="fa fa-plus"></i>
+                                </span>
+                            </fieldset>
 
-                    <fieldset class="ingredient-set">
-                        <!-- <label for="nutrients">Nutrients</label> -->
-                     
-                        <ul class="list-sortable nutrients-list ui-sortable">
-                            <div class="row" style="max-height: 200px; overflow: auto;">
-                            <div class="col-4" *ngFor="let nutrient of searchRes['nutrientsArr'] | keyvalue; let n = index">
-                            <li style="" >
-                                <div class="add-fields">
-                                    <span style="border-right: 1px;" class="handler-list ui-sortable-handle"><i class="fa fa-arrows"></i></span>                                   
-                                    <div class="row" style='    border: 1px solid #CCC;  width:100%; margin-bottom: 0px;' class="selectric-wrapper selectric-advance-selectable">
-                                        <div class= "col-12 selectric-select" >
-                                        <span style="font-size:12px;" >{{nutrient['value']["label"]}}  {{formatVal(nutrient['value']["quantity"])}} {{nutrient['value']['unit']}}</span>
+                            <fieldset class="ingredient-set">
+                                <label for="steps">Instructions</label>
+                                <ul class="list-sortable steps ui-sortable">
+                                    <li style="" *ngFor="let instruction of instructions; let i = index;">
+                                        <div class="add-fields">
+                                            <span class="handler-list"><i class="fa fa-arrows"></i></span>
+                                            <textarea class="short-text" (blur)="formatInstructions()"
+                                                [(ngModel)]="instruction.text" name="steps{{i}}" id="steps{{i}}"
+                                                cols="30" rows="10">    </textarea> <br>
+                                            <span (click)="deleteContent('ins', i)" class="del-list"><i
+                                                    class="fa fa-trash"></i></span>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <span (click)="addRows('ins')" class="add-button add-steps">
+                                    <i class="fa fa-plus"></i>
+                                </span>
+                            </fieldset>
+
+
+                            <fieldset class="ingredient-set">
+                                <!-- <label for="nutrients">Nutrients</label> -->
+
+                                <ul class="list-sortable nutrients-list ui-sortable">
+                                    <div class="row" style="max-height: 200px; overflow: auto;">
+                                        <div class="col-4"
+                                            *ngFor="let nutrient of searchRes['nutrientsArr'] | keyvalue; let n = index">
+                                            <li style="">
+                                                <div class="add-fields">
+                                                    <span style="border-right: 1px;"
+                                                        class="handler-list ui-sortable-handle"><i
+                                                            class="fa fa-arrows"></i></span>
+                                                    <div class="row"
+                                                        style='    border: 1px solid #CCC;  width:100%; margin-bottom: 0px;'
+                                                        class="selectric-wrapper selectric-advance-selectable">
+                                                        <div class="col-12 selectric-select">
+                                                            <span style="font-size:12px;">{{nutrient['value']["label"]}}
+                                                                {{formatVal(nutrient['value']["quantity"])}}
+                                                                {{nutrient['value']['unit']}}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </div>
                                     </div>
-                                    </div>
+                                </ul>
+
+                            </fieldset>
+                            <br />
+                            <div class="row">
+                                <div class="col-12 col-lg-4" style="padding-left:0px;">
+                                    <label for="servings">Servings</label>
+                                    <input type="text" name="s_servings" id="s_servings"
+                                        [(ngModel)]="searchRes.s_servings">
                                 </div>
-                            </li>
-                        </div>
-                    </div>
-                        </ul>
-                    
-                    </fieldset>
-<br/>
-                    <div class="row" >
-                        <div class="col-12 col-lg-4" style="padding-left:0px;" >
-                            <label for="servings">Servings</label>
-                            <input type="text" name="s_servings" id="s_servings" [(ngModel)]="searchRes.s_servings" >
-                        </div>
-                        <div class="col-12 col-lg-4" style="padding-left:0px;">
-                            <label for="calorietags">Calories in kcal</label>
-                            <input type="text"  [(ngModel)]="searchRes.calories" name="calorieLabels" id="calorieLabels" />
-                        </div> 
-                        <div class="col-12 col-lg-4" style="padding-left:0px;">
-                            <label for="weighttag">Total Weight in gms</label>
-                            <input type="text"  [(ngModel)]="searchRes.totalWeight" name="weighttag" id="weighttag" />
-                        </div>
-                    </div>
-                     
-    
-                  
-   
-                    <div class="row">
-                        <div class="col-12 col-lg-4" style="padding-left:0px;">
-                            <label for="dietLabels">Diet Labels</label>
-                            
-                            <label class="container" style=" text-align: left;
-                            display: inline-block;
-                            font-family: 'Lato', sans-serif;
-                            font-weight: 400;
-                            font-size: 16px;" *ngFor="let dietLabel of dietLabelsList; let d=index;">{{dietLabel.name}}
-                                <input name="videoenabled" id="dietLabel{{d}}" name="dietLabel{{d}}" [(ngModel)] = 'dietLabel.selected' type="checkbox">
-                                <span class="checkmark"></span>
-                            </label>
-                        </div>
-            
-                        <div class="col-12 col-lg-8" style="padding-left:0px;">
-                            <label for="healthtags">Health Labels</label>
-                            <div class="row" style="max-height: 200px;
-                            overflow: auto;">
-                                <div class="col-12 col-lg-6" *ngFor="let healthLabel of healthlabelsList; let h=index;" style="padding-left:0px;">
-                                    <label class="container" style=" text-align: left;
-                                    display: inline-block;
-                                    font-family: 'Lato', sans-serif;
-                                    font-weight: 400;
-                                    font-size: 16px;" >{{healthLabel.name}}
-                                        <input name="videoenabled" id="healthLabel{{h}}" name="healthLabel{{h}}" [(ngModel)] = 'healthLabel.selected' type="checkbox">
+                                <div class="col-12 col-lg-4" style="padding-left:0px;">
+                                    <label for="calorietags">Calories in kcal</label>
+                                    <input type="text" [(ngModel)]="searchRes.calories" name="calorieLabels"
+                                        id="calorieLabels" />
+                                </div>
+                                <div class="col-12 col-lg-4" style="padding-left:0px;">
+                                    <label for="weighttag">Total Weight in gms</label>
+                                    <input type="text" [(ngModel)]="searchRes.totalWeight" name="weighttag"
+                                        id="weighttag" />
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12 col-lg-4" style="padding-left:0px;">
+                                    <label for="dietLabels">Diet Labels</label>
+                                    <label class="container" style=" text-align: left; display: inline-block; font-family: 'Lato', sans-serif; font-weight: 400; font-size: 16px;" *ngFor="let dietLabel of dietLabelsList; let d=index;">{{dietLabel.name}}
+                                        <input name="videoenabled" id="dietLabel{{d}}" name="dietLabel{{d}}"
+                                            [(ngModel)]='dietLabel.selected' type="checkbox">
                                         <span class="checkmark"></span>
                                     </label>
                                 </div>
+
+                                <div class="col-12 col-lg-8" style="padding-left:0px;">
+                                    <label for="healthtags">Health Labels</label>
+                                    <div class="row" style="max-height: 200px; overflow: auto;">
+                                        <div class="col-12 col-lg-6" style="padding-left:0px;"
+                                            *ngFor="let healthLabel of healthlabelsList; let h=index;">
+                                            <label class="container" style=" text-align: left; display: inline-block; font-family: 'Lato', sans-serif; font-weight: 400;  font-size: 16px;">{{healthLabel.name}}
+                                                <input name="videoenabled" id="healthLabel{{h}}" name="healthLabel{{h}}"
+                                                    [(ngModel)]='healthLabel.selected' type="checkbox">
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+
+                                <div>
+                                    <div class="col-12 col-lg-6" style="padding-left:0px;margin-top:10px">
+                                        <label for="mealtype">Meal Type&nbsp;</label>
+                                        <select name="mealtype" [(ngModel)]="searchRes.mealType"
+                                            (change)="mtypeChange()" id="mealtype" class="advance-selectable"
+                                            tabindex="0">
+                                            <option value="" selected="selected">None</option>
+                                            <option value="breakfast">Breakfast</option>
+                                            <option value="snack1">Pre-lunch Snack</option>
+                                            <option value="lunch">Lunch</option>
+                                            <option value="snack2">Evening Snack</option>
+                                            <option value="dinner">Dinner</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-12 col-lg-6" style="padding-left:0px;margin-top:10px">
+                                        <label for="ispublic">Available in Search Listing?</label>
+                                        <label class="container" style=" text-align: left; display: inline-block; font-family: 'Lato', sans-serif; font-weight: 400;    font-size: 16px;">Make Public?
+                                            <input id="ispublic" name="ispublic" [(ngModel)]='ispublic' type="checkbox">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                </div>
                             </div>
-                           
-                           
-                        </div>
-                 
-                      
-                        <div  >
-                        <div class="col-12 col-lg-6" style="padding-left:0px;margin-top:10px">
-                            <label for="mealtype">Meal Type&nbsp;</label>            
-                            <select name="mealtype" [(ngModel)]="searchRes.mealType" (change)="mtypeChange()" id="mealtype" class="advance-selectable" tabindex="0">
-                                <option value="" selected="selected">None</option>
-                                <option value="breakfast">Breakfast</option>
-                                <option value="snack1">Pre-lunch Snack</option>
-                                <option value="lunch">Lunch</option>
-                                <option value="snack2">Evening Snack</option>
-                                <option value="dinner">Dinner</option>
-                            </select>   
-                        </div>
-                        <div class="col-12 col-lg-6" style="padding-left:0px;margin-top:10px">
-                            <label for="ispublic">Available in Search Listing?</label>            
-                            <label class="container" style=" text-align: left;
-                            display: inline-block;
-                            font-family: 'Lato', sans-serif;
-                            font-weight: 400;
-                            font-size: 16px;">Make Public?
-                                <input id="ispublic" name="ispublic" [(ngModel)] = 'ispublic' type="checkbox">
-                                <span class="checkmark"></span>
-                            </label>  
-                        </div>
-                    </div>
+                            <br />
 
+                            <div class="row">
+                                <div class="col-12 col-md-6 col-lg-6" style="padding-left:0px;">
+                                    <label class='comment-label'>Upload Image&nbsp;&nbsp;</label>
+                                    <button (click)="uploadmedia('image')" class="upload-comment">
+                                        <i class="fa fa-picture-o" aria-hidden="true"></i>Upload Image</button>
+                                    <div>
+                                        <input id="inputuploadrecipe" hidden type="file" name="inputuploadrecipe"
+                                            (change)="onFileSelect($event)" />
+                                    </div>
+                                    <img *ngIf="searchRes.image" src="{{searchRes.image}}"
+                                        style="width: 90%; max-width: 200px;" />
+                                </div>
 
-
-
-                    </div>
-<br/>
-
-                    <div class="row">
-                        <div class="col-12 col-md-6 col-lg-6" style="padding-left:0px;">
-                            <label  class='comment-label'>Upload Image&nbsp;&nbsp;</label>
-                            <button (click)="uploadmedia('image')" class="upload-comment">
-                               <i class="fa fa-picture-o" aria-hidden="true"></i>Upload Image</button>
-                           <div>
-                               <input id="inputuploadrecipe" hidden type="file" name="inputuploadrecipe" (change)="onFileSelect($event)" />
-                             </div>
-                             <img *ngIf="searchRes.image" src="{{searchRes.image}}"  style="width: 90%; max-width: 200px;" />
-                     
-                             
-                          </div>
-
-                        <div class="col-12 col-md-6 col-lg-6" style="padding-left:0px;">
-                         
-
-                                <label class='comment-label'>Upload Video&nbsp;&nbsp;</label>
+                                <div class="col-12 col-md-6 col-lg-6" style="padding-left:0px;">
+                                    <label class='comment-label'>Upload Video&nbsp;&nbsp;</label>
                                     <button (click)="uploadmedia('video')" class="upload-comment">
                                         <i class="fa fa-file-video-o" aria-hidden="true"></i> Upload Video</button>
                                     <div *ngIf="searchRes.video" style="width:100%; display:block">
@@ -223,35 +257,29 @@
                                             Your browser does not support HTML video.
                                         </video>
                                     </div>
-                          
-                        </div>
+                                </div>
+                            </div>
+
+                            <div class="text-center">
+                                <button type="submit" (click)="saveRecipe()" class="recipe-submit-btn">Submit Your
+                                    Recipe</button>
+                            </div>
+                        </form>
                     </div>
+                </div>
+            </div>
+            <div class="col-12  col-md-4 col-lg-3">
+                <aside>
+                    <div class="side-bar">
 
 
-                   
+                        <app-sidebar></app-sidebar>
 
-                      
-                
-                  
-                    <div class="text-center">
-                        <button type="submit" (click)="saveRecipe()"  class="recipe-submit-btn">Submit Your Recipe</button>
+
                     </div>
-                </form>
+                </aside>
             </div>
         </div>
+
     </div>
-   <div class="col-12  col-md-4 col-lg-3">
-    <aside>
-    <div class="side-bar">
-   
-   
-    <app-sidebar></app-sidebar>
-   
-    
-    </div>
-    </aside>
-    </div>
-    </div>
-    
-    </div>
-    </div>
+</div>
