@@ -777,6 +777,8 @@ plan: any = {"id":'', "day":"", "mealType":""};
 showAdd2MP: boolean = false;
 loadPlanNames()
 {
+	if(this.currentUser && this.currentUser["id"])
+	{
 	this.plansList = [];
 
 	var params = {};
@@ -794,6 +796,7 @@ loadPlanNames()
 	  this.loadOptions();
 
 	}));
+}
 }
 loadOptions()
 {
