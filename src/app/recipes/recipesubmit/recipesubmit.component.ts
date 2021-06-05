@@ -1,4 +1,4 @@
-import { Component, OnInit,OnDestroy, OnChanges  } from '@angular/core';
+import { Component, OnInit,OnDestroy, OnChanges, HostListener  } from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
 import { UserService } from '../../services/user.service';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -11,6 +11,7 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { HttpHeaders } from '@angular/common/http';
 import { recipe } from '../../jsonfiles/recipestructure';
+import { ToastrService } from 'ngx-toastr';
 @Component({
 	selector: 'app-recipesubmit',
 	templateUrl: './recipesubmit.component.html',
@@ -32,7 +33,12 @@ export class RecipesubmitComponent implements OnInit, OnChanges {
 	apiUrl: any = "";
 	ispublic: boolean = false;
 	isEdit:boolean = false;
-	constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
+	@HostListener('document:click', ['$event'])
+  	clickout(args) {
+		this.callhideFunct(args);
+  }
+  
+	constructor(private router: Router, private toastr: ToastrService, private route: ActivatedRoute, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
 	
 	}
 ngOnChanges()
@@ -86,8 +92,8 @@ loadDefaults()
 }
 measureList: Array<any> =[];
 foodCategoryList: Array<any> =[];
-showFoodCategories: any = false;
-showMeasures: any = false;
+showFoodCategories:  Array<any> =[];
+showMeasures:  Array<any> =[];
 displayListMeasure: Array<any> =[];
 displayListFoodCat: Array<any> =[];
 setDefaults()
@@ -102,8 +108,8 @@ quantity: 3
 text: "3 cups peeled, chopped, ripe Asian pears (about 3 large)"
 weight: 420
 	*/
-	this.showFoodCategories = false;
-	this.showMeasures = false;
+	this.showFoodCategories = [];
+	this.showMeasures = [];
 
 	this.measureList = constants.measureList.sort();
 	this.displayListMeasure = this.measureList;
@@ -198,15 +204,22 @@ loadRecipe(id)
 			  }
 			  this.searchRes["digestArr"]  = tempDigest;
 			  this.searchRes['nutrientsArr'] = tempNutrients;
+			  var ingfound =false;
 			  if(typeof(this.searchRes["ingredients"]) !== "undefined" && this.searchRes["ingredients"] !== "")
 			  {
 				try{
 					console.log(this.searchRes["ingredients"]);
-					this.searchRes["ingredients"] = JSON.parse(this.searchRes["ingredients"]);
+					
+						this.searchRes["ingredients"]= JSON.parse(this.searchRes["ingredients"]);
+				
+						this.ingredients = this.searchRes["ingredients"];
+						ingfound  = true;
 				}
 				catch(error)
 				{
 					this.searchRes["ingredients"] = this.searchRes["ingredients"].split("~");
+					this.ingredients = this.searchRes["ingredients"];
+					ingfound  = true;
 				}
 			 }
 		
@@ -215,6 +228,8 @@ loadRecipe(id)
 			console.log(this.searchRes);
 			console.log("this.searchRes");
 			 console.log(this.searchRes["ingredientLines"]);
+			 if(!ingfound)
+			 {
 			 if(typeof(this.searchRes["ingredientLines"]) !== "undefined" && this.searchRes["ingredientLines"] !== "")
 			 {
 				var tempIng= this.searchRes["ingredientLines"].split("~");
@@ -234,6 +249,12 @@ loadRecipe(id)
 				}
 
 			 }
+			 else
+			 {
+				this.addRows("ing");
+			 }
+
+			}
 			 else
 			 {
 				this.addRows("ing");
@@ -449,8 +470,7 @@ formatIngredients()
 		if(typeof(this.ingredients[i]["nutrients"]) !== "undefined")
 		this.consolidateNutrients(this.ingredients[i]["nutrients"]);
 		this.formatLabels(this.ingredients[i]["nutrients"]);
-		var tempIng = JSON.parse(JSON.stringify(this.ingredients));
-		this.searchRes["ingredients"].push(tempIng);
+	
 	}
 	if(temp !== '')
 	temp=  temp.slice(0, -1);
@@ -459,7 +479,7 @@ formatIngredients()
 	this.searchRes["totalNutrients"] = JSON.stringify(this.cons_Nutrients);
 	this.searchRes["calories"] = this.total_calories;
 	
-	this.searchRes["ingredients"] = JSON.stringify(this.searchRes["ingredients"]);
+	//this.searchRes["ingredients"] = this.ingredients;
 }
 
 formatLabels(item)
@@ -610,6 +630,19 @@ saveRecipe()
 	{
 		params["ingredientLines"] =this.searchRes["ingredientLines"];
 	}
+
+	if(typeof(this.ingredients) !== "undefined" && this.ingredients["length"] > 0)
+	{
+		var ting =[];
+		for(let n = 0; n < this.ingredients.length; n++)
+		{
+		var tempIng = JSON.parse(JSON.stringify(this.ingredients[n]));
+		delete tempIng["nutrients"];
+		ting.push(tempIng);
+		}
+		console.log(ting);
+		params["ingredients"] =JSON.stringify(ting);
+	}
 	if(typeof(this.searchRes["instructionLines"] ) !== "undefined" && this.searchRes["instructionLines"]  !== "")
 	{
 		params["s_instructions"] =this.searchRes["instructionLines"];
@@ -640,6 +673,7 @@ saveRecipe()
 	if(typeof(this.searchRes.s_servings) !== "undefined"  &&  this.searchRes.s_servings !== "")
 	{
 		params["s_servings"] =this.searchRes.s_servings;
+		params["yield"] =this.searchRes.s_servings;
 	}
 	if(typeof(this.searchRes['mealType']) !== "undefined"  &&  this.searchRes['mealType'] !== "")
 	{
@@ -649,7 +683,7 @@ saveRecipe()
 	{
 		params["ispublic"] =this.searchRes.ispublic;
 	}
-
+	
 	if(typeof(this.searchRes.image) !== "undefined"  &&  this.searchRes.image !== "")
 	{
 		params["image"] =this.searchRes.image;
@@ -673,6 +707,7 @@ saveRecipe()
 			console.log(params);
 			var res =   this.dbService.updateDataByTable("recipes", params).subscribe(recipeData => setTimeout(() => {
 				console.log(recipeData);	
+				this.toastr.success('Recipe has been updated!!!', 'Submit Recipe!');
 				this.loadRecipe(this.searchRes.id);
 				
 			}));
@@ -687,6 +722,7 @@ saveRecipe()
 		
 				if(recipeData['inserted_id'] !== "undefined" && recipeData['inserted_id'] !== "")
 				{
+					this.toastr.success('Recipe has been saved!!!', 'Submit Recipe!');
 					this.loadRecipe(recipeData['inserted_id']);	
 				}
 			}));
@@ -749,6 +785,7 @@ console.log("type " + type);
 		  console.log(resultData);
 		  if(typeof(resultData) !== "undefined" && resultData !== null)
 		  {
+		
 			if(typeof(resultData["name"]) !== "undefined" && resultData["name"] !== null && resultData["name"] !== "")
 			{
 				var urlapi = this.apiUrl.replace("/api","");
@@ -794,6 +831,44 @@ formatVal(str)
    this.router.navigate(["recipes"]);    
 }
 
+callhideFunct(args)
+	{
+	
+
+
+			console.log("Document onclick incident");
+			console.log("args.srcElement.id");
+		console.log(args.srcElement.id);
+			/*
+			if(typeof(args.srcElement.id) !== "undefined"  && (args.srcElement.id.indexOf("btnsavefinish") > -1 || args.srcElement.id.indexOf("btnsavecomplete") > -1 || args.srcElement.id.indexOf("btncompleteno") > -1 ||args.srcElement.id.indexOf("btncompleteyes") > -1 ||args.srcElement.id.indexOf("btnplansavecomplete") > -1 ||args.srcElement.id.indexOf("btnplansavefinish") > -1 ||args.srcElement.id.indexOf("btnplancompleteno") > -1 ||args.srcElement.id.indexOf("btnplancompleteyes") > -1) )
+			{
+
+			}
+			else
+			{
+			//	console.log(this.invModel);
+			//	this.autosave();
+			}
+			*/
+
+			var classlist = ["add-fields","food-category", "food-measure", "autofillpanel"];
+
+			var matchFlag = 0;
+			for (let ip = 0; ip < classlist.length; ip++) {
+				if (args.srcElement.className.indexOf(classlist[ip]) !== -1) {
+					matchFlag = 1;
+				}
+			}
+			if (matchFlag == 0) {
+				for(let i=0; i < this.ingredients.length; i++)
+				{
+					this.ingredients[i]["showFoodCategories"] = false;
+					this.ingredients[i]["showMeasures"] = false;
+				}
+			}
+	}
+
+
 setValue(item, key, value, index)
 {
 	console.log("in setValue");
@@ -801,10 +876,10 @@ setValue(item, key, value, index)
 	console.log(value);
 	item[key] = value;
 	if(key == "foodCategory")
-	this.showFoodCategories = false;
+	item.showFoodCategories = false;
 
 	if(key == "measure")
-	this.showMeasures = false;
+	item.showMeasures = false;
 
 }
 /*
@@ -813,9 +888,14 @@ this.displayListMeasure = this.measureList;
 	this.displayListFoodCat = this.foodCategoryList;
 	*/
 
-	resetDropdown()
+	resetDropdown(ingredient)
 	{
-		this.showFoodCategories = false; this.showMeasures = false;
+		for(let i=0; i < this.ingredients.length; i++)
+		{
+			this.ingredients[i]["showFoodCategories"] = false;
+			this.ingredients[i]["showMeasures"] = false;
+		}
+	//	ingredient.showFoodCategories = false; ingredient.showMeasures = false;
 	}
 filterList(item, key)
 {
