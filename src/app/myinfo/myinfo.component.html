@@ -1,39 +1,39 @@
 <div class="fixedtop myinfo recipes-home-body inner-page">
     <div class="row page-max-width bg-white">  
 
-<div class="col-12 col-md-6 col-lg-6">  
+<div class="col-12 col-md-6 col-lg-4">  
   <div class="form-group">
     <div class="input-label"> Username </div>
     <input type="text" class="input-text" (blur)="changeInfo('username')" [(ngModel)] = "currentUser['username']" />
   </div>
 </div>
-<div class="col-12 col-md-6 col-lg-6"> 
+<div class="col-12 col-md-6 col-lg-4"> 
   
   <div class="form-group">
     <div class="input-label" > Email </div>
     <input type="text"  class="input-text"  (blur)="changeInfo('email')" [(ngModel)] = "currentUser['email']" />
   </div>
 </div>
-<div class="col-12 col-md-6 col-lg-6">
+<div class="col-12 col-md-6 col-lg-4">
   <div class="form-group">
       <div class="input-label" >  Firstname </div>
       <input type="text"  class="input-text"  (ionBlur)="changeInfo('firstname')" [(ngModel)] = "currentUser['firstname']" />
     </div>
   
 </div>
-<div class="col-12 col-md-6 col-lg-6">
+<div class="col-12 col-md-6 col-lg-4">
     <div class="form-group">
       <div class="input-label" >  Lastname </div>
       <input type="text"  class="input-text"  (blur)="changeInfo('lastname')" [(ngModel)] = "currentUser['lastname']" />
     </div>
 </div>
-<div class="col-12 col-md-6 col-lg-6">
+<div class="col-12 col-md-6 col-lg-4">
   <div class="form-group">
     <div class="input-label" >  Phone </div>
     <input  type="text" class="input-text"  (blur)="changeInfo('phone')" [(ngModel)] = "currentUser['phone']" />
   </div>
 </div>
-<div class="col-12 col-md-6 col-lg-6">
+<div class="col-12 col-md-6 col-lg-4">
   <div class="form-group">
     <div class="input-label" >Date of Birth</div>
     <!--<ion-datetime (ionChange)="changeInfo('dob')" [(ngModel)] = "currentUser['dob']"  placeholder="None"></ion-datetime>-->
@@ -43,13 +43,13 @@
 
   </div>
 </div>
-<div class="col-12 col-md-6 col-lg-6">  
+<div class="col-12 col-md-6 col-lg-4">  
   <div class="form-group">
     <div class="input-label">Age</div>
     <input type="text"  class="input-text"  (blur)="changeInfo('age')" [(ngModel)] = "currentUser['age']" />
   </div>
 </div>
-<div class="col-12 col-md-6 col-lg-6">  
+<div class="col-12 col-md-6 col-lg-4">  
   <div class="form-group">
     <div class="input-label">Gender</div>
     <select class="select input-text" (change)="changeInfo('gender')" [(ngModel)]="currentUser['gender']" >
@@ -58,13 +58,13 @@
     </select>
   </div>
 </div>
-<div class="col-12 col-md-6 col-lg-6"> 
+<div class="col-12 col-md-6 col-lg-4"> 
   <div class="form-group">
     <div class="input-label">Height (in cms)</div>
     <input class="input-text" (blur)="changeInfo('height')" [(ngModel)] = "currentUser['height']" />
   </div>
 </div>
-<div class="col-12 col-md-6 col-lg-6">
+<div class="col-12 col-md-6 col-lg-4">
   <div class="form-group">
     <div class="input-label">Weight (in kgs)</div>
     <input class="input-text"  (blur)="changeInfo('weight')" [(ngModel)] = "currentUser['weight']" />
@@ -72,7 +72,7 @@
 </div>
 <div class="col-12">
     <div class="row">
-        <div class="col-12 col-lg-6 col-md-6">
+        <div class="col-12 col-lg-4 col-md-6">
            
 
             <div style="display:block"> <img style="max-width:250px;" src="{{profileImage}}" /></div>
@@ -84,7 +84,7 @@
               <input id="inputuploadimage" hidden type="file" name="inputuploadimage" (change)="onFileSelect($event)" />
 
           </div>
-        <div class="col-12 col-lg-6 col-md-6">
+        <div class="col-12 col-lg-4 col-md-6">
          
         </div>
      

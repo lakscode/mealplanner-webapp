@@ -2,9 +2,11 @@
     <div style="width:100%" style="background: #F8F6F5">
         <div class="container">
     
-<h1> Health Data </h1>
-<div class="row">
-    
+
+<div class="row graphpanel" *ngIf="chartOptionsSteps || chartOptionsCalories || chartOptionsDistance">
+    <div class="col-12" >
+        <h1> Health Data </h1>
+    </div>
     <div class="col-12 col-lg-4" *ngIf="chartOptionsSteps">
         <highcharts-chart [Highcharts]="Highcharts" [constructorType]="chartConstructor"
         [options]="chartOptionsSteps" [(update)]="updateFlag" class="graphcommon">
@@ -23,9 +25,11 @@
         </highcharts-chart>
     </div>
 </div>
-<h1 *ngIf="chartOptionsFBSteps || chartOptionsFBCalories || chartOptionsFBDistance"> Fitbit Data </h1>
-<div class="row">
-    
+
+<div class="row graphpanel" *ngIf="chartOptionsFBSteps || chartOptionsFBCalories || chartOptionsFBDistance">
+    <div class="col-12">
+        <h1 > Fitbit Data </h1>
+    </div>
     <div class="col-12 col-lg-4" *ngIf="chartOptionsFBSteps">
         <highcharts-chart [Highcharts]="Highcharts" [constructorType]="chartConstructor"
         [options]="chartOptionsFBSteps" [(update)]="updateFlag" class="graphcommon">
@@ -45,9 +49,11 @@
     </div>
 </div>
 
-<h1 *ngIf="chartOptionsWeight || chartOptionsFBDistance"> Additional Charts </h1>
-<div class="row">
-    
+
+<div class="row graphpanel" *ngIf="chartOptionsWeight || chartOptionsFBDistance">
+    <div class="col-12">
+        <h1 > Additional Charts </h1>
+    </div>
     <div class="col-12 col-lg-4" *ngIf="chartOptionsBp">
         <highcharts-chart [Highcharts]="Highcharts" [constructorType]="chartConstructor"
         [options]="chartOptionsBp" [(update)]="updateFlag" class="graphcommon">

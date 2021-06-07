@@ -796,7 +796,7 @@ loadPlanNames()
 	  this.loadOptions();
 
 	}));
-}
+	}
 }
 loadOptions()
 {

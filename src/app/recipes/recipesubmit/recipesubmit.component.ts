@@ -917,7 +917,7 @@ this.displayListMeasure = this.measureList;
 	this.displayListFoodCat = this.foodCategoryList;
 	*/
 
-	resetDropdown(ingredient)
+	resetDropdown()
 	{
 		for(let i=0; i < this.ingredients.length; i++)
 		{
