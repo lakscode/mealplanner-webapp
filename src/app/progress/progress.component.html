@@ -1,12 +1,12 @@
 <section class="fixedtop wrapper-main-contents all-chefs">
-    <div style="width:100%" style="background: #F8F6F5">
+    <div style="width:100%" >
         <div class="container">
+             <div class="line-heading" style="padding-bottom:0;padding-bottom:20px">
+        <h2 style="margin-bottom:20px">Health Data</h2>
+    </div>
     
 
 <div class="row graphpanel" *ngIf="chartOptionsSteps || chartOptionsCalories || chartOptionsDistance">
-    <div class="col-12" >
-        <h1> Health Data </h1>
-    </div>
     <div class="col-12 col-lg-4" *ngIf="chartOptionsSteps">
         <highcharts-chart [Highcharts]="Highcharts" [constructorType]="chartConstructor"
         [options]="chartOptionsSteps" [(update)]="updateFlag" class="graphcommon">
