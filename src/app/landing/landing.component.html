@@ -104,7 +104,7 @@
   
 
 <!--hottest recipes-->
-<section class="hot-recipes-var2" *ngIf="communitiesList && communitiesList.length > 0">
+<section class="hot-recipes-var2" *ngIf="collectionsList && collectionsList.length > 0">
    <div class="container">
        <div class="wrapper-hot-recipe-var2">
           <div class="hot-recipes-bordered">
@@ -117,7 +117,7 @@
                   <!--<div class="col-12" *ngIf="community.community_name">
                       <label for="recipes">Recipes</label>
                   </div>-->
-                  <ng-container  *ngFor="let cItem of communitiesList; let i = index;">
+                  <ng-container  *ngFor="let cItem of collectionsList; let i = index;">
                   <div style="padding-left:0px; padding-right:0px;margin-top:15px;margin-bottom:15px" class="col-12 col-lg-3 col-md-4">
                       <div class="recipe-item" style="min-height:200px;background-size:cover;  background-position:center;  " [ngStyle]="{'background-image':'linear-gradient(
                           rgba(0, 0, 0, 0.3),
@@ -136,7 +136,7 @@
 
                           <div class="col-12" style="padding-left:0px; padding-right:0px">
                               
-                          <h1 class="recipe-label" style="font-size:20px; line-height: 32px;">{{cItem.community_name}}</h1>
+                          <h1 class="recipe-label" style="font-size:20px; line-height: 32px;">{{cItem.collection_name}}</h1>
                           <!--<p *ngIf="cItem.recipecount && cItem.recipecount >0" style="text-align:left;"><i class="fa fa-cutlery"></i> {{cItem.recipecount}} recipes</p>
                           <br>
                           <p *ngIf="cItem.userscount && cItem.userscount > 0" style="text-align:left;"><i class="fa fa-user"></i> {{cItem.userscount}} members</p>-->
@@ -287,7 +287,7 @@
                               <div class="short-separator"></div>
                               <p style="text-align:left;">Calories: {{rRecipe.calories}}</p>
                               <br>
-                              <p style="text-align:left;">Diet Labels: {{rRecipe.dietLabels}}</p>
+                              <p *ngIf="rRecipe.dietLabels" style="text-align:left;">Diet Labels: {{formatLabels(rRecipe.dietLabels)}}</p>
                               <br>
                               <div class="short-separator"></div>
                               <a class="read-more" (click)="gotoRecipeDetails('recipedetails',rRecipe.id)">view more</a>

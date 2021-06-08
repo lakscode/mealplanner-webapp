@@ -74,7 +74,7 @@ constructor(private router: Router, private httpClient : HttpClient, private san
 	}
 	loadRecommendedRecipes()
 	{
-		
+		console.log("recommendedRecipes");
 	  this.recommendedRecipes = [];
   
 	  var params = {"limit": "4"};
@@ -91,7 +91,7 @@ constructor(private router: Router, private httpClient : HttpClient, private san
 
 	  var res =   this.dbService.getDatabyQuery("recipes", params).subscribe(invData => setTimeout(() => {
    
-	  //console.log(invData);
+	  console.log(invData);
    
 	   if(invData !== null && typeof(invData["body"]) !== "undefined" && invData["body"] !== null && invData["body"]["length"] > 0)
 		 {
@@ -513,10 +513,16 @@ getUserPreferences()
 		}
 	  }
 	 
-	  this.loadCommunities();
+	  this.loadcollections();
 	  this.loadRecommendedRecipes();
 	} ));
 
+  }
+  else
+  {
+	   
+	this.loadcollections();
+	this.loadRecommendedRecipes();
   }
 }
 
@@ -526,33 +532,32 @@ transform(value: any) {
 	console.log(retvalue);
     return retvalue;
   }
-  communitiesList: Array<any> = [];
-  loadCommunities()
+  collectionsList: Array<any> = [];
+  loadcollections()
   {
 	   /******** recipes api serach */
-
  
-	  this.communitiesList = [];
+	  this.collectionsList = [];
 	 // var params = {"limit": 100};
 	 // params["createdby"] = this.currentUser["id"];
 	  console.log(params);
-	  var params = {"query": "SELECT c.*, COUNT(rm.id) AS recipecount, u.email, u.firstname, u.lastname FROM community AS c LEFT JOIN recipe_mapping AS rm ON c.id = rm.community_id LEFT JOIN users AS u ON c.created_by = u.id GROUP BY c.id limit 0, 4"};
+	  var params = {"query": "SELECT c.*, COUNT(rm.id) AS recipecount, u.email, u.firstname, u.lastname FROM collection AS c LEFT JOIN recipe_mapping AS rm ON c.id = rm.collection_id LEFT JOIN users AS u ON c.created_by = u.id GROUP BY c.id limit 0, 4"};
 
-	  var res =   this.dbService.getDatabyTablebyQuery("community", params).subscribe(invData => setTimeout(() => {
+	  var res =   this.dbService.getDatabyTablebyQuery("collection", params).subscribe(invData => setTimeout(() => {
   
 		console.log(invData);
 		if(invData !== null)
 		{
 		  var obj = invData["body"]["length"];
 		  console.log(invData["body"]);
-		  this.communitiesList = invData["body"];
-		  for(let o=0; o <  this.communitiesList.length; o++)
+		  this.collectionsList = invData["body"];
+		  for(let o=0; o <  this.collectionsList.length; o++)
 		{
-			this.communitiesList[o]["userjoined"] = false;
-			this.communitiesList[o]["image"] =encodeURI( this.communitiesList[o]["image"]);
+			this.collectionsList[o]["userjoined"] = false;
+			this.collectionsList[o]["image"] =encodeURI( this.collectionsList[o]["image"]);
 		}
 
-		  console.log(this.communitiesList);
+		  console.log(this.collectionsList);
 		  this.loaduserCount();
 		}
 	  }));
@@ -563,18 +568,12 @@ transform(value: any) {
   
   loaduserCount()
   {
-	  /*
-	SELECT c.id, COUNT(cj.id) AS usercount
-	FROM community AS c
-	LEFT JOIN community_join AS cj ON c.id = cj.community_id
-	GROUP BY c.id, cj.community_id
-
-	*/
 
 	console.log("in loadusercount");
-	var params = {"query": "SELECT c.id, COUNT(cj.id) AS usercount 	FROM community AS c LEFT JOIN  community_join AS cj ON c.id = cj.community_id GROUP BY c.id, cj.community_id LIMIT 0, 4"};
 
-	var res =   this.dbService.getDatabyTablebyQuery("community", params).subscribe(invData => setTimeout(() => {
+	var params = {"query": "SELECT c.id, COUNT(cj.id) AS usercount 	FROM collection AS c LEFT JOIN  collection_join AS cj ON c.id = cj.collection_id GROUP BY c.id, cj.collection_id LIMIT 0, 4"};
+
+	var res =   this.dbService.getDatabyTablebyQuery("collection", params).subscribe(invData => setTimeout(() => {
 
 	 
 	  if(invData !== null)
@@ -582,12 +581,12 @@ transform(value: any) {
 		var obj = invData["body"];
 		for(let o=0; o < obj.length; o++)
 		{
-			var fIndex = this.communitiesList.findIndex(x=>(x.id === obj[o]["id"]));
+			var fIndex = this.collectionsList.findIndex(x=>(x.id === obj[o]["id"]));
 			
 			if(fIndex > -1)
 			{
 			//	console.log(obj[o]["usercount"])
-				this.communitiesList[fIndex]["userscount"] = obj[o]["usercount"];
+				this.collectionsList[fIndex]["userscount"] = obj[o]["usercount"];
 			//	console.log(this.communitiesList[fIndex]["userscount"] );
 			}
 		}
@@ -608,9 +607,9 @@ transform(value: any) {
 	*/
 
 	console.log("in loaduserJoinedStatus");
-	var params = {"query": "SELECT id, community_id from community_join where userid = " + this.currentUser["id"] };
+	var params = {"query": "SELECT id, collection_id from collection_join where userid = " + this.currentUser["id"] };
 
-	var res =   this.dbService.getDatabyTablebyQuery("community", params).subscribe(invData => setTimeout(() => {
+	var res =   this.dbService.getDatabyTablebyQuery("collection", params).subscribe(invData => setTimeout(() => {
 
 	 
 	  if(invData !== null)
@@ -619,12 +618,12 @@ transform(value: any) {
 		for(let o=0; o < obj.length; o++)
 		{
 		
-			var fIndex = this.communitiesList.findIndex(x=>(x.id === obj[o]["community_id"]));
+			var fIndex = this.collectionsList.findIndex(x=>(x.id === obj[o]["collection_id"]));
 			
 			if(fIndex > -1)
 			{
 			//	console.log(obj[o]["usercount"])
-				this.communitiesList[fIndex]["userjoined"] = true;
+				this.collectionsList[fIndex]["userjoined"] = true;
 			//	console.log(this.communitiesList[fIndex]["userscount"] );
 			}
 		}
@@ -634,13 +633,13 @@ transform(value: any) {
 
   }
 
-  joinCommunity(id)
+  joincollection(id)
   {
 	var params = {};
 	//params["created_by"]  = this.currentUser["id"];
 	console.log(params);
-	params ['query'] = "select * from community_join where community_id = " + id + " AND userid = " + this.currentUser["id"];
-	var res =   this.dbService.getDatabyTablebyQuery("community_join", params).subscribe(invData => setTimeout(() => {
+	params ['query'] = "select * from collection_join where collection_id = " + id + " AND userid = " + this.currentUser["id"];
+	var res =   this.dbService.getDatabyTablebyQuery("collection_join", params).subscribe(invData => setTimeout(() => {
 
 	  console.log(invData);
 	  if(invData !== null && invData["body"]["length"] > 0)
@@ -650,11 +649,11 @@ transform(value: any) {
 	  else
 	  {
 		var params = {};
-		params["community_id"] =id;
+		params["collection_id"] =id;
 		params["userid"] =this.currentUser["id"];
 		
-		var res =   this.dbService.postDataByTable("community_join", params).subscribe(dData => setTimeout(() => {
-			alert("Joined community ");
+		var res =   this.dbService.postDataByTable("collection_join", params).subscribe(dData => setTimeout(() => {
+			alert("Joined collection ");
 		}));
 
 	  }

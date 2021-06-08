@@ -12,7 +12,7 @@ import { constants } from './../../jsonfiles/constants';
 import { HttpHeaders } from '@angular/common/http';
 import { env } from 'process';
 import { DomSanitizer } from '@angular/platform-browser';
-
+import { ToastrService } from 'ngx-toastr';
 @Component({
 	selector: 'app-recipedetails',
 	templateUrl: './recipedetails.component.html',
@@ -52,7 +52,7 @@ urlWhatsApp: any;
 msg: any = "";
 labeltext: any = "";
 perServingFlag: boolean = true;
-	constructor(private router: Router, private route: ActivatedRoute, private sanitize: DomSanitizer, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
+	constructor(private router: Router, private route: ActivatedRoute, private toastr: ToastrService,  private sanitize: DomSanitizer, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
 	
 	}
 
@@ -835,7 +835,7 @@ add2Plan()
 		}
 		else
 		{
-			alert("Already recipe added");
+			this.toastr.warning('Another Recipe has been already added to selected meal type of the plan!!!', 'Add to Meal Plan');
 		}
 	  }
 	  else
@@ -859,7 +859,9 @@ add2Plan()
  
 	
 		var res =   this.dbService.postDataByTable("days", params).subscribe(dData => setTimeout(() => {
-			alert("New day record created for plan");
+		//	alert("New day record created for plan");
+			this.toastr.success('Recipe has been added to the selected meal type of the plan!!!', 'Add to Meal Plan');
+	
 		}));
 
 	  }
@@ -873,7 +875,8 @@ updateMealType()
 	var params1 = {};
 	params1 ['query'] = "update days set " + this.plan["mealType"] + " = " + this.searchRes["id"] + " where meal_plan_id = " + this.plan["id"] + " AND day_num = " + this.plan["day"];
 	var res =   this.dbService.getDatabyTablebyQuery("days", params1).subscribe(invData => setTimeout(() => {
-
+		this.toastr.success('Recipe has been added to the selected meal type of the plan!!!', 'Add to Meal Plan');
+	
 	}));
 }
 

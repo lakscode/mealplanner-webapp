@@ -328,30 +328,28 @@ getUserPreferences()
 
   if(typeof(this.user_ipaddress) !=="undefined" && this.user_ipaddress !== null && this.user_ipaddress !== "")
   {
-	params["user_ipaddress"] = this.user_ipaddress;
-	paramFound = true;
-	qWhere  = " user_ipaddress = '" + this.user_ipaddress  + "' ";
+    params["user_ipaddress"] = this.user_ipaddress;
+    paramFound = true;
+    qWhere  = " user_ipaddress = '" + this.user_ipaddress  + "' ";
   }
  
   if(typeof(this.uniqueid) !=="undefined" && this.uniqueid !== null && this.uniqueid !== "")
   {
-	params["uniqueid"] = this.uniqueid;
-	paramFound = true;
-	if(qWhere == "")
-	{
-	  qWhere  += " user_uniqueid = '" + this.uniqueid + "' " ;
-	}
-	else
-	{
-	  qWhere  += " OR user_uniqueid = '" + this.uniqueid  + "'  " ;
-	}
+    params["uniqueid"] = this.uniqueid;
+    paramFound = true;
+    if(qWhere == "")
+    {
+      qWhere  += " user_uniqueid = '" + this.uniqueid + "' " ;
+    }
+    else
+    {
+      qWhere  += " OR user_uniqueid = '" + this.uniqueid  + "'  " ;
+    }
   }
  
-
 	if(paramFound)
 	{
-   
-	  var params1 = {};
+    var params1 = {};
 	  params1["query"] = "select * from questionnaire ";
 	  if(qWhere !== "")
 	  {
@@ -372,6 +370,10 @@ getUserPreferences()
 		
 	} ));
 
+  }
+  else
+  {
+    this.loadRecipes();
   }
 }
 
