@@ -450,7 +450,7 @@ display:block;
   top: 0px;
   right: 0;
   width: 300px;
-    height: 200px;
+    height: 340px;
     background: #FFF;
     color: #555;
     padding: 10px;
@@ -474,6 +474,40 @@ z-index:999;
 .add2mealplan:hover .moremenu
 {
 //display:block;
+}
+.add2mealplanmenu .title
+{
+  margin-bottom: 20px !important;
+    text-align: left;
+    font-size: 20px;
+    font-weight: 700;
+}
+.add2mealplanmenu .lbl
+{
+  margin-bottom:10px !important;
+}
+
+.add2mealplanmenu select
+{
+  margin-bottom:10px !important;
+  padding:10px;
+  width:100%;
+}
+
+.add2mealplanmenu .btn
+{
+  margin-bottom:10px;
+  background-color: $orange1;
+  padding: 5px 10px;
+  color: #FFF !important;
+    font-size: 16px;
+    margin: 0 auto;
+    width: 50%;
+
+}
+.add2mealplanmenu .btn:hover
+{
+  background-color: $orange;
 }
 
 .favactive

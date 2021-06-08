@@ -10,9 +10,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import * as $ from 'jquery';
 import { constants } from '../../jsonfiles/constants';
-import { env } from 'process';
-//declare var $: any;
-
+import { ToastrService } from 'ngx-toastr';
 @Component({
 	selector: 'app-myrecipes',
 	templateUrl: './myrecipes.component.html',
@@ -38,7 +36,7 @@ export class MyRecipesComponent implements OnInit {
 	totalPage: any = 0;
 	displayList: Array<any> = [];
 	nutrientDbFields : Array<any> = [];
-	constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
+	constructor(private router: Router, private route: ActivatedRoute, private toastr: ToastrService, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
 	
 	}
 	toggleMore() {
@@ -479,11 +477,13 @@ endIndex = startIndex+ endIndex;
 	this.new_recipe["label"] = data["name"];
 	this.new_recipe["image"] = data["image"];
 	this.new_recipe["url"] = url;
-	this.new_recipe["ingredientLines"] = data["ingredients"].join("~");
+	this.new_recipe["uri"] = url;
+	this.new_recipe["ingredientLines"] = this.formatString(data["ingredients"].join("~"));
 	
-	this.new_recipe["s_instructions"] = data["instructions"].join("~");
+	this.new_recipe["s_instructions"] = this.formatString(data["instructions"].join("~"));
 	this.new_recipe["created_by"] = this.currentUser["id"];
 	this.new_recipe["status"] = "0";
+	this.new_recipe["source"] = "imported";
 
 	if(data["time"] && data["time"]["total"])
 	{
@@ -532,6 +532,39 @@ getNutrients(item)
 	}));
 
 }
+
+SaveRecipe()
+{
+	console.log(this.new_recipe);
+	console.log(JSON.stringify(this.new_recipe));
+	  var res =   this.dbService.postDataByTable("recipes", this.new_recipe).subscribe(recipeData => setTimeout(() => {
+		console.log(recipeData);
+	
+		if(recipeData['inserted_id'] !== "undefined" && recipeData['inserted_id'] !== "" && recipeData['inserted_id'] !== "0" && recipeData['inserted_id'] !== 0)
+		{
+			this.toastr.success('Recipe has been imported!!!', 'Save Recipe from URL!');
+			this.searchProps();
+		}
+		else
+		{
+			this.toastr.error('Error importing the recipe!!!', 'Save Recipe from URL!');
+		}
+	  }));
+	
+}
+formatString(str)
+{
+  var retVal = str;
+  if(str !== "")
+  {
+	if(str.indexOf("'") > -1)
+	{
+	retVal = retVal.replaceAll("'","");
+	console.log(retVal);
+	}
+  }
+  return retVal;
+}
 cons_Nutrients: any= {};
 total_calories: any = 0;
 total_weight: any = 0;
@@ -561,6 +594,7 @@ formatIngredients()
 	this.new_recipe["totalNutrients"] = JSON.stringify(this.cons_Nutrients);
 	this.new_recipe["calories"] = this.total_calories;
 	console.log(this.new_recipe);
+	this.SaveRecipe();
 }
 
 formatLabels(item)
