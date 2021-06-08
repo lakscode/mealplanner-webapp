@@ -2,21 +2,21 @@
     <div class="container" style="margin:0 auto;padding-top:20px;padding-left:0px;padding-right:0px">
         <div class="row">
         <div class="col-md-12 col-lg-12">
-            <div class="recipe-set">
-               <div style="float:right; background:#FFF; margin-bottom:10px;">
+            <div class="recipe-set">         
+                <h2>Create Plan</h2>
+            </div>
+            <div style="width:100%; text-align:right; background:#FFF; margin-bottom:10px;">
 
-            <a class="copy-button" (click)="downloadplan()" title="Download PDF"><i
-                    class="fa fa-file-pdf-o" style="z-index:-1"></i> Export</a>
-            &nbsp; <a class="copy-button" (click)="getIngredientsList()"
-                title="Ingredients List"><i class="fa fa-download"></i> Grocery List </a>
-            &nbsp;
-        </div>                           
-          
-          <h2>Create Plan</h2>
-          
+                <a class="copy-button" href="javascript:void(0)" (click)="downloadplan()" title="Download PDF"><i
+                        class="fa fa-file-pdf-o" style="z-index:-1"></i> Export</a>
+                &nbsp; <a class="copy-button" href="javascript:void(0)" (click)="getIngredientsList()"
+                    title="Ingredients List"><i class="fa fa-download"></i> Grocery List </a>
+                &nbsp;
             </div>
         </div>
         <div class="col-md-12 col-lg-12">
+            
+
             <div class="submit-recipe-form"
             style="text-align:left; padding-top:10px; padding-bottom:10px;  background-color: #f8f8f8;">
 
@@ -707,7 +707,7 @@
             <div class="modal-header" style="border-bottom:0px;">
                 <h4><b>Grocery List</b></h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"
-                    (click)="closeModal('popuppanel');" style="font-size:40px;color:$text-gray;opacity:1">
+                    (click)="closeModal('popuppanel');" style="font-size:40px;color:#555;opacity:1">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>

@@ -47,7 +47,8 @@ export const data =[{
         {"name":"q8", "value":"c3", "text":"Celery", "subtext":""},
         {"name":"q8", "value":"c4", "text":"Mushrooms", "subtext":""},
 		{"name":"q8", "value":"c5", "text":"Peanut", "subtext":""},
-		{"name":"q8", "value":"c5", "text":"Cocoa and chololate", "subtext":""}
+		{"name":"q8", "value":"c6", "text":"Cocoa and chololate", "subtext":""},
+        {"name":"q8", "value":"c7", "text":"None", "subtext":""}
         ]
     },
     {
@@ -58,7 +59,7 @@ export const data =[{
         {"name":"q9", "value":"c3", "text":"High-Protein", "subtext":""},
         {"name":"q9", "value":"c4", "text":"Low-Carb", "subtext":""},
 		{"name":"q9", "value":"c5", "text":"Low-Fat", "subtext":""},
-		{"name":"q9", "value":"c5", "text":"Low-Sodium", "subtext":""}
+		{"name":"q9", "value":"c6", "text":"Low-Sodium", "subtext":""}
         ]
     }
     ]

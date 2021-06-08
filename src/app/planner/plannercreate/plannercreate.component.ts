@@ -1506,7 +1506,7 @@ console.log(invData);
 
 	getIngredientsList()
 	{
-
+		console.log(" in getIngredientsList");
 	  var ingredientsList = [];
 
 	  var consList = [];
@@ -1571,7 +1571,7 @@ console.log(invData);
 
 		consList = consList.sort(this.sortArraybyIndex);
 	  this.shoppingList = consList
-
+	  console.log(this.shoppingList);
 	  this.openModal("popuppanel");
 	}
 
@@ -1610,6 +1610,7 @@ console.log(invData);
 	}
 	openModal(id)
 	{
+		console.log(id);
 		this.modalService.open(id);
 	}
 	closeModal(id)

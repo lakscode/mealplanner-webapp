@@ -1,0 +1,78 @@
+<section class="fixedtop wrapper-main-contents all-chefs">
+    <div style="width:100%" style="background: #F8F6F5">
+        <div class="container">
+    
+
+<div class="row graphpanel" *ngIf="chartOptionsSteps || chartOptionsCalories || chartOptionsDistance">
+    <div class="col-12" >
+        <h1> Health Data </h1>
+    </div>
+    <div class="col-12 col-lg-4" *ngIf="chartOptionsSteps">
+        <highcharts-chart [Highcharts]="Highcharts" [constructorType]="chartConstructor"
+        [options]="chartOptionsSteps" [(update)]="updateFlag" class="graphcommon">
+        </highcharts-chart>
+    </div>
+
+    <div class="col-12 col-lg-4" *ngIf="chartOptionsCalories">
+        <highcharts-chart [Highcharts]="Highcharts" [constructorType]="chartConstructor"
+        [options]="chartOptionsCalories" [(update)]="updateFlag" class="graphcommon">
+        </highcharts-chart>
+    </div>
+
+    <div class="col-12 col-lg-4" *ngIf="chartOptionsDistance">
+        <highcharts-chart [Highcharts]="Highcharts" [constructorType]="chartConstructor"
+        [options]="chartOptionsDistance" [(update)]="updateFlag" class="graphcommon">
+        </highcharts-chart>
+    </div>
+</div>
+
+<div class="row graphpanel" *ngIf="chartOptionsFBSteps || chartOptionsFBCalories || chartOptionsFBDistance">
+    <div class="col-12">
+        <h1 > Fitbit Data </h1>
+    </div>
+    <div class="col-12 col-lg-4" *ngIf="chartOptionsFBSteps">
+        <highcharts-chart [Highcharts]="Highcharts" [constructorType]="chartConstructor"
+        [options]="chartOptionsFBSteps" [(update)]="updateFlag" class="graphcommon">
+        </highcharts-chart>
+    </div>
+
+    <div class="col-12 col-lg-4" *ngIf="chartOptionsFBCalories">
+        <highcharts-chart [Highcharts]="Highcharts" [constructorType]="chartConstructor"
+        [options]="chartOptionsFBCalories" [(update)]="updateFlag" class="graphcommon">
+        </highcharts-chart>
+    </div>
+
+    <div class="col-12 col-lg-4" *ngIf="chartOptionsFBDistance">
+        <highcharts-chart [Highcharts]="Highcharts" [constructorType]="chartConstructor"
+        [options]="chartOptionsFBDistance" [(update)]="updateFlag" class="graphcommon">
+        </highcharts-chart>
+    </div>
+</div>
+
+
+<div class="row graphpanel" *ngIf="chartOptionsWeight || chartOptionsFBDistance">
+    <div class="col-12">
+        <h1 > Additional Charts </h1>
+    </div>
+    <div class="col-12 col-lg-4" *ngIf="chartOptionsBp">
+        <highcharts-chart [Highcharts]="Highcharts" [constructorType]="chartConstructor"
+        [options]="chartOptionsBp" [(update)]="updateFlag" class="graphcommon">
+        </highcharts-chart>
+    </div>
+
+    <div class="col-12 col-lg-4" *ngIf="chartOptionsWeight">
+        <highcharts-chart [Highcharts]="Highcharts" [constructorType]="chartConstructor"
+        [options]="chartOptionsWeight" [(update)]="updateFlag" class="graphcommon">
+        </highcharts-chart>
+    </div>
+    
+    <div class="col-12 col-lg-4" *ngIf="chartOptionsCaloriesBurned">
+        <highcharts-chart [Highcharts]="Highcharts" [constructorType]="chartConstructor"
+        [options]="chartOptionsCaloriesBurned" [(update)]="updateFlag" class="graphcommon">
+        </highcharts-chart>
+    </div>
+    
+</div>
+</div> 
+</div> 
+</section>
