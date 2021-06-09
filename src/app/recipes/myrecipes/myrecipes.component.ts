@@ -36,11 +36,7 @@ export class MyRecipesComponent implements OnInit {
 	totalPage: any = 0;
 	displayList: Array<any> = [];
 	nutrientDbFields : Array<any> = [];
-<<<<<<< HEAD
-	recipeurl: any = "";
-=======
 	recipeurl :any;
->>>>>>> 18c4159cb23077e3854c5070345802dafc62918e
 	constructor(private router: Router, private route: ActivatedRoute, private toastr: ToastrService, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
 	
 	}
