@@ -79,11 +79,11 @@ perServingFlag: boolean = true;
 	 //  console.log(params);   
 		this.routeParams = params;     
 		if (typeof (this.routeParams.id) !== "undefined") {
-			console.log(this.routeParams.id);
+		//	console.log(this.routeParams.id);
 		}  
 
 	
-		console.log(this.routeParams);
+	//	console.log(this.routeParams);
 		
 		this.loadRecipe(this.routeParams.id);
 		
@@ -97,7 +97,7 @@ perServingFlag: boolean = true;
 		this.currentUser["displayname"]  = this.currentUser["firstname"];
 		else if( this.currentUser["username"] !== "")
 		this.currentUser["displayname"]  = this.currentUser["username"];
-		console.log(this.currentUser);
+	//	console.log(this.currentUser);
 
 		this.comment['userid'] = this.currentUser["id"];
 
@@ -106,7 +106,7 @@ perServingFlag: boolean = true;
 
 		this.showNutrientsFlag = this.helpService.showorhideNutritions(this.role);
 
-		console.log(this.showNutrientsFlag);
+	//	console.log(this.showNutrientsFlag);
 
 		this.getFavouriteStatus();
 		this.getRating();
@@ -134,7 +134,7 @@ loadRecipe(id)
 {
   console.log("In load Recipe");
   this.loading++;
-  console.log(this.loading);
+//  console.log(this.loading);
  // if(this.loading ==1)
   //{
   this.searchRes = [];
@@ -145,7 +145,7 @@ loadRecipe(id)
  }
 
 //  console.log(this.searchparam);
- console.log(params);
+ //console.log(params);
  //this.searchRes["image"]="assets/images/temp-images/slide-recipe2-detail.jpg";
  if(this.loading)
   {

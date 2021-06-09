@@ -57,12 +57,11 @@ export class ListpanelComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     ngOnChanges(): void{
-      console.log("ngOnchanges");
-        console.log(this.params);
+
         this.setDefaults();
     }
     ngOnInit(): void {
-      console.log(this.params);
+
         this.setDefaults();  
     }
 
@@ -118,7 +117,7 @@ export class ListpanelComponent implements OnInit, OnChanges, OnDestroy {
 	
 loadRelatedRecipes()
 {
-  console.log(this.params);
+
   this.relatedrecipesList = [];
   var params = {};
   var dietLabels = "(";
@@ -131,14 +130,14 @@ loadRelatedRecipes()
     if(i < temp.length-1)
     dietLabels +=" OR ";
     }
-  console.log(dietLabels);
+
   }
   var query = "select id, image, label, dietLabels from recipes where s_instructions != ''";
 if(dietLabels !== "(")
 query += " AND " + dietLabels + ") ";
 query += " order by rand() limit 6";
  params["query"] = query;
- console.log(params);
+
  var res =   this.dbService.getDatabyTablebyQuery("recipes", params).subscribe(invData => setTimeout(() => {
  
   if(invData !== null && typeof(invData["body"]) !== "undefined" && invData["body"] !== null && invData["body"]["length"] > 0)
@@ -149,7 +148,7 @@ query += " order by rand() limit 6";
       this.relatedrecipesList.push(invData["body"][i]);		
     }
   }
-  console.log(this.relatedrecipesList);
+
  }));
 
 }

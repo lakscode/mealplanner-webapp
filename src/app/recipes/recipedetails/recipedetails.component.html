@@ -14,10 +14,10 @@
                     <a [ngClass]="showpopupflag?'menu active':'menu'"  (click)="showhidepopup()" href="javascript:void(0)"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></a>
                     <div *ngIf='showpopupflag' class="add2mealplanmenu" style='height:120px'>
                         <a (click)="showpopupflag = false; showAdd2MP = true " href="javascript:void(0)">
-                            <i class="fa fa-calendar-plus-o" aria-hidden="true"></i> Add recipe to Meal Plan
+                            <i class="fa fa-calendar-plus-o" aria-hidden="true"></i> Add Recipe to Meal Plan
                         </a>
                         <a (click)="showpopupflag = false; makeacopy()" href="javascript:void(0)">
-                            <i class="fa fa-clone" aria-hidden="true"></i> Make a copy
+                            <i class="fa fa-clone" aria-hidden="true"></i> Make a Copy
                         </a>
                     </div>
 
