@@ -440,8 +440,10 @@ endIndex = startIndex+ endIndex;
   checkrecipeexists()
   {
 	  var params1 = {};
-	  params1["url"]="http://www.myrecipes.com/recipe/black-cardamom-beef-sliders";
-	  this.importrecipe(params1["url"])
+	  console.log(this.recipeurl);
+	  params1["url"] =  this.recipeurl;
+	  //params1["url"]="http://www.myrecipes.com/recipe/black-cardamom-beef-sliders";
+	  this.importrecipe(params1["url"]);
 	/*
 	var res =   this.dbService.getDatabyQuery("recipes", params1).subscribe(resData => setTimeout(() => {
 		if(resData !== null && resData['body']['length'] > 0)
@@ -453,7 +455,7 @@ endIndex = startIndex+ endIndex;
 
 		}
 	}));
-	*/
+	*/ 	
   }
 
   instructionCount:any = 0;
