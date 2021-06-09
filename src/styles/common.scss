@@ -757,3 +757,18 @@ font-size:13pt;
     }
   }
 }
+
+.createplanbtn
+{
+  margin-right:0px; float:right;   margin-right: 25px;
+  float: right;
+  margin-top: -55px;
+  background: #FFF;
+  font-size: 16px;
+  font-weight: 700;
+  font-family: Lato;
+}
+.createplanbtn:hover
+{
+color:$orange1;
+}

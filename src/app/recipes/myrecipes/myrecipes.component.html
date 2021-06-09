@@ -14,7 +14,46 @@
                                 class="fa fa-bars"></i></span>
                     </div> -->
                     <h2>My Recipes</h2>
-                    <div class="row" style=" width:100%; text-align:right;margin-bottom:20px;">
+
+                    <div class="add2mealplan">
+                        <a [ngClass]="showpopupflag?'menu active':'menu'"  (click)="showpopupflag = !showpopupflag" href="javascript:void(0)"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></a>
+                        <div *ngIf='showpopupflag' class="add2mealplanmenu" style='height:120px'>
+                            <a (click)="showpopupflag = false; recipeFromUrlFlag = true; " href="javascript:void(0)">
+                                <i class="fa fa-link"></i> Save from URL
+                            </a>
+                            <a (click)="showpopupflag = false; gotopage('recipesubmit');" href="javascript:void(0)">
+                                <i class="fa fa-pencil"></i>  Create New
+                            </a>
+                        </div>
+                        <div *ngIf="recipeFromUrlFlag" class="add2mealplanmenu" style="height:250px;">
+                            <div class="row">
+                              <div class='col-12'>
+                                <div class="custom-item">
+                                  <div style="float:left">
+                                <h2 class="title" style="margin-top:0px;">Import Recipe from URL</h2>
+                                </div>
+                                <div (click)="recipeFromUrlFlag = !recipeFromUrlFlag"  style="float:right" class="right" >
+                                <h1 style="margin-top:0px;font-size:24px;"> <i class="fa- fa-close'"></i></h1>
+                          
+                                </div>
+                              </div>
+                          
+                            </div>
+                              <div class='col-12'>
+                                <textarea style="width:100%;padding:5px; border-radius:5px;margin-bottom:10px;" type="text" rows=4 placeholder="Enter recipe url" [(ngModel)]= "recipeurl"   name="recipeurl" (keyup.enter)="checkrecipeexists()"></textarea>
+                          
+                              </div>
+                              <div class='col-12' style="text-align:center">
+                                 <button [disabled]="recipeurl == ''" style="width: 100%; " class='btn' (click)="recipeFromUrlFlag = false; checkrecipeexists()" >Import</button>
+                              </div>
+                          
+                            </div>
+                          
+                          </div>
+                        </div>
+
+
+                    <!--<div class="row" style=" width:100%; text-align:right;margin-bottom:20px;">
                         <div class="col-12">
                             <div class="create-button anim-button btn-4" (click)="checkrecipeexists();">
                                 <i class="fa fa-plus"></i> Save from URL
@@ -23,7 +62,7 @@
                             <i class="fa fa-plus"></i>  Create New
                         </div>
                     </div>
-                    </div>
+                    </div>-->
                     <ul class="pagination" *ngIf="totalPage >= 10">
                         <li (click)="currentPage(0)" class="">
                             <a href="javascript:void(0)">
@@ -54,20 +93,30 @@
 
 
                         <div class="listing" *ngFor="let recipe1 of displayList; let i = index;">
+                               
                             <div class="image image-animate">
-                                <a (click)="gotoRecipeDetails(recipe1.id)">
+                                <a href="javascript:void(0)"  (click)="gotoRecipeDetails('recipedetails', recipe1.id)">
                                     <img style="max-height: 148px;" *ngIf="recipe1.image !== ''"  src="{{recipe1.image}}"
                                         alt="{{recipe1.label}}">
                                     <img *ngIf="recipe1.image == ''"  src="assets/notavailable.png"
                                         alt="{{recipe1.label}}">
                                 </a>
                             </div>
+                       
                             <div class="detail">
-                                <h4><a (click)="gotoRecipeDetails(recipe1.id)">{{recipe1.label}}</a></h4>
+                                <div style="position:relative;">
+                                <a (click)="showhidecontent(recipe1)" href="javascript:void(0)" [ngClass]="recipe1.showpopup?'contextmenu-icon active':'contextmenu-icon'"><i class="fa fa-ellipsis-v"></i></a>
+                                <div *ngIf="recipe1.showpopup" class="contextmenu"><a  class="menu" href="javascript:void(0)"  (click)="gotoRecipeDetails('recipedetails', recipe1.id)" ><i class="fa fa-list"></i>View Recipe</a>
+                                    <a  (click)="gotoRecipeDetails('recipesubmit', recipe1.id)" class="menu" href="javascript:void(0)"><i class="fa fa-pencil-square-o"></i>Edit Recipe</a>
+                                    <a  (click)="deleteRecipe(recipe1.id)" class="menu" href="javascript:void(0)"><i class="fa fa-trash"></i>Delete Recipe</a>
+                                </div>
+                                </div>
+                                <h4><a>{{recipe1.label}}</a></h4>
+                                
                                 <p innerHTML="{{limitTo(formatIns(recipe1.s_instructions), 200)}}">
 
                                 </p>
-                                <div class="meta-listing">
+                                <!--<div class="meta-listing">
                                     <div style="display:inline-block;color: #5e676b;">
                                         Calories: {{recipe1.calories}} Kcal
                                     </div>
@@ -78,9 +127,11 @@
                                         </span>
                                         <span class="rating-figure">{{recipe1.displayrating}}</span>
                                     </div>
-                                </div>
+                                </div>-->
                             </div>
+                                
                         </div>
+                        
 
                         <ul class="pagination" *ngIf="totalPage >= 10">
                             <li (click)="currentPage(0)" class="">

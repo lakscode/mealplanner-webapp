@@ -343,10 +343,21 @@ endIndex = startIndex+ endIndex;
 	{
 		this.router.navigate([page]);
 	}
-	gotoRecipeDetails(id){
-	this.router.navigate(['recipesubmit', {id:id}]);
+	gotoRecipeDetails(page, id){
+		if(page == "recipedetails")
+		{
+			this.router.navigate([page, id]);
+		}
+		else
+		{
+			this.router.navigate([page, {id:id}]);
+		}
+	
 	}
-
+	deleteRecipe(id)
+	{
+		console.log("Delete recipe - " + id) ;
+	}
 	loadNutrientsMaxMin()
   {
  //   console.log("loadNutrientsMaxMin");
@@ -703,7 +714,17 @@ consolidateNutrients(item)
 	//	console.log(this.cons_Nutrients); 
 	}
 }
-
+showhidecontent(recipe)
+{
+	recipe.showpopup = !recipe.showpopup
+	for(let r = 0; r < this.displayList.length; r++)
+	{
+		if(recipe.id !== this.displayList[r]["id"])
+		{
+			this.displayList[r]["showpopup"] = false;
+		}
+	}
+}
 }
 
 	

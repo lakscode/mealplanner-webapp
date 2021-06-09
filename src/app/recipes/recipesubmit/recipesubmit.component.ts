@@ -857,7 +857,7 @@ formatVal(str)
   }
 
   gotopage(){        
-   this.router.navigate(["recipes"]);    
+   this.router.navigate(["myrecipes"]);    
 }
 
 callhideFunct(args)
