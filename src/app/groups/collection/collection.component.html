@@ -407,8 +407,30 @@
                                     <a href="javascript:void(0)" *ngIf="recipe.UserFavStatus" (click)="removeFavourite(recipe.id)" style="color:orange"><i class="fa fa-heart" aria-hidden="true"></i> Remove Favourite </a>
                                      <a href="javascript:void(0)" *ngIf="!recipe.UserFavStatus" (click)="setFavourite(recipe.id)" ><i class="fa fa-heart" aria-hidden="true"></i> Set Favourite</a>
                                     <a href="javascript:void(0)" *ngIf="currentUser['id'] == recipe['userid']"  (click)="removeRecipe(recipe)"><i class="fa fa-trash" aria-hidden="true"></i> Remove Recipe</a>
+                                    <a href="javascript:void(0)" (click)="addtoMealPlan(recipe)"><i class="fa fa-calendar-plus-o" aria-hidden="true"></i> Add to Meal Plan</a>
                                     <a href="javascript:void(0)" (click)="viewRecipe(recipe)"><i class="fa fa-list-ul" aria-hidden="true"></i> Details</a>
                                 </div>
+                                </div>
+
+                                <div *ngIf='recipe.showAdd2MP' class="add2mealplanmenu" style="top:0px">
+                                    <a style="float:right;font-size:24px;" href="javascript:void(0)" (click)="recipe.showAdd2MP = false;"><i class="fa fa-close" aria-hidden="true"></i> </a>
+                                    <p class="title"> Add Recipe to Meal Plan</p>
+                                    <p class="lbl">Choose Meal Plan</p>
+                                    <select name="planid" [(ngModel)] ="plan.id">
+                                        <option value="{{plan.id}}" *ngFor='let plan of plansList; let i = index'>{{plan.name}}</option>
+                                    </select>
+                                    <p class="lbl">Choose Day</p>
+                                    <select name="planday" [(ngModel)] ="plan.day">
+                                        <option value="{{day.id}}" *ngFor='let day of daysList; let i = index'>{{day.name}}</option>
+                                    </select>
+                                    <p class="lbl">Choose Meal Type</p>
+                                    <select name="planmealtype" [(ngModel)] ="plan.mealType">
+                                        <option value="{{mealtype.code}}" *ngFor='let mealtype of mealTypesList; let i = index'>{{mealtype.name}}</option>
+                                    </select>
+                                    <a class="btn" href="javascript:void(0)" (click)="add2Plan()"> Add to Plan</a>
+            
+                                    <!--<a href="javascript:void(0)" (click)="addRecipe(recipe)"><i class="fa fa-plus" aria-hidden="true"></i> Add Recipe</a>-->
+                                    
                                 </div>
                             </div>
                            
