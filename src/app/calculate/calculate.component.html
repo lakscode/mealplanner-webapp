@@ -104,7 +104,7 @@
 
    
             <div>
-              <label class="activityType">Activity</label>
+              <label class="activityType">Activity &nbsp;</label>
                 <select  class="inputText" placeholder="Select One" (change)="CalculateCB()" [(ngModel)]="activity.type"  id='activityType' name="activityType" #model="ngModel">
                   <ng-container *ngFor="let activity of activitiesList; let a = index">
                   <option value='{{activity.value}}'>{{activity.activity}}</option>
