@@ -58,7 +58,7 @@
                         </p>
                         <div class="short-separator" style="margin-top:10px"></div>
                         <div class="recipe-details-group">
-                            <div class="recipe-details" *ngIf="searchRes.totalWeight">
+                            <div class="recipe-details" *ngIf="searchRes.totalWeight && searchRes.totalWeight != 0">
                             <p>Total Weight:</p>
                             <p style="display:block;">
                                 <a href="javascript:void(0);"  class="hlabel">{{formatValue(searchRes.totalWeight)}} g</a> 
