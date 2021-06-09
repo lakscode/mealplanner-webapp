@@ -103,7 +103,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
 	{
 	  this.contentList = [];
 	  var params = {};
-    params["query"] = "select id, image, label, dietLabels from recipes where s_instructions != '' order by rand() limit 8";
+    params["query"] = "select id, image, label, dietLabels from recipes where status = 1 AND s_instructions != '' order by rand() limit 8";
 
 	 var res =   this.dbService.getDatabyTablebyQuery("recipes", params).subscribe(invData => setTimeout(() => {
    

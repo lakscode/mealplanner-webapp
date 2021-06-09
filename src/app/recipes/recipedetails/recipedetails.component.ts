@@ -635,6 +635,7 @@ submitcomment()
 	  {
 		this.loadComments();
 		this.commentSubmitMsg = "Comment submitted successfully";
+		this.toastr.success('Comment has been added successfully', 'Recipe Comments');
 		this.showResponse('success');
 	  }
 	  

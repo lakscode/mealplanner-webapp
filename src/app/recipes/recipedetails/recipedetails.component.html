@@ -58,7 +58,7 @@
                         </p>
                         <div class="short-separator" style="margin-top:10px"></div>
                         <div class="recipe-details-group">
-                            <div class="recipe-details" *ngIf="searchRes.totalWeight">
+                            <div class="recipe-details" *ngIf="searchRes.totalWeight && searchRes.totalWeight != 0">
                             <p>Total Weight:</p>
                             <p style="display:block;">
                                 <a href="javascript:void(0);"  class="hlabel">{{formatValue(searchRes.totalWeight)}} g</a> 
@@ -72,7 +72,7 @@
                                 </p>
                             </div>
                             <p style="clear:both"></p>
-                            <div class="recipe-details" *ngIf="searchRes.calories">
+                            <div class="recipe-details" *ngIf="searchRes.calories && searchRes.yield">
                                 <p>Calories per Serving:</p>
                                 <p style="display:block;">
                                     <a href="javascript:void(0)"  class="hlabel">{{formatValue(searchRes.calories/searchRes.yield)}} kcal</a> 
@@ -334,9 +334,9 @@
                 <div class="col-12" style="padding:15px; text-align:right;">
                     <button [disabled] = "comment.message == ''" [ngClass]="comment.message !== ''?'submit-comment active':'submit-comment'" (click)="submitcomment()" >Submit</button>
                 </div>
-                <div class='col-12'>
+               <!--  <div class='col-12'>
                     {{commentSubmitMsg}}
-                </div>
+                </div> -->
             </div>
        
     </div>

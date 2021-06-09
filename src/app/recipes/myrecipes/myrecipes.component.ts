@@ -1,7 +1,7 @@
 import { Component, OnInit,OnDestroy  } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd } from "@angular/router";
 import { UserService } from '../../services/user.service';
-import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {  FormBuilder } from '@angular/forms';
 import { DBService } from '../../dbservices/db.service';
 import { HelpService } from '../../services/help.service';
 
@@ -36,7 +36,11 @@ export class MyRecipesComponent implements OnInit {
 	totalPage: any = 0;
 	displayList: Array<any> = [];
 	nutrientDbFields : Array<any> = [];
+<<<<<<< HEAD
 	recipeurl: any = "";
+=======
+	recipeurl :any;
+>>>>>>> 18c4159cb23077e3854c5070345802dafc62918e
 	constructor(private router: Router, private route: ActivatedRoute, private toastr: ToastrService, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
 	
 	}

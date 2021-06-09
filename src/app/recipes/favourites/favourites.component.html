@@ -48,7 +48,7 @@
                         <div class="listing" *ngFor="let recipe1 of displayList; let i = index;">
                             <div class="image image-animate" >
                                 <a (click)="gotoRecipeDetails(recipe1.id)">
-                                    <img  src="{{formatImage(recipe1.image, 'm')}}"
+                                    <img style="max-width:200px; max-height:200px" src="{{formatImage(recipe1.image, 'm')}}"
                                         alt="image">
                                 </a>
                             </div>
