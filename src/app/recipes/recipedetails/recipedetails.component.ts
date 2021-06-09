@@ -162,11 +162,9 @@ loadRecipe(id)
 		var temp = recipeData["body"];
 		if(typeof(temp) == "object" && temp["length"] > 0)
 		{
-		  for(let i=0; i< temp["length"] ; i++)
-		  {
-			  this.searchRes = temp[i];
-			//  console.log(this.searchRes);
-			//  console.log(this.searchRes["digest"]);
+				
+			  this.searchRes =temp[0];
+
 			  var tempDigest = this.searchRes["digest"];
 			  
 			  if(typeof(this.searchRes["digest"]) !== "undefined" && this.searchRes["digest"] !== "")
@@ -192,18 +190,40 @@ loadRecipe(id)
 				  tempNutrients = JSON.parse(this.searchRes["totalNutrients"]);
 				}
 			  }
-			  this.searchRes["digestArr"]  = tempDigest;
-			  this.searchRes['nutrientsArr'] = tempNutrients;
-			  try{
-				  console.log(this.searchRes["ingredients"]);
-				this.searchRes["ingredients"] = JSON.parse(this.searchRes["ingredients"]);
-			  }
-			  catch(error)
+
+			  if(typeof(tempDigest) !== "undefined")
 			  {
-				this.searchRes["ingredients"] = this.searchRes["ingredients"].split("~");
+				this.searchRes["digestArr"] = [];
+				this.searchRes["digestArr"]  = tempDigest;
 			  }
+
+			  if(typeof(tempNutrients) !== "undefined")
+			  {
+				this.searchRes["nutrientsArr"] = [];
+				this.searchRes['nutrientsArr'] = tempNutrients;
+			  }
+
+			  if(typeof(this.searchRes["ingredients"]) !== "undefined")
+			  {
+				try{
+
+					this.searchRes["ingredients"] = JSON.parse(this.searchRes["ingredients"]);
+				}
+				catch(error)
+				{
+
+					if(this.searchRes["ingredients"] !== "")
+					{
+					var temp = this.searchRes["ingredients"].split("~");
+					this.searchRes["ingredients"] = temp;
+					}
+				}
+			  }
+
+
 			  if(this.searchRes["ingredients"] == "" && this.searchRes["ingredientLines"] !== "")
 			  {
+				this.searchRes["ingredients"] = [];
 				  var temp = this.searchRes["ingredientLines"].split("~");
 				  for(let t=0; t < temp["length"]; t++)
 				  {
@@ -212,7 +232,8 @@ loadRecipe(id)
 				  }
 			  }
 			  this.searchRes["instructions"] = this.searchRes["s_instructions"];
-			 // console.log(this.searchRes["s_instructions"]);
+
+
 			  if(typeof(this.searchRes["s_instructions"]) !== "undefined" && this.searchRes["s_instructions"] !== "")
 			  {
 			  var temp1 = this.searchRes["s_instructions"].split("~");
@@ -240,17 +261,6 @@ loadRecipe(id)
 					mmicro.totalP = mmicro.total.toFixed(1);
 					this.paramMicro.push(mmicro); 
 				  }
-				  /*switch(mmicro.label.toLowerCase())
-				  {
-					case "fat": 
-					case "carbs":
-					case "protein":
-					case "cholesterol":
-					case "sodium":
-					case "sodium":
-					  mmicro.totalP = mmicro.total.toFixed(1);
-					this.paramMicro.push(mmicro); break
-				  }*/
 				}
 			  }
 
@@ -270,7 +280,6 @@ loadRecipe(id)
 		
 			  } 
 
-		  }
 		}
 	  }
 	console.log(this.searchRes);
