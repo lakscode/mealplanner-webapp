@@ -738,6 +738,7 @@ saveRecipe()
 				console.log(recipeData);	
 				this.toastr.success('Recipe has been updated!!!', 'Submit Recipe!');
 				this.loadRecipe(this.searchRes.id);
+				this.gotopage();
 				
 			}));
 		}
@@ -753,6 +754,7 @@ saveRecipe()
 				{
 					this.toastr.success('Recipe has been saved!!!', 'Submit Recipe!');
 					this.loadRecipe(recipeData['inserted_id']);	
+					this.gotopage();
 				}
 			}));
 		}
