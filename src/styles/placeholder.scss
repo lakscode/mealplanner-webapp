@@ -392,7 +392,7 @@ text-decoration: line-through;
   top: 25px;
   right: 0;
   width: 200px;
-    height: 100px;
+    min-height: 100px;
     background: #FFF;
     color: #555;
     padding: 10px;
@@ -404,7 +404,7 @@ text-decoration: line-through;
     {
       font-family: 'Lato', sans-serif;
       text-decoration: none;
-      margin-bottom: 5px;
+      margin-bottom: 10px;
       display:block;
     }
      a i
@@ -461,7 +461,7 @@ font-size:24px;
     height: 360px;
     background: #FFF;
     color: #555;
-    padding: 10px;
+    padding: 20px;
     font-size: 14px;
      border: 1px solid #eee; 
     border-radius: 10px;

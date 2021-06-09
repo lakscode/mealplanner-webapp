@@ -341,7 +341,7 @@
                                       ), url(' + recipe.image + ')'}">
                             
                                         <div>
-                                            <h1 class="recipe-label" style='color:#FFF'>{{recipe.label}}</h1>                                  
+                                            <h1  class="recipe-label" style='color:#FFF'>{{recipe.label}}</h1>                                  
                                             <p style='color:#FFF'><b><em>Calories</em></b>: {{recipe.calories}} Kcal, <b><em>Servings</em></b>: {{recipe.yield}}</p>
                                             <!--<p><b><em>Diet Labels</em></b>: {{recipe.dietLabels}} </p>-->
 
@@ -393,7 +393,7 @@
 
                                 <div class="col-12" style="padding-left:0px; padding-right:0px">
                                     
-                                <h1 class="recipe-label">{{recipe.label}}</h1>
+                                <h1 style="width:calc(100% - 30px)" class="recipe-label">{{recipe.label}}</h1>
                                    <p><b>Calories</b>: {{recipe.calories}} Kcal</p>
                                    <p><b>Servings</b>: {{recipe.yield}}</p>
                                    
@@ -403,17 +403,19 @@
                                    
                                 </div>
                                 <div class="morebtn"><a (click)="toggleMoreMenu(recipe, i, 'viewlist')" class="menu" href="javascript:void(0)"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></a>
-                                <div class="moremenu" *ngIf="recipe.expand">
-                                    <a href="javascript:void(0)" *ngIf="recipe.UserFavStatus" (click)="removeFavourite(recipe.id)" style="color:orange"><i class="fa fa-heart" aria-hidden="true"></i> Remove Favourite </a>
-                                     <a href="javascript:void(0)" *ngIf="!recipe.UserFavStatus" (click)="setFavourite(recipe.id)" ><i class="fa fa-heart" aria-hidden="true"></i> Set Favourite</a>
-                                    <a href="javascript:void(0)" *ngIf="currentUser['id'] == recipe['userid']"  (click)="removeRecipe(recipe)"><i class="fa fa-trash" aria-hidden="true"></i> Remove Recipe</a>
-                                    <a href="javascript:void(0)" (click)="addtoMealPlan(recipe)"><i class="fa fa-calendar-plus-o" aria-hidden="true"></i> Add to Meal Plan</a>
-                                    <a href="javascript:void(0)" (click)="viewRecipe(recipe)"><i class="fa fa-list-ul" aria-hidden="true"></i> Details</a>
+                                <div class="moremenu" style='min-height: 100px; height: 130px;' *ngIf="recipe.expand">
+                                    <a class="menuitem"  href="javascript:void(0)" (click)="recipe.expand = false; addtoMealPlan(recipe)"><i class="fa fa-calendar-plus-o" aria-hidden="true"></i> Add to Meal Plan</a>
+                                    <a class="menuitem"  href="javascript:void(0)" (click)="viewRecipe(recipe)"><i class="fa fa-list-ul" aria-hidden="true"></i> Details</a>
+                                    <a class="menuitem" href="javascript:void(0)" *ngIf="recipe.UserFavStatus" (click)="removeFavourite(recipe.id)" style="color:orange;"><i class="fa fa-heart" aria-hidden="true"></i> Remove Favourite </a>
+                                     <a class="menuitem"  href="javascript:void(0)" *ngIf="!recipe.UserFavStatus" (click)="setFavourite(recipe.id)" ><i class="fa fa-heart" aria-hidden="true"></i> Set Favourite</a>
+                                    <a class="menuitem"  href="javascript:void(0)" *ngIf="currentUser['id'] == recipe['userid']"  (click)="removeRecipe(recipe)"><i class="fa fa-trash" aria-hidden="true"></i> Remove Recipe</a>
+                                   
                                 </div>
                                 </div>
 
                                 <div *ngIf='recipe.showAdd2MP' class="add2mealplanmenu" style="top:0px">
-                                    <a style="float:right;font-size:24px;" href="javascript:void(0)" (click)="recipe.showAdd2MP = false;"><i class="fa fa-close" aria-hidden="true"></i> </a>
+                                    <a style="float:right;font-size:24px;padding-top: 0px;
+                                    padding-right: 0px;" href="javascript:void(0)" (click)="recipe.showAdd2MP = false;"><i class="fa fa-close" aria-hidden="true"></i> </a>
                                     <p class="title"> Add Recipe to Meal Plan</p>
                                     <p class="lbl">Choose Meal Plan</p>
                                     <select name="planid" [(ngModel)] ="plan.id">
@@ -527,12 +529,12 @@
 
                 </div>
                
-<!--
+
                 <div class='col-12'>
                     <div class="form-group">
-                        <button class="defaultbtn" type="submit">Save</button>
+                        <button class="defaultbtn" (click)="gotodetails(selectedRecipe.id)">View More</button>
                     </div>
-                </div>-->
+                </div>
             </div>
 
         </div>

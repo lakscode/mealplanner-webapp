@@ -1206,7 +1206,9 @@ transform(value: any, args?: any): any {
 gotopage(){        
    this.router.navigate(["collections"]);    
 }
-
+gotodetails(id){        
+	this.router.navigate(["recipedetails", id]);    
+ }
 usersList: Array<any> = [];
 showusersflag: boolean = false;
 hideusers()
@@ -1358,10 +1360,16 @@ updateMealType()
 {
 	//alert("add recipe");
 	var params1 = {};
-	params1 ['query'] = "update days set " + this.plan["mealType"] + " = " + this.searchRes["id"] + " where meal_plan_id = " + this.plan["id"] + " AND day_num = " + this.plan["day"];
+	params1 ['query'] = "update days set " + this.plan["mealType"] + " = " + this.selectedRecipe2Add2plan["id"] + " where meal_plan_id = " + this.plan["id"] + " AND day_num = " + this.plan["day"];
 	var res =   this.dbService.getDatabyTablebyQuery("days", params1).subscribe(invData => setTimeout(() => {
 		this.toastr.success('Recipe has been added to the selected meal type of the plan!!!', 'Add to Meal Plan');
 	
+
+		var recipeindex = this.recipesList.findIndex(x=>(x.id == this. selectedRecipe2Add2plan.id));
+		if(recipeindex  >-1)
+		{
+			this.recipesList[recipeindex].showAdd2MP = false;
+		}
 	}));
 }
 
