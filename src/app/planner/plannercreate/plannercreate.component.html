@@ -5,14 +5,37 @@
             <div class="recipe-set">         
                 <h2>Create Plan</h2>
             </div>
-            <div style="float:right;margin-top:-55px; text-align:right; background:#FFF; margin-bottom:10px;">
+            <div class="add2mealplan">
+                <a [ngClass]="showpopupflag?'menu active':'menu'"  (click)="showpopupflag = !showpopupflag" href="javascript:void(0)"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></a>
+                <div *ngIf='showpopupflag' class="add2mealplanmenu" style='height:120px'>
+                    <a (click)="showpopupflag = false; downloadplan() " href="javascript:void(0)">
+                        <i class="fa fa-file-pdf-o"></i> Export
+                    </a>
+                    <a (click)="showpopupflag = false; getIngredientsList();" href="javascript:void(0)">
+                        <i class="fa fa-download"></i>   Grocery List
+                    </a>
+                </div>
+         
+
+            <!--<div class="createplanbtn" >
+                <a  href="javascript:void(0)" (click)="downloadplan()" title="Download PDF"><i
+                    class="fa fa-file-pdf-o" ></i> Export</a>
+            &nbsp; <a href="javascript:void(0)" (click)="getIngredientsList()"
+                title="Ingredients List"><i class="fa fa-download"></i> Grocery List </a>-->
+               <!--<span (click)="downloadplan();"><i class="fa fa-file-pdf-o" style="margin-right:10px;"></i>  Export </span>
+               <span (click)="getIngredientsList();"><i class="fa fa-download" style="margin-right:10px;"></i>  Grocery List </span>-->
+               
+                 
+              </div>
+
+            <!--<div style="float:right;margin-top:-55px; text-align:right; background:#FFF; margin-bottom:10px;">
 
                 <a class="copy-button" href="javascript:void(0)" (click)="downloadplan()" title="Download PDF"><i
                         class="fa fa-file-pdf-o" style="z-index:-1"></i> Export</a>
                 &nbsp; <a class="copy-button" href="javascript:void(0)" (click)="getIngredientsList()"
                     title="Ingredients List"><i class="fa fa-download"></i> Grocery List </a>
                 &nbsp;
-            </div>
+            </div>-->
         </div>
         <div class="col-md-12 col-lg-12">
             

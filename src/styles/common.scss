@@ -768,7 +768,20 @@ font-size:13pt;
   font-weight: 700;
   font-family: Lato;
 }
-.createplanbtn:hover
+.createplanbtn:hover, .createplanbtn span:hover
 {
 color:$orange1;
+}
+.copy-button
+{
+  	display: inline-block;
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+    font-size: 16px;   
+	
+}
+
+.copy-button:hover
+{
+	color:$orange1;
 }

@@ -4,10 +4,19 @@
     <div class="col-12 col-md-12 col-lg-9">
         <div class="recipe-set submit-recipe-set">
             <h2><a (click)="gotopage();"><i class="fa fa-chevron-left"></i></a>  Recipe Book</h2>
+            <div class="createplanbtn">
+
+                <a class="copy-button" href="javascript:void(0)" (click)="downloadplan()" title="Download PDF"><i
+                        class="fa fa-file-pdf-o" style="z-index:-1"></i> Export</a>
+                      &nbsp;
+            </div>
+
             <p>Recipe book is selection of the recipes based on ingredients,  health labels or nutrients from our list of recipes.  </p>
-            <div style="width:100%; text-align:right">
+            <!--<div style="width:100%; text-align:right">
                 <a class="copy-button" (click)="downloadplan()" title="Download PDF"><i class="fa fa-download"></i> Download</a>
-            </div>    
+            </div>    -->
+
+            
             <div class="submit-recipe-form">
                 <form action="#" method="post">
                     <label for="title">Recipe book Title</label>

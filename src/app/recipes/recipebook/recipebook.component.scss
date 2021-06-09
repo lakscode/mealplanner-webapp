@@ -1,34 +1,8 @@
 @import "../../../variables.scss";
 
-.py-3 {
-    padding-top: 1rem!important;
-    padding-bottom: 1rem!important;
+.recipe-set h2:after {
+  width: 72% !important;
 }
-
-.mb-0 {
-    margin-bottom: 0!important;
-}
-
-h5, .h5, .h5 {
-    font-size: 36px;
-}
-
-big, .big {
-    font-size: 18px;
-}
-.font-weight-semibold {
-    font-weight: 600!important;
-}
-.mt-1 {
-    margin-top: .25rem!important;
-}
-.d-block {
-    display: block!important;
-}
-a {
-    color:$text-gray;
-}
-
 a:hover {
     color: #ff642b;
         //text-decoration: underline;

@@ -36,6 +36,7 @@ export class MyRecipesComponent implements OnInit {
 	totalPage: any = 0;
 	displayList: Array<any> = [];
 	nutrientDbFields : Array<any> = [];
+	recipeurl: any = "";
 	constructor(private router: Router, private route: ActivatedRoute, private toastr: ToastrService, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
 	
 	}
@@ -443,19 +444,21 @@ endIndex = startIndex+ endIndex;
 	  console.log(this.recipeurl);
 	  params1["url"] =  this.recipeurl;
 	  //params1["url"]="http://www.myrecipes.com/recipe/black-cardamom-beef-sliders";
-	  this.importrecipe(params1["url"]);
-	/*
+	 // this.importrecipe(params1["url"]);
+
 	var res =   this.dbService.getDatabyQuery("recipes", params1).subscribe(resData => setTimeout(() => {
 		if(resData !== null && resData['body']['length'] > 0)
 		{
-			alert("Recipe already in our database");
+		//	alert("Recipe already in our database");
+			this.toastr.error('Recipe already in our database', 'Save Recipe from URL!');
+			
 		}
 		else
 		{
-
+			this.importrecipe(params1["url"]);
 		}
 	}));
-	*/ 	
+	 	
   }
 
   instructionCount:any = 0;
@@ -471,7 +474,8 @@ endIndex = startIndex+ endIndex;
 		console.log(resData);
 		if(resData && resData["result"] && resData["result"] == "Error")
 		{
-			alert("unable to import this url at present. Please try existing recipes ")
+			this.toastr.error('unable to import this url at present. Please try existing recipes.', 'Save Recipe from URL!');
+			//alert("unable to import this url at present. Please try existing recipes ")
 		}
 		else{
 			this.createrecipe(resData, url)
