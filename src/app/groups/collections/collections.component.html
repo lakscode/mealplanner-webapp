@@ -13,14 +13,19 @@
                                 class="fa fa-bars"></i></span>
                     </div> --> 
                    
-                    <h2>Collections</h2>
-                    <div class="row" style=" width:100%; text-align:right;margin-bottom:20px;">
+                    <h2 style="width: 70%;">Collections</h2>
+                    <div class="createplanbtn" (click)="createNew()">
+                        <i class="fa fa-pencil" style="margin-right:10px;"></i>  Create Collection   
+                         
+                      </div>
+
+                    <!--<div class="row" style=" width:100%; text-align:right;margin-bottom:20px;">
                         <div class="col-12">
                             <div class="create-button anim-button btn-4" (click)="createNew()">
                             <i class="fa fa-plus"></i>  Create New
                         </div>
                     </div>
-                    </div>
+                    </div>-->
                     <ul class="pagination" *ngIf="totalPage >= 10">
                         <li (click)="currentPage(0)" class="">
                             <a href="javascript:void(0)">
