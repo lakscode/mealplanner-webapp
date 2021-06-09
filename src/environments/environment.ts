@@ -6,6 +6,7 @@ export const environment = {
   production: false,
  apiUrl:"https://www.dentavacation.com/mobileapp/api",
  appUrl:"https://www.fitaholic.com",
+ appname:"fitaholic",
   accessToken:"",
   fromname: "Team MTC",
   fromemail:"<contact@medicaltourismco.com>",

@@ -871,7 +871,7 @@ add2Plan()
 
 updateMealType()
 {
-	alert("add recipe");
+	//alert("add recipe");
 	var params1 = {};
 	params1 ['query'] = "update days set " + this.plan["mealType"] + " = " + this.searchRes["id"] + " where meal_plan_id = " + this.plan["id"] + " AND day_num = " + this.plan["day"];
 	var res =   this.dbService.getDatabyTablebyQuery("days", params1).subscribe(invData => setTimeout(() => {
@@ -879,11 +879,112 @@ updateMealType()
 	
 	}));
 }
+showpopupflag: boolean = false;
 
+showhidepopup()
+{
+	this.showpopupflag = !this.showpopupflag; 
+///	if(this.showpopupflag && this.showAdd2MP)
+//	this.showAdd2MP = false;
+}
 gotopage(){        
    this.router.navigate(["recipes"]);    
 }
+formatString(str)
+{
+  var retVal = str;
+  if(str !== "")
+  {
+    if(str.indexOf("'") > -1)
+    {
+    
+    //retVal = str.replace(/'/g, "\'");
+    retVal = retVal.replaceAll("'","");
+    ////console.log(retVal);
+    }
+  }
+  return retVal;
+}
 
+makeacopy()
+{
+	console.log("make a copy")
+
+	var new_copy = JSON.parse(JSON.stringify(this.searchRes));
+	delete new_copy["id"];
+	delete new_copy["favcount"];
+	delete new_copy["tablename"];
+	delete new_copy["instructions"];
+	delete new_copy["nutrients"];
+	delete new_copy["UserFavStatus"];
+	delete new_copy["digestArr"];
+	delete new_copy["nutrientsArr"];
+	
+	var pQuery = {"query":"select max(id) as maxid from recipes"};
+	var res =   this.dbService.getDatabyTablebyQuery("recipes", pQuery).subscribe(recipeData => setTimeout(() => {
+	 console.log(recipeData);
+  
+	  if(recipeData !== null && typeof(recipeData['body']) !== "undefined" && recipeData['body']['length'] >0)
+	  {
+		var newid =  recipeData['body'][0]["maxid"];
+		if(typeof(newid) !== "undefined" && newid !== null && newid !== "")
+		{
+		  newid = parseInt(newid) + 1;
+		  new_copy["ingredients"]= this.formatString(JSON.stringify(new_copy["ingredients"]));
+		  new_copy["s_instructions"]= this.formatString(new_copy["s_instructions"]);
+		  new_copy["created_by"]= this.currentUser["id"];
+		  new_copy["status"]= "0";
+		  new_copy["url"] = environment.appUrl + "/recipedetails/" + newid;
+		  new_copy["uri"] = environment.appUrl + "/recipedetails/" + newid;
+		  new_copy["shareAs"] = environment.appUrl + "/recipedetails/" + newid;
+		  new_copy["source"] = environment.appname + "_" + this.searchRes["id"];
+		  new_copy["s_servings"] = new_copy["yield"];
+		  console.log(JSON.stringify(new_copy));
+		  this.createNewRecipe(new_copy, newid);
+		  
+		}
+	    	  
+	  }
+	}));
+  
+   
+  }
+  
+  createNewRecipe(new_copy, newid)
+  {
+	var res =   this.dbService.postDataByTable("recipes", new_copy).subscribe(recipeData => setTimeout(() => {
+	  console.log(recipeData);
+  
+	  if(recipeData['inserted_id'] !== "undefined" && recipeData['inserted_id'] !== "" && recipeData['inserted_id'] !== "0" && recipeData['inserted_id'] !== 0)
+	  {
+		this.toastr.success("Recipe has been copied.","Create a Copy of Recipe")
+		var param = {};
+  
+		  param["id"] = recipeData['inserted_id'];
+	   
+		  if(newid !== recipeData['inserted_id'])
+		  {
+			this.updaterecipe(recipeData['inserted_id'])
+		  }
+			this.router.navigate(["recipesubmit", param]);
+	  }
+	}));
+  }
+  updaterecipe(newid)
+  {
+	console.log("in updatereicpe");
+	console.log(newid);
+	var new_copy = {};
+	new_copy["id"] = newid;
+	new_copy["url"] = environment.appUrl + "/recipedetails/" + newid;
+	new_copy["uri"] = environment.appUrl + "/recipedetails/" + newid;
+	new_copy["shareAs"] = environment.appUrl + "/recipedetails/" + newid;
+  
+  
+   // var res =   this.dbService.updateDataByTable("recipes", new_copy).subscribe(recipeData => setTimeout(() => {
+	//  console.log(recipeData);	     
+   // }));
+  }
 }
 
 
