@@ -556,7 +556,7 @@ saveRecipebook()
 			console.log(params);
 			var res =   this.dbService.updateDataByTable("recipebook", params).subscribe(recipeData => setTimeout(() => {
 				console.log(recipeData);
-				//this.toastr.success('Updated Recipe Book!', 'Recipe Book!');	
+				this.toastr.success('Updated Recipe Book!', 'Recipe Book!');	
 				this.loadRecipebook(this.searchRes.id);
 				
 			}));
@@ -568,7 +568,7 @@ saveRecipebook()
 			console.log(params);
 			var res =   this.dbService.postDataByTable("recipebook", params).subscribe(recipeData => setTimeout(() => {
 				console.log(recipeData);
-				//this.toastr.success('Saved Recipe Book!', 'Recipe Book!');
+				this.toastr.success('Saved Recipe Book!', 'Recipe Book!');
 				if(recipeData['inserted_id'] !== "undefined" && recipeData['inserted_id'] !== "")
 				{
 					this.loadRecipebook(recipeData['inserted_id']);	
