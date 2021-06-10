@@ -40,127 +40,17 @@
                    </div>-->
                  
                     
-                  
-                       <!-- <div class="col-12 col-md-6 col-lg-6">
-                            <label  class='comment-label'>Upload Image</label>
-                            <button (click)="fileupload()" class="upload-comment">
-                               <i class="fa fa-picture-o" aria-hidden="true"></i> Upload Image</button>
-                           <div>
-                               <input id="inputuploadrecipe" hidden type="file" name="inputuploadrecipe" (change)="onFileSelect($event)" />
-                             </div>
-                             <img *ngIf="collection.image" src="{{collection.image}}"  style="width: 90%; max-width: 300px;" />
-                     
-                             
-                          </div>
-                        -->
+                 
                         <div class="text-center">
                             <button type="submit" (click)="saveRecipebook()"  class="recipe-submit-btn">Save </button>
                         </div>
                     </div>
-<!--
-                    <div class="row" *ngIf="!collectionOwner && collection.image"  >
-                      <div class="col-12 collection_panel">
-                        <div class="row fadeInLeft animated newanim recipeDay-outer" *ngIf='collection' >
-                            <div class="col-12 col-md-4 col-lg-4" style="padding-left:0px; padding-right:0px;">
-                               <div style="padding:10px">
-                                  <div class="animated wow flipInX" style='border:1px solid #CCC; padding: 25px;'>
-                                     <img src="{{collection.image}}" alt="slide" style='width:100%;max-height:440px;min-height:200px;'>  
-                                </div>     
-                               </div>
-                            </div>
-                            <div class="col-12 col-md-8 col-lg-8"  style="padding-left:0px; padding-right:0px; background: #ffffff;padding: 10px;">
-                                <div class="outerbox" style='height: 100%;
-                                padding: 10px;
-                                border: 1px solid rgb(204, 204, 204);'>
-                                    <div class="innerbox">
-                                     
-                                        <div class="recipe-details-group">
-                                           <div class="recipe-details" *ngIf="collection.collection_name">
-                                              <p style="display:block; text-align:center; font-size: 46px;
-                                              font-weight: bold;                                            line-height: 60px; padding-bottom:10px">
-                                                 <a href="javascript:void(0)" style="cursor:pointer" class="hlabel">{{collection.collection_name}}</a> 
-                                             </p>
-                                             </div>
-                                           
-                                             <div class="short-separator" style="margin-top:10px;margin-bottom:5px"></div>
-                                            <p style="clear:both;margin-top:10px;"></p>
-                                            <div style="position:absolute; bottom:20px" class="recipe-details" *ngIf="collection">
-                                             
-                                                <p class="details" *ngIf="recipesList.length > 0">{{recipesList.length}} Recipe<span *ngIf="recipesList.length > 1">s</span></p>
-                                                <p class="details" *ngIf="collection && collection.joinedcount">{{collection.joinedcount}} member<span *ngIf="collection.joinedcount > 1">s</span></p>
-                                                
-                                           </div>
-                                            <div style="position:absolute; bottom:20px; right:20px;">
-                                                <div class="component-bg" style="display:inline-block;">
-                                                    <div class="share-recipe">
-                                                      Share :  
-                                                  
-                                                  
-                                                      <div class="fb-share-button social-icon fb" 
-                                                      data-href="https://developers.facebook.com/docs/plugins/" data-layout="button" data-size="large">
-                                                      <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?quote={{msg}}&u={{urlShare}}/" class=" fa fa-facebook"></a>
-                                                      </div>
-                                                      <div class="social-icon twitter">
-                                                        <a href="{{urlTweet}}" target="_blank" class=" fa fa-twitter"></a>
-                                                      </div>
-                                                  
-                                                      <div class="social-icon whatsapp">
-                                                        <a href="https://api.whatsapp.com/send?text={{urlShare}}" target="_blank" data-action="share/whatsapp/share" class=" fa fa-whatsapp"></a>
-                                                      </div>
-                                                  
-                                                      <div class="social-icon print">
-                                                        <a href="javascript:void()" target="_blank" class=" fa fa-print"></a>
-                                                      </div>
-                                                    </div>
-                                                  </div>
-                                                <button *ngIf="showActions['invite']" class="create-button anim-button btn-4">Invite</button>
-                                                <button (click)="joincollection()" *ngIf="showActions['join'] " class="create-button anim-button btn-4">Join</button>
-                                          </div>
-                                         
-                                        </div>
-                                            <p style="clear:both"></p>
-                                         
-                                            <p style="clear:both; padding-bottom:10px;"></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        </div>
-                    -->
-
-<!--
-                        <div class="row">
-                            <div class="col-12 col-lg-6" style="padding:10px; border:1px solid #555;">
-                                <img class="collection_img" src="{{collection.image}}"  style="height:200px;width: 100%;" />
-                            </div>
-                            <div class="col-12 col-lg-6">
-                                <div class="collection_details">
-                                    <p class="name">{{collection.collection_name}}</p>
-                                    <br>
-                                
-                                    <p class="details">{{collection.description}}</p>
-                                       <p class="details" *ngIf="recipesList.length > 0">{{recipesList.length}} Recipe<span *ngIf="recipesList.length > 1">s</span></p>
-                                       <p class="details" *ngIf="collection && collection.joinedcount">{{collection.joinedcount}} member<span *ngIf="collection.joinedcount > 1">s</span> joined</p>
-                                        <button *ngIf="showActions['invite']" class="add-recipe">Invite</button>
-                                        <button (click)="joincollection()" *ngIf="showActions['join'] " class="add-recipe">Join</button>
-                     
-                                 </div>
-                            </div>
-
-                        </div>
-                    -->
-                     
-                             
-                  
 
 
                    <!--  <div class="row" *ngIf="!collectionOwner && collection.image"  > -->
                      <div class="row" *ngIf="collection.image"  >
                         <div class="col-12 collection_panel animated wow flipInX">
-                         <!--<div class="ribbon-container-left" *ngIf="collection && collection.joinedcount"><div class="ribbon">{{collection.joinedcount}} member<span *ngIf="collection.joinedcount > 1">s</span> joined</div></div>
-                         <div class="ribbon-container-right" *ngIf="recipesList.length > 0"><div class="ribbon">{{recipesList.length}} Recipe<span *ngIf="recipesList.length > 1">s</span> added</div></div>-->
-  
+                   
                         <img class="collection_img " src="{{collection.image}}"  style="height:200px;width: 100%;" />
                        <div class="collection_details" style="position: absolute;
                        top: 0px;background-size:cover;  background-position:center;  height:100%; " [ngStyle]="{'background-image':'linear-gradient(
@@ -173,14 +63,14 @@
                           <div style="position:absolute; bottom:10px; padding:15px;" class="recipe-details" *ngIf="collection">
                                              
                             <p class="details" *ngIf="recipesList.length > 0"><i class="fa fa-cutlery"></i> {{recipesList.length}} Recipe<span *ngIf="recipesList.length > 1">s</span>
-                            <a href="javascript:void(0)" (mouseout) = "hideusers()" (mouseover)="showusers()"><span style="margin-left:10px" class="details" *ngIf="collection && collection.joinedcount"><i class="fa fa-user"></i> {{collection.joinedcount}} member<span *ngIf="collection.joinedcount > 1">s</span></span></a></p>
-                            <div class="userslist" *ngIf="usersList.length > 0">
+                            <a href="javascript:void(0)"  (click)="showusers()"><span style="margin-left:10px" class="details" *ngIf="collection && collection.joinedcount"><i class="fa fa-user"></i> {{collection.joinedcount}} member<span *ngIf="collection.joinedcount > 1">s</span></span></a></p>
+                            <!--<div class="userslist" *ngIf="usersList.length > 0">
                                 <ng-container *ngFor="let user of usersList; let u=index">
                                     <div style="display:block; margin-bottom:10px;">
                                         <img src="{{user.image}}" class="profileimage"><span class="username">{{user.firstname}}</span>
                                     </div>
                                 </ng-container>
-                               </div>
+                               </div>-->
                                
                        </div>
                        
@@ -210,6 +100,9 @@
                             <!--<button *ngIf="showActions['invite']" class="create-button anim-button btn-4">Invite</button>-->
                             <button (click)="joincollection()" *ngIf="showActions['join'] " class="create-button anim-button btn-4">Join</button>
                             <button class="create-button anim-button btn-4" (click)="addNew()" >Add Recipe</button>
+                            <button class="create-button anim-button btn-4" (click)="toggleRecipeAddURL = !toggleRecipeAddURL" >Save from URL</button>
+                          
+
                       </div>
            
                        </div>
@@ -221,8 +114,18 @@
                     <div class="row " style="margin-top:20px" *ngIf="collection.collection_name">
                        <div class="col-12 onlymobile">
                             <button (click)="joincollection()" *ngIf="showActions['join'] " class="create-button anim-button btn-4">Join</button>
-                            <button class="create-button anim-button btn-4" (click)="addNew()" >Add Recipe</button>          
+                            <button class="create-button anim-button btn-4" (click)="addNew()" >Add Recipe</button>      
+                            <button class="create-button anim-button btn-4" (click)="toggleRecipeAddURL = !toggleRecipeAddURL" >Save from URL</button>    
                        </div>
+                       <div class="col-12 add-recipe-panel" *ngIf="toggleRecipeAddURL">
+                        <div style="padding-left: 10px; padding-right: 10px;">
+                            <input type="text" name="searchquery" [(ngModel)]= "recipeurl"   name="recipeurl" (keyup.enter)="checkrecipeexists()"  class="inputbox" placeholder="Enter recipe url..." />
+                            <input  type="button"  (click)="checkrecipeexists()" style="margin-bottom:10px;" 
+                            [ngClass]="searchmorebar?'defaultbtn searchbtn hideonmobile bg-orange' :' defaultbtn searchbtn  bg-orange'" id="header-submit-search-pro" name="submit" value="Import Recipe">
+                        </div>
+                      </div>
+                     
+
                         <div class="col-12 add-recipe-panel" *ngIf="toggleRecipeAdd">
                             <div class="row">
                         <div class="col-12 " style="margin:0; padding-left:0px; padding-right:0px;">
@@ -541,3 +444,35 @@
 
     </form>
 </jw-modal>
+
+
+
+<jw-modal id="viewusers" [width] = "widthClass">
+    
+    <form name="form"  #uf="ngForm" novalidate class="popup-panel">
+        <div class="modal-header" style="background:#FFF;">
+            <h2 style="margin:15px; ">
+                <span>Members</span> 
+            </h2>
+            <button style="font-size: 30px;padding:5px;" type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeModal('viewusers');">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body" style="background:#FFF;">
+
+            <div class="row">
+                <div class='col-12 col-lg-12' style="max-height: 300px; overflow: auto;">
+                    <div class="row">
+                          <div class="col-12" style="margin-bottom:10px;" *ngFor="let user of usersList; let u=index">
+                               <img src="{{formatimage(user.image)}}" style="width:40px; display:inline-block;border-radius:50%; margin-right:10px;"> <span style="font-size:16px">{{user.firstname}}</span>
+                           
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </form>
+</jw-modal>
+

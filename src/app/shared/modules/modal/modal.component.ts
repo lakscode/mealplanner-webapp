@@ -10,12 +10,13 @@ export class ModalComponent implements OnInit, OnDestroy {
     @Input() id: string;
     @Input() width: string;
     private element: any;
-    widthClass:any = "60";
+    widthClass:any = "width60";
     constructor(private modalService: ModalService, private el: ElementRef) {
         this.element = el.nativeElement;
     }
     ngOnInit(): void {
         let modal = this;
+      
         if (!this.id) {
             console.error('modal must have an id');
             return;
@@ -39,6 +40,7 @@ export class ModalComponent implements OnInit, OnDestroy {
             else 
             this.widthClass ="width60";
         }
+ 
     }
 
     // remove self from modal service when component is destroyed
@@ -50,7 +52,6 @@ export class ModalComponent implements OnInit, OnDestroy {
     // open modal
     open(): void {
         this.element.style.display = 'block';
-        console.log(this.element.id);
         document.body.classList.add('jw-modal-open');
     }
 

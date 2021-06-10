@@ -983,6 +983,7 @@ params = {};
 		{
 			this.recipesList[fIndex]["UserFavStatus"] =  false;
 			this.recipesList[fIndex]["favcount"] = parseInt(this.recipesList[fIndex]["favcount"]) - 1;
+			console.log(	this.recipesList[fIndex]);
 		}
 
 	 
@@ -1042,11 +1043,12 @@ var res =   this.dbService.getDatabyTablebyQuery("favourites", params).subscribe
 	var res =   this.dbService.postDataByTable("favourites", params1).subscribe(invData => setTimeout(() => {
 		if(invData !== null)
 		{
-			this.toastr.success('Recipe has been set as favourite.', 'Collection!');	
+			//this.toastr.success('Recipe has been set as favourite.', 'Collection!');	
 			//this.getFavouriteStatus();
 			var fIndex = this.recipesList.findIndex(x=>(x["id"] === id));
 			if(fIndex > -1)
 			{
+				this.recipesList[fIndex]["favcount"]  = this.recipesList[fIndex]["favcount"]+1;
 				this.recipesList[fIndex]["UserFavStatus"] =  true;
 				this.setFav = true;
 				this.recipesList[fIndex]["expand"] = !this.recipesList[fIndex]["expand"];
@@ -1091,6 +1093,7 @@ params = {};
 		var fIndex = this.recipesList.findIndex(x=>(x["id"] === id));
 		if(fIndex > -1)
 		{
+			this.recipesList[fIndex]["favcount"]  = this.recipesList[fIndex]["favcount"]-1;
 			this.recipesList[fIndex]["UserFavStatus"] =  false;
 			this.recipesList[fIndex]["expand"] = !this.recipesList[fIndex]["expand"];
 		}
@@ -1215,37 +1218,36 @@ gotodetails(id){
  }
 usersList: Array<any> = [];
 showusersflag: boolean = false;
+widthClass: any = "";
 hideusers()
 {
 	this.showusersflag = false;
 }
 showusers()
 {
-	/*
+	this.widthClass = 40;
+	this.modalService.open("viewusers");
+
 	this.showusersflag = true;
-	console.log("in showusers");
-	console.log("userslist");
-	console.log(this.usersList);
   if(this.usersList.length == 0)
   {
- // var params = {"query": "SELECT c.id, COUNT(cj.id) AS usercount 	FROM users AS u LEFT JOIN  collection_join AS cj ON c.id = cj.collection_id GROUP BY c.id, cj.collection_id"};
 
   var params = {"query": "SELECT id, firstname, lastname, email, username, image FROM users where id in (select user_id from collection_join  where collectin_id = " + this.routeParams.id + ")"};
 
   params["query"] ="select id, username, firstname, lastname, email, image from users where id in (select userid from collection_join where collection_id = " + this.collection["id"] + ")"; 
-console.log(params);
+
   var res =   this.dbService.getDatabyTablebyQuery("recipes", params).subscribe(invData => setTimeout(() => {
-	console.log(invData);
+
    
     if(invData !== null && invData["body"]["length"] > 0)
     {
       this.usersList = invData["body"];
-      console.log( this.usersList);
+  
     }
   }));
  
 
-} */
+} 
 }
 
 
@@ -1377,6 +1379,310 @@ updateMealType()
 	}));
 }
 
+
+
+/**************** import recipe from url  */
+
+
+recipeurl: any = "";
+checkrecipeexists()
+{
+	var params1 = {};
+	console.log(this.recipeurl);
+	params1["url"] =  this.recipeurl;
+	//params1["url"]="http://www.myrecipes.com/recipe/black-cardamom-beef-sliders";
+   // this.importrecipe(params1["url"]);
+console.log(params1);
+  var res =   this.dbService.getDatabyFields("recipes", params1).subscribe(resData => setTimeout(() => {
+	  console.log(resData);
+	  if(resData !== null && resData['body']['length'] > 0)
+	  {
+	  //	alert("Recipe already in our database");
+		  this.toastr.error('Recipe already in our database', 'Save Recipe from URL!');
+		  
+	  }
+	  else
+	  {
+		  this.importrecipe(params1["url"]);
+	  }
+  }));
+	   
+}
+
+instructionCount:any = 0;
+toggleRecipeAddURL: boolean = false;
+importrecipe(url)
+{
+  var params1 = {};
+  this.instructionCount= 0;
+  params1["url"]=url;
+  var apiurl = environment.scrapeurl;
+  console.log("apiurl " + apiurl);
+  var res =   this.dbService.postLocalData(apiurl, params1).subscribe(resData => setTimeout(() => {
+	  console.log(resData);
+	  if(resData && resData["result"] && resData["result"] == "Error")
+	  {
+		  this.toastr.error('Unable to import this url at present. Please try existing recipes.', 'Save Recipe from URL!');
+		  //alert("unable to import this url at present. Please try existing recipes ")
+	  }
+	  else{
+		  this.createrecipe(resData, url)
+	  }
+	  
+  }));
+}
+
+new_recipe: any = {};
+
+ingredientsImport :Array<any> = [];
+
+createrecipe(data, url)
+{
+  this.new_recipe = {};
+  this.new_recipe["label"] = data["name"];
+  this.new_recipe["image"] = data["image"];
+  this.new_recipe["url"] = url;
+  this.new_recipe["uri"] = url;
+  this.new_recipe["ingredientLines"] = this.formatString(data["ingredients"].join("~"));
+  
+  this.new_recipe["s_instructions"] = this.formatString(data["instructions"].join("~"));
+  this.new_recipe["created_by"] = this.currentUser["id"];
+  this.new_recipe["status"] = "0";
+  this.new_recipe["source"] = "imported";
+
+  if(data["time"] && data["time"]["total"])
+  {
+	  this.new_recipe["totalTime"] = data["time"]["total"];
+  }
+
+  for(let i=0; i < data["ingredients"].length; i++)
+  {
+	  this.ingredientsImport.push({'text':data["ingredients"][i]});
+  }
+  this.instructionCount = 0;
+  this.getNutrients(this.ingredientsImport[0])
+}
+
+
+/************ for nutrients */
+
+getNutrients(item)
+{
+
+
+  console.log(item);
+  var api_id = environment.edamameId;
+  var api_key = environment.edamameKey;
+
+  console.log(api_id);
+  console.log(api_key);
+
+  var apiURL = constants.edamam_nutrient_api   +"?app_id="+ api_id + "&app_key=" + api_key + "&ingr=" + item["text"];
+
+  console.log(apiURL);
+  var res =   this.dbService.getLocalData(apiURL).subscribe(recipeData => setTimeout(() => {
+	  console.log(recipeData);
+	  item["nutrients"] = recipeData;
+	  
+	  
+	  if(this.instructionCount < this.ingredientsImport.length-1)
+	  {
+		  this.instructionCount++;
+		  this.getNutrients(this.ingredientsImport[this.instructionCount]);
+	  }
+	  else
+	  {
+		  this.formatIngredients();
+	  }
+  }));
+
+}
+
+SaveRecipe()
+{
+  console.log(this.new_recipe);
+  console.log(JSON.stringify(this.new_recipe));
+	var res =   this.dbService.postDataByTable("recipes", this.new_recipe).subscribe(recipeData => setTimeout(() => {
+	  console.log(recipeData);
+  
+	  if(recipeData['inserted_id'] !== "undefined" && recipeData['inserted_id'] !== "" && recipeData['inserted_id'] !== "0" && recipeData['inserted_id'] !== 0)
+	  {
+		  this.toastr.success('Recipe has been imported!!!', 'Save Recipe from URL!');
+		  this.searchProps();
+	  }
+	  else
+	  {
+		  this.toastr.error('Error importing the recipe!!!', 'Save Recipe from URL!');
+	  }
+	}));
+  
+}
+formatString(str)
+{
+var retVal = str;
+if(str !== "")
+{
+  if(str.indexOf("'") > -1)
+  {
+  retVal = retVal.replaceAll("'","");
+  console.log(retVal);
+  }
+}
+return retVal;
+}
+cons_Nutrients: any= {};
+total_calories: any = 0;
+total_weight: any = 0;
+labels: any = {};
+formatIngredients()
+{
+  console.log(this.ingredientsImport);
+  var temp = "";
+  var totalNutrients = {};
+  this.cons_Nutrients= {};
+  
+  if(typeof(this.new_recipe["totalNutrients"]) !== "undefined" && this.new_recipe["totalNutrients"]!== "")
+  {
+	  this.cons_Nutrients = JSON.parse(this.new_recipe["totalNutrients"]);
+  }
+  for(let i=0; i < this.ingredientsImport.length; i++)
+  {
+	  temp += this.ingredientsImport[i]["text"] + "~";
+	  if(typeof(this.ingredientsImport[i]["nutrients"]) !== "undefined")
+	  this.consolidateNutrients(this.ingredientsImport[i]["nutrients"]);
+	  this.formatLabels(this.ingredientsImport[i]["nutrients"]);
+  }
+  if(temp !== '')
+  temp=  temp.slice(0, -1);
+
+  //this.new_recipe["ingredientLines"] = temp;
+  this.new_recipe["totalNutrients"] = JSON.stringify(this.cons_Nutrients);
+  this.new_recipe["calories"] = this.total_calories;
+  console.log(this.new_recipe);
+  this.SaveRecipe();
+}
+
+formatLabels(item)
+{
+//	console.log("Formatlabels");
+//	console.log(item);
+  if(typeof(item) !== "undefined" && item !== null)
+  {
+  
+  if(typeof(item["cautions"]) !== "undefined" && item['cautions'] !== null && item['cautions'] !== "")
+  {
+	  var cautions  = item["cautions"]
+	  if(typeof(this.labels["cautions"]) == "undefined")
+	  {
+		  this.labels["cautions"] = cautions.join("~");
+	  }
+	  else
+	  {
+		  for(let c=0; c < cautions.length; c++)
+		  {
+			  if(this.labels["cautions"].indexOf(cautions[c]) == -1)
+			  {
+				  cautions[c] = cautions[c].replace("_", "-");
+				  this.labels["cautions"] += "~" + cautions[c];
+			  }
+		  }
+	  }
+	  this.new_recipe["cautions"] = this.labels["cautions"];
+  }
+  if(typeof(item["dietLabels"]) !== "undefined" && item['dietLabels'] !== null && item['dietLabels'] !==  "")
+  {
+	  var tDiet  = item["dietLabels"];
+	  if(typeof(this.labels["dietLabels"]) == "undefined")
+	  {
+		  this.labels["dietLabels"] = tDiet.join("~");
+	  }
+	  else
+	  {
+		  for(let c=0; c < tDiet.length; c++)
+		  {
+			  if(this.labels["dietLabels"].indexOf(tDiet[c]) == -1)
+			  {
+				  tDiet[c] = tDiet[c].replaceAll("_", "-");
+				  this.labels["dietLabels"] += "~" + tDiet[c];
+			  }
+		  }
+	  }
+	  this.new_recipe["dietLabels"] = this.labels["dietLabels"];
+  }
+  if(typeof(item["healthLabels"]) !== "undefined" && item['healthLabels'] !== null && item['healthLabels'] !== "")
+  {
+	  var tlabel2  = item["healthLabels"];
+	  if(typeof(this.labels["healthLabels"]) == "undefined")
+	  {
+		  this.labels["healthLabels"] = tlabel2.join("~");
+	  }
+	  else
+	  {
+		  for(let c=0; c < tlabel2.length; c++)
+		  {
+			  if(this.labels["healthLabels"].indexOf(tlabel2[c]) == -1)
+			  {
+				  tlabel2[c] = tlabel2[c].replaceAll("_", "-");
+				  this.labels["healthLabels"] += "~" + tlabel2[c];
+			  }
+		  }
+	  }
+	  this.new_recipe["healthLabels"] = this.labels["healthLabels"];
+  }
+//	console.log(this.labels);
+  }
+//	console.log(this.labels);
+//	console.log(this.new_recipe);
+}
+
+consolidateNutrients(item)
+{
+	if(typeof(item["totalWeight"]) !== "undefined" && item['totalWeight'] !== null)
+	{
+	this.total_weight  += item["totalWeight"];
+	}
+
+	if(typeof(item["calories"]) !== "undefined" && item['calories'] !== null)
+	{
+	this.total_calories  += item["calories"];
+	}
+	if(typeof(item["totalNutrients"]) !== "undefined" && item['totalNutrients'] !== null)
+	{
+	var obj = item["totalNutrients"];
+
+	if(item)
+		{
+			for (let x in obj) {
+			
+				if(typeof(this.cons_Nutrients[x]) == "undefined")
+				{
+					this.cons_Nutrients[x] = obj[x];
+				}
+				else
+				{
+					this.cons_Nutrients[x]['quantity'] = parseFloat(this.cons_Nutrients[x]['quantity']) + obj[x]["quantity"];
+				}
+			}
+		
+		}
+	//	console.log(this.cons_Nutrients); 
+	}
+}
+
+formatimage(image)
+{
+  var ret = image;
+  if(image !== "")
+  {
+    if(image.indexOf("uploads/profiles") > -1)
+    {
+		var urlapi = this.apiUrl.replace("/api","");
+
+      ret = urlapi + image;
+    }
+  }
+  return ret;
+}
 }
 
 	
