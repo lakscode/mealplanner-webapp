@@ -785,3 +785,49 @@ color:$orange1;
 {
 	color:$orange1;
 }
+
+
+
+.contextmenu-icon
+{
+  float:right; width:30px; height:30px;
+  padding-top: 4px;
+  
+}
+
+.contextmenu-icon.active
+{
+ background-color: #f1f2f3;
+ border-radius: 50%;
+}
+.contextmenu
+{
+  position: absolute;
+  top: 20px;
+  right: 15px;
+  color: $text-gray;
+  width: 200px;
+  left: 15px;
+  background: #FFF;
+  border-radius: 15px;
+  z-index: 10;
+  padding: 10px;
+  text-align:left;
+  box-shadow: rgb(98 98 119 / 10%) 0px 5px 20px;
+  .menu
+  {
+    font-size:16px;
+    color:$text-gray;  
+    padding: 10px 5px;
+    display: block;
+    font-family: 'Lato', serif;
+  }
+  .menu:hover
+  {
+    color:$orange1;
+  }
+  i
+  {    margin-right: 10px;
+     width: 16px;
+  }
+}

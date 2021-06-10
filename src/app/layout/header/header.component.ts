@@ -169,15 +169,18 @@ export class HeaderComponent implements OnInit, OnDestroy {
 				{
 					this.userName = this.currentUser["firstname"];
 					this.userName = this.userName.charAt(0).toUpperCase() + this.userName.slice(1);
+
+				//	if(typeof(this.currentUser["lastname"]) !== "undefined")
+				//	{
+				//		var lastname = this.currentUser["lastname"].charAt(0).toUpperCase() + this.currentUser["lastname"].slice(1);
+				//	this.userName = this.userName + " " + lastname;
+				//	}
+
 				}
 
-				if(typeof(this.currentUser["lastname"]) !== "undefined")
-				{
-					var lastname = this.currentUser["lastname"].charAt(0).toUpperCase() + this.currentUser["lastname"].slice(1);
-				this.userName = this.userName + " " + lastname;
-				}
+				
 
-				 if(typeof(this.currentUser["username"]) !== "undefined") {
+				 if(this.userName == "" && typeof(this.currentUser["username"]) !== "undefined") {
                 this.userName = this.currentUser["username"];
                 }
 				if(typeof(this.currentUser["loggedIn"]) !== "undefined") {

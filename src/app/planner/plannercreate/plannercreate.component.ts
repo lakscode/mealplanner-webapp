@@ -65,7 +65,7 @@ export class PlannercreateComponent implements OnInit {
 	role: any = {};
 	searchFilterLabels: Array<any> = [];
 	cuisineTypeList : Array<any> = [];
-
+	showpopupflag: boolean = false;
 	constructor(private router: Router, private toastr: ToastrService,  private route: ActivatedRoute, private modalService: ModalService, private pdfService: PDFService, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
 	
 	}

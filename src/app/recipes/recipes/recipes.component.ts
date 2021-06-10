@@ -4,7 +4,7 @@ import { UserService } from '../../services/user.service';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DBService } from '../../dbservices/db.service';
 import { HelpService } from '../../services/help.service';
-
+import { ToastrService } from 'ngx-toastr';
 import { environment } from './../../../environments/environment';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -46,7 +46,7 @@ export class RecipesComponent implements OnInit {
 
 	searchFilterLabels: Array<any> = [];
 	splitcontent : boolean = false;
-	constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
+	constructor(private router: Router, private toastr: ToastrService, private route: ActivatedRoute, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
 	
 	}
 	toggleMore() {
@@ -777,6 +777,308 @@ clearFilters(){
 	this.maxcalories = "";
 	this.searchparam = {"q":""};
 }
+showhidecontent(recipe)
+{
+	recipe.showpopup = !recipe.showpopup
+	for(let r = 0; r < this.displayList.length; r++)
+	{
+		if(recipe.id !== this.displayList[r]["id"])
+		{
+			this.displayList[r]["showpopup"] = false;
+		}
+	}
+}
+
+
+
+/************** add to mean plan */
+
+
+selectedRecipe2Add2plan: any;
+addtoMealPlan(recipe)
+{
+	this.loadPlanNames();
+this.selectedRecipe2Add2plan= recipe;
+recipe.showAdd2MP = !recipe.showAdd2MP; 
+
+}
+plansList:Array<any>=[];
+daysList: Array<any> = [];
+mealTypesList : Array<any> = [];
+plan: any = {"id":'', "day":"", "mealType":""};
+showAdd2MP: boolean = false;
+loadPlanNames()
+{
+	if(this.currentUser && this.currentUser["id"])
+	{
+	this.plansList = [];
+
+	var params = {};
+	//params["created_by"]  = this.currentUser["id"];
+	console.log(params);
+	params ['query'] = "select id, name from mealplan where created_by = " + this.currentUser["id"];
+	var res =   this.dbService.getDatabyTablebyQuery("mealplan", params).subscribe(invData => setTimeout(() => {
+
+	  console.log(invData);
+	  if(invData !== null)
+	  {
+		var obj = invData["body"]["length"];
+		this.plansList = invData["body"];
+	  }
+	  this.loadOptions();
+
+	}));
+	}
+}
+loadOptions()
+{
+	this.mealTypesList = [];
+	this.daysList = [];
+	for(let d=0; d < 7; d++)
+	{
+		this.daysList.push({"id":d, "name":"Day " + (d+1)});
+	}
+
+	this.mealTypesList.push({"code":"breakfast", "name":"Breakfast"});
+	this.mealTypesList.push({"code":"snack1", "name":"Pre-lunch Snack"});
+	this.mealTypesList.push({"code":"lunch", "name":"Lunch"});
+	this.mealTypesList.push({"code":"snack2", "name":"Evening Snack"});
+	this.mealTypesList.push({"code":"dinner", "name":"Dinner"});
+
+}
+add2Plan()
+{
+	this.showAdd2MP= false;
+	console.log(this.plan);
+
+	var params = {};
+	//params["created_by"]  = this.currentUser["id"];
+	console.log(params);
+	params ['query'] = "select * from days where meal_plan_id = " + this.plan["id"] + " AND day_num = " + this.plan["day"];
+	var res =   this.dbService.getDatabyTablebyQuery("days", params).subscribe(invData => setTimeout(() => {
+
+	  console.log(invData);
+	  if(invData !== null && invData["body"]["length"] > 0)
+	  {
+		var selectedDay = invData["body"][0];
+		if(selectedDay[this.plan["mealType"]] == "")
+		{
+			this.updateMealType();
+		}
+		else
+		{
+			this.toastr.warning('Another Recipe has been already added to selected meal type of the plan!!!', 'Add to Meal Plan');
+		}
+	  }
+	  else
+	  {
+		var params = {};
+		   
+		params["meal_plan_id"] = this.plan["id"];
+		params["day_num"] = this.plan["day"];
+		params["name"] = "Day " + (this.plan["day"] +1);
+
+		params["breakfast"] = "";
+		params["snack1"] = "";
+		params["lunch"] = "";
+		params["snack2"] = "";
+		params["dinner"] = "";
+		params[this.plan["mealType"]] = this.selectedRecipe2Add2plan["id"];
+		params["created_by"] = "";
+		params["created_at"] = new Date();
+		params["status"] = 1;
+
+ 
+	
+		var res =   this.dbService.postDataByTable("days", params).subscribe(dData => setTimeout(() => {
+		//	alert("New day record created for plan");
+			this.toastr.success('Recipe has been added to the selected meal type of the plan!!!', 'Add to Meal Plan');
+	
+		}));
+
+	  }
+	}));
+
+}
+
+updateMealType()
+{
+	//alert("add recipe");
+	var params1 = {};
+	params1 ['query'] = "update days set " + this.plan["mealType"] + " = " + this.selectedRecipe2Add2plan["id"] + " where meal_plan_id = " + this.plan["id"] + " AND day_num = " + this.plan["day"];
+	var res =   this.dbService.getDatabyTablebyQuery("days", params1).subscribe(invData => setTimeout(() => {
+		this.toastr.success('Recipe has been added to the selected meal type of the plan!!!', 'Add to Meal Plan');
+	
+
+		var recipeindex = this.recipesList.findIndex(x=>(x.id == this. selectedRecipe2Add2plan.id));
+		if(recipeindex  >-1)
+		{
+			this.recipesList[recipeindex].showAdd2MP = false;
+		}
+	}));
+}
+
+
+/**************************** Make copy of recipe  */
+
+
+formatString(str)
+{
+  var retVal = str;
+  if(typeof(str) !== "undefined" && str !== "")
+  {
+    if(str.indexOf("'") > -1)
+    {
+    
+    //retVal = str.replace(/'/g, "\'");
+    retVal = retVal.replaceAll("'","");
+    ////console.log(retVal);
+    }
+  }
+  return retVal;
+}
+makeacopy(recipe)
+{
+	console.log("make a copy")
+	var pparms = {"id":recipe.id}
+	var res =   this.dbService.getDatabyFields("recipes", pparms).subscribe(recipeData1 => setTimeout(() => {
+		console.log(recipeData1);
+if(recipeData1 !== null && recipeData1["body"]["length"]> 0)
+{
+	var new_copy = JSON.parse(JSON.stringify(recipeData1["body"][0]));
+	delete new_copy["id"];
+
+	var pQuery = {"query":"select max(id) as maxid from recipes"};
+	var res =   this.dbService.getDatabyTablebyQuery("recipes", pQuery).subscribe(recipeData => setTimeout(() => {
+	 console.log(recipeData);
+  
+	  if(recipeData !== null && typeof(recipeData['body']) !== "undefined" && recipeData['body']['length'] >0)
+	  {
+		var newid =  recipeData['body'][0]["maxid"];
+		if(typeof(newid) !== "undefined" && newid !== null && newid !== "")
+		{
+		  newid = parseInt(newid) + 1;
+		//  new_copy["ingredients"]= this.formatString(JSON.stringify(new_copy["ingredients"]));
+		//  new_copy["s_instructions"]= this.formatString(new_copy["s_instructions"]);
+		  new_copy["created_by"]= this.currentUser["id"];
+		  new_copy["status"]= "0";
+		  new_copy["url"] = environment.appUrl + "/recipedetails/" + newid;
+		  new_copy["uri"] = environment.appUrl + "/recipedetails/" + newid;
+		  new_copy["shareAs"] = environment.appUrl + "/recipedetails/" + newid;
+		  new_copy["source"] = environment.appname + "_" + recipe["id"];
+		  new_copy["s_servings"] = new_copy["yield"];
+		  console.log(JSON.stringify(new_copy));
+		  this.createNewRecipe(new_copy, newid);
+		  
+		}
+	    	  
+	  }
+	}));
+}
+}));
+
+  }
+  
+  createNewRecipe(new_copy, newid)
+  {
+	var res =   this.dbService.postDataByTable("recipes", new_copy).subscribe(recipeData => setTimeout(() => {
+	  console.log(recipeData);
+  
+	  if(recipeData['inserted_id'] !== "undefined" && recipeData['inserted_id'] !== "" && recipeData['inserted_id'] !== "0" && recipeData['inserted_id'] !== 0)
+	  {
+		this.toastr.success("Recipe has been copied.","Create a Copy of Recipe")
+		var param = {};
+  
+		  param["id"] = recipeData['inserted_id'];
+	   
+		  if(newid !== recipeData['inserted_id'])
+		  {
+			this.updaterecipe(recipeData['inserted_id'])
+		  }
+			this.router.navigate(["recipesubmit", param]);
+	  }
+	}));
+  }
+  updaterecipe(newid)
+  {
+	console.log("in updatereicpe");
+	console.log(newid);
+	var new_copy = {};
+	new_copy["id"] = newid;
+	new_copy["url"] = environment.appUrl + "/recipedetails/" + newid;
+	new_copy["uri"] = environment.appUrl + "/recipedetails/" + newid;
+	new_copy["shareAs"] = environment.appUrl + "/recipedetails/" + newid;
+  
+  
+   // var res =   this.dbService.updateDataByTable("recipes", new_copy).subscribe(recipeData => setTimeout(() => {
+	//  console.log(recipeData);	     
+   // }));
+  }
+
+
+  /********* Add to collections  */
+  selectedRecipe2Add2Collection: any;
+  addCollectionsPopup(recipe)
+  {
+
+
+	this.loadCollectionNames();
+this.selectedRecipe2Add2Collection= recipe;
+recipe.showAdd2C = !recipe.showAdd2C; 
+
+}
+collectionsList:Array<any>=[];
+collection: any = {"id":'', "day":"", "mealType":""};
+showAdd2C: boolean = false;
+loadCollectionNames()
+{
+	if(this.currentUser && this.currentUser["id"])
+	{
+	this.collectionsList = [];
+
+	var params = {};
+	console.log(params);
+	params ['query'] = "select id, collection_name from collection where created_by = " + this.currentUser["id"];
+	var res =   this.dbService.getDatabyTablebyQuery("collection", params).subscribe(invData => setTimeout(() => {
+
+	  console.log(invData);
+	  if(invData !== null)
+	  {
+		var obj = invData["body"]["length"];
+		this.collectionsList = invData["body"];
+	  }
+	 
+	}));
+	}
+}
+
+add2Collection(recipe)
+{
+	this.showAdd2MP= false;
+	console.log(this.plan);
+
+	var paramsr = {};
+    paramsr["collection_id"] = this.collection["id"];
+    paramsr["recipe_id"] = recipe["id"];
+    paramsr["created_by"] = this.currentUser["id"];
+
+    var res =   this.dbService.getDataByTable("recipe_mapping", paramsr).subscribe(invData => setTimeout(() => {
+     
+      if(invData !== null && invData["body"]["length"] > 0)
+      {
+		this.toastr.success("Recipe has been already added to the collection.","Add Recipe to Collection");
+      }
+      else
+      {
+        var res =   this.dbService.postDataByTable("recipe_mapping", paramsr).subscribe(invData => setTimeout(() => {
+			this.toastr.success("Recipe has been added to the collection.","Add Recipe to Collection");
+        }));
+      }
+	  recipe.showAdd2C = false;
+    }));
+
+}
+
 
 }
 

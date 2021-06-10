@@ -145,12 +145,16 @@ date: {year: number, month: number};
 		  }
 		}
 			
-			
+				console.log(params);
 		if(this.currentUser[param] !== "")
 		{
 		  var res =   this.dbService.putData("users", params).subscribe(invData => setTimeout(() => 
 		  {
 			console.log(JSON.stringify(invData));
+			delete this.currentUser["password"];
+					sessionStorage.setItem("currentUser", JSON.stringify(this.currentUser));
+					let username = this.userService.setUser(this.currentUser);
+
 		  }));
 		}
 	  }

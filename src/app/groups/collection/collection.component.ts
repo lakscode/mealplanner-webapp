@@ -1132,8 +1132,12 @@ getJoinStatuscollection()
 	console.log(params);
 	params ['query'] = "select * from collection_join where collection_id = " + this.collection["id"] + " AND userid = " + this.currentUser["id"];
 	var res =   this.dbService.getDatabyTablebyQuery("collection_join", params).subscribe(invData => setTimeout(() => {
-
-	  console.log(invData);
+		console.log(invData);
+		if(invData !== null && invData["body"]["length"] > 0)
+		{
+			this.showActions['join'] = false;
+		}
+	 
 	  }));
 }
 

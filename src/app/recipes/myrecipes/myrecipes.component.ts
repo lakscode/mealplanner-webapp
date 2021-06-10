@@ -37,6 +37,8 @@ export class MyRecipesComponent implements OnInit {
 	displayList: Array<any> = [];
 	nutrientDbFields : Array<any> = [];
 	recipeurl :any;
+	showpopupflag: boolean = false;
+	recipeFromUrlFlag: boolean = false;
 	constructor(private router: Router, private route: ActivatedRoute, private toastr: ToastrService, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
 	
 	}

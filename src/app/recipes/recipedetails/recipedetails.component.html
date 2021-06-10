@@ -9,7 +9,7 @@
         <div class="wrapper-recipe-heading">
             <div class="heading" style="width:100%">
                 <!--<h2>{{searchRes.label}}</h2>-->
-                <h2><a (click)="gotopage();"><i class="fa fa-chevron-left"></i></a>  Recipe Details</h2>
+                <h2><!--<a (click)="gotopage();"><i class="fa fa-chevron-left"></i></a>-->  Recipe Details</h2>
                 <div class="add2mealplan" *ngIf="plansList.length > 0">
                     <a [ngClass]="showpopupflag?'menu active':'menu'"  (click)="showhidepopup()" href="javascript:void(0)"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></a>
                     <div *ngIf='showpopupflag' class="add2mealplanmenu" style='height:120px'>
