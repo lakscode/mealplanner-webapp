@@ -1424,6 +1424,7 @@ importrecipe(url)
 	  {
 		  this.toastr.error('Unable to import this url at present. Please try existing recipes.', 'Save Recipe from URL!');
 		  //alert("unable to import this url at present. Please try existing recipes ")
+		  this.helpService.import_url_save(this.currentUser["id"],url,"collection_d");
 	  }
 	  else{
 		  this.createrecipe(resData, url)

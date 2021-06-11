@@ -864,5 +864,30 @@ SendEmailPasswordReset(email,data) {
 		
 	  }
 
+	  import_url_save(userid, url, module)
+	  {
+		  var params = {};
+		  params['url'] = url;
+
+
+		this.dbService.getDataByTable("import_url", params).subscribe(resData => setTimeout(() => {  
+			if(resData && resData["body"]["length"] > 0)
+			{
+
+			}
+			else
+			{
+				params['created_by'] = userid;
+				params['module'] = module;
+				this.dbService.postDataByTable("import_url", params).subscribe(invData => setTimeout(() => {  
+
+				}));
+			}
+		}));
+
+		
+
+	  }
+
 	  
 }
