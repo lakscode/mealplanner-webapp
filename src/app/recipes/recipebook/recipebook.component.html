@@ -283,7 +283,7 @@
     <jw-modal id="viewrecipe">
     
     <form name="form"  #uf="ngForm" novalidate class="popup-panel">
-        <div class="modal-header" style="background:#FFF;">
+        <div class="modal-header">
             <h2 style="margin:15px; ">
                 <span>View Recipe Details</span>           
 
@@ -292,7 +292,7 @@
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
-        <div class="modal-body" style="background:#FFF;" *ngIf="selectedRecipe">
+        <div class="modal-body" *ngIf="selectedRecipe">
 
             <div class="row">
                 <div class='col-12 col-lg-12' style="max-height: 300px; overflow: auto;">

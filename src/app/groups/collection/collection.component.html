@@ -377,7 +377,7 @@
     <jw-modal id="viewrecipe">
     
     <form name="form"  #uf="ngForm" novalidate class="popup-panel">
-        <div class="modal-header" style="background:#FFF;">
+        <div class="modal-header" >
             <h2 style="margin:15px; ">
                 <span>View Recipe Details</span>           
 
@@ -386,7 +386,7 @@
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
-        <div class="modal-body" style="background:#FFF;" *ngIf="selectedRecipe">
+        <div class="modal-body" *ngIf="selectedRecipe">
 
             <div class="row">
                 <div class='col-12 col-lg-12' style="max-height: 300px; overflow: auto;">
@@ -447,10 +447,10 @@
 
 
 
-<jw-modal id="viewusers" [width] = "widthClass">
+<jw-modal id="viewusers" [width] = "40">
     
     <form name="form"  #uf="ngForm" novalidate class="popup-panel">
-        <div class="modal-header" style="background:#FFF;">
+        <div class="modal-header">
             <h2 style="margin:15px; ">
                 <span>Members</span> 
             </h2>
@@ -458,13 +458,13 @@
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
-        <div class="modal-body" style="background:#FFF;">
+        <div class="modal-body">
 
             <div class="row">
                 <div class='col-12 col-lg-12' style="max-height: 300px; overflow: auto;">
                     <div class="row">
                           <div class="col-12" style="margin-bottom:10px;" *ngFor="let user of usersList; let u=index">
-                               <img src="{{formatimage(user.image)}}" style="width:40px; display:inline-block;border-radius:50%; margin-right:10px;"> <span style="font-size:16px">{{user.firstname}}</span>
+                               <img src="{{formatimage(user.image)}}" style="width:30px; display:inline-block;border-radius:50%; margin-right:10px;"> <span style="font-size:14px">{{user.firstname}}</span>
                            
                         </div>
                        
