@@ -20,6 +20,7 @@ export class CalculateComponent implements OnInit {
 	activity: any;
 	inputValue: any;
 	currentUser: any;
+	calburned : any;
 	constructor(private router: Router, private dbService:DBService, private helpService: HelpService) {	
 	}
 	selectedOption : any;
@@ -144,6 +145,7 @@ this.selectedOption = this.optionsList[0];
 		console.log(this.inputValue);
 		this.saveTrackingData();
 		console.log( this.activity);
+		this.calburned =  caloriesburned;
 	  }
 	  saveTrackingData()
 	  {
