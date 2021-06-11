@@ -105,9 +105,14 @@ import {environment} from "../environments/environment";
     BenefitsModule,
 	LandingModule,
 	ToastrModule.forRoot({
+<<<<<<< HEAD
 		timeOut:3000,
+=======
+		timeOut:5000,
+>>>>>>> c0ac0d0bfaab41606986d6367e8f125b97c2f1ad
 		positionClass: 'toast-top-full-width',
 		preventDuplicates: true,
+		closeButton: true
 	}),
 
 //	AngularFontAwesomeModule,
