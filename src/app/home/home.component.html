@@ -17,9 +17,9 @@
                 <!--  <a class="buttonGreen video-button swipebox" href="javascript:void(0)">Watch our Video</a> -->
                  <!--  <a class="buttonGreen" (click)="gotopage('pricing')" href="javascript:void(0)">Know more About Us</a> -->
                  <div  class="storeImgDiv" >
-                     <a href="javascript:void(0)">
+                     <a href="javascript:void(0)" style="margin-right:8px">
                         <img [lazyLoad]="images['appstore']" alt="Download on the App Store" class="storeImg"></a>
-                     <a href="javascript:void(0)">
+                     <a href="javascript:void(0)" style="margin-left:8px">
                         <img [lazyLoad]="images['playstore']" alt="Get it on Google Play" class="storeImg"></a>
                   </div>
               </div>
@@ -58,7 +58,7 @@
 			            </div>
 		            </div>
 		            <div class="col-12 col-lg-6 wow zoomIn animated" style="text-align:center;">
-				         <img alt="background image" [lazyLoad]="step.image" style=" height: 250px" class="rounded-bg specialty-image w-80">
+				         <img alt="background image" [lazyLoad]="step.image" style=" height: 250px; max-width:100%" class="rounded-bg specialty-image w-80">
 		             </div>
 	            </div>
 	            <div class="row">
@@ -106,7 +106,7 @@
 
                           <div class="col-12" style="padding-left:0px; padding-right:0px">
                               
-                          <h1 class="recipe-label" style="font-size:20px; line-height: 32px;">{{cItem.collection_name}}</h1>
+                          <h1 class="recipe-label" style="font-size:20px; line-height: 32px;padding:10px;">{{cItem.collection_name}}</h1>
                           <!--<p *ngIf="cItem.recipecount && cItem.recipecount >0" style="text-align:left;"><i class="fa fa-cutlery"></i> {{cItem.recipecount}} recipes</p>
                           <br>
                           <p *ngIf="cItem.userscount && cItem.userscount > 0" style="text-align:left;"><i class="fa fa-user"></i> {{cItem.userscount}} members</p>-->
@@ -142,10 +142,10 @@
                   <h2>Meal planning made easy...</h2>
                 
                   <div  class="storeImgDiv" >
-                     <a href="javascript:void(0)">
-                        <img [lazyLoad]="images['appstore']" alt="Download on the App Store" class="storeImg"></a>
-                     <a href="javascript:void(0)">
-                        <img [lazyLoad]="images['playstore']" alt="Get it on Google Play" class="storeImg"></a>
+                     <a  href="javascript:void(0)">
+                        <img style="margin-right:5px;" [lazyLoad]="images['appstore']" alt="Download on the App Store" class="storeImg"></a>
+                     <a  href="javascript:void(0)">
+                        <img style="margin-left:5px;" [lazyLoad]="images['playstore']" alt="Get it on Google Play" class="storeImg"></a>
                   </div>
                  
               </div>
@@ -173,10 +173,10 @@
    <div class="row subscribe-sec">
       <div class="container">
           <div class="col-12 text-center wow animated bounceInDown">
-              <div class="chefs-card-inner " style="margin-bottom:40px;margin-top:40px;">
+              <div class="chefs-card-inner " style="margin-bottom:40px;margin-top:40px;padding: 20px 15px;">
                   <h2> Subscribe to our newsletter</h2>
                   <div class="short-separator"></div>
-                  <p>
+                  <p style="color:#FFF;">
                      It's easy, just write your email address and we'll send you information. No spam!
                    </p>
                    <div class="email-field subscribe">
