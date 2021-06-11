@@ -746,7 +746,10 @@ h2.counter {
 .nav-link {
   padding: .5rem .4rem;
 }
-    
+.submit-recipe-form {
+    background: #ffffff;
+    padding: 10px 0px 40px;
+}
  
 }
  

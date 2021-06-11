@@ -61,6 +61,7 @@ ngOnChanges()
 }
 	ngOnInit() {
 		this.loadDefaults();
+		window.scrollTo(0,0);
 
 		this.setFav = false;
 	//	this.getFavouriteStatus();

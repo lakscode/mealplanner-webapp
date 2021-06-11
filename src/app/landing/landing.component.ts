@@ -342,7 +342,8 @@ constructor(private router: Router, private httpClient : HttpClient, private san
 	}
 
 	gotoRecipeDetails(page, id){
-		if(page == "community")
+		console.log("in gotorecipedetails");
+		if(page == "collection")
 		{
 			this.router.navigate([page, {id:id}]);
 		}
