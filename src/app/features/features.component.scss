@@ -60,6 +60,10 @@
 }
 
 
+.arrowimg
+{
+  display:block;
+}
 
 .secL:nth-child(even) {
   direction: rtl;
@@ -232,3 +236,10 @@ section {
     max-width: 180px;
     opacity: 0.8;
 }
+
+@media only screen and (max-width: 767px) {
+  .arrowimg
+  {
+    display:none;
+  }
+  }
