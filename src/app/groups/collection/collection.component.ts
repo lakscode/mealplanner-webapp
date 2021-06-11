@@ -1509,7 +1509,10 @@ SaveRecipe()
 	  if(recipeData['inserted_id'] !== "undefined" && recipeData['inserted_id'] !== "" && recipeData['inserted_id'] !== "0" && recipeData['inserted_id'] !== 0)
 	  {
 		  this.toastr.success('Recipe has been imported!!!', 'Save Recipe from URL!');
-		  this.searchProps();
+		  this.new_recipe["id"] = recipeData['inserted_id'];
+		  this.recipesList.push(this.new_recipe);
+		  this.addRecipe(this.new_recipe);
+		//  this.searchProps();
 	  }
 	  else
 	  {
