@@ -84,39 +84,22 @@
               </div>
               
             </div>
-          </div>
-            </div>
-            <div class="col-12 col-lg-6 col-md-6 pl-5" style="padding-left:0px !important">
-              <div *ngIf="selectedOption && selectedOption.name.toLowerCase() == 'bmi'" class="recipe-of-day">
-                <img src="assets/images/bmi.jpg" alt="BMI details">
 
-
-              </div>
-              <div *ngIf="selectedOption && selectedOption.name.toLowerCase() == 'bmr'" class="recipe-of-day">
-                <img src="assets/images/temp-images/bg-corner-shef.jpg" alt="BMI details">
-
-
-              </div>
-            
-            </div>
-            <div class="row submit-recipe-form" style="background:#f8f8f8;padding:20px;border:1px solid #f1f2f3;border-radius: 10px">
-            <div *ngIf="selectedOption && selectedOption.name.toLowerCase() == 'calories burned'" class="col-12 col-lg-6 col-md-6 pl-5" style="padding-left:0px !important">
+             
+            <div *ngIf="selectedOption && selectedOption.name.toLowerCase() == 'calories burned'" class="col-12 pl-5" style="padding-left:0px !important">
 
    
             <div>
               <label class="activityType">Activity &nbsp;</label>
-                <select  class="inputText" placeholder="Select One" (change)="CalculateCB()" [(ngModel)]="activity.type"  id='activityType' name="activityType" #model="ngModel">
+                <select  style="font-size:12px" class="inputText" placeholder="Select One" (change)="CalculateCB()" [(ngModel)]="activity.type"  id='activityType' name="activityType" #model="ngModel">
                   <ng-container *ngFor="let activity of activitiesList; let a = index">
-                  <option value='{{activity.value}}'>{{activity.activity}}</option>
+                  <option style="font-size:12px" value='{{activity.value}}'>{{activity.activity}}</option>
                   </ng-container>
                 
             
                 </select>
-              </div>
-              <div>
-                <label for="bmiweight">Duration (in minutes)&nbsp;</label>
-                  <input class="inputText" name="bmrheight"  (blur)="CalculateCB()" type="number" [(ngModel)]="activity['duration']" />
-                </div>
+              </div><br/>
+             
         
 
           
@@ -134,9 +117,35 @@
                 <button type="submit" (click)="CalculateCB()"  class="recipe-submit-btn" style="margin-top:10px">Calculate</button>
             </div>
 
+            <div *ngIf="calburned" class="calData" >
+                  <!-- <p style="padding-bottom:10px">Calories Burned</p>
+                  <p class="para1">Weight {{activity['weight']}} kg </p>
+                  <p class="para1"> Activity {{this.activity.value}} </p>
+                  <p class="para1"> Duration {{activity['duration']}} mins </p> -->
+                  <p style="padding-top:5px;font-weight:bold">Calories Burned: {{this.calburned}} Calories</p>
+                
+
+              </div>
+
 
           </div>
-        </div>
+        
+          </div>
+            </div>
+            <div class="col-12 col-lg-6 col-md-6 pl-5" style="padding-left:0px !important">
+              <div *ngIf="selectedOption && selectedOption.name.toLowerCase() == 'bmi'" class="recipe-of-day">
+                <img src="assets/images/bmi.jpg" alt="BMI details">
+
+
+              </div>
+              <div *ngIf="selectedOption && selectedOption.name.toLowerCase() == 'bmr'" class="recipe-of-day">
+                <img src="assets/images/temp-images/bg-corner-shef.jpg" alt="BMI details">
+
+
+              </div>
+            
+            </div>
+           
         </div><br />
 
 
