@@ -1,8 +1,8 @@
 export const constants = {
-  companyName:"Meal Planner",
+  companyName:"Fitaholic",
   copyright:" Copyright 2021 All Rights Reserved by",
   contactNo:"0123456789",
-  contactEmail:"support@email.com",
+  contactEmail:"support@fitaholic.com",
   minerals : ["calcium", "phosphorus", "potassium", "sodium", "chloride", "magnesium", "iron", "zinc", "iodine", "chromium", "copper", "fluoride", "sulfur", "molybdenum", "manganese","selenium", "fat", "protein", "carbs" ],
   dietLabels: ["Balanced", "High-Fiber","High-Protein", "Low-Carb", "Low-Fat", "Low-Sodium"],
   healthLabels: ["Vegetarian", "Vegan","Peanut-free", "Low potassium", "Alcohol-free"],
