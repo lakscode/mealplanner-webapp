@@ -444,7 +444,8 @@ endIndex = startIndex+ endIndex;
   {
 	  var params1 = {};
 	  console.log(this.recipeurl);
-	  params1["url"] =  this.recipeurl;
+	 // params1["query"] = "select * from recipes where url = '" + this.recipeurl + "'";
+	 params1["url"]= this.recipeurl;
 	  //params1["url"]="http://www.myrecipes.com/recipe/black-cardamom-beef-sliders";
 	 // this.importrecipe(params1["url"]);
 console.log(params1);

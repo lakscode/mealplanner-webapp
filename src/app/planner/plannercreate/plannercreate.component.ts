@@ -1462,11 +1462,14 @@ console.log(invData);
 			if(dItem["recipe"] !== null)
 			{
 			
+				var servings = 1;
+				if(typeof(dItem["recipe"]["yield"]) !== "undefined" && dItem["recipe"]["yield"] !== null && dItem["recipe"]["yield"] !== "" && dItem["recipe"]["yield"] !== "0" && dItem["recipe"]["yield"] !== 0)
+				servings = parseInt(dItem["recipe"]["yield"]);
 				var fIndex1s = mMacro.findIndex(x1=>(x1.name == "calories"));
 					if(fIndex1s > -1)
-					mMacro[fIndex1s]["value"] = parseFloat(mMacro[fIndex1s]["value"]) +parseFloat(dItem["recipe"]["calories"])/ dItem["recipe"]["yield"];
+					mMacro[fIndex1s]["value"] = parseFloat(mMacro[fIndex1s]["value"]) +parseFloat(dItem["recipe"]["calories"])/ servings;
 					else
-					mMacro.push({"name" : "calories", "value" : parseFloat(dItem["recipe"]["calories"])/ dItem["recipe"]["yield"], "unit" : "cal", "yield":dItem["recipe"]["yield"]});
+					mMacro.push({"name" : "calories", "value" : parseFloat(dItem["recipe"]["calories"])/ servings, "unit" : "cal", "yield":servings});
 			
 				if(typeof(dItem["recipe"]["minerals"]) !== "undefined")
 				{
@@ -1478,9 +1481,9 @@ console.log(invData);
 
 					var fIndex1 = mMacro.findIndex(x1=>(x1.name == lbl1));
 					if(fIndex1 > -1)
-					mMacro[fIndex1]["value"] = parseFloat(mMacro[fIndex1]["value"]) +parseFloat(dmItem1["value"])/ dItem["recipe"]["yield"];
+					mMacro[fIndex1]["value"] = parseFloat(mMacro[fIndex1]["value"]) +parseFloat(dmItem1["value"])/ servings;
 					else
-					mMacro.push({"name" : lbl1, "value" : parseFloat(dmItem1["value"])/ dItem["recipe"]["yield"], "unit" : dmItem1["unit"], "yield":dItem["recipe"]["yield"]});
+					mMacro.push({"name" : lbl1, "value" : parseFloat(dmItem1["value"])/ servings, "unit" : dmItem1["unit"], "yield":dItem["recipe"]["yield"]});
 				}
 				}
 				
@@ -1822,6 +1825,7 @@ console.log(invData);
 
   formatValPServing(str, serving)
   {
+	
 	var retVal = this.helpService.formatValuePServing(str, serving);
 	return retVal;
   }

@@ -789,9 +789,9 @@ SendEmailPasswordReset(email,data) {
     {
       retVal = parseFloat(str);
      
-      if(typeof(servings) !== "undefined" && servings !== "" && servings !== 0)
+      if(typeof(servings) !== "undefined" && servings !== "" && servings !== "0" && servings !== 0)
       { 
-        retVal = (parseFloat(str) /  servings).toFixed(2);
+        retVal = (parseFloat(str) /  parseInt(servings)).toFixed(2);
       
       }
     }
