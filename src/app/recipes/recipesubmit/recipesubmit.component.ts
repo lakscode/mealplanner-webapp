@@ -9,7 +9,7 @@ import { environment } from './../../../environments/environment';
 import { constants } from './../../jsonfiles/constants';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-import { HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { recipe } from '../../jsonfiles/recipestructure';
 import { ToastrService } from 'ngx-toastr';
 @Component({
@@ -38,7 +38,7 @@ export class RecipesubmitComponent implements OnInit, OnChanges {
 		this.callhideFunct(args);
   }
   
-	constructor(private router: Router, private toastr: ToastrService, private ingredientsService: IngredientsService, private route: ActivatedRoute, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
+	constructor(private router: Router, private httpClient: HttpClient,  private toastr: ToastrService, private ingredientsService: IngredientsService, private route: ActivatedRoute, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
 	
 	}
 ngOnChanges()
@@ -899,20 +899,56 @@ callhideFunct(args)
 				}
 			}
 	}
+	displayListImages: Array<any> = [];
 
+	showImages(item)
+	{
+		var fname = item.foodCategory;
+		fname = fname.replaceAll("-","_");
+		fname = fname.toLowerCase();
+		fname = fname.replaceAll(",", "");
+		fname = fname.replaceAll(" ", "_");
+		console.log(fname);
+		this.displayListImages = [];
+		console.log(item);
+		if(fname !== "")
+		{
+			console.log(fname);
+			try
+			{
+		this.httpClient.get('assets/data/ing/' + fname + '.json').subscribe(
+			data => {
+				console.log(data);
+				this.displayListImages = data["ingredients"];
+			});
+		}
+		catch(error)
+		{
+
+		}
+		}
+	}
 
 setValue(item, key, value, index)
 {
 	console.log("in setValue");
 	console.log(item);
 	console.log(value);
+	if(key == "image")
+	{
+		item[key] = value.image;
+	}
+	else
+	{
 	item[key] = value;
+	}
 	if(key == "foodCategory")
 	item.showFoodCategories = false;
 
 	if(key == "measure")
 	item.showMeasures = false;
-
+	if(key == "image")
+	item.showimages = false;
 }
 /*
 this.displayListMeasure = this.measureList;

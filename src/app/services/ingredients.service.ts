@@ -55,9 +55,21 @@ export class IngredientsService {
 				var fCat = this.foodCategory.findIndex(x=> (x.category.toLowerCase() === ing.foodCategory.toLowerCase()))
 				if(fCat == -1)
 				{
-					this.foodCategory.push({"category": ing.foodCategory})
+					this.foodCategory.push({"category": ing.foodCategory, "ingredients":[]});
+					fCat = this.foodCategory.findIndex(x=> (x.category.toLowerCase() === ing.foodCategory.toLowerCase()))
 				}
-					var iIndex = this.ingredients.findIndex(x=> (x.food === ing.food));
+
+
+
+				var iIndexf = this.foodCategory[fCat]["ingredients"].findIndex(x=> (x.food === ing.food));
+				if(iIndexf == -1)
+				{
+					this.foodCategory[fCat]["ingredients"].push({"food":ing.food, "image":ing.image, "foodCategory":ing.foodCategory, "measure":ing.measure});
+				}
+					
+					
+
+					var iIndex = this.ingredients.findIndex(x=> (x.food.toLowerCase() === ing.food.toLowerCase()));
 					if(iIndex == -1)
 					{
 						this.ingredients.push({"food":ing.food, "image":ing.image, "foodCategory":ing.foodCategory, "measure":ing.measure});
@@ -80,8 +92,8 @@ export class IngredientsService {
 			}
 			else
 			{
-				console.log(this.foodCategory);
-				//console.log(JSON.stringify(this.ingredients));
+				//console.log(this.foodCategory);
+			console.log(JSON.stringify(this.foodCategory));
 			}
 		}));
 	}

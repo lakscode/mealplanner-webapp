@@ -28,10 +28,7 @@
                                                     [(ngModel)]="ingredient.text" autocomplete="off"
                                                     [disabled]="i< existingIngCount" id="ingredients{{i}}">
                                                
-                                                <input type="text" (focus)="resetDropdown()" placeholder="Image URL"
-                                                    name="ingredientsimg{{i}}" autocomplete="off"
-                                                    [(ngModel)]="ingredient.image" [disabled]="i< existingIngCount"
-                                                    id="ingredientsimg{{i}}">
+                                              
 
                                                 <div class="row" style='padding-left:0px; padding-right:0px;'>
                                                     <div style='padding-left:0px;' class="col-12 col-md-3 col-lg-3">
@@ -39,7 +36,7 @@
                                                         <input type="text" class="food-category" placeholder="Food Category"
                                                             style="width:100%" name="ingredientsfc{{i}}"
                                                             autocomplete="off"
-                                                            (focus)="ingredient.showMeasures= false; ingredient.showFoodCategories = true;"
+                                                            (focus)="ingredient.showMeasures= false; ingredient.showFoodCategories = true;ingredient.showimages = false;"
                                                             [(ngModel)]="ingredient.foodCategory"
                                                             [disabled]="i< existingIngCount" id="ingredientsfc{{i}}">
                                                         <div *ngIf="ingredient.showFoodCategories" class="autofillpanel">
@@ -73,7 +70,7 @@
                                                         <input type="text" class="food-measure" placeholder="Measure" style="width:100%"
                                                             name="ingredientsm{{i}}" autocomplete="off"
                                                             (keyup)="filterList(ingredient, 'measure')"
-                                                            (focus)="ingredient.showFoodCategories = false; ingredient.showMeasures = true;"
+                                                            (focus)="ingredient.showFoodCategories = false; ingredient.showMeasures = true;ingredient.showimages = false;"
                                                             [(ngModel)]="ingredient.measure"
                                                             [disabled]="i< existingIngCount" id="ingredientsm{{i}}">
 
@@ -96,6 +93,21 @@
 
                                                     </div>
                                                 </div>
+
+                                                <input type="text" placeholder="Image URL"
+                                                name="ingredientsimg{{i}}" autocomplete="off"
+                                                [(ngModel)]="ingredient.image" [disabled]="i< existingIngCount "
+                                                id="ingredientsimg{{i}}"  (focus)="ingredient.showFoodCategories = false; ingredient.showMeasures = false; ingredient.showimages = true; showImages(ingredient)">
+                                                <div *ngIf="ingredient.showimages && displayListImages.length > 0" style="width:85%" class="autofillpanel">
+                                                    <ng-container
+                                                        *ngFor="let m of displayListImages; let mc=index">
+                                                        <p *ngIf="m.image && m.image !== null" style='  font-size: 16px;'
+                                                            (click)="setValue(ingredient, 'image',m, i)">
+                                                            <img src="{{m.image}}" style='width:50px; height:50px' /><span>{{m.food}}</span>
+                                                        </p>
+                                                    </ng-container>
+                                                </div>
+
                                             </div>
 
                                             <span *ngIf="i >= existingIngCount" (click)="deleteContent('ing', i)"
