@@ -1512,15 +1512,15 @@ background-color: $orange;
 
 .overflow-text {
   //width: 100px;
-  max-width:40ch;
+  max-width:25ch;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 .overflow-text:hover{
-  overflow: visible; 
-  white-space: normal; 
-  width: auto;
+ // overflow: visible; 
+  //white-space: normal; 
+  //width: auto;
 }
 
 
@@ -1643,7 +1643,8 @@ background-color: $orange;
   .listing-search
   {
     display:inline-block;
-    width: 160px; 
+    width: 180px;
+    margin-right:5px; 
     position:relative;
     .more
     {

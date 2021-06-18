@@ -948,6 +948,16 @@ console.log(invData);
 
 			
  }
+
+limitTo(str, num)
+	{
+		var retVal = str;
+		
+		if(typeof(str) !== "undefined" && str !== null && str !== "")
+		retVal = this.helpService.limitTo(str, num) + "...";
+		return retVal;
+	}
+
   saveMealPlan()
   { 
   this.errorMessage ="";

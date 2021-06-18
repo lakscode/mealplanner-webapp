@@ -309,12 +309,12 @@
                                     </div>
                                     </div>
                                     <a hreaf="javascript:void(0)" title="Drag and Drop Recipe to add it to meal plan"><img style="width:90%; max-height:100px"  id="imagep_{{i}}"  draggable="true" (dragstart)="drag($event, i)" src="{{formatImage(recipe1.image, 'm')}}"
-                            alt="image">  </a>
-                                <p>{{recipe1.label}}</p>
-                                <p>Calories: <span style="font-size:12px;">{{recipe1.calories}} Kcal</span></p>
+                            alt="image">  </a><br/>
+                                <a title="{{recipe1.label}}"><span innerHTML="{{limitTo(recipe1.label, 20)}}" style="font-size:14px;padding-left:6px"></span></a>
+                                <p style="font-size:14px;padding-left:6px">Calories: <span style="font-size:12px;">{{recipe1.calories}} Kcal</span></p>
                                 <div class="meta-listing">                                   
-                                    <div *ngIf="showNutrientsFlag" style="display:inline-block;color: #5e676b;">
-                                        Per Serving: <span style="font-size:12px;">{{formatValPServing(recipe1.calories, recipe1.yield)}} Kcal</span>
+                                    <div *ngIf="showNutrientsFlag" style="display:inline-block;color: #5e676b;font-size:13px">
+                                         <span style="font-size:12px;padding-left:6px">({{formatValPServing(recipe1.calories, recipe1.yield)}} Kcal / Serving)</span>
                                     </div>                                   
                                 </div>
                             </div>
