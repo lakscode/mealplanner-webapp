@@ -16,6 +16,7 @@
     <i class="fa fa-pencil" style="margin-right:10px;"></i>  Create New Plan    
      
   </div>
+</div>
 
   <div class="recipe-listing listing-list" style="background:#FFF;padding-top:15px;">
   
@@ -24,7 +25,8 @@
      
       <div class="detail" (click)="gotopage('plancreate', {'id':mplan.id});"  style="width:100%">
           <h4><a href="javascript:void(0)">{{mplan.name}}</a></h4>
-          <p innerHTML = "{{mplan.tags}}"></p>
+          <p innerHTML = "{{mplan.tags}}" *ngIf="mplan.tags"></p>
+          <p *ngIf="!mplan.tags">&nbsp;</p>
           <div>
          <div class="linkview" style="float:right;">View Details</div> 
         </div>
@@ -44,7 +46,7 @@
 
  
   </div>
-  </div>
+  
   </div>
   <!--<div class="col-md-4 col-lg-3">
   <aside>
