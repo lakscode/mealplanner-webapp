@@ -1,0 +1,945 @@
+<div class="fixedtop recipes-home-body inner-page">
+    <div class="container" style="margin:0 auto;padding-top:20px;padding-left:0px;padding-right:0px">
+        <div class="row">
+        <div class="col-md-12 col-lg-12">
+            <div class="recipe-set">         
+                <h2>Create Plan <span *ngIf="plan.name"> - {{plan.name}}</span></h2>
+            </div>
+            <div class="add2mealplan">
+                <a [ngClass]="showpopupflag?'menu active':'menu'"  (click)="showpopupflag = !showpopupflag" href="javascript:void(0)"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></a>
+                <div *ngIf='showpopupflag' class="add2mealplanmenu" style='height:120px'>
+                    <a (click)="showpopupflag = false; downloadplan() " href="javascript:void(0)">
+                        <i class="fa fa-file-pdf-o"></i> Export
+                    </a>
+                    <a (click)="showpopupflag = false; getIngredientsList();" href="javascript:void(0)">
+                        <i class="fa fa-download"></i>   Grocery List
+                    </a>
+                </div>
+         
+
+            <!--<div class="createplanbtn" >
+                <a  href="javascript:void(0)" (click)="downloadplan()" title="Download PDF"><i
+                    class="fa fa-file-pdf-o" ></i> Export</a>
+            &nbsp; <a href="javascript:void(0)" (click)="getIngredientsList()"
+                title="Ingredients List"><i class="fa fa-download"></i> Grocery List </a>-->
+               <!--<span (click)="downloadplan();"><i class="fa fa-file-pdf-o" style="margin-right:10px;"></i>  Export </span>
+               <span (click)="getIngredientsList();"><i class="fa fa-download" style="margin-right:10px;"></i>  Grocery List </span>-->
+               
+                 
+              </div>
+
+            <!--<div style="float:right;margin-top:-55px; text-align:right; background:#FFF; margin-bottom:10px;">
+
+                <a class="copy-button" href="javascript:void(0)" (click)="downloadplan()" title="Download PDF"><i
+                        class="fa fa-file-pdf-o" style="z-index:-1"></i> Export</a>
+                &nbsp; <a class="copy-button" href="javascript:void(0)" (click)="getIngredientsList()"
+                    title="Ingredients List"><i class="fa fa-download"></i> Grocery List </a>
+                &nbsp;
+            </div>-->
+        </div>
+        <!--<div class="col-md-12 col-lg-12">
+            
+
+            <div class="submit-recipe-form"
+            style="text-align:left; padding-top:10px; padding-bottom:10px;  background-color: #f8f8f8;">
+
+            <div class="row">
+                <div class="col-12 col-lg-3">
+                    <label for="title" style="font-size:10px">Meal Plan Name</label>
+                    <input  type="text" name="tiplannametle" id="planname" [(ngModel)]="plan.name"
+                        (blur)="saveMealPlan()" style="margin-bottom:5px" />                          
+                </div> 
+                <div class="col-12 col-lg-3">
+
+                <label for="short-description"  style="font-size:10px">Tags</label>
+                <input  type="text" style="    margin-bottom: 0px;
+                width: 100%;
+                height: 40px;
+                padding-left: 20px;
+                padding-right: 20px;" class="short-text" name="plantags"
+                    id="plantags" [(ngModel)]="plan.tags" (blur)="saveMealPlan() " />
+                
+                </div>     
+                <div class="col-12 col-lg-3">
+                    <label for="title" style="font-size:10px">Calories per Day</label>
+                    <input  type="text" name="maxcaloryperday" id="maxcaloryperday" [(ngModel)]="maxcaloryperday"
+                        (blur)="saveMealPlan()" style="margin-bottom:5px" /> 
+                </div>                        
+                <div class="col-12 col-lg-3">
+                    <div style='text-align:left;'>
+                        <div style="display:block; margin:0 auto;text-align:left;width: 100%">
+                            
+                            <label *ngIf="showNutrientsFlag" class="container" style=" text-align: left;
+                    display:inline-block;
+                    width: 160px;
+                    font-family: 'Lato', sans-serif;
+                    font-weight: 400;
+                    font-size: 16px;">Show Nutrients
+                                <input class="showhidenut" id="showhidenut" (change)="showhidenutrients()"
+                                    [(ngModel)]='showhidenutrientsFlag' type="checkbox">
+                                <span class="checkmark"></span>
+                            </label>
+
+                            <div style="    display: inline-block;
+                    width: 140px;
+                    text-align: left;" *ngIf="showhidenutrientsFlag">
+                                <label class="container" style=" text-align: left;
+                                display: inline-block;
+                                width: 140px;
+                                font-family: 'Lato', sans-serif;
+                                font-weight: 400;
+                                font-size: 16px;">Per Serving
+                                                <input (change)="toggleNutrients('perserving')"
+                                                    [(ngModel)]='showNutrientsPServing' type="checkbox">
+                                                <span class="checkmark"></span>
+                                            </label>
+                              
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+                
+
+            </div>
+        </div>
+        <div style="clear:both"></div>
+        </div>-->
+    </div>
+    <div *ngIf="plan.name" class="row" style="text-align:center; margin:0 auto;">
+
+        <div class='leftblock'>
+
+
+            <div id="recipelistpnael" class="recipe-browse-side">
+                <div id="recipes-container" class="container-fluid side-recipes">
+                    <div>
+                        <div class="filter-bar--side-version">
+                            <div class="filter-bar__search-container">
+                                <form class="recipe-search false">
+                                    <div class="form-group-plan">
+                                        <div class="input-group">
+                                            <div class="hm-typeahead " data-test="typeahead-input">
+                                                <div class="rbt clearfix open" style="position: relative;"
+                                                    tabindex="-1">
+                                                    <div class="rbt-input-hint-container" style="position: relative;">
+                                                        <input aria-autocomplete="both" aria-expanded="false"
+                                                            aria-haspopup="listbox" autocomplete="nope" role="combobox"
+                                                            name="searchq" id="searchq" [(ngModel)]="searchparam.q"
+                                                            type="text" class="rbt-input-main form-control rbt-input "
+                                                            (keyup.enter)="loadRecipes()" value="" placeholder="SEARCH">
+                                                    </div>
+                                                    <div aria-atomic="true" aria-live="polite"
+                                                        class="sr-only rbt-sr-status" role="status">0
+                                                        selections</div>
+                                                </div>
+                                            </div>
+                                            <div class="input-group-append"> &nbsp;&nbsp;<button type="submit"
+                                                    (click)="loadRecipes()" class="btn btn-secondary"><i
+                                                        class="fa fa-search" aria-hidden="true"></i></button></div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <div class="filters-mb">
+
+                                <div id="meal-type"
+                                    class="meal-types-container btn-filter btn-filter-mb meal-type-filter-btn   btn-group btn-group-sm">
+                                    <button type="button" (click)="getFavourites()" aria-haspopup="true"
+                                        aria-expanded="false" class="btn btn-secondary"><i class="fa fa-heart"
+                                            aria-hidden="true"></i>Favourites</button>
+                                </div>
+                                <!--  <div *ngIf="showNutrientsFlag" id="advanced-filters" (click)="loadFilterLabels(); filtersOpt = !filtersOpt" -->
+                                <div *ngIf="showNutrientsFlag" id="advanced-filters"
+                                    (click)=" openModal('searchFiltersPopup');"
+                                    class="advanced-filters btn-filter btn-filter-mb other-filters-btn   btn-group btn-group-sm">
+                                    <button type="button" id="advancedFilterToggle" aria-haspopup="true"
+                                        aria-expanded="false" class="btn btn-secondary"><i class="fa fa-plus"
+                                            aria-hidden="true"></i>Filters</button>
+
+                                </div>
+                                <div id="clear-all" style="margin-left:5px !important"
+                                    class="meal-types-container btn-filter btn-filter-mb meal-type-filter-btn   btn-group btn-group-sm">
+                                    <button type="button" (click)="clearFilters()" aria-haspopup="true"
+                                        aria-expanded="false" class="btn btn-secondary"><i class="fa fa-trash"
+                                            aria-hidden="true"></i>Clear</button>
+                                </div>
+                            </div>
+                            <div *ngIf="filtersOpt" class="filterpopup boxshadow ">
+
+                                <div style=" width:97%">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h1 style="text-align:left">Search Recipes:
+                                                <a href="javascript:void(0)" style="float:right; font-size:24px;"
+                                                    (click)="filtersOpt = false;"><i class="fa fa-close"
+                                                        aria-hidden="true"></i></a>
+                                            </h1>
+
+                                        </div>
+                                    </div>
+                                    <div class="row divoverflow"
+                                        style="padding-left:0; padding-right:0px; max-height:330px; overflow:auto;">
+
+                                        <div class="col-12 col-lg-3 col-md-3">
+                                            <div class="form-group">
+
+                                                <label class="form-control-placeholder fcs">Health Labels </label>
+                                                <div class="listSection" id="healthLabels"
+                                                    style="display:inline-block;">
+                                                    <div class="row">
+                                                        <ng-container
+                                                            *ngFor="let hlabel of healthlabelsList; let h = index">
+                                                            <div class="col-12" style="padding-right:0px;">
+                                                                <label class="container"
+                                                                    style="font-size:12px;text-align:left">{{hlabel.name}}
+                                                                    <input [(ngModel)]="hlabel.selected" type="checkbox"
+                                                                        [checked]="h == 0?'checked':''">
+                                                                    <span class="checkmark"></span>
+                                                                </label>
+                                                            </div>
+                                                        </ng-container>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12  col-lg-3 col-md-3">
+                                            <div class="form-group">
+                                                <label class="form-control-placeholder fcs">Diet Labels</label>
+                                                <div class="listSection" id="diethLabels" style="display:inline-block;">
+                                                    <div class="row">
+                                                        <ng-container
+                                                            *ngFor="let dlabel of dietLabelsList; let h = index">
+                                                            <div class="col-12">
+                                                                <label class="container"
+                                                                    style="font-size:12px;text-align:left">{{dlabel.name}}
+                                                                    <input [(ngModel)]="dlabel.selected" type="checkbox"
+                                                                        [checked]="h == 0?'checked':''">
+                                                                    <span class="checkmark"></span>
+                                                                </label>
+                                                            </div>
+                                                        </ng-container>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12  col-lg-2 col-md-2">
+                                            <div class="row form-group" style="padding-left:0px">
+                                                <label class="form-control-placeholder fcs">Calories</label>
+                                                <div class="listSection"
+                                                    style="display:inline-block;width:100%; text-align:left;">
+                                                    <span>Max calories&nbsp;&nbsp;</span>
+                                                    <input type="text" style="width:100%;" class="inputbox-fullwidth"
+                                                        [(ngModel)]="searchparam.calories" />
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12   col-lg-4 col-md-4">
+                                            <div class="form-group" style="text-align:left;">
+                                                <label class="form-control-placeholder fcs">Nutrients</label>
+                                                <div class="listSection ">
+                                                    <!--  style="width:90%; display:inline-block; height:145px; max-height:145px;overflow-x: hidden;">-->
+                                                    <div class="row divoverflow"
+                                                        style="padding-left:0px; padding-right:0px; max-height: 200px; overflow:auto;">
+                                                        <ng-container
+                                                            *ngFor="let mlabel of mineralsLabelsList; let m = index">
+                                                            <div class="col-12 col-lg-12">
+                                                                <label class="container"
+                                                                    style="font-size:12px;text-align:left;">{{setFLU(mlabel.name)}}
+                                                                    <input [(ngModel)]='mlabel.selected' type="checkbox"
+                                                                        [checked]="m == 0?'checked':''">
+                                                                    <span class="checkmark"></span>
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-5 paddinglr0" style="margin-bottom:15px;"
+                                                                *ngIf="mlabel.selected">
+
+                                                                <input class="mineral-input" type='text'
+                                                                    name="minerals_{{m}}_min" [(ngModel)]="mlabel.min"
+                                                                    placeholder="min" />
+                                                                <span class="maxmin">{{formatVal(mlabel.t_min)}}</span>
+
+                                                            </div>
+                                                            <div class="col-5 paddinglr0" style="margin-bottom:15px;"
+                                                                *ngIf="mlabel.selected">
+                                                                <input class="mineral-input" type='text'
+                                                                    name="minerals_{{m}}_max" [(ngModel)]="mlabel.max"
+                                                                    placeholder="max" />
+                                                                <span class="maxmin">{{formatVal(mlabel.t_max)}}</span>
+
+                                                            </div>
+                                                            <div class="col-2 paddinglr0" *ngIf="mlabel.selected">
+                                                                {{mlabel.unit}}</div>
+
+                                                        </ng-container>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12" style='text-align:right;'>
+                                            <input type="button" (click)="filtersOpt= false; searchFilters()"
+                                                style="margin-bottom:10px;" class="defaultbtn searchbtn bg-orange"
+                                                id="header-submit-search-pro" name="submit" value="Search">
+
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="content">
+                        <div class="recipes card-group">
+                            <div class="recipe-wrapper" *ngFor="let recipe of displayList; let k=index;">
+                                <div id="Drag{{k}}" (dragover)="allowDrop($event)">
+                                    <div class="recipe-mb mb-3 recipe-mb--draggable  card">
+
+                                        <div style='width:calc(100%)'>
+                                            <a class="hmp-link--no-style"
+                                                style="cursor: -webkit-grabbing; cursor: grabbing;">
+                                                <div class="recipe-content recipe-content--draggable card-body">
+                                                    <div class="recipe-image-container recipe-drag-container"
+                                                        id="dragp_{{page_num}}_{{k}}">
+                                                        <img class="recipe-image" id="drag_{{page_num}}_{{k}}"
+                                                            src="assets/images/drag.png" style="width:80%"
+                                                            title="Drag Recipe" alt="{{recipe.label}} Image"
+                                                            draggable="true" (dragstart)="drag($event, k)">
+                                                    </div>
+
+                                                    <div class="recipe-image-container mobile"
+                                                        id="imagep_{{page_num}}_{{k}}">
+                                                        <img class="recipe-image" id="picture_{{page_num}}_{{k}}"
+                                                            src="{{formatImage(recipe.image, 's')}}" alt="Recipe image"
+                                                            draggable="true" (dragstart)="drag($event, k)">
+                                                    </div>
+                                                    <div class="recipe-mb-info">
+                                                        <h2 class="title overflow-text"
+                                                            id="recipe-6050d5d15ddc1c00294df92a">{{recipe.label}}</h2>
+                                                        <div class="calories" id="calories-6050d5d15ddc1c00294df92a">
+                                                            {{recipe.calories}} calories</div>
+                                                    </div>
+
+                                                </div>
+
+
+                                                <div class="recipe-footer card-footer">
+                                                    <div class="row recipe-icons justify-content-md-center">
+                                                        <div data-test="add-to-meal-plan-modal-button">
+                                                            <div class="container-fluid create-meal-plan-modal-container"
+                                                                data-test="container"></div><img
+                                                                id="add-to-meal-plan-modal-6050d5d15ddc1c00294df92a"
+                                                                class="add-to-meal-plan-modal-button"
+                                                                src="/assets/plus.png" alt="Add recipe icon" href="#">
+                                                        </div>
+                                                        <div data-test="share-modal"><i class="fa fa-share-alt"
+                                                                aria-hidden="true"></i>
+                                                        </div><img
+                                                            id="favorite-button-share-modal-button-6050d5d15ddc1c00294df92a"
+                                                            class="share-modal-button" src="assets/images/heart.png"
+                                                            alt="Heart icon">
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="pagination" *ngIf="totalPage > 2">
+                        <li (click)="currentPage(1)" class="">
+                            <a href="javascript:void(0)">
+                                <i class="fa fa-angle-double-left"></i>
+                            </a>
+                        </li>
+                        <li (click)="prevPage()" class="">
+                            <a href="javascript:void(0)">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        </li>
+
+
+                        <li (click)="currentPage(in)" [ngClass]="in == page_num?'current':''"
+                            *ngFor='let in of pageNosList ;let i = index'>
+                            <a href="javascript:void(0)">{{in}}</a>
+                        </li>
+                        <li (click)="nextPage()" class="">
+                            <a href="javascript:void(0)">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </li>
+                        <li (click)="currentPage(totalPage-1)" class="">
+                            <a href="javascript:void(0)">
+                                <i class="fa fa-angle-double-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+
+
+
+        </div>
+        <!--<div class="col-12 col-lg-8">-->
+        <div class='rightblock'>
+
+
+            <div class="meal-plans-content">
+                <!--<div class="submit-recipe-form"
+                    style="text-align:left; padding-top:10px; padding-bottom:10px;  background-color: #f8f8f8;">
+
+                    <div class="row">
+                        <div class="col-12 col-lg-6">
+                            <label for="title" style="font-size:10px">Meal Plan Name</label>
+                            <input  type="text" name="tiplannametle" id="planname" [(ngModel)]="plan.name"
+                                (blur)="saveMealPlan()" style="margin-bottom:5px" />                          
+                        </div>      
+                        <div class="col-12 col-lg-3">
+                            <label for="title" style="font-size:10px">Max Calories per Day</label>
+                            <input  type="text" name="maxcaloryperday" id="maxcaloryperday" [(ngModel)]="maxcaloryperday"
+                                (blur)="saveMealPlan()" style="margin-bottom:5px" /> 
+                        </div>                        
+                        <div class="col-12 col-lg-3">
+                            <div style='text-align:left;'>
+                                <div style="display:block; margin:0 auto;text-align:left;width: 100%">
+                                    <div style="display:block; margin-bottom:10px;">
+
+                                        <a class="copy-button" (click)="downloadplan()" title="Download PDF"><i
+                                                class="fa fa-file-pdf-o"></i> Export</a>
+                                        &nbsp; <a class="copy-button" (click)="getIngredientsList()"
+                                            title="Ingredients List"><i class="fa fa-download"></i> Grocery List </a>
+                                        &nbsp;
+                                    </div>
+                                    <label *ngIf="showNutrientsFlag" class="container" style=" text-align: left;
+                            display: block;
+                            width: 100%;
+                            font-family: 'Lato', sans-serif;
+                            font-weight: 400;
+                            font-size: 16px;">Show Nutrients
+                                        <input class="showhidenut" id="showhidenut" (change)="showhidenutrients()"
+                                            [(ngModel)]='showhidenutrientsFlag' type="checkbox">
+                                        <span class="checkmark"></span>
+                                    </label>
+
+                                    <div style="    display: inline-block;
+                            width: 100%;
+                            text-align: left;" *ngIf="showhidenutrientsFlag">
+                                        <label class="container" style=" text-align: left;
+                            display: inline-block;
+                            width: 140px;
+                            font-family: 'Lato', sans-serif;
+                            font-weight: 400;
+                            font-size: 16px;">Per Serving
+                                            <input (change)="toggleNutrients('perserving')"
+                                                [(ngModel)]='showNutrientsPServing' type="checkbox">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                       <!--<label class="container" style=" text-align: left;
+                            display: inline-block;
+                            width: 120px;
+                            font-family: 'Lato', sans-serif;
+                            font-weight: 400;
+                            font-size: 16px;">Total
+                                            <input (change)="toggleNutrients('total')" [(ngModel)]='showNutrients'
+                                                type="checkbox">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                        
+
+                    </div>
+                </div>-->
+                <div style="clear:both"></div>
+
+                <div class="meal-row-wrapper meal-row__week-days">
+                    <div class="dayname" style="border-bottom:0px"></div>
+                    <div class="meal-plan-row row">
+                        <div [ngClass]="showNutrients || showNutrientsPServing?'meal-plan-col col mealplan-col':'meal-plan-col col mealplan-col20'"
+                            *ngFor="let mealtype of mealsList; let d =index;">
+                            <div class="meal-day"><span>{{mealtype.name}}</span></div>
+                        </div>
+                        <div *ngIf="showNutrients || showNutrientsPServing" class="meal-plan-col col mealplan-col">
+                            <div class="meal-day"><span>Total</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="divoverflow" style='width:100%; '>
+                    <ng-container *ngFor="let item of plan['days']; let r = index;">
+                        <div class="meal-row-wrapper">
+
+                            <div class="dayname"><span>{{item.name}}</span></div>
+                            <div class="meal-plan-column-container">
+                                <div class="meal-plan-row">
+
+                                    <div [ngClass]="showNutrients || showNutrientsPServing?'meal-plan-slot mealplan-col':'meal-plan-slot mealplan-col20'"
+                                        *ngFor="let meal of item.meals; let c= index;">
+                                        <div class="panelr" *ngIf="meal.recipe">
+                                            <div draggable="true">
+                                                <div class="recipe-image-wrapper ">
+                                                    <div class="recipe-image-card card">
+                                                        <div class="recipe-image-card-content card-body">
+                                                            <div class="image-card-container">
+                                                                <!--  <div class="recipe-remove" (click)="removeRecipe(r, c)"><i class="fa fa-trash" aria-hidden="true"></i></div>
+                                                        <div class="recipe-show" (click)="viewRecipe(r, c)"><i class="fa fa-cutlery" aria-hidden="true"></i></div> -->
+                                                                <div class="morebtn"
+                                                                    style="margin-top:-15px;margin-right:-5px"><a
+                                                                        class="menu" (click)="toggleMoreMenu(meal, r,c)"
+                                                                        href="javascript:void(0)"><i
+                                                                            class="fa fa-ellipsis-v"
+                                                                            aria-hidden="true"></i></a>
+
+                                                                    <div class="moremenu" *ngIf="meal.recipe['expand']">
+
+
+                                                                        <a href="javascript:void(0)"
+                                                                            (click)="removeRecipe(r,c)"><i
+                                                                                class="fa fa-trash"
+                                                                                aria-hidden="true"></i> Remove</a>
+                                                                        <a href="javascript:void(0)"
+                                                                            (click)="viewRecipe(r,c)"><i
+                                                                                class="fa fa-list-ul"
+                                                                                aria-hidden="true"></i> Details</a>
+                                                                    </div>
+                                                                </div>
+
+
+                                                                <div class="recipe-name-box">{{meal.recipe.label}}</div>
+                                                                <img *ngIf="showImages"
+                                                                    class="recipe-image-card recipe-image-card__img open-fist-cursor"
+                                                                    style="opacity: 1;"
+                                                                    id="picture-5c252abdb834861eec5388f3"
+                                                                    src="{{meal.recipe.image}}" alt="Recipe image">
+                                                            </div>
+
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div *ngIf='meal.recipe.calories > 0' class="calories-item">
+                                                <span *ngIf="showNutrients">
+                                                    <a href="javascript:void(0)"
+                                                        title="Calories : {{meal.recipe.calories}} Kcal">
+                                                        {{meal.recipe.calories}} cal </a><br>
+                                                    <!--Calories {{meal.recipe.calories}} Kcal <br>-->
+                                                    Servings {{meal.recipe.yield}}
+                                                </span>
+                                                <span *ngIf="showNutrientsPServing">
+                                                    <a href="javascript:void(0)"
+                                                        title="Calories per Serving : {{formatValPServing(meal.recipe.calories, meal.recipe.yield)}}">
+                                                        {{formatValPServing(meal.recipe.calories, meal.recipe.yield)}}
+                                                        cal </a>
+                                                    <!--Calories<br> per Serving<br>{{formatValPServing(meal.recipe.calories, meal.recipe.yield)}} Kcal -->
+                                                </span>
+                                            </div>
+                                            <div class="minerals" *ngIf="showNutrients">
+                                                <!--<div style="clear:both"></div>
+                                        <div style="display:block">
+                                        <p  style="font-weight:bold">Nutrients</p>
+                                        </div>
+                                        <div style="clear:both"></div>-->
+
+                                                <ng-container *ngFor="let paramN of meal.recipe.minerals">
+
+                                                    <div *ngIf='paramN.value > 0'
+                                                        style='float:left; padding:2px; margin-right:5px;display:flex; align-items: center;'>
+                                                        <div [ngStyle]="{'background-color':getColorCode(paramN)}"
+                                                            style="display:inline-block; width:10px; height:10px;  margin-right:3px; ">
+                                                        </div>
+                                                        <a style="font-size:12px" href="javascript:void(0)"
+                                                            title="{{setFLU(paramN.name)}} {{paramN.value}} {{paramN.unit}}">{{formatVal(paramN.value,2)}}
+                                                            {{paramN.unit}} </a>
+
+                                                    </div>
+                                                </ng-container>
+                                            </div>
+
+                                            <div class="minerals" *ngIf="showNutrientsPServing">
+                                                <!--<div style="clear:both"></div>
+                                        <div style="display:block">
+                                        <p style="font-weight:bold">Nutrients per serving</p>
+                                        </div>
+                                        <div style="clear:both"></div>-->
+
+                                                <ng-container *ngFor="let paramN of meal.recipe.minerals">
+
+                                                    <div *ngIf='paramN.value > 0'
+                                                        style='float:left; padding:2px; margin-right:5px;display:flex; align-items: center;'>
+                                                        <div [ngStyle]="{'background-color':getColorCode(paramN)}"
+                                                            style="display:inline-block; width:10px; height:10px;  margin-right:3px; ">
+                                                        </div>
+                                                        <a style="font-size:12px"  href="javascript:void(0)"
+                                                            title="Per Serving - {{setFLU(paramN.name)}} {{paramN.value}} {{paramN.unit}}">{{formatValPServing(paramN.value,meal.recipe.yield)}}
+                                                            {{paramN.unit}} </a>
+
+                                                    </div>
+                                                </ng-container>
+                                            </div>
+
+                                        </div>
+                                        <div style="min-height:130px" *ngIf="!meal.recipe" id="drop-{{r}}-{{c}}"
+                                            (drop)="drop($event, r, c)" (dragover)="allowDrop($event)">
+                                            <div id="image-placeholder-{{r}}-{{c}}"
+                                                class="recipe-image-placeholder card">
+                                                <div class="recipe-image-card-content  card-body"><img
+                                                        *ngIf="showImages" id="target-{{r}}-{{c}}"
+                                                        class="recipe-card-placeholder-image" src="{{addRecipeImage}}"
+                                                        alt="Recipe Image Card">
+                                                    <span *ngIf="!showImages">Add Image</span>
+                                                </div>
+                                            </div>
+                                            <div class="calories-slot-sum">0 Calories</div>
+                                        </div>
+                                    </div>
+                                    <div class="meal-plan-slot mealplan-col"
+                                        *ngIf="showNutrients || showNutrientsPServing">
+
+                                        <div class="minerals" *ngIf="showNutrients">
+                                            <div style="clear:both"></div>
+                                            <div style="display:block">
+                                                <p class="totalnutrientstitle">Total Nutrients<br>
+                                                    per day</p>
+                                            </div>
+                                            <div style="clear:both"></div>
+                                            <div style='float:left; padding:2px; margin-right:5px;display:flex; align-items: center;'
+                                                *ngFor="let totalM of calculateTotalNutrient(r) ">
+                                                <div [ngStyle]="{'background-color':getColorCode(totalM)}"
+                                                    style="display:inline-block; width:10px; height:10px;  margin-right:3px; ">
+                                                </div>
+                                                <a style="font-size:12px"  href="javascript:void(0)"
+                                                    title="Total {{setFLU(totalM.name)}} {{formatValue(totalM.value)}} {{totalM.unit}}">{{formatValue(totalM.value)}}
+                                                    {{totalM.unit}} </a>
+
+                                            </div>
+
+                                        </div>
+                                        <div class="minerals" *ngIf="showNutrientsPServing">
+                                            <div style="clear:both"></div>
+                                            <div style="display:block">
+                                                <p class="totalnutrientstitle">Total Nutrients <br>
+                                                    per Day <br>
+                                                    per serving</p>
+                                            </div>
+                                            <div style="clear:both"></div>
+                                            <div style='float:left; padding:2px; margin-right:5px;display:flex; align-items: center;'
+                                                *ngFor="let totalM1 of calculateTotalNutrientPServing(r) ">
+                                                <div [ngStyle]="{'background-color':getColorCode(totalM1)}"
+                                                    style="display:inline-block; width:10px; height:10px;  margin-right:3px; ">
+                                                </div>
+                                                <a style="font-size:12px"  href="javascript:void(0)"
+                                                    title="Total {{setFLU(totalM1.name)}} per Serving : {{formatValue(totalM1.value)}} {{totalM1.unit}}">{{formatValue(totalM1.value)}}
+                                                    {{totalM1.unit}} </a>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                    </ng-container>
+
+                    
+
+                </div>
+
+                <div *ngIf="showNutrients || showNutrientsPServing" class="meal-row-wrapper meal-row__calories" style="display: block;
+                height: 100px;
+                text-align: left;
+                width: 100%;
+                margin-left: 50px;
+                margin-top: 10px;">
+                <em>Note:</em> <br>
+                        <div style='float:left; padding:5px; margin-right:5px;display:flex; align-items: center;'
+                            *ngFor="let ccode of colorCodes | keyvalue;">
+                            <div [ngStyle]="{'background-color':ccode.value}"
+                                style="display:inline-block; width:20px; height:20px;  margin-right:5px; "></div>
+                            {{setFLU(ccode.key)}}
+    
+                        </div>                  
+
+                </div>
+
+                <!--<div class="meal-row-wrapper meal-row__calories" id="calculateCaloryFlag" *ngIf="calculateCaloryFlag">
+                <div class="dayname"></div>
+                <div id="total-calories-row" class="meal-plan-row" style="flex-wrap: nowrap;">
+                    <div [ngClass]="showNutrients || showNutrientsPServing?'meal-plan-col col mealplan-col':'meal-plan-col col mealplan-col20'"
+                    *ngFor="let mealtype of mealsList; let d =index;">
+                        <div class="totalcalories">
+                        {{calculateCalory(mealtype, d)}}</div>
+                    </div>
+                    <div *ngIf="showNutrients || showNutrientsPServing" [ngClass]="showNutrients || showNutrientsPServing?'meal-plan-col col mealplan-col':'meal-plan-col col mealplan-col20'">
+                       
+                    </div>
+                </div>
+            </div>-->
+                
+            </div>
+            <div class="panel-save">
+                <!-- <div style="float:left;text-align:left; width:50%;">
+                <label for="short-description"  style="font-size:10px">Tags</label>
+                <input  type="text" style="    margin-bottom: 0px;
+                width: 100%;
+                height: 40px;
+                padding-left: 20px;
+                padding-right: 20px;" class="short-text" name="plantags"
+                    id="plantags" [(ngModel)]="plan.tags" (blur)="saveMealPlan() " />
+                </div> -->
+                <button id="btnsaveplan" (click)="saveMealPlanStatus()" class="saveplan"><i class="fa fa-cloud-upload"
+                        aria-hidden="true"></i><span>Save Plan</span></button>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+</div>
+
+
+
+
+<jw-modal id="popuppanel" style="display:none;" [width]="40">
+    <div class="" style="min-height:400px;padding:25px;">
+
+        <div style="border:1px solid #ccc; border-radius:15px; padding:15px">
+
+            <div class="modal-header" style="border-bottom:0px;">
+                <h4><b>Grocery List</b></h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                    (click)="closeModal('popuppanel');" style="font-size:40px;color:#555;opacity:1">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="border-bottom:0px;min-height: 430px;">
+                <div class="row">
+                    <div class="col-12 col-lg-12 col-xl-12 infoModal"
+                        style='max-height:400px; border:0px;margin-top:0px; text-align:center'>
+                        <ng-container *ngFor="let item of shoppingList; let i = index">
+                            <div class="items" *ngIf='item.quantity > 0' style="padding:10px;text-align:left;">
+                                <div style='float:left'>{{setFLU(item.name)}}</div>
+                                <div style='float:right'>
+                                    {{formatNumber(item.quantity)}} {{item.unit}}<br>
+                                    {{formatweight(item.weight)}} lbs<br>
+                                    {{item.weight.toFixed(2)}} grams<br>
+                                </div>
+                                <div style='clear:both'></div>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</jw-modal>
+
+<jw-modal id="searchFiltersPopup" [width]="70">
+    <div class="" style="min-height:400px;padding:25px;">
+
+        <div style="border:1px solid #ccc; border-radius:15px; padding:15px">
+
+            <div class="modal-header" style="border-bottom:0px;">
+                <h4><b>Search Filters</b></h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                    (click)="closeModal('searchFiltersPopup');" style="font-size:40px;color:$text-gray;opacity:1">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="border-bottom:0px;min-height: 270px;">
+                <div class="row">
+
+                        <div class="col-12 " style="margin-bottom:10px;padding-left:0;display:inline">
+
+                            <ng-container *ngFor="let lab of searchFilterLabels; let l = index;">
+                                <a [ngClass]="lab.selected?'filterlabel active': 'filterlabel'"
+                                    href="javascript:void(0)" (click)="showLabels(lab)" style="font-size:12px">
+                                    {{lab.label}}
+                                </a>
+                            </ng-container>
+
+
+
+
+                        </div>
+                        <div *ngIf="searchFilterLabels[0]['selected']" class="col-12 paddinglr0">
+                            <div class="filter-group">
+
+                                <!--<label class="filter-title">Health Labels </label>-->
+
+                                <ng-container *ngFor="let hlabel of healthlabelsList; let h = index">
+                                    <div class="listSection  " id="healthLabels">
+                                        <label class="container">{{hlabel.name}}
+                                            <input [(ngModel)]="hlabel.selected" type="checkbox"
+                                                [checked]="h == 0?'checked':''">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                </ng-container>
+
+
+                            </div>
+                        </div>
+                        <div *ngIf="searchFilterLabels[1]['selected']" class="col-12 paddinglr0">
+                            <div class="filter-group">
+
+
+                                <!--<label class="filter-title">Diet Labels</label> -->
+
+
+                                <ng-container *ngFor="let dlabel of dietLabelsList; let h = index">
+                                    <div class="listSection  " id="diethLabels">
+                                        <label class="container">{{dlabel.name}}
+                                            <input [(ngModel)]="dlabel.selected" type="checkbox"
+                                                [checked]="h == 0?'checked':''">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                </ng-container>
+
+
+                            </div>
+                        </div>
+                        <div *ngIf="searchFilterLabels[2]['selected']" class="col-12  paddinglr0">
+                            <div class="filter-group">
+
+                                <!--<label class="filter-title">Cuisine Type </label>-->
+
+
+                                <ng-container *ngFor="let clabel of cuisineTypeList; let c = index">
+                                    <div class="listSection " id="cuisineType">
+                                        <label class="container">{{setFLU(clabel.name)}}
+                                            <input [(ngModel)]="clabel.selected" type="checkbox"
+                                                [checked]="c == 0?'checked':''">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                </ng-container>
+
+
+                            </div>
+                        </div>
+
+                        <div *ngIf="searchFilterLabels[3]['selected']" class="col-12  paddinglr0">
+                            <div class="filter-group">
+
+                                <!--<label class="filter-title">Cuisine Type </label>-->
+
+
+                                <ng-container *ngFor="let mlabel of mealTypeList; let m = index">
+                                    <div class="listSection " id="mealType">
+                                        <label class="container">{{setFLU(mlabel.name)}}
+                                            <input [(ngModel)]="mlabel.selected" type="checkbox"
+                                                [checked]="m == 0?'checked':''">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                </ng-container>
+
+
+                            </div>
+                        </div>
+
+                        <div *ngIf="searchFilterLabels[4]['selected']" class="col-12  paddinglr0">
+                            <div class="filter-group" style="margin-left:30px">
+                                <!--<label class="filter-title">Nutrients</label> -->
+
+
+                                <div class="row paddinglr0">
+                                    <ng-container *ngFor="let mlabel of mineralsLabelsList; let m = index">
+
+                                        <div class="col-12 col-lg-3 col-md-3 paddinglr0">
+                                            <div class="row">
+
+
+                                                <div class="col-12 paddinglr0">
+                                                    <label class="container">{{setFLU(mlabel.name)}}
+                                                        <input [(ngModel)]='mlabel.selected' type="checkbox"
+                                                            [checked]="m == 0?'checked':''">
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="col-5 paddinglr0" style="margin-bottom:15px;"
+                                                    *ngIf="mlabel.selected">
+
+                                                    <input class="mineral-input" type='text' name="minerals_{{m}}_min"
+                                                        [(ngModel)]="mlabel.min" placeholder="min" />
+                                                    <span class="maxmin">{{formatVal(mlabel.t_min)}}</span>
+
+                                                </div>
+                                                <div class="col-5 paddinglr0" style="margin-bottom:15px;"
+                                                    *ngIf="mlabel.selected">
+                                                    <input class="mineral-input" type='text' name="minerals_{{m}}_max"
+                                                        [(ngModel)]="mlabel.max" placeholder="max" />
+                                                    <span class="maxmin">{{formatVal(mlabel.t_max)}}</span>
+
+                                                </div>
+                                                <div class="col-2 paddinglr0" style="margin-bottom:15px;"
+                                                    *ngIf="mlabel.selected"> {{mlabel.unit}}</div>
+                                            </div>
+                                        </div>
+
+                                    </ng-container>
+
+
+
+
+
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="searchFilterLabels[5]['selected']" class="col-12 paddinglr0">
+                            <div class="filter-group">
+                                <!--<label class="filter-title">Calories (Max)</label> -->
+                                <div class="listSection" style="display:inline-block;margin:0px">
+                                    <!--  <span>Max calories</span> -->
+                                    <input [(ngModel)]="maxcalories" placeholder="Enter maximum calories" type="text"
+                                        class="inputbox" style="margin-top:0px;width:200px" />
+
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+
+                </div>
+
+
+
+
+            </div>
+            <div class="text-center">
+                <button type="submit" (click)="searchFilters()" class="defaultbtn searchbtn bg-orange">Search
+                </button>&nbsp;&nbsp;
+                <button type="submit" (click)="clearFilterValues()"
+                    class="defaultbtn searchbtn bg-orange">Clear</button>
+            </div>
+
+        </div>
+    </div>
+</jw-modal>

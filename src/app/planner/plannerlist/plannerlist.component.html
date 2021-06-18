@@ -12,7 +12,7 @@
  
 
   <h2 style="width: 70%;">Your Meal Plans</h2>
-  <div class="createplanbtn" (click)="gotopage('plan-create');">
+  <div class="createplanbtn" (click)="gotopage('plancreate');">
     <i class="fa fa-pencil" style="margin-right:10px;"></i>  Create Plan    
      
   </div>
@@ -22,7 +22,7 @@
   
   <div class="listing col-12 col-lg-3 col-md-4 " *ngFor="let mplan of mealPlans; let i = index;">
      
-      <div class="detail" (click)="gotopage('plan-create', {'id':mplan.id});"  style="width:100%">
+      <div class="detail" (click)="gotopage('plancreate', {'id':mplan.id});"  style="width:100%">
           <h4><a href="javascript:void(0)">{{mplan.name}}</a></h4>
           <p innerHTML = "{{mplan.tags}}"></p>
           <div>

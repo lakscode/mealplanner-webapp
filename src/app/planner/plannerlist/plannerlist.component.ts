@@ -66,7 +66,7 @@ this.loadPlans()
         var param = {};
         if(params !== null)
         param = params;
-        if(page == "plan-create")
+        if(page == "plancreate")
         {
             if(window.screen.width > 768 || window.innerWidth > 768)
             {

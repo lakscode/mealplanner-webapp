@@ -48,7 +48,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
             if(window.screen.width > 768 || window.innerWidth > 768)
             {
-               this.planLink = "/plan-create";
+              // this.planLink = "/plan-create";
+			  this.planLink = "/plancreate";
             }
             else
             {
@@ -114,6 +115,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
 					{"id":"planner-plan-list", "menu":"Meal Plans", "link":"/plans", "display":displayMenu, "active":false},
 					{"id":"planner-plan-create", "menu":"Create Plan", "link":this.planLink, "display":displayMenu, "active":false}
+					
 				]
 			}	,
 			{"id":"collections", "menu":"Collections", "link":"/collections", "display":displayMenu, "active":false/*
