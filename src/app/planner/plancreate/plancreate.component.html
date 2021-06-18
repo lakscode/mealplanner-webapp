@@ -715,11 +715,11 @@
                 </div>
                 <div class="divoverflow" style='width:100%; '>
                     <ng-container *ngFor="let item of plan['days']; let r = index;">
-                    <div class="meal-plan-slot mealplan-col">
-                        <div (click)="showDayData(r)" class="dayname"><span>{{item.name}}</span></div>
-                    </div>
+                    
                         <div class="meal-row-wrapper">
-
+                           
+                                <div (click)="showDayData(r)" class="dayname"><span>{{item.name}}</span></div>
+                   
                           
                             <div *ngIf="item.expand" class="meal-plan-column-container">
                                 <div class="meal-plan-row">
