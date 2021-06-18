@@ -105,10 +105,16 @@ this.loadPlans()
         return retValue;
     }
 
+    planname: any = '';
+    plantags: any = '';
 
      saveMealPlan()
   { 
     if(this.planname !== ""){
+
+        this.plan = {"id":"", "name":"", "tags":"", "days":[], "created_by":"", "created_at":""};
+
+
         var params = {};
         if(this.planname !== "")
         params["name"] = this.planname;
@@ -127,7 +133,7 @@ this.loadPlans()
                 this.plan["id"] = insertedid;
                 console.log(insertedid);
                 console.log(this.plan["id"]);
-                this.loadWeekDays();
+               this.loadWeekDays();
                 //this.gotopage('plancreate', {'id':insertedid});
                 
             }
@@ -159,7 +165,7 @@ this.loadPlans()
         this.weekDays.push({"name":"Day 7"})
 
         var daysM= [];
-        this.plan = {"id":"", "name":"", "tags":"", "days":[], "created_by":"", "created_at":""};
+        
         
         for(let j=0; j< 7; j++)
         {
@@ -233,6 +239,11 @@ this.loadPlans()
                   if(this.insertR < 7)
                   {
                       this.createDays();
+                  }
+                  else
+                  {
+
+                    this.gotopage('plancreate', {'id':this.plan["id"]});
                   }
                   },100);
                 }
