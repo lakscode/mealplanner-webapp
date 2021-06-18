@@ -446,8 +446,8 @@ endIndex = startIndex+ endIndex;
 	  console.log(this.recipeurl);
 	 // params1["query"] = "select * from recipes where url = '" + this.recipeurl + "'";
 	 params1["url"]= this.recipeurl;
-	  //params1["url"]="http://www.myrecipes.com/recipe/black-cardamom-beef-sliders";
-	 // this.importrecipe(params1["url"]);
+	//  params1["url"]="https://www.foodnetwork.com/recipes/photos/cauliflower-recipes#item-8";
+	//  this.importrecipe(params1["url"]);
 console.log(params1);
 
 	var res =   this.dbService.getDatabyFields("recipes", params1).subscribe(resData => setTimeout(() => {
@@ -512,18 +512,74 @@ console.log(params1);
 	{
 		this.new_recipe["totalTime"] = data["time"]["total"];
 	}
-
+	var ingr = [];
 	for(let i=0; i < data["ingredients"].length; i++)
 	{
 		this.ingredients.push({'text':data["ingredients"][i]});
+
+		ingr.push(data["ingredients"][i]);
 	}
 	this.instructionCount = 0;
-	this.getNutrients(this.ingredients[0])
+	//this.getNutrients(this.ingredients[0])
+	this.getNutrientsConsolidated(ingr);
   }
 
 
   /************ for nutrients */
- 
+  getNutrientsConsolidated(ingr)
+  {
+
+	console.log("getNutrientsConsoldiated");
+	  var api_id = environment.edamameId;
+	  var api_key = environment.edamameKey;
+  
+	  console.log(api_id);
+	  console.log(api_key);
+	console.log(ingr)
+	  var apiURL = constants.edamam_nutrient_api_details   +"?app_id="+ api_id + "&app_key=" + api_key ;
+  
+	  console.log(apiURL);
+	  var res =   this.dbService.getIngredientsApi(apiURL, ingr).subscribe(recipeData => setTimeout(() => {
+		  console.log(recipeData);
+		  if(recipeData["dietLabels"] && recipeData["dietLabels"]["length"] > 0)
+		  this.new_recipe["dietLabels"] = JSON.stringify(recipeData['dietLabels']);
+
+		  if(recipeData["healthLabels"] && recipeData["healthLabels"]["length"] > 0)
+		  this.new_recipe["healthLabels"] = JSON.stringify(recipeData['healthLabels']);
+
+		  if(recipeData["totalWeight"] && recipeData["totalWeight"]> 0)
+		  this.new_recipe["totalWeight"] =recipeData["totalWeight"];
+
+		  this.new_recipe["calories"] =recipeData["calories"];
+
+		  if(recipeData["cautions"] && recipeData["cautions"]["length"] > 0)
+		  this.new_recipe["cautions"] =JSON.stringify(recipeData["cautions"]);
+
+
+	
+			if(typeof(recipeData["yield"]) !== "undefined" && recipeData["yield"] !== "" && recipeData["yield"] !== "0" && recipeData["yield"] !== 0)
+			this.new_recipe["yield"] = recipeData["yield"];
+			this.new_recipe["s_servings"] = recipeData["yield"]
+	console.log(this.new_recipe);
+	this.SaveRecipe();
+
+
+		 // item["nutrients"] = recipeData;
+		  
+		  
+		//  if(this.instructionCount < this.ingredients.length-1)
+		//  {
+			//  this.instructionCount++;
+			  //this.getNutrients(this.ingredients[this.instructionCount]);
+		 // }
+		//  else
+		//  {
+		//	  this.formatIngredients();
+		 // }
+	  }));
+  
+  }
+
 getNutrients(item)
 {
 

@@ -32,11 +32,26 @@ postLocalData(path, params){
 	var options = {
 		headers : new HttpHeaders({"Content-Type": "application/json"})
 		};
-
 	return this.httpService.post(tempUrl, JSON.stringify(params), options).pipe(
 	map((res) => res)).pipe(share());
 
 }
+
+getIngredientsApi(path, params){
+   
+	var tempUrl = path; 
+
+
+	var options = {
+		headers : new HttpHeaders({"Content-Type": "application/json"})
+		};
+
+		var params1 = {"ingr":params};
+	return this.httpService.post(tempUrl, JSON.stringify(params1), options).pipe(
+	map((res) => res)).pipe(share());
+
+}
+
 getData(path){
 
 	var options = {
