@@ -24,6 +24,7 @@ export class PlannerlistComponent implements OnInit {
     }
 
     ngOnInit() {
+    this.plan = {"id":"", "name":"", "tags":"", "days":[], "created_by":"", "created_at":""};
 
     $('.listing-buttons span').on("click",function(){
         $('.listing-buttons span').removeClass("current");
@@ -125,6 +126,7 @@ this.loadPlans()
                 var insertedid = invData["inserted_id"];
                 this.plan["id"] = insertedid;
                 console.log(insertedid);
+                console.log(this.plan["id"]);
                 this.loadWeekDays();
                 //this.gotopage('plancreate', {'id':insertedid});
                 
@@ -177,8 +179,9 @@ this.loadPlans()
    createDays()
   {
   console.log("createDays");
-    if(typeof(this.plan["id"]) !== "undefined" && this.plan["id"] !== "")
-    {
+  console.log(this.plan["id"]);
+   // if(typeof(this.plan["id"]) !== "undefined" && this.plan["id"] !== "")
+    //{
         var r =  this.insertR;
     
             var rowItem = this.plan["days"][r]["meals"];
@@ -213,7 +216,7 @@ this.loadPlans()
             params["created_at"] = new Date();
             params["status"] = 1;
     
-     
+     console.log(params);
         
             var res =   this.dbService.postDataByTable("days", params).subscribe(dData => setTimeout(() => {
         console.log(dData);
@@ -241,7 +244,7 @@ this.loadPlans()
          
          
           
-    }
+  //  }
 
   }
 
