@@ -66,6 +66,16 @@ export class PlancreateComponent implements OnInit {
 	searchFilterLabels: Array<any> = [];
 	cuisineTypeList : Array<any> = [];
 	showpopupflag: boolean = false;
+
+	/*********** new variables  */
+	recipesList1: Array<any> = [];
+	recipesList2: Array<any> = [];
+	listorgrid: any = {};
+	searchmorebar: boolean = false;
+	animClass: any = "";
+	splitcontent : boolean = false;
+
+
 	constructor(private router: Router, private toastr: ToastrService,  private route: ActivatedRoute, private modalService: ModalService, private pdfService: PDFService, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
 	
 	}
@@ -80,6 +90,8 @@ export class PlancreateComponent implements OnInit {
 			this.searchFilterLabels[l]['selected'] = false;
 		}
 	}
+
+	
 	ngOnInit() {
 			 this.totalPage = 1;
 			 this.pageCount= 5;
@@ -671,7 +683,8 @@ this.loadColorCodes();
 		
 		ev.preventDefault();
 		var index = sessionStorage.getItem("dragstartindex");
-		var recipeItem = this.displayList[index];
+		//var recipeItem = this.displayList[index];
+		var recipeItem = this.recipesList[index];
 		console.log(recipeItem);
 		var totalCals = 0;
 		for(let i=0; i <this.plan["days"][r]["meals"]["length"]; i++)
@@ -693,26 +706,19 @@ this.loadColorCodes();
 		}
 		else
 		{
-		var r_index = parseInt(index);
-		if(this.page_num > 1)
-		r_index = parseInt(index) + (this.page_num-1 * this.pageCount)
-		console.log("index " + index);
-		console.log("page_num " + this.page_num);
-		console.log("r_index " + r_index);
-
 		
 
 		var data = ev.dataTransfer.getData("text");
 this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 	
-		var panelObj = document.getElementById("imagep_" + this.page_num + "_" + index);
+		var panelObj = document.getElementById("imagep_" + index);
 		console.log(panelObj);
 		var img = document.createElement('img');
             img.src = this.formatImage(recipeItem["image"], 's');
 			img.style.width = "50px";
 			img.style.height = "50px";
 			img.style.position = "absolute";
-			img.id = "picture_" + this.page_num + "_" + index;
+			img.id = "picture_" + index;
 			img.style.top = "0";
 			img.style.left = "0";
 			img.setAttribute("class","recipe-image");
@@ -1859,6 +1865,22 @@ console.log(invData);
 	this.maxcalories = "";
 	
 }
+
+/********** new plan  */
+
+
+showhidecontent(recipe)
+{
+	recipe.showpopup = !recipe.showpopup
+	for(let r = 0; r < this.displayList.length; r++)
+	{
+		if(recipe.id !== this.displayList[r]["id"])
+		{
+			this.displayList[r]["showpopup"] = false;
+		}
+	}
+}
+
 
 }
 
