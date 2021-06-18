@@ -233,7 +233,7 @@ this.loadColorCodes();
 			}
 			this.plan["days"].push({"id":"row" + (j+1), "name":this.weekDays[j]["name"], "meals":daysM})
 		}
-	
+		this.plan["days"][0]["expand"]= true;
 	//	console.log(this.plan);
 	
 		this.setDefaults();
@@ -1881,7 +1881,17 @@ showhidecontent(recipe)
 	}
 }
 
-
+showDayData(rowindex)
+{
+	for(let i = 0; i < this.plan['days']["length"] ; i++)
+	{
+		if(i !== rowindex)
+		{
+			this.plan['days'][i]["expand"] = false;
+		}
+	}
+	this.plan['days'][rowindex]["expand"] = true;
+}
 }
 
 	

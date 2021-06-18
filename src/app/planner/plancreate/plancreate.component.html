@@ -14,6 +14,8 @@
                     <a (click)="showpopupflag = false; getIngredientsList();" href="javascript:void(0)">
                         <i class="fa fa-download"></i>   Grocery List
                     </a>
+                   
+                        
                 </div>
          
 
@@ -37,7 +39,49 @@
                 &nbsp;
             </div>-->
         </div>
+        <div class="col-12 col-lg-3">
+            <label for="title" style="font-size:10px">Calories per Day</label>
+            <input  type="text" name="maxcaloryperday" id="maxcaloryperday" [(ngModel)]="maxcaloryperday"
+                (blur)="saveMealPlan()" style="margin-bottom:5px" /> 
+        </div>                        
+        <div class="col-12 col-lg-3">
+            <div style='text-align:left;'>
+                <div style="display:block; margin:0 auto;text-align:left;width: 100%">
+                    
+                    <label *ngIf="showNutrientsFlag" class="container" style=" text-align: left;
+            display:inline-block;
+            width: 160px;
+            font-family: 'Lato', sans-serif;
+            font-weight: 400;
+            font-size: 16px;">Show Nutrients
+                        <input class="showhidenut" id="showhidenut" (change)="showhidenutrients()"
+                            [(ngModel)]='showhidenutrientsFlag' type="checkbox">
+                        <span class="checkmark"></span>
+                    </label>
+
+                    <div style="    display: inline-block;
+            width: 140px;
+            text-align: left;" *ngIf="showhidenutrientsFlag">
+                        <label class="container" style=" text-align: left;
+                        display: inline-block;
+                        width: 140px;
+                        font-family: 'Lato', sans-serif;
+                        font-weight: 400;
+                        font-size: 16px;">Per Serving
+                                        <input (change)="toggleNutrients('perserving')"
+                                            [(ngModel)]='showNutrientsPServing' type="checkbox">
+                                        <span class="checkmark"></span>
+                                    </label>
+                      
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
         <div class="col-12">
+           
+
             <div class="wrapper-search">
                    
                 <div class="row" >
@@ -264,8 +308,8 @@
                                         
                                     </div>
                                     </div>
-                                    <img style="width:90%; max-height:100px"  id="imagep_{{i}}"  draggable="true" (dragstart)="drag($event, i)" src="{{formatImage(recipe1.image, 'm')}}"
-                            alt="image">  
+                                    <a hreaf="javascript:void(0)" title="Drag and Drop Recipe to add it to meal plan"><img style="width:90%; max-height:100px"  id="imagep_{{i}}"  draggable="true" (dragstart)="drag($event, i)" src="{{formatImage(recipe1.image, 'm')}}"
+                            alt="image">  </a>
                                 <p>{{recipe1.label}}</p>
                                 <p>Calories: <span style="font-size:12px;">{{recipe1.calories}} Kcal</span></p>
                                 <div class="meta-listing">                                   
@@ -654,75 +698,7 @@
             <div class="col-12 col-lg-12">
 
             <div class="meal-plans-content">
-                <!--<div class="submit-recipe-form"
-                    style="text-align:left; padding-top:10px; padding-bottom:10px;  background-color: #f8f8f8;">
-
-                    <div class="row">
-                        <div class="col-12 col-lg-6">
-                            <label for="title" style="font-size:10px">Meal Plan Name</label>
-                            <input  type="text" name="tiplannametle" id="planname" [(ngModel)]="plan.name"
-                                (blur)="saveMealPlan()" style="margin-bottom:5px" />                          
-                        </div>      
-                        <div class="col-12 col-lg-3">
-                            <label for="title" style="font-size:10px">Max Calories per Day</label>
-                            <input  type="text" name="maxcaloryperday" id="maxcaloryperday" [(ngModel)]="maxcaloryperday"
-                                (blur)="saveMealPlan()" style="margin-bottom:5px" /> 
-                        </div>                        
-                        <div class="col-12 col-lg-3">
-                            <div style='text-align:left;'>
-                                <div style="display:block; margin:0 auto;text-align:left;width: 100%">
-                                    <div style="display:block; margin-bottom:10px;">
-
-                                        <a class="copy-button" (click)="downloadplan()" title="Download PDF"><i
-                                                class="fa fa-file-pdf-o"></i> Export</a>
-                                        &nbsp; <a class="copy-button" (click)="getIngredientsList()"
-                                            title="Ingredients List"><i class="fa fa-download"></i> Grocery List </a>
-                                        &nbsp;
-                                    </div>
-                                    <label *ngIf="showNutrientsFlag" class="container" style=" text-align: left;
-                            display: block;
-                            width: 100%;
-                            font-family: 'Lato', sans-serif;
-                            font-weight: 400;
-                            font-size: 16px;">Show Nutrients
-                                        <input class="showhidenut" id="showhidenut" (change)="showhidenutrients()"
-                                            [(ngModel)]='showhidenutrientsFlag' type="checkbox">
-                                        <span class="checkmark"></span>
-                                    </label>
-
-                                    <div style="    display: inline-block;
-                            width: 100%;
-                            text-align: left;" *ngIf="showhidenutrientsFlag">
-                                        <label class="container" style=" text-align: left;
-                            display: inline-block;
-                            width: 140px;
-                            font-family: 'Lato', sans-serif;
-                            font-weight: 400;
-                            font-size: 16px;">Per Serving
-                                            <input (change)="toggleNutrients('perserving')"
-                                                [(ngModel)]='showNutrientsPServing' type="checkbox">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                       <!--<label class="container" style=" text-align: left;
-                            display: inline-block;
-                            width: 120px;
-                            font-family: 'Lato', sans-serif;
-                            font-weight: 400;
-                            font-size: 16px;">Total
-                                            <input (change)="toggleNutrients('total')" [(ngModel)]='showNutrients'
-                                                type="checkbox">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </div>
-                                </div>
-
-
-                            </div>
-                        </div>
-                        
-
-                    </div>
-                </div>-->
+            
                 <div style="clear:both"></div>
 
                 <div class="meal-row-wrapper meal-row__week-days">
@@ -739,10 +715,13 @@
                 </div>
                 <div class="divoverflow" style='width:100%; '>
                     <ng-container *ngFor="let item of plan['days']; let r = index;">
+                    <div class="meal-plan-slot mealplan-col">
+                        <div (click)="showDayData(r)" class="dayname"><span>{{item.name}}</span></div>
+                    </div>
                         <div class="meal-row-wrapper">
 
-                            <div class="dayname"><span>{{item.name}}</span></div>
-                            <div class="meal-plan-column-container">
+                          
+                            <div *ngIf="item.expand" class="meal-plan-column-container">
                                 <div class="meal-plan-row">
 
                                     <div [ngClass]="showNutrients || showNutrientsPServing?'meal-plan-slot mealplan-col':'meal-plan-slot mealplan-col20'"
