@@ -675,6 +675,11 @@ this.loadColorCodes();
 		var recipe = this.plan["days"][r]["meals"][c]["recipe"];
 		window.open("/recipedetails/" + recipe.id)
 	}
+
+	gotoRecipeDetails(id)
+	{
+		window.open("/recipedetails/" + id)
+	}
 	maxcaloryperday: any = 0;
 	drop(ev, r, c) {
 	
@@ -1901,6 +1906,69 @@ showDayData(rowindex)
 		}
 	}
 	this.plan['days'][rowindex]["expand"] = true;
+}
+
+ /********* Add to collections  */
+ selectedRecipe2Add2Collection: any;
+ addCollectionsPopup(recipe)
+ {
+
+
+   this.loadCollectionNames();
+this.selectedRecipe2Add2Collection= recipe;
+recipe.showAdd2C = !recipe.showAdd2C; 
+
+}
+collectionsList:Array<any>=[];
+collection: any = {"id":'', "day":"", "mealType":""};
+showAdd2C: boolean = false;
+loadCollectionNames()
+{
+   if(this.currentUser && this.currentUser["id"])
+   {
+   this.collectionsList = [];
+
+   var params = {};
+   console.log(params);
+   params ['query'] = "select id, collection_name from collection where created_by = " + this.currentUser["id"];
+   var res =   this.dbService.getDatabyTablebyQuery("collection", params).subscribe(invData => setTimeout(() => {
+
+	 console.log(invData);
+	 if(invData !== null)
+	 {
+	   var obj = invData["body"]["length"];
+	   this.collectionsList = invData["body"];
+	 }
+	
+   }));
+   }
+}
+
+add2Collection(recipe)
+{
+
+   console.log(this.plan);
+
+   var paramsr = {};
+   paramsr["collection_id"] = this.collection["id"];
+   paramsr["recipe_id"] = recipe["id"];
+   paramsr["created_by"] = this.currentUser["id"];
+
+   var res =   this.dbService.getDataByTable("recipe_mapping", paramsr).subscribe(invData => setTimeout(() => {
+	
+	 if(invData !== null && invData["body"]["length"] > 0)
+	 {
+	   this.toastr.success("Recipe has been already added to the collection.","Add Recipe to Collection");
+	 }
+	 else
+	 {
+	   var res =   this.dbService.postDataByTable("recipe_mapping", paramsr).subscribe(invData => setTimeout(() => {
+		   this.toastr.success("Recipe has been added to the collection.","Add Recipe to Collection");
+	   }));
+	 }
+	 recipe.showAdd2C = false;
+   }));
+
 }
 }
 

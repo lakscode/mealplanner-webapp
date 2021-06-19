@@ -258,7 +258,7 @@
                 </div>
                 <div style='height:20px; width:100%'></div>
                 <div class="recipe-set" *ngIf="!noResult">
-                    <div class="recipes-horizontal">
+                    <div class="recipes-horizontal divoverflowh">
 
 
                         <div class="listing-search"  *ngFor="let recipe1 of recipesList; let i = index;">
@@ -267,7 +267,7 @@
                                 <div class="more">
                                     <a (click)="showhidecontent(recipe1)" href="javascript:void(0)" [ngClass]="recipe1.showpopup?'contextmenu-icon active':'contextmenu-icon'"><i class="fa fa-ellipsis-v"></i></a>
                                     <div *ngIf="recipe1.showpopup" class="contextmenu">
-                                        <a class="menu"  href="javascript:void(0)" (click)="recipe1.showpopup = false; addtoMealPlan(recipe1)"><i class="fa fa-calendar-plus-o" aria-hidden="true"></i> Add to Meal Plan</a>
+                                        <!--<a class="menu"  href="javascript:void(0)" (click)="recipe1.showpopup = false; addtoMealPlan(recipe1)"><i class="fa fa-calendar-plus-o" aria-hidden="true"></i> Add to Meal Plan</a>-->
                                   
                                         <a  class="menu" href="javascript:void(0)"  (click)="gotoRecipeDetails( recipe1.id)" ><i class="fa fa-list"></i>View Recipe</a>
                                         <a  (click)="makeacopy(recipe1)" class="menu" href="javascript:void(0)"><i class="fa fa-clone"></i>Make a Copy</a>
@@ -295,7 +295,7 @@
                 
                                                 
                                     </div>
-                                    <div *ngIf='recipe1.showAdd2C' class="add2mealplanmenu" style="top:0px;width:100%; height:200px;">
+                                    <div *ngIf='recipe1.showAdd2C' class="add2mealplanmenu" style="top:0px;width:300px; z-index: 100; height:200px;">
                                         <a style="float:right;font-size:24px;padding-top: 0px;
                                         padding-right: 0px;" href="javascript:void(0)" (click)="recipe1.showAdd2C = false;"><i class="fa fa-close" aria-hidden="true"></i> </a>
                                         <p class="title" style="display:block"> Add Recipe to Collections</p>
@@ -304,7 +304,7 @@
                                             <option value="{{collection.id}}" *ngFor='let collection of collectionsList; let i = index'>{{collection.collection_name}}</option>
                                         </select>
                                      
-                                        <a class="btn" style="width:100%" href="javascript:void(0)" (click)="add2Collection(recipe1)"> Add to Collection</a>
+                                        <a class="btn" style="width:100%;display:block;" href="javascript:void(0)" (click)="add2Collection(recipe1)"> Add to Collection</a>
                                         
                                     </div>
                                     </div>
@@ -702,7 +702,7 @@
                 <div style="clear:both"></div>
 
                 <div class="meal-row-wrapper meal-row__week-days">
-                    <div class="dayname" style="border-bottom:0px"></div>
+                    <div style='width: 150px; display:inline-block;border-bottom:0px'></div>
                     <div class="meal-plan-row row">
                         <div [ngClass]="showNutrients || showNutrientsPServing?'meal-plan-col col mealplan-col':'meal-plan-col col mealplan-col20'"
                             *ngFor="let mealtype of mealsList; let d =index;">
@@ -714,13 +714,21 @@
                     </div>
                 </div>
                 <div class="divoverflow" style='width:100%; '>
+                    <div class="meal-plan-row row">
+                <div class=" mealplan-col" style='width: 150px; display:inline-block;'>
+                    <ng-container *ngFor="let item of plan['days']; let r = index;">
+                          
+                        <div (click)="showDayData(r)" [ngClass]="item.expand?'dayname active':'dayname'"><span>{{item.name}}</span></div>
+                    </ng-container>
+                </div>
+                <div class=" mealplan-col" style='width: calc(100% - 150px); display:inline-block;'>
                     <ng-container *ngFor="let item of plan['days']; let r = index;">
                     
-                        <div class="meal-row-wrapper">
+                        
                            
-                                <div (click)="showDayData(r)" class="dayname"><span>{{item.name}}</span></div>
+                                <!--<div (click)="showDayData(r)" class="dayname"><span>{{item.name}}</span></div>-->
                    
-                          
+                                <div class="meal-row-wrapper" >
                             <div *ngIf="item.expand" class="meal-plan-column-container">
                                 <div class="meal-plan-row">
 
@@ -895,7 +903,7 @@
 
 
                     </ng-container>
-
+</div></div>
                     
 
                 </div>

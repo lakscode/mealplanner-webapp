@@ -141,13 +141,33 @@
 }
 .dayname
 {
-  min-width: 50px;
-  display: flex;
+ //@debug min-width: 50px;
+ // display: flex;
   align-items: center;
   font-weight:bold;
   font-size: 12px;
   text-transform: uppercase;
+  background: #FFF;
+  border:1px solid $orange1;
+  margin-bottom: 5px;
+  padding: 5px;
 }
+
+.dayname.active
+{
+ //@debug min-width: 50px;
+ // display: flex;
+  align-items: center;
+  font-weight:bold;
+  font-size: 12px;
+  text-transform: uppercase;
+  background: $orange1;
+  border:1px solid $orange1;
+  color:#FFF;
+  margin-bottom: 5px;
+  padding: 5px;
+}
+
 .meal-name span {
   font-size: 14px;
   font-weight: bold;
@@ -203,8 +223,8 @@
 
 
 .recipe-image-wrapper .recipe-image-card.card {
-  max-width: 120px;
-  max-height: 120px;
+  max-width: 160px;
+  max-height: 160px;
   display: inline-block;
   border: 0;
   border-radius: 2px;
@@ -231,8 +251,8 @@
 }
 
 .recipe-image-wrapper .recipe-image-card-content.card-body {
-  max-width: 120px;
-  max-height: 120px;
+  max-width: 160px;
+  max-height: 160px;
   padding: 0;
 }
 .recipe-image-card-content.card-body {
@@ -282,7 +302,7 @@
   border-radius: 0 0 2px 2px;
 }
 .recipe-card-placeholder-image {
-  width: 70px;
+  width: 120px;
 }
 element {
 
