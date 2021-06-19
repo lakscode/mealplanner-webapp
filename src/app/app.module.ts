@@ -43,7 +43,11 @@ import { MyRecipesModule } from './recipes/myrecipes/myrecipes.module';
 import { FavouritesModule } from './recipes/favourites/favourites.module'; 
 import { RecipedetailsModule } from './recipes/recipedetails/recipedetails.module'; 
 import { RecipesubmitModule } from './recipes/recipesubmit/recipesubmit.module'; 
+import { RecipesmodifyModule } from './recipes/recipesmodify/recipesmodify.module'; 
+import { ApproveModule } from './recipes/approve/approve.module'; 
+
 import { TestimonialsModule } from './testimonials/testimonials.module'; 
+
 import { PlannerlistModule } from './planner/plannerlist/plannerlist.module'; 
 import { PlannercreateModule } from './planner/plannercreate/plannercreate.module'; 
 import { PlancreateModule } from './planner/plancreate/plancreate.module'; 
@@ -119,6 +123,8 @@ import {environment} from "../environments/environment";
 	HomeModule,
 	FeaturesModule,
 	RecipesModule,
+	RecipesmodifyModule,
+	ApproveModule,
 	MyRecipesModule,
 	FavouritesModule,
 	RecipedetailsModule,
