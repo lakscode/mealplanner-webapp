@@ -15,7 +15,7 @@
                                 <label class="searchicon">
                                     <i class="fa fa-search" aria-hidden="true"></i>
                                 </label>
-                                <input type="text" [(ngModel)]="searchparam.q" class="inputbox"
+                                <input type="text" (keyup.enter)="searchProps()" [(ngModel)]="searchparam.q" class="inputbox"
                                     placeholder="Search Recipes..." />
                                 <input type="button" (click)="searchProps()" style="margin-bottom:10px;"
                                     [ngClass]="searchmorebar?'defaultbtn searchbtn hideonmobile bg-orange' :' defaultbtn searchbtn  bg-orange'"
@@ -312,7 +312,7 @@
                                             <p class="lbl">Choose Cuisine Type</p>
                                             <select name="plancuisinetype" [(ngModel)]="recipe1.newrecipe.cuisineType">
                                                 <option value="{{ctype.code}}"
-                                                    *ngFor='let ctype of cuisineTypesList; let i = index'>{{ctype.name}}
+                                                    *ngFor='let ctype of cuisineTypeList; let i = index'>{{ctype.name}}
                                                 </option>
                                             </select>
                                         </div>
@@ -320,7 +320,7 @@
                                             <p class="lbl">Choose meal Type</p>
                                             <select name="planmealtype" [(ngModel)]="recipe1.newrecipe.mealType">
                                                 <option value="{{mealtype.code}}"
-                                                    *ngFor='let mealtype of mealTypesList; let i = index'>
+                                                    *ngFor='let mealtype of mealTypeList; let i = index'>
                                                     {{mealtype.name}}</option>
                                             </select>
                                         </div>

@@ -144,7 +144,7 @@ this.searchFilterLabels = [];
 
 		this.loadNutrientsMaxMin();
 	
-		window.addEventListener("scroll", this.scrollFunc);
+	//	window.addEventListener("scroll", this.scrollFunc);
 		this.getNutrientsMaxMin(); 
 		
 		this.searchparam['q'] = "";
@@ -289,7 +289,7 @@ this.loadColorCodes();
 	  var params = {"limit": "30"}; //{"limit": "10"};
    //  params["caloriesfrom"] = this.searchparam.range.lower;
 	// params["caloriesto"] = this.searchparam.range.upper;
-	// console.log(this.searchparam);
+	 console.log(this.searchparam);
 
 	 if(idslist == "")
 	 {
@@ -341,6 +341,7 @@ this.loadColorCodes();
 	  
 	  console.log(JSON.stringify(params));
 	  this.calculateCaloryFlag = false;
+
 	 var res =   this.dbService.getDatabyFields("recipes", params).subscribe(invData => setTimeout(() => {
   
 	 console.log(invData);
@@ -382,6 +383,7 @@ this.loadColorCodes();
 		//  console.log(this.plan);
 		  this.calculateCaloryFlag = true;
 		 // this.loadRatings();
+		 this.clearFilterValues();
 		  this.page_num = 1;
 	 this.totalPage = this.recipesList["length"] /this.pageCount;
 	 console.log(this.totalPage);
@@ -399,7 +401,7 @@ this.loadColorCodes();
 		return new Array(i);
 	} */
 	counter() {
-		console.log("pagenum " + this.page_num);
+	//	console.log("pagenum " + this.page_num);
 		if(this.totalPage > 3)
 		this.pageNosList = [1,2,3];
 		else
@@ -422,12 +424,12 @@ this.loadColorCodes();
 			this.pageNosList.push(this.page_num+1);
 
 		}
-		console.log(this.pageNosList);
+	//	console.log(this.pageNosList);
 		return this.pageNosList;
 	}
 	prevPage()
 	{
-		console.log("prevPage");
+	//	console.log("prevPage");
 		if(this.page_num > 1)
 		{
 			this.page_num -= 1;
@@ -437,7 +439,7 @@ this.loadColorCodes();
 	}
 	nextPage()
 	{
-		console.log("nextPage");
+	//	console.log("nextPage");
 		if(this.page_num >= 0 && this.page_num < this.totalPage-1)
 		{
 			this.page_num += 1;
@@ -447,9 +449,9 @@ this.loadColorCodes();
 	}
 	currentPage(pagenum)
 	{
-		console.log("currentPage");
+	//	console.log("currentPage");
 
-		console.log("pagenum " + pagenum);
+	//	console.log("pagenum " + pagenum);
 		this.page_num = parseInt(pagenum);
 		this.counter();
 		this.getDisplayList();
@@ -457,7 +459,7 @@ this.loadColorCodes();
 
 	getDisplayList()
 	{
-		console.log(this.page_num);
+	//	console.log(this.page_num);
 		this.displayList=[];
 		var startIndex= (this.page_num-1)*this.pageCount;
 		var endIndex = this.pageCount;
@@ -822,7 +824,7 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 
       var res =   this.dbService.getDataByTable("days", params).subscribe(dData => setTimeout(() => {
 
-   			 console.log(dData);
+   		//	 console.log(dData);
         if(dData !== null)
         {
 			var idslist = ""; 
@@ -831,7 +833,7 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
             for(let i=0; i < dData["body"]['length'] ; i++)
             {
 				var item = dData['body'][i];
-				console.log(item);
+			//	console.log(item);
 				this.plan["days"][item["day_num"]]["dayid"] = item["id"]
 				if(typeof(item["breakfast"]) !== "undefined" && item["breakfast"] !== null && item["breakfast"] !== "")
 				{
@@ -917,7 +919,7 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
         else{
 
         }
-        console.log(this.plan);
+     //   console.log(this.plan);
 		if(idslist !== "")
 		{			
 		  idslist = idslist.substring(0, idslist.length-1);
@@ -1668,7 +1670,7 @@ limitTo(str, num)
 	maxcalories: any = "";
 	searchFilters()
 	{
-
+		console.log("in searchFilters");
 		var dietlabels = "";
 	
 		if(typeof(this.searchparam.calories) !== "undefined" && this.searchparam.calories !== ""){
@@ -1699,6 +1701,7 @@ limitTo(str, num)
 		}
 
 		var cuisinetypes = "";
+		console.log(this.cuisineTypeList);
 	 for(let c=0; c <this.cuisineTypeList.length; c++)
 	 {
 		 if(this.cuisineTypeList[c]["selected"])
@@ -1760,7 +1763,7 @@ limitTo(str, num)
 	
 		this.loadRecipes('', true);
 		this.closeModal('searchFiltersPopup');
-		this.clearFilterValues();
+		//this.clearFilterValues();
 	}
 
 
@@ -1876,7 +1879,7 @@ limitTo(str, num)
 	for(let m=0; m < this.mineralsLabelsList.length; m++){
 		this.mineralsLabelsList[m]['selected'] = false;
 	}
-	this.loadRecipes();
+	
 	this.maxcalories = "";
 	
 }
@@ -1968,6 +1971,76 @@ add2Collection(recipe)
 	 }
 	 recipe.showAdd2C = false;
    }));
+
+}
+daysList: Array<any>=[];
+loadOptions()
+{
+
+	this.daysList = [];
+	for(let d=0; d < 7; d++)
+	{
+		this.daysList.push({"id":d, "name":"Day " + (d+1)});
+	}
+
+
+
+}
+selectedRecipe2Add2plan: any;
+addtoplan: any;
+addtoMealPlan(recipe)
+{
+	this.addtoplan = {};
+	this.loadOptions();
+this.selectedRecipe2Add2plan= recipe;
+recipe.showAdd2MP = !recipe.showAdd2MP; 
+
+}
+add2Plan()
+{
+	console.log(this.selectedRecipe2Add2plan);
+	console.log(this.addtoplan);
+	console.log(this.mealTypeList);
+	var r = this.addtoplan["day"];
+	var c = this.addtoplan["mealType"];
+	var mtype = this.mealTypeList.findIndex(x=>(x.name == this.selectedRecipe2Add2plan.mealType));
+	console.log(mtype);
+
+
+	var recipeItem = this.selectedRecipe2Add2plan;
+	console.log(recipeItem);
+	var totalCals = 0;
+	for(let i=0; i <this.plan["days"][r]["meals"]["length"]; i++)
+	{
+		console.log(this.plan["days"][r]["meals"][i]);
+		if(typeof(this.plan["days"][r]["meals"][i]["calories"]) !== "undefined")
+		{
+			console.log( parseInt(this.plan["days"][r]["meals"][i]));
+			totalCals += parseInt(this.plan["days"][r]["meals"][i]["calories"]) / parseInt(this.plan["days"][r]["meals"][i]["yield"]);
+		}
+	}
+
+	totalCals += parseInt(recipeItem["calories"])/parseInt(recipeItem["yield"]);
+	console.log("totalCals " + totalCals);
+
+	if(this.maxcaloryperday > 0 && totalCals > this.maxcaloryperday  )
+	{
+		alert("Per day calories is more than your maximum calory consumption for the day");
+	}
+	else
+	{
+	
+
+this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
+
+	
+		if(this.plan["id"] !== "" )
+		{
+			this.SavePlanData(r, c);
+		}
+		
+	}
+
 
 }
 }

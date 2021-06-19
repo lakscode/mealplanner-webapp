@@ -39,46 +39,8 @@
                 &nbsp;
             </div>-->
         </div>
-        <div class="col-12 col-lg-3">
-            <label for="title" style="font-size:10px">Calories per Day</label>
-            <input  type="text" name="maxcaloryperday" id="maxcaloryperday" [(ngModel)]="maxcaloryperday"
-                (blur)="saveMealPlan()" style="margin-bottom:5px" /> 
-        </div>                        
-        <div class="col-12 col-lg-3">
-            <div style='text-align:left;'>
-                <div style="display:block; margin:0 auto;text-align:left;width: 100%">
-                    
-                    <label *ngIf="showNutrientsFlag" class="container" style=" text-align: left;
-            display:inline-block;
-            width: 160px;
-            font-family: 'Lato', sans-serif;
-            font-weight: 400;
-            font-size: 16px;">Show Nutrients
-                        <input class="showhidenut" id="showhidenut" (change)="showhidenutrients()"
-                            [(ngModel)]='showhidenutrientsFlag' type="checkbox">
-                        <span class="checkmark"></span>
-                    </label>
-
-                    <div style="    display: inline-block;
-            width: 140px;
-            text-align: left;" *ngIf="showhidenutrientsFlag">
-                        <label class="container" style=" text-align: left;
-                        display: inline-block;
-                        width: 140px;
-                        font-family: 'Lato', sans-serif;
-                        font-weight: 400;
-                        font-size: 16px;">Per Serving
-                                        <input (change)="toggleNutrients('perserving')"
-                                            [(ngModel)]='showNutrientsPServing' type="checkbox">
-                                        <span class="checkmark"></span>
-                                    </label>
-                      
-                    </div>
-                </div>
-
-
-            </div>
-        </div>
+                               
+      
         <div class="col-12">
            
 
@@ -91,9 +53,9 @@
                                 <i class="fa fa-search" aria-hidden="true"></i>
                             </label>
                             <input type="text" [(ngModel)]="searchparam.q" class="inputbox" placeholder="Search Recipes..." />
-                            <input  type="button"  (click)="searchProps()" style="margin-bottom:10px;" 
+                            <input  type="button"  (click)="searchFilters()" style="margin-bottom:10px;" 
                             [ngClass]="searchmorebar?'defaultbtn searchbtn hideonmobile bg-orange' :' defaultbtn searchbtn  bg-orange'" id="header-submit-search-pro" name="submit" value="Search">
-                            <input  type="button"  (click)="clearFilters()" style="margin-bottom:10px;" 
+                            <input  type="button"  (click)="clearFilters();loadRecipes();" style="margin-bottom:10px;" 
                             [ngClass]="searchmorebar?'defaultbtn searchbtn hideonmobile bg-orange' :' defaultbtn searchbtn  bg-orange'" id="header-submit-search-pro" name="submit" value="Clear">
                         </div>
                       
@@ -238,7 +200,7 @@
        
                 
                                 <div class="col-12 showonmobile">
-                                    <input type="button" (click)="searchProps()" style="margin-bottom:10px;" class="defaultbtn searchbtn" id="header-submit-search-pro" name="submit" value="Search">
+                                    <input type="button" (click)="searchFilters()" style="margin-bottom:10px;" class="defaultbtn searchbtn" id="header-submit-search-pro" name="submit" value="Search">
                 
                                 </div>
                 
@@ -264,38 +226,38 @@
                         <div class="listing-search"  *ngFor="let recipe1 of recipesList; let i = index;">
                             
                             <div class="details">
-                                <div class="more">
-                                    <a (click)="showhidecontent(recipe1)" href="javascript:void(0)" [ngClass]="recipe1.showpopup?'contextmenu-icon active':'contextmenu-icon'"><i class="fa fa-ellipsis-v"></i></a>
-                                    <div *ngIf="recipe1.showpopup" class="contextmenu">
-                                        <!--<a class="menu"  href="javascript:void(0)" (click)="recipe1.showpopup = false; addtoMealPlan(recipe1)"><i class="fa fa-calendar-plus-o" aria-hidden="true"></i> Add to Meal Plan</a>-->
+                                <div class="more" style="right: 10px;
+                                text-align: center;
+                                top: 20px;">
+                                    <a (click)="showhidecontent(recipe1)" href="javascript:void(0)" [ngClass]="recipe1.showpopup?'contextmenu-icon active':'contextmenu-icon'" style=""><i class="fa fa-ellipsis-v"></i></a>
+                                    <div *ngIf="recipe1.showpopup" style="left: unset;" class="contextmenu">
+                                       <a class="menu"  href="javascript:void(0)" (click)="recipe1.showpopup = false; addtoMealPlan(recipe1); "><i class="fa fa-calendar-plus-o" aria-hidden="true"></i> Add Meal</a>
                                   
-                                        <a  class="menu" href="javascript:void(0)"  (click)="gotoRecipeDetails( recipe1.id)" ><i class="fa fa-list"></i>View Recipe</a>
-                                        <a  (click)="makeacopy(recipe1)" class="menu" href="javascript:void(0)"><i class="fa fa-clone"></i>Make a Copy</a>
+                                        <a  class="menu" href="javascript:void(0)"  (click)="recipe1.showAdd2MP = false; recipe1.showpopup =false;gotoRecipeDetails( recipe1.id)" ><i class="fa fa-list"></i>View Recipe</a>
+                                        <!--<a  (click)="makeacopy(recipe1)" class="menu" href="javascript:void(0)"><i class="fa fa-clone"></i>Make a Copy</a>-->
                                         <a  (click)="recipe1.showpopup = false; addCollectionsPopup(recipe1)" class="menu" href="javascript:void(0)"><i class="fa fa-plus-square-o"></i>Add to Collections</a>
 
                                          </div>
 
-                                    <div *ngIf='recipe1.showAdd2MP' class="add2mealplanmenu" style="top:0px; ">
+                                    <div *ngIf='recipe1.showAdd2MP' class="add2mealplanmenu" style="top:0; height: 300px; ">
                                         <a style="float:right;font-size:24px;padding-top: 0px;
                                         padding-right: 0px;" href="javascript:void(0)" (click)="recipe1.showAdd2MP = false;"><i class="fa fa-close" aria-hidden="true"></i> </a>
                                         <p class="title"  style="display:block"> Add Recipe to Meal Plan</p>
-                                        <p class="lbl">Choose Meal Plan</p>
-                                        <select name="planid" [(ngModel)] ="plan.id">
-                                            <option value="{{plan.id}}" *ngFor='let plan of plansList; let i = index'>{{plan.name}}</option>
-                                        </select>
+                                        <p style='width:100%' class="lbl">{{selectedRecipe2Add2plan.label}}</p>
+
                                         <p class="lbl">Choose Day</p>
-                                        <select name="planday" [(ngModel)] ="plan.day">
+                                        <select name="planday" [(ngModel)] ="addtoplan.day">
                                             <option value="{{day.id}}" *ngFor='let day of daysList; let i = index'>{{day.name}}</option>
                                         </select>
                                         <p class="lbl">Choose Meal Type</p>
-                                        <select name="planmealtype" [(ngModel)] ="plan.mealType">
-                                            <option value="{{mealtype.code}}" *ngFor='let mealtype of mealTypesList; let i = index'>{{mealtype.name}}</option>
+                                        <select name="planmealtype" [(ngModel)] ="addtoplan.mealType">
+                                            <option value="{{i}}" *ngFor='let mealtype of mealTypeList; let i = index'>{{mealtype.name}}</option>
                                         </select>
-                                        <a class="btn" href="javascript:void(0)" (click)="add2Plan()"> Add to Plan</a>
+                                        <a style="display:block;" class="btn" href="javascript:void(0)" (click)="recipe1.showAdd2MP= false;add2Plan()"> Add to Plan</a>
                 
                                                 
                                     </div>
-                                    <div *ngIf='recipe1.showAdd2C' class="add2mealplanmenu" style="top:0px;width:300px; z-index: 100; height:200px;">
+                                    <div *ngIf='recipe1.showAdd2C' class="add2mealplanmenu" style="top:0px;width:300px; z-index: 100; height:220px;">
                                         <a style="float:right;font-size:24px;padding-top: 0px;
                                         padding-right: 0px;" href="javascript:void(0)" (click)="recipe1.showAdd2C = false;"><i class="fa fa-close" aria-hidden="true"></i> </a>
                                         <p class="title" style="display:block"> Add Recipe to Collections</p>
@@ -695,6 +657,52 @@
     -->
      
        <!-- <div class='rightblock'>-->
+        <div class="col-12">
+            <div style='text-align:right;margin-top:20px;'>
+            <div class="row">
+                <div class="col-12 col-lg-8">
+                    <label for="title" style="font-size:16px;margin-right:10px;font-weight:normal;">Calories per Day</label>
+                    <input style="width:100px;margin-bottom:5px" type="text" name="maxcaloryperday" id="maxcaloryperday" [(ngModel)]="maxcaloryperday"
+                        (blur)="saveMealPlan()" /> 
+                </div> 
+                <div class="col-12 col-lg-4">
+               
+                        <div style="display:block; margin:0 auto;text-align:right;width: 100%">
+                            
+                            <label *ngIf="showNutrientsFlag" class="container" style=" text-align: left;
+                    display:inline-block;
+                    width: 160px;
+                    font-family: 'Lato', sans-serif;
+                    font-weight: 400;
+                    font-size: 16px;">Show Nutrients
+                                <input class="showhidenut" id="showhidenut" (change)="showhidenutrients()"
+                                    [(ngModel)]='showhidenutrientsFlag' type="checkbox">
+                                <span class="checkmark"></span>
+                            </label>
+        
+                            <div style="    display: inline-block;
+                    width: 140px;
+                    text-align: left;" *ngIf="showhidenutrientsFlag">
+                                <label class="container" style=" text-align: left;
+                                display: inline-block;
+                                width: 140px;
+                                font-family: 'Lato', sans-serif;
+                                font-weight: 400;
+                                font-size: 16px;">Per Serving
+                                                <input (change)="toggleNutrients('perserving')"
+                                                    [(ngModel)]='showNutrientsPServing' type="checkbox">
+                                                <span class="checkmark"></span>
+                                            </label>
+                              
+                            </div>
+                        </div>
+        
+        
+                    </div>
+                </div>
+            </div>
+           
+        </div>
             <div class="col-12 col-lg-12">
 
             <div class="meal-plans-content">

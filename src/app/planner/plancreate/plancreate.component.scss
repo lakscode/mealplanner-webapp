@@ -302,7 +302,7 @@
   border-radius: 0 0 2px 2px;
 }
 .recipe-card-placeholder-image {
-  width: 120px;
+  width: 80px;
 }
 element {
 
@@ -1841,3 +1841,12 @@ padding-right:11px;
   width:100%;
 }
 
+.contextmenu-icon.active {
+  background-color: $orange1;
+ 
+}
+
+.contextmenu-icon {
+  background-color: #f1f2f3;
+  border-radius:50%;
+}

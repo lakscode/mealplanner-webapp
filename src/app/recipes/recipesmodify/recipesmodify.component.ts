@@ -1117,22 +1117,12 @@ add2Collection(recipe)
     }));
 
 }
-cuisineTypesList: Array<any> = [];
+
 newrecipe:any;
 
 loadCMLabels()
 {
 	this.newrecipe = {};
-
-this.mealTypesList.push({"code":"breakfast", "name":"Breakfast"});
-	this.mealTypesList.push({"code":"snack1", "name":"Pre-lunch Snack"});
-	this.mealTypesList.push({"code":"lunch", "name":"Lunch"});
-	this.mealTypesList.push({"code":"snack2", "name":"Evening Snack"});
-	this.mealTypesList.push({"code":"dinner", "name":"Dinner"});
-
-	this.cuisineTypesList.push({"code":"american", "name":"American"});
-	this.cuisineTypesList.push({"code":"italian", "name":"Italian"});
-
 }
 
 loadLabels(recipe)
@@ -1149,7 +1139,7 @@ this.mealTypesList.push({"code":"breakfast", "name":"Breakfast"});
 
 	this.cuisineTypesList.push({"code":"american", "name":"American"});
 	this.cuisineTypesList.push({"code":"italian", "name":"Italian"});
-
+	
 }
 
 setlabels(recipe1)
