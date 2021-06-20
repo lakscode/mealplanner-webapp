@@ -1219,7 +1219,7 @@ setlabels(recipe1)
 			paramsr["mealType"]= this.newRecipe["mealType"];
 
 			console.log(paramsr);
-			
+			paramsr["status"]= 1;
 			var res =   this.dbService.postDataByTable("recipes_modify", paramsr).subscribe(invData => setTimeout(() => {
 				this.toastr.success("Recipe has been updated.","Modify recipe");
 
@@ -1258,7 +1258,7 @@ updateNewRecipe(recipe1, id)
 			if(typeof(this.newRecipe["mealType"]) !== "undefined" && this.newRecipe["mealType"] !== "")
 			paramsr["mealType"]= this.newRecipe["mealType"];
 	console.log(paramsr);
-		
+	paramsr["status"]= 1;
 			var res =   this.dbService.updateDataByTable("recipes_modify", paramsr).subscribe(invData => setTimeout(() => {
 				this.toastr.success("Recipe has been modifed.","Modify Recipe");
 				

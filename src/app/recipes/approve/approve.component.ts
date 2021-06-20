@@ -263,12 +263,29 @@ approvechanges(recipe)
 		{
 			params["cuisineType"] = recipe.cuisineType;
 		}
-
+		
+	
+		console.log(params);
 		var res =   this.dbService.updateDataByTable("recipes", params).subscribe(invData => setTimeout(() => {
 
 			console.log("Modified recipy");
+			this.updateStatus(2,recipe["id"] )
 		}));
 	}
+}
+
+updateStatus(status, id)
+{
+	var params = {};
+	params["approved_by"] = this.currentUser["id"];
+	params["status"] = status;
+	params["id"] = id;
+	var res =   this.dbService.updateDataByTable("recipes_modify", params).subscribe(invData => setTimeout(() => {
+		console.log("Modified status");
+
+	}
+	));
+
 }
 rejectchanges(recipe)
 {
@@ -278,9 +295,12 @@ rejectchanges(recipe)
 	{
 		var params = {};
 		params["id"] = recipe.recipeid;
-		var res =   this.dbService.deleteDataByTable("recipes_modify", params).subscribe(invData => setTimeout(() => {
+		params["status"]= 3;
+		params["approved_by"] = this.currentUser["id"];
+		var res =   this.dbService.updateDataByTable("recipes_modify", params).subscribe(invData => setTimeout(() => {
 
 			console.log("Rejected the changes recipy");
+			
 		}));
 	}
 
