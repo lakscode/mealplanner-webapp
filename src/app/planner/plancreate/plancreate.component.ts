@@ -82,10 +82,11 @@ export class PlancreateComponent implements OnInit {
 
 	showLabels(label)
 	{
+		
 		for(let l=0; l < this.searchFilterLabels.length; l++)
 		{
 			if( this.searchFilterLabels[l]["label"] == label.label)
-			this.searchFilterLabels[l]['selected'] = true;
+			this.searchFilterLabels[l]['selected'] = !this.searchFilterLabels[l]['selected'];
 			else
 			this.searchFilterLabels[l]['selected'] = false;
 		}

@@ -118,8 +118,9 @@
   width: 100%;
 }
 .meal-plan-row {
-  border-top: $gray solid 1px;
+ /* border-top: $gray solid 1px;
   border-left: $gray solid 1px;
+  border: $gray solid 1px; */
   padding-top: 5px;
   padding-bottom: 5px;
   margin: 0;
@@ -1849,4 +1850,23 @@ padding-right:11px;
 .contextmenu-icon {
   background-color: #f1f2f3;
   border-radius:50%;
+}
+
+.multi-select-lbl
+{
+  display:inline-block;
+}
+.multi-select
+{
+  position: absolute;
+  width: 200px;
+  z-index: 1;
+  background: #FFF;
+  padding: 0px 10px 10px 10px;
+  border: 1px solid #CCC;
+  top: 35px;
+  max-height: 300px;
+  overflow:auto;
+  box-shadow: 0px 1px 10px #999;
+  border-radius:5px;
 }
