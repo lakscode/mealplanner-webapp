@@ -580,7 +580,11 @@ endIndex = startIndex+ endIndex;
 		{
 			console.log("calling again searchprops");
 			this.splitcontent = true;
-			this.searchProps();			
+			if(this.loopCount < 1){
+				this.loopCount++;
+				this.searchProps();
+	
+				}	
 		}
 		else
 		{

@@ -282,9 +282,13 @@ this.loadColorCodes();
 	this.loadRecipes();
 
 	}
+	loopCount: any = 0;
+	recipesloading: boolean = false;
 	loadRecipes(idslist = "", allFlag = true)
 	{
-	  
+		if(this.recipesloading == false)
+		{
+	  this.recipesloading = true;
 		this.ratingIds = "";
 	// this.recipes = recipesList;
 	  var params = {"limit": "30"}; //{"limit": "10"};
@@ -307,8 +311,25 @@ this.loadColorCodes();
 		params["content"] = this.searchparam["q"];
 		this.helpService.saveSearchHistory(this.searchparam["q"], "content", "plan", this.currentUser["id"]);
 
+		console.log(" this.splitcontent " + this.splitcontent);
+	   if(this.splitcontent)
+	   {
+		params["content"] = this.searchparam.q.split(" ").join(",");
+		console.log(params['content']);
+		this.helpService.saveSearchHistory(this.searchparam.q, "text", "recipes", this.currentUser["id"]);
+
+	   }
+	   else
+	   {
+	   this.loopCount = 0;
+		params["content"] = this.searchparam.q;
+		this.helpService.saveSearchHistory(this.searchparam.q, "text", "recipes", this.currentUser["id"]);
+	   }
+
 	  }
   
+	 
+
 	//  params["instructions"] = "notempty";
 	console.log(this.filtersParams);
 	 params["returnfields"] = " id, label, image, cuisineType, mealType, healthLabels,ingredients,  dietLabels, totalNutrients, digest,calories, yield ";
@@ -343,8 +364,10 @@ this.loadColorCodes();
 	  console.log(JSON.stringify(params));
 	  this.calculateCaloryFlag = false;
 
+	
+	  
 	 var res =   this.dbService.getDatabyFields("recipes", params).subscribe(invData => setTimeout(() => {
-  
+		this.recipesloading = false;
 	 console.log(invData);
  var count = 0;
 	  if(invData !== null && typeof(invData["body"]) !== "undefined" && invData["body"] !== null && invData["body"]["length"] > 0)
@@ -352,55 +375,69 @@ this.loadColorCodes();
 
 			if(allFlag)
 			this.recipesList = [];
+			if( invData["body"]["length"] == 0)
+			{
+				this.splitcontent = true;
+				if(this.loopCount < 1){
+				this.loopCount++;
+				this.loadRecipes();
+	
+				}
+				
+			}
+			else
+			{
+				this.splitcontent = false;
+				this.formatResult(invData);
+			}
 
 	
-		  for(let i=0; i < invData["body"]["length"] ; i++)
-		  {
-			var recIndex = this.recipesList.findIndex(x1 => (x1.id === invData["body"][i]["id"]));
-				if(recIndex == -1)
-				{
-					this.recipesList.push(invData["body"][i]);
-				}	
-		  }
-		  for(let p =0 ; p < this.plan['days']['length']; p++)
-		  {
-			for(let q =0 ; q < this.plan['days'][p]['meals']['length']; q++)
-			{
-			//	console.log(this.plan['days'][p]['meals'][q])
-				var pItem = this.plan['days'][p]['meals'][q];
-				if(pItem["recipe"] !== null  && pItem["recipe"]["id"] !== null)
-				{
-					var recIndex = this.recipesList.findIndex(x1 => (x1.id === pItem["recipe"]["id"]));
-				//	console.log(recIndex);
-					if(recIndex > -1)
-					{
-						this.plan['days'][p]['meals'][q]["recipe"] = JSON.parse(JSON.stringify(this.formatRecipe(this.recipesList[recIndex])));
-					}
-				}
-			}
-		  }
-		//  console.log(this.recipesList);
-	
-		//  console.log(this.plan);
-		  this.calculateCaloryFlag = true;
-		 // this.loadRatings();
-		 this.clearFilterValues();
-		  this.page_num = 1;
-	 this.totalPage = this.recipesList["length"] /this.pageCount;
-	 console.log(this.totalPage);
-		  this.getDisplayList();
-		  this.counter();
+		 
 		}
 		 
 	  }
 	
 	 ));
-  
 	}
-/*
-	counter(i: number) {
-		return new Array(i);
-	} */
+	}
+
+	formatResult(invData)
+	{
+		for(let i=0; i < invData["body"]["length"] ; i++)
+		{
+		  var recIndex = this.recipesList.findIndex(x1 => (x1.id === invData["body"][i]["id"]));
+			  if(recIndex == -1)
+			  {
+				  this.recipesList.push(invData["body"][i]);
+			  }	
+		}
+		for(let p =0 ; p < this.plan['days']['length']; p++)
+		{
+		  for(let q =0 ; q < this.plan['days'][p]['meals']['length']; q++)
+		  {
+	
+			  var pItem = this.plan['days'][p]['meals'][q];
+			  if(pItem["recipe"] !== null  && pItem["recipe"]["id"] !== null)
+			  {
+				  var recIndex = this.recipesList.findIndex(x1 => (x1.id === pItem["recipe"]["id"]));
+		
+				  if(recIndex > -1)
+				  {
+					  this.plan['days'][p]['meals'][q]["recipe"] = JSON.parse(JSON.stringify(this.formatRecipe(this.recipesList[recIndex])));
+				  }
+			  }
+		  }
+		}
+
+		this.calculateCaloryFlag = true;
+	
+	   this.clearFilterValues();
+		this.page_num = 1;
+   this.totalPage = this.recipesList["length"] /this.pageCount;
+   console.log(this.totalPage);
+		this.getDisplayList();
+		this.counter();
+	}
 	counter() {
 	//	console.log("pagenum " + this.page_num);
 		if(this.totalPage > 3)

@@ -258,12 +258,14 @@
 
                                         </h4>
                                         <span *ngIf="recipe1.dietLabels"
-                                        style="font-size:12px;"> <b>Diet Labels:</b> {{formatlabels(recipe1.dietLabels)}}</span>
-
-                                 <span *ngIf="recipe1.mealType"
-                                        style="font-size:12px;">, <b>Health Labels:</b> {{formatlabels(recipe1.mealType)}}</span>
-                                        <span *ngIf="recipe1.cuisineType" 
-                                        style="font-size:12px;">, <b>Cuisine Type:</b> {{formatlabels(recipe1.cuisineType)}}</span>
+                                        style="font-size:12px;"> <b>Diet Labels:</b> {{formatlabels(recipe1.dietLabels)}}</span><br>
+                                         <span *ngIf="recipe1.healthLabels"
+                                        style="font-size:12px;"> <b>Health Labels:</b> {{formatlabels(recipe1.healthLabels)}}</span> <br>
+                                        <span *ngIf="recipe1.mealType"
+                                        style="font-size:12px;"> <b>Meal Type:</b> {{setFLU(recipe1.mealType)}}</span><br>
+                                        <span *ngIf="recipe1.cuisineType"
+                                        style="font-size:12px;"> <b>Cuisine Type:</b> {{setFLU(recipe1.cuisineType)}}</span>
+                              
 
                                     </div>
                                     <div class="col-3">
@@ -312,16 +314,16 @@
                                             <p class="lbl">Choose Cuisine Type</p>
                                             <select name="plancuisinetype" [(ngModel)]="recipe1.newrecipe.cuisineType">
                                                 <option value="{{ctype.code}}"
-                                                    *ngFor='let ctype of cuisineTypeList; let i = index'>{{ctype.name}}
+                                                    *ngFor='let ctype of cuisineTypeList; let i = index'>{{setFLU(ctype.name)}}
                                                 </option>
                                             </select>
                                         </div>
                                         <div class='col-12 col-lg-3 col-md-3  item-section'>
-                                            <p class="lbl">Choose meal Type</p>
+                                            <p class="lbl">Choose Meal Type</p>
                                             <select name="planmealtype" [(ngModel)]="recipe1.newrecipe.mealType">
                                                 <option value="{{mealtype.code}}"
                                                     *ngFor='let mealtype of mealTypeList; let i = index'>
-                                                    {{mealtype.name}}</option>
+                                                    {{setFLU(mealtype.name)}}</option>
                                             </select>
                                         </div>
                                         <div class="col-12 col-lg-3 col-md-3 ">
