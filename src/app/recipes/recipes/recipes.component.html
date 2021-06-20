@@ -1,5 +1,5 @@
 <div class="fixedtop recipes-home-body inner-page">
-    
+
     <div class="container" style="padding-left:0; padding-right:0;padding-top:20px">
         <div class="row">
             <div class="col-md-12 col-lg-12 col-xs-12">
@@ -7,23 +7,222 @@
                     <h2>Recipes</h2>
                 </div>
                 <div class="wrapper-search">
-                   
-                <div class="row" >
-                    <div class="col-12 "  style="background:#FFF;  margin:0;  padding-bottom:20px;padding-left:0px; padding-right:0px;">
-                        <div style="padding-left: 10px; padding-right: 10px;" class="col-12">
-                            <label class="searchicon">
-                                <i class="fa fa-search" aria-hidden="true"></i>
-                            </label>
-                            <input type="text" [(ngModel)]="searchparam.q" class="inputbox" placeholder="Search Recipes..." />
-                            <input  type="button"  (click)="searchProps()" style="margin-bottom:10px;" 
-                            [ngClass]="searchmorebar?'defaultbtn searchbtn hideonmobile bg-orange' :' defaultbtn searchbtn  bg-orange'" id="header-submit-search-pro" name="submit" value="Search">
-                            <input  type="button"  (click)="clearFilters()" style="margin-bottom:10px;" 
-                            [ngClass]="searchmorebar?'defaultbtn searchbtn hideonmobile bg-orange' :' defaultbtn searchbtn  bg-orange'" id="header-submit-search-pro" name="submit" value="Clear">
-                        </div>
-                      
-                        
-                        <div  class="searchmorebar searchbaranim">
-                            <div class="row mleft" >
+
+                    <div class="row">
+                        <div class="col-12 "
+                            style="background:#FFF;  margin:0;  padding-bottom:20px;padding-left:0px; padding-right:0px;">
+                            <div style="padding-left: 10px; padding-right: 10px;" class="col-12">
+                                <label class="searchicon">
+                                    <i class="fa fa-search" aria-hidden="true"></i>
+                                </label>
+                                <input type="text" [(ngModel)]="searchparam.q" class="inputbox"
+                                    placeholder="Search Recipes..." />
+                                <input type="button" (click)="hideLabels();searchProps()" style="margin-bottom:10px;"
+                                    [ngClass]="searchmorebar?'defaultbtn searchbtn hideonmobile bg-orange' :' defaultbtn searchbtn  bg-orange'"
+                                    id="header-submit-search-pro" name="submit" value="Search">
+                                <input type="button" (click)="hideLabels();clearFilters()" style="margin-bottom:10px;"
+                                    [ngClass]="searchmorebar?'defaultbtn searchbtn hideonmobile bg-orange' :' defaultbtn searchbtn  bg-orange'"
+                                    id="header-submit-search-pro" name="submit" value="Clear">
+                            </div>
+
+
+                            <div class="searchmorebar searchbaranim">
+                                <div class="row mleft">
+
+                                    <div class="col-12 col-xs-12" style="margin-bottom:10px;">
+
+                                        <!--<ng-container *ngFor="let lab of searchFilterLabels; let l = index;">
+                                           <a [ngClass]="lab.selected?'filterlabel active': 'filterlabel'" href="javascript:void(0)" (click)="showLabels(lab)">
+                                             {{lab.label}}
+                                           </a>
+
+
+                                           
+                                   </ng-container>-->
+                                        <div class="multi-select-lbl">
+                                            <a [ngClass]="searchFilterLabels[0].selected?'filterlabel active': 'filterlabel'"
+                                                href="javascript:void(0)" (click)="showLabels(searchFilterLabels[0])">
+                                                {{searchFilterLabels[0].label}} <i class="fa fa-angle-down"
+                                                    aria-hidden="true"></i>
+                                            </a>
+
+                                            <div *ngIf="searchFilterLabels[0]['selected']" class="col-12 multi-select">
+                                                <div class="filter-group">
+                                                    <ng-container
+                                                        *ngFor="let hlabel of healthlabelsList; let h = index">
+                                                        <div class="listSection " id="healthLabels">
+                                                            <label class="container">{{hlabel.name}}
+                                                                <input [(ngModel)]="hlabel.selected" type="checkbox"
+                                                                    [checked]="h == 0?'checked':''">
+                                                                <span class="checkmark"></span>
+                                                            </label>
+                                                        </div>
+                                                    </ng-container>
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="multi-select-lbl">
+                                            <a [ngClass]="searchFilterLabels[1].selected?'filterlabel active': 'filterlabel'"
+                                                href="javascript:void(0)" (click)="showLabels(searchFilterLabels[1])">
+                                                {{searchFilterLabels[1].label}} <i class="fa fa-angle-down"
+                                                    aria-hidden="true"></i>
+                                            </a>
+                                            <div *ngIf="searchFilterLabels[1]['selected']" class="col-12 multi-select">
+                                                <div class="filter-group">
+                                                    <ng-container *ngFor="let dlabel of dietLabelsList; let h = index">
+                                                        <div class="listSection  " id="diethLabels">
+                                                            <label class="container">{{dlabel.name}}
+                                                                <input [(ngModel)]="dlabel.selected" type="checkbox"
+                                                                    [checked]="h == 0?'checked':''">
+                                                                <span class="checkmark"></span>
+                                                            </label>
+                                                        </div>
+                                                    </ng-container>
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="multi-select-lbl">
+                                            <a [ngClass]="searchFilterLabels[2].selected?'filterlabel active': 'filterlabel'"
+                                                href="javascript:void(0)" (click)="showLabels(searchFilterLabels[2])">
+                                                {{searchFilterLabels[2].label}} <i class="fa fa-angle-down"
+                                                    aria-hidden="true"></i>
+                                            </a>
+                                            <div *ngIf="searchFilterLabels[2]['selected']" class="col-12  multi-select">
+                                                <div class="filter-group">
+
+                                                    <!--<label class="filter-title">Cuisine Type </label>-->
+
+
+                                                    <ng-container *ngFor="let clabel of cuisineTypeList; let c = index">
+                                                        <div class="listSection " id="cuisineType">
+                                                            <label class="container">{{setFLU(clabel.name)}}
+                                                                <input [(ngModel)]="clabel.selected" type="checkbox"
+                                                                    [checked]="c == 0?'checked':''">
+                                                                <span class="checkmark"></span>
+                                                            </label>
+                                                        </div>
+                                                    </ng-container>
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="multi-select-lbl">
+                                            <a [ngClass]="searchFilterLabels[3].selected?'filterlabel active': 'filterlabel'"
+                                                href="javascript:void(0)" (click)="showLabels(searchFilterLabels[3])">
+                                                {{searchFilterLabels[3].label}} <i class="fa fa-angle-down"
+                                                    aria-hidden="true"></i>
+                                            </a>
+                                            <div *ngIf="searchFilterLabels[3]['selected']" class="col-12  multi-select">
+                                                <div class="filter-group">
+
+                                                    <!--<label class="filter-title">Cuisine Type </label>-->
+
+
+                                                    <ng-container *ngFor="let mlabel of mealTypeList; let m = index">
+                                                        <div class="listSection " id="mealType">
+                                                            <label class="container">{{setFLU(mlabel.name)}}
+                                                                <input [(ngModel)]="mlabel.selected" type="checkbox"
+                                                                    [checked]="m == 0?'checked':''">
+                                                                <span class="checkmark"></span>
+                                                            </label>
+                                                        </div>
+                                                    </ng-container>
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="multi-select-lbl">
+                                            <a [ngClass]="searchFilterLabels[4].selected?'filterlabel active': 'filterlabel'"
+                                                href="javascript:void(0)" (click)="showLabels(searchFilterLabels[4])">
+                                                {{searchFilterLabels[4].label}} <i class="fa fa-angle-down"
+                                                    aria-hidden="true"></i>
+                                            </a>
+                                            <div *ngIf="searchFilterLabels[4]['selected']" class="col-12  multi-select">
+                                                <div class="filter-group">
+                                                    <!--<label class="filter-title">Nutrients</label> -->
+                                                    <div class="row " style="margin-left:0px ;margin-right:0px;">
+                                                        <ng-container
+                                                            *ngFor="let mlabel of mineralsLabelsList; let m = index">
+
+                                                            <div class="col-12 paddinglr0">
+                                                                <div class="row">
+
+
+                                                                    <div class="col-12 ">
+                                                                        <label class="container">{{setFLU(mlabel.name)}}
+                                                                            <input [(ngModel)]='mlabel.selected'
+                                                                                type="checkbox"
+                                                                                [checked]="m == 0?'checked':''">
+                                                                            <span class="checkmark"></span>
+                                                                        </label>
+                                                                    </div>
+                                                                    <div class="col-5 paddinglr0"
+                                                                        style="margin-bottom:15px;"
+                                                                        *ngIf="mlabel.selected">
+
+                                                                        <input class="mineral-input" type='text'
+                                                                            name="minerals_{{m}}_min"
+                                                                            [(ngModel)]="mlabel.min"
+                                                                            placeholder="min" />
+                                                                        <span
+                                                                            class="maxmin">{{formatVal(mlabel.t_min)}}</span>
+
+                                                                    </div>
+                                                                    <div class="col-5 paddinglr0"
+                                                                        style="margin-bottom:15px;"
+                                                                        *ngIf="mlabel.selected">
+                                                                        <input class="mineral-input" type='text'
+                                                                            name="minerals_{{m}}_max"
+                                                                            [(ngModel)]="mlabel.max"
+                                                                            placeholder="max" />
+                                                                        <span
+                                                                            class="maxmin">{{formatVal(mlabel.t_max)}}</span>
+
+                                                                    </div>
+                                                                    <div class="col-2 paddinglr0"
+                                                                        style="margin-bottom:15px;"
+                                                                        *ngIf="mlabel.selected"> {{mlabel.unit}}</div>
+                                                                </div>
+                                                            </div>
+
+                                                        </ng-container>
+
+
+
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="multi-select-lbl">
+                                            <a [ngClass]="searchFilterLabels[5].selected?'filterlabel active': 'filterlabel'"
+                                                href="javascript:void(0)" (click)="showLabels(searchFilterLabels[5])">
+                                                {{searchFilterLabels[5].label}} <i class="fa fa-angle-down"
+                                                    aria-hidden="true"></i>
+                                            </a>
+                                            <div *ngIf="searchFilterLabels[5]['selected']" class="col-12 multi-select">
+                                                <div class="filter-group">
+                                                    <!--<label class="filter-title">Calories (Max)</label> -->
+                                                    <div class="listSection" style="display:block;margin:0px">
+                                                        <!--  <span>Max calories</span> -->
+                                                        <input [(ngModel)]="maxcalories"
+                                                            placeholder="Enter maximum calories" type="text"
+                                                            class="inputbox" style="margin-top:0px;width:180px" />
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!--
                                 <div class="col-12 col-xs-12" style="margin-bottom:10px;padding-left:0;">
                                  
                                      <ng-container class="col-xs-12" *ngFor="let lab of searchFilterLabels; let l = index;">
@@ -36,7 +235,6 @@
                                 <div *ngIf="searchFilterLabels[0]['selected']" class="col-12 paddinglr0">
                                     <div class="filter-group">
 
-                                        <!--<label class="filter-title">Health Labels </label>-->
                                         
                                             <ng-container *ngFor="let hlabel of healthlabelsList; let h = index">
                                                 <div class="listSection  " id="healthLabels" >
@@ -53,8 +251,6 @@
                                 <div *ngIf="searchFilterLabels[1]['selected']" class="col-12 paddinglr0">
                                     <div class="filter-group">
 
-
-                                        <!--<label class="filter-title">Diet Labels</label> -->
                                       
                                            
                                             <ng-container *ngFor="let dlabel of dietLabelsList; let h = index">
@@ -72,7 +268,6 @@
                                 <div *ngIf="searchFilterLabels[2]['selected']" class="col-12  paddinglr0">
                                     <div class="filter-group">
 
-                                        <!--<label class="filter-title">Cuisine Type </label>-->
                                       
 
                                             <ng-container *ngFor="let clabel of cuisineTypeList; let c = index">
@@ -90,8 +285,6 @@
 
                                 <div *ngIf="searchFilterLabels[3]['selected']" class="col-12  paddinglr0">
                                     <div class="filter-group">
-
-                                        <!--<label class="filter-title">Cuisine Type </label>-->
                                       
 
                                             <ng-container *ngFor="let mlabel of mealTypeList; let m = index">
@@ -109,8 +302,7 @@
 
                                   <div *ngIf="searchFilterLabels[4]['selected']" class="col-12  paddinglr0">
                                     <div class="filter-group">
-                                        <!--<label class="filter-title">Nutrients</label> -->
-                                        
+                                                             
                                          
                                                 <div class="row paddinglr0">
                                                     <ng-container *ngFor="let mlabel of mineralsLabelsList; let m = index">
@@ -151,39 +343,41 @@
                                   </div>
                                   <div *ngIf="searchFilterLabels[5]['selected']" class="col-12 paddinglr0">
                                     <div class="filter-group">
-                                        <!--<label class="filter-title">Calories (Max)</label> -->
+
                                         <div class="listSection"  style="display:inline-block;margin:0px">
-                                           <!--  <span>Max calories</span> -->
+                                       
                                           <input [(ngModel)]="maxcalories" placeholder="Enter maximum calories" type="text" class="inputbox" style="margin-top:0px;width:200px" />
 
                                         </div>
                                     </div>
                                 </div>
-       
-                
-                                <div class="col-12 showonmobile">
-                                    <input type="button" (click)="searchProps()" style="margin-bottom:10px;" class="defaultbtn searchbtn" id="header-submit-search-pro" name="submit" value="Search">
-                
+                            -->
+
+                                    <div class="col-12 showonmobile">
+                                        <input type="button" (click)="searchProps()" style="margin-bottom:10px;"
+                                            class="defaultbtn searchbtn" id="header-submit-search-pro" name="submit"
+                                            value="Search">
+
+                                    </div>
+
                                 </div>
-                
+
+
+
                             </div>
-                            
-                              
-                        
-                        </div>
-                
-                        <!--<div *ngIf='showNutrientsFlag' class="header-more-search-btn" (click)="toggleMore()">
+
+                            <!--<div *ngIf='showNutrientsFlag' class="header-more-search-btn" (click)="toggleMore()">
                             <i *ngIf="!searchmorebar" class="fa fa-chevron-down" aria-hidden="true"></i>
                             <i *ngIf="searchmorebar" class="fa fa-chevron-up" aria-hidden="true"></i>
                         </div>-->
-                
-                
+
+
+                        </div>
+
+
+
                     </div>
-                        
-                        
-                
-                </div>
-    
+
                 </div>
                 <div style='height:20px; width:100%'></div>
                 <div class="recipe-set" *ngIf="!noResult">
@@ -199,8 +393,9 @@
                                 <i class="fa fa-angle-left"></i>
                             </a>
                         </li>
-                        
-                        <li (click)="currentPage(i)" [ngClass]="i == page_num?'current':''" *ngFor='let in of counter(totalPage) ;let i = index'>
+
+                        <li (click)="currentPage(i)" [ngClass]="i == page_num?'current':''"
+                            *ngFor='let in of counter(totalPage) ;let i = index'>
                             <a href="javascript:void(0)">{{i+1}}</a>
                         </li>
                         <li (click)="nextPage()" class="">
@@ -212,79 +407,102 @@
                             <a href="javascript:void(0)">
                                 <i class="fa fa-angle-double-right"></i>
                             </a>
-                        </li>   
+                        </li>
                     </ul>
                     <div class="recipe-listing {{listorgrid.panel}}">
 
 
-                        <div class="listing"  *ngFor="let recipe1 of displayList; let i = index;">
-                            
+                        <div class="listing" *ngFor="let recipe1 of displayList; let i = index;">
+
 
                             <div class="image image-animate detail" style="background:#f8f8f8;">
-                                
+
                                 <a (click)="gotoRecipeDetails(recipe1.id)">
-                                    <img style="max-width:200px; max-height:200px" src="{{formatImage(recipe1.image, 'm')}}"
-                                        alt="image">
+                                    <img style="max-width:200px; max-height:200px"
+                                        src="{{formatImage(recipe1.image, 'm')}}" alt="image">
                                 </a>
                             </div>
                             <div class="detail">
                                 <div style="position:relative;">
-                                    <a (click)="showhidecontent(recipe1)" href="javascript:void(0)" [ngClass]="recipe1.showpopup?'contextmenu-icon active':'contextmenu-icon'"><i class="fa fa-ellipsis-v"></i></a>
+                                    <a (click)="showhidecontent(recipe1)" href="javascript:void(0)"
+                                        [ngClass]="recipe1.showpopup?'contextmenu-icon active':'contextmenu-icon'"><i
+                                            class="fa fa-ellipsis-v"></i></a>
                                     <div *ngIf="recipe1.showpopup" class="contextmenu">
-                                        <a class="menu"  href="javascript:void(0)" (click)="recipe1.showpopup = false; addtoMealPlan(recipe1)"><i class="fa fa-calendar-plus-o" aria-hidden="true"></i> Add to Meal Plan</a>
-                                  
-                                        <a  class="menu" href="javascript:void(0)"  (click)="gotoRecipeDetails( recipe1.id)" ><i class="fa fa-list"></i>View Recipe</a>
-                                        <a  (click)="makeacopy(recipe1)" class="menu" href="javascript:void(0)"><i class="fa fa-clone"></i>Make a Copy</a>
-                                        <a  (click)="recipe1.showpopup = false; addCollectionsPopup(recipe1)" class="menu" href="javascript:void(0)"><i class="fa fa-plus-square-o"></i>Add to Collections</a>
+                                        <a class="menu" href="javascript:void(0)"
+                                            (click)="recipe1.showpopup = false; addtoMealPlan(recipe1)"><i
+                                                class="fa fa-calendar-plus-o" aria-hidden="true"></i> Add to Meal
+                                            Plan</a>
+
+                                        <a class="menu" href="javascript:void(0)"
+                                            (click)="gotoRecipeDetails( recipe1.id)"><i class="fa fa-list"></i>View
+                                            Recipe</a>
+                                        <a (click)="makeacopy(recipe1)" class="menu" href="javascript:void(0)"><i
+                                                class="fa fa-clone"></i>Make a Copy</a>
+                                        <a (click)="recipe1.showpopup = false; addCollectionsPopup(recipe1)"
+                                            class="menu" href="javascript:void(0)"><i
+                                                class="fa fa-plus-square-o"></i>Add to Collections</a>
 
                                         <!--<a  (click)="deleteRecipe(recipe1.id)" class="menu" href="javascript:void(0)"><i class="fa fa-trash"></i>Delete Recipe</a>-->
                                     </div>
 
                                     <div *ngIf='recipe1.showAdd2MP' class="add2mealplanmenu" style="top:0px; ">
                                         <a style="float:right;font-size:24px;padding-top: 0px;
-                                        padding-right: 0px;" href="javascript:void(0)" (click)="recipe1.showAdd2MP = false;"><i class="fa fa-close" aria-hidden="true"></i> </a>
-                                        <p class="title"  style="display:block"> Add Recipe to Meal Plan</p>
+                                        padding-right: 0px;" href="javascript:void(0)"
+                                            (click)="recipe1.showAdd2MP = false;"><i class="fa fa-close"
+                                                aria-hidden="true"></i> </a>
+                                        <p class="title" style="display:block"> Add Recipe to Meal Plan</p>
                                         <p class="lbl">Choose Meal Plan</p>
-                                        <select name="planid" [(ngModel)] ="plan.id">
-                                            <option value="{{plan.id}}" *ngFor='let plan of plansList; let i = index'>{{plan.name}}</option>
+                                        <select name="planid" [(ngModel)]="plan.id">
+                                            <option value="{{plan.id}}" *ngFor='let plan of plansList; let i = index'>
+                                                {{plan.name}}</option>
                                         </select>
                                         <p class="lbl">Choose Day</p>
-                                        <select name="planday" [(ngModel)] ="plan.day">
-                                            <option value="{{day.id}}" *ngFor='let day of daysList; let i = index'>{{day.name}}</option>
+                                        <select name="planday" [(ngModel)]="plan.day">
+                                            <option value="{{day.id}}" *ngFor='let day of daysList; let i = index'>
+                                                {{day.name}}</option>
                                         </select>
                                         <p class="lbl">Choose Meal Type</p>
-                                        <select name="planmealtype" [(ngModel)] ="plan.mealType">
-                                            <option value="{{mealtype.code}}" *ngFor='let mealtype of mealTypesList; let i = index'>{{mealtype.name}}</option>
+                                        <select name="planmealtype" [(ngModel)]="plan.mealType">
+                                            <option value="{{mealtype.code}}"
+                                                *ngFor='let mealtype of mealTypesList; let i = index'>{{mealtype.name}}
+                                            </option>
                                         </select>
                                         <a class="btn" href="javascript:void(0)" (click)="add2Plan()"> Add to Plan</a>
-                
+
                                         <!--<a href="javascript:void(0)" (click)="addRecipe(recipe)"><i class="fa fa-plus" aria-hidden="true"></i> Add Recipe</a>-->
-                                        
+
                                     </div>
-                                    <div *ngIf='recipe1.showAdd2C' class="add2mealplanmenu" style="top:0px;width:100%; height:200px;">
+                                    <div *ngIf='recipe1.showAdd2C' class="add2mealplanmenu"
+                                        style="top:0px;width:100%; height:200px;">
                                         <a style="float:right;font-size:24px;padding-top: 0px;
-                                        padding-right: 0px;" href="javascript:void(0)" (click)="recipe1.showAdd2C = false;"><i class="fa fa-close" aria-hidden="true"></i> </a>
+                                        padding-right: 0px;" href="javascript:void(0)"
+                                            (click)="recipe1.showAdd2C = false;"><i class="fa fa-close"
+                                                aria-hidden="true"></i> </a>
                                         <p class="title" style="display:block"> Add Recipe to Collections</p>
                                         <p class="lbl">Choose Collection</p>
-                                        <select name="collectionid" [(ngModel)] ="collection.id">
-                                            <option value="{{collection.id}}" *ngFor='let collection of collectionsList; let i = index'>{{collection.collection_name}}</option>
+                                        <select name="collectionid" [(ngModel)]="collection.id">
+                                            <option value="{{collection.id}}"
+                                                *ngFor='let collection of collectionsList; let i = index'>
+                                                {{collection.collection_name}}</option>
                                         </select>
-                                     
-                                        <a class="btn" style="width:100%" href="javascript:void(0)" (click)="add2Collection(recipe1)"> Add to Collection</a>
-                                        
+
+                                        <a class="btn" style="width:100%" href="javascript:void(0)"
+                                            (click)="add2Collection(recipe1)"> Add to Collection</a>
+
                                     </div>
-                                    </div>
+                                </div>
                                 <h4><a (click)="gotoRecipeDetails(recipe1.id)">{{recipe1.label}}</a>
-                                    
+
                                 </h4>
                                 <!--<p innerHTML="{{limitTo(recipe1.s_instructions, 200)}}">
 
                                 </p>-->
 
-                                
+
 
                                 <p *ngIf="recipe1.dietLabels">
-                                    Diet Labels: <span style="font-size:12px;">{{formatlabels(recipe1.dietLabels)}}</span>
+                                    Diet Labels: <span
+                                        style="font-size:12px;">{{formatlabels(recipe1.dietLabels)}}</span>
                                 </p>
                                 <!--<p *ngIf="recipe1.healthLabels">
                                     Health Labels: <span style="font-size:12px;">{{formatlabels(recipe1.healthLabels)}}</span>
@@ -292,29 +510,32 @@
 
                                 <p>Calories: <span style="font-size:12px;">{{recipe1.calories}} Kcal</span></p>
                                 <div class="meta-listing">
-                                   
+
                                     <div *ngIf="showNutrientsFlag" style="display:inline-block;color: #5e676b;">
-                                        Per Serving: <span style="font-size:12px;">{{formatValuePServing(recipe1.calories, recipe1.yield)}} Kcal</span>
+                                        Per Serving: <span
+                                            style="font-size:12px;">{{formatValuePServing(recipe1.calories,
+                                            recipe1.yield)}} Kcal</span>
                                     </div>
-                       
+
                                     <div class="rating-box">
                                         <span class="rating-icons" *ngFor="let item of [1,2,3,4,5]">
-                                            <i [ngClass]="item <= recipe1.displayrating?'fa fa-star rating-h':'fa fa-star rating'"></i>
+                                            <i
+                                                [ngClass]="item <= recipe1.displayrating?'fa fa-star rating-h':'fa fa-star rating'"></i>
                                         </span>
                                         <!--<span class="rating-figure">{{recipe1.displayrating}}</span>-->
                                     </div>
 
-                                    
+
                                 </div>
                             </div>
                         </div>
 
 
 
-                      
 
 
-                       
+
+
 
 
 
@@ -331,8 +552,9 @@
                                     <i class="fa fa-angle-left"></i>
                                 </a>
                             </li>
-                            
-                            <li (click)="currentPage(i)" [ngClass]="i == page_num?'current':''" *ngFor='let in of counter(totalPage) ;let i = index'>
+
+                            <li (click)="currentPage(i)" [ngClass]="i == page_num?'current':''"
+                                *ngFor='let in of counter(totalPage) ;let i = index'>
                                 <a href="javascript:void(0)">{{i+1}}</a>
                             </li>
                             <li (click)="nextPage()" class="">
@@ -344,7 +566,7 @@
                                 <a href="javascript:void(0)">
                                     <i class="fa fa-angle-double-right"></i>
                                 </a>
-                            </li>   
+                            </li>
                         </ul>
 
                     </div>
@@ -353,7 +575,7 @@
                     <p> No Results</p>
                 </div>
             </div>
-          <!--   <div class="col-md-4 col-lg-3">
+            <!--   <div class="col-md-4 col-lg-3">
                 <aside>
                     <div class="side-bar">
 

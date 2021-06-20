@@ -54,12 +54,21 @@ export class RecipesComponent implements OnInit {
 		if (this.searchmorebar)
 			this.animClass = "searchbaranim";
 	}
+
+	hideLabels()
+	{
+		for(let l=0; l < this.searchFilterLabels.length; l++)
+		{
+			this.searchFilterLabels[l]['selected'] = false;
+		}
+	}
+
 	showLabels(label)
 	{
 		for(let l=0; l < this.searchFilterLabels.length; l++)
 		{
 			if( this.searchFilterLabels[l]["label"] == label.label)
-			this.searchFilterLabels[l]['selected'] = true;
+			this.searchFilterLabels[l]['selected'] = !this.searchFilterLabels[l]['selected'];
 			else
 			this.searchFilterLabels[l]['selected'] = false;
 		}
@@ -426,7 +435,7 @@ endIndex = startIndex+ endIndex;
    }
    
   // params["cuisineType"] = "american";
-   params["returnfields"] = " id, label, image, cuisineType, healthLabels, dietLabels, calories, yield";
+   params["returnfields"] = " id, label, image, cuisineType, mealType, healthLabels, dietLabels, calories, yield";
 
 	 var dietlabels = "";
 	 for(let m=0; m <this.dietLabelsList.length; m++)
@@ -462,6 +471,17 @@ endIndex = startIndex+ endIndex;
 		cuisinetypes=  cuisinetypes.slice(0, -1);
 	 }
 	 
+	 var mealtypes = "";
+	 for(let c=0; c <this.mealTypeList.length; c++)
+	 {
+		 if(this.mealTypeList[c]["selected"])
+		 mealtypes += this.mealTypeList[c]["name"] + "~";
+	 }
+
+	 if( mealtypes !== "")
+	 {
+		mealtypes=  mealtypes.slice(0, -1);
+	 }
 
 	 var minerals = "";
 	 var mQuery = "";
@@ -513,7 +533,12 @@ endIndex = startIndex+ endIndex;
 	this.helpService.saveSearchHistory(cuisinetypes, "cuisineType", "recipes", this.currentUser["id"]);
    } 
 
-   
+   if(typeof(mealtypes ) !== "undefined" && mealtypes !== "")
+   {
+    params["mealType"] = mealtypes
+	this.helpService.saveSearchHistory(mealtypes, "mealType", "recipes", this.currentUser["id"]);
+   } 
+
 
 
    if(typeof(minerals ) !== "undefined" && minerals  !== "")
@@ -531,7 +556,7 @@ endIndex = startIndex+ endIndex;
   
 	  var params1 = {};
 
-	  var query = "select id, label, image, cuisineType, healthLabels, dietLabels, calories, yield from recipes ";
+	  var query = "select id, label, image, cuisineType, healthLabels, mealType, dietLabels, calories, yield from recipes ";
 	  var where = " where status = 1 AND totalNutrients != '' AND digest != ''  AND s_instructions != '' " ;
 	  if(this.maxcalories > 0)
 	  where +=  " AND calories >= " + this.maxcalories;
@@ -589,6 +614,7 @@ endIndex = startIndex+ endIndex;
 		else
 		{
 			this.splitcontent = false;
+		//	this.formatResult(this.shuffle(invData));
 			this.formatResult(invData);
 		}
 	  }));
@@ -614,6 +640,7 @@ endIndex = startIndex+ endIndex;
 		else
 		{
 			this.splitcontent = false;
+		//	this.formatResult(this.shuffle(invData));
 			this.formatResult(invData);
 		}
 	  }));
@@ -621,6 +648,19 @@ endIndex = startIndex+ endIndex;
 
 		
 	}
+
+	shuffle(array) {
+		//for (var i = array.length - 1; i > 0; i--) {
+		for (var i=0; i < array.length-1;i++) {			
+			var j = Math.floor(Math.random() * (i + 1));
+			var temp = array[i];
+			array[i] = array[j];
+			array[j] = temp;
+		}
+		console.log("after sort");
+		console.log(array);
+		return array;
+	  }
 
 	formatResult(invData)
 	{
