@@ -396,11 +396,12 @@ endIndex = startIndex+ endIndex;
   /******** recipes api serach */
   maxcalories: any = "";
   loopCount: any = 0;
+  loadingData: boolean = false;
 	searchProps()
 	{
 
 	console.log('searchProps');
- 
+		this.loadingData= true;
 
    var params = {}
    if(this.searchparam.q)
@@ -610,9 +611,11 @@ endIndex = startIndex+ endIndex;
 				this.searchProps();
 	
 				}	
+				this.noResult =  true;
 		}
 		else
 		{
+			this.loadingData= false;
 			this.splitcontent = false;
 		//	this.formatResult(this.shuffle(invData));
 			this.formatResult(invData);
@@ -639,6 +642,7 @@ endIndex = startIndex+ endIndex;
 		}
 		else
 		{
+			this.loadingData= false;
 			this.splitcontent = false;
 		//	this.formatResult(this.shuffle(invData));
 			this.formatResult(invData);
