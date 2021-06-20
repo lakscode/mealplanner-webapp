@@ -282,6 +282,7 @@ this.loadColorCodes();
 	this.loadRecipes();
 
 	}
+	noResult: boolean = false;
 	loopCount: any = 0;
 	recipesloading: boolean = false;
 	loadRecipes(idslist = "", allFlag = true)

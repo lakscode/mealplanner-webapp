@@ -19,6 +19,7 @@ export class PlannerlistComponent implements OnInit {
     plan:any={};
     weekDays: Array<any> = [];
     mealsList: Array<any> = [];
+    maxcaloryperday: any ="";
     constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private dbService: DBService, private helpService: HelpService, private modalService: ModalService) {
     
     }
