@@ -609,27 +609,27 @@
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
-        <div class="modal-body" *ngIf="selectedRecipe">
+        <div class="modal-body" *ngIf="newRecipe">
 
             <div class="row">
            
                         <div class="col-12"   style="max-height: 300px; overflow: auto;">
                             <div class="row">
                                 <p class="title" style="display:block"> Modify Recipe </p>
-                                <div class='col-12 item-section' style="width:100%">
+                                <div class='col-12 item-section' style="width:100%;  font-size:15px;">
                                     <p class="lbl">Recipe Name</p>
-                                    <textarea style='width:100%' name="newrecipename" [(ngModel)]="selectedRecipe.newrecipe.label"></textarea>
+                                    <textarea style='width:100%' name="newrecipename" [(ngModel)]="newRecipe.label"></textarea>
 
                                 </div>
                                 <div class='col-12 item-section' style="width:100%">
                                     <p class="lbl">Instructions</p>
-                                    <textarea rows=6 style='width:100%' name="newrecipeins" [(ngModel)]="selectedRecipe.newrecipe.s_instructions"></textarea>
+                                    <textarea rows=6 style='width:100%; font-size:15px;' name="newrecipeins" [(ngModel)]="newRecipe.s_instructions"></textarea>
 
                                 </div>
 
                                 <div class='col-12 col-lg-3 col-md-3 item-section'>
                                     <p class="lbl">Choose Health label</p>
-                                    <select name="planid" [(ngModel)]="selectedRecipe.newrecipe.healthLabels">
+                                    <select name="planid" [(ngModel)]="newRecipe.healthLabels">
                                         <option value="{{hlabel.name}}"
                                             *ngFor='let hlabel of healthlabelsList; let i = index'>
                                             {{hlabel.name}}</option>
@@ -637,7 +637,7 @@
                                 </div>
                                 <div class='col-12 col-lg-3 col-md-3  item-section'>
                                     <p class="lbl">Choose Diet Label</p>
-                                    <select name="planday" [(ngModel)]="selectedRecipe.newrecipe.dietLabels">
+                                    <select name="planday" [(ngModel)]="newRecipe.dietLabels">
                                         <option value="{{dlabel.name}}"
                                             *ngFor='let dlabel of dietLabelsList; let i = index'>{{dlabel.name}}
                                         </option>
@@ -645,16 +645,16 @@
                                 </div>
                                 <div class='col-12 col-lg-3 col-md-3  item-section'>
                                     <p class="lbl">Choose Cuisine Type</p>
-                                    <select name="plancuisinetype" [(ngModel)]="selectedRecipe.newrecipe.cuisineType">
-                                        <option value="{{ctype.code}}"
+                                    <select name="plancuisinetype" [(ngModel)]="newRecipe.cuisineType">
+                                        <option value="{{ctype.name}}"
                                             *ngFor='let ctype of cuisineTypeList; let i = index'>{{setFLU(ctype.name)}}
                                         </option>
                                     </select>
                                 </div>
                                 <div class='col-12 col-lg-3 col-md-3  item-section'>
                                     <p class="lbl">Choose Meal Type</p>
-                                    <select name="planmealtype" [(ngModel)]="selectedRecipe.newrecipe.mealType">
-                                        <option value="{{mealtype.code}}"
+                                    <select name="planmealtype" [(ngModel)]="newRecipe.mealType">
+                                        <option value="{{mealtype.name}}"
                                             *ngFor='let mealtype of mealTypeList; let i = index'>
                                             {{setFLU(mealtype.name)}}</option>
                                     </select>
@@ -669,9 +669,9 @@
 
                 <div class='col-12'>
                     <div class="form-group">
-                        <a class="defaultbtn" href="javascript:void(0)" (click)="setlabels(selectedRecipe)"> Modify</a>
+                        <a class="defaultbtn" href="javascript:void(0)" (click)="setlabels(newRecipe)"> Modify</a>
 
-                        <a class="defaultbtn" href="javascript:void(0)" (click)="selectedRecipe.modify =false;"> Cancel</a>
+                        <a class="defaultbtn" href="javascript:void(0)" (click)="closeModal('modifyrecipe');"> Cancel</a>
 
  
                     </div>

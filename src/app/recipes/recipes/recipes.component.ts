@@ -1127,14 +1127,21 @@ add2Collection(recipe)
 
 }
 selectedRecipe: any ;
-
+newRecipe: any; 
 modifyRecipe(recipe)
 {
 	console.log(recipe);
 	this.selectedRecipe = recipe;
 	
-	this.selectedRecipe["newrecipe"]= recipe;
-
+//	this.selectedRecipe["newrecipe"]= JSON.parse(JSON.stringify(recipe));
+	this.newRecipe = {};
+	this.newRecipe["id"] =  this.selectedRecipe["id"];
+	this.newRecipe["label"] =  this.selectedRecipe["label"];
+	//this.newRecipe["s_instructions"] =  this.selectedRecipe["s_instructions"];
+	this.newRecipe["dietLabels"] =  ""; //this.selectedRecipe["dietLabels"]
+	this.newRecipe["healthLabels"] =  ""; //this.selectedRecipe["healthLabels"];
+	this.newRecipe["cuisineType"] =  ""; //this.selectedRecipe["cuisineType"];
+	this.newRecipe["mealType"] =  ""; //this.selectedRecipe["mealType"];
 
 	console.log(this.selectedRecipe);
 
@@ -1147,8 +1154,8 @@ modifyRecipe(recipe)
 	  console.log(invData);
 	  if( invData['body']["length"] > 0)
 	  {
-		this.selectedRecipe["newrecipe"]["s_instructions"]= invData['body'][0]["s_instructions"]
-
+		this.newRecipe["s_instructions"]= invData['body'][0]["s_instructions"]
+		this.selectedRecipe["s_instructions"]= invData['body'][0]["s_instructions"]
 	  }
   }));
 }
@@ -1175,6 +1182,8 @@ closeModal(id)
 
 setlabels(recipe1)
 {
+
+	console.log(this.selectedRecipe);
 	console.log(recipe1);
 	var paramsr = {};
 	paramsr["recipeid"] = recipe1.id;
@@ -1188,30 +1197,35 @@ setlabels(recipe1)
 		}
 		else
 		{
-			if(recipe1["s_instructions"] !== recipe1["newrecipe"]["s_instructions"])
-			paramsr["s_instructions"]= recipe1["newrecipe"]["s_instructions"];
+			if(recipe1["s_instructions"] !== this.selectedRecipe["s_instructions"])
+			{
+				console.log("instructions modified");
+			paramsr["s_instructions"]= this.newRecipe["s_instructions"];
+			}
 
-			if(typeof(recipe1["newrecipe"]["label"]) !== "undefined" &&  recipe1["label"] !== recipe1["newrecipe"]["label"])
-			paramsr["label"]= recipe1["newrecipe"]["label"];
+			if(typeof(this.newRecipe["label"]) !== "undefined" &&  recipe1["label"] !== this.selectedRecipe["label"])
+			paramsr["label"]= this.newRecipe["label"];
 
-			if(typeof(recipe1["newrecipe"]["dietLabels"]) !== "undefined" &&  recipe1["newrecipe"]["dietLabels"] !== "")
-			paramsr["dietLabels"]= recipe1["newrecipe"]["dietLabels"];
+			if(typeof(this.newRecipe["dietLabels"]) !== "undefined" &&  this.newRecipe["dietLabels"] !== "")
+			paramsr["dietLabels"]= this.newRecipe["dietLabels"];
 
-			if(typeof(recipe1["newrecipe"]["healthLabels"]) !== "undefined" &&  recipe1["newrecipe"]["healthLabels"] !== "")
-			paramsr["healthLabels"]= recipe1["newrecipe"]["healthLabels"];
+			if(typeof(this.newRecipe["healthLabels"]) !== "undefined" &&  this.newRecipe["healthLabels"] !== "")
+			paramsr["healthLabels"]= this.newRecipe["healthLabels"];
 
-			if(typeof(recipe1["newrecipe"]["cuisineType"]) !== "undefined" &&  recipe1["newrecipe"]["cuisineType"] !== "")
-			paramsr["cuisineType"]= recipe1["newrecipe"]["cuisineType"];
-		//	paramsr["dishType"]= recipe1["newrecipe"]["dishType"];
+			if(typeof(this.newRecipe["cuisineType"]) !== "undefined" &&  this.newRecipe["cuisineType"] !== "")
+			paramsr["cuisineType"]= this.newRecipe["cuisineType"];
 
-			if(typeof(recipe1["newrecipe"]["mealType"]) !== "undefined" && recipe1["newrecipe"]["mealType"] !== "")
-			paramsr["mealType"]= recipe1["newrecipe"]["mealType"];
+			if(typeof(this.newRecipe["mealType"]) !== "undefined" && this.newRecipe["mealType"] !== "")
+			paramsr["mealType"]= this.newRecipe["mealType"];
 
+			console.log(paramsr);
+			
 			var res =   this.dbService.postDataByTable("recipes_modify", paramsr).subscribe(invData => setTimeout(() => {
 				this.toastr.success("Recipe has been updated.","Modify recipe");
 
 				this.closeModal("modifyrecipe");
 			}));
+			
 		}
 	}));
 
@@ -1226,30 +1240,32 @@ updateNewRecipe(recipe1, id)
 	paramsr["recipeid"] = recipe1.id;
 	paramsr["created_by"] = this.currentUser["id"];
 	paramsr["id"] = id;
-			if(recipe1["s_instructions"] !== recipe1["newrecipe"]["s_instructions"])
-			paramsr["s_instructions"]= recipe1["newrecipe"]["s_instructions"];
+			if(this.newRecipe["s_instructions"] !== this.selectedRecipe["s_instructions"])
+			paramsr["s_instructions"]= this.newRecipe["s_instructions"];
 
-			if(typeof(recipe1["newrecipe"]["label"]) !== "undefined" &&  recipe1["label"] !== recipe1["newrecipe"]["label"])
-			paramsr["label"]= recipe1["newrecipe"]["label"];
+			if(typeof(this.newRecipe["label"]) !== "undefined" &&  this.newRecipe["label"] !== this.selectedRecipe["label"])
+			paramsr["label"]= this.newRecipe["label"];
 
-			if(typeof(recipe1["newrecipe"]["dietLabels"]) !== "undefined" &&  recipe1["newrecipe"]["dietLabels"] !== "")
-			paramsr["dietLabels"]= recipe1["newrecipe"]["dietLabels"];
+			if(typeof(this.newRecipe["dietLabels"]) !== "undefined" &&  this.newRecipe["dietLabels"] !== "")
+			paramsr["dietLabels"]= this.newRecipe["dietLabels"];
 
-			if(typeof(recipe1["newrecipe"]["healthLabels"]) !== "undefined" &&  recipe1["newrecipe"]["healthLabels"] !== "")
-			paramsr["healthLabels"]= recipe1["newrecipe"]["healthLabels"];
+			if(typeof(this.newRecipe["healthLabels"]) !== "undefined" &&  this.newRecipe["healthLabels"] !== "")
+			paramsr["healthLabels"]= this.newRecipe["healthLabels"];
 
-			if(typeof(recipe1["newrecipe"]["cuisineType"]) !== "undefined" &&  recipe1["newrecipe"]["cuisineType"] !== "")
-			paramsr["cuisineType"]= recipe1["newrecipe"]["cuisineType"];
-		//	paramsr["dishType"]= recipe1["newrecipe"]["dishType"];
+			if(typeof(this.newRecipe["cuisineType"]) !== "undefined" &&  this.newRecipe["cuisineType"] !== "")
+			paramsr["cuisineType"]= this.newRecipe["cuisineType"];
 
-			if(typeof(recipe1["newrecipe"]["mealType"]) !== "undefined" && recipe1["newrecipe"]["mealType"] !== "")
-			paramsr["mealType"]= recipe1["newrecipe"]["mealType"];
+			if(typeof(this.newRecipe["mealType"]) !== "undefined" && this.newRecipe["mealType"] !== "")
+			paramsr["mealType"]= this.newRecipe["mealType"];
 	console.log(paramsr);
+		
 			var res =   this.dbService.updateDataByTable("recipes_modify", paramsr).subscribe(invData => setTimeout(() => {
 				this.toastr.success("Recipe has been modifed.","Modify Recipe");
 				
 				this.closeModal("modifyrecipe");
 			}));
+
+			
 }
 
 
