@@ -1291,7 +1291,7 @@ saveOriginal()
 	paramsr["mealType"] = this.selectedRecipe["mealType"];
 	paramsr["recipeid"] = this.selectedRecipe["id"];
 	paramsr["created_by"] = this.currentUser["id"];
-
+	paramsr["approved_by"] = this.currentUser["id"];
 	var res =   this.dbService.postDataByTable("recipes_modify", paramsr).subscribe(invData => setTimeout(() => {
 		
 	}));

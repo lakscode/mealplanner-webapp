@@ -326,12 +326,13 @@ rejectchanges(recipe)
 {
 	console.log("reject hancges");
 	console.log(recipe);
-	if(typeof(recipe.recipeid) !== "undefined" && recipe.recipeid !== "")
+	if(typeof(recipe.id) !== "undefined" && recipe.id !== "")
 	{
 		var params = {};
-		params["id"] = recipe.recipeid;
-		params["status"]= 3;
+		params["id"] = recipe.id;
+		params["status"]= "3";
 		params["approved_by"] = this.currentUser["id"];
+		console.log(params);
 		var res =   this.dbService.updateDataByTable("recipes_modify", params).subscribe(invData => setTimeout(() => {
 
 			console.log("Rejected the changes recipy");
