@@ -141,7 +141,7 @@ export class ApproveComponent implements OnInit {
 	this.noResult =  false;
   
    var params1 ={};
-	  params1["query"] = "SELECT rm.*,r.image, r.label as rlabel, r.cuisineType as rcuisineType, r.dietLabels as rdietLabels, r.healthLabels as rhealthLabels FROM `recipes_modify` rm, recipes r WHERE rm.recipeid = r.id";
+	  params1["query"] = "SELECT rm.*, r.image, r.label as rlabel, r.cuisineType as rcuisineType, r.dietLabels as rdietLabels, r.healthLabels as rhealthLabels,r.mealType as rmealType,  r.s_instructions as rs_instructions FROM `recipes_modify` rm, recipes r WHERE rm.recipeid = r.id";
 	  console.log(params1);
     var res =   this.dbService.getDatabyTablebyQuery("recipes", params1).subscribe(invData => setTimeout(() => {
 		console.log(invData);
@@ -229,11 +229,61 @@ approvechanges(recipe)
 {
 	console.log("approve hancges");
 	console.log(recipe);
+	if(typeof(recipe.recipeid) !== "undefined" && recipe.recipeid !== "")
+	{
+		var params = {};
+		params["id"] = recipe.recipeid;
+		if(recipe.label !== "" && recipe.rlabel !== recipe.label)
+		{
+			params["label"] = recipe.label;
+		}
+
+		if(recipe.s_instructions !== "" && recipe.rs_instructions !== recipe.s_instructions)
+		{
+			params["s_instructions"] = recipe.s_instructions;
+		}
+
+		if(recipe.healthLabels !== "" && recipe.rhealthLabels !== recipe.healthLabels)
+		{
+			params["label"] = recipe.healthLabels;
+		}
+
+
+		if(recipe.dietLabels !== "" && recipe.rdietLabels !== recipe.dietLabels)
+		{
+			params["dietLabels"] = recipe.dietLabels;
+		}
+
+		if(recipe.mealType !== "" && recipe.rmealType !== recipe.mealType)
+		{
+			params["mealType"] = recipe.mealType;
+		}
+
+		if(recipe.cuisineType !== "" && recipe.rcuisineType !== recipe.cuisineType)
+		{
+			params["cuisineType"] = recipe.cuisineType;
+		}
+
+		var res =   this.dbService.updateDataByTable("recipes", params).subscribe(invData => setTimeout(() => {
+
+			console.log("Modified recipy");
+		}));
+	}
 }
 rejectchanges(recipe)
 {
 	console.log("reject hancges");
 	console.log(recipe);
+	if(typeof(recipe.recipeid) !== "undefined" && recipe.recipeid !== "")
+	{
+		var params = {};
+		params["id"] = recipe.recipeid;
+		var res =   this.dbService.deleteDataByTable("recipes_modify", params).subscribe(invData => setTimeout(() => {
+
+			console.log("Rejected the changes recipy");
+		}));
+	}
+
 }
 }
 
