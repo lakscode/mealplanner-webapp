@@ -43,6 +43,7 @@ export class RecipesmodifyComponent implements OnInit {
 	showNutrientsFlag: boolean = false;
 	cuisineTypeList : Array<any> = [];
 	noResult: boolean = false;
+	cuisineTypesList : Array<any> = [];
 
 	searchFilterLabels: Array<any> = [];
 	splitcontent : boolean = false;
