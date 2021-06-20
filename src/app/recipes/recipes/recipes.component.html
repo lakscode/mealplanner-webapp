@@ -439,9 +439,12 @@
                                             Recipe</a>
                                         <a (click)="makeacopy(recipe1)" class="menu" href="javascript:void(0)"><i
                                                 class="fa fa-clone"></i>Make a Copy</a>
-                                        <a (click)="recipe1.showpopup = false; addCollectionsPopup(recipe1)"
-                                            class="menu" href="javascript:void(0)"><i
+                                        <a (click)="recipe1.showpopup = false; addCollectionsPopup(recipe1)" class="menu" href="javascript:void(0)"><i
                                                 class="fa fa-plus-square-o"></i>Add to Collections</a>
+                                        
+                                        <a (click)="recipe1.showpopup = false; modifyRecipe(recipe1)" class="menu" href="javascript:void(0)"><i
+                                                    class="fa fa-plus-square-o"></i>Modify Recipe</a>
+    
 
                                         <!--<a  (click)="deleteRecipe(recipe1.id)" class="menu" href="javascript:void(0)"><i class="fa fa-trash"></i>Delete Recipe</a>-->
                                     </div>
@@ -590,3 +593,92 @@
 
     </div>
 </div>
+
+
+
+<jw-modal id="modifyrecipe">
+
+    <form name="form" #uf="ngForm" novalidate class="popup-panel">
+        <div class="modal-header">
+            <h2 style="margin:15px; ">
+                <span>Modify Recipe Details</span>
+
+            </h2>
+            <button style="font-size: 30px;padding:5px;" type="button" class="close" data-dismiss="modal"
+                aria-label="Close" (click)="closeModal('modifyrecipe');">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body" *ngIf="selectedRecipe">
+
+            <div class="row">
+           
+                        <div class="col-12"   style="max-height: 300px; overflow: auto;">
+                            <div class="row">
+                                <p class="title" style="display:block"> Modify Recipe </p>
+                                <div class='col-12 item-section' style="width:100%">
+                                    <p class="lbl">Recipe Name</p>
+                                    <textarea style='width:100%' name="newrecipename" [(ngModel)]="selectedRecipe.newrecipe.label"></textarea>
+
+                                </div>
+                                <div class='col-12 item-section' style="width:100%">
+                                    <p class="lbl">Instructions</p>
+                                    <textarea rows=6 style='width:100%' name="newrecipeins" [(ngModel)]="selectedRecipe.newrecipe.s_instructions"></textarea>
+
+                                </div>
+
+                                <div class='col-12 col-lg-3 col-md-3 item-section'>
+                                    <p class="lbl">Choose Health label</p>
+                                    <select name="planid" [(ngModel)]="selectedRecipe.newrecipe.healthLabels">
+                                        <option value="{{hlabel.name}}"
+                                            *ngFor='let hlabel of healthlabelsList; let i = index'>
+                                            {{hlabel.name}}</option>
+                                    </select>
+                                </div>
+                                <div class='col-12 col-lg-3 col-md-3  item-section'>
+                                    <p class="lbl">Choose Diet Label</p>
+                                    <select name="planday" [(ngModel)]="selectedRecipe.newrecipe.dietLabels">
+                                        <option value="{{dlabel.name}}"
+                                            *ngFor='let dlabel of dietLabelsList; let i = index'>{{dlabel.name}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class='col-12 col-lg-3 col-md-3  item-section'>
+                                    <p class="lbl">Choose Cuisine Type</p>
+                                    <select name="plancuisinetype" [(ngModel)]="selectedRecipe.newrecipe.cuisineType">
+                                        <option value="{{ctype.code}}"
+                                            *ngFor='let ctype of cuisineTypeList; let i = index'>{{setFLU(ctype.name)}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class='col-12 col-lg-3 col-md-3  item-section'>
+                                    <p class="lbl">Choose Meal Type</p>
+                                    <select name="planmealtype" [(ngModel)]="selectedRecipe.newrecipe.mealType">
+                                        <option value="{{mealtype.code}}"
+                                            *ngFor='let mealtype of mealTypeList; let i = index'>
+                                            {{setFLU(mealtype.name)}}</option>
+                                    </select>
+                                </div>
+                               
+                            </div>
+                    </div>
+
+
+
+                
+
+                <div class='col-12'>
+                    <div class="form-group">
+                        <a class="defaultbtn" href="javascript:void(0)" (click)="setlabels(selectedRecipe)"> Modify</a>
+
+                        <a class="defaultbtn" href="javascript:void(0)" (click)="selectedRecipe.modify =false;"> Cancel</a>
+
+ 
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </form>
+</jw-modal>

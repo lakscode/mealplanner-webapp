@@ -11,7 +11,7 @@ import { takeUntil } from 'rxjs/operators';
 import * as $ from 'jquery';
 import { constants } from '../../jsonfiles/constants';
 //declare var $: any;
-
+import { ModalService } from '../../shared/modules/modal/modal.service';
 @Component({
 	selector: 'app-recipes',
 	templateUrl: './recipes.component.html',
@@ -46,7 +46,7 @@ export class RecipesComponent implements OnInit {
 
 	searchFilterLabels: Array<any> = [];
 	splitcontent : boolean = false;
-	constructor(private router: Router, private toastr: ToastrService, private route: ActivatedRoute, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
+	constructor(private router: Router, private toastr: ToastrService, private route: ActivatedRoute, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder, private modalService: ModalService) {
 	
 	}
 	toggleMore() {
@@ -1125,6 +1125,131 @@ add2Collection(recipe)
 	  recipe.showAdd2C = false;
     }));
 
+}
+selectedRecipe: any ;
+
+modifyRecipe(recipe)
+{
+	console.log(recipe);
+	this.selectedRecipe = recipe;
+	
+	this.selectedRecipe["newrecipe"]= recipe;
+
+
+	console.log(this.selectedRecipe);
+
+	var params= {};
+	params["id"] =recipe.id;
+	console.log(params);
+	if(typeof(recipe.id) !== "undefined" && recipe.id !== null && recipe.id !== "")
+	{
+  var res =   this.dbService.getDatabyFields("recipes", params).subscribe(invData => setTimeout(() => {
+	  console.log(invData);
+	  if( invData['body']["length"] > 0)
+	  {
+		this.selectedRecipe["newrecipe"]["s_instructions"]= invData['body'][0]["s_instructions"]
+
+	  }
+  }));
+}
+
+
+
+
+	this.openModal("modifyrecipe");
+}
+openModal(id)
+{	
+	this.modalService.open(id);
+}
+closeModal(id)
+{	
+	this.modalService.close(id);
+}
+
+
+
+/************** modify recipes */
+
+
+
+setlabels(recipe1)
+{
+	console.log(recipe1);
+	var paramsr = {};
+	paramsr["recipeid"] = recipe1.id;
+	paramsr["created_by"] = this.currentUser["id"];
+
+	var res =   this.dbService.getDataByTable("recipes_modify", paramsr).subscribe(invData => setTimeout(() => {
+		if(invData !== null && invData["body"]["length"] > 0)
+		{
+			console.log("alredy modified");
+			this.updateNewRecipe(recipe1, invData["body"][0]["id"])
+		}
+		else
+		{
+			if(recipe1["s_instructions"] !== recipe1["newrecipe"]["s_instructions"])
+			paramsr["s_instructions"]= recipe1["newrecipe"]["s_instructions"];
+
+			if(typeof(recipe1["newrecipe"]["label"]) !== "undefined" &&  recipe1["label"] !== recipe1["newrecipe"]["label"])
+			paramsr["label"]= recipe1["newrecipe"]["label"];
+
+			if(typeof(recipe1["newrecipe"]["dietLabels"]) !== "undefined" &&  recipe1["newrecipe"]["dietLabels"] !== "")
+			paramsr["dietLabels"]= recipe1["newrecipe"]["dietLabels"];
+
+			if(typeof(recipe1["newrecipe"]["healthLabels"]) !== "undefined" &&  recipe1["newrecipe"]["healthLabels"] !== "")
+			paramsr["healthLabels"]= recipe1["newrecipe"]["healthLabels"];
+
+			if(typeof(recipe1["newrecipe"]["cuisineType"]) !== "undefined" &&  recipe1["newrecipe"]["cuisineType"] !== "")
+			paramsr["cuisineType"]= recipe1["newrecipe"]["cuisineType"];
+		//	paramsr["dishType"]= recipe1["newrecipe"]["dishType"];
+
+			if(typeof(recipe1["newrecipe"]["mealType"]) !== "undefined" && recipe1["newrecipe"]["mealType"] !== "")
+			paramsr["mealType"]= recipe1["newrecipe"]["mealType"];
+
+			var res =   this.dbService.postDataByTable("recipes_modify", paramsr).subscribe(invData => setTimeout(() => {
+				this.toastr.success("Recipe has been updated.","Modify recipe");
+
+				this.closeModal("modifyrecipe");
+			}));
+		}
+	}));
+
+
+	
+
+}
+
+updateNewRecipe(recipe1, id)
+{
+	var paramsr = {};
+	paramsr["recipeid"] = recipe1.id;
+	paramsr["created_by"] = this.currentUser["id"];
+	paramsr["id"] = id;
+			if(recipe1["s_instructions"] !== recipe1["newrecipe"]["s_instructions"])
+			paramsr["s_instructions"]= recipe1["newrecipe"]["s_instructions"];
+
+			if(typeof(recipe1["newrecipe"]["label"]) !== "undefined" &&  recipe1["label"] !== recipe1["newrecipe"]["label"])
+			paramsr["label"]= recipe1["newrecipe"]["label"];
+
+			if(typeof(recipe1["newrecipe"]["dietLabels"]) !== "undefined" &&  recipe1["newrecipe"]["dietLabels"] !== "")
+			paramsr["dietLabels"]= recipe1["newrecipe"]["dietLabels"];
+
+			if(typeof(recipe1["newrecipe"]["healthLabels"]) !== "undefined" &&  recipe1["newrecipe"]["healthLabels"] !== "")
+			paramsr["healthLabels"]= recipe1["newrecipe"]["healthLabels"];
+
+			if(typeof(recipe1["newrecipe"]["cuisineType"]) !== "undefined" &&  recipe1["newrecipe"]["cuisineType"] !== "")
+			paramsr["cuisineType"]= recipe1["newrecipe"]["cuisineType"];
+		//	paramsr["dishType"]= recipe1["newrecipe"]["dishType"];
+
+			if(typeof(recipe1["newrecipe"]["mealType"]) !== "undefined" && recipe1["newrecipe"]["mealType"] !== "")
+			paramsr["mealType"]= recipe1["newrecipe"]["mealType"];
+	console.log(paramsr);
+			var res =   this.dbService.updateDataByTable("recipes_modify", paramsr).subscribe(invData => setTimeout(() => {
+				this.toastr.success("Recipe has been modifed.","Modify Recipe");
+				
+				this.closeModal("modifyrecipe");
+			}));
 }
 
 

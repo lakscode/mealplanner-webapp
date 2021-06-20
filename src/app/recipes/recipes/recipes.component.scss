@@ -526,3 +526,41 @@ color:#FFF;
   box-shadow: 0px 1px 10px #999;
   border-radius:5px;
 }
+
+
+/************* modify recipe*/
+
+
+
+.item-section
+{
+ //@debug width:50%; display:inline-block;
+  padding:10px;
+}
+
+.item-section select
+{
+  padding:5px;
+}
+.modify-recipe-sec
+{
+  padding-bottom:10px;
+}
+.modify-recipe-sec .btn
+{
+  padding:10px; 
+  background: $orange1;
+  border:1px solid $orange1;
+  color:#FFF;
+  font-size:16px;
+}
+
+.modify-recipe-sec .btnc
+{
+  padding:10px; 
+  background: #FFF;
+  border:1px solid $orange1;
+  color:$orange1;
+  font-size:16px;
+  margin-left:10px;
+}
