@@ -46,6 +46,8 @@ export class ApproveComponent implements OnInit {
 
 	searchFilterLabels: Array<any> = [];
 	splitcontent : boolean = false;
+	filterOpts: any = {};
+
 	constructor(private router: Router, private toastr: ToastrService, private route: ActivatedRoute, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
 	
 	}
@@ -53,8 +55,9 @@ export class ApproveComponent implements OnInit {
 	ngOnInit() {
 		console.log("ngOnInit");
 	
-	
-
+		this.filterOpts = {};
+		this.filterOpts = {"submitted":true, "approved": false, "rejected":false, "all":false}
+		this.recordType = "submitted";
 		this.router.events.subscribe((evt) => {
             if (!(evt instanceof NavigationEnd)) {
                 return;
@@ -134,14 +137,46 @@ export class ApproveComponent implements OnInit {
   /******** recipes api serach */
   maxcalories: any = "";
   loopCount: any = 0;
+	filterRecords(opt)
+	{
+		this.filterOpts["submitted"] = false;
+		this.filterOpts["approved"] = false;
+		this.filterOpts["rejected"] = false;
+		this.filterOpts["all"] = false;
+
+		this.recordType = opt; 
+		this.filterOpts[opt] = true;
+		this.searchProps();
+
+	}
+	showFilters: boolean = false;
+	recordType  : any = "";
 	searchProps()
 	{
 
+	var status = "";
+	if(this.filterOpts.submitted)
+	status = "rm.status = 1 ";
+
+	if(this.filterOpts.approved)
+	status = "rm.status = 2 ";
+	
+	if(this.filterOpts.rejected)
+	status = "rm.status = 3 ";
+
+	if(this.filterOpts.all)
+	status = "";
+
+	console.log(status);
 	console.log('searchProps');
 	this.noResult =  false;
   
    var params1 ={};
 	  params1["query"] = "SELECT rm.*, r.image, r.label as rlabel, r.cuisineType as rcuisineType, r.dietLabels as rdietLabels, r.healthLabels as rhealthLabels,r.mealType as rmealType,  r.s_instructions as rs_instructions FROM `recipes_modify` rm, recipes r WHERE rm.recipeid = r.id";
+	  if(status !== "")
+	  {
+		params1["query"]  +=  " AND " + status;
+	  }
 	  console.log(params1);
     var res =   this.dbService.getDatabyTablebyQuery("recipes", params1).subscribe(invData => setTimeout(() => {
 		console.log(invData);

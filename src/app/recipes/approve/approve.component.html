@@ -6,8 +6,54 @@
                 <div class="recipe-set">
                     <h2>Approve Recipe Changes</h2>
                 </div>
-         
+                <div style="width:100%; text-align:right">
+                    <a href="javascript:void(0)" style="font-size:20px;" (click)="showFilters = !showFilters">
+                        <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                    </a>
+                   <div *ngIf="showFilters" style="position: absolute;
+                   width: 150px;
+                   height: 160px;
+                   top: 100px;
+                   right: 0;
+                   z-index: 1;
+                   background: #FFF;
+                   border: 1px solid #ccc;
+                   padding-top: 20px;
+                   border-radius: 10px;
+                   padding-left: 15px;">
+                    <div style="display:block">
+                        <label class="container lblcheckbox">Submitted
+                            <input (change)="showFilters= false;filterRecords('submitted')" [(ngModel)]='filterOpts.submitted' type="checkbox">
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+
+                    <div style="display:block">
+                        <label class="container lblcheckbox">Approved
+                            <input (change)="showFilters= false;filterRecords('approved')" [(ngModel)]='filterOpts.approved' type="checkbox">
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+
+                    <div style="display:block">
+                        <label class="container lblcheckbox">Rejected
+                            <input (change)="showFilters= false;filterRecords('rejected')" [(ngModel)]='filterOpts.rejected' type="checkbox">
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+
+                    <div style="display:block">
+                        <label class="container lblcheckbox">All
+                            <input (change)="showFilters= false;filterRecords('all')" [(ngModel)]='filterOpts.all' type="checkbox">
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                    </div>
+                    </div>
                 <div style='height:20px; width:100%'></div>
+                <div style="width:100%">
+                <h3>{{setFLU(recordType)}} recipes</h3>
+                </div>
                 <div class="recipe-set" *ngIf="!noResult">
                    
                     <div class="">
@@ -40,10 +86,16 @@
                                         style="font-size:12px;">, <b>Cuisine Type:</b> {{formatlabels(recipe1.rcuisineType)}}</span>
 
                                     </div>
-                                    <div class="col-2">
+                                    <div class="col-2" >
                                         <button (click)="recipe1.modify = !recipe1.modify">
                                             View Changes
-                                        </button>
+                                        </button><br>
+                                        <span *ngIf="recipe1.status == 2">
+                                            Approved
+                                        </span>
+                                        <span *ngIf="recipe1.status == 3">
+                                            Rejected
+                                        </span>
                                     </div>
 
                                     <div class="col-12 modify-recipe-sec" *ngIf='recipe1.modify' style='border:1px solid #CCC; background:#f1f2f3;'>
@@ -79,7 +131,7 @@
                                         </div>
                                     
                                     
-                                        <div class="col-12">
+                                        <div class="col-12" *ngIf="recipe1.status == 1">
                                             <a class="btnc" href="javascript:void(0)"(click)="approvechanges(recipe1);recipe1.modify =false;"> Approve</a>
 
                                             <a class="btnc" href="javascript:void(0)"(click)="rejectchanges(recipe1);recipe1.modify =false;"> Reject</a>
