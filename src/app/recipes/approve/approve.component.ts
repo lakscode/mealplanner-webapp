@@ -165,7 +165,7 @@ export class ApproveComponent implements OnInit {
 	status = "rm.status = 3 ";
 
 	if(this.filterOpts.all)
-	status = "";
+	status = "rm.status != 0  ";
 
 	console.log(status);
 	console.log('searchProps');

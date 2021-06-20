@@ -350,7 +350,15 @@ endIndex = startIndex+ endIndex;
 	{
 		var retVal = str;
 		if(typeof(str) !== "undefined" && str !== "")
-		retVal = this.helpService.limitTo(str, num) + "...";
+		{
+			retVal = this.helpService.limitTo(str, num);
+
+			if(str.length > num)
+			{
+				retVal +=  "...";
+			}
+		}
+
 		return retVal;
 	}
 
@@ -1222,7 +1230,7 @@ setlabels(recipe1)
 			paramsr["status"]= 1;
 			var res =   this.dbService.postDataByTable("recipes_modify", paramsr).subscribe(invData => setTimeout(() => {
 				this.toastr.success("Recipe has been updated.","Modify recipe");
-
+				this.saveOriginal();
 				this.closeModal("modifyrecipe");
 			}));
 			
@@ -1240,6 +1248,7 @@ updateNewRecipe(recipe1, id)
 	paramsr["recipeid"] = recipe1.id;
 	paramsr["created_by"] = this.currentUser["id"];
 	paramsr["id"] = id;
+	
 			if(this.newRecipe["s_instructions"] !== this.selectedRecipe["s_instructions"])
 			paramsr["s_instructions"]= this.newRecipe["s_instructions"];
 
@@ -1268,6 +1277,26 @@ updateNewRecipe(recipe1, id)
 			
 }
 
+saveOriginal()
+{
+	var paramsr = {};
+	paramsr["status"] = 0;
+	paramsr["s_instructions"] = this.selectedRecipe["s_instructions"];
+	paramsr["label"] = this.selectedRecipe["label"];
+
+	paramsr["dietLabels"] = this.selectedRecipe["dietLabels"];
+	paramsr["healthLabels"] = this.selectedRecipe["healthLabels"];
+
+	paramsr["cuisineType"] = this.selectedRecipe["cuisineType"];
+	paramsr["mealType"] = this.selectedRecipe["mealType"];
+	paramsr["recipeid"] = this.selectedRecipe["id"];
+	paramsr["created_by"] = this.currentUser["id"];
+
+	var res =   this.dbService.postDataByTable("recipes_modify", paramsr).subscribe(invData => setTimeout(() => {
+		
+	}));
+
+}
 
 }
 
