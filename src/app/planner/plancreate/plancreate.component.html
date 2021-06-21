@@ -62,7 +62,7 @@
                         
                         <div  class="searchmorebar searchbaranim">
                             <div class="row mleft" >
-                                <div class="col-12 col-xs-12" style="margin-bottom:10px;">
+                                <div class="col-12 col-xs-12" style="margin-bottom:10px;margin-left:50px">
                                  
                                      <!--<ng-container *ngFor="let lab of searchFilterLabels; let l = index;">
                                             <a [ngClass]="lab.selected?'filterlabel active': 'filterlabel'" href="javascript:void(0)" (click)="showLabels(lab)">
@@ -249,12 +249,12 @@
                 <div class="col-12">
                     <div style='text-align:right;margin-top:0px;'>
                     <div class="row">
-                        <div class="col-12 col-lg-9">
+                        <div class="col-12 col-lg-8">
                             <label for="title" style="font-size:16px;margin-right:10px;font-weight:normal;">Calories per Day</label>
                             <input style="width:100px;margin-bottom:5px;margin-top:0px;" class="inputbox " type="text" name="maxcaloryperday" id="maxcaloryperday" [(ngModel)]="maxcaloryperday"
                                 (blur)="saveMealPlan()" /> 
                         </div> 
-                        <div class="col-12 col-lg-3">
+                        <div class="col-12 col-lg-4">
                        
                                 <div style="display:block; margin:0 auto;text-align:right;width: 100%">
                                     
@@ -335,8 +335,7 @@
                                         <select name="planday" [(ngModel)] ="addtoplan.day">
                                             <option value="{{day.id}}" placeholder="Choose day" *ngFor='let day of daysList; let i = index'>{{day.name}}</option>
                                         </select>
-                                        </div>
-                                        <div style="display: inline-block;
+                                        </div>                                        <div style="display: inline-block;
                                         width: 49%;">
                                         <!--<span class="lbl">Choose Meal Type</span>-->
                                         <select name="planmealtype" placeholder="Choose meal type" [(ngModel)] ="addtoplan.mealType">
