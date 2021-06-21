@@ -11,7 +11,7 @@
 
  
 
-  <h2 style="width: 70%;">Your Meal Plans</h2>
+  <h2 style="width: 66%;">Your Meal Plans</h2>
   <div class="createplanbtn" (click)="createNewPlan()">
     <i class="fa fa-pencil" style="margin-right:10px;"></i>  Create New Plan    
      
@@ -21,15 +21,15 @@
   <div class="recipe-listing listing-list" style="background:#FFF;padding-top:15px;">
   
   
-  <div class="listing col-12 col-lg-3 col-md-4 " *ngFor="let mplan of mealPlans; let i = index;">
+  <div class="listing col-12 col-lg-4 col-md-4 " *ngFor="let mplan of mealPlans; let i = index;">
      
       <div class="detail" (click)="gotopage('plancreate', {'id':mplan.id});"  style="width:100%">
           <h4><a href="javascript:void(0)">{{mplan.name}}</a></h4>
           <p innerHTML = "{{mplan.tags}}" *ngIf="mplan.tags"></p>
           <p *ngIf="!mplan.tags">&nbsp;</p>
           <div>
-         <div class="linkview" style="float:right;">View Details</div> 
-        </div>
+        <!--  <div class="linkview" style="float:right;">View Details</div> 
+        </div> -->
       </div>
 
         <!--<div class="detail visible-xs" style="width:100%">
