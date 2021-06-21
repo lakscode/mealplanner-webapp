@@ -35,7 +35,7 @@ testimonialsList: Array<any> = [];
 	{
 		this.stepsList = [];
 
-		this.stepsList.push({"label":"Features", "subtitle":"Recipe Suggestions", "image":"assets/new/food_collection.jpg", "description":"With over 50 thousand recipes available, we assure you that you won’t run out of options to choose from. Even more, dieticians from across the world continue to add recipes to this bundle."});
+		this.stepsList.push({"label":"Features", "subtitle":"Recipe Suggestions", "image":"assets/new/food_collection.jpg", "description":"With over 50 thousand recipes available, we assure you that you won’t run out of options to choose from. Even more, Dietitians from across the world continue to add recipes to this bundle."});
 
 		this.stepsList.push({"label":"Choose", "subtitle":"Calculators","image":"assets/new/calculator.jpg", "description":"Easily calculate and save your BMI (Body Mass Index), BMR (Basal Metabolic Rate), BFP (Body Fat Percentage) using our app. Moreover, the calorie counter automatically calculates your calorie intake of the day and makes changes to the above."});
 

@@ -15,7 +15,7 @@ export class BenefitsComponent implements OnInit {
 
 	this.stepsList = [];
 
-		this.stepsList.push({ "subtitle":"Recipe Suggestions", "description":"With over 50 thousand recipes available, we assure you that you won’t run out of options to choose from. Even more, dieticians from across the world continue to add recipes to this bundle.", "index":"1"});
+		this.stepsList.push({ "subtitle":"Recipe Suggestions", "description":"With over 50 thousand recipes available, we assure you that you won’t run out of options to choose from. Even more, Dietitians from across the world continue to add recipes to this bundle.", "index":"1"});
 
 		this.stepsList.push({ "subtitle":"Calculators", "description":"Easily calculate and save your BMI (Body Mass Index), BMR (Basal Metabolic Rate), BFP (Body Fat Percentage) using our app. Moreover, the calorie counter automatically calculates your calorie intake of the day and makes changes to the above.", "index":"3"});
 

@@ -120,6 +120,8 @@ date: {year: number, month: number};
 	{
 	  var dateParam1 = new Date();
 	  var dateParam2  = new Date(this.currentUser['age']);
+	  console.log(dateParam1);
+	  console.log(dateParam2);
 	  var diff =(dateParam2.getTime() - dateParam1.getTime()) / 1000;
 	  diff /= (60 * 60 * 24);
 			var years = Math.abs(Math.round(diff/365.25));
