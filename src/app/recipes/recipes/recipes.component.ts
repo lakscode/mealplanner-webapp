@@ -425,7 +425,8 @@ endIndex = startIndex+ endIndex;
 	   else
 	   {
 	   this.loopCount = 0;
-		params["content"] = this.searchparam.q;
+	   var words = this.searchparam.q.replaceAll(" ","~");
+		params["words"] = words;
 		this.helpService.saveSearchHistory(this.searchparam.q, "text", "recipes", this.currentUser["id"]);
 	   }
 
@@ -558,7 +559,7 @@ endIndex = startIndex+ endIndex;
 	console.log(minerals);
 
    } 
-     // console.log(params);
+    console.log(params);
    if(mQuery !== "")
 	  {
 
@@ -576,7 +577,7 @@ endIndex = startIndex+ endIndex;
 		  var tempc= "";
 		  for(let t=0; t < temp.length; t++)
 		  {
-			tempc += " label LIKE '%" + temp[t] + "%' OR ingredientLines LIKE '%" +temp[t] + "%' OR healthLabels LIKE '%" + temp[t] +  "%' OR dietLabels LIKE '%" + temp[t] + "%' OR";
+			tempc += " label LIKE '%" + temp[t] + "%' OR healthLabels LIKE '%" + temp[t] +  "%' OR dietLabels LIKE '%" + temp[t] + "%' OR";
 		  }
 		  if(tempc !== "")
 		  {

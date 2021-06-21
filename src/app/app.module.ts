@@ -44,7 +44,7 @@ import { FavouritesModule } from './recipes/favourites/favourites.module';
 import { RecipedetailsModule } from './recipes/recipedetails/recipedetails.module'; 
 import { RecipesubmitModule } from './recipes/recipesubmit/recipesubmit.module'; 
 import { RecipesmodifyModule } from './recipes/recipesmodify/recipesmodify.module'; 
-import { ApproveModule } from './recipes/approve/approve.module'; 
+//import { ApproveModule } from './recipes/approve/approve.module'; 
 
 import { TestimonialsModule } from './testimonials/testimonials.module'; 
 
@@ -91,6 +91,10 @@ import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { SocialLoginModule, SocialAuthServiceConfig, FacebookLoginProvider } from 'angularx-social-login';
 import { GoogleLoginProvider } from 'angularx-social-login';
 import {environment} from "../environments/environment";
+
+import { AdminModule } from './admin/admin.module'; 
+
+
 //import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 @NgModule({
   declarations: [
@@ -124,7 +128,7 @@ import {environment} from "../environments/environment";
 	FeaturesModule,
 	RecipesModule,
 	RecipesmodifyModule,
-	ApproveModule,
+//	ApproveModule,
 	MyRecipesModule,
 	FavouritesModule,
 	RecipedetailsModule,
@@ -157,7 +161,8 @@ import {environment} from "../environments/environment";
 	GroupModule,
 	PrivacyModule,
 	TermsModule,
-	CalculateModule
+	CalculateModule,
+	AdminModule
   ],
   schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
   providers: [{

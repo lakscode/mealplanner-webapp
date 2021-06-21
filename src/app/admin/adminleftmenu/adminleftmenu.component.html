@@ -1,0 +1,23 @@
+
+
+<div class="containeradmin" style="margin-bottom:15px;">
+
+	<nav class="navigation">
+		<ul class="mainmenu">
+		  <li style='display:block;' *ngFor="let aitem of amenuItems; let i = index;">
+			  <a [ngClass]="aitem.active?' active ':' '" href="javascript:void(0);" (click)="setmenu(aitem)">
+			  	<i class="fa fa-{{aitem.icon}}"></i>
+				  <strong> {{aitem.menu}} </strong> 
+				</a>
+
+			</li>
+		 
+
+		</ul>
+	  </nav>
+
+
+	</div>
+
+
+	

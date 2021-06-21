@@ -110,13 +110,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
 				]
 			},
 			{"id":"planner", "menu":"Planner", "link":"/plans", "display":displayMenu, "active":false,
-				"children":
+			/*	"children":
 				[
 
 					{"id":"planner-plan-list", "menu":"Meal Plans", "link":"/plans", "display":displayMenu, "active":false},
-			//		{"id":"planner-plan-create", "menu":"Create Plan", "link":this.planLink, "display":displayMenu, "active":false}
+					{"id":"planner-plan-create", "menu":"Create Plan", "link":this.planLink, "display":displayMenu, "active":false}
 					
-				]
+				]*/
 			}	,
 			{"id":"collections", "menu":"Collections", "link":"/collections", "display":displayMenu, "active":false/*
 			,	"children":
@@ -278,7 +278,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 	{
 	var str = this.location.path();	
 
-		if(!this.loggedIn && str.indexOf("resetpassword") == -1 && str.indexOf("index") == -1 && str.indexOf("home") == -1 && str.indexOf("signup") == -1 && str.indexOf("pricing") == -1 && str.indexOf("features") == -1 && str.indexOf("recipedetails") == -1  && str.indexOf("group") == -1 && str.indexOf("privacy") == -1 && str.indexOf("benefits") == -1 && str.indexOf("calculate") == -1  && str.indexOf("recipesubmit") == -1  && str.indexOf("plancreate") == -1 && str.indexOf("recipesmodify") == -1 && str.indexOf("approve") == -1)
+		if(!this.loggedIn && str.indexOf("resetpassword") == -1 && str.indexOf("index") == -1 && str.indexOf("home") == -1 && str.indexOf("signup") == -1 && str.indexOf("pricing") == -1 && str.indexOf("features") == -1 && str.indexOf("recipedetails") == -1  && str.indexOf("group") == -1 && str.indexOf("privacy") == -1 && str.indexOf("benefits") == -1 && str.indexOf("calculate") == -1  && str.indexOf("recipesubmit") == -1  && str.indexOf("plancreate") == -1 && str.indexOf("recipesmodify") == -1 && str.indexOf("approve") == -1 && str.indexOf("admin") == -1)
 		{
 			var params = {};
 			if( this.router.url.indexOf("login") > -1)

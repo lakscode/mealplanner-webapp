@@ -1,0 +1,16 @@
+@import "../../../_variables.scss";
+:host {
+//  padding: 30px
+}
+.gridclass
+{
+  width:99.9%; height:420px;
+   font-size:$font_small;
+   border-radius:10px;
+   -webkit-border-radius:10px;
+   -moz-border-radius:10px;
+}
+
+.noborder {
+  border: none;
+}
