@@ -299,14 +299,13 @@
                     <div class="recipes-horizontal divoverflowh">
 
 
-                        <div class="listing-search"  *ngFor="let recipe1 of recipesList; let i = index;">
-                            
+                        <div class="listing-search"  *ngFor="let recipe1 of recipesList; let ir = index;">
                             <div class="details">
                                 <div class="more" style="right: 10px;
                                 text-align: center;
                                 top: 20px;">
                                     <a (click)="showhidecontent(recipe1)" href="javascript:void(0)" [ngClass]="recipe1.showpopup?'contextmenu-icon active':'contextmenu-icon'" style=""><i class="fa fa-ellipsis-v"></i></a>
-                                    <div *ngIf="recipe1.showpopup" style="left: unset;" class="contextmenu">
+                                    <div *ngIf="recipe1.showpopup" style="top:30px;" class="contextmenu" [ngClass] = "ir == 0? 'left130':'leftunset'"> 
                                        <a class="menu"  href="javascript:void(0)" (click)="recipe1.showpopup = false; addtoMealPlan(recipe1); "><i class="fa fa-calendar-plus-o" aria-hidden="true"></i> Add Meal</a>
                                   
                                         <a  class="menu" href="javascript:void(0)"  (click)="recipe1.showAdd2MP = false; recipe1.showpopup =false;gotoRecipeDetails( recipe1.id)" ><i class="fa fa-list"></i>View Recipe</a>
@@ -315,7 +314,7 @@
 
                                          </div>
 
-                                    <div *ngIf='recipe1.showAdd2MP' class="add2mealplanmenu" style="top:0; height: 160px; ">
+                                    <div *ngIf='recipe1.showAdd2MP' class="" style="top:0; height: 160px; " [ngClass] = "ir == 0? 'add2mealplanmenu left130':'add2mealplanmenu leftunset'">
                                         <a style="float:right;font-size:24px;padding-top: 0px;
                                         padding-right: 0px;" href="javascript:void(0)" (click)="recipe1.showAdd2MP = false;"><i class="fa fa-close" aria-hidden="true"></i> </a>
                                         <p class="title"  style="display:block"> Add Recipe to Meal Plan</p>

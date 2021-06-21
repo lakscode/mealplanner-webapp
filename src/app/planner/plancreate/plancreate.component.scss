@@ -882,7 +882,14 @@ mark, .mark {
 .recipe-search .hm-typeahead {
   width: calc(35vw);
 }
-
+.left130
+{
+  left:-130px;
+}
+.leftunset
+{
+  left:unset;
+}
 
 .recipe-search .form-group-plan .rbt-input-main {
   border-top-right-radius: 0 !important;
@@ -1881,7 +1888,7 @@ padding-right:11px;
   background-color: transparent;
   border: 2px solid $orange1;
   border-radius: 0.6em;
-  color: $orange1;
+  color: $orange1 !important;
   cursor: pointer;
   display: -webkit-box;
   display: -webkit-flex;
@@ -1890,7 +1897,7 @@ padding-right:11px;
   -webkit-align-self: center;
       -ms-flex-item-align: center;
           align-self: center;
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-weight: 400;
   line-height: 1;
   padding: 1.2em 2.8em;
@@ -1898,9 +1905,10 @@ padding-right:11px;
   text-align: center;
   text-transform: uppercase;
   font-weight: 700;
+  letter-spacing:0px;
 }
 .btn:hover, .btn:focus {
-  color: #fff;
+  color: #fff !important;
   outline: 0;
 }
 .fifth {
