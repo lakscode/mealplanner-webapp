@@ -2387,12 +2387,13 @@ ul {
 .listing-grid {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  /*justify-content: space-between;*/
 }
 .listing-grid .listing {
   text-align: center;
   flex-direction: column;
   width: 31%;
+  margin-right:2%;
 }
 .listing-grid .listing .image,
 .listing-grid .listing .detail {
