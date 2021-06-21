@@ -1,10 +1,84 @@
 
-<div class="fixedtop food-tabs wow animated fadeIn" style="background:#fff">
+<!--trending plan-->
+
+<div *ngIf="showNutrientsFlag" class="trendings-banner">
+   
    <div class="container">
+       <div class="trendings-card text-center wow animated bounceInDown" style="margin-top:160px;margin-bottom: 70px">
+         
+          <div class="chefs-card-inner">
+            <img *ngIf="mealplans.length > 0" class="badget" src="assets/bg/ribbon2.png" />
+            <img *ngIf="planStatus.length > 0" class="badge-right" src="assets/bg/schedule.png" />
+               <h2 *ngIf="mealplans.length > 0" style="    padding-top: 20px;">Meal Plan for YOU</h2>
+               <h2 *ngIf="planStatus.length > 0" style="    padding-top: 20px;">Schedule for TODAY</h2>
+
+               <div class="short-separator"></div>
+   
+               <ng-container *ngIf="mealplans.length > 0">
+                  <p class="plan-name">{{mealplans[0]["name"]}} </p>
+                    <p class="plan-tags">{{mealplans[0]["tags"]}} <br/>
+                  <a class="read-more-bordered" (click)="gotopage('trending', mealplans[0]['id'])" href="javascript:void(0)">View More</a>
+               </ng-container>
+               <ng-container *ngIf="planStatus.length > 0">
+                  <p class="plan-name">{{planStatus[0]["mpname"]}} </p>
+                    <p class="plan-tags">{{planStatus[0]["tags"]}} <br/>
+                     </p>
+                  <a class="read-more-bordered" (click)="gotopage('schedule', planStatus[0]['id'])" href="javascript:void(0)">View Details</a>
+               </ng-container>
+           </div>
+       </div>
+   </div>
+ </div>
+ 
+ <!--trending plan-->
+
+   <div class="site-section">
+      <div class="container" >
+         <div class="col-12" *ngIf="healthLabels.length > 1">
+            <div class="" style="display:flex; align-items: center;min-height:450px;padding-top:30px"> 
+               <div class="row " >
+                  <div class="col-md-4 col-lg-5 pl-5" style="padding-left:0px !important; margin-bottom: 20px;">
+                     <h1 class="text-lg-left mb-4 title">Too busy to plan?</h1>
+                     <p class="text-justify mb-5 description">Subscribe to our dietitian-prepared Specialty Meal Plans which offer balanced nutrition every week and can be easily customized to your personal tastes.</p>
+                     <a href="javascript:void(0);" style="cursor:default; margin-bottom:20px;" class="leanmore">Learn More</a>
+
+                   <!--  <img class="animated wow flipInX" src="assets/images/landing-bg.png" style='width:100%' />-->
+                  </div>
+
+                  <div class="col-md-8 col-lg-7">
+                     <div class="row">
+                        <ng-container  *ngFor="let hLabel of healthLabels; let h=index;">
+                        <div class="mb-5 col-sm-3"  *ngIf="h <8"> 
+                           <div class="px-5 px-sm-0">
+                              <a (click)="gotoRecipes(hLabel.label)"
+                                 class="specialty"><img src="{{hLabel.image}}"
+                                 srcset="{{hLabel.image}}"
+                                 class="rounded-bg specialty-image w-100">
+                              <div class="p-3 bg-white rounded-lg border specialty-label">{{hLabel.label}}</div>
+                              </a>
+                           </div>
+                        </div>
+                     </ng-container>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <div class="fixedtop food-tabs wow animated fadeIn" style="background:#fff;margin-top:0px">
+   <div class="container">
+    <div class="heading-var1 text-center animated wow flipInX">
+                   <h2 style="margin-top:0px"><a href="javascript:void(0)">RECIPE OF THE DAY</a></h2>
+                    <span class="heading-bell"></span>
+                 </div>
+             
+
       <div class="container-food-tabs">
          <section class="row custom-row-food-tabs">
             <div class="col-12 col-lg-8 padding-xs-0" >
-
+               
 
                <div class="row fadeInLeft animated newanim recipeDay-outer" *ngIf='RecipeoftheDay && RecipeoftheDay[0]' >
                   <div class="col-12 col-md-7 col-lg-7" style="padding-left:0px; padding-right:0px;">
@@ -103,7 +177,8 @@
 </div>
   
 
-<!--hottest recipes-->
+
+   <!--hottest recipes-->
 <section class="hot-recipes-var2" *ngIf="collectionsList && collectionsList.length > 0">
    <div class="container">
        <div class="wrapper-hot-recipe-var2">
@@ -195,76 +270,11 @@
  </section>
  <!--hottest recipes ends-->
 
+
+
+
 <div>
-   <div class="site-section">
-      <div class="container" >
-         <div class="col-12" *ngIf="healthLabels.length > 1">
-            <div class="" style="display:flex; align-items: center;min-height:450px;padding-top:40px"> 
-               <div class="row " >
-                  <div class="col-md-4 col-lg-5 pl-5" style="padding-left:0px !important; margin-bottom: 20px;">
-                     <h1 class="text-lg-left mb-4 title">Too busy to plan?</h1>
-                     <p class="text-justify mb-5 description">Subscribe to our dietitian-prepared Specialty Meal Plans which offer balanced nutrition every week and can be easily customized to your personal tastes.</p>
-                     <a href="javascript:void(0);" style="cursor:default; margin-bottom:20px;" class="leanmore">Learn More</a>
-
-                   <!--  <img class="animated wow flipInX" src="assets/images/landing-bg.png" style='width:100%' />-->
-                  </div>
-
-                  <div class="col-md-8 col-lg-7">
-                     <div class="row">
-                        <ng-container  *ngFor="let hLabel of healthLabels; let h=index;">
-                        <div class="mb-5 col-sm-3"  *ngIf="h <8"> 
-                           <div class="px-5 px-sm-0">
-                              <a (click)="gotoRecipes(hLabel.label)"
-                                 class="specialty"><img src="{{hLabel.image}}"
-                                 srcset="{{hLabel.image}}"
-                                 class="rounded-bg specialty-image w-100">
-                              <div class="p-3 bg-white rounded-lg border specialty-label">{{hLabel.label}}</div>
-                              </a>
-                           </div>
-                        </div>
-                     </ng-container>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-   </div>
-
-
-<!--trending plan-->
-
-<div *ngIf="showNutrientsFlag" class="trendings-banner">
-   
-   <div class="container">
-       <div class="trendings-card text-center wow animated bounceInDown">
-         
-          <div class="chefs-card-inner">
-            <img *ngIf="mealplans.length > 0" class="badget" src="assets/bg/ribbon2.png" />
-            <img *ngIf="planStatus.length > 0" class="badge-right" src="assets/bg/schedule.png" />
-               <h2 *ngIf="mealplans.length > 0" style="    padding-top: 20px;">Meal Plan for YOU</h2>
-               <h2 *ngIf="planStatus.length > 0" style="    padding-top: 20px;">Schedule for TODAY</h2>
-
-               <div class="short-separator"></div>
-   
-               <ng-container *ngIf="mealplans.length > 0">
-                  <p class="plan-name">{{mealplans[0]["name"]}} </p>
-                    <p class="plan-tags">{{mealplans[0]["tags"]}} <br/>
-                  <a class="read-more-bordered" (click)="gotopage('trending', mealplans[0]['id'])" href="javascript:void(0)">View More</a>
-               </ng-container>
-               <ng-container *ngIf="planStatus.length > 0">
-                  <p class="plan-name">{{planStatus[0]["mpname"]}} </p>
-                    <p class="plan-tags">{{planStatus[0]["tags"]}} <br/>
-                     </p>
-                  <a class="read-more-bordered" (click)="gotopage('schedule', planStatus[0]['id'])" href="javascript:void(0)">View Details</a>
-               </ng-container>
-           </div>
-       </div>
-   </div>
- </div>
  
- <!--trending plan-->
-
 <!--hottest recipes-->
 <section class="hot-recipes-var2">
   <div class="container">
