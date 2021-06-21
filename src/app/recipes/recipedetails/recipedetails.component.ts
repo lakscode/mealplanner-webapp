@@ -263,7 +263,7 @@ loadRecipe(id)
 					if(fIndex1 == -1)
 					{
 					mmicro.totalP = mmicro.total.toFixed(1);
-				//	if( mmicro.total > 0)
+					if( mmicro.total > 0)
 					this.paramMicro.push(mmicro); 
 					}
 				  }
