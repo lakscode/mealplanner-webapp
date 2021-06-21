@@ -449,23 +449,23 @@
                                         <!--<a  (click)="deleteRecipe(recipe1.id)" class="menu" href="javascript:void(0)"><i class="fa fa-trash"></i>Delete Recipe</a>-->
                                     </div>
 
-                                    <div *ngIf='recipe1.showAdd2MP' class="add2mealplanmenu" style="top:0px; ">
+                                    <div *ngIf='recipe1.showAdd2MP' class="add2mealplanmenu" style="top:0px;background-color: #f8f8f8 ">
                                         <a style="float:right;font-size:24px;padding-top: 0px;
                                         padding-right: 0px;" href="javascript:void(0)"
                                             (click)="recipe1.showAdd2MP = false;"><i class="fa fa-close"
                                                 aria-hidden="true"></i> </a>
                                         <p class="title" style="display:block"> Add Recipe to Meal Plan</p>
-                                        <p class="lbl">Choose Meal Plan</p>
+                                        <p style="display:block;text-align:left">Choose Meal Plan</p>
                                         <select name="planid" [(ngModel)]="plan.id">
                                             <option value="{{plan.id}}" *ngFor='let plan of plansList; let i = index'>
                                                 {{plan.name}}</option>
                                         </select>
-                                        <p class="lbl">Choose Day</p>
+                                        <p style="display:block;text-align:left">Choose Day</p>
                                         <select name="planday" [(ngModel)]="plan.day">
                                             <option value="{{day.id}}" *ngFor='let day of daysList; let i = index'>
                                                 {{day.name}}</option>
                                         </select>
-                                        <p class="lbl">Choose Meal Type</p>
+                                        <p style="display:block;text-align:left">Choose Meal Type</p>
                                         <select name="planmealtype" [(ngModel)]="plan.mealType">
                                             <option value="{{mealtype.code}}"
                                                 *ngFor='let mealtype of mealTypesList; let i = index'>{{mealtype.name}}
@@ -477,13 +477,13 @@
 
                                     </div>
                                     <div *ngIf='recipe1.showAdd2C' class="add2mealplanmenu"
-                                        style="top:0px;width:100%; height:200px;">
+                                        style="top:0px;background-color: #f8f8f8 ">
                                         <a style="float:right;font-size:24px;padding-top: 0px;
                                         padding-right: 0px;" href="javascript:void(0)"
                                             (click)="recipe1.showAdd2C = false;"><i class="fa fa-close"
                                                 aria-hidden="true"></i> </a>
                                         <p class="title" style="display:block"> Add Recipe to Collections</p>
-                                        <p class="lbl">Choose Collection</p>
+                                        <p style="display:block;text-align:left">Choose Collection</p>
                                         <select name="collectionid" [(ngModel)]="collection.id">
                                             <option value="{{collection.id}}"
                                                 *ngFor='let collection of collectionsList; let i = index'>
@@ -633,7 +633,7 @@
                                         <option value="{{hlabel.name}}"
                                             *ngFor='let hlabel of healthlabelsList; let i = index' style="font-size:12px">
                                             {{hlabel.name}}</option>
-                                    </select>
+</select>
                                 </div>
                                 <div class='col-12 col-lg-3 col-md-3  item-section'>
                                     <p class="lbl">Diet Label</p>
