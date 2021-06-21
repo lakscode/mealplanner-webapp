@@ -1929,13 +1929,23 @@ limitTo(str, num)
 showhidecontent(recipe)
 {
 	recipe.showpopup = !recipe.showpopup
-	for(let r = 0; r < this.displayList.length; r++)
+/*	for(let r = 0; r < this.displayList.length; r++)
 	{
 		if(recipe.id !== this.displayList[r]["id"])
 		{
 			this.displayList[r]["showpopup"] = false;
 		}
 	}
+*/
+	for(let i = 0; i < this.recipesList.length;i++)
+	{
+		if(this.recipesList[i]["id"] !== recipe.id)
+		{
+			this.recipesList[i]["showpopup"] = false;
+			this.recipesList[i]["showAdd2MP"] = false;
+		}
+	}
+
 }
 
 showDayData(rowindex)
@@ -2030,6 +2040,8 @@ addtoplan: any;
 addtoMealPlan(recipe)
 {
 	this.addtoplan = {};
+
+	
 	this.loadOptions();
 this.selectedRecipe2Add2plan= recipe;
 recipe.showAdd2MP = !recipe.showAdd2MP; 

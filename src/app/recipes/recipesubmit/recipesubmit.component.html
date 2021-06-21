@@ -39,10 +39,10 @@
                                                             (focus)="ingredient.showMeasures= false; ingredient.showFoodCategories = true;ingredient.showimages = false;"
                                                             [(ngModel)]="ingredient.foodCategory"
                                                             [disabled]="i< existingIngCount" id="ingredientsfc{{i}}">
-                                                        <div *ngIf="ingredient.showFoodCategories" class="autofillpanel">
+                                                        <div *ngIf="ingredient.showFoodCategories" class="autofillpanel" style="width: 240px">
                                                             <ng-container
                                                                 *ngFor="let fc of displayListFoodCat; let fcc=index">
-                                                                <p style='  font-size: 16px;'
+                                                                <p style='  font-size: 14px;'
                                                                     (click)="setValue(ingredient, 'foodCategory', fc, i)">
                                                                     <span
                                                                         style="text-transform: capitalize;">{{fc}}</span>
@@ -98,12 +98,12 @@
                                                 name="ingredientsimg{{i}}" autocomplete="off"
                                                 [(ngModel)]="ingredient.image" [disabled]="i< existingIngCount "
                                                 id="ingredientsimg{{i}}"  (focus)="ingredient.showFoodCategories = false; ingredient.showMeasures = false; ingredient.showimages = true; showImages(ingredient)">
-                                                <div *ngIf="ingredient.showimages && displayListImages.length > 0" style="width:85%" class="autofillpanel">
-                                                    <ng-container
-                                                        *ngFor="let m of displayListImages; let mc=index">
-                                                        <p *ngIf="m.image && m.image !== null" style='  font-size: 16px;'
+                                                <div *ngIf="ingredient.showimages && displayListImages.length > 0" style="width:55%" class="autofillpanel">
+                                                    <ng-container *ngFor="let m of displayListImages; let mc=index">
+                                                        <p *ngIf="m.image && m.image !== null" style='  font-size: 14px;margin-bottom:10px !important;'
                                                             (click)="setValue(ingredient, 'image',m, i)">
-                                                            <img src="{{m.image}}" style='width:50px; height:50px' /><span>{{m.food}}</span>
+                                                            <img src="{{m.image}}" style='width:50px; height:50px;    border-radius: 50%;
+                                                            margin-right: 10px;' /><span>{{setFLU(m.food)}}</span>
                                                         </p>
                                                     </ng-container>
                                                 </div>

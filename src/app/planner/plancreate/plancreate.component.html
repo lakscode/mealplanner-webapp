@@ -299,38 +299,27 @@
                     <div class="recipes-horizontal divoverflowh">
 
 
-                        <div class="listing-search"  *ngFor="let recipe1 of recipesList; let ir = index;">
+                        <div class="listing-search"  *ngFor="let recipe1 of recipesList; let i = index;">
                             <div class="details">
                                 <div class="more" style="right: 10px;
                                 text-align: center;
                                 top: 20px;">
                                     <a (click)="showhidecontent(recipe1)" href="javascript:void(0)" [ngClass]="recipe1.showpopup?'contextmenu-icon active':'contextmenu-icon'" style=""><i class="fa fa-ellipsis-v"></i></a>
-                                    <div *ngIf="recipe1.showpopup" style="top:30px;" class="contextmenu" [ngClass] = "ir == 0? 'left130':'leftunset'"> 
+                                    <div *ngIf="recipe1.showpopup" style="top:30px;" class="contextmenu" [ngClass] = "i == 0? 'left130':'leftunset'"> 
                                        <a class="menu"  href="javascript:void(0)" (click)="recipe1.showpopup = false; addtoMealPlan(recipe1); "><i class="fa fa-calendar-plus-o" aria-hidden="true"></i> Add Meal</a>
                                   
-                                        <a  class="menu" href="javascript:void(0)"  (click)="recipe1.showAdd2MP = false; recipe1.showpopup =false;gotoRecipeDetails( recipe1.id)" ><i class="fa fa-list"></i>View Recipe</a>
-                                        <!--<a  (click)="makeacopy(recipe1)" class="menu" href="javascript:void(0)"><i class="fa fa-clone"></i>Make a Copy</a>-->
-                                        <!--<a  (click)="recipe1.showpopup = false; addCollectionsPopup(recipe1)" class="menu" href="javascript:void(0)"><i class="fa fa-plus-square-o"></i>Add to Collections</a>-->
+                                        <a  class="menu" href="javascript:void(0)"  (click)="recipe1.showAdd2MP = false; recipe1.showpopup =false; gotoRecipeDetails( recipe1.id)" ><i class="fa fa-list"></i>View Recipe</a>
+                                 
 
                                          </div>
 
-                                    <div *ngIf='recipe1.showAdd2MP' class="" style="top:0; height: 160px; " [ngClass] = "ir == 0? 'add2mealplanmenu left130':'add2mealplanmenu leftunset'">
+                                    <div *ngIf='recipe1.showAdd2MP' class="" style="top:0; height: 160px; " [ngClass] = "i == 0? 'add2mealplanmenu left130':'add2mealplanmenu leftunset'">
                                         <a style="float:right;font-size:24px;padding-top: 0px;
                                         padding-right: 0px;" href="javascript:void(0)" (click)="recipe1.showAdd2MP = false;"><i class="fa fa-close" aria-hidden="true"></i> </a>
                                         <p class="title"  style="display:block"> Add Recipe to Meal Plan</p>
-                                       <!-- <p style='width:100%' class="lbl">{{selectedRecipe2Add2plan.label}}</p>-->
-                                        <!--
-                                        <p class="lbl">Choose Day</p>
-                                        <select name="planday" [(ngModel)] ="addtoplan.day">
-                                            <option value="{{day.id}}" *ngFor='let day of daysList; let i = index'>{{day.name}}</option>
-                                        </select>
-                                        <p class="lbl">Choose Meal Type</p>
-                                        <select name="planmealtype" [(ngModel)] ="addtoplan.mealType">
-                                            <option value="{{i}}" *ngFor='let mealtype of mealTypeList; let i = index'>{{mealtype.name}}</option>
-                                        </select>-->
+                                      
                                         <div style="display: inline-block;
                                         width: 49%;margin-right:2%">
-                                        <!--<span class="lbl">Choose Day</span>-->
                                         <select name="planday" [(ngModel)] ="addtoplan.day">
                                             <option value="{{day.id}}" placeholder="Choose day" *ngFor='let day of daysList; let i = index'>{{day.name}}</option>
                                         </select>
