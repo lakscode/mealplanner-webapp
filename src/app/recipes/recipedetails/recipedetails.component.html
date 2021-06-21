@@ -169,8 +169,8 @@
                     <div class="left-box">
                         {{paramMicro[m].label}}
                         <br>
-                        <span *ngIf="!perServingFlag">{{paramMicro[m].totalP}}{{paramMicro[m].unit}}</span>
-                        <span *ngIf="perServingFlag">{{(paramMicro[m].totalP/searchRes.yield).toFixed(1)}}{{paramMicro[m].unit}}</span>
+                        <span *ngIf="!perServingFlag">{{paramMicro[m].totalP}} {{paramMicro[m].unit}}</span>
+                        <span *ngIf="perServingFlag">{{(paramMicro[m].totalP/searchRes.yield).toFixed(1)}}&nbsp;{{paramMicro[m].unit}}</span>
                         
                     </div>
                    
