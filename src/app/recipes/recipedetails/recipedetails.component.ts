@@ -258,23 +258,37 @@ loadRecipe(id)
 				  var fIndex = this.mineralsList.findIndex(x=> (x === mmicro.label.toLowerCase()));
 				  if(fIndex > -1)
 				  {
+					var fIndex1 = this.paramMicro.findIndex(x1=> (x1.label.toLowerCase() === mmicro.label.toLowerCase()));
+					console.log(fIndex1);
+					if(fIndex1 == -1)
+					{
 					mmicro.totalP = mmicro.total.toFixed(1);
+				//	if( mmicro.total > 0)
 					this.paramMicro.push(mmicro); 
+					}
 				  }
 				}
 			  }
 
-			  if(tempNutrients && this.searchRes["digest"] == "")
+			  if(tempNutrients)
 			  {
-				//console.log(tempNutrients);
+				console.log(tempNutrients);
 				for (let x in tempNutrients) {
 				//	console.log(tempNutrients[x]);
 					var mmicro = tempNutrients[x];
+					console.log(mmicro);
 					var fIndex = this.mineralsList.findIndex(x=> (x === mmicro.label.toLowerCase()));
 					if(fIndex > -1)
 					{
-					  mmicro.totalP = mmicro.quantity.toFixed(1);
-					  this.paramMicro.push(mmicro); 
+						var fIndex1 = this.paramMicro.findIndex(x1=> (x1.label.toLowerCase() === mmicro.label.toLowerCase()));
+						console.log(fIndex1);
+						if(fIndex1 == -1)
+						{
+							mmicro.totalP = mmicro.quantity.toFixed(1);
+							if( mmicro.quantity > 0)
+							this.paramMicro.push(mmicro); 
+						}
+					 
 					}
 				  }
 		

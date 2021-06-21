@@ -85,10 +85,16 @@ a:hover {
   left: 0;
   line-height: 26px;
 }
-.newitem:nth-child(1)
+.newitems .newitem
+{
+ // float:left;
+ // margin-right: 20px; 
+  
+}
+.newitems .newitem:nth-child(1)
 {
   top:29px;
-  left: 95px;
+  left: 5px;
   background: $bgcolornew1;
   transition: 0.9s;
   background-size: 200% auto;
@@ -98,7 +104,7 @@ background-image: linear-gradient(to right, #1A2980 0%, #26D0CE  51%, #1A2980  1
 //animation: load 5s infinite;
 } 
 
-.newitem:nth-child(2)
+.newitems .newitem:nth-child(2)
 {
   top: 30px;
   left: 170px;
@@ -108,7 +114,7 @@ background-image: linear-gradient(to right, #1A2980 0%, #26D0CE  51%, #1A2980  1
 } 
 
 
-.newitem:nth-child(3)
+.newitems .newitem:nth-child(3)
 {
   top: 100px;
     left: 40px;
@@ -118,16 +124,16 @@ background-image: linear-gradient(to right, #1A2980 0%, #26D0CE  51%, #1A2980  1
 
 } 
 
-.newitem:nth-child(4)
+.newitems .newitem:nth-child(4)
 {
   top: 110px;
-  left: 110px;
+  left: 130px;
   background: $bgcolornew4;
  // -webkit-animation: load 5s infinite 1.7s;
  // animation: load 5s infinite 1.7s;
 } 
 
-.newitem:nth-child(5)
+.newitems .newitem:nth-child(5)
 {
   top: 100px;
   left: 220px;
@@ -136,7 +142,7 @@ background-image: linear-gradient(to right, #1A2980 0%, #26D0CE  51%, #1A2980  1
  // animation: load 5s infinite 1.9s;
 } 
 
-.newitem:nth-child(6)
+.newitems .newitem:nth-child(6)
 {
   top: 170px;
   left: 10px;
@@ -145,7 +151,7 @@ background-image: linear-gradient(to right, #1A2980 0%, #26D0CE  51%, #1A2980  1
  // animation: load 5s infinite 0.7s;
 } 
 
-.newitem:nth-child(7)
+.newitems .newitem:nth-child(7)
 {
   top:175px;
   left: 90px;
@@ -154,7 +160,7 @@ background-image: linear-gradient(to right, #1A2980 0%, #26D0CE  51%, #1A2980  1
 //  animation: load 5s infinite 1.2s;
 } 
 
-.newitem:nth-child(8)
+.newitems .newitem:nth-child(8)
 {
   top: 180px;
     left: 170px;
@@ -165,7 +171,7 @@ background-image: linear-gradient(to right, #1A2980 0%, #26D0CE  51%, #1A2980  1
 
 
 
-.newitem:nth-child(9)
+.newitems .newitem:nth-child(9)
 {
   top: 250px;
   left: 10px;
@@ -173,21 +179,21 @@ background-image: linear-gradient(to right, #1A2980 0%, #26D0CE  51%, #1A2980  1
 } 
 
 
-.newitem:nth-child(10)
+.newitems .newitem:nth-child(10)
 {
   top: 250px;
   left: 100px;
   background: $bgcolornew10;
 } 
 
-.newitem:nth-child(11)
+.newitems .newitem:nth-child(11)
 {
   top:270px;
   left: 190px;
   background: $bgcolornew11;
 } 
 
-.newitem:nth-child(12)
+.newitems .newitem:nth-child(12)
 {
   top: 320px;
   left: 20px;
@@ -196,23 +202,45 @@ background-image: linear-gradient(to right, #1A2980 0%, #26D0CE  51%, #1A2980  1
 } 
 
 
-.newitem:nth-child(13)
+.newitems .newitem:nth-child(13)
 {
   top: 320px;
     left: 120px;
     background: $bgcolornew13;
 } 
 
-.newitem:nth-child(14)
+.newitems .newitem:nth-child(14)
 {
-  top: 320px;
+  top: 340px;
   left: 230px;
   background: $bgcolornew14;
 } 
 
-.newitem:nth-child(15)
+.newitems .newitem:nth-child(15)
 {
-  top:29px;
+  top:389px;
+  left: 30px;
+  background: $bgcolor15;
+} 
+
+.newitems .newitem:nth-child(16)
+{
+  top:389px;
+  left: 130px;
+  background: $bgcolor15;
+} 
+
+
+.newitems .newitem:nth-child(17)
+{
+  top:389px;
+  left: 230px;
+  background: $bgcolor15;
+} 
+
+.newitems .newitem:nth-child(18)
+{
+  top:489px;
   left: 30px;
   background: $bgcolor15;
 } 
