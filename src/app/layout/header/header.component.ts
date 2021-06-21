@@ -109,14 +109,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
 					{"id":"recipes-recipe-submit", "menu":"Submit Recipe", "link":"/recipesubmit", "display":displayMenu, "active":false}
 				]
 			},
-			{"id":"planner", "menu":"Planner", "link":"/plans", "display":displayMenu, "active":false,
+			{"id":"planner", "menu":"Planner", "link":"/plans", "display":displayMenu, "active":false/*,
 				"children":
 				[
 
 					{"id":"planner-plan-list", "menu":"Meal Plans", "link":"/plans", "display":displayMenu, "active":false},
 			//		{"id":"planner-plan-create", "menu":"Create Plan", "link":this.planLink, "display":displayMenu, "active":false}
 					
-				]
+				]*/
 			}	,
 			{"id":"collections", "menu":"Collections", "link":"/collections", "display":displayMenu, "active":false/*
 			,	"children":
