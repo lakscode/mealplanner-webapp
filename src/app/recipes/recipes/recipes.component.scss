@@ -507,7 +507,9 @@ color:#FFF;
 }
 }
 
-
+.lbl{
+  font-size:14px !important;
+}
 
 .multi-select-lbl
 {
@@ -565,3 +567,19 @@ color:#FFF;
   font-size:16px;
   margin-left:10px;
 }
+
+
+.submit-comment {
+    height: 42px;
+    background: #ccc;
+    font-family: 'Lora', serif;
+    font-size: 16px;
+    color: #ffffff;
+    padding: 0 35px;
+    border: none;
+    transition: 0.2s all ease-in-out;
+}
+
+.submit-comment.active {
+ background: #6ebe3b;
+ }
