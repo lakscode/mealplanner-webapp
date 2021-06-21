@@ -2,10 +2,11 @@ import { Component, OnInit, } from '@angular/core';
 import {HelpService} from "../services/help.service"
 
 import { ActivatedRoute, Router } from '@angular/router';
-
+import { UserService } from '../services/user.service';
 
 import {DBService} from "../dbservices/db.service";
-import { takeUntil } from 'rxjs/operators';
+import { SocialAuthService, GoogleLoginProvider, SocialUser, FacebookLoginProvider } from 'angularx-social-login'
+
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -26,8 +27,8 @@ userObj: any = {};
 role: any;
 sub: any;
   errorPassMatch: any;
-
-  constructor(private router: Router, private route: ActivatedRoute, private helpService: HelpService, private dbService: DBService) { 
+  socialUser: SocialUser;
+  constructor(private router: Router, private route: ActivatedRoute, private helpService: HelpService, private dbService: DBService, private socialAuthService: SocialAuthService, private userService: UserService) { 
     this.role = "FREE";
     this.errorMessage = "";
     this.successMessage = "";
@@ -76,21 +77,17 @@ signup()
   validEmail = this.ValidateEmail(this.userObj.email);
 
   console.log(validEmail);
-if(this.userObj.username == "" ||  this.userObj.confirmpass == "" || this.userObj.password == "" || this.userObj.email == "")
+if(this.userObj.password == "" || this.userObj.email == "")
 {
   this.errorMessage = "All the fields are mandatory.";
 }
-else if(this.userObj.password == "" ||  this.userObj.confirmpass == "")
+else if(this.userObj.password == "" )
 {
-  this.errorMessage = "Passwords are empty.";
+  this.errorMessage = "Password is empty.";
 }
-else if(this.userObj.password !== "" && this.userObj.password == this.userObj.confirmpass)
+else if(this.userObj.password !== "")
 {
-  if(this.userObj.username == "")
-  {
-    this.errorMessage = "Username is empty.";
-  }
-  else if(this.userObj.email == "")
+  if(this.userObj.email == "")
   {
     this.errorMessage = "Email is empty.";
   }
@@ -100,7 +97,7 @@ else if(this.userObj.password !== "" && this.userObj.password == this.userObj.co
   }
   else
   {
-  var params  = {'username': this.userObj.username, 'email':this.userObj.email}
+  var params  = {'username': this.userObj.email, 'email':this.userObj.email}
   console.log(JSON.stringify(params));
   var res =   this.dbService.checkIfExists("users", params).subscribe(invData => setTimeout(() => 
   {
@@ -141,7 +138,7 @@ else if(this.userObj.password !== "" && this.userObj.password == this.userObj.co
         var dcryptedPass = this.helpService.decryptPass(encryptedPass);
         console.log(dcryptedPass );
         var params = {
-          "username":this.userObj["username"],
+          "username":this.userObj["email"],
           "email":this.userObj["email"],
           "password":encryptedPass,
           "role":this.userObj['role']
@@ -223,6 +220,77 @@ gotologin()
   gotopage(page){
   this.router.navigate([page]);
   }
+
+  
+  loginWithGoogle(): void {
+    this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID);
+    this.socialLogin();
+  }
+
+  signInWithFB(): void {
+    this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID);
+    this.socialLogin();
+}
+
+socialLogin(){
+ this.socialAuthService.authState.subscribe((user) => {
+    this.socialUser = user;
+    //this.isLoggedin = (user != null);
+    console.log(this.socialUser);
+      var params = {
+        "username":this.socialUser.name,
+        "email":this.socialUser.email,
+        "social_id": this.socialUser.id,
+        "social_provider": this.socialUser.provider,
+        "image":this.socialUser.photoUrl
+
+      }
+
+  sessionStorage.setItem("socialLogin", this.socialUser.provider);
+      console.log(params);
+      var params1 = {'email':  this.socialUser.email};
+
+  this.dbService.checkIfExists("users", params1).subscribe(userDataObj => setTimeout(() => {
+    console.log(userDataObj);
+    if (userDataObj['body']['length'] > 0) {
+      var userDataSocial = userDataObj['body'][0];
+        if(userDataSocial["social_id"] == "") {
+          var paramsUpdate = {};
+          paramsUpdate["id"] = userDataSocial["id"];
+                paramsUpdate["social_id"] = this.socialUser.id;
+                paramsUpdate["social_provider"] = this.socialUser.provider;
+          
+          if(userDataSocial["image"] =="")
+                paramsUpdate["image"] = this.socialUser.photoUrl;
+    
+          
+          console.log(paramsUpdate);
+                 var res =   this.dbService.updateDataByTable("users", paramsUpdate).subscribe(invData => setTimeout(() => {
+                  console.log("successfully updated");
+          }));
+              }
+              sessionStorage.setItem("currentUser", JSON.stringify(userDataSocial));
+        let username = this.userService.setUser(userDataSocial);
+        this.gotopage("landing");
+          } else {
+              var res =   this.dbService.postData("users", params).subscribe(invData => setTimeout(() => {
+              console.log(invData);
+              if(invData !== null){
+                if(typeof(invData["result"]) !== "undefined" && invData["result"] == "success"){
+                    console.log("user has been successfully created");
+                    var parent = this;
+                    
+                      sessionStorage.setItem("currentUser", JSON.stringify(invData));
+              let username = this.userService.setUser(invData); 
+                        this.gotopage("landing");
+                  
+                 }
+              }
+           }));
+    }
+  }));      
+  });
+}
 
 
 }
