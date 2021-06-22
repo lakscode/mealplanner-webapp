@@ -25,10 +25,10 @@ extraItem: any;
   constructor(private router: Router, private location: Location, private route: ActivatedRoute, private userService: UserService) { 
 
 		this.amenuItems= [
-			{"id":"users", "menu":"Users", "subtitle":"Manage Employees, Realtors", "link":"/admin/users", "active":false, "visible":true,"icon":"group"},
-			{"id":"requests", "menu":"Enquiries",  "subtitle":"Manage Enquiries", "link":"/admin/enquires", "active":false, "visible":true, "icon":"tasks"},
-			{"id":"testimonials", "menu":"Testimonials", "subtitle":"Manage Testimonials", "link":"/admin/testimonials", "active":false, "visible":true, "icon":"trophy"},
-			{"id":"approve", "menu":"Approve Recipes", "subtitle":"Manage approve", "link":"/admin/approve", "active":false, "visible":true, "icon":"file"},
+			//{"id":"users", "menu":"Users", "subtitle":"Manage Employees, Realtors", "link":"/admin/users", "active":false, "visible":true,"icon":"group"},
+			//{"id":"requests", "menu":"Enquiries",  "subtitle":"Manage Enquiries", "link":"/admin/enquires", "active":false, "visible":true, "icon":"tasks"},
+			//{"id":"testimonials", "menu":"Testimonials", "subtitle":"Manage Testimonials", "link":"/admin/testimonials", "active":false, "visible":true, "icon":"trophy"},
+			{"id":"approve", "menu":"Approve Recipes", "subtitle":"Manage approve", "link":"/admin/approve", "active":false, "visible":true, "icon":"file"}
 		
 		];
 

@@ -1,19 +1,27 @@
-<div class="recipes-home-body inner-page">
+<div class=" recipes-home-body inner-page" style="padding-top:0px">
 
+<<<<<<< HEAD
     <div class="container" style="padding-left:0; padding-right:0;padding-top:0px">
+=======
+    <div class="container" style="padding-left:0; padding-right:0;">
+>>>>>>> 03d5828641675bde809ca633e5b01e1e4c97ee5a
         <div class="row">
             <div class="col-md-12 col-lg-12 col-xs-12">
                 <div class="recipe-set">
-                    <h2>Approve Recipe Changes</h2>
-                </div>
-                <div style="width:100%; text-align:right">
-                    <a href="javascript:void(0)" style="font-size:20px;" (click)="showFilters = !showFilters">
+                    <h2 style="width:60% !important">Approve Recipe Changes</h2>
+                            <div class="sortBtn" (click)="showFilters = !showFilters">
+    <i class="fa fa-ellipsis-h" style="margin-right:10px;"></i>    
+     
+  </div>
+                
+                <div>
+                   <!--  <a href="javascript:void(0)" style="font-size:20px;" (click)="showFilters = !showFilters">
                         <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
-                    </a>
+                    </a> -->
                    <div *ngIf="showFilters" style="position: absolute;
                    width: 150px;
                    height: 160px;
-                   top: 100px;
+                   top: 20px;
                    right: 0;
                    z-index: 1;
                    background: #FFF;
@@ -50,9 +58,10 @@
                     </div>
                     </div>
                     </div>
-                <div style='height:20px; width:100%'></div>
+                    </div>
+                <!-- <div style='height:15px; width:100%'></div> -->
                 <div style="width:100%">
-                <h3>{{setFLU(recordType)}} recipes</h3>
+                <h3 style="font-weight:bold;margin-left:10px">{{setFLU(recordType)}} Recipes</h3>
                 </div>
                 <div class="recipe-set" *ngIf="!noResult">
                    
@@ -78,16 +87,16 @@
 
                                         </h4>
                                         <span *ngIf="recipe1.rdietLabels"
-                                        style="font-size:12px;"> <b>Diet Labels:</b> {{formatlabels(recipe1.rdietLabels)}}</span>
+                                        style="font-size:12px;"> <b style="font-size:13px">Diet Labels:</b> {{formatlabels(recipe1.rdietLabels)}}</span>
 
                                  <span *ngIf="recipe1.rhealthLabels"
-                                        style="font-size:12px;">, <b>Health Labels:</b> {{formatlabels(recipe1.rhealthLabels)}}</span>
+                                        style="font-size:12px;">, <b style="font-size:13px">Health Labels:</b> {{formatlabels(recipe1.rhealthLabels)}}</span>
                                         <span *ngIf="recipe1.rcuisineType" 
-                                        style="font-size:12px;">, <b>Cuisine Type:</b> {{formatlabels(recipe1.rcuisineType)}}</span>
+                                        style="font-size:12px;">, <b style="font-size:13px">Cuisine Type:</b> {{formatlabels(recipe1.rcuisineType)}}</span>
 
                                     </div>
                                     <div class="col-2" >
-                                        <button (click)="recipe1.modify = !recipe1.modify">
+                                        <button class="create-button ng-star-inserted" style="padding:5px" (click)="recipe1.modify = !recipe1.modify">
                                             View Changes
                                         </button><br>
                                         <span *ngIf="recipe1.status == 2">
@@ -100,7 +109,7 @@
 
                                     <div class="col-12 modify-recipe-sec" *ngIf='recipe1.modify' style='border:1px solid #CCC; background:#f1f2f3;'>
                                         <div class="row">
-                                        <p class="title" style="display:block"> Modified Details </p>
+                                        <p class="title" style="display:block;font-weight:700;text-align:center"> Modified Details </p>
                                         <div class='col-12 item-section' style="width:100%">
                                             <div *ngIf="recipe1.label"class="newsec">
                                             <p class="lbl">Recipe Name</p>

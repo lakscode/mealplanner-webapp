@@ -716,7 +716,8 @@ endIndex = startIndex+ endIndex;
 	}
 
 	gotoRecipeDetails(id){
-	this.router.navigate(['recipedetails', id]);
+	//this.router.navigate(['recipedetails', id]);
+	window.open("/recipedetails/" + id)
 	}
 
 	loadNutrientsMaxMin()
