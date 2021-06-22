@@ -1,79 +1,73 @@
-<div class="fixedtop myinfo recipes-home-body inner-page">
-    <div class="row page-max-width bg-white">  
+<div class="fixedtop recipes-home-body inner-page">
+    
+  <div class="container" style="padding-top:20px;padding-left:0px; padding-right:0px;">
+      <div class="row">
 
-<div class="col-12">  
- 
-<div class="recipes-home-body inner-page">
-
-  <div class="row w-1200" style="text-align:center; margin:0 auto;">
-    <div class="col-12">
-      <div id="wrapper">
-          <h2></h2>
-
-          <div id="answer" *ngIf="errorMessage"><span style="color:red">{{errorMessage}}</span></div>
+<div class="col-12 col-lg-6">  
+  <div class="questions-panel">
+    <div *ngIf="!processing">
+      <ng-container *ngFor="let question of questions; let currentQuestion = index">
+    <div class="q-panel row" *ngIf="questions && questions[currentQuestion]">
+    <div class="col-12 col-lg-6 col-md-6"><p class="question-text">{{getFLU(questions[currentQuestion].question)}}</p></div>
+    <div class="col-12 col-lg-6 col-md-6">  
+    
+      
+    
+      <div *ngIf="questions[currentQuestion]['type'] == 'text'" style="text-align:center;">
+    
+        <input class="input-text" type="text" (keyup)="setAnswerText(questions[currentQuestion])" placeholder="Please enter value" style="font-size:14px" name = "question{{currentQuestion}}" [(ngModel)]="questions[currentQuestion]['answer']">
+        <span style='margin-left: 10px; font-size: 14px;' *ngIf="questions[currentQuestion].textlabel">{{questions[currentQuestion].textlabel}}</span>
+    
+        <div class="opts" *ngIf="questions[currentQuestion] && questions[currentQuestion].options &&  questions[currentQuestion].options.length > 0">
+          <!--<div (click)="toggleChoice(questions[currentQuestion], questions[currentQuestion].options, i)" [ngClass]="opt.selected?'opt sel':'opt'" *ngFor="let opt of questions[currentQuestion].options; let i = index;">{{opt.name}}</div>-->
+          <select [(ngModel)]="question['opt']">
+            <option value = "{{opt.name}}"*ngFor="let opt of questions[currentQuestion].options; let i = index;">
+              {{opt.name}}
+            </option>
+          </select>
+        </div>
        
-
-          <div class="row">
-          <form id="quiz">
-              <ng-container *ngFor="let question of questionsList; let i =index;">
-                <div class="col-12 col-lg-4 col-md-4" >
-                  <div [ngClass]="question.type == 'text'?'question-box h120':'question-box h200' ">
-                  
-                    <h4 class="question-name">{{question.question}} <span class="mandatory">&#42;</span></h4>
-                    <ng-container *ngIf="question.type == 'text'">
-
-                      <input class="input-text" type="text" (blur)="makeAnswers(question)" name="q_{{question.id}}"  [(ngModel)] = 'question.answer' />
-                      <span *ngIf="question.textlabel">{{question.textlabel}}</span>
-                      <div class="opts" *ngIf="question && question.options &&  question.options.length > 0">
-                        <div (click)="toggleChoice(question, question.options, i)" [ngClass]="opt.selected?'opt sel':'opt'" *ngFor="let opt of question.options; let i = index;">{{opt.name}}</div>
-
-                      </div>
-                     
-
-
-                    </ng-container>
-
-                    <ng-container *ngIf="question.type == 'option'">
-                    <ng-container  *ngFor="let answer of question.answers; let i =index;" >
-
-                      <label class="container1" style=" text-align: left; display:inline-block;max-width: 200px; width: auto; font-family: 'Lato', sans-serif;font-weight: 400;font-size: 16px;margin-right:10px;"> {{answer.text}}
-                        <input (change)="saveAnswer()" name="q_{{answer.name}}" [(ngModel)] = 'question.answer' type="radio" value="{{answer.text}}">
-                          <span class="checkmark1"></span>
-                      </label>
-                     </ng-container>
-                
-                    </ng-container>
-
-                    <ng-container *ngIf="question.type == 'checkbox'">
-                      <ng-container  *ngFor="let answer of question.answers; let i =index;" >
-  
-                        <label class="container" style=" text-align: left; display:inline-block;max-width: 200px; width: auto; font-family: 'Lato', sans-serif;font-weight: 400;font-size: 16px;"> {{answer.text}}
-                          <input (change)="makeAnswers(question)" name="q_{{answer.name}}" [(ngModel)] = 'answer.answer' type="checkbox" value="{{answer.value}}">
-                            <span class="checkmark"></span>
-                        </label>
-                       </ng-container>
-                  
-                      </ng-container>
-
-                  </div>
-              </div>
-              </ng-container>
-           
-          </form>
-          
+      </div>
+    
+      <div class="options-panel" *ngIf="questions[currentQuestion]['type'] == 'option' || questions[currentQuestion]['type'] == 'checkbox'">
+    
+        <div *ngIf="questions[currentQuestion]['answers'] && questions[currentQuestion]['answers']['length'] > 0">
+          <!--<div [ngClass]="questions[currentQuestion]['answer'] == answer.text?'btn-panel active':'btn-panel'" (click)="setAnswer(answer)" *ngFor="let answer of questions[currentQuestion]['answers']; let a = index;">
+            <div  class="answer-box" >
+              {{getFLU(answer.text)}}
+              <span style="font-size:12px; color:#000" *ngIf="answer.subtext !== ''"><br>{{getFLU(answer.subtext)}}</span>
+            </div>
+            <div class="tick-mark">
+              <i class="fa fa-check"></i>
+            </div>
+          </div>-->
+          <select [(ngModel)]="question['opt']">
+            <option value = "{{answer['answer']}}" *ngFor="let answer of questions[currentQuestion]['answers']; let a = index;">
+              {{getFLU(answer.text)}}
+              <span style="font-size:12px; color:#000" *ngIf="answer.subtext !== ''"> -{{getFLU(answer.subtext)}}</span>
+            </option>
+          </select>
         </div>
-        <div class="row">
-          <div class="col-12" style='text-align:right; margin-bottom:10px;'>
-            <button type="reset" id="reset" (click)="resetAnswer()">Reset</button>
-            <button type="submit" id="submit" (click)="saveAnswers()">Submit Your Answers</button>
-          </div>
-        </div>
-         
-        </div>
-    </div>  
-  </div>
-</div>
+      </div>
+      </div>
+ 
+
+    <!--<div style="width:100%; margin:0 auto;text-align:center;">
+    
+    <button [disabled] = "params['question'+ (currentQuestion+1)] == ''" *ngIf="currentQuestion < questions.length -1" [ngClass]="params['question'+ (currentQuestion+1)] !== ''?'btn-next active':'btn-next'" (click)="next()">Next</button>
+    <button [disabled] = "params['question'+ (currentQuestion+1)] == ''" *ngIf="currentQuestion == questions.length -1" [ngClass]="params['question'+ (currentQuestion+1)] !== ''?'btn-next active':'btn-next'" (click)="complete()">Complete</button>
+    </div>-->
+    </div>
+  </ng-container>"
+    </div>
+      <div *ngIf="processing">
+        <img class="rotate" src="assets/loading.png" />
+        
+      </div>
+    </div>
 
 </div>
 
   </div>
+</div>
+</div>
