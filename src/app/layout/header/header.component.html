@@ -10,7 +10,7 @@
                 </div>
                 <div class="col-8 col-lg-10">
                     <div class="outer-nav">
-                        <div class="wrapper-main-nav menuTitle" >
+                        <div class="wrapper-main-nav menuTitle"  style="margin-left: 150px">
                             <nav class="nav-collapse responsive-menu">
                                 <ul class="main-menu" *ngIf="!loggedIn">
                                     <li (click)="setMenuActive();" [ngClass]="menu.active == true?'active':''"  *ngFor="let menu of menuItems; let m = index">
@@ -39,9 +39,13 @@
                             </nav>
 
                         </div>
-                        <div class="wrapper-links"  style="display:inline-block;float: right;
-                        margin-top: 15px;">
-                            
+                        <div class="wrapper-links"  style="display: inline-block;
+                        margin-right: 30px; margin-top:10px;">
+                            <div *ngIf="loggedIn" style="display:inline-block;margin-right: 30px; border: 1px solid #CCC; border-radius: 15px;">
+                                <input style="padding: 5px 10px;
+                                border-radius: 15px; width: 200px; outline: 0; font-size: 14px;
+                                border: 0;" name="searchinput" [(ngModel)]="searchparam" placeholder="Search..." (keyup.enter)="searchparams()" type="text" />
+                            </div>
                             <!--<ul class="header-social-icons">
                                 <li><a href="javascript:void(0)"><i class="fa fa-facebook"></i></a></li>
                                 <li><a href="javascript:void(0)"><i class="fa fa-twitter"></i></a></li>
@@ -60,12 +64,12 @@
                                 <strong>{{SetFLU(userName)}}</strong></span>-->
                                 <p  style="margin-right:10px; margin-bottom:10px; font-size:14px;color:red " *ngIf='isTrialExpired'>Your Trial version expired.</p>
 
-                                      <a href="javascript:void(0);" (click)="gotopage('myinfo')">Settings</a>
-                                      <a href="javascript:void(0);" (click)="gotopage('preferences')">Preferences</a>
-                                      <a href="javascript:void(0);" (click)="gotopage('progress')">Progress</a>
-                                      <a href="javascript:void(0);" (click)="gotopage('calculate')">Calculators</a>                                     
+                                      <a href="javascript:void(0);" (click)="setMenuActive();gotopage('myinfo')">Settings</a>
+                                      <a href="javascript:void(0);" (click)="setMenuActive();gotopage('preferences')">Preferences</a>
+                                      <a href="javascript:void(0);" (click)="setMenuActive();gotopage('progress')">Progress</a>
+                                      <a href="javascript:void(0);" (click)="setMenuActive();gotopage('calculate')">Calculators</a>                                     
                                       <!--<a href="javascript:void(0);" (click)="gotopage('recipesmodify')">Modify Recipes</a>-->
-                                      <a href="javascript:void(0);" (click)="gotopage('admin/approve')">Approve Recipes</a>
+                                      <a href="javascript:void(0);" (click)="setMenuActive();gotopage('admin/approve')">Approve Recipes</a>
                                       <a  (click)="logout()" href="javascript:void(0)">Logout</a>
                                     
 

@@ -589,3 +589,70 @@ background-color: $orange;
 }
 
 
+
+
+$black: #1d1f20;
+$blue: #83e4e2;
+$green: #a2ed56;
+$yellow: #fddc32;
+$white: #fafafa;
+
+
+%boxshadow {
+  box-shadow: 3px 3px 6px rgba(0,0,0,0.05), 0 5px 12px rgba(75,0,0,0.05);
+}
+
+ol.gradient-list {
+  counter-reset: gradient-counter;
+  list-style: none;
+  margin: 17px 0;
+  padding-left: 10px;
+  > li {
+    background: #FFF;
+    border-radius: 0 5px 5px 5px;
+    @extend %boxshadow;
+    counter-increment: gradient-counter;
+    margin-top: 10px;
+    min-height: 40px;
+    padding: 10px 10px 10px 40px;
+    position: relative;
+    line-height: 24px;
+    text-align: justify;
+    &::before,
+    &::after {
+      background: linear-gradient(135deg, var(--blue) 0%, $green 100%);
+      border-radius: 10px 10px 0 10px;
+      content: '';
+      height: 40px;
+      left: -10px;
+      overflow: hidden;
+      position: absolute;
+      top: -10px;
+      width: 40px;
+    }
+    &::before {
+      align-items: flex-end;
+      @extend %boxshadow;
+      content: counter(gradient-counter);
+      color:var(--text-gray);
+      display: flex;
+      font: 900 16px 'Montserrat';
+      justify-content: flex-end;
+      padding: 10px 10px;
+      z-index: 1;
+    }
+    @for $i from 1 through 5 {
+      &:nth-child(10n+#{$i}):before {
+        background: linear-gradient(135deg, rgba($green, $i * 0.2) 0%,rgba($yellow, 1 - (($i - 4) * 0.2)) 100%);
+      }
+    }
+    @for $i from 6 through 10 {
+      &:nth-child(10n+#{$i}):before {
+        background: linear-gradient(135deg, rgba($green, 1 - (($i - 5) * 0.2)) 0%,rgba($yellow, 1 - (($i - 5) * 0.2)) 100%);
+      }
+    }
+    + li {
+      margin-top: 20px;
+    }
+  }
+}

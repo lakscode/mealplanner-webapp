@@ -39,13 +39,15 @@ export class HeaderComponent implements OnInit, OnDestroy {
 	companylogo : any;
 	collapsed: boolean  = true;
 	planLink:any;
+	searchparam: any;
+
 	constructor(private router :Router, private socialAuthService: SocialAuthService, public userService: UserService, public helpService: HelpService,  private dbService: DBService, private location: Location) {
 
 	var currentUrl = this.router.url;
 	currentUrl = currentUrl.replace("/","");
 	////console.log(currentUrl);
 	var displayMenu =  true;
-
+		this.searchparam = "";
             if(window.screen.width > 768 || window.innerWidth > 768)
             {
               // this.planLink = "/plan-create";
@@ -158,6 +160,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 	
 		
 		console.log("ngOninit");
+		this.setMenuActive();
 		this.userService.loggedinUser().subscribe(userdata => setTimeout(() => {
 			this.setIconMenu();
 			this.loggedIn = false;
@@ -198,6 +201,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
 				this.companylogo = 'assets/logo-dark.png';
 				this.companyname = "";
 				this.isTrialExpired = this.helpService.isTrialExpired(this.currentUser);
+
+				this.helpService.getIpaddress(this.currentUser);
 			}
 			
 		//	//console.log(this.loggedIn);
@@ -297,7 +302,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
 	setMenuActive()
 	{
-		
+		console.log("in setmenuactive");
+		console.log(this.router.url);
+
 		for(let i=0; i < this.menuItems.length; i++)
 		{
 			this.menuItems[i]["active"] = false;
@@ -338,7 +345,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
 			}	
 		}
 		
-		
+		console.log(this.menuItems);
+		console.log(this.menuItems1);
 	}
 	
 	
@@ -428,6 +436,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
 	{
 		if(this.subscribeCompanyService) this.subscribeCompanyService.unsubscribe();
 	}
-
+	searchparams()
+	{
+		console.log(this.searchparam);
+		if(this.searchparam !== "")
+		{
+			
+		}
+	}
   
 }

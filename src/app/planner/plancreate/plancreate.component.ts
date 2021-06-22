@@ -110,9 +110,9 @@ this.searchFilterLabels = [];
 		this.searchFilterLabels.push({"label":"Calories", "selected":false});
 
 		this.cuisineTypeList = [];
-		for(let c=0; c < constants.cusineTypeList.length; c++)
+		for(let c=0; c < constants.cuisineTypeList.length; c++)
 		{
-			this.cuisineTypeList.push({"name":constants.cusineTypeList[c], "selected":false})
+			this.cuisineTypeList.push({"name":constants.cuisineTypeList[c], "selected":false})
 		}
 
 		this.dietLabelsList= [];
@@ -1263,7 +1263,8 @@ limitTo(str, num)
 	this.colorCodes["fat"] ="#FFFF00";
 	this.colorCodes["protein"] ="#800000";
 	this.colorCodes["carbs"] ="#008000";
-
+	this.colorCodes["fiber"] ="#006000";
+	this.colorCodes["cholesterol"] ="#616000";
   }
 
   showhidenutrients()

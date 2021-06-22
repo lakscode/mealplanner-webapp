@@ -1,13 +1,16 @@
-<div class="fixedtop recipes-home-body inner-page">
-    
-  <div class="container" style="padding-top:20px;padding-left:0px; padding-right:0px;">
-      <div class="row">
+<div class="fixedtop myinfo recipes-home-body inner-page">
+  <div class="recipe-set submit-recipe-set page-max-width bg-white">
+    <h2 style="margin-bottom:30px; padding-top:30px; padding-left:15px;">Preferences</h2>
+   
 
-<div class="col-12 col-lg-6">  
+    <div class="row "> 
+
+<div class="col-12 col-lg-12">  
   <div class="questions-panel">
-    <div *ngIf="!processing">
+    <div *ngIf="!processing" class="row">
       <ng-container *ngFor="let question of questions; let currentQuestion = index">
-    <div class="q-panel row" *ngIf="questions && questions[currentQuestion]">
+    <div class="q-panel col-12 col-lg-6 col-md-6" *ngIf="questions && questions[currentQuestion]">
+      <div class="row">
     <div class="col-12 col-lg-6 col-md-6"><p class="question-text">{{getFLU(questions[currentQuestion].question)}}</p></div>
     <div class="col-12 col-lg-6 col-md-6">  
     
@@ -41,7 +44,7 @@
               <i class="fa fa-check"></i>
             </div>
           </div>-->
-          <select [(ngModel)]="question['opt']">
+          <select [(ngModel)]="question['opt']" style="max-width:100%">
             <option value = "{{answer['answer']}}" *ngFor="let answer of questions[currentQuestion]['answers']; let a = index;">
               {{getFLU(answer.text)}}
               <span style="font-size:12px; color:#000" *ngIf="answer.subtext !== ''"> -{{getFLU(answer.subtext)}}</span>
@@ -57,8 +60,8 @@
     <button [disabled] = "params['question'+ (currentQuestion+1)] == ''" *ngIf="currentQuestion < questions.length -1" [ngClass]="params['question'+ (currentQuestion+1)] !== ''?'btn-next active':'btn-next'" (click)="next()">Next</button>
     <button [disabled] = "params['question'+ (currentQuestion+1)] == ''" *ngIf="currentQuestion == questions.length -1" [ngClass]="params['question'+ (currentQuestion+1)] !== ''?'btn-next active':'btn-next'" (click)="complete()">Complete</button>
     </div>-->
-    </div>
-  </ng-container>"
+    </div></div>
+  </ng-container>
     </div>
       <div *ngIf="processing">
         <img class="rotate" src="assets/loading.png" />

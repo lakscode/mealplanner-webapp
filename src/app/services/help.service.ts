@@ -888,6 +888,18 @@ SendEmailPasswordReset(email,data) {
 		
 
 	  }
+	   
+	 
+	  getIpaddress(user)
+	  {
+		console.log(user);
 
+		fetch("https://api.ipify.org/?format=json"),function(response) {
+            alert(response.ip);
+        };
+		
+		  
+		
+	}
 	  
 }

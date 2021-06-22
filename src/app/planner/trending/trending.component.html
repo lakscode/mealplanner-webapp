@@ -7,7 +7,12 @@
           <div class="col-12 col-md-6  col-lg-4">
             <h1 class="title-black center">{{plan.name}}</h1>
           </div>
-          <div *ngIf='showNutrientsFlag' class="col-12 col-md-6 col-lg-8">
+          <div class="col-12 col-md-6  col-lg-8">
+            <div style="text-align:right; margin-top:20px;">
+           <button (click)="startPlan()">Start the Plan</button>
+          </div>
+          </div>
+          <div *ngIf='showNutrientsFlag' class="col-12">
             <div style="text-align:right; margin-top:20px;">
             <div style="display:inline-block;">
               <label style="font-size:14px">Total Nutrients &nbsp;&nbsp;</label>
@@ -48,7 +53,7 @@
                 <div class="nutrient-item">
                   <div class="label">{{SetFLU(nutrient1["name"])}}</div>
                   <div class="quantity">{{nutrient1.value.toFixed(2)}}</div>
-                  <div class="unit"> {{nutrient1.unit}}</div>
+                  <div class="unit"> &nbsp;{{nutrient1.unit}}</div>
                 </div>
 
               </ng-container>

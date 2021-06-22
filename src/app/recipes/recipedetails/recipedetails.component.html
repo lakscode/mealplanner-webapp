@@ -185,7 +185,17 @@
     <div class="recipe-steps">
         <h3 class="lined">Step by Step method</h3>
 
-                <div class="row" *ngFor="let instr of searchRes['instructions']; let j=index; let even = even;">
+                <!--<div class="row" *ngFor="let instr of searchRes['instructions']; let j=index; let even = even;">-->
+                    <div class="row">
+
+                    <div class="col-12">
+                    <ol class="gradient-list">
+                        <li *ngFor="let inst of searchRes['instructions']; let x = index">
+                          {{setFLU(inst)}}
+                        </li>
+                      </ol>
+                      </div>
+<!--
                     <div class="col-sm-9">
                         <p>
                             {{instr}}
@@ -194,7 +204,7 @@
                     </div>
                     <div class="col-sm-3">
                         <img style="max-height: 150px;" *ngIf="searchRes['ingredients'][j] && searchRes['ingredients'][j]['image']" src="{{searchRes['ingredients'][j]['image']}}" alt="image">
-                    </div>
+                    </div>-->
                 </div>
          
     

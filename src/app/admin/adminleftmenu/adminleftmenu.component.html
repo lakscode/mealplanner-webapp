@@ -2,10 +2,10 @@
 
 <div class="containeradmin" style="margin-bottom:15px;">
 
-	<nav class="navigation">
-		<ul class="mainmenu">
-		  <li style='display:block;' *ngFor="let aitem of amenuItems; let i = index;">
-			  <a [ngClass]="aitem.active?' active ':' '" href="javascript:void(0);" (click)="setmenu(aitem)">
+
+		<ul class="sidemenu">
+		  <li [ngClass]="aitem.active?' active ':' '"  *ngFor="let aitem of amenuItems; let i = index;">
+			  <a href="javascript:void(0);" (click)="setmenu(aitem)">
 			  	<i class="fa fa-{{aitem.icon}}"></i>
 				  <strong> {{aitem.menu}} </strong> 
 				</a>
@@ -14,8 +14,7 @@
 		 
 
 		</ul>
-	  </nav>
-
+	 
 
 	</div>
 

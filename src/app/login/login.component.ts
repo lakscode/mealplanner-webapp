@@ -41,6 +41,8 @@ export class LoginComponent implements OnInit {
 		sessionStorage.setItem("socialLogin", "");
 		this.rememberMe = true;
 		this.users = JSON.parse(sessionStorage.getItem("user"));
+
+		
 		this.redirecturl = "";
 		//	let token = this.route.params
 		if (typeof (this.users) !== "undefined" && this.users !== null) {

@@ -335,7 +335,14 @@ export class TrendingComponent implements OnInit {
 					}
 					else
 					{
-					  oRecipe["ingredients"] = JSON.parse(oRecipe["ingredients"]);
+						try
+						{
+					  		oRecipe["ingredients"] = JSON.parse(oRecipe["ingredients"]);
+						}
+						catch(error)
+						{
+							console.log(error);
+						}
    
 					}
 				  }
@@ -495,6 +502,7 @@ export class TrendingComponent implements OnInit {
 	}
 	startPlan()
 	{
+		console.log("start Plan");
 	  var params = {};
 	  if(this.userid !== null && this.userid !== "")
 	  {

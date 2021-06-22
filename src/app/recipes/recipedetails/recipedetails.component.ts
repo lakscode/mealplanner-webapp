@@ -231,6 +231,7 @@ loadRecipe(id)
 					this.searchRes["ingredients"].push({"text":temp[t]})
 				  }
 			  }
+			  console.log(this.searchRes["s_instructions"]);
 			  this.searchRes["instructions"] = this.searchRes["s_instructions"];
 
 
@@ -259,7 +260,7 @@ loadRecipe(id)
 				  if(fIndex > -1)
 				  {
 					var fIndex1 = this.paramMicro.findIndex(x1=> (x1.label.toLowerCase() === mmicro.label.toLowerCase()));
-					console.log(fIndex1);
+				//	console.log(fIndex1);
 					if(fIndex1 == -1)
 					{
 					mmicro.totalP = mmicro.total.toFixed(1);
@@ -272,16 +273,16 @@ loadRecipe(id)
 
 			  if(tempNutrients)
 			  {
-				console.log(tempNutrients);
+			//	console.log(tempNutrients);
 				for (let x in tempNutrients) {
 				//	console.log(tempNutrients[x]);
 					var mmicro = tempNutrients[x];
-					console.log(mmicro);
+				//	console.log(mmicro);
 					var fIndex = this.mineralsList.findIndex(x=> (x === mmicro.label.toLowerCase()));
 					if(fIndex > -1)
 					{
 						var fIndex1 = this.paramMicro.findIndex(x1=> (x1.label.toLowerCase() === mmicro.label.toLowerCase()));
-						console.log(fIndex1);
+					//	console.log(fIndex1);
 						if(fIndex1 == -1)
 						{
 							mmicro.totalP = mmicro.quantity.toFixed(1);
@@ -1009,6 +1010,16 @@ makeacopy()
 	//  console.log(recipeData);	     
    // }));
   }
+
+  setFLU(str)
+	{
+		var retValue = str;
+		if(str !== "")
+		{
+			retValue = this.helpService.setInputFirstToUppercase(str);
+		}
+		return retValue;
+	}
 }
 
 

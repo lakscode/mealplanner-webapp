@@ -56,7 +56,8 @@ export const constants = {
       ["#2CA02C", "#BCBD22", "#1F77B4", "#D62728","#9467BD","#F9CB9C","#FF9900"]
       ],
   "cusineType":["american","british","caribbean","central europe","chinese","eastern europe","italian","korean","bulgogi","mediterranean","nordic","south american","south east asian","asian","central europe","indian","japanese","middle eastern","south east asian","french","greek","italian","mexican","kosher"],
-  "cusineTypeList":["american","asian","chinese","french","italian","indian","japanese","kosher","mexican","korean"],
+ // "cusineTypeList":["american","asian","chinese","french","italian","indian","japanese","kosher","mexican","korean"],
+ "cuisineTypeList":["american","asian","bibimbap","british","bulgogi","caribbean","central europe","chinese","eastern europe","french","greek", "indian","italian", "japanese","kimchi",  "korean","kosher",  "mediterranean","mexican",  "middle eastern","nordic", "south american", "south east asian",    "world"],
   "mealTypeList":["breakfast","snack","lunch","teatime","dinner"],
 
    "measureList":['<unit>', 'cup', 'tablespoon', 'teaspoon', 'ounce', 'pint', 'pinch', 'pound', 'roll', 'gram', 'slice','inch', 'piece', 'handful','bowl', 'stick', 'milliliter', 'bunch', 'package', 'kilogram', 'drop', 'can', 'cube', 'fluid ounce', 'pack', 'root', 'half', 'liter', 'quart', 'bag'],

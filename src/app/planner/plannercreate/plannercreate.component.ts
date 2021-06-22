@@ -97,9 +97,9 @@ this.searchFilterLabels = [];
 		this.searchFilterLabels.push({"label":"Calories", "selected":false});
 
 		this.cuisineTypeList = [];
-		for(let c=0; c < constants.cusineTypeList.length; c++)
+		for(let c=0; c < constants.cuisineTypeList.length; c++)
 		{
-			this.cuisineTypeList.push({"name":constants.cusineTypeList[c], "selected":false})
+			this.cuisineTypeList.push({"name":constants.cuisineTypeList[c], "selected":false})
 		}
 
 		this.dietLabelsList= [];

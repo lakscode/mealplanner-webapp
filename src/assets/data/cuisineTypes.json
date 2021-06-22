@@ -1,0 +1,680 @@
+{
+    "body": [
+        {
+            "cuisineType": ""
+        },
+        {
+            "cuisineType": "american"
+        },
+        {
+            "cuisineType": "american~bibimbap"
+        },
+        {
+            "cuisineType": "american~british"
+        },
+        {
+            "cuisineType": "american~bulgogi"
+        },
+        {
+            "cuisineType": "american~caribbean"
+        },
+        {
+            "cuisineType": "american~central europe"
+        },
+        {
+            "cuisineType": "american~chinese"
+        },
+        {
+            "cuisineType": "american~eastern europe"
+        },
+        {
+            "cuisineType": "american~greek"
+        },
+        {
+            "cuisineType": "american~italian"
+        },
+        {
+            "cuisineType": "american~japanese"
+        },
+        {
+            "cuisineType": "american~korean"
+        },
+        {
+            "cuisineType": "american~korean~bulgogi"
+        },
+        {
+            "cuisineType": "american~mediterranean"
+        },
+        {
+            "cuisineType": "american~nordic"
+        },
+        {
+            "cuisineType": "american~south american"
+        },
+        {
+            "cuisineType": "american~south east asian"
+        },
+        {
+            "cuisineType": "asian"
+        },
+        {
+            "cuisineType": "asian~american"
+        },
+        {
+            "cuisineType": "asian~american~korean"
+        },
+        {
+            "cuisineType": "asian~bibimbap"
+        },
+        {
+            "cuisineType": "asian~british"
+        },
+        {
+            "cuisineType": "asian~caribbean"
+        },
+        {
+            "cuisineType": "asian~central europe"
+        },
+        {
+            "cuisineType": "asian~chinese"
+        },
+        {
+            "cuisineType": "asian~chinese~korean"
+        },
+        {
+            "cuisineType": "asian~chinese~south east asian"
+        },
+        {
+            "cuisineType": "asian~eastern europe"
+        },
+        {
+            "cuisineType": "asian~indian"
+        },
+        {
+            "cuisineType": "asian~indian~chinese"
+        },
+        {
+            "cuisineType": "asian~italian"
+        },
+        {
+            "cuisineType": "asian~japanese"
+        },
+        {
+            "cuisineType": "asian~japanese~bulgogi"
+        },
+        {
+            "cuisineType": "asian~japanese~south east asian"
+        },
+        {
+            "cuisineType": "asian~korean"
+        },
+        {
+            "cuisineType": "asian~mediterranean"
+        },
+        {
+            "cuisineType": "asian~middle eastern"
+        },
+        {
+            "cuisineType": "asian~nordic"
+        },
+        {
+            "cuisineType": "asian~south american"
+        },
+        {
+            "cuisineType": "asian~south east asian"
+        },
+        {
+            "cuisineType": "british"
+        },
+        {
+            "cuisineType": "british~caribbean"
+        },
+        {
+            "cuisineType": "british~central europe"
+        },
+        {
+            "cuisineType": "british~eastern europe"
+        },
+        {
+            "cuisineType": "british~nordic"
+        },
+        {
+            "cuisineType": "british~south american"
+        },
+        {
+            "cuisineType": "bulgogi~eastern europe"
+        },
+        {
+            "cuisineType": "caribbean"
+        },
+        {
+            "cuisineType": "caribbean~central europe"
+        },
+        {
+            "cuisineType": "caribbean~nordic"
+        },
+        {
+            "cuisineType": "caribbean~south american"
+        },
+        {
+            "cuisineType": "caribbean~south east asian"
+        },
+        {
+            "cuisineType": "central europe"
+        },
+        {
+            "cuisineType": "chinese"
+        },
+        {
+            "cuisineType": "chinese~bibimbap"
+        },
+        {
+            "cuisineType": "chinese~british"
+        },
+        {
+            "cuisineType": "chinese~bulgogi"
+        },
+        {
+            "cuisineType": "chinese~caribbean"
+        },
+        {
+            "cuisineType": "chinese~central europe"
+        },
+        {
+            "cuisineType": "chinese~eastern europe"
+        },
+        {
+            "cuisineType": "chinese~japanese"
+        },
+        {
+            "cuisineType": "chinese~korean"
+        },
+        {
+            "cuisineType": "chinese~nordic"
+        },
+        {
+            "cuisineType": "chinese~south american"
+        },
+        {
+            "cuisineType": "chinese~south east asian"
+        },
+        {
+            "cuisineType": "eastern europe"
+        },
+        {
+            "cuisineType": "eastern europe~central europe"
+        },
+        {
+            "cuisineType": "french"
+        },
+        {
+            "cuisineType": "french~american"
+        },
+        {
+            "cuisineType": "french~american~south american"
+        },
+        {
+            "cuisineType": "french~asian"
+        },
+        {
+            "cuisineType": "french~british"
+        },
+        {
+            "cuisineType": "french~caribbean"
+        },
+        {
+            "cuisineType": "french~central europe"
+        },
+        {
+            "cuisineType": "french~chinese"
+        },
+        {
+            "cuisineType": "french~eastern europe"
+        },
+        {
+            "cuisineType": "french~greek"
+        },
+        {
+            "cuisineType": "french~indian"
+        },
+        {
+            "cuisineType": "french~italian"
+        },
+        {
+            "cuisineType": "french~italian~south east asian"
+        },
+        {
+            "cuisineType": "french~japanese"
+        },
+        {
+            "cuisineType": "french~korean"
+        },
+        {
+            "cuisineType": "french~kosher"
+        },
+        {
+            "cuisineType": "french~mediterranean"
+        },
+        {
+            "cuisineType": "french~mediterranean~greek"
+        },
+        {
+            "cuisineType": "french~mexican"
+        },
+        {
+            "cuisineType": "french~middle eastern"
+        },
+        {
+            "cuisineType": "french~nordic"
+        },
+        {
+            "cuisineType": "french~south american"
+        },
+        {
+            "cuisineType": "french~south east asian"
+        },
+        {
+            "cuisineType": "greek~central europe"
+        },
+        {
+            "cuisineType": "greek~italian"
+        },
+        {
+            "cuisineType": "greek~nordic"
+        },
+        {
+            "cuisineType": "indian"
+        },
+        {
+            "cuisineType": "indian~american"
+        },
+        {
+            "cuisineType": "indian~british"
+        },
+        {
+            "cuisineType": "indian~caribbean"
+        },
+        {
+            "cuisineType": "indian~central europe"
+        },
+        {
+            "cuisineType": "indian~chinese"
+        },
+        {
+            "cuisineType": "indian~italian"
+        },
+        {
+            "cuisineType": "indian~mediterranean"
+        },
+        {
+            "cuisineType": "indian~mediterranean~greek"
+        },
+        {
+            "cuisineType": "indian~middle eastern"
+        },
+        {
+            "cuisineType": "indian~nordic"
+        },
+        {
+            "cuisineType": "indian~south american"
+        },
+        {
+            "cuisineType": "indian~south east asian"
+        },
+        {
+            "cuisineType": "italian"
+        },
+        {
+            "cuisineType": "italian~bibimbap"
+        },
+        {
+            "cuisineType": "italian~british"
+        },
+        {
+            "cuisineType": "italian~caribbean"
+        },
+        {
+            "cuisineType": "italian~central europe"
+        },
+        {
+            "cuisineType": "italian~chinese"
+        },
+        {
+            "cuisineType": "italian~eastern europe"
+        },
+        {
+            "cuisineType": "italian~japanese"
+        },
+        {
+            "cuisineType": "italian~korean"
+        },
+        {
+            "cuisineType": "italian~nordic"
+        },
+        {
+            "cuisineType": "italian~south american"
+        },
+        {
+            "cuisineType": "italian~south east asian"
+        },
+        {
+            "cuisineType": "japanese"
+        },
+        {
+            "cuisineType": "japanese~british"
+        },
+        {
+            "cuisineType": "japanese~bulgogi"
+        },
+        {
+            "cuisineType": "japanese~central europe"
+        },
+        {
+            "cuisineType": "japanese~eastern europe"
+        },
+        {
+            "cuisineType": "japanese~korean"
+        },
+        {
+            "cuisineType": "japanese~nordic"
+        },
+        {
+            "cuisineType": "japanese~south american"
+        },
+        {
+            "cuisineType": "japanese~south east asian"
+        },
+        {
+            "cuisineType": "kimchi~american"
+        },
+        {
+            "cuisineType": "kimchi~american~korean"
+        },
+        {
+            "cuisineType": "kimchi~asian"
+        },
+        {
+            "cuisineType": "kimchi~asian~american"
+        },
+        {
+            "cuisineType": "kimchi~caribbean"
+        },
+        {
+            "cuisineType": "kimchi~central europe"
+        },
+        {
+            "cuisineType": "kimchi~chinese"
+        },
+        {
+            "cuisineType": "kimchi~chinese~korean"
+        },
+        {
+            "cuisineType": "kimchi~french"
+        },
+        {
+            "cuisineType": "kimchi~french~bibimbap"
+        },
+        {
+            "cuisineType": "kimchi~italian"
+        },
+        {
+            "cuisineType": "kimchi~japanese"
+        },
+        {
+            "cuisineType": "kimchi~mediterranean"
+        },
+        {
+            "cuisineType": "kimchi~mexican~korean"
+        },
+        {
+            "cuisineType": "kimchi~middle eastern"
+        },
+        {
+            "cuisineType": "kimchi~nordic"
+        },
+        {
+            "cuisineType": "kimchi~south american"
+        },
+        {
+            "cuisineType": "kimchi~south east asian"
+        },
+        {
+            "cuisineType": "korean~caribbean"
+        },
+        {
+            "cuisineType": "korean~nordic"
+        },
+        {
+            "cuisineType": "korean~south american"
+        },
+        {
+            "cuisineType": "korean~south east asian"
+        },
+        {
+            "cuisineType": "kosher"
+        },
+        {
+            "cuisineType": "kosher~american"
+        },
+        {
+            "cuisineType": "kosher~central europe"
+        },
+        {
+            "cuisineType": "kosher~chinese"
+        },
+        {
+            "cuisineType": "kosher~italian"
+        },
+        {
+            "cuisineType": "kosher~korean"
+        },
+        {
+            "cuisineType": "kosher~mediterranean"
+        },
+        {
+            "cuisineType": "kosher~middle eastern"
+        },
+        {
+            "cuisineType": "kosher~nordic"
+        },
+        {
+            "cuisineType": "mediterranean"
+        },
+        {
+            "cuisineType": "mediterranean~british"
+        },
+        {
+            "cuisineType": "mediterranean~caribbean"
+        },
+        {
+            "cuisineType": "mediterranean~central europe"
+        },
+        {
+            "cuisineType": "mediterranean~chinese"
+        },
+        {
+            "cuisineType": "mediterranean~eastern europe"
+        },
+        {
+            "cuisineType": "mediterranean~greek"
+        },
+        {
+            "cuisineType": "mediterranean~italian"
+        },
+        {
+            "cuisineType": "mediterranean~japanese"
+        },
+        {
+            "cuisineType": "mediterranean~korean"
+        },
+        {
+            "cuisineType": "mediterranean~korean~bulgogi"
+        },
+        {
+            "cuisineType": "mediterranean~nordic"
+        },
+        {
+            "cuisineType": "mediterranean~south american"
+        },
+        {
+            "cuisineType": "mediterranean~south east asian"
+        },
+        {
+            "cuisineType": "mexican"
+        },
+        {
+            "cuisineType": "mexican~american"
+        },
+        {
+            "cuisineType": "mexican~american~central europe"
+        },
+        {
+            "cuisineType": "mexican~american~italian"
+        },
+        {
+            "cuisineType": "mexican~asian"
+        },
+        {
+            "cuisineType": "mexican~asian~korean"
+        },
+        {
+            "cuisineType": "mexican~bibimbap"
+        },
+        {
+            "cuisineType": "mexican~british"
+        },
+        {
+            "cuisineType": "mexican~bulgogi"
+        },
+        {
+            "cuisineType": "mexican~caribbean"
+        },
+        {
+            "cuisineType": "mexican~central europe"
+        },
+        {
+            "cuisineType": "mexican~chinese"
+        },
+        {
+            "cuisineType": "mexican~eastern europe"
+        },
+        {
+            "cuisineType": "mexican~greek"
+        },
+        {
+            "cuisineType": "mexican~indian"
+        },
+        {
+            "cuisineType": "mexican~italian"
+        },
+        {
+            "cuisineType": "mexican~japanese"
+        },
+        {
+            "cuisineType": "mexican~korean"
+        },
+        {
+            "cuisineType": "mexican~korean~bulgogi"
+        },
+        {
+            "cuisineType": "mexican~mediterranean"
+        },
+        {
+            "cuisineType": "mexican~middle eastern"
+        },
+        {
+            "cuisineType": "mexican~nordic"
+        },
+        {
+            "cuisineType": "mexican~south american"
+        },
+        {
+            "cuisineType": "mexican~south east asian"
+        },
+        {
+            "cuisineType": "middle eastern"
+        },
+        {
+            "cuisineType": "middle eastern~american"
+        },
+        {
+            "cuisineType": "middle eastern~british"
+        },
+        {
+            "cuisineType": "middle eastern~caribbean"
+        },
+        {
+            "cuisineType": "middle eastern~chinese"
+        },
+        {
+            "cuisineType": "middle eastern~eastern europe"
+        },
+        {
+            "cuisineType": "middle eastern~greek"
+        },
+        {
+            "cuisineType": "middle eastern~italian"
+        },
+        {
+            "cuisineType": "middle eastern~japanese"
+        },
+        {
+            "cuisineType": "middle eastern~mediterranean"
+        },
+        {
+            "cuisineType": "middle eastern~mediterranean~central europe"
+        },
+        {
+            "cuisineType": "middle eastern~nordic"
+        },
+        {
+            "cuisineType": "middle eastern~south american"
+        },
+        {
+            "cuisineType": "middle eastern~south east asian"
+        },
+        {
+            "cuisineType": "nordic"
+        },
+        {
+            "cuisineType": "nordic~bulgogi"
+        },
+        {
+            "cuisineType": "nordic~central europe"
+        },
+        {
+            "cuisineType": "nordic~eastern europe"
+        },
+        {
+            "cuisineType": "nordic~south american"
+        },
+        {
+            "cuisineType": "nordic~south east asian"
+        },
+        {
+            "cuisineType": "south american"
+        },
+        {
+            "cuisineType": "south american~central europe"
+        },
+        {
+            "cuisineType": "south american~eastern europe"
+        },
+        {
+            "cuisineType": "south american~south east asian"
+        },
+        {
+            "cuisineType": "south east asian"
+        },
+        {
+            "cuisineType": "south east asian~central europe"
+        },
+        {
+            "cuisineType": "world"
+        },
+        {
+            "cuisineType": "[\"american\"]"
+        }
+    ],
+    "count": 225
+}

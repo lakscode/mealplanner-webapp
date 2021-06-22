@@ -11,13 +11,13 @@ import { takeUntil } from 'rxjs/operators';
 import * as $ from 'jquery';
 import { constants } from '../../jsonfiles/constants';
 //declare var $: any;
-
+import { ModalService } from '../../shared/modules/modal/modal.service';
 @Component({
-	selector: 'app-recipesmodify',
-	templateUrl: './recipesmodify.component.html',
-	styleUrls: ['./recipesmodify.component.scss']
+	selector: 'app-searchresults',
+	templateUrl: './searchresults.component.html',
+	styleUrls: ['./searchresults.component.scss']
 })
-export class RecipesmodifyComponent implements OnInit {
+export class SearchresultsComponent implements OnInit {
 	recipesList: Array<any> = [];
 	recipesList1: Array<any> = [];
 	recipesList2: Array<any> = [];
@@ -43,11 +43,12 @@ export class RecipesmodifyComponent implements OnInit {
 	showNutrientsFlag: boolean = false;
 	cuisineTypeList : Array<any> = [];
 	noResult: boolean = false;
-	cuisineTypesList : Array<any> = [];
 
 	searchFilterLabels: Array<any> = [];
 	splitcontent : boolean = false;
-	constructor(private router: Router, private toastr: ToastrService, private route: ActivatedRoute, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
+	filterOpts: any; 
+	sortType: any = "";
+	constructor(private router: Router, private toastr: ToastrService, private route: ActivatedRoute, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder, private modalService: ModalService) {
 	
 	}
 	toggleMore() {
@@ -55,12 +56,21 @@ export class RecipesmodifyComponent implements OnInit {
 		if (this.searchmorebar)
 			this.animClass = "searchbaranim";
 	}
+
+	hideLabels()
+	{
+		for(let l=0; l < this.searchFilterLabels.length; l++)
+		{
+			this.searchFilterLabels[l]['selected'] = false;
+		}
+	}
+
 	showLabels(label)
 	{
 		for(let l=0; l < this.searchFilterLabels.length; l++)
 		{
 			if( this.searchFilterLabels[l]["label"] == label.label)
-			this.searchFilterLabels[l]['selected'] = true;
+			this.searchFilterLabels[l]['selected'] = !this.searchFilterLabels[l]['selected'];
 			else
 			this.searchFilterLabels[l]['selected'] = false;
 		}
@@ -70,6 +80,10 @@ export class RecipesmodifyComponent implements OnInit {
 		this.searchmorebar = false;
 	//	this.dietLabelsList = constants.dietLabels;
 		this.getNutrientsMaxMin(); 
+
+		this.filterOpts = {};
+		this.filterOpts = {"asc":false, "desc": false, "calories":false, "all":false}
+		this.sortType = "";
 
 		this.searchFilterLabels = [];
 		this.searchFilterLabels.push({"label":"Health Labels", "selected":false});
@@ -178,7 +192,7 @@ export class RecipesmodifyComponent implements OnInit {
 	 }); 
 
 //this.loadRecipes()
-	this.loadCMLabels();
+	
 	}
 
 /*
@@ -342,7 +356,15 @@ endIndex = startIndex+ endIndex;
 	{
 		var retVal = str;
 		if(typeof(str) !== "undefined" && str !== "")
-		retVal = this.helpService.limitTo(str, num) + "...";
+		{
+			retVal = this.helpService.limitTo(str, num);
+
+			if(str.length > num)
+			{
+				retVal +=  "...";
+			}
+		}
+
 		return retVal;
 	}
 
@@ -388,11 +410,12 @@ endIndex = startIndex+ endIndex;
   /******** recipes api serach */
   maxcalories: any = "";
   loopCount: any = 0;
+  loadingData: boolean = false;
 	searchProps()
 	{
 
 	console.log('searchProps');
- 
+		this.loadingData= true;
 
    var params = {}
    if(this.searchparam.q)
@@ -408,7 +431,8 @@ endIndex = startIndex+ endIndex;
 	   else
 	   {
 	   this.loopCount = 0;
-		params["content"] = this.searchparam.q;
+	   var words = this.searchparam.q.replaceAll(" ","~");
+		params["words"] = words;
 		this.helpService.saveSearchHistory(this.searchparam.q, "text", "recipes", this.currentUser["id"]);
 	   }
 
@@ -463,6 +487,17 @@ endIndex = startIndex+ endIndex;
 		cuisinetypes=  cuisinetypes.slice(0, -1);
 	 }
 	 
+	 var mealtypes = "";
+	 for(let c=0; c <this.mealTypeList.length; c++)
+	 {
+		 if(this.mealTypeList[c]["selected"])
+		 mealtypes += this.mealTypeList[c]["name"] + "~";
+	 }
+
+	 if( mealtypes !== "")
+	 {
+		mealtypes=  mealtypes.slice(0, -1);
+	 }
 
 	 var minerals = "";
 	 var mQuery = "";
@@ -514,7 +549,12 @@ endIndex = startIndex+ endIndex;
 	this.helpService.saveSearchHistory(cuisinetypes, "cuisineType", "recipes", this.currentUser["id"]);
    } 
 
-   
+   if(typeof(mealtypes ) !== "undefined" && mealtypes !== "")
+   {
+    params["mealType"] = mealtypes
+	this.helpService.saveSearchHistory(mealtypes, "mealType", "recipes", this.currentUser["id"]);
+   } 
+
 
 
    if(typeof(minerals ) !== "undefined" && minerals  !== "")
@@ -525,14 +565,14 @@ endIndex = startIndex+ endIndex;
 	console.log(minerals);
 
    } 
-     // console.log(params);
+    console.log(params);
    if(mQuery !== "")
 	  {
 
   
 	  var params1 = {};
 
-	  var query = "select id, label, image, cuisineType, mealType, healthLabels, dietLabels, calories, yield from recipes ";
+	  var query = "select id, label, image, cuisineType, healthLabels, mealType, dietLabels, calories, yield from recipes ";
 	  var where = " where status = 1 AND totalNutrients != '' AND digest != ''  AND s_instructions != '' " ;
 	  if(this.maxcalories > 0)
 	  where +=  " AND calories >= " + this.maxcalories;
@@ -543,7 +583,7 @@ endIndex = startIndex+ endIndex;
 		  var tempc= "";
 		  for(let t=0; t < temp.length; t++)
 		  {
-			tempc += " label LIKE '%" + temp[t] + "%' OR ingredientLines LIKE '%" +temp[t] + "%' OR healthLabels LIKE '%" + temp[t] +  "%' OR dietLabels LIKE '%" + temp[t] + "%' OR";
+			tempc += " label LIKE '%" + temp[t] + "%' OR healthLabels LIKE '%" + temp[t] +  "%' OR dietLabels LIKE '%" + temp[t] + "%' OR";
 		  }
 		  if(tempc !== "")
 		  {
@@ -572,7 +612,7 @@ endIndex = startIndex+ endIndex;
 	 
 	  where += " AND id in (select recipeid from nutrients where " + mQuery +  ")";
 
-	  params1["query"] = query + where + " limit 0, 15";
+	  params1["query"] = query + where + " limit 0, 30";
 	  console.log(params1);
     var res =   this.dbService.getDatabyTablebyQuery("recipes", params1).subscribe(invData => setTimeout(() => {
 		console.log(invData);
@@ -581,11 +621,18 @@ endIndex = startIndex+ endIndex;
 		{
 			console.log("calling again searchprops");
 			this.splitcontent = true;
-			this.searchProps();			
+			if(this.loopCount < 1){
+				this.loopCount++;
+				this.searchProps();
+	
+				}	
+				this.noResult =  true;
 		}
 		else
 		{
+			this.loadingData= false;
 			this.splitcontent = false;
+		//	this.formatResult(this.shuffle(invData));
 			this.formatResult(invData);
 		}
 	  }));
@@ -595,6 +642,7 @@ endIndex = startIndex+ endIndex;
   {
 	
 	  params["status"] = "1";
+	  params["limit"] =  "100";
 	  console.log(params);
 	var res =   this.dbService.getDatabyFields("recipes", params).subscribe(invData => setTimeout(() => {
 		console.log(invData);
@@ -610,7 +658,9 @@ endIndex = startIndex+ endIndex;
 		}
 		else
 		{
+			this.loadingData= false;
 			this.splitcontent = false;
+		//	this.formatResult(this.shuffle(invData));
 			this.formatResult(invData);
 		}
 	  }));
@@ -618,6 +668,19 @@ endIndex = startIndex+ endIndex;
 
 		
 	}
+
+	shuffle(array) {
+		//for (var i = array.length - 1; i > 0; i--) {
+		for (var i=0; i < array.length-1;i++) {			
+			var j = Math.floor(Math.random() * (i + 1));
+			var temp = array[i];
+			array[i] = array[j];
+			array[j] = temp;
+		}
+		console.log("after sort");
+		console.log(array);
+		return array;
+	  }
 
 	formatResult(invData)
 	{
@@ -634,13 +697,10 @@ endIndex = startIndex+ endIndex;
 			{
 			  for(let i=0; i< temp["length"] ; i++)
 			  {
-				temp[i]["newrecipe"] = {};
-				temp[i]["newrecipe"]["label"] = temp[i]["label"];
-				temp[i]["newrecipe"]["s_instructions"] = temp[i]["s_instructions"];
 				  this.recipesList1.push(temp[i]);          
 				  this.ratingIds += temp[i]["id"] + ",";
 			  }
-			  this.totalPage = this.recipesList1["length"] /10;
+			  this.totalPage = this.recipesList1["length"] / this.page_length;
 			  this.counter(this.totalPage);
 			}
 		   console.log("totalPage " + this.totalPage);
@@ -654,43 +714,9 @@ endIndex = startIndex+ endIndex;
 			this.noResult =  true;
 		}
 	}
-	loadModifyRecipe(recipe)
-	{
-		var params= {};
-		params["id"] =recipe.id;
-		console.log(params);
-		if(typeof(recipe.id) !== "undefined" && recipe.id !== null && recipe.id !== "")
-		{
-	  var res =   this.dbService.getDatabyFields("recipes", params).subscribe(invData => setTimeout(() => {
-		  console.log(invData);
-		  if( invData['body']["length"] > 0)
-		  {
-			var fIndex = this.recipesList1.findIndex(x=> (x.id == recipe.id));
-			console.log(fIndex);
-			if(fIndex > -1)
-			{
-				this.recipesList1[fIndex]["s_instructions"]= invData['body'][0]["s_instructions"];
-				this.recipesList1[fIndex]["newrecipe"]["s_instructions"]= invData['body'][0]["s_instructions"]
-			}
-			console.log(this.recipesList1[fIndex]);
 
-			var fIndex1 = this.displayList.findIndex(x=> (x.id == recipe.id));
-			console.log(fIndex1);
-			if(fIndex1 > -1)
-			{
-				console.log("fIndex 1 " + fIndex1);
-				this.displayList[fIndex1]["s_instructions"]= invData['body'][0]["s_instructions"];
-				this.displayList[fIndex1]["newrecipe"]["s_instructions"]= invData['body'][0]["s_instructions"];
-			}
-
-		  }
-	  }));
-	}
-	}
 	gotoRecipeDetails(id){
-		console.log(id);
-	//this.router.navigate(['recipedetails', id]);
-	window.open("/recipedetails/"+ id);
+	this.router.navigate(['recipedetails', id]);
 	}
 
 	loadNutrientsMaxMin()
@@ -817,8 +843,6 @@ clearFilters(){
 }
 showhidecontent(recipe)
 {
-	console.log("showhidecontent");
-	console.log(recipe);
 	recipe.showpopup = !recipe.showpopup
 	for(let r = 0; r < this.displayList.length; r++)
 	{
@@ -1118,33 +1142,64 @@ add2Collection(recipe)
     }));
 
 }
-
-newrecipe:any;
-
-loadCMLabels()
+selectedRecipe: any ;
+newRecipe: any; 
+modifyRecipe(recipe)
 {
-	this.newrecipe = {};
-}
-
-loadLabels(recipe)
-{
-	this.newrecipe = {};
-	this.selectedRecipe2Add2plan= recipe;
-recipe.showLabels = !recipe.showLabels; 
-
-this.mealTypesList.push({"code":"breakfast", "name":"Breakfast"});
-	this.mealTypesList.push({"code":"snack1", "name":"Pre-lunch Snack"});
-	this.mealTypesList.push({"code":"lunch", "name":"Lunch"});
-	this.mealTypesList.push({"code":"snack2", "name":"Evening Snack"});
-	this.mealTypesList.push({"code":"dinner", "name":"Dinner"});
-
-	this.cuisineTypesList.push({"code":"american", "name":"American"});
-	this.cuisineTypesList.push({"code":"italian", "name":"Italian"});
+	console.log(recipe);
+	this.selectedRecipe = recipe;
 	
+//	this.selectedRecipe["newrecipe"]= JSON.parse(JSON.stringify(recipe));
+	this.newRecipe = {};
+	this.newRecipe["id"] =  this.selectedRecipe["id"];
+	this.newRecipe["label"] =  this.selectedRecipe["label"];
+	//this.newRecipe["s_instructions"] =  this.selectedRecipe["s_instructions"];
+	this.newRecipe["dietLabels"] =  ""; //this.selectedRecipe["dietLabels"]
+	this.newRecipe["healthLabels"] =  ""; //this.selectedRecipe["healthLabels"];
+	this.newRecipe["cuisineType"] =  ""; //this.selectedRecipe["cuisineType"];
+	this.newRecipe["mealType"] =  ""; //this.selectedRecipe["mealType"];
+
+	console.log(this.selectedRecipe);
+
+	var params= {};
+	params["id"] =recipe.id;
+	console.log(params);
+	if(typeof(recipe.id) !== "undefined" && recipe.id !== null && recipe.id !== "")
+	{
+  var res =   this.dbService.getDatabyFields("recipes", params).subscribe(invData => setTimeout(() => {
+	  console.log(invData);
+	  if( invData['body']["length"] > 0)
+	  {
+		this.newRecipe["s_instructions"]= invData['body'][0]["s_instructions"]
+		this.selectedRecipe["s_instructions"]= invData['body'][0]["s_instructions"]
+	  }
+  }));
 }
+
+
+
+
+	this.openModal("modifyrecipe");
+}
+openModal(id)
+{	
+	this.modalService.open(id);
+}
+closeModal(id)
+{	
+	this.modalService.close(id);
+}
+
+
+
+/************** modify recipes */
+
+
 
 setlabels(recipe1)
 {
+
+	console.log(this.selectedRecipe);
 	console.log(recipe1);
 	var paramsr = {};
 	paramsr["recipeid"] = recipe1.id;
@@ -1158,28 +1213,35 @@ setlabels(recipe1)
 		}
 		else
 		{
-			if(recipe1["s_instructions"] !== recipe1["newrecipe"]["s_instructions"])
-			paramsr["s_instructions"]= recipe1["newrecipe"]["s_instructions"];
+			if(recipe1["s_instructions"] !== this.selectedRecipe["s_instructions"])
+			{
+				console.log("instructions modified");
+			paramsr["s_instructions"]= this.newRecipe["s_instructions"];
+			}
 
-			if(typeof(recipe1["newrecipe"]["label"]) !== "undefined" &&  recipe1["label"] !== recipe1["newrecipe"]["label"])
-			paramsr["label"]= recipe1["newrecipe"]["label"];
+			if(typeof(this.newRecipe["label"]) !== "undefined" &&  recipe1["label"] !== this.selectedRecipe["label"])
+			paramsr["label"]= this.newRecipe["label"];
 
-			if(typeof(recipe1["newrecipe"]["dietLabels"]) !== "undefined" &&  recipe1["newrecipe"]["dietLabels"] !== "")
-			paramsr["dietLabels"]= recipe1["newrecipe"]["dietLabels"];
+			if(typeof(this.newRecipe["dietLabels"]) !== "undefined" &&  this.newRecipe["dietLabels"] !== "")
+			paramsr["dietLabels"]= this.newRecipe["dietLabels"];
 
-			if(typeof(recipe1["newrecipe"]["healthLabels"]) !== "undefined" &&  recipe1["newrecipe"]["healthLabels"] !== "")
-			paramsr["healthLabels"]= recipe1["newrecipe"]["healthLabels"];
+			if(typeof(this.newRecipe["healthLabels"]) !== "undefined" &&  this.newRecipe["healthLabels"] !== "")
+			paramsr["healthLabels"]= this.newRecipe["healthLabels"];
 
-			if(typeof(recipe1["newrecipe"]["cuisineType"]) !== "undefined" &&  recipe1["newrecipe"]["cuisineType"] !== "")
-			paramsr["cuisineType"]= recipe1["newrecipe"]["cuisineType"];
-		//	paramsr["dishType"]= recipe1["newrecipe"]["dishType"];
+			if(typeof(this.newRecipe["cuisineType"]) !== "undefined" &&  this.newRecipe["cuisineType"] !== "")
+			paramsr["cuisineType"]= this.newRecipe["cuisineType"];
 
-			if(typeof(recipe1["newrecipe"]["mealType"]) !== "undefined" && recipe1["newrecipe"]["mealType"] !== "")
-			paramsr["mealType"]= recipe1["newrecipe"]["mealType"];
+			if(typeof(this.newRecipe["mealType"]) !== "undefined" && this.newRecipe["mealType"] !== "")
+			paramsr["mealType"]= this.newRecipe["mealType"];
 
+			console.log(paramsr);
+			paramsr["status"]= 1;
 			var res =   this.dbService.postDataByTable("recipes_modify", paramsr).subscribe(invData => setTimeout(() => {
 				this.toastr.success("Recipe has been updated.","Modify recipe");
+				this.saveOriginal();
+				this.closeModal("modifyrecipe");
 			}));
+			
 		}
 	}));
 
@@ -1194,29 +1256,118 @@ updateNewRecipe(recipe1, id)
 	paramsr["recipeid"] = recipe1.id;
 	paramsr["created_by"] = this.currentUser["id"];
 	paramsr["id"] = id;
-			if(recipe1["s_instructions"] !== recipe1["newrecipe"]["s_instructions"])
-			paramsr["s_instructions"]= recipe1["newrecipe"]["s_instructions"];
+	
+			if(this.newRecipe["s_instructions"] !== this.selectedRecipe["s_instructions"])
+			paramsr["s_instructions"]= this.newRecipe["s_instructions"];
 
-			if(typeof(recipe1["newrecipe"]["label"]) !== "undefined" &&  recipe1["label"] !== recipe1["newrecipe"]["label"])
-			paramsr["label"]= recipe1["newrecipe"]["label"];
+			if(typeof(this.newRecipe["label"]) !== "undefined" &&  this.newRecipe["label"] !== this.selectedRecipe["label"])
+			paramsr["label"]= this.newRecipe["label"];
 
-			if(typeof(recipe1["newrecipe"]["dietLabels"]) !== "undefined" &&  recipe1["newrecipe"]["dietLabels"] !== "")
-			paramsr["dietLabels"]= recipe1["newrecipe"]["dietLabels"];
+			if(typeof(this.newRecipe["dietLabels"]) !== "undefined" &&  this.newRecipe["dietLabels"] !== "")
+			paramsr["dietLabels"]= this.newRecipe["dietLabels"];
 
-			if(typeof(recipe1["newrecipe"]["healthLabels"]) !== "undefined" &&  recipe1["newrecipe"]["healthLabels"] !== "")
-			paramsr["healthLabels"]= recipe1["newrecipe"]["healthLabels"];
+			if(typeof(this.newRecipe["healthLabels"]) !== "undefined" &&  this.newRecipe["healthLabels"] !== "")
+			paramsr["healthLabels"]= this.newRecipe["healthLabels"];
 
-			if(typeof(recipe1["newrecipe"]["cuisineType"]) !== "undefined" &&  recipe1["newrecipe"]["cuisineType"] !== "")
-			paramsr["cuisineType"]= recipe1["newrecipe"]["cuisineType"];
-		//	paramsr["dishType"]= recipe1["newrecipe"]["dishType"];
+			if(typeof(this.newRecipe["cuisineType"]) !== "undefined" &&  this.newRecipe["cuisineType"] !== "")
+			paramsr["cuisineType"]= this.newRecipe["cuisineType"];
 
-			if(typeof(recipe1["newrecipe"]["mealType"]) !== "undefined" && recipe1["newrecipe"]["mealType"] !== "")
-			paramsr["mealType"]= recipe1["newrecipe"]["mealType"];
+			if(typeof(this.newRecipe["mealType"]) !== "undefined" && this.newRecipe["mealType"] !== "")
+			paramsr["mealType"]= this.newRecipe["mealType"];
 	console.log(paramsr);
+	paramsr["status"]= 1;
 			var res =   this.dbService.updateDataByTable("recipes_modify", paramsr).subscribe(invData => setTimeout(() => {
 				this.toastr.success("Recipe has been modifed.","Modify Recipe");
+				
+				this.closeModal("modifyrecipe");
 			}));
+
+			
 }
+
+saveOriginal()
+{
+	var paramsr = {};
+	paramsr["status"] = 0;
+	paramsr["s_instructions"] = this.selectedRecipe["s_instructions"];
+	paramsr["label"] = this.selectedRecipe["label"];
+
+	paramsr["dietLabels"] = this.selectedRecipe["dietLabels"];
+	paramsr["healthLabels"] = this.selectedRecipe["healthLabels"];
+
+	paramsr["cuisineType"] = this.selectedRecipe["cuisineType"];
+	paramsr["mealType"] = this.selectedRecipe["mealType"];
+	paramsr["recipeid"] = this.selectedRecipe["id"];
+	paramsr["created_by"] = this.currentUser["id"];
+	paramsr["approved_by"] = this.currentUser["id"];
+	var res =   this.dbService.postDataByTable("recipes_modify", paramsr).subscribe(invData => setTimeout(() => {
+		
+	}));
+
+}
+filterRecords(opt)
+{
+	this.filterOpts["asc"] = false;
+	this.filterOpts["desc"] = false;
+	this.filterOpts["rejected"] = false;
+	this.filterOpts["all"] = false;
+
+	this.sortType = opt; 
+	this.filterOpts[opt] = true;
+	
+	if(opt == "asc")
+	{
+		console.log("sort ascending");
+
+		this.recipesList1 = this.recipesList1.sort(this.sortArraybyLabelAsc);
+		console.log(this.recipesList1);
+		this.getDisplayList();
+	}
+
+	if(opt == "desc")
+	{
+		console.log("sort descending");
+
+		this.recipesList1 = this.recipesList1.sort(this.sortArraybyLabelDesc);
+		this.getDisplayList();
+	}
+
+	if(opt == "calories")
+	{
+		this.recipesList1 = this.recipesList1.sort(this.sortArraybyLabelCalories);
+		this.getDisplayList();
+	}
+
+}
+sortArraybyLabelAsc(a, b) {
+	//return b.label - a.label;
+	if (a.label.toLowerCase() < b.label.toLowerCase()) {
+		return -1;
+	  }
+	  if (a.label.toLowerCase() > b.label.toLowerCase()) {
+		return 1;
+	  }
+	  return 0;
+}
+sortArraybyLabelDesc(a, b) {
+	if (b.label.toLowerCase() < a.label.toLowerCase()) {
+		return -1;
+	  }
+	  if (b.label.toLowerCase() > a.label.toLowerCase()) {
+		return 1;
+	  }
+	  return 0;
+}
+sortArraybyLabelCalories(a, b) {
+	if (a.calories < b.calories) {
+		return -1;
+	  }
+	  if (a.calories > b.calories) {
+		return 1;
+	  }
+	  return 0;
+}
+
 }
 
 	
