@@ -29,6 +29,16 @@ a {
     color:$text-gray;
 }
 
+
+.left130
+{
+  left:-200px;
+}
+.leftunset
+{
+  left:unset;
+}
+
 a:hover {
     color: #ff642b;
         //text-decoration: underline;

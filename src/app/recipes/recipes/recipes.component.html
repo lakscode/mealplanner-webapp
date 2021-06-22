@@ -495,7 +495,7 @@
                                         <!--<a  (click)="deleteRecipe(recipe1.id)" class="menu" href="javascript:void(0)"><i class="fa fa-trash"></i>Delete Recipe</a>-->
                                     </div>
 
-                                    <div *ngIf='recipe1.showAdd2MP' class="add2mealplanmenu" style="top:0px;background-color: #f8f8f8 ">
+                                    <div *ngIf='recipe1.showAdd2MP' [ngClass] = "i == 0? 'add2mealplanmenu left130':'add2mealplanmenu leftunset'" style="top:0px;background-color: #f8f8f8 ">
                                         <a style="float:right;font-size:24px;padding-top: 0px;
                                         padding-right: 0px;" href="javascript:void(0)"
                                             (click)="recipe1.showAdd2MP = false;"><i class="fa fa-close"
@@ -522,8 +522,7 @@
                                         <!--<a href="javascript:void(0)" (click)="addRecipe(recipe)"><i class="fa fa-plus" aria-hidden="true"></i> Add Recipe</a>-->
 
                                     </div>
-                                    <div *ngIf='recipe1.showAdd2C' class="add2mealplanmenu"
-                                        style="top:0px;background-color: #f8f8f8 ">
+                                    <div *ngIf='recipe1.showAdd2C' [ngClass] = "i == 0? 'add2mealplanmenu left130':'add2mealplanmenu leftunset'" style="top:0px;background-color: #f8f8f8 ">
                                         <a style="float:right;font-size:24px;padding-top: 0px;
                                         padding-right: 0px;" href="javascript:void(0)"
                                             (click)="recipe1.showAdd2C = false;"><i class="fa fa-close"
