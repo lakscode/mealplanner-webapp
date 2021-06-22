@@ -4,17 +4,22 @@
         <div class="row">
             <div class="col-md-12 col-lg-12 col-xs-12">
                 <div class="recipe-set">
-                    <h2>Recipes</h2>
+                    <h2 style="width:80%">Recipes</h2>
 
-                </div>
-                <div style="width:100%; text-align:right">
-                    <a href="javascript:void(0)" style="font-size:20px;" (click)="showFilters = !showFilters">
+            
+                 <div class="sortBtn" (click)="showFilters = !showFilters">
+    <i class="fa fa-sort-amount-asc" style="margin-right:10px;"></i>  Sort   
+     
+  </div>
+                  <!--   <a href="javascript:void(0)" style="font-size:20px;" (click)="showFilters = !showFilters">
                         <i class="fa fa-sort-amount-asc" aria-hidden="true"></i>
-                    </a>
+                    </a> -->
+                      
+                    <div >
                    <div *ngIf="showFilters" style="position: absolute;
                    width: 180px;
                    height: 120px;
-                   top: 100px;
+                   top: 25px;
                    right: 0;
                    z-index: 1;
                    background: #FFF;
@@ -52,6 +57,7 @@
                     </div>-->
                     </div>
                     </div>
+                      </div>
                 <div class="wrapper-search">
 
                     <div class="row">
@@ -474,7 +480,7 @@
                                     <a style="left:unset;" (click)="showhidecontent(recipe1)" href="javascript:void(0)"
                                         [ngClass]="recipe1.showpopup?'contextmenu-icon active':'contextmenu-icon'"><i
                                             class="fa fa-ellipsis-v"></i></a>
-                                    <div *ngIf="recipe1.showpopup" style="left:unset;" class="contextmenu">
+                                    <div *ngIf="recipe1.showpopup" style="" class="contextmenu" [ngClass] = "i == 0? 'left130':'leftunset'">
                                         <a class="menu" href="javascript:void(0)"
                                             (click)="recipe1.showpopup = false; addtoMealPlan(recipe1)"><i
                                                 class="fa fa-calendar-plus-o" aria-hidden="true"></i> Add to Meal
