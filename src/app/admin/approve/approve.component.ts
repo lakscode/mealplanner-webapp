@@ -280,7 +280,7 @@ approvechanges(recipe)
 
 		if(recipe.healthLabels !== "" && recipe.rhealthLabels !== recipe.healthLabels)
 		{
-			params["label"] = recipe.healthLabels;
+			params["healthLabels"] = recipe.healthLabels;
 		}
 
 
