@@ -1,4 +1,4 @@
-@import "../../../variables.scss";
+@import "../../variables.scss";
 
 .py-3 {
     padding-top: 1rem!important;
@@ -583,3 +583,57 @@ color:#FFF;
 .submit-comment.active {
  background: #6ebe3b;
  }
+
+ 
+
+.recipes-horizontal
+{
+  margin: 4px 4px; 
+                padding: 4px; 
+
+                width: 100%; 
+                overflow: auto; 
+                white-space: nowrap; 
+ 
+  .listing-search
+  {
+    display:inline-block;
+    width: 180px;
+    margin-right:5px; 
+    position:relative;
+    .more
+    {
+      position: absolute;
+      right: 0;
+      top: 20px;
+    }
+    .details
+    {
+width:100%;
+    }
+    img {
+    box-shadow: 1px 1px 10px #999;
+    margin: 10px;
+    max-height: 50px;
+    cursor: pointer;
+    display:inline-block;
+    *display:inline;/* For IE7*/
+    *zoom:1;/* For IE7*/
+    vertical-align:top;
+    
+    }
+    img:hover
+    {
+      cursor: grab;
+    }
+  }
+}
+
+.left130
+{
+  left:-130px;
+}
+.leftunset
+{
+  left:unset;
+}

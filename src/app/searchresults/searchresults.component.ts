@@ -1,17 +1,17 @@
 import { Component, OnInit,OnDestroy  } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd } from "@angular/router";
-import { UserService } from '../../services/user.service';
+import { UserService } from '../services/user.service';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { DBService } from '../../dbservices/db.service';
-import { HelpService } from '../../services/help.service';
+import { DBService } from '../dbservices/db.service';
+import { HelpService } from '../services/help.service';
 import { ToastrService } from 'ngx-toastr';
-import { environment } from './../../../environments/environment';
+import { environment } from './../../environments/environment';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import * as $ from 'jquery';
-import { constants } from '../../jsonfiles/constants';
-//declare var $: any;
-import { ModalService } from '../../shared/modules/modal/modal.service';
+import { constants } from '../jsonfiles/constants';
+import { ModalService } from '../shared/modules/modal/modal.service';
+
 @Component({
 	selector: 'app-searchresults',
 	templateUrl: './searchresults.component.html',
@@ -129,21 +129,7 @@ export class SearchresultsComponent implements OnInit {
 
 		this.loadNutrientsMaxMin();
 		this.listorgrid = {"menu":"grid", "panel":"listing-grid"}
-	 $('.listing-buttons span').on("click",function(){
-        $('.listing-buttons span').removeClass("current");
-        if( $(this).hasClass("grid")){
-            $(this).addClass("current");
-            if($(".recipe-listing").hasClass("listing-list")){
-                $(".recipe-listing").removeClass("listing-list").addClass("listing-grid");
-            }
-
-        }
-        if( $(this).hasClass("list")){
-            $(this).addClass("current");
-            $(".recipe-listing").removeClass("listing-grid").addClass("listing-list");
-
-        }
-    });
+	
 
 
 		this.router.events.subscribe((evt) => {
@@ -173,130 +159,27 @@ export class SearchresultsComponent implements OnInit {
 	  this.totalPage = 1;
 	 this.page_num = 0;
 	 this.page_length= 12;
-	  this.searchparam = {"q":"", "range":{}}
+	  this.searchparam = {"q":"", "range":{}, "param":""}
 	
   
 	  this.routeParams = {};
 	 	this.route.params.pipe(takeUntil(this.onDestroy$)).subscribe(params => {
-	  //  console.log(params);   
+  
 		this.routeParams = params;     
-		if (typeof (this.routeParams.details) !== "undefined") {
-		  console.log(this.routeParams.details);
+		if (typeof (this.routeParams.param) !== "undefined") {
+		  this.searchparam["param"] = this.routeParams.param;
 		}    
-		 if (typeof (this.routeParams.dietLabels) !== "undefined" && this.routeParams.dietLabels !== "") {
-		  this.searchparam["q"] = this.routeParams.dietLabels;
-		}   
+		 
 		console.log(this.routeParams);
 		this.splitcontent = false;
 	  this.searchProps();
 	 }); 
 
-//this.loadRecipes()
+
 	
 	}
 
-/*
-
-	loadRecipes()
-	{
-	  this.recipesList1 = [];
-	  this.recipesList2 = [];
-	// this.recipes = recipesList;
-	 var params = {"limit": "100"};
-   //  params["caloriesfrom"] = this.searchparam.range.lower;
-	// params["caloriesto"] = this.searchparam.range.upper;
-	 console.log(this.searchparam);
 	
-	  if(typeof(this.routeParams["dietLabels"]) !== "undefined" && this.routeParams["dietLabels"] !== null && this.routeParams["dietLabels"] !== "")
-	  {
-		params["content"] = this.routeParams["dietLabels"];
-		this.helpService.saveSearchHistory(params["content"], "text", "recipes", this.currentUser["id"]);
-	  }
-  
-	  params["instructions"] = "notempty";
-
-	 // params["cuisineType"] = "american";
-	  params["returnfields"] = " id, label, image, healthLabels,  dietLabels, calories ";
-	  console.log(JSON.stringify(params));
-	 var res =   this.dbService.getDatabyFields("recipes", params).subscribe(invData => setTimeout(() => {
-  
-	  console.log(invData);
-  
-	  if(invData !== null && typeof(invData["body"]) !== "undefined" && invData["body"] !== null && invData["body"]["length"] > 0)
-		{
-		  this.recipesList1 = [];
-
-		  for(let i=0; i < invData["body"]["length"] ; i++)
-		  {
-			this.recipesList1.push(invData["body"][i]);
-			this.ratingIds += invData["body"][i]["id"] + ",";
-		  }
-		  this.totalPage = this.recipesList1["length"] / this.page_length;
-		  this.counter(this.totalPage);
-		  console.log(this.recipesList1);
-		 
-		  this.getDisplayList();
-		  this.loadRatings();
-		}
-	  }
-	
-	 ));
-  
-	}
-	*/
-	counter(i: number) {
-	//	console.log(i);
-		var num = Math.ceil(i);
-		return new Array(num);
-	}
-	prevPage()
-	{
-		if(this.page_num > 0)
-		{
-			this.page_num -= 1;
-		}
-		this.getDisplayList();
-	}
-	nextPage()
-	{
-		
-		if(this.page_num > 0 && this.page_num < this.totalPage-1)
-		{
-			this.page_num += 1;
-		}
-		this.getDisplayList();
-	}
-	currentPage(pagenum)
-	{
-	//	console.log(pagenum);
-		this.page_num = parseInt(pagenum);
-		this.getDisplayList();
-	}
-
-	getDisplayList()
-	{
-	//	console.log(this.recipesList1);
-	//	console.log(this.page_num);
-		this.displayList=[];
-		var startIndex= this.page_num*this.page_length;
-		var endIndex = this.page_length;
-
-		if(startIndex + endIndex > this.recipesList1["length"])
-		{
-			endIndex = this.recipesList1["length"]-startIndex;
-		}
-
-	//	console.log(startIndex);
-	//	console.log(endIndex);
-endIndex = startIndex+ endIndex;
-		for(let i=startIndex; i < endIndex; i++)
-		{
-		this.displayList.push(this.recipesList1[i]);
-		
-		}
-	//	console.log(this.displayList);
-		window.scrollTo(0, 0);
-	}
 
 	loadRatings()
 	{
@@ -309,7 +192,6 @@ endIndex = startIndex+ endIndex;
 	   
 		params["query"] = "SELECT count(rating) as totalcount, sum(rating) as totalrating, recipeid FROM `rating` where recipeid in (" + this.ratingIds + ") group by recipeid";
 		var res =   this.dbService.getDatabyTablebyQuery("rating", params).subscribe(invData => setTimeout(() => {
-	//	console.log(invData);
 		  if(invData !== null)
 		  {
 			if(typeof(invData["body"]) !== "undefined" && invData["body"] !== null && invData["body"]["length"] > 0)
@@ -321,9 +203,9 @@ endIndex = startIndex+ endIndex;
 				for(let i=0; i< temp["length"] ; i++)
 				{
 				  this.ratingsArr.push(temp[i])
-				//  console.log(temp[i]);
+		
 				  var recIndex = this.recipesList1.findIndex(x1 => (x1.id === temp[i]["recipeid"]));
-				//  console.log(recIndex);
+	
 				  if(recIndex > -1)
 				  {
 					this.recipesList1[recIndex]["totalcount"] = temp[i]["totalcount"];
@@ -335,12 +217,9 @@ endIndex = startIndex+ endIndex;
 					 }
   
 				  }
-  
 
-  
 				}
-			//	console.log(this.ratingsArr);
-		
+	
 			  }
 			}
 	
@@ -370,32 +249,19 @@ endIndex = startIndex+ endIndex;
 
 	formatImage(image, type)
 	{
-	//  console.log(image);
+
 	  var retImage = image;
 	  if(image !== "" && type !== "")
 	  {
 		retImage = this.helpService.formatImage(image, type);
 		
 	  }
-	//  console.log(retImage);
 	  return retImage;
 	}
 
-	setListorGrid(opt)
-	{
-		//		this.listorgrid = {"menu":"", "panel":"listing-grid"}
-		console.log(this.listorgrid);
-		this.listorgrid["menu"] = opt;
-		this.listorgrid["panel"] = "listing-" + opt;
-	}
 
-	searchPanelDisplay(){
-	 var searchId = document.getElementById('searchPanel');
-       if(searchId.style.display == 'block')
-          searchId.style.display = 'none';
-       else
-          searchId.style.display = 'block';
-	}
+
+
 	setFLU(str)
 	{
 		var retValue = str;
@@ -418,228 +284,33 @@ endIndex = startIndex+ endIndex;
 		this.loadingData= true;
 
    var params = {}
-   if(this.searchparam.q)
+   if(this.searchparam["param"])
    {
 	   console.log(" this.splitcontent " + this.splitcontent);
 	   if(this.splitcontent)
 	   {
-		params["content"] = this.searchparam.q.split(" ").join(",");
+		params["content"] = this.searchparam["param"].split(" ").join(",");
 		console.log(params['content']);
-		this.helpService.saveSearchHistory(this.searchparam.q, "text", "recipes", this.currentUser["id"]);
+		this.helpService.saveSearchHistory(this.searchparam["param"], "text", "searchresults", this.currentUser["id"]);
 
 	   }
 	   else
 	   {
 	   this.loopCount = 0;
-	   var words = this.searchparam.q.replaceAll(" ","~");
+	   var words = this.searchparam["param"].replaceAll(" ","~");
 		params["words"] = words;
-		this.helpService.saveSearchHistory(this.searchparam.q, "text", "recipes", this.currentUser["id"]);
+		this.helpService.saveSearchHistory(this.searchparam["param"], "text", "searchresults", this.currentUser["id"]);
 	   }
 
    }
-   if(typeof(this.searchparam.range) !== "undefined")
-   {
-    if(typeof(this.searchparam.range.lower) !== "undefined")
-    {
-      params["caloriesfrom"] = this.searchparam.range.lower;
-    }
-    if(typeof(this.maxcalories) !== "undefined" && this.maxcalories > 0)
-    {
-      params["caloriesto"] = this.maxcalories;
-    }
+   
     params["instructions"]="notempty";
-   }
+  
    
   // params["cuisineType"] = "american";
    params["returnfields"] = " id, label, image, cuisineType, mealType, healthLabels, dietLabels, calories, yield";
-
-	 var dietlabels = "";
-	 for(let m=0; m <this.dietLabelsList.length; m++)
-	 {
-		 if(this.dietLabelsList[m]["selected"])
-		 dietlabels += this.dietLabelsList[m]["name"] + "~";
-	 }
-	 if( dietlabels !== "")
-	 {
-		dietlabels=  dietlabels.slice(0, -1);
-	 }
-
-	 var healthlabels = "";
-	 for(let m=0; m <this.healthlabelsList.length; m++)
-	 {
-		 if(this.healthlabelsList[m]["selected"])
-		 healthlabels += this.healthlabelsList[m]["name"] + "~";
-	 }
-	 if( healthlabels !== "")
-	 {
-		healthlabels=  healthlabels.slice(0, -1);
-	 }
-	
-	 var cuisinetypes = "";
-	 for(let c=0; c <this.cuisineTypeList.length; c++)
-	 {
-		 if(this.cuisineTypeList[c]["selected"])
-		 cuisinetypes += this.cuisineTypeList[c]["name"] + "~";
-	 }
-
-	 if( cuisinetypes !== "")
-	 {
-		cuisinetypes=  cuisinetypes.slice(0, -1);
-	 }
+   
 	 
-	 var mealtypes = "";
-	 for(let c=0; c <this.mealTypeList.length; c++)
-	 {
-		 if(this.mealTypeList[c]["selected"])
-		 mealtypes += this.mealTypeList[c]["name"] + "~";
-	 }
-
-	 if( mealtypes !== "")
-	 {
-		mealtypes=  mealtypes.slice(0, -1);
-	 }
-
-	 var minerals = "";
-	 var mQuery = "";
-	 for(let m=0; m <this.mineralsLabelsList.length; m++)
-	 {
-		 var item = this.mineralsLabelsList[m];
-		// console.log(item);
-		 if(this.mineralsLabelsList[m]["selected"])
-		 minerals += this.mineralsLabelsList[m]["name"] + "~";
-		 if(typeof(item["min"]) !== "undefined" && item["min"] !== "" && item["min"] >0)
-              {
-                mQuery += " " + item["name"].toLowerCase() + " >= " + item["min"] + " AND ";
-              }
-              if(typeof(item["max"]) !== "undefined" && item["max"] !== "" && item["max"] >0)
-              {
-                mQuery += " " + item["name"].toLowerCase() + " <= " + item["max"] + " AND ";
-              }
-
-	 }
-	 if( minerals !== "")
-	 {
-		minerals=  minerals.slice(0, -1);
-	 }
-
-	 if( mQuery !== "")
-	 {
-		mQuery=  mQuery.slice(0, -4);
-		this.helpService.saveSearchHistory(mQuery, "nutrients", "recipes", this.currentUser["id"]);
-	 }
-//	 console.log("mQuery");
-//	 console.log(mQuery);
-	var checkMinerals = false;
- 
-   if(typeof(dietlabels) !== "undefined" && dietlabels  !== "")
-   {
-    params["dietLabels"] = dietlabels
-	this.helpService.saveSearchHistory(dietlabels, "dietLabels", "recipes", this.currentUser["id"]);
-   } 
-
-   if(typeof(healthlabels ) !== "undefined" && healthlabels !== "")
-   {
-    params["healthLabels"] = healthlabels
-	this.helpService.saveSearchHistory(healthlabels, "healthLabels", "recipes", this.currentUser["id"]);
-   } 
-
-   if(typeof(cuisinetypes ) !== "undefined" && cuisinetypes !== "")
-   {
-    params["cuisineType"] = cuisinetypes
-	this.helpService.saveSearchHistory(cuisinetypes, "cuisineType", "recipes", this.currentUser["id"]);
-   } 
-
-   if(typeof(mealtypes ) !== "undefined" && mealtypes !== "")
-   {
-    params["mealType"] = mealtypes
-	this.helpService.saveSearchHistory(mealtypes, "mealType", "recipes", this.currentUser["id"]);
-   } 
-
-
-
-   if(typeof(minerals ) !== "undefined" && minerals  !== "")
-   {
-    params["totalNutrientsne"]="notempty";
-    params["digestne"]="notempty";
-    checkMinerals = true;
-	console.log(minerals);
-
-   } 
-    console.log(params);
-   if(mQuery !== "")
-	  {
-
-  
-	  var params1 = {};
-
-	  var query = "select id, label, image, cuisineType, healthLabels, mealType, dietLabels, calories, yield from recipes ";
-	  var where = " where status = 1 AND totalNutrients != '' AND digest != ''  AND s_instructions != '' " ;
-	  if(this.maxcalories > 0)
-	  where +=  " AND calories >= " + this.maxcalories;
-
-	  if(params["content"])
-	  {
-		  var temp = params["content"].split(",");
-		  var tempc= "";
-		  for(let t=0; t < temp.length; t++)
-		  {
-			tempc += " label LIKE '%" + temp[t] + "%' OR healthLabels LIKE '%" + temp[t] +  "%' OR dietLabels LIKE '%" + temp[t] + "%' OR";
-		  }
-		  if(tempc !== "")
-		  {
-			tempc=  tempc.slice(0, -2);
-			where +=  " AND ( " + tempc + ")";
-		  }
-		 
-	  }
- 
-	  if(dietlabels !== "")
-	  {
-		  var t = dietlabels.split("~");
-		  for(let i=0; i < t.length; i++)
-		  {
-			  where +=  " AND dietLabels LIKE '%" + t[i] + "%'" 
-		  }
-	  }
-	  if(healthlabels !== "")
-	  {
-		  var t1 = healthlabels.split("~");
-		  for(let i=0; i < t1.length; i++)
-		  {
-			  where +=  " AND healthLabels LIKE '%" + t1[i] + "%'" 
-		  }
-	  }
-	 
-	  where += " AND id in (select recipeid from nutrients where " + mQuery +  ")";
-
-	  params1["query"] = query + where + " limit 0, 30";
-	  console.log(params1);
-    var res =   this.dbService.getDatabyTablebyQuery("recipes", params1).subscribe(invData => setTimeout(() => {
-		console.log(invData);
-		console.log(invData["body"]["length"]);
-		if(invData["body"]["length"] == 0)
-		{
-			console.log("calling again searchprops");
-			this.splitcontent = true;
-			if(this.loopCount < 1){
-				this.loopCount++;
-				this.searchProps();
-	
-				}	
-				this.noResult =  true;
-		}
-		else
-		{
-			this.loadingData= false;
-			this.splitcontent = false;
-		//	this.formatResult(this.shuffle(invData));
-			this.formatResult(invData);
-		}
-	  }));
-
-	  }
-  else
-  {
 	
 	  params["status"] = "1";
 	  params["limit"] =  "100";
@@ -663,8 +334,9 @@ endIndex = startIndex+ endIndex;
 		//	this.formatResult(this.shuffle(invData));
 			this.formatResult(invData);
 		}
+		this.searchCollections();
 	  }));
-  }
+  
 
 		
 	}
@@ -700,13 +372,13 @@ endIndex = startIndex+ endIndex;
 				  this.recipesList1.push(temp[i]);          
 				  this.ratingIds += temp[i]["id"] + ",";
 			  }
-			  this.totalPage = this.recipesList1["length"] / this.page_length;
-			  this.counter(this.totalPage);
+			 
+			 
 			}
-		   console.log("totalPage " + this.totalPage);
+
 		  }
 		 
-		  this.getDisplayList();
+	
 		  this.loadRatings();
   
 		} else {
@@ -721,14 +393,11 @@ endIndex = startIndex+ endIndex;
 
 	loadNutrientsMaxMin()
   {
- //   console.log("loadNutrientsMaxMin");
-//    console.log(this.mineralsLabelsList);
- //   console.log(this.nutrientDbFields);
+
 
     if(this.mineralsLabelsList["length"] > 0 && this.nutrientDbFields["length"] > 0)
     {
-  //    console.log(this.mineralsLabelsList);
-  //    console.log(this.nutrientDbFields);
+
       for(let m =0; m < this.mineralsLabelsList["length"]; m++)
       {
         var lbl = this.mineralsLabelsList[m]["name"].toLowerCase();
@@ -748,7 +417,7 @@ endIndex = startIndex+ endIndex;
         }
 
       }
-   ////   console.log(this.mineralsLabelsList);
+
     }
     else
     {
@@ -810,37 +479,6 @@ endIndex = startIndex+ endIndex;
 	  return ret;
   }
 
-
-clearFilters(){
-	this.noResult =  false;
-
-	for(let l=0; l < this.searchFilterLabels.length; l++){
-		this.searchFilterLabels[l]['selected'] = false;
-	}
-	
-	for(let m=0; m < this.mealTypeList.length; m++){
-		this.mealTypeList[m]['selected'] = false;
-	}
-
-	for(let m=0; m < this.healthlabelsList.length; m++){
-		this.healthlabelsList[m]['selected'] = false;
-	}
-
-	for(let m=0; m < this.dietLabelsList.length; m++){
-		this.dietLabelsList[m]['selected'] = false;
-	}
-
-	for(let m=0; m < this.cuisineTypeList.length; m++){
-		this.cuisineTypeList[m]['selected'] = false;
-	}
-
-	for(let m=0; m < this.mineralsLabelsList.length; m++){
-		this.mineralsLabelsList[m]['selected'] = false;
-	}
-	this.searchProps();
-	this.maxcalories = "";
-	this.searchparam = {"q":""};
-}
 showhidecontent(recipe)
 {
 	recipe.showpopup = !recipe.showpopup
@@ -1321,7 +959,7 @@ filterRecords(opt)
 
 		this.recipesList1 = this.recipesList1.sort(this.sortArraybyLabelAsc);
 		console.log(this.recipesList1);
-		this.getDisplayList();
+		
 	}
 
 	if(opt == "desc")
@@ -1329,13 +967,13 @@ filterRecords(opt)
 		console.log("sort descending");
 
 		this.recipesList1 = this.recipesList1.sort(this.sortArraybyLabelDesc);
-		this.getDisplayList();
+		
 	}
 
 	if(opt == "calories")
 	{
 		this.recipesList1 = this.recipesList1.sort(this.sortArraybyLabelCalories);
-		this.getDisplayList();
+		
 	}
 
 }
@@ -1367,6 +1005,101 @@ sortArraybyLabelCalories(a, b) {
 	  }
 	  return 0;
 }
+
+gotopage(page, id){        
+	if(page == "collection")
+	{
+	//this.router.navigate([page, {id:id}]);    
+		window.open(page + ";id="+ id);
+	}
+	else
+	{
+	//this.router.navigate([page, id]);    
+		window.open(page + "/"+ id)
+	}
+ }
+/*********** for collections  */
+
+
+ /******** recipes api serach */
+ communitiesList: Array<any> = [];
+ searchCollections()
+ {
+
+	 this.communitiesList = [];
+	// var params = {"limit": 100};
+	// params["createdby"] = this.currentUser["id"];
+	this.searchparam["param"] = "";
+
+
+	 //var params = {"query": "SELECT c.*, COUNT(rm.id) AS recipecount, u.email, u.firstname, u.lastname FROM collection AS c LEFT JOIN recipe_mapping AS rm ON c.id = rm.collection_id LEFT JOIN users AS u ON c.created_by = u.id"};
+	 
+	 var params = {"query": "SELECT c.*,  u.email, u.firstname, u.lastname FROM collection AS c LEFT JOIN users AS u ON c.created_by = u.id"};
+	 
+	 
+	 if(this.searchparam["param"] !== "")
+	 {
+		params["query"] += "where c.collection_name like '%" + this.searchparam["param"] + "%' "
+	 } 
+	 params["query"] +=  " GROUP BY c.id ";
+	 console.log(params);
+	 var res =   this.dbService.getDatabyTablebyQuery("collection", params).subscribe(invData => setTimeout(() => {
+ 
+	   console.log(invData);
+	   if(invData !== null)
+	   {
+		 var obj = invData["body"]["length"];
+		 console.log(invData["body"]);
+		 this.communitiesList = invData["body"];
+		 for(let o=0; o < this.communitiesList.length; o++)
+		 {
+		 this.communitiesList[o]["image"] =encodeURI( this.communitiesList[o]["image"]);
+		 }
+
+		 console.log(this.communitiesList);
+		 this.loaduserCount();
+	   }
+	 }));
+ 
+	 
+ }
+
+
+ loaduserCount()
+ {
+	 /*
+   SELECT c.id, COUNT(cj.id) AS usercount
+   FROM collection AS c
+   LEFT JOIN collection_join AS cj ON c.id = cj.collection_id
+   GROUP BY c.id, cj.collection_id
+
+   */
+
+   console.log("in loadusercount");
+   var params = {"query": "SELECT c.id, COUNT(cj.id) AS usercount 	FROM collection AS c LEFT JOIN  collection_join AS cj ON c.id = cj.collection_id GROUP BY c.id, cj.collection_id"};
+
+   var res =   this.dbService.getDatabyTablebyQuery("collection", params).subscribe(invData => setTimeout(() => {
+
+	
+	 if(invData !== null)
+	 {
+	   var obj = invData["body"];
+	   for(let o=0; o < obj.length; o++)
+	   {
+		   var fIndex = this.communitiesList.findIndex(x=>(x.id === obj[o]["id"]));
+		   
+		   if(fIndex > -1)
+		   {
+		   //	console.log(obj[o]["usercount"])
+			   this.communitiesList[fIndex]["userscount"] = obj[o]["usercount"];
+			   console.log(this.communitiesList[fIndex]["userscount"] );
+		   }
+	   }
+
+	 }
+   }));
+
+ }
 
 }
 

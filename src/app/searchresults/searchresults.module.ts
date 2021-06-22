@@ -5,8 +5,8 @@ import { SearchresultsRoutingModule } from './searchresults-routing.module';
 import { SearchresultsComponent } from './searchresults.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {SidebarModule } from "../../shared/modules"
-import { ModalModule } from '../../shared/modules/modal/modal.module';
+import {SidebarModule } from "../shared/modules"
+import { ModalModule } from '../shared/modules/modal/modal.module';
 
 @NgModule({
   imports: [

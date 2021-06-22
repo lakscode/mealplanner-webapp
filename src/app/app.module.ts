@@ -44,7 +44,7 @@ import { FavouritesModule } from './recipes/favourites/favourites.module';
 import { RecipedetailsModule } from './recipes/recipedetails/recipedetails.module'; 
 import { RecipesubmitModule } from './recipes/recipesubmit/recipesubmit.module'; 
 import { RecipesmodifyModule } from './recipes/recipesmodify/recipesmodify.module'; 
-//import { ApproveModule } from './recipes/approve/approve.module'; 
+import { SearchresultsModule } from './searchresults/searchresults.module'; 
 
 import { TestimonialsModule } from './testimonials/testimonials.module'; 
 
@@ -165,7 +165,8 @@ import { AdminModule } from './admin/admin.module';
 	TermsModule,
 	CalculateModule,
 	AdminModule,
-	PreferencesModule
+	PreferencesModule,
+	SearchresultsModule
   ],
   schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
   providers: [{

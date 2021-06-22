@@ -16,9 +16,9 @@
                                 <div class="col-12 collection_panel">
 
                                     <img *ngIf="collection.image" class="collection_img" src="{{collection.image}}"
-                                        style="height:200px;width: 100%;" />
+                                        style="height:200px;width: 100%;     object-fit: cover;" />
                                     <img *ngIf="!collection.image" class="collection_img" src="assets/notavailable1.jpg"
-                                        style="height:200px;width: 100%;" />
+                                        style="height:200px;width: 100%;     object-fit: cover;" />
 
                                     <div class="collection_details">
                                         <input id="inputuploadrecipe" hidden type="file" name="inputuploadrecipe"
@@ -61,7 +61,7 @@
                                 <div class="col-12 collection_panel animated wow flipInX">
 
                                     <img class="collection_img " src="{{collection.image}}"
-                                        style="height:200px;width: 100%;" />
+                                        style="height:200px;width: 100%;     object-fit: cover;" />
                                     <div class="collection_details" style="position: absolute;
                        top: 0px;background-size:cover;  background-position:center;  height:100%; " [ngStyle]="{'background-image':'linear-gradient(
                                 rgba(0, 0, 0, 0.3),
