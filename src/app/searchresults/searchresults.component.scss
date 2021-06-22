@@ -584,7 +584,9 @@ color:#FFF;
  background: #6ebe3b;
  }
 
- 
+ .recipe-set h2:after {
+width:90%;
+ }
 
 .recipes-horizontal
 {
@@ -598,8 +600,8 @@ color:#FFF;
   .listing-search
   {
     display:inline-block;
-    width: 180px;
-    margin-right:5px; 
+    width: 250px;
+    margin-right:15px; 
     position:relative;
     .more
     {

@@ -504,17 +504,18 @@ export class TrendingComponent implements OnInit {
 	{
 		console.log("start Plan");
 	  var params = {};
-	  if(this.userid !== null && this.userid !== "")
+	  if(this.currentUser !== null && this.currentUser["id"] !== "")
 	  {
-		params["userid"] = this.userid;
+		params["userid"] = this.currentUser["id"];
 		params["mealplanid"] = this.routeParams.id;
 		params["startdate"] = new Date();
 		params["status"] = 1;
+		console.log(params);
 		var res =   this.dbService.postDataByTable("mealplan_user_mapping", params).subscribe(invData => setTimeout(() => {
-   
+			console.log(invData);
 		if(invData !== null)
 		{
-  
+			 this.router.navigate(["schedule", {id:this.routeParams.id}]);
 		}
 		}));
 	  }
