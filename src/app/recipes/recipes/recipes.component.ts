@@ -517,6 +517,7 @@ endIndex = startIndex+ endIndex;
               }
 
 	 }
+	 
 	 if( minerals !== "")
 	 {
 		minerals=  minerals.slice(0, -1);
@@ -837,6 +838,9 @@ clearFilters(){
 
 	for(let m=0; m < this.mineralsLabelsList.length; m++){
 		this.mineralsLabelsList[m]['selected'] = false;
+		this.mineralsLabelsList[m]['min'] = "";
+		this.mineralsLabelsList[m]['max'] = "";
+		
 	}
 	this.searchProps();
 	this.maxcalories = "";
