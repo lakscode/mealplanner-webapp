@@ -461,7 +461,7 @@ getPlanStatus()
 
 	//console.log(params);
 	  var res =   this.dbService.getDatabyTablebyQuery("mealplan_user_mapping", params).subscribe(invData => setTimeout(() => {
-   
+		console.log(invData);
 	if(invData !== null)
 	{
 	 

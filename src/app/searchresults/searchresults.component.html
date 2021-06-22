@@ -4,6 +4,15 @@
         <div class="row">
             <div class="col-md-12 col-lg-12 col-xs-12">
                 <div class="recipe-set">
+<<<<<<< HEAD
+                    <h2>Search Results</h2>
+                </div>
+                <!--<div style="width:100%; text-align:right">
+                   <a href="javascript:void(0)" style="font-size:20px;" (click)="showFilters = !showFilters">
+                        <i class="fa fa-sort-amount-asc" aria-hidden="true"></i>
+                    </a>
+                   <div *ngIf="showFilters" style="position: absolute;
+=======
                     <h2 style="width:78%">Search Results</h2>
                     <!--  <a href="javascript:void(0)" style="font-size:20px;" (click)="showFilters = !showFilters">
                         <i class="fa fa-sort-amount-asc" aria-hidden="true"></i>
@@ -16,6 +25,7 @@
                 <div>
                    
                     <div *ngIf="showFilters" style="position: absolute;
+>>>>>>> 94949592a7767ad5c4bab3c14bc96b944ec033b9
                    width: 180px;
                    height: 120px;
                    top: 20px;
@@ -53,8 +63,12 @@
 
 
                     </div>
+<<<<<<< HEAD
+                </div>-->
+=======
                 </div>
                 </div>
+>>>>>>> 94949592a7767ad5c4bab3c14bc96b944ec033b9
                 <!--<div class="wrapper-search">
 
                     <div class="row">
@@ -280,8 +294,14 @@
                 </div>-->
                
                 <div *ngIf="loadingData && !noResult">Loading data...</div>
-                <div *ngIf="!loadingData">
-                    <h2 style="font-weight: 900">Recipes</h2>
+                <div *ngIf="!loadingData" class="recipe-set">
+                    <h2 style="width:100%;">Recipes
+                        <div style="float:right;text-align:right; background:#FFF;"> <a href="javascript:void(0)" style="font-size:30px;" (click)="gotopage('recipes')">
+                            <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                    </h2>
+                 
                 </div>
 
                 <div class="recipe-set" *ngIf="!noResult">
@@ -336,7 +356,7 @@
                                         
                                     </div>
                                     </div>
-                                    <a  (click)="gotopage('recipedetails', recipe1.id)" href="javascript:void(0)" title="{{recipe1.label}}"><img style="width:90%; max-height:100px"  id="imagep_{{i}}"   src="{{formatImage(recipe1.image, 'm')}}"
+                                    <a  (click)="gotopage('recipedetails', recipe1.id)" href="javascript:void(0)" title="{{recipe1.label}}"><img style="width:90%; max-height:150px;object-fit: cover;"  id="imagep_{{i}}"   src="{{formatImage(recipe1.image, 'm')}}"
                             alt="image">  </a><br/>
                                 <a title="{{recipe1.label}}"><span innerHTML="{{limitTo(recipe1.label, 20)}}" style="font-size:14px;padding-left:6px"></span></a>
                                 <p style="font-size:14px;padding-left:6px">Calories: <span style="font-size:12px;">{{recipe1.calories}} Kcal</span></p>
@@ -490,7 +510,7 @@
                         <div class="listing-search"  *ngFor="let community of communitiesList; let i = index;">
                             <div class="image-animate details" (click)="gotopage('collection', community.id)">
 
-                                    <a href="javascript:void(0)" title="{{community.collection_name}}"><img style="width:90%; max-height:100px"  id="imagep_{{i}}"   src="{{community.image}}"
+                                    <a hreaf="javascript:void(0)" title="{{community.collection_name}}"><img style="width:90%; max-height:150px; object-fit: cover;"  id="imagep_{{i}}"  draggable="true"  src="{{community.image}}"
                             alt="image">  </a><br/>
                             
                                  <a title="{{community.collection_name}}"><span innerHTML="{{limitTo(community.collection_name, 20)}}"style="font-size:14px;padding-left:6px"></span></a>

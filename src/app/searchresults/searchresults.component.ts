@@ -1006,16 +1006,20 @@ sortArraybyLabelCalories(a, b) {
 	  return 0;
 }
 
-gotopage(page, id){        
-	if(page == "collection")
+gotopage(page, id = null){        
+	if(page == "collection" && id !== null)
 	{
 	//this.router.navigate([page, {id:id}]);    
 		window.open(page + ";id="+ id);
 	}
-	else
+	else if(page == "recipedetails"  && id !== null)
 	{
 	//this.router.navigate([page, id]);    
 		window.open(page + "/"+ id)
+	}
+	else if(page == "recipes")
+	{
+		this.router.navigate([page]);    
 	}
  }
 /*********** for collections  */
@@ -1029,12 +1033,12 @@ gotopage(page, id){
 	 this.communitiesList = [];
 	// var params = {"limit": 100};
 	// params["createdby"] = this.currentUser["id"];
-	this.searchparam["param"] = "";
+	//this.searchparam["param"] = "";
 
 
-	 //var params = {"query": "SELECT c.*, COUNT(rm.id) AS recipecount, u.email, u.firstname, u.lastname FROM collection AS c LEFT JOIN recipe_mapping AS rm ON c.id = rm.collection_id LEFT JOIN users AS u ON c.created_by = u.id"};
+	 var params = {"query": "SELECT c.*, COUNT(rm.id) AS recipecount, u.email, u.firstname, u.lastname FROM collection AS c LEFT JOIN recipe_mapping AS rm ON c.id = rm.collection_id LEFT JOIN users AS u ON c.created_by = u.id"};
 	 
-	 var params = {"query": "SELECT c.*,  u.email, u.firstname, u.lastname FROM collection AS c LEFT JOIN users AS u ON c.created_by = u.id"};
+	// var params = {"query": "SELECT c.*,  u.email, u.firstname, u.lastname FROM collection AS c LEFT JOIN users AS u ON c.created_by = u.id"};
 	 
 	 
 	 if(this.searchparam["param"] !== "")
