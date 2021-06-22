@@ -309,7 +309,7 @@
 
 
                         <div class="listing-search"  *ngFor="let recipe1 of recipesList1; let i = index;">
-                            <div class="details">
+                            <div class="image-animate details">
                                 <div class="more" style="right: 10px;
                                 text-align: center;
                                 top: 20px;">
@@ -508,7 +508,7 @@
 
 
                         <div class="listing-search"  *ngFor="let community of communitiesList; let i = index;">
-                            <div class="details" (click)="gotopage('collection', community.id)">
+                            <div class="image-animate details" (click)="gotopage('collection', community.id)">
 
                                     <a hreaf="javascript:void(0)" title="{{community.collection_name}}"><img style="width:90%; max-height:150px; object-fit: cover;"  id="imagep_{{i}}"  draggable="true"  src="{{community.image}}"
                             alt="image">  </a><br/>
