@@ -29,6 +29,18 @@ a {
     color:$text-gray;
 }
 
+
+.sortBtn
+{
+  margin-right:0px; float:right;   margin-right: 25px;
+  float: right;
+  margin-top: -55px;
+  background: #FFF;
+  font-size: 16px;
+  font-weight: 700;
+  font-family: Lato;
+}
+
 a:hover {
     color: #ff642b;
         //text-decoration: underline;
