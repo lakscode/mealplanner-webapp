@@ -2393,7 +2393,7 @@ ul {
   text-align: center;
   flex-direction: column;
   width: 31%;
-  margin-right:2%;
+ /* margin-right:2%;*/
 }
 .listing-grid .listing .image,
 .listing-grid .listing .detail {

@@ -392,7 +392,7 @@ endIndex = startIndex+ endIndex;
 			
 			if(fIndex > -1)
 			{
-				console.log(obj[o]["usercount"])
+			//	console.log(obj[o]["usercount"])
 				this.communitiesList[fIndex]["userscount"] = obj[o]["usercount"];
 				console.log(this.communitiesList[fIndex]["userscount"] );
 			}

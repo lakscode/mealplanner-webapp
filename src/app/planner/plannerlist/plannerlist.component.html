@@ -21,10 +21,10 @@
   <div class="recipe-listing listing-list" style="background:#FFF;padding-top:15px;">
   
   
-  <div class="listing col-12 col-lg-4 col-md-4 " *ngFor="let mplan of mealPlans; let i = index;">
+  <div class="listing col-12 col-lg-4 col-md-4 "style='height:160px' *ngFor="let mplan of mealPlans; let i = index;">
      
       <div class="detail" (click)="gotopage('plancreate', {'id':mplan.id});"  style="width:100%">
-          <h4><a href="javascript:void(0)">{{mplan.name}}</a></h4>
+          <h4><a style="width:90%" href="javascript:void(0)">{{mplan.name}}</a></h4>
           <p innerHTML = "{{mplan.tags}}" *ngIf="mplan.tags"></p>
           <p *ngIf="!mplan.tags">&nbsp;</p>
           <div>

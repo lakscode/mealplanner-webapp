@@ -46,6 +46,8 @@ export class RecipesComponent implements OnInit {
 
 	searchFilterLabels: Array<any> = [];
 	splitcontent : boolean = false;
+	filterOpts: any; 
+	sortType: any = "";
 	constructor(private router: Router, private toastr: ToastrService, private route: ActivatedRoute, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder, private modalService: ModalService) {
 	
 	}
@@ -78,6 +80,10 @@ export class RecipesComponent implements OnInit {
 		this.searchmorebar = false;
 	//	this.dietLabelsList = constants.dietLabels;
 		this.getNutrientsMaxMin(); 
+
+		this.filterOpts = {};
+		this.filterOpts = {"asc":false, "desc": false, "calories":false, "all":false}
+		this.sortType = "";
 
 		this.searchFilterLabels = [];
 		this.searchFilterLabels.push({"label":"Health Labels", "selected":false});
@@ -606,7 +612,7 @@ endIndex = startIndex+ endIndex;
 	 
 	  where += " AND id in (select recipeid from nutrients where " + mQuery +  ")";
 
-	  params1["query"] = query + where + " limit 0, 15";
+	  params1["query"] = query + where + " limit 0, 30";
 	  console.log(params1);
     var res =   this.dbService.getDatabyTablebyQuery("recipes", params1).subscribe(invData => setTimeout(() => {
 		console.log(invData);
@@ -636,6 +642,7 @@ endIndex = startIndex+ endIndex;
   {
 	
 	  params["status"] = "1";
+	  params["limit"] =  "100";
 	  console.log(params);
 	var res =   this.dbService.getDatabyFields("recipes", params).subscribe(invData => setTimeout(() => {
 		console.log(invData);
@@ -693,7 +700,7 @@ endIndex = startIndex+ endIndex;
 				  this.recipesList1.push(temp[i]);          
 				  this.ratingIds += temp[i]["id"] + ",";
 			  }
-			  this.totalPage = this.recipesList1["length"] /10;
+			  this.totalPage = this.recipesList1["length"] / this.page_length;
 			  this.counter(this.totalPage);
 			}
 		   console.log("totalPage " + this.totalPage);
@@ -709,8 +716,7 @@ endIndex = startIndex+ endIndex;
 	}
 
 	gotoRecipeDetails(id){
-	//this.router.navigate(['recipedetails', id]);
-	window.open("/recipedetails/" + id)
+	this.router.navigate(['recipedetails', id]);
 	}
 
 	loadNutrientsMaxMin()
@@ -1298,6 +1304,68 @@ saveOriginal()
 		
 	}));
 
+}
+filterRecords(opt)
+{
+	this.filterOpts["asc"] = false;
+	this.filterOpts["desc"] = false;
+	this.filterOpts["rejected"] = false;
+	this.filterOpts["all"] = false;
+
+	this.sortType = opt; 
+	this.filterOpts[opt] = true;
+	
+	if(opt == "asc")
+	{
+		console.log("sort ascending");
+
+		this.recipesList1 = this.recipesList1.sort(this.sortArraybyLabelAsc);
+		console.log(this.recipesList1);
+		this.getDisplayList();
+	}
+
+	if(opt == "desc")
+	{
+		console.log("sort descending");
+
+		this.recipesList1 = this.recipesList1.sort(this.sortArraybyLabelDesc);
+		this.getDisplayList();
+	}
+
+	if(opt == "calories")
+	{
+		this.recipesList1 = this.recipesList1.sort(this.sortArraybyLabelCalories);
+		this.getDisplayList();
+	}
+
+}
+sortArraybyLabelAsc(a, b) {
+	//return b.label - a.label;
+	if (a.label.toLowerCase() < b.label.toLowerCase()) {
+		return -1;
+	  }
+	  if (a.label.toLowerCase() > b.label.toLowerCase()) {
+		return 1;
+	  }
+	  return 0;
+}
+sortArraybyLabelDesc(a, b) {
+	if (b.label.toLowerCase() < a.label.toLowerCase()) {
+		return -1;
+	  }
+	  if (b.label.toLowerCase() > a.label.toLowerCase()) {
+		return 1;
+	  }
+	  return 0;
+}
+sortArraybyLabelCalories(a, b) {
+	if (a.calories < b.calories) {
+		return -1;
+	  }
+	  if (a.calories > b.calories) {
+		return 1;
+	  }
+	  return 0;
 }
 
 }

@@ -219,7 +219,7 @@ this.loadPlans()
             if(typeof(rowItem[4]["recipe"]) !== "undefined" && rowItem[4]["recipe"] !== null && rowItem[4]["recipe"]["id"] !== "undefined")
             params["dinner"] = rowItem[4]["recipe"]["id"];
     
-            params["created_by"] = "";
+            params["created_by"] = this.currentUser["id"];
             params["created_at"] = new Date();
             params["status"] = 1;
     

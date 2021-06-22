@@ -400,7 +400,7 @@ loadMealPlan()
   {
     this.mealplans = [];
    // this.recipes = recipesList;
-    var params = {"query": "SELECT * FROM mealplan where status=1 ORDER BY RAND() LIMIT 1"};
+    var params = {"query": "SELECT * FROM mealplan where status='1' ORDER BY RAND() LIMIT 1"};
     // ////console.log(JSON.stringify(params));
     var res =   this.dbService.getDatabyTablebyQuery("mealplan", params).subscribe(invData => setTimeout(() => {
   

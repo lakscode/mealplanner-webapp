@@ -59,6 +59,8 @@ import { TrendingModule } from './planner/trending/trending.module';
 import { PricingModule } from './pricing/pricing.module'; 
 import { OurteamModule } from './ourteam/ourteam.module'; 
 import { MyinfoModule } from './myinfo/myinfo.module'; 
+import { PreferencesModule } from './preferences/preferences.module'; 
+
 import { AutherizeModule } from './autherize/autherize.module'; 
 import { BenefitsModule } from './benefits/benefits.module'; 
 import { CalculateModule } from './calculate/calculate.module'; 
@@ -162,7 +164,8 @@ import { AdminModule } from './admin/admin.module';
 	PrivacyModule,
 	TermsModule,
 	CalculateModule,
-	AdminModule
+	AdminModule,
+	PreferencesModule
   ],
   schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
   providers: [{

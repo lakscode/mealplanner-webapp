@@ -297,7 +297,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
 	setMenuActive()
 	{
-
+		
 		for(let i=0; i < this.menuItems.length; i++)
 		{
 			this.menuItems[i]["active"] = false;

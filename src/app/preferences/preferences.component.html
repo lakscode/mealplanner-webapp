@@ -1,0 +1,79 @@
+<div class="fixedtop myinfo recipes-home-body inner-page">
+    <div class="row page-max-width bg-white">  
+
+<div class="col-12">  
+ 
+<div class="recipes-home-body inner-page">
+
+  <div class="row w-1200" style="text-align:center; margin:0 auto;">
+    <div class="col-12">
+      <div id="wrapper">
+          <h2></h2>
+
+          <div id="answer" *ngIf="errorMessage"><span style="color:red">{{errorMessage}}</span></div>
+       
+
+          <div class="row">
+          <form id="quiz">
+              <ng-container *ngFor="let question of questionsList; let i =index;">
+                <div class="col-12 col-lg-4 col-md-4" >
+                  <div [ngClass]="question.type == 'text'?'question-box h120':'question-box h200' ">
+                  
+                    <h4 class="question-name">{{question.question}} <span class="mandatory">&#42;</span></h4>
+                    <ng-container *ngIf="question.type == 'text'">
+
+                      <input class="input-text" type="text" (blur)="makeAnswers(question)" name="q_{{question.id}}"  [(ngModel)] = 'question.answer' />
+                      <span *ngIf="question.textlabel">{{question.textlabel}}</span>
+                      <div class="opts" *ngIf="question && question.options &&  question.options.length > 0">
+                        <div (click)="toggleChoice(question, question.options, i)" [ngClass]="opt.selected?'opt sel':'opt'" *ngFor="let opt of question.options; let i = index;">{{opt.name}}</div>
+
+                      </div>
+                     
+
+
+                    </ng-container>
+
+                    <ng-container *ngIf="question.type == 'option'">
+                    <ng-container  *ngFor="let answer of question.answers; let i =index;" >
+
+                      <label class="container1" style=" text-align: left; display:inline-block;max-width: 200px; width: auto; font-family: 'Lato', sans-serif;font-weight: 400;font-size: 16px;margin-right:10px;"> {{answer.text}}
+                        <input (change)="saveAnswer()" name="q_{{answer.name}}" [(ngModel)] = 'question.answer' type="radio" value="{{answer.text}}">
+                          <span class="checkmark1"></span>
+                      </label>
+                     </ng-container>
+                
+                    </ng-container>
+
+                    <ng-container *ngIf="question.type == 'checkbox'">
+                      <ng-container  *ngFor="let answer of question.answers; let i =index;" >
+  
+                        <label class="container" style=" text-align: left; display:inline-block;max-width: 200px; width: auto; font-family: 'Lato', sans-serif;font-weight: 400;font-size: 16px;"> {{answer.text}}
+                          <input (change)="makeAnswers(question)" name="q_{{answer.name}}" [(ngModel)] = 'answer.answer' type="checkbox" value="{{answer.value}}">
+                            <span class="checkmark"></span>
+                        </label>
+                       </ng-container>
+                  
+                      </ng-container>
+
+                  </div>
+              </div>
+              </ng-container>
+           
+          </form>
+          
+        </div>
+        <div class="row">
+          <div class="col-12" style='text-align:right; margin-bottom:10px;'>
+            <button type="reset" id="reset" (click)="resetAnswer()">Reset</button>
+            <button type="submit" id="submit" (click)="saveAnswers()">Submit Your Answers</button>
+          </div>
+        </div>
+         
+        </div>
+    </div>  
+  </div>
+</div>
+
+</div>
+
+  </div>
