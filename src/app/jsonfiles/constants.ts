@@ -57,7 +57,7 @@ export const constants = {
       ],
   "cusineType":["american","british","caribbean","central europe","chinese","eastern europe","italian","korean","bulgogi","mediterranean","nordic","south american","south east asian","asian","central europe","indian","japanese","middle eastern","south east asian","french","greek","italian","mexican","kosher"],
  // "cusineTypeList":["american","asian","chinese","french","italian","indian","japanese","kosher","mexican","korean"],
- "cuisineTypeList":["american","asian","bibimbap","british","bulgogi","caribbean","central europe","chinese","eastern europe","french","greek", "indian","italian", "japanese","kimchi",  "korean","kosher",  "mediterranean","mexican",  "middle eastern","nordic", "south american", "south east asian",    "world"],
+ "cuisineTypeList":["american","asian","bibimbap","british","bulgogi","caribbean","central europe","chinese","eastern europe","french","greek", "indian","italian", "japanese","kimchi",  "korean","kosher",  "mediterranean","mexican",  "middle eastern","nordic", "south american", "south east asian"],
   "mealTypeList":["breakfast","snack","lunch","teatime","dinner"],
 
    "measureList":['<unit>', 'cup', 'tablespoon', 'teaspoon', 'ounce', 'pint', 'pinch', 'pound', 'roll', 'gram', 'slice','inch', 'piece', 'handful','bowl', 'stick', 'milliliter', 'bunch', 'package', 'kilogram', 'drop', 'can', 'cube', 'fluid ounce', 'pack', 'root', 'half', 'liter', 'quart', 'bag'],
