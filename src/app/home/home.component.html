@@ -72,6 +72,41 @@
    </section>
 
 
+   <div class="site-section">
+      <div class="container" >
+         <div class="col-12" *ngIf="healthLabels.length > 1">
+            <div class="" style="display:flex; align-items: center;min-height:450px;padding-top:30px"> 
+               <div class="row " >
+                  <div class="col-md-4 col-lg-5 pl-5" style="padding-left:0px !important; margin-bottom: 20px;">
+                     <h1 class="text-lg-left mb-4 title">Too busy to plan?</h1>
+                     <p class="text-justify mb-5 description">Subscribe to our dietitian-prepared Specialty Meal Plans which offer balanced nutrition every week and can be easily customized to your personal tastes.</p>
+                     <a (click)="gotopage('signup')" href="javascript:void(0);" style="cursor:default; margin-bottom:20px;" class="leanmore">Learn More</a>
+
+                   <!--  <img class="animated wow flipInX" src="assets/images/landing-bg.png" style='width:100%' />-->
+                  </div>
+
+                  <div class="col-md-8 col-lg-7">
+                     <div class="row">
+                        <ng-container  *ngFor="let hLabel of healthLabels; let h=index;">
+                        <div class="mb-5 col-sm-3"  *ngIf="h <8"> 
+                           <div class="px-5 px-sm-0">
+                              <a (click)="gotopage('signup')"
+                                 class="specialty"><img src="{{hLabel.image}}"
+                                 srcset="{{hLabel.image}}"
+                                 class="rounded-bg specialty-image w-100">
+                              <div class="p-3 bg-white rounded-lg border specialty-label">{{hLabel.label}}</div>
+                              </a>
+                           </div>
+                        </div>
+                     </ng-container>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+
 <!--hottest recipes-->
 <section class="hot-recipes-var2" style="margin-bottom:30px;padding-bottom:0px;" *ngIf="communitiesList && communitiesList.length > 0">
    <div class="container">
@@ -191,7 +226,7 @@
     </div>
 
 <!--hottest recipes-->
-<section class="hot-recipes-var2">
+<!--<section class="hot-recipes-var2">
    <div class="container">
        <div class="wrapper-hot-recipe-var2">
           <div class="hot-recipes-bordered">
@@ -204,18 +239,18 @@
                    <div class="split-images-var2 col-size text-center" *ngFor="let rRecipe of recommendedRecipes; let r=index;">
                       <div class="image-first inner-split">
                          <div class="image image-animate common-split animated wow flipInY animation-delay{{r+1*100}}ms">
-                            <a style="cursor:pointer" (click)="gotoRecipeDetails('recipedetails',rRecipe.id)"><img src="{{formatImage(rRecipe.image, 'm')}}" alt="image"/></a>
+                            <a style="cursor:pointer" (click)="gotoRecipeDetails('signup',rRecipe.id)"><img src="{{formatImage(rRecipe.image, 'm')}}" alt="image"/></a>
                          </div>
                          <div class="intro common-split animated wow flipInY animation-delay{{r+2*100}}ms">
                             <div class="intro-inner ">
-                               <h3><a style="cursor:pointer" (click)="gotoRecipeDetails('recipedetails',rRecipe.id)">{{rRecipe.label}}</a></h3>
+                               <h3><a style="cursor:pointer" (click)="gotoRecipeDetails('signup',rRecipe.id)">{{rRecipe.label}}</a></h3>
                                <div class="short-separator"></div>
                                <p style="text-align:left;">Calories: {{rRecipe.calories}}</p>
                                <br>
                                <p *ngIf="rRecipe.dietLabels" style="text-align:left;">Diet Labels: {{formatLabels(rRecipe.dietLabels)}}</p>
                                <br>
                                <div class="short-separator"></div>
-                               <a class="read-more" (click)="gotoRecipeDetails('recipedetails',rRecipe.id)">view more</a>
+                               <a class="read-more" (click)="gotoRecipeDetails('signup',rRecipe.id)">view more</a>
                             </div>
                          </div>
                       </div>
@@ -224,7 +259,7 @@
           </div>
        </div>
     </div>
- </section>
+ </section>-->
  <!--hottest recipes ends-->
  <div class="chefs-banner">
   <div class="container">

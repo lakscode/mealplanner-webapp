@@ -62,7 +62,7 @@ export class ScheduleComponent implements OnInit {
 	showpopupMenu: boolean = false;
 	completeStatus: any = {};
 	updateFlag: boolean = false;
-
+	perServing: boolean = true;
 	constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
 	
 	}
@@ -71,7 +71,11 @@ export class ScheduleComponent implements OnInit {
 			this.loadDefaults();
 		   
 	}
-
+	reloadData()
+	{
+		console.log(this.perServing);
+		this.loadRecipesToDays()
+	}
 	gotopage(page)
 	{
 		this.router.navigate([page]);
@@ -264,7 +268,7 @@ export class ScheduleComponent implements OnInit {
 	  }
   
   var res =   this.dbService.getDatabyFields("recipes", params).subscribe(invData => setTimeout(() => {
-  
+	console.log(invData);
 	if(invData !== null)
 	{
 	  if(typeof(invData["body"]) !== "undefined" && invData["body"] !== null && invData["body"]["length"] > 0)
@@ -360,6 +364,9 @@ export class ScheduleComponent implements OnInit {
 				  this.plan["days"][i][this.mealTypeList[j]]["ingredients"] = []
 			  
 			  this.plan["days"][i][this.mealTypeList[j]]["instructions"] = this.plan["days"][i][this.mealTypeList[j]]["s_instructions"];
+			  if(this.perServing && this.plan["days"][i][this.mealTypeList[j]]["yield"] !== "" && this.plan["days"][i][this.mealTypeList[j]]["yield"] !== "0" )
+			  totalCals +=  (this.plan["days"][i][this.mealTypeList[j]]["calories"]/this.plan["days"][i][this.mealTypeList[j]]["yield"]);
+			  else
 			  totalCals +=  this.plan["days"][i][this.mealTypeList[j]]["calories"]
   
 			}
@@ -484,27 +491,38 @@ export class ScheduleComponent implements OnInit {
 	  {
 	   // console.log(this.selDay[this.mealTypeList[i]]);
 	   		var obj = this.selDay[this.mealTypeList[i]];
+			   console.log(obj);
 		if(typeof(obj) !== "undefined" && obj !== null)
 		{
 		if(typeof(obj["calories"]) !== "undefined")
 		{
-		  this.selCatValues[chartValCount] = {"name": this.mealTypeList[i],"id":obj["id"], "label": obj["label"], "totalWeight":obj["totalWeight"], "details": [] };
+		  this.selCatValues[chartValCount] = {"name": this.mealTypeList[i],"id":obj["id"], "label": obj["label"], "yield":obj["yield"],  "totalWeight":obj["totalWeight"], "details": [] };
   
 		  if(this.selCat["name"] == "Calories")
 		  {
-			this.selCatValues[chartValCount]["details"].push({"name":"Calories", "value": obj["calories"], "unit":"Kcal"});
-			this.data[chartValCount] =  parseFloat(obj["calories"]);
-			this.dataPie[chartValCount] = {"name":this.setFLU(this.mealTypeList[i]), "y":  parseFloat(obj["calories"])}
+			  var cals = parseInt(obj["calories"]);
+			  if(this.perServing && obj["yield"] !== "" && obj["yield"] !== "0")	
+			  {
+				cals = parseInt(obj["calories"])/parseInt(obj["yield"])
+			  }
+			this.selCatValues[chartValCount]["details"].push({"name":"Calories", "value": cals, "unit":"Kcal"});
+
+			this.data[chartValCount] =  cals;
+
+			this.dataPie[chartValCount] = {"name":this.setFLU(this.mealTypeList[i]), "y":  cals}
+
 			this.labels[chartValCount] =  this.setFLU(this.mealTypeList[i]);
+
 			chartValCount++;
 			var cIndex = this.totalCats.findIndex(x => (x.name  === "Calories"));
 			if(cIndex > -1)
 			{
-			  this.totalCats[cIndex]={"name": "Calories", 'value' :  (parseInt(this.totalCats[cIndex]["value"]) + parseInt(obj["calories"])), "unit":"Kcal"}
+		
+			  this.totalCats[cIndex]={"name": "Calories", 'value' :  parseInt(this.totalCats[cIndex]["value"]) + cals, "unit":"Kcal"}
 			}
 			else
 			{
-			  this.totalCats.push({"name": "Calories", 'value' :  parseInt(obj["calories"]), "unit":"Kcal"});
+			  this.totalCats.push({"name": "Calories", 'value' :  cals, "unit":"Kcal"});
 			}
 			
 		   this.chartUnit= "Kcal";
@@ -521,21 +539,27 @@ export class ScheduleComponent implements OnInit {
 				{
 				  if(temp["total"] > 0)
 				  {
+					var tot = parseInt(temp["total"]); 
+					if(this.perServing && obj["yield"] !== "" && obj["yield"] !== "0")	
+					{
+						tot =parseInt(temp["total"])/obj["yield"];
+					}
 					if(temp["unit"].indexOf("u00b5") !== -1)
 					{
 					  temp["unit"] = temp["unit"].replace("u00b5", "µ");
 					}
-				  this.selCatValues[chartValCount]["details"].push({"name":temp["label"], "value": temp["total"].toFixed(2), "unit":temp["unit"]});
-				  totalValue += temp["total"];
+				  this.selCatValues[chartValCount]["details"].push({"name":temp["label"], "value": tot, "unit":temp["unit"]});
+
+				  totalValue += tot;
   
 				  var cIndex = this.totalCats.findIndex(x => (x.name  === temp["label"]));
 				  if(cIndex > -1)
 				  {
-					this.totalCats[cIndex]={"name": temp["label"], 'value' :  (parseInt(this.totalCats[cIndex]["value"]) + parseInt( temp["total"])), "unit":temp["unit"]}
+					this.totalCats[cIndex]={"name": temp["label"], 'value' :  (parseInt(this.totalCats[cIndex]["value"]) + tot), "unit":temp["unit"]}
 				  }
 				  else
 				  {
-					this.totalCats.push({"name": temp["label"], 'value' :  parseInt( temp["total"]), "unit":temp["unit"]});
+					this.totalCats.push({"name": temp["label"], 'value':tot, "unit":temp["unit"]});
 				  }
 			
 				  this.chartUnit= temp["unit"];
@@ -579,24 +603,31 @@ export class ScheduleComponent implements OnInit {
   
 				  if(temp["total"] > 0)
 				  {
+
+					var tot = parseInt(temp["total"]); 
+					if(this.perServing && obj["yield"] !== "" && obj["yield"] !== "0")	
+					{
+						tot =parseInt(temp["total"])/obj["yield"];
+					}
+
 					if(temp["unit"].indexOf("u00b5") !== -1)
 					{
 					  temp["unit"] = temp["unit"].replace("u00b5", "µ");
 					}
-				  this.selCatValues[chartValCount]["details"].push({"name":temp["label"], "value": temp["total"].toFixed(2), "unit":temp["unit"]});
-				  totalValue += temp["total"];
+				  this.selCatValues[chartValCount]["details"].push({"name":temp["label"], "value": tot, "unit":temp["unit"]});
+				  totalValue +=tot;
 				  if(typeof(totalValArr[i][temp["label"]]) !== "undefined")
-				  totalValArr[i][temp["label"]] += temp["total"];
+				  totalValArr[i][temp["label"]] += tot;
 				  else
-				  totalValArr[i][temp["label"]] = temp["total"];
+				  totalValArr[i][temp["label"]] = tot;
 				  var cIndex = this.totalCats.findIndex(x => (x.name  === temp["label"]));
 				  if(cIndex > -1)
 				  {
-					this.totalCats[cIndex]={"name": temp["label"], 'value' :  (parseInt(this.totalCats[cIndex]["value"]) + parseInt( temp["total"])), "unit":temp["unit"]}
+					this.totalCats[cIndex]={"name": temp["label"], 'value' :  (parseInt(this.totalCats[cIndex]["value"]) + tot), "unit":temp["unit"]}
 				  }
 				  else
 				  {
-					this.totalCats.push({"name": temp["label"], 'value' :  parseInt( temp["total"]), "unit":temp["unit"]});
+					this.totalCats.push({"name": temp["label"], 'value' :  tot, "unit":temp["unit"]});
 				  }
 			
 				  
@@ -631,22 +662,30 @@ export class ScheduleComponent implements OnInit {
 				{
 				  if(temp["value"]["quantity"] > 0)
 				  {
+
+					var qty = parseInt(temp["value"]["quantity"]); 
+					if(this.perServing && obj["yield"] !== "" && obj["yield"] !== "0")	
+					{
+						qty =parseInt(temp["value"]["quantity"])/obj["yield"];
+					}
+
+
 					if(temp["value"]["unit"].indexOf("u00b5") !== -1)
 					{
 					  temp["value"]["unit"] = temp["value"]["unit"].replace("u00b5", "µ");
 					}
 					console.log(temp["value"]["label"]);
-				  this.selCatValues[chartValCount]["details"].push({"name":temp["value"]["label"], "value": temp["value"]["quantity"].toFixed(5), "unit":temp["value"]["unit"]});
-				  totalValue += temp["value"]["quantity"];
+				  this.selCatValues[chartValCount]["details"].push({"name":temp["value"]["label"], "value": qty.toFixed(5), "unit":temp["value"]["unit"]});
+				  totalValue += qty;
 				  console.log(temp["label"])
 				  var cIndex = this.totalCats.findIndex(x => (x.name  === temp["value"]["label"]));
 				  if(cIndex > -1)
 				  {
-					this.totalCats[cIndex]={"name": temp["value"]["label"], 'value' :  (parseInt(this.totalCats[cIndex]["value"]) + parseInt(temp["value"]["quantity"])), "unit":temp["value"]["unit"]}
+					this.totalCats[cIndex]={"name": temp["value"]["label"], 'value' :  (parseInt(this.totalCats[cIndex]["value"]) + qty), "unit":temp["value"]["unit"]}
 				  }
 				  else
 				  {
-					this.totalCats.push({"name": temp["value"]["label"], 'value' :  parseInt( temp["value"]["quantity"]), "unit":temp["value"]["unit"]});
+					this.totalCats.push({"name": temp["value"]["label"], 'value' :  qty, "unit":temp["value"]["unit"]});
 				  }
 			
 				  this.chartUnit=  temp["unit"];
@@ -675,30 +714,39 @@ export class ScheduleComponent implements OnInit {
 			  for(let j=0; j < obj["totalNutrientsArr"]["length"] ; j++)
 			  {
 				var temp = obj["totalNutrientsArr"][j];
-				console.log(temp["value"]);
+				//console.log(temp["value"]);
 				for(let k=0; k < this.mineralsList["length"] ; k++)
 				{
 				  if(temp["value"]["label"].toUpperCase().indexOf(this.mineralsList[k].toUpperCase()) !== -1)
 				  {
 					if(temp["value"]["quantity"] > 0)
 					{
+
+						var qty = parseInt(temp["value"]["quantity"]); 
+						console.log(qty);
+						if(this.perServing && obj["yield"] !== "" && obj["yield"] !== "0")	
+						{
+							qty =parseInt(temp["value"]["quantity"])/obj["yield"];
+						}
+						console.log(qty);
+						console.log(obj["yield"]);
 					  if(temp["value"]["unit"].indexOf("u00b5") !== -1)
 					  {
 						temp["value"]["unit"] = temp["value"]["unit"].replace("u00b5", "µ");
 					  }
   
-					  this.selCatValues[chartValCount]["details"].push({"name":temp["value"]["label"], "value": temp["value"]["quantity"].toFixed(5), "unit":temp["value"]["unit"]});
-					  totalValue += temp["value"]["quantity"];
+					  this.selCatValues[chartValCount]["details"].push({"name":temp["value"]["label"], "value": qty.toFixed(5), "unit":temp["value"]["unit"]});
+					  totalValue += qty;
   
 					  var cIndex = this.totalCats.findIndex(x => (x.name  === this.mineralsList[k]));
 					  this.chartUnit=  temp["value"]["unit"];
 					  if(cIndex > -1)
 					  {
-						this.totalCats[cIndex]={"name":this.mineralsList[k], 'value' :  (parseInt(this.totalCats[cIndex]["value"]) + parseInt(temp["value"]["quantity"])), "unit":temp["value"]["unit"]}
+						this.totalCats[cIndex]={"name":this.mineralsList[k], 'value' :  (parseInt(this.totalCats[cIndex]["value"]) + qty), "unit":temp["value"]["unit"]}
 					  }
 					  else
 					  {
-						this.totalCats.push({"name": this.mineralsList[k], 'value' :  parseInt( temp["value"]["quantity"]), "unit":temp["value"]["unit"]});
+						this.totalCats.push({"name": this.mineralsList[k], 'value' :  qty, "unit":temp["value"]["unit"]});
 					  }
 					}
 				  }
@@ -779,11 +827,18 @@ export class ScheduleComponent implements OnInit {
   
 				  if(temp["total"] > 0)
 				  {
+					var tot = parseInt(temp["total"]);
+					if(this.perServing && obj["yield"] !== "" && obj["yield"] !== "0")	
+					{
+						tot = parseInt(temp["total"])/parseInt(obj["yield"])
+					}
+
 					if(temp["unit"].indexOf("u00b5") !== -1)
 					{
 					  temp["unit"] = temp["unit"].replace("u00b5", "µ");
 					}
-				  totalValue += temp["total"];
+
+					  totalValue += tot;
 					}
 				}
 			   
@@ -815,12 +870,19 @@ export class ScheduleComponent implements OnInit {
 				  {
 					if(temp["value"]["quantity"] > 0)
 					{
+
+						var tot = parseFloat(temp["value"]["quantity"]); 
+					if(this.perServing && obj["yield"] !== "" && obj["yield"] !== "0")	
+					{
+						tot =parseFloat(temp["value"]["quantity"])/obj["yield"];
+					}
+
 					  if(temp["value"]["unit"].indexOf("u00b5") !== -1)
 					  {
 						temp["value"]["unit"] = temp["value"]["unit"].replace("u00b5", "µ");
 					  }
   
-					  totalValue += temp["value"]["quantity"];
+					  totalValue += tot;
 				
 					 
 					}

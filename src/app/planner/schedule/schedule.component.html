@@ -15,11 +15,13 @@
       </div>
       <div class="col-12  col-lg-4 col-md-4" style="text-align:right;">
         <ul class="menu-options-sc" style="float:right;">
-      <!--  <li class="menu-option" (click)="gotopage('home'); toggleMore();">Home</li>-->
+  
           <li class="menu-option" (click)="loadDefaults(); toggleMore();">Reload</li>
-        <!-- <li class="menu-option" (click)="gotopage('favourites'); toggleMore();">My Favourites</li>-->
-          <li class="menu-option" (click)="getIngredientsList(); toggleMore();">Grocery List</li>           
+      
+          <li class="menu-option" (click)="getIngredientsList(); toggleMore();">Grocery List</li>          
+           
           <li *ngIf="plan && plan['days'] && plan['days']['length'] > 0 && plan['days'][0]['day_num'] == 6" class="menu-option" (click)=" toggleMore();">Set Plan Complete</li>    
+         
 
         </ul>
       </div>
@@ -42,11 +44,23 @@
       line-height: 20px;
       border-bottom: 1px solid #ccc;' *ngIf="chartTitle">
        <p style='text-align:center; font-weight:bold; font-size:16px;'>{{chartTitle}} in {{chartUnit}}</p>
+       <div style="    text-align: right; width: 100%;">
+        <label class="container" style=" text-align: left;
+                          display: inline-block;
+                          width: 140px;
+                          font-family: 'Lato', sans-serif;
+                          font-weight: 400;
+                          font-size: 16px;">
+          <input (change)="reloadData()" [(ngModel)]='perServing' type="checkbox">&nbsp;Per Serving
+        </label>
+      
+      </div>         
+     
       <div style='display:block; width:100%'>
         <ng-container *ngFor="let item of totalCats" >
           <div [ngClass]="item.active?'nutriitem active':'nutriitem' ">
-          <div *ngIf="selCat.name.toLowerCase() == 'vitamin' || selCat.name.toLowerCase() == 'minerals' " (click)="selectSubCat(item)" > <b>Total {{ setFLU(item.name) }}</b> - {{ item['value'] }}  {{ item['unit'] }} <br></div>
-          <div *ngIf="selCat.name.toLowerCase() !== 'vitamin' && selCat.name.toLowerCase() !== 'minerals'  " > <b>Total {{ setFLU(item.name) }}</b> - {{ item['value'] }}  {{ item['unit'] }} <br></div>
+          <div *ngIf="selCat.name.toLowerCase() == 'vitamin' || selCat.name.toLowerCase() == 'minerals' " class="plaintext" (click)="selectSubCat(item)" ><span class="title">{{ setFLU(item.name) }}</span> - {{ item['value'].toFixed(2) }}  {{ item['unit'] }} <br></div>
+          <div class="plaintext" *ngIf="selCat.name.toLowerCase() !== 'vitamin' && selCat.name.toLowerCase() !== 'minerals'  " > <span class="title">{{ setFLU(item.name) }}</span> - {{ item['value'].toFixed(2) }}  {{ item['unit'] }} <br></div>
         </div>
         </ng-container>
       </div>
@@ -77,15 +91,18 @@
               <a *ngIf="completeStatus[itemcat.name] !== '1'" href="javascript:void(0)" (click)="setComplete(itemcat)">Set Complete</a>
               <a *ngIf="completeStatus[itemcat.name] == '1'" href="javascript:void(0)">Completed</a>
             </div>
-          <p  (click)="gotopagedetails('recipedetails',itemcat)" style="display:block; margin-top:0px;padding-top:10px;color:#AAA;text-align:left">{{setFLU(itemcat.name)}} 
+          <p  (click)="gotopagedetails('recipedetails',itemcat)" style="display:block; margin-top:0px;color:#AAA;text-align:left">{{setFLU(itemcat.name)}} 
             <!--<span style="float:right;margin-right:5px;"><b>Total Weight:</b> {{formatValue(itemcat.totalWeight)}} gms</span>-->
         </p>
           <p  (click)="gotopagedetails('recipedetails',itemcat)" class="meal-title"  *ngIf="itemcat.label">  {{setFLU(itemcat.label)}}</p>
-         
-        <label *ngFor = "let item of itemcat['details']; let j=index">
+          <p class="plaintext" (click)="gotopagedetails('recipedetails',itemcat)" > Servings : <span *ngIf="itemcat.yield !== ''">{{itemcat.yield}}</span>
+            <span *ngIf="!itemcat.yield">N/A</span>
+          </p>
+        <label style="margin-bottom:0px" *ngFor = "let item of itemcat['details']; let j=index">
           <div class='nutriitem'>
-            <p class="nut-col1" style="display:inline-block;color:$text-gray; margin-right:5px;font-weight:bold;">{{item.name}}</p>
-          <p class="nut-col2" style="display:inline-block;color:#000" >{{formatValue(item.value)}} {{item.unit}}</p>
+            <p class="plaintext nut-col1" style="display:inline-block;color:#555; margin-right:5px;font-weight:bold;">{{item.name}}</p>
+          <p class="plaintext nut-col2" style="display:inline-block;color:#000" >{{formatValue(item.value)}} {{item.unit}}</p>
+          
           </div>
         
         </label>

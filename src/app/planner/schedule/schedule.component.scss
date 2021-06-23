@@ -58,7 +58,7 @@
 .meal-title
 {
   //padding-left:5px;
-  margin-top:0px;
+  margin-top:5px;
  //  padding-top:10px;
     font-size:15px;
     font-family: 'Lato', sans-serif;
@@ -119,7 +119,10 @@ ion-segment-button {
   --indicator-box-shadow: 10px 10px 5px #aaaaaa;
 }
 
-
+.plaintext
+{
+  font-size:12px;
+}
 .itemcat
 {
   display:inline-block;
@@ -151,13 +154,17 @@ ion-segment-button {
   display:inline-block; 
   float:left;
   margin-right: 5px;
-  border: 1px solid var(--blue);
+  /*border: 1px solid var(--blue);*/
   background: var(--light-green1);
-  padding: 0px 6px;
-  margin-bottom: 5px;
+  /* padding: 0px 6px; */
+  /*margin-bottom: 5px; */
   border-radius: 5px;
 }
 
+.plaintext .title
+{
+  font-weight:bold;
+}
 .nutriitemright
 {
   display:inline-block; 
@@ -165,9 +172,8 @@ ion-segment-button {
   margin-right: 10px;
   border:1px solid var(--orange);
   background: var(--orange);
-  padding:5px;
+  padding:5px; 
   color:#FFF;
-  margin-bottom:10px;
   border-radius: 5px;
 }
 

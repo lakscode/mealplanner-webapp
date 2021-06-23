@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { HelpService } from '../services/help.service';
-
+import {constants} from "../jsonfiles/constants"
 import { ModalService } from '../shared/modules/modal/modal.service';
 import { DBService } from '../dbservices/db.service';
 @Component({
@@ -47,7 +47,7 @@ images: any;
 		  else if( this.currentUser["username"] !== "")
 		  this.currentUser["displayname"] = this.currentUser["username"];
 		}
-
+		this.loadHealthLabels();
 	}
 
 	loadSteps()
@@ -107,13 +107,36 @@ images: any;
 			this.loaduserCount();
 		  }
 
-		  this.loadRecommendedRecipes();
+		//  this.loadRecommendedRecipes();
 		}));
 	
 		
   
 	}
+	healthLabels: Array<any> = [];
+	loadHealthLabels()
+	{
+	  this.healthLabels = [];
 	
+				 var arrLabel = constants.healthLabelsWithImages;
+				 if(arrLabel.length > 0)
+				 {
+				   for(let l=0; l < arrLabel.length; l++)
+				   {
+					
+
+				
+						
+					 //   //console.log(img);
+					  this.healthLabels.push({"label":arrLabel[l]["name"], "image":arrLabel[l]["image"]});
+					  
+					
+					
+				   }
+				 }
+			  
+   
+	}
 	loaduserCount()
 	{
 		/*
@@ -201,8 +224,10 @@ images: any;
 		}
 		else if( page == "signup")
 		{
-			this.router.navigate([page]);
+			
 		}
+
+		this.router.navigate([page]);
 	}
 
 	subscribe: any = {};
@@ -226,6 +251,7 @@ images: any;
 	  
 	}
 
+	/*
 	recommendedRecipes: Array<any> = [];
 	loadRecommendedRecipes()
 	{
@@ -284,6 +310,8 @@ images: any;
 	//  //console.log(retImage);
 	  return retImage;
 	}
+
+	*/
 }
 
 
