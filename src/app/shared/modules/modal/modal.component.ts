@@ -37,6 +37,12 @@ export class ModalComponent implements OnInit, OnDestroy {
             this.widthClass ="width40";
             else if(this.width == "50")
             this.widthClass ="width50";
+            else if(this.width == "70")
+            this.widthClass ="width70";
+            else if(this.width == "80")
+            this.widthClass ="width80";
+            else if(this.width == "90")
+            this.widthClass ="width90";
             else 
             this.widthClass ="width60";
         }
