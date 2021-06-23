@@ -45,6 +45,7 @@ export class RecipesComponent implements OnInit {
 	noResult: boolean = false;
 
 	searchFilterLabels: Array<any> = [];
+	modifyFilterLabels: Array<any> = [];
 	splitcontent : boolean = false;
 	filterOpts: any; 
 	sortType: any = "";
@@ -64,8 +65,15 @@ export class RecipesComponent implements OnInit {
 		{
 			this.searchFilterLabels[l]['selected'] = false;
 		}
+	
 	}
-
+	hideModifyLabels()
+	{
+		for(let l=0; l < this.modifyFilterLabels.length; l++)
+			{
+				this.modifyFilterLabels[l]['selected'] = false;
+			}
+	}
 	showLabels(label)
 	{
 		for(let l=0; l < this.searchFilterLabels.length; l++)
@@ -75,6 +83,22 @@ export class RecipesComponent implements OnInit {
 			else
 			this.searchFilterLabels[l]['selected'] = false;
 		}
+
+
+		
+
+	}
+	showModifyLabels(label)
+	{
+	
+		for(let l=0; l < this.modifyFilterLabels.length; l++)
+		{
+			if( this.modifyFilterLabels[l]["label"] == label.label)
+			this.modifyFilterLabels[l]['selected'] = !this.modifyFilterLabels[l]['selected'];
+			else
+			this.modifyFilterLabels[l]['selected'] = false;
+		}
+
 	}
 	ngOnInit() {
 		console.log("ngOnInit");
@@ -86,48 +110,7 @@ export class RecipesComponent implements OnInit {
 		this.filterOpts = {"asc":false, "desc": false, "calories":false, "all":false}
 		this.sortType = "";
 
-		this.searchFilterLabels = [];
-		this.searchFilterLabels.push({"label":"Health Labels", "selected":false});
-		this.searchFilterLabels.push({"label":"Diet Labels", "selected":false});
-		this.searchFilterLabels.push({"label":"Cuisine Type", "selected":false});
-		this.searchFilterLabels.push({"label":"Meal Type", "selected":false});
-		this.searchFilterLabels.push({"label":"Nutrients", "selected":false});
-		this.searchFilterLabels.push({"label":"Calories", "selected":false});
-
-		this.cuisineTypeList = [];
-		for(let c=0; c < constants.cuisineTypeList.length; c++)
-		{
-			this.cuisineTypeList.push({"name":constants.cuisineTypeList[c], "selected":false})
-		}
-
-		this.dietLabelsList= [];
-		for(let d=0; d < constants.dietLabels.length; d++)
-		{
-			this.dietLabelsList.push({"name":constants.dietLabels[d], "selected":false})
-		}
-
-		
-		this.mealTypeList= [];
-		for(let d=0; d < constants.mealTypeList.length; d++)
-		{
-			this.mealTypeList.push({"name":constants.mealTypeList[d], "selected":false})
-		}
-
-
-		//this.healthlabelsList = constants.healthLabels;
-		this.healthlabelsList= [];
-		for(let h=0; h < constants.healthLabels.length; h++)
-		{
-			this.healthlabelsList.push({"name":constants.healthLabels[h], "selected":false})
-		}
-
-		//this.mineralsLabelsList = constants.minerals;
-		this.mineralsLabelsList= [];
-		for(let m=0; m <constants.minerals.length; m++)
-		{
-			this.mineralsLabelsList.push({"name":constants.minerals[m], "selected":false,  "unit":"",  "min":"", "max":"", "t_min":"", "t_max":""})
-		}
-
+		this.loadDDList();
 		this.loadNutrientsMaxMin();
 		this.listorgrid = {"menu":"grid", "panel":"listing-grid"}
 	 $('.listing-buttons span').on("click",function(){
@@ -194,6 +177,59 @@ export class RecipesComponent implements OnInit {
 
 //this.loadRecipes()
 	
+	}
+
+	loadDDList()
+	{
+
+		this.searchFilterLabels = [];
+		this.searchFilterLabels.push({"label":"Health Labels", "selected":false});
+		this.searchFilterLabels.push({"label":"Diet Labels", "selected":false});
+		this.searchFilterLabels.push({"label":"Cuisine Type", "selected":false});
+		this.searchFilterLabels.push({"label":"Meal Type", "selected":false});
+		this.searchFilterLabels.push({"label":"Nutrients", "selected":false});
+		this.searchFilterLabels.push({"label":"Calories", "selected":false});
+
+
+		this.modifyFilterLabels = [];
+		this.modifyFilterLabels.push({"label":"Health Labels", "selected":false});
+		this.modifyFilterLabels.push({"label":"Diet Labels", "selected":false});
+		this.modifyFilterLabels.push({"label":"Cuisine Type", "selected":false});
+		this.modifyFilterLabels.push({"label":"Meal Type", "selected":false});
+	
+		this.cuisineTypeList = [];
+		for(let c=0; c < constants.cuisineTypeList.length; c++)
+		{
+			this.cuisineTypeList.push({"name":constants.cuisineTypeList[c], "selected":false})
+		}
+
+		this.dietLabelsList= [];
+		for(let d=0; d < constants.dietLabels.length; d++)
+		{
+			this.dietLabelsList.push({"name":constants.dietLabels[d], "selected":false})
+		}
+
+		
+		this.mealTypeList= [];
+		for(let d=0; d < constants.mealTypeList.length; d++)
+		{
+			this.mealTypeList.push({"name":constants.mealTypeList[d], "selected":false})
+		}
+
+
+		//this.healthlabelsList = constants.healthLabels;
+		this.healthlabelsList= [];
+		for(let h=0; h < constants.healthLabels.length; h++)
+		{
+			this.healthlabelsList.push({"name":constants.healthLabels[h], "selected":false})
+		}
+
+		//this.mineralsLabelsList = constants.minerals;
+		this.mineralsLabelsList= [];
+		for(let m=0; m <constants.minerals.length; m++)
+		{
+			this.mineralsLabelsList.push({"name":constants.minerals[m], "selected":false,  "unit":"",  "min":"", "max":"", "t_min":"", "t_max":""})
+		}
 	}
 
 /*
@@ -807,7 +843,7 @@ endIndex = startIndex+ endIndex;
 
 	  return ret;
   }
-
+  
 
 clearFilters(){
 	this.noResult =  false;
@@ -1153,6 +1189,7 @@ selectedRecipe: any ;
 newRecipe: any; 
 modifyRecipe(recipe)
 {
+	this.loadDDList();
 	console.log(recipe);
 	this.selectedRecipe = recipe;
 	
@@ -1375,6 +1412,57 @@ sortArraybyLabelCalories(a, b) {
 	  return 0;
 }
 
+setValues(type)
+{
+	console.log(this.newRecipe[type]);
+	if(type == "healthLabels")
+	{
+		this.newRecipe[type]= "";
+		for(let c=0; c < this.healthlabelsList.length; c++)
+		{
+			if(this.healthlabelsList[c]["selected"])
+			{
+				this.newRecipe[type] += this.healthlabelsList[c]["name"] + "~";
+			}
+		}
+	}
+	
+	if(type == "dietLabels")
+	{
+		this.newRecipe[type]= "";
+		for(let c=0; c < this.dietLabelsList.length; c++)
+		{
+			if(this.dietLabelsList[c]["selected"])
+			{
+				this.newRecipe[type] += this.dietLabelsList[c]["name"] + "~";
+			}
+		}
+	}
+
+	if(type == "cuisineType")
+	{
+		this.newRecipe[type]= "";
+		for(let c=0; c < this.cuisineTypeList.length; c++)
+		{
+			if(this.cuisineTypeList[c]["selected"])
+			{
+				this.newRecipe[type] += this.cuisineTypeList[c]["name"] + "~";
+			}
+		}
+	}
+	if(type == "mealType")
+	{
+		this.newRecipe[type]= "";
+		for(let c=0; c < this.mealTypeList.length; c++)
+		{
+			if(this.mealTypeList[c]["selected"])
+			{
+				this.newRecipe[type] += this.mealTypeList[c]["name"] + "~";
+			}
+		}
+	}
+	console.log(this.newRecipe);
+}
 }
 
 	

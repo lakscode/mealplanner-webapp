@@ -537,6 +537,15 @@ color:#FFF;
 {
   display:inline-block;
 }
+.maxheight100
+{
+  max-height:100px;
+
+}
+.maxheight100 .container
+{
+  text-transform: capitalize;
+}
 .multi-select
 {
   position: absolute;

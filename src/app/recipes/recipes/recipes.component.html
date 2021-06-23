@@ -656,7 +656,7 @@
 
             </h2>
             <button style="font-size: 30px;padding:5px;" type="button" class="close" data-dismiss="modal"
-                aria-label="Close" (click)="closeModal('modifyrecipe');">
+                aria-label="Close" (click)="hideModifyLabels(); closeModal('modifyrecipe');">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
@@ -678,7 +678,115 @@
 
                                 </div>
 
-                                <div class='col-12 col-lg-3 col-md-3 item-section'>
+                                <div class='col-12 item-section'>
+                                    <div class="multi-select-lbl">
+                                        <a [ngClass]="modifyFilterLabels[0].selected?'filterlabel active': 'filterlabel'"
+                                            href="javascript:void(0)" (click)="showModifyLabels(modifyFilterLabels[0])">
+                                            {{modifyFilterLabels[0].label}} <i class="fa fa-angle-down"
+                                                aria-hidden="true"></i>
+                                        </a>
+
+                                        <div *ngIf="modifyFilterLabels[0]['selected']" class="col-12 multi-select">
+                                            <div class="filter-group maxheight100">
+                                                <ng-container
+                                                    *ngFor="let hlabel of healthlabelsList; let h = index">
+                                                    <div class="listSection " id="healthLabels">
+                                                        <label class="container">{{hlabel.name}}
+                                                            <input (change)="setValues('healthLabels')"  name="hlable{{h}}" [(ngModel)]="hlabel.selected" type="checkbox"
+                                                                [checked]="h == 0?'checked':''">
+                                                            <span class="checkmark"></span>
+                                                        </label>
+                                                    </div>
+                                                </ng-container>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="multi-select-lbl">
+                                        <a [ngClass]="modifyFilterLabels[1].selected?'filterlabel active': 'filterlabel'"
+                                            href="javascript:void(0)" (click)="showModifyLabels(modifyFilterLabels[1])">
+                                            {{modifyFilterLabels[1].label}} <i class="fa fa-angle-down"
+                                                aria-hidden="true"></i>
+                                        </a>
+
+                                        <div *ngIf="modifyFilterLabels[1]['selected']" class="col-12 multi-select">
+                                            <div class="filter-group maxheight100">
+                                                <ng-container
+                                                    *ngFor="let dlabel of dietLabelsList; let h = index">
+                                                    <div class="listSection " id="doetLabels{{h}}">
+                                                        <label class="container">{{dlabel.name}}
+                                                            <input (change)="setValues('dietLabels')" name="dlable{{h}}" [(ngModel)]="dlabel.selected" type="checkbox"
+                                                                [checked]="h == 0?'checked':''">
+                                                            <span class="checkmark"></span>
+                                                        </label>
+                                                    </div>
+                                                </ng-container>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="multi-select-lbl">
+                                        <a [ngClass]="modifyFilterLabels[2].selected?'filterlabel active': 'filterlabel'"
+                                            href="javascript:void(0)" (click)="showModifyLabels(modifyFilterLabels[2])">
+                                            {{modifyFilterLabels[2].label}} <i class="fa fa-angle-down"
+                                                aria-hidden="true"></i>
+                                        </a>
+
+                                        <div *ngIf="modifyFilterLabels[2]['selected']" class="col-12 multi-select">
+                                            <div class="filter-group maxheight100">
+                                                <ng-container
+                                                    *ngFor="let clabel of cuisineTypeList; let h = index">
+                                                    <div class="listSection " id="cyLabels{{h}}">
+                                                        <label class="container">{{clabel.name}}
+                                                            <input  (change)="setValues('cuisineType')" name="clabel{{h}}" [(ngModel)]="clabel.selected" type="checkbox"
+                                                                [checked]="h == 0?'checked':''">
+                                                            <span class="checkmark"></span>
+                                                        </label>
+                                                    </div>
+                                                </ng-container>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    
+                                    <div class="multi-select-lbl">
+                                        <a [ngClass]="modifyFilterLabels[3].selected?'filterlabel active': 'filterlabel'"
+                                            href="javascript:void(0)" (click)="showModifyLabels(modifyFilterLabels[3])">
+                                            {{modifyFilterLabels[3].label}} <i class="fa fa-angle-down"
+                                                aria-hidden="true"></i>
+                                        </a>
+
+                                        <div *ngIf="modifyFilterLabels[3]['selected']" class="col-12 multi-select">
+                                            <div class="filter-group maxheight100">
+                                                <ng-container
+                                                    *ngFor="let mlabel of mealTypeList; let m = index">
+                                                    <div class="listSection " id="cyLabels{{h}}">
+                                                        <label class="container">{{mlabel.name}}
+                                                            <input  (change)="setValues('mealType')" name="mlabel{{m}}" [(ngModel)]="mlabel.selected" type="checkbox"
+                                                                [checked]="h == 0?'checked':''">
+                                                            <span class="checkmark"></span>
+                                                        </label>
+                                                    </div>
+                                                </ng-container>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                              <!--  <div class='col-12 col-lg-3 col-md-3 item-section'>
                                     <p class="lbl">Health label</p>
                                     <select name="planid" [(ngModel)]="newRecipe.healthLabels">
                                         <option value="{{hlabel.name}}"
@@ -696,6 +804,25 @@
                                 </div>
                                 <div class='col-12 col-lg-3 col-md-3  item-section'>
                                     <p class="lbl">Cuisine Type</p>
+
+                                    <div class="multi-select" style="max-height: 100px">
+                                        <div class="filter-group">
+
+                                         
+                                            <ng-container *ngFor="let ctype of cuisineTypeList; let c = index">
+                                                <div class="listSection " id="cuisineTypeD{{c}}">
+                                                    <label class="container">{{setFLU(ctype.name)}}
+                                                        <input name="cusinetype{{c}}" (change)="setValues('cuisineType')" [(ngModel)]="ctype.selected" type="checkbox"
+                                                            [checked]="m == 0?'checked':''">
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                            </ng-container>
+
+
+                                        </div>
+                                    </div>
+
                                     <select name="plancuisinetype" [(ngModel)]="newRecipe.cuisineType">
                                         <option value="{{ctype.name}}"
                                             *ngFor='let ctype of cuisineTypeList; let i = index' style="font-size:12px">{{setFLU(ctype.name)}}
@@ -710,6 +837,7 @@
                                             {{setFLU(mealtype.name)}}</option>
                                     </select>
                                 </div>
+                            -->
                                
                             </div>
                     </div>
@@ -723,7 +851,7 @@
                       <!--    <a class="defaultbtn" href="javascript:void(0)" (click)="setlabels(newRecipe)"> Modify</a> -->
 
                         <button  (click)="setlabels(newRecipe)" class="submit-comment active">Modify</button>&nbsp;&nbsp;
-                        <button (click)="closeModal('modifyrecipe')" class="submit-comment">Cancel</button>
+                        <button (click)="hideModifyLabels(); closeModal('modifyrecipe')" class="submit-comment">Cancel</button>
                         <!-- <a class="submit-comment active" href="javascript:void(0)" (click)="closeModal('modifyrecipe');"> Cancel</a> -->
 
  
