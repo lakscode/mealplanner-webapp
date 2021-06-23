@@ -280,8 +280,8 @@
                 </div>-->
                
                 <div *ngIf="loadingData && !noResult">Loading data...</div>
-                <div *ngIf="!loadingData" class="recipe-set">
-                    <h2 style="width:100%;">Recipes
+                <div *ngIf="!loadingData">
+                    <h2 style="width:100%;font-weight: 900">Recipes
                         <div style="float:right;text-align:right; background:#FFF;"> <a href="javascript:void(0)" style="font-size:30px;" (click)="gotopage('recipes')">
                             <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
                         </a>
