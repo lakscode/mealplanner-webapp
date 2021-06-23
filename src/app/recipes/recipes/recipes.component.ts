@@ -437,18 +437,13 @@ endIndex = startIndex+ endIndex;
 	   }
 
    }
-   if(typeof(this.searchparam.range) !== "undefined")
-   {
-    if(typeof(this.searchparam.range.lower) !== "undefined")
-    {
-      params["caloriesfrom"] = this.searchparam.range.lower;
-    }
+  
     if(typeof(this.maxcalories) !== "undefined" && this.maxcalories > 0)
     {
       params["caloriesto"] = this.maxcalories;
     }
     params["instructions"]="notempty";
-   }
+ 
    
   // params["cuisineType"] = "american";
    params["returnfields"] = " id, label, image, cuisineType, mealType, healthLabels, dietLabels, calories, yield";
@@ -842,9 +837,11 @@ clearFilters(){
 		this.mineralsLabelsList[m]['max'] = "";
 		
 	}
-	this.searchProps();
-	this.maxcalories = "";
+	this.maxcalories = 0;
 	this.searchparam = {"q":""};
+	
+	this.searchProps();
+
 }
 showhidecontent(recipe)
 {
