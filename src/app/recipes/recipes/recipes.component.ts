@@ -576,7 +576,7 @@ endIndex = startIndex+ endIndex;
 	  var query = "select id, label, image, cuisineType, healthLabels, mealType, dietLabels, calories, yield from recipes ";
 	  var where = " where status = 1 AND totalNutrients != '' AND digest != ''  AND s_instructions != '' " ;
 	  if(this.maxcalories > 0)
-	  where +=  " AND calories >= " + this.maxcalories;
+	  where +=  " AND calories <= " + this.maxcalories;
 
 	  if(params["content"])
 	  {
