@@ -677,7 +677,7 @@
                                     <textarea rows=6 style='width:100%; font-size:15px;' name="newrecipeins" [(ngModel)]="newRecipe.s_instructions"></textarea>
 
                                 </div>
-
+<!--
                                 <div class='col-12 item-section'>
                                     <div class="multi-select-lbl">
                                         <a [ngClass]="modifyFilterLabels[0].selected?'filterlabel active': 'filterlabel'"
@@ -785,6 +785,119 @@
                                     </div>
 
                                 </div>
+                            -->
+
+
+                                <div class='col-12 col-lg-3 item-section'>
+                                    <div class="multi-select-lbl">
+                                        <p>
+                                            {{modifyFilterLabels[0].label}} 
+                                        </p>
+
+                                        <div  class="col-12 paddinglr0">
+                                            <div class="filter-group maxheight100">
+                                                <ng-container
+                                                    *ngFor="let hlabel of healthlabelsList; let h = index">
+                                                    <div class="listSection " id="healthLabels">
+                                                        <label class="container">{{hlabel.name}}
+                                                            <input (change)="setValues('healthLabels')"  name="hlable{{h}}" [(ngModel)]="hlabel.selected" type="checkbox"
+                                                                [checked]="h == 0?'checked':''">
+                                                            <span class="checkmark"></span>
+                                                        </label>
+                                                    </div>
+                                                </ng-container>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <div class='col-12 col-lg-3 item-section'>
+                                    <div class="multi-select-lbl">
+                                        <p>
+                                            {{modifyFilterLabels[1].label}}
+                                        </p>
+
+                                        <div class="col-12 paddinglr0">
+                                            <div class="filter-group maxheight100">
+                                                <ng-container
+                                                    *ngFor="let dlabel of dietLabelsList; let h = index">
+                                                    <div class="listSection " id="doetLabels{{h}}">
+                                                        <label class="container">{{dlabel.name}}
+                                                            <input (change)="setValues('dietLabels')" name="dlable{{h}}" [(ngModel)]="dlabel.selected" type="checkbox"
+                                                                [checked]="h == 0?'checked':''">
+                                                            <span class="checkmark"></span>
+                                                        </label>
+                                                    </div>
+                                                </ng-container>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <div class='col-12 col-lg-3 item-section'>
+
+
+                                    <div class="multi-select-lbl">
+                                        <p>
+                                            {{modifyFilterLabels[2].label}} 
+                                        </p>
+
+                                        <div  class="col-12 paddinglr0">
+                                            <div class="filter-group maxheight100">
+                                                <ng-container
+                                                    *ngFor="let clabel of cuisineTypeList; let h = index">
+                                                    <div class="listSection " id="cyLabels{{h}}">
+                                                        <label class="container">{{clabel.name}}
+                                                            <input  (change)="setValues('cuisineType')" name="clabel{{h}}" [(ngModel)]="clabel.selected" type="checkbox"
+                                                                [checked]="h == 0?'checked':''">
+                                                            <span class="checkmark"></span>
+                                                        </label>
+                                                    </div>
+                                                </ng-container>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <div class='col-12 col-lg-3 item-section'>
+
+                                    
+                                    <div class="multi-select-lbl">
+                                        <p>
+                                            {{modifyFilterLabels[3].label}} 
+                                        </p>
+
+
+                                        <div  class="col-12 paddinglr0">
+                                            <div class="filter-group maxheight100">
+                                                <ng-container
+                                                    *ngFor="let mlabel of mealTypeList; let m = index">
+                                                    <div class="listSection " id="cyLabels{{h}}">
+                                                        <label class="container">{{mlabel.name}}
+                                                            <input  (change)="setValues('mealType')" name="mlabel{{m}}" [(ngModel)]="mlabel.selected" type="checkbox"
+                                                                [checked]="h == 0?'checked':''">
+                                                            <span class="checkmark"></span>
+                                                        </label>
+                                                    </div>
+                                                </ng-container>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+
+
+
+
+
+
+
+
 
                               <!--  <div class='col-12 col-lg-3 col-md-3 item-section'>
                                     <p class="lbl">Health label</p>
