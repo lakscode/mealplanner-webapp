@@ -400,6 +400,14 @@ this.loadColorCodes();
 	
 	 ));
 	}
+	else
+	{
+		
+		setTimeout(() => {
+			this.loadRecipes(idslist, allFlag)
+		}, 200);
+		
+	}
 	}
 
 	formatResult(invData)

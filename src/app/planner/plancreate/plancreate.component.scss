@@ -149,9 +149,10 @@
   font-size: 12px;
   text-transform: uppercase;
   background: #FFF;
-  border:1px solid $orange1;
-  margin-bottom: 5px;
+  /*border:1px solid $orange1;
+  margin-bottom: 5px;*/
   padding: 5px;
+  border-right:2px solid #FFF;
 }
 
 .dayname.active
@@ -162,9 +163,10 @@
   font-weight:bold;
   font-size: 12px;
   text-transform: uppercase;
-  background: $orange1;
-  border:1px solid $orange1;
-  color:#FFF;
+  background: #FFF;
+  border-right:2px solid $orange1;
+
+  color:$orange1;
   margin-bottom: 5px;
   padding: 5px;
 }
@@ -1594,7 +1596,7 @@ background-color: $orange;
  
   background: #FFF;
   border-radius: 5px;
-  padding: 5px 10px ;
+  padding: 2px 10px ;
   border-radius: 50%;
   width: 25px;
   height: 25px;

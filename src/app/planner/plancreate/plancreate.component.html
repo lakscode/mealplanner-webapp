@@ -386,7 +386,7 @@
                 <div style="clear:both"></div>
 
                 <div class="meal-row-wrapper meal-row__week-days">
-                    <div style='width: 180px; display:inline-block;border-bottom:0px'></div>
+                    <div style='width: 130px; display:inline-block;border-bottom:0px'></div>
                     <div class="meal-plan-row row">
                         <div [ngClass]="showNutrients || showNutrientsPServing?'meal-plan-col col mealplan-col ':'meal-plan-col col mealplan-col20'"
                             *ngFor="let mealtype of mealsList; let d =index;">
@@ -399,13 +399,13 @@
                 </div>
                 <div class="divoverflow" style='width:100%; '>
                     <div class="meal-plan-row row">
-                <div class=" mealplan-col" style='width: 150px; display:inline-block;'>
+                <div class=" mealplan-col" style='width: 100px; display:inline-block;'>
                     <ng-container *ngFor="let item of plan['days']; let r = index;">
                           
                         <div (click)="showDayData(r)" [ngClass]="item.expand?'dayname active':'dayname '"><span>{{item.name}}</span></div>
                     </ng-container>
                 </div>
-                <div class=" mealplan-col" style='width: calc(100% - 150px); display:inline-block;'>
+                <div class=" mealplan-col" style='width: calc(100% - 100px); display:inline-block;'>
                     <ng-container *ngFor="let item of plan['days']; let r = index;">
                     
                         

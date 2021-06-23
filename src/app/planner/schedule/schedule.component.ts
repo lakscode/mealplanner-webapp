@@ -299,11 +299,11 @@ export class ScheduleComponent implements OnInit {
 			var bIndex = this.recipesList.findIndex(x => (x.id === this.plan["days"][i][this.mealTypeList[j]]));
   
 			if(bIndex > -1)
-			{
+			{ var tempDigest;
 			  this.plan["days"][i][this.mealTypeList[j]] =  this.recipesList[bIndex];
 			  if(typeof(this.plan["days"][i][this.mealTypeList[j]]["digest"]) !== "undefined" && this.plan["days"][i][this.mealTypeList[j]]["digest"] !== "")
 			  {
-			  var tempDigest = JSON.parse(this.plan["days"][i][this.mealTypeList[j]]["digest"]);
+			  tempDigest = JSON.parse(this.plan["days"][i][this.mealTypeList[j]]["digest"]);
 			  this.plan["days"][i][this.mealTypeList[j]]["digestArr"]  = tempDigest;
 			  }
 			  this.plan["days"][i][this.mealTypeList[j]]["totalNutrientsArr"] = [];

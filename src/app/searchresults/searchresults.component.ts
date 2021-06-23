@@ -1043,7 +1043,7 @@ gotopage(page, id = null){
 	 
 	 if(this.searchparam["param"] !== "")
 	 {
-		params["query"] += "where c.collection_name like '%" + this.searchparam["param"] + "%' "
+		params["query"] += " where c.collection_name like '%" + this.searchparam["param"] + "%' "
 	 } 
 	 params["query"] +=  " GROUP BY c.id ";
 	 console.log(params);
