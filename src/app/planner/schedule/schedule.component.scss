@@ -123,22 +123,27 @@ ion-segment-button {
 .itemcat
 {
   display:inline-block;
-  padding:10px;
+  padding:5px 10px;
   font-size: 14px;
-  background: var(--light-green1);
+ // background: var(--light-green1);
   margin-right: 10px;
-  margin-bottom: 10px;
-  border-radius: 5px;
+ // margin-bottom: 10px;
+  //border-radius: 5px;
   color:$text-gray;
-  border:1px solid var(--orange);
+  border-left:2px solid #FFF;
   width:100%;
   text-align:left;
 }
-
-.itemcat:hover, .itemcat.active
+.itemcat:hover
 {
-  background: var(--orange);
-  color: #FFF;
+  border-left:2px solid #000;
+  color: #000;
+}
+
+ .itemcat.active
+{
+  border-left:2px solid var(--orange);
+  color: var(--orange);
 }
 
 .nutriitem

@@ -318,7 +318,7 @@ export class ScheduleComponent implements OnInit {
 				this.plan["days"][i][this.mealTypeList[j]]["totalNutrientsArr"]  = temptotalNutrients;
 			  }
   
-			  if(tempDigest["length"] > 0)
+			  if(tempDigest && tempDigest["length"] > 0)
 				  {
 					var paramMicro = [];
 					for(let j=0; j< tempDigest["length"] ; j++)
@@ -337,7 +337,7 @@ export class ScheduleComponent implements OnInit {
 					}
 					this.plan["days"][i][this.mealTypeList[j]]["paramMicro"] = paramMicro;
 				  }
-				  if(this.plan["days"][i][this.mealTypeList[j]]["ingredients"] !== null)
+				  if(typeof(this.plan["days"][i][this.mealTypeList[j]]["ingredients"]) !== "undefined" && this.plan["days"][i][this.mealTypeList[j]]["ingredients"] !== null)
 				  {
 					if(this.plan["days"][i][this.mealTypeList[j]]["ingredients"]["length"] > 0)
 					{
@@ -346,8 +346,14 @@ export class ScheduleComponent implements OnInit {
 					}
 					else
 					{
+						try
+						{
 					  this.plan["days"][i][this.mealTypeList[j]]["ingredients"] = JSON.parse(this.plan["days"][i][this.mealTypeList[j]]["ingredients"]);
-   
+					}
+					catch(error)
+					{
+
+					}
 					}
 				  }
 				  else
@@ -505,7 +511,7 @@ export class ScheduleComponent implements OnInit {
 		  }
 		  else if(this.selCat["name"] == "Carbs"  || this.selCat["name"] == "Protein" || this.selCat["name"] == "Cholesterol")
 		  {
-			if( obj["digestArr"]["length"] > 0)
+			if( obj["digestArr"] && obj["digestArr"]["length"] > 0)
 			{
 			  var totalValue= 0;
 			  for(let j=0; j < obj["digestArr"]["length"] ; j++)
@@ -553,7 +559,7 @@ export class ScheduleComponent implements OnInit {
 		  }
 		  else if(this.selCat["name"] == "Vitamin")
 		  {
-			if( obj["digestArr"]["length"] > 0)
+			if( obj["digestArr"] && obj["digestArr"]["length"] > 0)
 			{
 			 
 			  var totalValue= 0;
@@ -614,7 +620,7 @@ export class ScheduleComponent implements OnInit {
 		  }
 		  else if(this.selCat["name"] == "Fat")
 		  {
-			if( obj["totalNutrientsArr"]["length"] > 0)
+			if(  obj["totalNutrientsArr"] &&  obj["totalNutrientsArr"]["length"] > 0)
 			{
 			  var totalValue= 0;
 			  for(let j=0; j < obj["totalNutrientsArr"]["length"] ; j++)
@@ -663,7 +669,7 @@ export class ScheduleComponent implements OnInit {
 		  } 
 		  else if(this.selCat["name"].toUpperCase() == "MINERALS")
 		  {
-			if( obj["totalNutrientsArr"]["length"] > 0)
+			if(  obj["totalNutrientsArr"] && obj["totalNutrientsArr"]["length"] > 0)
 			{
 			  var totalValue= 0;
 			  for(let j=0; j < obj["totalNutrientsArr"]["length"] ; j++)
@@ -711,11 +717,9 @@ export class ScheduleComponent implements OnInit {
 			}
 		   
 		  }
-	  //    console.log("chartValCount " + chartValCount);
-	  //    console.log(this.selCatValues);
+
 		  if(typeof( this.selCatValues[chartValCount-1]) !== "undefined")
 		  {
-		//    console.log("sorting");
 			this.selCatValues[chartValCount-1]["details"] = this.selCatValues[chartValCount-1]["details"].sort(this.helpService.sortArraybyName);
 		  }
 		}

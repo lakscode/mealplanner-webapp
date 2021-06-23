@@ -106,6 +106,8 @@ images: any;
 			console.log(this.communitiesList);
 			this.loaduserCount();
 		  }
+
+		  this.loadRecommendedRecipes();
 		}));
 	
 		
@@ -222,6 +224,65 @@ images: any;
   
 	  }
 	  
+	}
+
+	recommendedRecipes: Array<any> = [];
+	loadRecommendedRecipes()
+	{
+		console.log("recommendedRecipes");
+	  this.recommendedRecipes = [];
+  
+	  var params = {"limit": "4"};
+
+	  var query = "select id, label, image, calories, yield, source, dietLabels, healthLabels from recipes  ";
+	  var qWhere = " where s_instructions != '' AND label != '' AND image != '' ";
+
+	
+	  params["query"]= query + qWhere + "  group by healthLabels order by rand() limit 0, 4";
+
+	  var res =   this.dbService.getDatabyQuery("recipes", params).subscribe(invData => setTimeout(() => {
+   
+	  console.log(invData);
+   
+	   if(invData !== null && typeof(invData["body"]) !== "undefined" && invData["body"] !== null && invData["body"]["length"] > 0)
+		 {
+		   this.recommendedRecipes = [];
+		   for(let i=0; i < invData["body"]["length"] ; i++)
+		   {
+			 this.recommendedRecipes.push(invData["body"][i]);
+			
+		   }
+		
+		 }
+	//	 //console.log(this.recommendedRecipes);
+	   }
+	 
+	  ));
+	
+	}
+	formatLabels(str)
+	{
+	//	//console.log(str);
+		var retArr = [];
+		retArr.push(str);
+		if(str !== "")
+		{
+			retArr = [];
+			retArr = str.split("~");
+		}
+		return retArr;
+	}
+	formatImage(image, type)
+	{
+	//  //console.log(image);
+	  var retImage = image;
+	  if(image !== "" && type !== "")
+	  {
+		retImage = this.helpService.formatImage(image, type);
+		
+	  }
+	//  //console.log(retImage);
+	  return retImage;
 	}
 }
 

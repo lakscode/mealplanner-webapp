@@ -322,5 +322,75 @@ cursor: pointer;
        );
   }
 }
+.mealplan
+{
+  display:block;
+  text-align: left;
+}
+.mealtype
+{
+  font-size:14px;
+  text-align:left;
+  display:block;
+  margin-bottom:5px;
+}
 
+.mealtype a
+{
+ color:#000;
+ padding-left:10px;
+ font-family: 'Lora', sans-serif;
+}
+.mealtype a:hover
+{
+  color: $orange1;
+
+}
+.mealplan .mealtype::before {
+  content: '';
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  background-color: #01B0F1;
+}
+
+.mealplan .mealtype:nth-child(1) span {
+  color: #01B0F1;
+}
+.mealplan .mealtype:nth-child(2)  span {
+  color: #FFC000;
+}
+.mealplan .mealtype:nth-child(3)  span {
+  color: #C00000;
+}
+
+.mealplan .mealtype:nth-child(4)  span {
+  color: #00AF50;
+}
+
+.mealplan .mealtype:nth-child(5)  span {
+  color: #E46C0B;
+}
+
+
+.mealplan .mealtype:nth-child(1)::before {
+  background-color: #01B0F1;
+}
+.mealplan .mealtype:nth-child(2)::before {
+  background-color: #FFC000;
+}
+.mealplan .mealtype:nth-child(3)::before {
+  background-color: #C00000;
+}
+
+.mealplan .mealtype:nth-child(4)::before {
+  background-color: #00AF50;
+}
+
+.mealplan .mealtype:nth-child(5)::before {
+  background-color: #E46C0B;
+}
 

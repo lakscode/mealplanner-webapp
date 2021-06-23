@@ -449,6 +449,7 @@ loadMealPlan()
   }
 
   planStatus: Array<any>= []; 
+  plan: any;
 getPlanStatus()
 {
 	//console.log("in getPlanstatus");
@@ -457,7 +458,7 @@ getPlanStatus()
   if(this.currentUser && this.currentUser["id"] !== null && this.currentUser["id"] !== "")
   {
 
-	var params = {"query": "SELECT mum.id mum_id, mp.id id, mp.name mpname, mp.tags FROM mealplan_user_mapping mum, mealplan mp where mum.userid = " + this.currentUser["id"] + " AND mp.id = mum.mealplanid AND mp.status=1 AND mum.status = 1 "};
+	var params = {"query": "SELECT mum.id mum_id, mum.startdate startdate,mp.id id, mp.name mpname, mp.tags FROM mealplan_user_mapping mum, mealplan mp where mum.userid = " + this.currentUser["id"] + " AND mp.id = mum.mealplanid AND mp.status=1 AND mum.status = 1 "};
 
 	//console.log(params);
 	  var res =   this.dbService.getDatabyTablebyQuery("mealplan_user_mapping", params).subscribe(invData => setTimeout(() => {
@@ -469,6 +470,13 @@ getPlanStatus()
 	  {
 		this.planStatus = invData["body"];
 	  	//console.log(this.planStatus);
+		this.plan = invData["body"][0];
+		  var Difference_In_Time = new Date().getTime() - new Date(this.planStatus[0]["startdate"] ).getTime(); 
+   
+			  var diff_days = Difference_In_Time / (1000 * 3600 * 24); 
+  
+			  this.loadDaysData(diff_days);
+
 	  }
 	  else
 	  {
@@ -756,6 +764,117 @@ transform(value: any) {
 		console.log(text2);
 		console.log("foodcount " + foodcount);
 */
+  }
+
+  welcomeMessage: any = "";
+  errorMessage: any = "";
+  mealTypeList: Array<any> = [];
+	loadDaysData(diff_days)
+	{
+	console.log(this.plan);
+	this.plan["days"] = [];
+	  var idslist = "";
+	  var diff_days_ceil = Math.ceil(diff_days);
+	  var param_day_num = 0;
+	  if(diff_days_ceil > 0) 
+	  param_day_num = diff_days_ceil -1;
+	  this.errorMessage  = "";
+	  this.welcomeMessage= "Your <b>Day " + (diff_days_ceil) + "</b> Plan";
+  
+	  if(typeof(this.plan["id"]) !== "undefined" && this.plan["id"] !== "")
+	  {
+		var params = {};
+		 
+		  params["meal_plan_id"] = this.plan["id"];
+		  params["day_num"] = param_day_num;
+		  this.mealTypeList = ["breakfast", "snack1", "lunch", "snack2", "dinner"];
+  
+		var res =   this.dbService.getDataByTable("days", params).subscribe(dData => setTimeout(() => {
+		  console.log(dData);
+		  if(dData !== null)
+		  {
+			if(dData["body"] !== null && dData["body"]['length'] > 0)
+			{
+			  for(let i=0; i < dData["body"]['length'] ; i++)
+			  {
+				this.plan["days"][i]= dData["body"][i];
+  
+				for(let j=0; j < this.mealTypeList['length']; j++)
+				{
+				  var t = this.plan["days"][i][this.mealTypeList[j]];
+				  if(t !== "")
+				  idslist += t + ",";
+				}
+				//this.planDay = this.plan['days'][i];
+				
+			  }
+			  
+			 
+			 // this.getCompleteStatus();
+			
+			}
+			
+		  }
+		  if(idslist !== "")
+		  {			
+			idslist = idslist.substring(0, idslist.length-1);
+			this.loadRecipes(idslist);
+		  }
+		 
+		}))
+	  }
+   
+	}
+	loadRecipes(idslist)
+	{
+		var recipesList = [];
+		console.log("loadRecipes");
+	  var params = {"limit": 100};
+	  if(idslist !== "")
+	  {
+		params["idslist"] = idslist;
+  
+	  }
+  
+  var res =   this.dbService.getDatabyFields("recipes", params).subscribe(invData => setTimeout(() => {
+  
+	if(invData !== null)
+	{
+	  if(typeof(invData["body"]) !== "undefined" && invData["body"] !== null && invData["body"]["length"] > 0)
+	  {
+		var temp = invData["body"];
+		if(temp["length"] > 0)
+		{
+		  recipesList = [];
+		  for(let i=0; i< temp["length"] ; i++)
+		  {
+			recipesList.push(temp[i])
+		  }
+		}
+	  }
+	  for(let i=0; i < this.plan["days"]['length'] ; i++)
+	  {
+		var obj = this.plan["days"][i];
+		for(let j=0; j < this.mealTypeList['length']; j++)
+		{
+		  var totalCals = 0;
+		  if(this.plan["days"][i][this.mealTypeList[j]] !== "")
+		  {
+  
+			var bIndex = recipesList.findIndex(x => (x.id === this.plan["days"][i][this.mealTypeList[j]]));
+  
+			if(bIndex > -1)
+			{ 
+			  this.plan["days"][i][this.mealTypeList[j]] = recipesList[bIndex];
+
+			}
+		}
+	}
+}
+console.log( this.plan);
+	}
+	
+  }));
   }
 }
 

@@ -8,12 +8,12 @@
          </div>
   <div *ngIf= "!errorMessage && categories">
     <div class="row">
-      <div class="col-12 col-lg-4 col-md-4">
+      <div class="col-12 col-lg-8 col-md-8">
         <div class="left">
             <h1 class="title-black center" ><b>{{setFLU(plan.name)}}</b> - <span innerHtml = "{{welcomeMessage}}"></span> </h1> 
         </div>
       </div>
-      <div class="col-12  col-lg-8 col-md-8" style="text-align:right;">
+      <div class="col-12  col-lg-4 col-md-4" style="text-align:right;">
         <ul class="menu-options-sc" style="float:right;">
       <!--  <li class="menu-option" (click)="gotopage('home'); toggleMore();">Home</li>-->
           <li class="menu-option" (click)="loadDefaults(); toggleMore();">Reload</li>
@@ -74,10 +74,11 @@
         <div class="col-12" [ngClass]="i%2 == 0?'colv plan-seperator-left' : 'colv plan-seperator-right'" >
           <div class="panel-box" style="text-align:left;">
             <div [ngClass]="completeStatus[itemcat.name] == '1'?'nutriitemright green':'nutriitemright '">
-              <a *ngIf="completeStatus[itemcat.name] == '0'" href="javascript:void(0)" (click)="setComplete(itemcat)">Set Complete</a>
+              <a *ngIf="completeStatus[itemcat.name] !== '1'" href="javascript:void(0)" (click)="setComplete(itemcat)">Set Complete</a>
               <a *ngIf="completeStatus[itemcat.name] == '1'" href="javascript:void(0)">Completed</a>
             </div>
-          <p  (click)="gotopagedetails('recipedetails',itemcat)" style="display:block; margin-top:0px;padding-top:10px;color:#AAA;text-align:left">{{setFLU(itemcat.name)}} <span style="float:right;margin-right:5px;"><b>Total Weight:</b> {{formatValue(itemcat.totalWeight)}} gms</span>
+          <p  (click)="gotopagedetails('recipedetails',itemcat)" style="display:block; margin-top:0px;padding-top:10px;color:#AAA;text-align:left">{{setFLU(itemcat.name)}} 
+            <!--<span style="float:right;margin-right:5px;"><b>Total Weight:</b> {{formatValue(itemcat.totalWeight)}} gms</span>-->
         </p>
           <p  (click)="gotopagedetails('recipedetails',itemcat)" class="meal-title"  *ngIf="itemcat.label">  {{setFLU(itemcat.label)}}</p>
          

@@ -21,8 +21,49 @@
                </ng-container>
                <ng-container *ngIf="planStatus.length > 0">
                   <p class="plan-name">{{planStatus[0]["mpname"]}} </p>
-                    <p class="plan-tags">{{planStatus[0]["tags"]}} <br/>
-                     </p>
+                    <!--<p class="plan-tags">{{planStatus[0]["tags"]}} <br/>
+                     </p>-->
+                     <div class="mealplan" *ngIf="plan && plan['days'] && plan['days']['length'] > 0">
+                        <ul>
+                           <li class="mealtype" >
+                              <a  href="/recipedetails/{{plan['days'][0]['breakfast']['id']}}"  target="_blank"  title = "{{plan['days'][0]['breakfast']['label']}}" *ngIf="plan['days'][0]['breakfast'] && plan['days'][0]['breakfast']['label']">
+                                 <span>Breakfast :</span> {{limitTo(plan['days'][0]['breakfast']['label'], 30)}}
+                              </a>
+                           </li>
+                           <li class="mealtype" >
+                              <a href="/recipedetails/{{plan['days'][0]['snack1']['id']}}"  target="_blank"  title = "{{plan['days'][0]['snack1']['label']}}" *ngIf="plan['days'][0]['snack1'] && plan['days'][0]['snack1']['label']">
+                                <span>Mornimg Snack :</span> {{limitTo(plan['days'][0]['snack1']['label'], 25)}}
+                              </a>
+                           </li>
+                           <li class="mealtype" >
+                              <a href="/recipedetails/{{plan['days'][0]['lunch']['id']}}" target="_blank" title = "{{plan['days'][0]['lunch']['label']}}" *ngIf="plan['days'][0]['lunch'] && plan['days'][0]['lunch']['label']">
+                                 <span>Lunch :</span> {{limitTo(plan['days'][0]['lunch']['label'], 30)}}
+                              </a>
+
+                           </li>
+
+                           <li class="mealtype" >
+                              <a href="/recipedetails/{{plan['days'][0]['snack2']['id']}}"  target="_blank"  title = "{{plan['days'][0]['snack2']['label']}}" *ngIf="plan['days'][0]['snack2'] && plan['days'][0]['snack2']['label']">
+                                 <span>Evening Snack :</span> {{limitTo(plan['days'][0]['snack2']['label'], 25)}}
+                              </a>
+
+                           </li>
+
+                           <li class="mealtype" >
+                              <a href="/recipedetails/{{plan['days'][0]['dinner']['id']}}"  target="_blank"  title = "{{plan['days'][0]['dinner']['label']}}" *ngIf="plan['days'][0]['dinner'] && plan['days'][0]['dinner']['label']">
+                                 <span>Dinner :</span> {{limitTo(plan['days'][0]['dinner']['label'], 30)}}
+                              </a>
+
+                           </li>
+                        </ul>
+                       
+
+                        
+
+                       
+                       
+                      </div>
+                     <br>
                   <a class="read-more-bordered" (click)="gotopage('schedule', planStatus[0]['id'])" href="javascript:void(0)">View Details</a>
                </ng-container>
            </div>
