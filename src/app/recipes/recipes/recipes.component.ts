@@ -48,6 +48,7 @@ export class RecipesComponent implements OnInit {
 	splitcontent : boolean = false;
 	filterOpts: any; 
 	sortType: any = "";
+	showFilters: boolean = false;
 	constructor(private router: Router, private toastr: ToastrService, private route: ActivatedRoute, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder, private modalService: ModalService) {
 	
 	}
@@ -839,7 +840,7 @@ clearFilters(){
 	}
 	this.maxcalories = 0;
 	this.searchparam = {"q":""};
-	
+
 	this.searchProps();
 
 }
