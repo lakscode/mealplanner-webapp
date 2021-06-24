@@ -681,7 +681,7 @@ export class PlancreatemComponent implements OnInit {
 			this.isItemAvailable = true;
 			this.isSearching = false;
 			this.items = this.recipeList.filter((item) => {    
-			  console.log(item);       
+			 // console.log(item);       
 				return (item["label"].toLowerCase().indexOf(val.toLowerCase()) > -1);
 			})
 		
@@ -1377,10 +1377,10 @@ export class PlancreatemComponent implements OnInit {
 				{
 				  this.filters["minerals"] = {"label":"Minerals", "expand":false, "data":[]}
 				  this.filters["minerals"]["data"] = [];
-				  for(let m = 0; m < constants.minerals["length"] ; m++)
+				  for(let m = 0; m < constants.minerals_new["length"] ; m++)
 				  {
 				   
-					this.filters["minerals"]["data"].push({"name":constants.minerals[m], "unit":"",  "min":"", "max":"", "t_min":"", "t_max":"", "selected":false});
+					this.filters["minerals"]["data"].push({"name":constants.minerals_new[m]["name"], "unit":constants.minerals_new[m]["unit"],  "min":"", "max":"", "t_min":"", "t_max":"", "selected":false});
 				  }
 				  this.loadNutrientsMaxMin();
 				}

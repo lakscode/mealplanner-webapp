@@ -87,12 +87,11 @@
     width: 40px !important;
     background: $green !important;
     color:#FFF !important;
-  
+
     border-radius:20px;
     height:70px;
     margin:0px 5px;
-    --color: transparent !important;
-    --color-checked: transparent !important;
+   
     .day
     {
       font-family: 'Lato', sans-serif;
@@ -133,6 +132,7 @@
    // background: #f1f2f3;
     color:#000;
     display:inline-block;
+    border:1px solid $green !important;
     border-radius:20px;
     height:70px;
     margin:0px 3px;
@@ -154,7 +154,7 @@
       height:30px !important;
       padding-top:10px;
       text-align:center;
-     //
+      font-weight:bold;
       border-radius:50%;
       color:$green !important;
       margin: 0 auto;
@@ -262,7 +262,7 @@ background: #aaaaaa;
 text-align:center;
 text-decoration:none;
 text-transform: uppercase;
-font-size:16px;
+font-size:12px;
 display: flex;
 vertical-align: middle;
 align-items: center;
@@ -272,7 +272,7 @@ color:#000;
 {
   color:#FFF;
 }
-.filters a ion-icon
+.filters a i
 {
 font-size:20px;
 margin-right:10px;
@@ -323,7 +323,21 @@ margin-right:10px;
 .bg-trans
 {
   background: transparent;
-  --background: transparent;
+
+}
+.search-button
+{
+  padding:10px 30px;
+  font-size: 16px;
+  text-align:center;
+  background: $orange;
+  color:#FFF;
+  margin: 0 auto;
+}
+.recipeRes
+{
+  max-height: calc(100vh - 230px); 
+  overflow-y: auto; padding-left:10px; padding-right:10px;
 }
 .custom-item
 {
@@ -332,6 +346,7 @@ margin-right:10px;
   background:transparent;
   font-size: 20px;
   line-height: 24px;
+  height: 50px;
   .left{
     width: 10%;
     float:left;
@@ -342,7 +357,7 @@ margin-right:10px;
     width: 80%;
     float:left;
     text-align:left;
-    font-weight:bold
+    font-style:18px;
   }
   
 
@@ -399,4 +414,138 @@ margin-right:10px;
 {
   box-shadow: 0 1rem 1.5rem rgb(255 145 0 / 25%);
 
+}
+
+.addicon
+{
+  position: absolute;
+    right: 40px;
+    border-radius: 50%;
+    border: 1px solid #FFF;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    padding-top: 0px;
+    font-size: 20px;
+}
+
+
+
+.filter-group
+{
+  margin-top:10px;
+}
+
+
+ .listSection{
+           // border: solid 1px #888;
+            //border-radius: 4px;
+            padding: 5px 5px 0px 0px;
+           //width: 340px;
+            margin: 0 auto;
+            font-size: 10.5pt;
+            display: block;
+            margin-bottom: 10px;
+            height: 24px;
+            margin-left: 6px;
+        }
+
+
+        
+.container {
+  display: block;
+  position: relative;
+  padding-left: 30px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 16px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  font-weight:normal;
+}
+
+/* Hide the browser's default checkbox */
+.container input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: #FFF;
+   //border-radius: 50%;
+   border:1px solid $orange;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input[type="checkbox"] ~ .checkmark {
+  background-color: #FFF;
+}
+
+/* When the checkbox is checked, add a blue background */
+.container input[type="checkbox"]:checked ~ .checkmark {
+background-color: $orange;
+  border:1px solid $orange;
+  //background-color: #66bb6a;
+  //border:1px solid #66bb6a;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+  left: 7px;
+  top: 3px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+
+.recipe-item-s
+{
+  margin-bottom:10px;
+  display:flex;
+  .recipe-image-s
+  {
+    width:50px; height:50px; display:inline-block;
+    img {
+      width:100%;
+      height:100%;
+      border-radius:50%;}
+
+
+  }
+
+  .recipe-label-s
+  {
+    margin-left:5px;
+    display:inline-block;width:calc(100% - 60px);
+    font-size: 16px;
+  }
 }

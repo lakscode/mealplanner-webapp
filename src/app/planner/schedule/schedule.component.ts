@@ -188,7 +188,8 @@ export class ScheduleComponent implements OnInit {
 	  if(diff_days_ceil > 0) 
 	  param_day_num = diff_days_ceil -1;
 	  this.errorMessage  = "";
-	  this.welcomeMessage= "Your <b>Day " + (diff_days_ceil) + "</b> Plan";
+	  //this.welcomeMessage= "Your <b>Day " + (diff_days_ceil) + "</b> Plan";
+	  this.welcomeMessage= "Day " + (diff_days_ceil) + "";
   
 	  if(typeof(this.plan["id"]) !== "undefined" && this.plan["id"] !== "")
 	  {
@@ -432,7 +433,7 @@ export class ScheduleComponent implements OnInit {
 	  this.dateObj["month"] = this.helpService.getMonth(new Date());
 	  this.dateObj["day"] = this.helpService.getDay(new Date());
 	  this.dateObj["date"] = new Date().getDate()
-  
+		console.log(this.dateObj);
 	}
 	startPlan()
 	{
@@ -1253,6 +1254,8 @@ export class ScheduleComponent implements OnInit {
 		 };
 		 console.log(this.chartOptionsLine);
 	}
+
+
 
   }
   

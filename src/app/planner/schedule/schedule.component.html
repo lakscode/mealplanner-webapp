@@ -1,18 +1,50 @@
 
-    <div class="fixedtop recipes-home-body inner-page" *ngIf="plan">
+    <!--<div class="fixedtop recipes-home-body inner-page" *ngIf="plan">
         <div class="row page-max-width" style="margin:0 auto;">
             <div class="recipe-set">         
-                <h2>Schedule Plan</h2>
+                <h2>Your Today's Schedule - <span *ngIf="plan.name">{{setFLU(plan.name)}}</span></h2>
             </div>
-
+            <div class="add2mealplan">
+              <a [ngClass]="showpopupflag?'menu active':'menu'"  (click)="showpopupflag = !showpopupflag" href="javascript:void(0)"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></a>
+              <div *ngIf='showpopupflag' class="add2mealplanmenu" style='height:120px'>
+                  <a (click)="showpopupflag = false; downloadplan() " href="javascript:void(0)">
+                      <i class="fa fa-file-pdf-o"></i> Export
+                  </a>
+                  <a (click)="showpopupflag = false; getIngredientsList();" href="javascript:void(0)">
+                      <i class="fa fa-download"></i>   Grocery List
+                  </a>
+              </div>      
+            </div>-->
+            <div class="fixedtop recipes-home-body inner-page">
+              <div class="container" style="margin:0 auto;padding-top:20px;padding-left:0px;padding-right:0px">
+                  <div class="row">
+                  <div class="col-md-12 col-lg-12">
+                      <div class="recipe-set">         
+                          <h2>Your Today's Schedule <span style="font-size:16px;" *ngIf="plan.name">- {{setFLU(plan.name)}}</span> <span style="font-size:16px;" *ngIf="welcomeMessage !==''"> ({{welcomeMessage}})</span></h2>
+                          
+                      </div>
+                      <div class="add2mealplan">
+                          <a [ngClass]="showpopupflag?'menu active':'menu'"  (click)="showpopupflag = !showpopupflag" href="javascript:void(0)"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></a>
+                          <div *ngIf='showpopupflag' class="add2mealplanmenu" style='height:120px'>
+                              <a (click)="showpopupflag = false; downloadplan() " href="javascript:void(0)">
+                                  <i class="fa fa-file-pdf-o"></i> Export
+                              </a>
+                              <a (click)="showpopupflag = false; getIngredientsList();" href="javascript:void(0)">
+                                  <i class="fa fa-download"></i>   Grocery List
+                              </a>
+                             
+                                  
+                          </div>
+                          </div>
+                          
         <div *ngIf="errorMessage">
           <p innerHtml = "{{errorMessage}}"></p>
          </div>
-  <div *ngIf= "!errorMessage && categories">
+  <div *ngIf= "!errorMessage && plan && categories">
     <div class="row">
-      <div class="col-12 col-lg-8 col-md-8">
+      <!--<div class="col-12 col-lg-8 col-md-8">
         <div class="left">
-            <h1 class="title-black center" style="text-align: center"><b>{{setFLU(plan.name)}}</b> - <span innerHtml = "{{welcomeMessage}}"></span> </h1> 
+          <p> <span innerHtml = "{{welcomeMessage}}"></span> </p>  
         </div>
       </div>
       <div class="col-12  col-lg-4 col-md-4" style="text-align:right;">
@@ -26,7 +58,7 @@
          
 
         </ul>
-      </div>
+      </div>-->
       
         <div class="col-12 col-md-2 col-lg-2">
     <div style='width:100%;' *ngIf="categories.length > 0 && selCat">

@@ -105,9 +105,9 @@ loadDefaults()
 
 		//this.mineralsLabelsList = constants.minerals;
 		this.mineralsLabelsList= [];
-		for(let m=0; m <constants.minerals.length; m++)
+		for(let m=0; m <constants.minerals_new.length; m++)
 		{
-			this.mineralsLabelsList.push({"name":constants.minerals[m], "selected":false,  "unit":"",  "min":"", "max":"", "t_min":"", "t_max":""})
+			this.mineralsLabelsList.push({"name":constants.minerals_new[m]["name"], "selected":false,  "unit":constants.minerals_new[m]["unit"],  "min":"", "max":"", "t_min":"", "t_max":""})
 		}
 
 		this.loadNutrientsMaxMin();

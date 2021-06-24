@@ -58,7 +58,7 @@
           <div style='width:100%; height:10px'></div>
           <div *ngIf="selDay && plan.name !== '' " class="panel">
           <div class="item-day">
-            <div class="mainlist" style="background:transparent; --background: transparent;">
+            <div class="mainlist" style="background:transparent;">
           <div class='item-heading'>
             <p class="title-black1" >{{selDay.name}} <span style='float:right; font-size:24px;' (click)="formatMinerals(planDay)" id="icon_{{selDayIndex}}_tm" class="btnicon"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></span></p>           
           </div>
@@ -89,12 +89,11 @@
         rgba(0, 0, 0, 0.3)
       ),url(' + planDay[mealType].image + ')'}">
       
-        <div *ngIf="plan['created_by'] == currentUser['id']" style="position: absolute;
-        right: 10px;"> 
-        <span style='color:#000' class="btnicon"  (click)="addMeal(mealType)">
+        <div *ngIf="plan['created_by'] == currentUser['id']  && plan.image !== ''" class="addicon"> 
+        <span style='color:#FFF' class="btnicon"  (click)="addMeal(mealType)">
             <i class="fa fa-plus" aria-hidden="true"></i></span> </div>
-        <h2 style='color:#000;'>{{getFLU(mealType)}}</h2>
-        <ng-container > <!--*ngIf="!planDay[mealType].label"-->
+        <h2 style='color:#FFF;'>{{getFLU(mealType)}}</h2>
+        <ng-container *ngIf="plan['created_by'] == currentUser['id'] && plan.image == ''"> 
           <div (click)="addMeal(mealType)" style="max-height: 60px; margin:0 auto; width:100%;text-align:center;">
             <i class="fa fa-plus" aria-hidden="true"></i>
         </div>
@@ -164,21 +163,20 @@
       
       
       <div id="addMeal" class="modalpopup" *ngIf='addMealFlag && modalText'>
-        <button class="closebtn" (click)="closeModal()">X
+        <button class="closebtn" (click)="closeModal()">x
         </button>
         <div style="margin-top:0px;" class='item-heading' >Add {{getFLU(modalText)}}</div>
         <div>
-          <p>For all remaining days {{getFLU(modalText)}}</p>
-          <input type="checkbox" slot="start" [(ngModel)]="planDay['forall'][modalText]">
+          <input type="checkbox" [(ngModel)]="planDay['forall'][modalText]"> For all remaining days {{getFLU(modalText)}}
         </div>
       
         <div *ngIf="planDay[modalText]">
       <p position="floating">Search Recipe</p>
-      <textarea  style="border-bottom: 1px solid #CCC;--padding-bottom: line-height:150%;  width:calc(100% - 50px);"  id="{{modalText}}" (blur)="getItems($event, modalText)" [(ngModel)] = "planDay[modalText].label"></textarea>
-      <button slot="end" class="micbtnend" (click)=" startListening(modalText)"><span name="mic-outline"></span></button>
+      <input type="text"  class="inputbox"  id="{{modalText}}" (keyup.enter)="filterFlag= false; searchFilters($event, modalText)" [(ngModel)] = "planDay[modalText].label" />
+ 
       </div>
-      <div>
-        <div size="6">
+      <div class="row">
+        <div class="col-4 ">
           <div [ngClass]="filterFlag?'filters active':'filters'">
             <a href="javascript:void(0)" (click)="setFilters()">
                 <i class="fa fa-sliders" aria-hidden="true"></i> 
@@ -186,7 +184,15 @@
             </a>
           </div>
         </div>
-        <div size="6">
+        <div class="col-4 paddinglr0">
+          <div class='filters'>
+            <a href="javascript:void(0)" (click)="clearFilters()">
+                <i class="fa fa-times" aria-hidden="true"></i>
+              My Recipes
+            </a>
+          </div>
+        </div>    
+        <div class="col-4 ">
           <div class='filters'>
             <a href="javascript:void(0)" (click)="clearFilters()">
                 <i class="fa fa-times" aria-hidden="true"></i>
@@ -194,13 +200,14 @@
             </a>
           </div>
         </div>
-      
-        <div style="    max-height: 280px;
+    
+
+        <div style="max-height: calc(100vh - 280px);
         overflow: auto;">
           <ng-container *ngIf="filterFlag && filters && filters['dietLabels'] && filters['dietLabels']['data'] && filters['dietLabels']['data']['length'] > 0">
             <div class="custom-item" (click)="filters['dietLabels']['expand'] = !filters['dietLabels']['expand']">
               <div class="left">
-                <span  name="restaurant"></span>
+                <span> <i class="fa fa-cutlery"></i></span>
               </div>
               <div class="center">
                 {{filters['dietLabels']['label']}} 
@@ -216,11 +223,25 @@
             <div class="bg-trans">           
               <ng-container *ngIf="filters['dietLabels']['expand']">
       
-                <div>
+                <div class="filter-group">
+                
+                  <ng-container *ngFor="let dItem of filters['dietLabels']['data']; let d = index;">
+                      <div class="listSection  " id="dietLabels" >
+                          <label class="container">{{dItem.name}}
+                          <input [(ngModel)] ="dItem.selected" type="checkbox" [checked]="d == 0?'checked':''">
+                          <span class="checkmark"></span>
+                      </label>
+                  </div>
+                  </ng-container>
+
+             
+          </div>
+
+                <!--<div>
                   <div style="display:flex; align-items:center" size="6" *ngFor="let dItem of filters['dietLabels']['data']; let h = index;">
                     <input type="checkbox"  class="checkbox marginr10" name="filterD[]" [(ngModel)]="dItem.selected"> <div style="display:inline-block" (click)="selectDeselect(dItem)" class="filteritem">{{dItem.name}}</div>
                   </div>
-                </div>
+                </div>-->
               </ng-container>
             </div>
          
@@ -231,7 +252,7 @@
           <ng-container *ngIf="filterFlag && filters && filters['healthLabels'] && filters['healthLabels']['data'] && filters['healthLabels']['data']['length'] > 0">
             <div class="custom-item" (click)="filters['healthLabels']['expand'] = !filters['healthLabels']['expand']">
               <div class="left">
-                <span  name="restaurant"></span>
+                <span> <i class="fa fa-cutlery"></i></span>
               </div>
               <div class="center">
                 {{filters['healthLabels']['label']}} 
@@ -247,11 +268,25 @@
             <div class="bg-trans">
             <ng-container *ngIf="filters['healthLabels']['expand']">
       
-                <div>
+              <div class="filter-group">
+                
+                    <ng-container *ngFor="let hItem of filters['healthLabels']['data']">
+                        <div class="listSection  " id="healthLabels" >
+                            <label class="container">{{hItem.name}}
+                            <input [(ngModel)] ="hItem.selected" type="checkbox" [checked]="h == 0?'checked':''">
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                    </ng-container>
+
+               
+            </div>
+
+                <!--<div>
                   <div style="display:flex; align-items:center" size="6" *ngFor="let hItem of filters['healthLabels']['data']; let h = index;">
                     <input type="checkbox"  class="checkbox marginr10" name="filtersH[]" [(ngModel)]="hItem.selected"> <span (click)="selectDeselect(hItem)"  class="filteritem">{{hItem.name}}</span>
                   </div>
-                </div>
+                </div>-->
               </ng-container>
             </div>
          
@@ -261,7 +296,7 @@
         
             <div class="custom-item" (click)="filters['minerals']['expand'] = !filters['minerals']['expand']">
                 <div class="left">
-                  icon
+                  <span> <i class="fa fa-cutlery"></i></span>
                 </div>
                 <div class="center">
                   {{filters['minerals']['label']}} 
@@ -277,7 +312,48 @@
             <div class="bg-trans">
               
               <ng-container *ngIf="filters['minerals']['expand']">
-                <div *ngFor="let mItem of filters['minerals']['data']; let m = index;">
+
+                
+                <div class="filter-group">
+                  <!--<label class="filter-title">Nutrients</label> -->
+                           <div class="row " style="margin-left:0px ;margin-right:0px;">
+                              <ng-container *ngFor="let mlabel of filters['minerals']['data']; let m = index">
+                                 
+                              <div class="col-12 ">
+                                  <div class="row">
+
+                                
+                              <div class="col-12 ">
+                                  <label class="container">{{getFLU(mlabel.name)}}
+                                      <input [(ngModel)] = 'mlabel.selected' type="checkbox" [checked]="m == 0?'checked':''">
+                                      <span class="checkmark"></span>
+                                  </label>
+                              </div>
+                              <div class="col-5 paddinglr0" style="margin-bottom:15px;" *ngIf="mlabel.selected">
+                                
+                                      <input class="mineral-input" type='text' name="minerals_{{m}}_min" [(ngModel)]="mlabel.min" placeholder="min" />
+                                      <span class="maxmin">{{formatVal(mlabel.t_min)}}</span>
+                              
+                              </div>
+                              <div class="col-5 paddinglr0" style="margin-bottom:15px;"  *ngIf="mlabel.selected">
+                                  <input class="mineral-input" type='text' name="minerals_{{m}}_max" [(ngModel)]="mlabel.max" placeholder="max" />
+                                  <span class="maxmin">{{formatVal(mlabel.t_max)}}</span>
+
+                              </div>
+                              <div class="col-2 paddinglr0" style="margin-bottom:15px;"  *ngIf="mlabel.selected"> {{mlabel.name.unit}}</div>
+                          </div>
+                      </div> 
+                  
+                  </ng-container>
+                         
+                        
+                         
+                     
+
+                  </div>
+              </div>
+
+               <!-- <div *ngFor="let mItem of filters['minerals']['data']; let m = index;">
                   <div style="display:flex; align-items:center" size="5" >
                     <input type="checkbox"  class="checkbox marginr10" name="filtersM[]" [(ngModel)]="mItem.selected"> <span (click)="selectDeselect(mItem)"  class="filteritem">{{mItem.name.label}}</span>
                   </div>
@@ -292,7 +368,7 @@
                   <div style="padding-left: 0px; padding-right: 0px;" *ngIf="mItem.selected"  size="1" >
                   {{mItem.name.unit}}
                   </div>
-                </div>
+                </div>-->
               </ng-container>
             </div>
          
@@ -300,22 +376,22 @@
       
         </div>
         <div size='12' *ngIf="filterFlag" style="text-align:right">
-          <button style="width: 100%;" class='button-round-corner bg-orange search-button' (click)="filterFlag= false; searchFilters($event, modalText)" >Search</button>
+          <button style="width: 100%;" class='search-button' (click)="filterFlag= false; searchFilters($event, modalText)" >Search</button>
         </div>
       
       </div>
-        <div *ngIf="planDay.selected ==  modalText && items.length > 0 && isItemAvailable" style="height: 300px; overflow-y: auto;">   
-          <div>
-            <div  (click)="setrecipe(planDay, modalText, item)" *ngFor="let item of items">
-              <p slot="start">
-                <img class="bxshadow" src='{{item.image}}' style="width:90%">
+        <div *ngIf="planDay.selected ==  modalText && items.length > 0 && isItemAvailable" class="recipeRes">   
+         
+            <div class="recipe-item-s" (click)="setrecipe(planDay, modalText, item)" *ngFor="let item of items">
+              <div class="recipe-image-s">
+                <img class="bxshadow" src='{{item.image}}'>
               
-              </p>
-              <p>{{item.label}} <br>
-                <span class="small_text"><span name="flame-outline"></span> {{item.calories}}</span> <br>
-              </p>
+              </div>
+              <div  class="recipe-label-s" style="">{{item.label}} 
+                <!--<span class="small_text"><span name="flame-outline"></span> {{item.calories}}</span> <br> -->
+              </div>
             </div>
-          </div>
+          <
         </div>
       
       
