@@ -1148,7 +1148,7 @@ export class ScheduleComponent implements OnInit {
 					//	format: '<b>{point.name}</b>: {point.percentage:.1f} %'
 					//format: '<b>{point.name}</b>: {point.y:.1f} ' + parent.chartUnit,
 					format: '{point.y:.1f} ' + parent.chartUnit,
-					style: {color:"#000",
+					style: {color:"#fff",
 						textShadow: false ,
 						textOutline: false 
 					}

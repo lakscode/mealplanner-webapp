@@ -1,7 +1,9 @@
 
     <div class="fixedtop recipes-home-body inner-page" *ngIf="plan">
-        <div class="row page-max-width" style="text-align:center; margin:0 auto;">
-           
+        <div class="row page-max-width" style="margin:0 auto;">
+            <div class="recipe-set">         
+                <h2>Schedule Plan</h2>
+            </div>
 
         <div *ngIf="errorMessage">
           <p innerHtml = "{{errorMessage}}"></p>
@@ -10,7 +12,7 @@
     <div class="row">
       <div class="col-12 col-lg-8 col-md-8">
         <div class="left">
-            <h1 class="title-black center" ><b>{{setFLU(plan.name)}}</b> - <span innerHtml = "{{welcomeMessage}}"></span> </h1> 
+            <h1 class="title-black center" style="text-align: center"><b>{{setFLU(plan.name)}}</b> - <span innerHtml = "{{welcomeMessage}}"></span> </h1> 
         </div>
       </div>
       <div class="col-12  col-lg-4 col-md-4" style="text-align:right;">
