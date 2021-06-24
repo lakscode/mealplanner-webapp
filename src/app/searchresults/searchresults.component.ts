@@ -190,7 +190,7 @@ export class SearchresultsComponent implements OnInit {
 	   this.ratingIds = this.ratingIds.substring(0, this.ratingIds.length-1);
 	  }
 	 
-		var params = {"limit": 100};
+		var params = {};
 	   
 		params["query"] = "SELECT count(rating) as totalcount, sum(rating) as totalrating, recipeid FROM `rating` where recipeid in (" + this.ratingIds + ") group by recipeid";
 		var res =   this.dbService.getDatabyTablebyQuery("rating", params).subscribe(invData => setTimeout(() => {
@@ -315,7 +315,7 @@ export class SearchresultsComponent implements OnInit {
 	 
 	
 	  params["status"] = "1";
-	  params["limit"] =  "100";
+	  params["limit"] =  "1000";
 	  console.log(params);
 	var res =   this.dbService.getDatabyFields("recipes", params).subscribe(invData => setTimeout(() => {
 		console.log(invData);
