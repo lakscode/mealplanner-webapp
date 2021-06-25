@@ -53,7 +53,7 @@
               <div style="display:block; text-align:left; margin:0 auto;" *ngFor="let answer of questions[currentQuestion]['answers']; let a = index;">
               <label class="containerc" style=""> {{getFLU(answer.text)}}
                 <span style="font-size:12px; color:#000" *ngIf="answer.subtext !== ''"><br>{{getFLU(answer.subtext)}}</span>
-                <input name="answer{{currentQuestion}}{{a}}" [(ngModel)] = "answer.selected" (change)="setAnswer(answer, questions[currentQuestion]['type'])" type="checkbox" checked="checked" name="checkbox">
+                <input name="answer{{currentQuestion}}{{a}}" [(ngModel)] = "answer.selected" (click)="setAnswer(answer, questions[currentQuestion]['type'])" type="checkbox" checked="checked" name="checkbox">
                 <span class="checkmarkc"></span>
               </label>
             </div>
