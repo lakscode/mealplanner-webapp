@@ -7,3 +7,4 @@ export * from './sidebar/sidebar.module';
 export * from './listpanel/listpanel.module';
 export * from "./questions/questions.module";
 export * from "./comment/comment.module";
+export * from "./customize/customize.module";
