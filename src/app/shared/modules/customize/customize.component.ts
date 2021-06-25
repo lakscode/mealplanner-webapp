@@ -4,7 +4,7 @@ import { CustomizeService } from './customize.service';
 import { data } from "../../../../assets/data/questionnaire";
 import { HelpService } from './../../../services/help.service';
 import { DBService } from './../../../dbservices/db.service';
-
+import * as $ from 'jquery';
 @Component({
   selector: 'app-customize',
   templateUrl: './customize.component.html',
@@ -77,11 +77,13 @@ export class CustomizeComponent implements OnInit, OnDestroy {
    
 
     }
-
+    
     ngOnInit(): void {
       this.processing = false;
         // customize default values of carousels used by this component tree
         this.setDefaults();
+
+        
     }
 
     ngAfterViewInit()

@@ -9,8 +9,9 @@ import { environment } from './../../environments/environment';
 
 import { HttpClient } from '@angular/common/http';
 
-import { data} from "../jsonfiles/questionnaire"
+
 import { timeStamp } from 'console';
+import { data } from "../../assets/data/questionnaire";
 @Component({
 	selector: 'app-questionnaire',
 	templateUrl: './questionnaire.component.html',
@@ -22,14 +23,135 @@ export class  QuestionnaireComponent implements OnInit {
 	responseText : any = "";
 	answersList : any= {};
 	errorMessage: any;
+		currentUser: any ;
+		processing: any;
+	params: any;
+	routeParams: any;
+	uniqueid: any;
+	returnparam1: any;
+	questions: any;
+	returnpath: any;
 	constructor(private router: Router, private route: ActivatedRoute, private httpClient: HttpClient, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
 	
 	}
 
 	ngOnInit() {
-		this.loadData();
+		this.setDefaults();
 	}
-	toggleChoice(question, opts, index)
+	
+  setDefaults()
+  {
+
+  	
+		this.currentUser =this.helpService.getCurrentUser();
+		if(this.currentUser !== null)
+		{
+		  if( this.currentUser["firstname"] !== "")
+		  this.currentUser["displayname"] = this.currentUser["firstname"];
+		  else if( this.currentUser["username"] !== "")
+		  this.currentUser["displayname"] = this.currentUser["username"];
+	
+		}
+		
+this.processing= false;
+    this.params = {};
+    
+    for(let i=1; i < 10; i++)
+    {
+      this.params["question" + i] ="";
+    }
+    
+				this.questions =data;
+      
+    console.log(this.questions);
+    this.routeParams = {};
+    this.returnpath = "";
+    this.returnparam1 = "";
+    var questionnaireDone =  sessionStorage.getItem("questionnaire");
+    
+    if(typeof(questionnaireDone) !== "undefined" && questionnaireDone == "true")
+    {
+        this.router.navigate(["home"]);
+    }
+
+   
+  // this.loadMealPlans();
+  }
+
+  complete()
+  {
+    this.processing = true;
+    console.log("complete");
+    console.log(this.params);
+    var uniqueid =  localStorage.getItem("uniqueid");
+
+    var params = {};
+    params = this.params;
+    //uniqueid = "1a15067e-ab63-a2ed-3582-220714793548";
+    this.uniqueid = uniqueid;
+    if(typeof(uniqueid) !== "undefined" && uniqueid !== null && uniqueid !== "")
+    {
+      params["user_uniqueid"] = uniqueid;
+    }
+    else
+    {
+      var uniqueid = this.helpService.GenerateUniqueId(20);
+      params["user_uniqueid"] = uniqueid;
+      localStorage.setItem("uniqueid",uniqueid);
+    }
+
+    var ipaddress =  localStorage.getItem("ipaddress");
+    if(typeof(ipaddress) !== "undefined" && ipaddress !== null && ipaddress !== "")
+    {
+      params["user_ipaddress"] = ipaddress;
+    }
+    if(this.currentUser !== null && typeof(this.currentUser["id"]) !=="undefined")
+		{
+      params["userid"] = this.currentUser["id"];
+    }
+    if((typeof(uniqueid) !== "undefined" && uniqueid !== null && uniqueid !== "") || (typeof(ipaddress) !== "undefined" && ipaddress !== null && ipaddress !== ""))
+    {
+    
+     
+    //  params["user_uniqueid"] = uniqueid;
+      var res =   this.dbService.postDataByTable("questionnaire", params).subscribe(invData => setTimeout(() => {
+        this.processing = false;
+        console.log(invData);
+        localStorage.setItem("q_complete","true");
+        localStorage.setItem("questions", JSON.stringify(params));
+
+        this.router.navigate(["pricing"]);
+
+      }));
+
+    }
+  }
+  currentQuestion : any = 0;
+  setAnswerText(answer)
+  {
+    var ans =  answer['answer'];
+    if(typeof(answer.opt) !=="undefined" && answer.opt !== "")
+    {
+      ans += " " + answer.opt;
+    }
+    this.questions[this.currentQuestion]["answer"] =answer['answer'];
+    console.log( this.questions[this.currentQuestion]);
+    this.params["question" + (this.currentQuestion+1)] = ans;
+
+  }
+  setAnswer(answer, type)
+  { 
+   // console.log(this.currentQuestion);
+   // console.log(answer);
+   if(type == "checkbox")
+   answer["selected"] = !answer["selected"];
+    this.questions[this.currentQuestion]["answer"] = answer['text'];
+
+    this.params["question" + (this.currentQuestion+1)] = answer['text'];
+
+    console.log(this.questions);
+  }
+  toggleChoice(question, opts, index)
 	{
 		if(opts.length > 0)
 		{
@@ -47,122 +169,31 @@ export class  QuestionnaireComponent implements OnInit {
 			}
 		}
 	}
-	loadData()
-	{
-		this.answersList = {};
-		this.answersList["question1"] = ""
-		this.answersList["question2"] = ""
-		this.answersList["question3"] = ""
-		this.answersList["question4"] = ""
-		this.answersList["question5"] = ""
-		this.answersList["question6"] = ""
-		this.answersList["question7"] = ""
-		this.answersList["question8"] = ""
-		this.answersList["question9"] = ""
-
-		this.responseText = "";
-		this.questionsList =[];
-
-		this.questionsList =data;
-			
-
-	}
-	saveAnswer()
-	{
-		console.log(this.questionsList);	
-	
-
-		for(let i = 0; i < this.questionsList.length; i++)
-		{
-			var qItem = this.questionsList[i];
-			if(typeof(qItem["answer"]) !== "undefined")
-			this.answersList["question" + (i+1)] = qItem["answer"];
-			else
-			this.answersList["question" + (i+1)] = "";
-		}
-		console.log(this.answersList);
-	}
-	makeAnswers(question)
-	{
-		console.log(question);
-		console.log(this.questionsList);	
-		for(let i = 0; i < this.questionsList.length ; i++)
-		{
-			var qitem = this.questionsList[i];
-			if(typeof(qitem['answer']) !== "undefined" && qitem["answer"] !== "")
-			{
-				var ans =  qitem["answer"];
-
-				if(typeof(qitem["options"]) !== "undefined" && qitem["options"].length > 0)
-				{
-					if(qitem["options"].length > 0)
-					{
-						for(let i=0; i < qitem["options"].length; i++)
-						{
-							if( qitem["options"][i]['selected'])
-							{
-								ans += " " + qitem["opt"];
-							}
-						
-						}
-					}
-				}
-			
-				this.answersList["question" + (i+1)] = ans;
-			}
-			else if(qitem.answers.length > 0)
-			{
-				var res = "";
-				for(let j= 0; j < qitem.answers.length ; j++)
-				{
-					var aitem = qitem.answers[j];
-					if(typeof(aitem['answer']) !== "undefined" && aitem["answer"] !== "" && aitem["answer"] !== false)
-					{
-						res +=  aitem["text"]  + ",";
-					}
-					
-				}
-				if(res !== "")
-				{
-					res = res.substring(0, res.length-1);	
-				}
-				this.answersList["question" + (i+1)] = res;
-			}
-		}
-	}
-
-	saveAnswers() {
-	console.log(this.answersList);
-	this.errorMessage = "";
-	
-	if(this.answersList["question1"] == "" || this.answersList["question2"] == "" || this.answersList["question3"] == "" || this.answersList["question4"] == "" || this.answersList["question5"] == "" || this.answersList["question6"] == "" || this.answersList["question7"] == "" || this.answersList["question8"] == "" ||	this.answersList["question9"] == "") {
-
-	this.errorMessage = "Please fill out all the fields to help better....";
-
-
-	} else {
-	this.errorMessage  ="";
-	}
-	console.log(this.errorMessage);
-
-	
+  next()
+  {
     
+    if(this.currentQuestion < this.questions.length-1)
+    {
+      console.log(this.params["question" + (this.currentQuestion+1)]);
+      if(typeof(this.params["question" + (this.currentQuestion+1)]) !== "undefined" && this.params["question" + (this.currentQuestion+1)] !== "")
+      {
+      this.currentQuestion++;
+      }
+    }
+  //  console.log(this.questions);
   }
-  
-  // program the reset button
-  	 resetAnswer() {
-		this.answersList = {};
-		this.answersList["question1"] = ""
-		this.answersList["question2"] = ""
-		this.answersList["question3"] = ""
-		this.answersList["question4"] = ""
-		this.answersList["question5"] = ""
-		this.answersList["question6"] = ""
-		this.answersList["question7"] = ""
-		this.answersList["question8"] = ""
-		this.answersList["question9"] = ""
 
+  
+  
+  getFLU(str)
+  {
+    var retStr = str;
+    if(str !== "")
+    retStr = this.helpService.setFirstLetterToUppercase(str);
+
+    return retStr;
   }
+
 }
 
 	
