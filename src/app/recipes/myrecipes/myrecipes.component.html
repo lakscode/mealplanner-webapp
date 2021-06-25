@@ -96,7 +96,7 @@
 
                         <div class="listing" *ngFor="let recipe1 of displayList; let i = index;">
                                
-                            <div class="image image-animate">
+                            <div class="image image-animate detail">
                                 <a href="javascript:void(0)"  (click)="gotoRecipeDetails('recipedetails', recipe1.id)">
                                     <img style="max-height: 148px;" *ngIf="recipe1.image !== ''"  src="{{recipe1.image}}"
                                         alt="{{recipe1.label}}">

@@ -429,3 +429,11 @@ color:#FFF;
 .submit-comment.active {
  background: #6ebe3b;
  }
+
+ .listing-grid .listing {
+  text-align: center;
+  flex-direction: column;
+  width: 25% ;
+ //width: 20% ;
+}
+
