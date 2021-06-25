@@ -54,6 +54,32 @@
                             </a>
                         </li>   
                     </ul>
+                    <div class="row">
+
+
+                        <div class="col-12 col-lg-3 col-md-4" *ngFor="let recipe1 of recipebooks; let i = index;">
+                            <div class="collection-item">
+                            <div class="image image-animate" >
+                                <a (click)="gotopage('recipebook', {'id':recipe1.id});">
+                                    <img *ngIf="recipe1.image !== ''"  src="{{recipe1.image}}"
+                                        alt="{{recipe1.recipebook_name}} image">
+                                    <img *ngIf="recipe1.image == ''"  src="assets/notavailable.png" alt="{{recipe1.recipebook_name}} image">
+                                </a>
+                                <div class="detail">
+                                    <a (click)="gotopage('recipebook', {'id':recipe1.id});"><h3>{{recipe1.recipebook_name}}</h3></a>
+                                    <!--<p innerHTML="{{limitTo(recipe1.description, 200)}}">
+    
+                                    </p>  -->
+                                    <p *ngIf="recipe1.recipes > 0">{{countrecipes(recipe1.recipes)}} Recipes </p>
+                                   
+                                  </div>
+                            </div>
+                            
+                            </div>
+                        </div>
+                      
+                    </div>
+                    <!--
                     <div class="recipe-listing {{listorgrid.panel}}">
 
 
@@ -74,41 +100,35 @@
                                
                               </div>
                         </div>
-
-                       <!--  <div class="banner-header text-center">
-                            <a href="javascript:void(0)">
-                                <img src="assets/images/temp-images/header-banner.jpg" alt="banner">
-                            </a>
-                        </div> -->
-
-
-                        <ul class="pagination" *ngIf="totalPage >= 10">
-                            <li (click)="currentPage(0)" class="">
-                                <a href="javascript:void(0)">
-                                    <i class="fa fa-angle-double-left"></i>
-                                </a>
-                            </li>
-                            <li (click)="prevPage()" class="">
-                                <a href="javascript:void(0)">
-                                    <i class="fa fa-angle-left"></i>
-                                </a>
-                            </li>
-                            
-                            <li (click)="currentPage(i)" [ngClass]="i == page_num?'current':''" *ngFor='let in of counter(totalPage) ;let i = index'>
-                                <a href="javascript:void(0)">{{i+1}}</a>
-                            </li>
-                            <li (click)="nextPage()" class="">
-                                <a href="javascript:void(0)">
-                                    <i class="fa fa-angle-right"></i>
-                                </a>
-                            </li>
-                            <li (click)="currentPage(totalPage-1)" class="">
-                                <a href="javascript:void(0)">
-                                    <i class="fa fa-angle-double-right"></i>
-                                </a>
-                            </li>   
-                        </ul>
+                      
                     </div>
+                -->
+                    <ul class="pagination" *ngIf="totalPage >= 10">
+                        <li (click)="currentPage(0)" class="">
+                            <a href="javascript:void(0)">
+                                <i class="fa fa-angle-double-left"></i>
+                            </a>
+                        </li>
+                        <li (click)="prevPage()" class="">
+                            <a href="javascript:void(0)">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        </li>
+                        
+                        <li (click)="currentPage(i)" [ngClass]="i == page_num?'current':''" *ngFor='let in of counter(totalPage) ;let i = index'>
+                            <a href="javascript:void(0)">{{i+1}}</a>
+                        </li>
+                        <li (click)="nextPage()" class="">
+                            <a href="javascript:void(0)">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </li>
+                        <li (click)="currentPage(totalPage-1)" class="">
+                            <a href="javascript:void(0)">
+                                <i class="fa fa-angle-double-right"></i>
+                            </a>
+                        </li>   
+                    </ul>
                 </div>
             </div>
             <div class="col-md-4 col-lg-3">

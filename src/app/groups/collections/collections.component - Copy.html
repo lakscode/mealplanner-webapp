@@ -52,34 +52,7 @@
                             </a>
                         </li>   
                     </ul>
-
-                    <div class="row">
-                        <div class="col-12 col-lg-3 col-md-3" *ngFor="let cItem of communitiesList; let i = index;">
-                           <div class="collection-item box-shadow">
-                            <div class="image image-animate detail">
-                                <a (click)="gotopage('collection', {'id':cItem.id});">
-                                    <img *ngIf="cItem.image !== ''" src="{{cItem.image}}"
-                                        alt="{{cItem.collection_name}} image">
-                                    <img  *ngIf="cItem.image == ''"  src="assets/notavailable.png" alt="{{cItem.collection_name}} image">
-                                </a>
-
-                                <div class="detail">
-                                    <a (click)="gotopage('collection', {'id':cItem.id});"><h3>{{cItem.collection_name}}</h3></a>
-                                     
-                                     <div class="ccount"><span *ngIf="cItem.userscount > 0"><i class="fa fa-user"></i> {{cItem.userscount}} Members, </span>
-                                   <span *ngIf="cItem.recipecount > 0"><i class="fa fa-cutlery"></i> {{cItem.recipecount}} Recipes</span>
-                                    </div>
-                                     <a *ngIf="cItem.created_by == currentUser['id']" href="javascript:void(0)" (click)="editcollection(cItem)" class="editicon"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                                  </div>
-
-                            </div>
-                            
-                        </div>
-                    </div>
-                   
-                    </div>
-
-                    <!--<div class="recipe-listing {{listorgrid.panel}}">
+                    <div class="recipe-listing {{listorgrid.panel}}">
 
 
                         <div class="listing boxshadow5" *ngFor="let cItem of communitiesList; let i = index;">
@@ -96,15 +69,23 @@
                                 <p innerHTML="{{limitTo(cItem.description, 200)}}">
 
                                 </p>  
-                                 <div style="font-size: 14px;"><span *ngIf="cItem.userscount > 0"><i class="fa fa-user"></i> {{cItem.userscount}} Members, </span>
+                                <!--<p>{{countrecipes(recipe1.recipes)}} Recipes </p>-->
+                               <div style="font-size: 14px;"><span *ngIf="cItem.userscount > 0"><i class="fa fa-user"></i> {{cItem.userscount}} Members, </span>
                                <span *ngIf="cItem.recipecount > 0"><i class="fa fa-cutlery"></i> {{cItem.recipecount}} Recipes</span>
                                 </div>
                                  <a *ngIf="cItem.created_by == currentUser['id']" href="javascript:void(0)" (click)="editcollection(cItem)" class="editicon"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                               </div>
                         </div>
 
-                   
-                    </div>-->
+                        <!--<div class="banner-header text-center">
+                            <a href="javascript:void(0)">
+                                <img src="assets/images/temp-images/header-banner.jpg" alt="banner">
+                            </a>
+                        </div>-->
+
+
+                      
+                    </div>
                     <ul class="pagination" *ngIf="totalPage >= 10">
                         <li (click)="currentPage(0)" class="">
                             <a href="javascript:void(0)">
