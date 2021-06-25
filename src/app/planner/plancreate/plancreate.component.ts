@@ -108,7 +108,7 @@ this.searchFilterLabels = [];
 		this.searchFilterLabels.push({"label":"Meal Type", "selected":false});
 		this.searchFilterLabels.push({"label":"Nutrients", "selected":false});
 		this.searchFilterLabels.push({"label":"Calories", "selected":false});
-
+/*
 		this.cuisineTypeList = [];
 		for(let c=0; c < constants.cuisineTypeList.length; c++)
 		{
@@ -142,7 +142,8 @@ this.searchFilterLabels = [];
 		{
 			this.mineralsLabelsList.push({"name":constants.minerals[m], "selected":false,  "unit":"",  "min":"", "max":"", "t_min":"", "t_max":""})
 		}
-
+		*/
+		this.loadFilterLabels();
 		this.loadNutrientsMaxMin();
 	
 	//	window.addEventListener("scroll", this.scrollFunc);
@@ -1681,6 +1682,20 @@ limitTo(str, num)
 
 	loadFilterLabels()
 	{
+		this.cuisineTypeList = [];
+		for(let c=0; c < constants.cuisineTypeList.length; c++)
+		{
+			this.cuisineTypeList.push({"name":constants.cuisineTypeList[c], "selected":false})
+		}
+
+		
+		this.mealTypeList= [];
+		for(let d=0; d < constants.mealTypeList.length; d++)
+		{
+			this.mealTypeList.push({"name":constants.mealTypeList[d], "selected":false})
+		}
+
+
 		this.dietLabelsList= [];
 		for(let d=0; d < constants.dietLabels.length; d++)
 		{
@@ -1698,6 +1713,7 @@ limitTo(str, num)
 		this.mineralsLabelsList= [];
 		for(let m=0; m <constants.minerals_new.length; m++)
 		{
+			console.log(constants.minerals_new[m]);
 			this.mineralsLabelsList.push({"name":constants.minerals_new[m]["name"], "selected":false, "unit":constants.minerals_new[m]["unit"],  "min":"", "max":"", "t_min":"", "t_max":""})
 		}
 		this.loadNutrientsMaxMin();

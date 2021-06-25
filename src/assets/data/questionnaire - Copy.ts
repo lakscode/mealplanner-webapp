@@ -23,15 +23,13 @@ export const data =[{
     },
     {
         "id":"8","type":"checkbox", "answer":"",
-        "question": "Sensivitives/Allergies?", "answers":[
-        {"name":"q8", "value":"c1", "text":"Milk", "subtext":""},
-        {"name":"q8", "value":"c2", "text":"Egg", "subtext":""},
-        {"name":"q8", "value":"c3", "text":"Tree Nuts", "subtext":""},
-        {"name":"q8", "value":"c4", "text":"Pea Nut", "subtext":""},
-		{"name":"q8", "value":"c5", "text":"Shellfish", "subtext":""},
-		{"name":"q8", "value":"c6", "text":"Wheat", "subtext":""},
-		{"name":"q8", "value":"c7", "text":"Soy", "subtext":""},
-		{"name":"q8", "value":"c8", "text":"Fish", "subtext":""}
+        "question": "Allergic to?", "answers":[
+        {"name":"q8", "value":"c1", "text":"Wheat", "subtext":""},
+        {"name":"q8", "value":"c2", "text":"Soy", "subtext":""},
+        {"name":"q8", "value":"c3", "text":"Celery", "subtext":""},
+        {"name":"q8", "value":"c4", "text":"Mushrooms", "subtext":""},
+		{"name":"q8", "value":"c5", "text":"Peanut", "subtext":""},
+		{"name":"q8", "value":"c5", "text":"Cocoa and chololate", "subtext":""}
         ]
     },
     {
@@ -42,7 +40,7 @@ export const data =[{
         {"name":"q9", "value":"c3", "text":"High-Protein", "subtext":"More than 50% of total calories from proteins"},
         {"name":"q9", "value":"c4", "text":"Low-Carb", "subtext":"Less than 20% of total calories from carbs"},
 		{"name":"q9", "value":"c5", "text":"Low-Fat", "subtext":"Less than 15% of total calories from fat"},
-		{"name":"q9", "value":"c6", "text":"Low-Sodium", "subtext":"Less than 140mg Na per serving"}
+		{"name":"q9", "value":"c5", "text":"Low-Sodium", "subtext":"Less than 140mg Na per serving"}
         ]
     },
     {
@@ -56,6 +54,10 @@ export const data =[{
     {
         "id":"6", "type":"text",  "answer":"","opt":"Kg", "options":[{"name":"Kg", "selected":true},{"name":"Lbs", "selected":false}], 
         "question": "What's your weight?", "answers":[]
+    },
+    {
+        "id":"7", "type":"text",  "answer":"","opt":"Kg", "options":[{"name":"Kg", "selected":true},{"name":"Lbs", "selected":false}],  
+        "question": "What's your target weight?", "answers":[]
     }
     ]
 

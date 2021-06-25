@@ -8,9 +8,13 @@
          
           <div class="chefs-card-inner">
             <img *ngIf="mealplans.length > 0" class="badget" src="assets/bg/ribbon2.png" />
-            <img *ngIf="planStatus.length > 0" class="badge-right" src="assets/bg/schedule.png" />
+            <!--<img *ngIf="planStatus.length > 0" class="badge-right" src="assets/bg/schedule.png" />-->
+            <!--<div *ngIf="planStatus.length > 0" class="cover-ribbon">
+               <div class="cover-ribbon-inside">Today</div>
+            </div>-->
+               <h4>Hello<span *ngIf="currentUser['displayname']"> {{currentUser["displayname"]}}</span>, {{greetings}}</h4>
                <h2 *ngIf="mealplans.length > 0" style="    padding-top: 20px;">Meal Plan for YOU</h2>
-               <h2 *ngIf="planStatus.length > 0" style="    padding-top: 20px;">Schedule for TODAY</h2>
+               <h2 *ngIf="planStatus.length > 0" style="    padding-top: 20px;">Your Meal Plan for Today</h2>
 
                <div class="short-separator"></div>
    

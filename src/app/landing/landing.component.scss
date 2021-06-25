@@ -356,7 +356,10 @@ cursor: pointer;
   border-radius: 50%;
   background-color: #01B0F1;
 }
-
+.mealplan .mealtype span {
+  font-style:italic;
+}
+/*
 .mealplan .mealtype:nth-child(1) span {
   color: #01B0F1;
 }
@@ -374,10 +377,10 @@ cursor: pointer;
 .mealplan .mealtype:nth-child(5)  span {
   color: #E46C0B;
 }
-
+*/
 
 .mealplan .mealtype:nth-child(1)::before {
-  background-color: #01B0F1;
+  background-color: #E46C0B;
 }
 .mealplan .mealtype:nth-child(2)::before {
   background-color: #FFC000;
@@ -391,6 +394,57 @@ cursor: pointer;
 }
 
 .mealplan .mealtype:nth-child(5)::before {
-  background-color: #E46C0B;
+  
+  background-color: #01B0F1;
 }
 
+
+
+/* Ribbon 6 */
+.cover-ribbon {
+  height: 115px;
+  width: 115px;
+  position: absolute;
+  right: -8px;
+  top: -8px;
+  overflow: hidden;
+}
+.cover-ribbon .cover-ribbon-inside {
+  background: #EA4335;
+  color: #FFF;
+  transform: rotate(45deg);
+  position: absolute;
+  right: -30px;
+  top: 15px;
+  padding: 10px;
+  min-width: 127px;
+  text-align: center;
+}
+.cover-ribbon .cover-ribbon-inside:before {
+  width: 0;
+  height: 0;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-bottom: 10px solid #992C23;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  content: "";
+  top: 30px;
+  transform: rotate(-45deg);
+}
+.cover-ribbon .cover-ribbon-inside:after {
+  width: 0;
+  height: 0;
+  border-top: 7px solid transparent;
+  border-left: 10px solid #992C23;
+  border-bottom: 7px solid transparent;
+  position: absolute;
+  left: 95%;
+  right: 0;
+  top: 30px;
+  bottom: 0;
+  content: "";
+  transform: rotate(-45deg);
+}

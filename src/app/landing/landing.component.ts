@@ -21,7 +21,7 @@ export class LandingComponent implements OnInit {
 	currentUser: any ;
 	showNutrientsFlag: boolean = false;
 	role: any = {"isTrialExpired":false, "isPremium":false, "isProfessional":false};
-	
+	greetings: any = "";
 
 constructor(private router: Router, private httpClient : HttpClient, private sanitizer: DomSanitizer , public dbService: DBService, public helpService: HelpService) {
 	this.RecipeoftheDay = [];
@@ -43,7 +43,7 @@ constructor(private router: Router, private httpClient : HttpClient, private san
 
 		//console.log(this.showNutrientsFlag);
 		}
-		
+		this.greetings = this.helpService.getGreetings();
 	
 	//	this.helpService.scrape_recipe();
 
@@ -138,7 +138,7 @@ constructor(private router: Router, private httpClient : HttpClient, private san
 	  ));
 	
 	}
-	dateObj
+
 	checkRecipeoftheDay()
 	{
 	

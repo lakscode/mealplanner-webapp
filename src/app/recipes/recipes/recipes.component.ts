@@ -157,7 +157,7 @@ export class RecipesComponent implements OnInit {
 	  this.totalPage = 1;
 	 this.page_num = 0;
 	 this.page_length= 12;
-	  this.searchparam = {"q":"", "range":{}}
+	  this.searchparam = {"q":"", "range":{}, "dietLabels":"", "healthLabels":""}
 	
   
 	  this.routeParams = {};
@@ -168,8 +168,11 @@ export class RecipesComponent implements OnInit {
 		  console.log(this.routeParams.details);
 		}    
 		 if (typeof (this.routeParams.dietLabels) !== "undefined" && this.routeParams.dietLabels !== "") {
-		  this.searchparam["q"] = this.routeParams.dietLabels;
+		  this.searchparam["dietLabels"] = this.routeParams.dietLabels;
 		}   
+		if (typeof (this.routeParams.healthLabels) !== "undefined" && this.routeParams.healthLabels !== "") {
+			this.searchparam["healthLabels"] = this.routeParams.healthLabels;
+		  } 
 		console.log(this.routeParams);
 		this.splitcontent = false;
 	  this.searchProps();
@@ -455,6 +458,16 @@ endIndex = startIndex+ endIndex;
 		this.loadingData= true;
 
    var params = {}
+
+    if (typeof (this.searchparam.dietLabels) !== "undefined" && this.searchparam.dietLabels !== "") {
+		params["dietLabels"] = this.searchparam.dietLabels;
+
+	}
+
+	if (typeof (this.searchparam.healthLabels) !== "undefined" && this.searchparam.healthLabels !== "") {
+		params["healthLabels"] = this.searchparam.healthLabels;
+
+  }
    if(this.searchparam.q)
    {
 	   console.log(" this.splitcontent " + this.splitcontent);

@@ -937,4 +937,19 @@ SendEmailPasswordReset(email,data) {
 	  var tempDt2 = { year: d.getFullYear(), month: d.getMonth() + 1, day: d.getDate(), dayname: weekdays[d.getDay()], mmddyyy: d.getMonth() + 1 + "-" + d.getDate() + "-" + d.getFullYear(), monthname : months[d.getMonth()] };
 		return tempDt2;
 	}
+
+	getGreetings()
+	{
+	   var today = new Date()
+	   var curHr = today.getHours()
+	   var retval = "Good Day";
+	   if (curHr < 12) {
+		retval ='Good Morning';
+	   } else if (curHr < 18) {
+		retval= 'Good Afternoon';
+	   } else {
+		retval= 'Good Evening';
+	   }
+	   return retval;
+	}
 }
