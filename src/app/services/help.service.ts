@@ -617,7 +617,7 @@ export class HelpService {
 		{
 			if(typeof(user["role"] ) !== "undefined" && user["role"]  !== null)
 			{
-				if(user["role"] == "SUPERADMIN" || user["role"] == "MASTERADMIN"  || user["role"] == "SYSADMIN" || user["role"] == "DEVADMIN" || user["role"] == "ADMIN"  || user["isAdmin"] == "ADMIN"   || user["isAdmin"] == "CLIENTADMIN"  )
+				if(user["role"] == "SUPERADMIN" || user["role"] == "MASTERADMIN"  || user["role"] == "SYSADMIN" || user["role"] == "DEVADMIN" || user["role"] == "ADMIN"  || user["isAdmin"] == 1  )
 				res = true;
 			}
 		}

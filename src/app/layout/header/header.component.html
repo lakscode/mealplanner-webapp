@@ -65,11 +65,11 @@
                                 <p  style="margin-right:10px; margin-bottom:10px; font-size:14px;color:red " *ngIf='isTrialExpired'>Your Trial version expired.</p>
 
                                       <a href="javascript:void(0);" (click)="setMenuActive();gotopage('myinfo')">Settings</a>
-                                      <a href="javascript:void(0);" (click)="setMenuActive();gotopage('preferences')">Preferences</a>
+                                      <!--<a href="javascript:void(0);" (click)="setMenuActive();gotopage('preferences')">Preferences</a>-->
                                       <a href="javascript:void(0);" (click)="setMenuActive();gotopage('progress')">Progress</a>
                                       <a href="javascript:void(0);" (click)="setMenuActive();gotopage('calculate')">Calculators</a>                                     
                                       <!--<a href="javascript:void(0);" (click)="gotopage('recipesmodify')">Modify Recipes</a>-->
-                                      <a href="javascript:void(0);" (click)="setMenuActive();gotopage('admin/approve')">Approve Recipes</a>
+                                      <a *ngIf="isAdmin" href="javascript:void(0);" (click)="setMenuActive();gotopage('admin/approve')">Approve Recipes</a>
                                       <a  (click)="logout()" href="javascript:void(0)">Logout</a>
                                     
 

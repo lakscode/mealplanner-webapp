@@ -40,7 +40,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 	collapsed: boolean  = true;
 	planLink:any;
 	searchparam: any;
-
+	isAdmin: boolean = false;
 	constructor(private router :Router, private socialAuthService: SocialAuthService, public userService: UserService, public helpService: HelpService,  private dbService: DBService, private location: Location) {
 
 	var currentUrl = this.router.url;
@@ -182,7 +182,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 				//	}
 
 				}
-
+				this.isAdmin = this.helpService.isAdmin(this.currentUser);
 				
 
 				 if(this.userName == "" && typeof(this.currentUser["username"]) !== "undefined") {
