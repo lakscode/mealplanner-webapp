@@ -2,7 +2,7 @@
   
   
  <div class="container" style="padding-left:0px">
- <div style="padding-top:40px">
+ <div style="padding-top:40px; text-align:center;">
         <h2>Take this questionnaire to let us know your choices!!!</h2>
     </div>
 </div>
@@ -25,10 +25,10 @@
           
             <div *ngIf="questions[currentQuestion]['type'] == 'text'" style="text-align:center;">
           
-              <input class="input-text" type="text" (keyup)="setAnswerText(questions[currentQuestion])" placeholder="Please enter value" style="font-size:14px" name = "question{{currentQuestion}}" [(ngModel)]="questions[currentQuestion]['answer']">
+              <input style="display:inline-block;font-size:14px"  class="input-text" type="text" (keyup)="setAnswerText(questions[currentQuestion])" placeholder="Please enter value"  name = "question{{currentQuestion}}" [(ngModel)]="questions[currentQuestion]['answer']">
               <span style='margin-left: 10px; font-size: 14px;' *ngIf="questions[currentQuestion].textlabel">{{questions[currentQuestion].textlabel}}</span>
           
-              <div class="opts" *ngIf="questions[currentQuestion] && questions[currentQuestion].options &&  questions[currentQuestion].options.length > 0">
+              <div style="display:inline-block" class="opts" *ngIf="questions[currentQuestion] && questions[currentQuestion].options &&  questions[currentQuestion].options.length > 0">
                 <div (click)="toggleChoice(questions[currentQuestion], questions[currentQuestion].options, i)" [ngClass]="opt.selected?'opt sel':'opt'" *ngFor="let opt of questions[currentQuestion].options; let i = index;">{{opt.name}}</div>
           
               </div>
@@ -41,7 +41,7 @@
 
              
               <label class="container" style=""> {{getFLU(answer.text)}}
-                <span style="font-size:12px; color:#000" *ngIf="answer.subtext !== ''"><br>{{getFLU(answer.subtext)}}</span>
+                <span style="font-size:12px; color:#000" *ngIf="answer.subtext !== ''"> - {{getFLU(answer.subtext)}}</span>
                 <input  name="answer{{currentQuestion}}{{a}}"  [(ngModel)] = "answer.selected" (change)="setAnswer(answer, questions[currentQuestion]['type'])"  type="radio" checked="checked" name="radio">
                 <span class="checkmark"></span>
               </label>
@@ -52,7 +52,7 @@
           
               <div style="display:block; text-align:left; margin:0 auto;" *ngFor="let answer of questions[currentQuestion]['answers']; let a = index;">
               <label class="containerc" style=""> {{getFLU(answer.text)}}
-                <span style="font-size:12px; color:#000" *ngIf="answer.subtext !== ''"><br>{{getFLU(answer.subtext)}}</span>
+                <span style="font-size:12px; color:#000" *ngIf="answer.subtext !== ''"> - {{getFLU(answer.subtext)}}</span>
                 <input name="answer{{currentQuestion}}{{a}}" [(ngModel)] = "answer.selected" (click)="setAnswer(answer, questions[currentQuestion]['type'])" type="checkbox" checked="checked" name="checkbox">
                 <span class="checkmarkc"></span>
               </label>

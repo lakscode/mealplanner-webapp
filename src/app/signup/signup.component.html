@@ -37,7 +37,7 @@
           </div>
             
             <div class="group">
-              <input type="button" [disabled]="userObj.confirmpass !== userObj.password" (click)="signup()" class="button" value="Sign Up">
+              <input type="button" [disabled]="userObj.email == '' && userObj.password == ''" (click)="signup()" class="button" value="Sign Up">
             </div>
             <div class="hr"></div>
 					<p class="hrline"><span>OR</span></p>			

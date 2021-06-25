@@ -65,7 +65,7 @@ h2 {
 
 /* When the radio button is checked, add a blue background */
 .container input:checked ~ .checkmark {
-  background-color: #2196F3;
+  background-color: $orange1;
 }
 
 /* Create the indicator (the dot/circle - hidden when not checked) */
@@ -137,7 +137,7 @@ h2 {
 
 /* When the checkbox is checked, add a blue background */
 .containerc input:checked ~ .checkmarkc {
-  background-color: #2196F3;
+  background-color: $orange1;
 }
 
 /* Create the checkmark/indicator (hidden when not checked) */
@@ -183,7 +183,7 @@ h2 {
   margin-left:10px;
   margin: 30px auto;
     text-align: center;
-    width: 100%;
+    /*width: 100%;*/
 }
 
 .opts .opt:nth-child(1)
