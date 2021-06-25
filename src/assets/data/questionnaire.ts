@@ -22,22 +22,6 @@ export const data =[{
         ]
     },
     {
-        "id":"4", "type":"text",  "answer":"", "opt":"Years",  "textlabel":"Years", 
-        "question": "What's your age?", "answers":[]
-    },
-    {
-        "id":"5", "type":"text", "answer":"", "opt":"Inch", "options":[{"name":"Inch", "selected":true},{"name":"Cm", "selected":false}], 
-        "question": "What's your height?", "answers":[]
-    },
-    {
-        "id":"6", "type":"text",  "answer":"","opt":"Kg", "options":[{"name":"Kg", "selected":true},{"name":"Lbs", "selected":false}], 
-        "question": "What's your weight?", "answers":[]
-    },
-    {
-        "id":"7", "type":"text",  "answer":"","opt":"Kg", "options":[{"name":"Kg", "selected":true},{"name":"Lbs", "selected":false}],  
-        "question": "What's your target weight?", "answers":[]
-    },
-    {
         "id":"8","type":"checkbox", "answer":"",
         "question": "Allergic to?", "answers":[
         {"name":"q8", "value":"c1", "text":"Wheat", "subtext":""},
@@ -58,6 +42,22 @@ export const data =[{
 		{"name":"q9", "value":"c5", "text":"Low-Fat", "subtext":"Less than 15% of total calories from fat"},
 		{"name":"q9", "value":"c5", "text":"Low-Sodium", "subtext":"Less than 140mg Na per serving"}
         ]
+    },
+    {
+        "id":"4", "type":"text",  "answer":"", "opt":"Years",  "textlabel":"Years", 
+        "question": "What's your age?", "answers":[]
+    },
+    {
+        "id":"5", "type":"text", "answer":"", "opt":"Inch", "options":[{"name":"Inch", "selected":true},{"name":"Cm", "selected":false}], 
+        "question": "What's your height?", "answers":[]
+    },
+    {
+        "id":"6", "type":"text",  "answer":"","opt":"Kg", "options":[{"name":"Kg", "selected":true},{"name":"Lbs", "selected":false}], 
+        "question": "What's your weight?", "answers":[]
+    },
+    {
+        "id":"7", "type":"text",  "answer":"","opt":"Kg", "options":[{"name":"Kg", "selected":true},{"name":"Lbs", "selected":false}],  
+        "question": "What's your target weight?", "answers":[]
     }
     ]
 

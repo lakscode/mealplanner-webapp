@@ -232,10 +232,13 @@ this.processing= false;
     this.params["question" + (this.currentQuestion+1)] = ans;
 
   }
-  setAnswer(answer)
+  setAnswer(answer, type)
   { 
    // console.log(this.currentQuestion);
    // console.log(answer);
+   if(type== "checkbox")
+   answer["selected"] = !answer["selected"]
+   
     this.questions[this.currentQuestion]["answer"] = answer['text'];
 
     this.params["question" + (this.currentQuestion+1)] = answer['text'];
