@@ -2,7 +2,7 @@
     
     <div class="container" style="padding-top:20px;padding-left:0px; padding-right:0px;">
         <div class="row">
-            <div class="col-md-12 col-lg-9">
+            <div class="col-md-12 col-lg-12">
                 <div class="recipe-set">
                      <!-- <div class="listing-buttons">
                         <span (click)="setListorGrid('grid')"
@@ -13,7 +13,7 @@
                                 class="fa fa-bars"></i></span>
                     </div> --> 
                    
-                    <h2 style="width: 70%;">Collections</h2>
+                    <h2 style="width: 90%;">Collections</h2>
                     <div class="createplanbtn" (click)="createNew()">
                         <i class="fa fa-pencil" style="margin-right:10px;"></i>  Create Collection   
                          
@@ -57,11 +57,11 @@
 
                         <div class="listing boxshadow5" *ngFor="let cItem of communitiesList; let i = index;">
                            
-                            <div class="image image-animate">
+                            <div class="image image-animate detail">
                                 <a (click)="gotopage('collection', {'id':cItem.id});">
-                                    <img style="max-height:95px;" *ngIf="cItem.image !== ''" src="{{cItem.image}}"
+                                    <img style=" max-height:120px" *ngIf="cItem.image !== ''" src="{{cItem.image}}"
                                         alt="{{cItem.collection_name}} image">
-                                    <img *ngIf="cItem.image == ''"  src="assets/notavailable.png" alt="{{cItem.collection_name}} image">
+                                    <img  *ngIf="cItem.image == ''"  src="assets/notavailable.png" alt="{{cItem.collection_name}} image">
                                 </a>
                             </div>
                             <div class="detail" style='color:#555'>
@@ -112,16 +112,6 @@
                         </ul>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4 col-lg-3">
-                <aside>
-                    <div class="side-bar">
-
-                        <app-sidebar></app-sidebar>
-
-
-                    </div>
-                </aside>
             </div>
         </div>
 
