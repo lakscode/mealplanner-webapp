@@ -760,7 +760,8 @@ this.loadColorCodes();
 
 		if(this.maxcaloryperday > 0 && totalCals > this.maxcaloryperday  )
 		{
-			alert("Per day calories is more than your maximum calory consumption for the day");
+			//alert("Per day calories is more than your maximum calorie consumption for the day");
+			this.toastr.warning('Per day calories is more than your maximum calories consumption for the day');
 		}
 		else
 		{
@@ -2091,7 +2092,8 @@ add2Plan()
 
 	if(this.maxcaloryperday > 0 && totalCals > this.maxcaloryperday  )
 	{
-		alert("Per day calories is more than your maximum calory consumption for the day");
+		//alert("Per day calories is more than your maximum calorie consumption for the day");
+		this.toastr.warning('Per day calories is more than your maximum calories consumption for the day');
 	}
 	else
 	{
