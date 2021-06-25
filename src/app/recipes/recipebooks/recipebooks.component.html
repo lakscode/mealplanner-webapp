@@ -58,14 +58,14 @@
 
 
                         <div class="listing boxshadow5" *ngFor="let recipe1 of recipebooks; let i = index;">
-                            <div class="image image-animate detail">
+                            <div class="image image-animate detail" style="height:160px">
                                 <a (click)="gotopage('recipebook', {'id':recipe1.id});">
                                     <img style="max-height:140px;" *ngIf="recipe1.image !== ''"  src="{{recipe1.image}}"
                                         alt="{{recipe1.recipebook_name}} image">
                                     <img *ngIf="recipe1.image == ''"  src="assets/notavailable.png" alt="{{recipe1.recipebook_name}} image">
                                 </a>
                             </div>
-                            <div class="detail">
+                            <div class="detail" style="height:100px">
                                 <h4><a (click)="gotopage('recipebook', {'id':recipe1.id});">{{recipe1.recipebook_name}}</a></h4>
                                 <p innerHTML="{{limitTo(recipe1.description, 200)}}">
 

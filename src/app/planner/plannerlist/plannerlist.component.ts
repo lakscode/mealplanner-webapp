@@ -67,6 +67,7 @@ this.loadPlans()
     }
 
     createNewPlan(){
+      this.plan = {"id":"", "name":"", "tags":"","maxcaloryperday":0, "days":[], "created_by":"", "created_at":""};
       this.modalService.open('createNewPlan');
 
     }
@@ -106,24 +107,34 @@ this.loadPlans()
         return retValue;
     }
 
-    planname: any = '';
-    plantags: any = '';
+    checkMealPlan()
+    {
+     
+      if(this.plan["id"] !== "" )
+      {
+       this.updateMealPlan();
+      }
+      else
+      {
+          this.saveMealPlan();
+      }
+    }
 
      saveMealPlan()
   { 
-    if(this.planname !== ""){
+    if(this.plan["name"] !== ""){
 
-        this.plan = {"id":"", "name":"", "tags":"", "days":[], "created_by":"", "created_at":""};
-
+       
 
         var params = {};
-        if(this.planname !== "")
-        params["name"] = this.planname;
-        if(this.plantags !== "")
-        params["tags"] = this.plantags;
+        if(this.plan["name"] !== "")
+        params["name"] = this.plan["name"];
+        if(this.plan["tags"] !== "")
+        params["tags"] = this.plan["tags"];
         params["status"] = "0";
         params["created_by"] = this.currentUser["id"];
-       
+       params["maxcaloryperday"] = this.plan["maxcaloryperday"];
+
         var res =   this.dbService.postDataByTable("mealplan", params).subscribe(invData => setTimeout(() => {
 
             if(invData !== null)
@@ -145,6 +156,46 @@ this.loadPlans()
 
   }
 
+  editmealplan(plan)
+  {
+    this.plan["id"] = plan.id;
+    this.plan["name"]= plan.name;
+    this.plan["tags"]= plan.tags;
+    this.plan["maxcaloryperday"] = plan.maxcaloryperday;
+    this.modalService.open('createNewPlan');
+  }
+  updateMealPlan()
+  { 
+    console.log("update meal plan");
+    if(this.plan["name"] !== ""){
+
+     console.log(this.plan);
+
+        var params = {};
+        params["id"] = this.plan["id"];
+        if(this.plan["name"] !== "")
+        params["name"] = this.plan["name"];
+        if(this.plan["tags"] !== "")
+        params["tags"] = this.plan["tags"];
+        params["status"] = "0";
+        params["created_by"] = this.currentUser["id"];
+       params["maxcaloryperday"] = this.plan["maxcaloryperday"];
+       console.log(params);
+        var res =   this.dbService.updateDataByTable("mealplan", params).subscribe(invData => setTimeout(() => {
+
+            if(invData !== null)
+            {
+              
+                console.log(this.plan["id"]);
+                this.modalService.close('createNewPlan');
+                this.loadPlans();
+           
+            }
+        }));
+    
+    } 
+
+  }
   loadWeekDays()
     {
         this.mealsList = [];

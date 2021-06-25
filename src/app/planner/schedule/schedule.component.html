@@ -26,9 +26,9 @@
                       <div class="add2mealplan">
                           <a [ngClass]="showpopupflag?'menu active':'menu'"  (click)="showpopupflag = !showpopupflag" href="javascript:void(0)"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></a>
                           <div *ngIf='showpopupflag' class="add2mealplanmenu" style='height:120px'>
-                              <a (click)="showpopupflag = false; downloadplan() " href="javascript:void(0)">
+                              <!--<a (click)="showpopupflag = false; downloadplan() " href="javascript:void(0)">
                                   <i class="fa fa-file-pdf-o"></i> Export
-                              </a>
+                              </a>-->
                               <a (click)="showpopupflag = false; getIngredientsList();" href="javascript:void(0)">
                                   <i class="fa fa-download"></i>   Grocery List
                               </a>

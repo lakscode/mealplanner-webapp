@@ -1620,7 +1620,7 @@ export class PlancreatemComponent implements OnInit {
 		  item['selected'] = !item['selected'];
 		}
 		
-		formatVal(str, limit)
+		formatVal(str, limit )
 		{
 		  var retVal = str;
 		  if(str !== "")

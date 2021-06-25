@@ -880,10 +880,10 @@
                                             <div class="filter-group maxheight100">
                                                 <ng-container
                                                     *ngFor="let mlabel of mealTypeList; let m = index">
-                                                    <div class="listSection " id="cyLabels{{h}}">
+                                                    <div class="listSection " id="cyLabels{{m}}">
                                                         <label class="container">{{mlabel.name}}
                                                             <input  (change)="setValues('mealType')" name="mlabel{{m}}" [(ngModel)]="mlabel.selected" type="checkbox"
-                                                                [checked]="h == 0?'checked':''">
+                                                                [checked]="m == 0?'checked':''">
                                                             <span class="checkmark"></span>
                                                         </label>
                                                     </div>

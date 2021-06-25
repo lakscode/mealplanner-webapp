@@ -259,8 +259,11 @@ this.loadColorCodes();
             this.plan["tags"] = mpData["body"][0]["tags"];
             this.plan["status"] = mpData["body"][0]["status"];
             this.plan["totalweeks"] = mpData["body"][0]["totalweeks"];
+			this.plan["maxcaloryperday"] = mpData["body"][0]["maxcaloryperday"];
             this.plan["mealplanid"] = mpData["body"][0]["id"];
             this.oldName =  this.plan["name"];
+
+			this.maxcaloryperday =  mpData["body"][0]["maxcaloryperday"];
             this.loadDaysData();
           }
         }
@@ -1713,7 +1716,7 @@ limitTo(str, num)
 		this.mineralsLabelsList= [];
 		for(let m=0; m <constants.minerals_new.length; m++)
 		{
-			console.log(constants.minerals_new[m]);
+		
 			this.mineralsLabelsList.push({"name":constants.minerals_new[m]["name"], "selected":false, "unit":constants.minerals_new[m]["unit"],  "min":"", "max":"", "t_min":"", "t_max":""})
 		}
 		this.loadNutrientsMaxMin();

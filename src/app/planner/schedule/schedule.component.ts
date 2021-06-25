@@ -63,6 +63,7 @@ export class ScheduleComponent implements OnInit {
 	completeStatus: any = {};
 	updateFlag: boolean = false;
 	perServing: boolean = true;
+	showpopupflag: boolean = false;
 	constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
 	
 	}

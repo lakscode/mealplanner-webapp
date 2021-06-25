@@ -57,14 +57,14 @@
 
                         <div class="listing boxshadow5" *ngFor="let cItem of communitiesList; let i = index;">
                            
-                            <div class="image image-animate detail">
+                            <div class="image image-animate detail" style="height:160px">
                                 <a (click)="gotopage('collection', {'id':cItem.id});">
                                     <img style=" max-height:120px" *ngIf="cItem.image !== ''" src="{{cItem.image}}"
                                         alt="{{cItem.collection_name}} image">
                                     <img  *ngIf="cItem.image == ''"  src="assets/notavailable.png" alt="{{cItem.collection_name}} image">
                                 </a>
                             </div>
-                            <div class="detail" style='color:#555'>
+                            <div class="detail" style='color:#555; height:140px;'>
                                 <h4><a (click)="gotopage('collection', {'id':cItem.id});">{{cItem.collection_name}}</a></h4>
                                 <p innerHTML="{{limitTo(cItem.description, 200)}}">
 
