@@ -522,3 +522,32 @@ a {
 .leanmore:hover{
   box-shadow: 0 0 15px 0 #77c14b;
 }
+
+.sitesection-bg
+{
+  background: $white-half1;
+    background-size: cover;
+    padding: 50px 0px;
+}
+
+
+/*----------------*/
+/*  SCALLOP down  */
+/*----------------*/
+.scallop-down{
+  height:100px;
+  width:100%;
+  background: -webkit-gradient(radial, 50% 0, 10, 50% 0, 40, from($white-half), color-stop(0.49, $white-half), color-stop(0.51, #fff), to(white));
+-webkit-background-size: 49px 100%;
+}
+
+
+/*----------------*/
+/*  SCALLOP up    */
+/*----------------*/
+.scallop-up{
+  height:100px;
+  width:100%;
+  background: -webkit-gradient(radial, 50% 100%, 10, 50% 100%, 40, from($white-half), color-stop(0.49, $white-half), color-stop(0.51, #fff), to(white));
+-webkit-background-size: 49px 100%;
+}

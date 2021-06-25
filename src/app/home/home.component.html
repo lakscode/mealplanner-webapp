@@ -38,7 +38,7 @@
       </div>
    </div>
    </section>
-
+<!--
    <section class="home-sec" style="background:#fff;margin-bottom:0px">
       <div class="container">
          <div class="col-12">
@@ -70,9 +70,35 @@
          </div>
       </div>
    </section>
+-->
+<section class="home-sec" style="background:#fff;margin-bottom:0px">
+   <div class="container">
+      <div class="col-12">
+        <div class="" style="padding-top:30px;">
+         <span class="heading-small-1">How to start?</span>
+                  <h2  class="heading-big-1" style="">Easy steps</h2>
+           <div class="row secL">
+               <div class="col-12 col-lg-4  wow zoomIn animated"  *ngFor="let step of stepsList; let i = index;">
+                  <img alt="background image" [lazyLoad]="step.image" style=" height: 250px; max-width:100%" class="rounded-bg specialty-image w-80">
+              
+                  <h1 class="text-lg-left mb-4 title">{{step.label}}</h1>
+                  <h3 class="subtitle">{{step.subtitle}}</h3>
+                  <p class="text-justify mb-5 description"  style=" direction: ltr;">{{step.description}}</p>
 
-
-   <div class="site-section">
+               </div>
+              
+            </div>
+            <div class="row">
+               <div class="col-12" style="text-align:center;margin-top:20px;margin-bottom:20px;">
+                  <a href="javascript:void(0);" (click)="gotopage('signup')" class="getstarted">Get Started</a>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</section>
+<!--<div class="scallop-up"></div>-->
+   <div class="site-section sitesection-bg">
       <div class="container" >
          <div class="col-12" *ngIf="healthLabels.length > 1">
             <div class="" style="display:flex; align-items: center;min-height:450px;padding-top:30px"> 
@@ -106,7 +132,7 @@
          </div>
       </div>
    </div>
-
+   <!--<div class="scallop-down"></div>-->
 <!--hottest recipes-->
 <section class="hot-recipes-var2" style="margin-bottom:30px;padding-bottom:0px;" *ngIf="communitiesList && communitiesList.length > 0">
    <div class="container">
