@@ -468,14 +468,14 @@
                         <div class="listing" *ngFor="let recipe1 of displayList; let i = index;">
 
 
-                            <div class="image image-animate detail" style="background:#f8f8f8;">
+                            <div class="image image-animate detail" style="background:#f8f8f8;margin-bottom:0px">
 
                                 <a (click)="gotoRecipeDetails(recipe1.id)">
-                                    <img style="max-width:200px; max-height:200px"
+                                    <img style="max-width:200px; max-height:200px; "
                                         src="{{formatImage(recipe1.image, 'm')}}" alt="image">
                                 </a>
                             </div>
-                            <div class="detail" style="height:150px;position:relative;">
+                            <div class="detail" style="height:150px;position:relative;margin-top:0px;">
                                 <div style="position:absolute; left:unset;top:0px;right:5px;">
                                     <a style="left:unset;" (click)="showhidecontent(recipe1)" href="javascript:void(0)"
                                         [ngClass]="recipe1.showpopup?'contextmenu-icon active':'contextmenu-icon'"><i
@@ -494,7 +494,7 @@
                                         <a (click)="recipe1.showpopup = false; addCollectionsPopup(recipe1)" class="menu" href="javascript:void(0)"><i
                                                 class="fa fa-folder-open-o"></i>Add to Collections</a>
                                         
-                                        <a (click)="recipe1.showpopup = false; modifyRecipe(recipe1)" class="menu" href="javascript:void(0)"><i
+                                        <a *ngIf="isAdmin" (click)="recipe1.showpopup = false; modifyRecipe(recipe1)" class="menu" href="javascript:void(0)"><i
                                                     class="fa fa-plus-square-o"></i>Modify Recipe</a>
     
 
@@ -507,7 +507,9 @@
                                             (click)="recipe1.showAdd2MP = false;"><i class="fa fa-close"
                                                 aria-hidden="true"></i> </a>
                                         <p class="title" style="display:block"> Add Recipe to Meal Plan</p>
-                                        <p style="display:block;text-align:left">Choose Meal Plan</p>
+                                        <p style="display:block"  *ngIf="!plansList || plansList.length == 0">You haven't created a meal plan yet.</p>
+                                        <ng-container *ngIf="plansList.length > 0">
+                                        <p *ngIf="plansList.length > 0" style="display:block;text-align:left">Choose Meal Plan</p>
                                         <select name="planid" [(ngModel)]="plan.id">
                                             <option value="{{plan.id}}" *ngFor='let plan of plansList; let i = index'>
                                                 {{plan.name}}</option>
@@ -524,16 +526,19 @@
                                             </option>
                                         </select>
                                         <a class="btn" href="javascript:void(0)" (click)="add2Plan()"> Add to Plan</a>
+                                        </ng-container>
 
                                         <!--<a href="javascript:void(0)" (click)="addRecipe(recipe)"><i class="fa fa-plus" aria-hidden="true"></i> Add Recipe</a>-->
 
                                     </div>
-                                    <div *ngIf='recipe1.showAdd2C' [ngClass] = "i == 0? 'add2mealplanmenu left130':'add2mealplanmenu leftunset'" style="top:0px;background-color: #f8f8f8 ">
+                                    <div *ngIf='recipe1.showAdd2C' [ngClass] = "i == 0? 'add2mealplanmenu left130':'add2mealplanmenu leftunset'" style="top:0px;background-color: #f8f8f8;height:200px">
                                         <a style="float:right;font-size:24px;padding-top: 0px;
                                         padding-right: 0px;" href="javascript:void(0)"
                                             (click)="recipe1.showAdd2C = false;"><i class="fa fa-close"
                                                 aria-hidden="true"></i> </a>
                                         <p class="title" style="display:block"> Add Recipe to Collections</p>
+                                        <p  style="display:block" *ngIf="!collectionsList || collectionsList.length == 0">You haven't created a meal plan yet.</p>
+                                        <ng-container *ngIf="collectionsList.length > 0">
                                         <p style="display:block;text-align:left">Choose Collection</p>
                                         <select name="collectionid" [(ngModel)]="collection.id">
                                             <option value="{{collection.id}}"
@@ -543,7 +548,7 @@
 
                                         <a class="btn" style="width:100%" href="javascript:void(0)"
                                             (click)="add2Collection(recipe1)"> Add to Collection</a>
-
+                                        </ng-container>
                                     </div>
                                 </div>
                                 <h4><a title = "{{recipe1.label}}" (click)="gotoRecipeDetails(recipe1.id)">{{limitTo(recipe1.label, 38)}}</a>

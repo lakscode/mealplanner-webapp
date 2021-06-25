@@ -50,6 +50,7 @@ export class RecipesComponent implements OnInit {
 	filterOpts: any; 
 	sortType: any = "";
 	showFilters: boolean = false;
+	isAdmin : boolean = false;
 	constructor(private router: Router, private toastr: ToastrService, private route: ActivatedRoute, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder, private modalService: ModalService) {
 	
 	}
@@ -151,6 +152,7 @@ export class RecipesComponent implements OnInit {
 		  this.showNutrientsFlag = this.helpService.showorhideNutritions(this.role);
   
 		  console.log(this.showNutrientsFlag);
+		  this.isAdmin = this.helpService.isAdmin(this.currentUser);
 		}
 		
 	
@@ -1167,6 +1169,8 @@ loadCollectionNames()
 		var obj = invData["body"]["length"];
 		this.collectionsList = invData["body"];
 	  }
+	  console.log("collectionsList");
+	  console.log(this.collectionsList);
 	 
 	}));
 	}
