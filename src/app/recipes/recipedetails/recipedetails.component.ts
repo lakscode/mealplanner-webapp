@@ -244,8 +244,10 @@ loadRecipe(id)
 			  }
 			  else
 			  {
-				temp1 = this.searchRes["s_instructions"].split(". ");
-				this.searchRes["instructions"]  = temp1;
+				/*temp1 = this.searchRes["s_instructions"].split(". ");
+				this.searchRes["instructions"]  = temp1; */
+				this.searchRes["instructions"] = [];
+				this.searchRes["instructions"].push(this.searchRes["s_instructions"]);
 			  }
 			  }
 			  this.paramMicro = [];
@@ -299,6 +301,7 @@ loadRecipe(id)
 	  }
 	console.log(this.searchRes);
 //	console.log(this.paramMicro);
+this.paramMicro = this.paramMicro.sort(this.sortArrayAsc);
 this.updated++;
 this.listParams= {};
 this.listParams["dietLabels"] = this.searchRes['dietLabels'];
@@ -310,6 +313,17 @@ this.listParams["dietLabels"] = this.searchRes['dietLabels'];
   }));
   }
 //}
+}
+
+sortArrayAsc(a, b) {
+	//return b.label - a.label;
+	if (a.label.toLowerCase() < b.label.toLowerCase()) {
+		return -1;
+	  }
+	  if (a.label.toLowerCase() > b.label.toLowerCase()) {
+		return 1;
+	  }
+	  return 0;
 }
 getFavouriteStatus()
 {

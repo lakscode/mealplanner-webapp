@@ -1665,20 +1665,7 @@ limitTo(str, num)
 		if(str !== "")
 		{
 		
-			retStr = str.replace(/tsp/gi, 'tbsp')
-			retStr = retStr.replace(/teaspoons/gi, 'tbsp')
-			retStr = retStr.replace(/teaspoon/gi, 'tbsp')
-			retStr = retStr.replace(/tablespoons/gi, 'tbsp')
-			retStr = retStr.replace(/tablespoon/gi, 'tbsp')
-			retStr = retStr.replace(/cups/gi, 'cup')
-		
-			retStr = retStr.replace("u2013", "-"); 
-			 
-			retStr = retStr.replace("u00bc", " 1/4");
-			retStr = retStr.replace("u00bc", " 1/2");
-			retStr = retStr.replace("u00bd", " 3/4");
-			retStr = retStr.replace("u2153", " 1/3");
-			retStr = retStr.replaceAll("  ", " ");
+			retStr = this.helpService.formatText(str);
 		}
 		return retStr;
 	}

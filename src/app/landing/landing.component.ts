@@ -138,15 +138,17 @@ constructor(private router: Router, private httpClient : HttpClient, private san
 	  ));
 	
 	}
+	dateObj
 	checkRecipeoftheDay()
 	{
 	
 	  var params = {};
-	  var d = new Date();
-	  var tempDt2 = { year: d.getFullYear(), month: d.getMonth() + 1, day: d.getDate() };
+	 // var d = new Date();
+	 // var weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+	  var tempDt2 =  this.helpService.todayDate();  //{ year: d.getFullYear(), month: d.getMonth() + 1, day: d.getDate(), dayname: weekdays[d.getDay()] };
 	  var tempDt ="";
 	  tempDt = tempDt2.month + "-" + tempDt2.day + "-"  + tempDt2.year ;
-
+console.log(tempDt2);
     //params["query"] = "select id, image, label, dietLabels, s_instructions from recipes where s_instructions != '' order by rand() limit 1";
 	params["query"] = "select * from recipeoftheday where datetime = '" + tempDt + "'";
 		//console.log(params["query"]);

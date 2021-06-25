@@ -901,5 +901,40 @@ SendEmailPasswordReset(email,data) {
 		  
 		
 	}
-	  
+
+
+	formatText(str)
+	{
+		var retStr = str;
+		if(str !== "")
+		{
+		
+			retStr = str.replace(/tsp/gi, 'tbsp')
+			retStr = retStr.replace(/teaspoons/gi, 'tbsp')
+			retStr = retStr.replace(/teaspoon/gi, 'tbsp')
+			retStr = retStr.replace(/tablespoons/gi, 'tbsp')
+			retStr = retStr.replace(/tablespoon/gi, 'tbsp')
+			retStr = retStr.replace(/cups/gi, 'cup')
+		
+			retStr = retStr.replace("u2013", "-"); 
+			 
+			retStr = retStr.replace("u00bc", " 1/4");
+			retStr = retStr.replace("u00bc", " 1/2");
+			retStr = retStr.replace("u00bd", " 3/4");
+			retStr = retStr.replace("u2153", " 1/3");
+			retStr = retStr.replaceAll("  ", " ");
+		}
+		return retStr;
+	}
+
+	todayDate()
+	{
+		console.log("in todayDate");
+		var d = new Date();
+	  var weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+	  var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+
+	  var tempDt2 = { year: d.getFullYear(), month: d.getMonth() + 1, day: d.getDate(), dayname: weekdays[d.getDay()], mmddyyy: d.getMonth() + 1 + "-" + d.getDate() + "-" + d.getFullYear(), monthname : months[d.getMonth()] };
+		return tempDt2;
+	}
 }
