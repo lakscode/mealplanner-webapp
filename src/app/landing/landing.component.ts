@@ -35,8 +35,15 @@ constructor(private router: Router, private httpClient : HttpClient, private san
 		  if( this.currentUser["firstname"] !== "")
 		  this.currentUser["displayname"] = this.currentUser["firstname"];
 		  else if( this.currentUser["username"] !== "")
+		  {
 		  this.currentUser["displayname"] = this.currentUser["username"];
-		//  //console.log(this.currentUser["displayname"]);
+		  if(this.currentUser["displayname"].indexOf("@") !== -1)
+		  {
+			  var t = this.currentUser["displayname"].split("@");
+			  this.currentUser["displayname"] = t[0];
+		  }
+		  }
+		
 		this.getUserPreferences();
 		this.role = this.helpService.getRoleStatus(this.currentUser);
 		this.showNutrientsFlag = this.helpService.showorhideNutritions(this.role);
