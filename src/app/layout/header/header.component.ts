@@ -187,6 +187,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
 				 if(this.userName == "" && typeof(this.currentUser["username"]) !== "undefined") {
                 this.userName = this.currentUser["username"];
+				if(this.userName.indexOf("@") !== -1)
+				{
+					var t = this.userName.split("@");
+					this.userName = t[0];
+				}
+
                 }
 				if(typeof(this.currentUser["loggedIn"]) !== "undefined") {
 					this.loggedIn = this.currentUser["loggedIn"];
