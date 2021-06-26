@@ -52,6 +52,7 @@ urlWhatsApp: any;
 msg: any = "";
 labeltext: any = "";
 perServingFlag: boolean = true;
+isloggedIn : boolean = false;
 	constructor(private router: Router, private route: ActivatedRoute, private toastr: ToastrService,  private sanitize: DomSanitizer, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
 	
 	}
@@ -98,7 +99,7 @@ perServingFlag: boolean = true;
 		else if( this.currentUser["username"] !== "")
 		this.currentUser["displayname"]  = this.currentUser["username"];
 	//	console.log(this.currentUser);
-
+			this.isloggedIn = true;
 		this.comment['userid'] = this.currentUser["id"];
 
 
@@ -803,10 +804,13 @@ return this.sanitize.bypassSecurityTrustHtml(value);
 }
 
 gotoRecipes(label, type) {
-	if(type == "diet")
-	this.router.navigate(['recipes', {dietLabels:label}]);
-	if(type == "health")
-	this.router.navigate(['recipes', {healthLabels:label}]);
+	if(this.isloggedIn)
+	{
+		if(type == "diet")
+		this.router.navigate(['recipes', {dietLabels:label}]);
+		if(type == "health")
+		this.router.navigate(['recipes', {healthLabels:label}]);
+	}
 	
 }
 plansList:Array<any>=[];
@@ -927,6 +931,7 @@ showhidepopup()
 //	this.showAdd2MP = false;
 }
 gotopage(){        
+	if(this.isloggedIn)
    this.router.navigate(["recipes"]);    
 }
 formatString(str)

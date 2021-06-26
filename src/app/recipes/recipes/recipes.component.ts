@@ -418,16 +418,17 @@ export class RecipesComponent implements OnInit {
 
 		console.log('searchProps');
 		this.loadingData = true;
-
+		var paramsAdded = false;
 		var params = {}
 
 		if (typeof (this.searchparam.dietLabels) !== "undefined" && this.searchparam.dietLabels !== "") {
 			params["dietLabels"] = this.searchparam.dietLabels;
-
+			paramsAdded = true;
 		}
 
 		if (typeof (this.searchparam.healthLabels) !== "undefined" && this.searchparam.healthLabels !== "") {
 			params["healthLabels"] = this.searchparam.healthLabels;
+			paramsAdded = true;
 
 		}
 		if (this.searchparam.q) {
@@ -436,19 +437,21 @@ export class RecipesComponent implements OnInit {
 				params["content"] = this.searchparam.q.split(" ").join(",");
 				console.log(params['content']);
 				this.helpService.saveSearchHistory(this.searchparam.q, "text", "recipes", this.currentUser["id"]);
-
+				paramsAdded = true;
 			}
 			else {
 				this.loopCount = 0;
 				var words = this.searchparam.q.replaceAll(" ", "~");
 				params["words"] = words;
 				this.helpService.saveSearchHistory(this.searchparam.q, "text", "recipes", this.currentUser["id"]);
+				paramsAdded = true;
 			}
 
 		}
 
 		if (typeof (this.maxcalories) !== "undefined" && this.maxcalories > 0) {
 			params["caloriesto"] = this.maxcalories;
+			paramsAdded = true;
 		}
 		params["instructions"] = "notempty";
 
@@ -460,9 +463,11 @@ export class RecipesComponent implements OnInit {
 		for (let m = 0; m < this.dietLabelsList.length; m++) {
 			if (this.dietLabelsList[m]["selected"])
 				dietlabels += this.dietLabelsList[m]["name"] + "~";
+				
 		}
 		if (dietlabels !== "") {
 			dietlabels = dietlabels.slice(0, -1);
+			paramsAdded = true;
 		}
 
 		var healthlabels = "";
@@ -472,6 +477,7 @@ export class RecipesComponent implements OnInit {
 		}
 		if (healthlabels !== "") {
 			healthlabels = healthlabels.slice(0, -1);
+			paramsAdded = true;
 		}
 
 		var cuisinetypes = "";
@@ -482,6 +488,7 @@ export class RecipesComponent implements OnInit {
 
 		if (cuisinetypes !== "") {
 			cuisinetypes = cuisinetypes.slice(0, -1);
+			paramsAdded = true;
 		}
 
 		var mealtypes = "";
@@ -492,6 +499,7 @@ export class RecipesComponent implements OnInit {
 
 		if (mealtypes !== "") {
 			mealtypes = mealtypes.slice(0, -1);
+			paramsAdded = true;
 		}
 
 		var minerals = "";
@@ -512,10 +520,12 @@ export class RecipesComponent implements OnInit {
 
 		if (minerals !== "") {
 			minerals = minerals.slice(0, -1);
+			paramsAdded = true;
 		}
 
 		if (mQuery !== "") {
 			mQuery = mQuery.slice(0, -4);
+			paramsAdded = true;
 			this.helpService.saveSearchHistory(mQuery, "nutrients", "recipes", this.currentUser["id"]);
 		}
 		//	 console.log("mQuery");
@@ -524,21 +534,25 @@ export class RecipesComponent implements OnInit {
 
 		if (typeof (dietlabels) !== "undefined" && dietlabels !== "") {
 			params["dietLabels"] = dietlabels
+			paramsAdded = true;
 			this.helpService.saveSearchHistory(dietlabels, "dietLabels", "recipes", this.currentUser["id"]);
 		}
 
 		if (typeof (healthlabels) !== "undefined" && healthlabels !== "") {
 			params["healthLabels"] = healthlabels
+			paramsAdded = true;
 			this.helpService.saveSearchHistory(healthlabels, "healthLabels", "recipes", this.currentUser["id"]);
 		}
 
 		if (typeof (cuisinetypes) !== "undefined" && cuisinetypes !== "") {
 			params["cuisineType"] = cuisinetypes
+			paramsAdded = true;
 			this.helpService.saveSearchHistory(cuisinetypes, "cuisineType", "recipes", this.currentUser["id"]);
 		}
 
 		if (typeof (mealtypes) !== "undefined" && mealtypes !== "") {
 			params["mealType"] = mealtypes
+			paramsAdded = true;
 			this.helpService.saveSearchHistory(mealtypes, "mealType", "recipes", this.currentUser["id"]);
 		}
 
@@ -549,6 +563,7 @@ export class RecipesComponent implements OnInit {
 			params["digestne"] = "notempty";
 			checkMinerals = true;
 			console.log(minerals);
+			paramsAdded = true;
 
 		}
 		console.log(params);
@@ -559,6 +574,10 @@ export class RecipesComponent implements OnInit {
 
 			var query = "select id, label, image, cuisineType, healthLabels, mealType, dietLabels, calories, yield from recipes ";
 			var where = " where status = 1 AND totalNutrients != '' AND digest != ''  AND s_instructions != '' ";
+			if(!paramsAdded)
+			{
+				where += " AND cuisineType LIKE '%american%' "
+			}
 			if (this.maxcalories > 0)
 				where += " AND calories <= " + this.maxcalories;
 
@@ -619,6 +638,10 @@ export class RecipesComponent implements OnInit {
 			params["status"] = "1";
 			params["limit"] = "100";
 			console.log(params);
+			if(!paramsAdded)
+			{
+				params["cuisineType"] = "american"
+			}
 			var res = this.dbService.getDatabyFields("recipes", params).subscribe(invData => setTimeout(() => {
 				console.log(invData);
 				if (invData["body"]["length"] == 0) {
