@@ -65,7 +65,79 @@
                         </div>
                     </div>
                     </div>-->
-                    <ul class="pagination" *ngIf="totalPage >= 10">
+                    <ul class="pagination" *ngIf="totalPage > 1">
+                        <li (click)="currentPage(0)" class="">
+                            <a href="javascript:void(0)">
+                                <i class="fa fa-angle-double-left"></i>
+                            </a>
+                        </li>
+                        <li (click)="prevPage()" class="">
+                            <a href="javascript:void(0)">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        </li>
+                        
+                        <li (click)="currentPage(i)" [ngClass]="i == page_num?'current':''" *ngFor='let in of counter(totalPage) ;let i = index'>
+                            <a href="javascript:void(0)">{{i+1}}</a>
+                        </li>
+                        <li (click)="nextPage()" class="">
+                            <a href="javascript:void(0)">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </li>
+                        <li (click)="currentPage(totalPage)" class="">
+                            <a href="javascript:void(0)">
+                                <i class="fa fa-angle-double-right"></i>
+                            </a>
+                        </li>   
+                    </ul>
+                    <div class="recipe-listing {{listorgrid.panel}}">
+
+
+                        <div class="listing" *ngFor="let recipe1 of displayList; let i = index;">
+                               
+                            <div class="image image-animate detail" style="margin-bottom:0px;">
+                                <a href="javascript:void(0)"  (click)="gotoRecipeDetails('recipedetails', recipe1.id)">
+                                    <img style="max-height: 148px;" *ngIf="recipe1.image !== ''"  src="{{recipe1.image}}"
+                                        alt="{{recipe1.label}}">
+                                    <img *ngIf="recipe1.image == ''"  src="assets/notavailable.png"
+                                        alt="{{recipe1.label}}">
+                                </a>
+                            </div>
+                       
+                            <div class="detail" style="position:relative;margin-top:0px;height:140px;">
+                                <div style="position: absolute; right: 0;top: 0px;">
+                                <a (click)="showhidecontent(recipe1)" href="javascript:void(0)" [ngClass]="recipe1.showpopup?'contextmenu-icon active':'contextmenu-icon'"><i class="fa fa-ellipsis-v"></i></a>
+                                <div *ngIf="recipe1.showpopup" class="contextmenu" style="left:unset;"><a  class="menu" href="javascript:void(0)"  (click)="gotoRecipeDetails('recipedetails', recipe1.id)" ><i class="fa fa-list"></i>View Recipe</a>
+                                    <a  (click)="gotoRecipeDetails('recipesubmit', recipe1.id)" class="menu" href="javascript:void(0)"><i class="fa fa-pencil-square-o"></i>Edit Recipe</a>
+                                    <!--<a  (click)="deleteRecipe(recipe1.id)" class="menu" href="javascript:void(0)"><i class="fa fa-trash"></i>Delete Recipe</a>-->
+                                </div>
+                                </div>
+                                <h4><a>{{recipe1.label}}</a></h4>
+                                
+                                <!--<p innerHTML="{{limitTo(formatIns(recipe1.s_instructions), 200)}}">
+
+                                </p>-->
+                                <!--<div class="meta-listing">
+                                    <div style="display:inline-block;color: #5e676b;">
+                                        Calories: {{recipe1.calories}} Kcal
+                                    </div>
+                              
+                                    <div class="rating-box">
+                                        <span class="rating-icons" *ngFor="let item of [1,2,3,4,5]">
+                                            <i [ngClass]="item <= recipe1.displayrating?'fa fa-star rating-h':'fa fa-star rating'"></i>
+                                        </span>
+                                        <span class="rating-figure">{{recipe1.displayrating}}</span>
+                                    </div>
+                                </div>-->
+                            </div>
+                                
+                        </div>
+                        
+
+                       
+                    </div>
+                    <ul class="pagination" *ngIf="totalPage > 1">
                         <li (click)="currentPage(0)" class="">
                             <a href="javascript:void(0)">
                                 <i class="fa fa-angle-double-left"></i>
@@ -91,77 +163,6 @@
                             </a>
                         </li>   
                     </ul>
-                    <div class="recipe-listing {{listorgrid.panel}}">
-
-
-                        <div class="listing" *ngFor="let recipe1 of displayList; let i = index;">
-                               
-                            <div class="image image-animate detail">
-                                <a href="javascript:void(0)"  (click)="gotoRecipeDetails('recipedetails', recipe1.id)">
-                                    <img style="max-height: 148px;" *ngIf="recipe1.image !== ''"  src="{{recipe1.image}}"
-                                        alt="{{recipe1.label}}">
-                                    <img *ngIf="recipe1.image == ''"  src="assets/notavailable.png"
-                                        alt="{{recipe1.label}}">
-                                </a>
-                            </div>
-                       
-                            <div class="detail">
-                                <div style="position:relative;">
-                                <a (click)="showhidecontent(recipe1)" href="javascript:void(0)" [ngClass]="recipe1.showpopup?'contextmenu-icon active':'contextmenu-icon'"><i class="fa fa-ellipsis-v"></i></a>
-                                <div *ngIf="recipe1.showpopup" class="contextmenu"><a  class="menu" href="javascript:void(0)"  (click)="gotoRecipeDetails('recipedetails', recipe1.id)" ><i class="fa fa-list"></i>View Recipe</a>
-                                    <a  (click)="gotoRecipeDetails('recipesubmit', recipe1.id)" class="menu" href="javascript:void(0)"><i class="fa fa-pencil-square-o"></i>Edit Recipe</a>
-                                    <!--<a  (click)="deleteRecipe(recipe1.id)" class="menu" href="javascript:void(0)"><i class="fa fa-trash"></i>Delete Recipe</a>-->
-                                </div>
-                                </div>
-                                <h4><a>{{recipe1.label}}</a></h4>
-                                
-                                <p innerHTML="{{limitTo(formatIns(recipe1.s_instructions), 200)}}">
-
-                                </p>
-                                <!--<div class="meta-listing">
-                                    <div style="display:inline-block;color: #5e676b;">
-                                        Calories: {{recipe1.calories}} Kcal
-                                    </div>
-                              
-                                    <div class="rating-box">
-                                        <span class="rating-icons" *ngFor="let item of [1,2,3,4,5]">
-                                            <i [ngClass]="item <= recipe1.displayrating?'fa fa-star rating-h':'fa fa-star rating'"></i>
-                                        </span>
-                                        <span class="rating-figure">{{recipe1.displayrating}}</span>
-                                    </div>
-                                </div>-->
-                            </div>
-                                
-                        </div>
-                        
-
-                        <ul class="pagination" *ngIf="totalPage >= 10">
-                            <li (click)="currentPage(0)" class="">
-                                <a href="javascript:void(0)">
-                                    <i class="fa fa-angle-double-left"></i>
-                                </a>
-                            </li>
-                            <li (click)="prevPage()" class="">
-                                <a href="javascript:void(0)">
-                                    <i class="fa fa-angle-left"></i>
-                                </a>
-                            </li>
-                            
-                            <li (click)="currentPage(i)" [ngClass]="i == page_num?'current':''" *ngFor='let in of counter(totalPage) ;let i = index'>
-                                <a href="javascript:void(0)">{{i+1}}</a>
-                            </li>
-                            <li (click)="nextPage()" class="">
-                                <a href="javascript:void(0)">
-                                    <i class="fa fa-angle-right"></i>
-                                </a>
-                            </li>
-                            <li (click)="currentPage(totalPage-1)" class="">
-                                <a href="javascript:void(0)">
-                                    <i class="fa fa-angle-double-right"></i>
-                                </a>
-                            </li>   
-                        </ul>
-                    </div>
                 </div>
             </div>
             <div class="col-md-4 col-lg-3">

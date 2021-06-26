@@ -302,7 +302,7 @@ export class RecipesComponent implements OnInit {
 	nextPage()
 	{
 		
-		if(this.page_num > 0 && this.page_num < this.totalPage-1)
+		if(this.page_num >= 0 && this.page_num < this.totalPage-1)
 		{
 			this.page_num += 1;
 		}
@@ -749,6 +749,10 @@ endIndex = startIndex+ endIndex;
 				  this.ratingIds += temp[i]["id"] + ",";
 			  }
 			  this.totalPage = this.recipesList1["length"] / this.page_length;
+
+			  if(this.recipesList1["length"] > (this.totalPage * this.page_length))
+			  this.totalPage = this.totalPage+1;
+			  
 			  this.counter(this.totalPage);
 			}
 		   console.log("totalPage " + this.totalPage);

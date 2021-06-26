@@ -21,8 +21,8 @@
                         </a>
                     </div>
 
-                    <div *ngIf='showAdd2MP' class="add2mealplanmenu" style="top:0px">
-                        <a style="float:right;font-size:24px;" href="javascript:void(0)" (click)="showAdd2MP = false;"><i class="fa fa-close" aria-hidden="true"></i> </a>
+                    <div *ngIf='showAdd2MP' class="add2mealplanmenu" style="top:0px; height:360px;">
+                        <a style="float:right;font-size:24px;padding:0;" href="javascript:void(0)" (click)="showAdd2MP = false;"><i class="fa fa-close" aria-hidden="true"></i> </a>
                         <p class="title"> Add Recipe to Meal Plan</p>
                         <p class="lbl">Choose Meal Plan</p>
                         <select [(ngModel)] ="plan.id">

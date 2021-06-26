@@ -34,6 +34,7 @@ export class MyRecipesComponent implements OnInit {
 	animClass: any = "";
 	page_num: any = 0;
 	totalPage: any = 0;
+	page_length: any = 9;
 	displayList: Array<any> = [];
 	nutrientDbFields : Array<any> = [];
 	recipeurl :any;
@@ -110,6 +111,7 @@ export class MyRecipesComponent implements OnInit {
 		}
 	  this.totalPage = 1;
 	 this.page_num = 0;
+	 this.page_length = 9;
 	 this.searchProps();
 	
   
@@ -148,7 +150,7 @@ export class MyRecipesComponent implements OnInit {
 	nextPage()
 	{
 		
-		if(this.page_num > 0 && this.page_num < this.totalPage-1)
+		if(this.page_num >= 0 && this.page_num < this.totalPage-1)
 		{
 			this.page_num += 1;
 		}
@@ -156,7 +158,8 @@ export class MyRecipesComponent implements OnInit {
 	}
 	currentPage(pagenum)
 	{
-	//	console.log(pagenum);
+		console.log(this.totalPage);
+		console.log(pagenum);
 		this.page_num = parseInt(pagenum);
 		this.getDisplayList();
 	}
@@ -166,8 +169,8 @@ export class MyRecipesComponent implements OnInit {
 	//	console.log(this.recipesList1);
 	//	console.log(this.page_num);
 		this.displayList=[];
-		var startIndex= this.page_num*10;
-		var endIndex = 10;
+		var startIndex= this.page_num* this.page_length;
+		var endIndex = this.page_length;
 
 		if(startIndex + endIndex > this.recipesList1["length"])
 		{
@@ -331,7 +334,9 @@ endIndex = startIndex+ endIndex;
 				  this.recipesList1.push(temp[i]);          
 				  this.ratingIds += temp[i]["id"] + ",";
 			  }
-			  this.totalPage = this.recipesList1["length"] /10;
+			  this.totalPage = this.recipesList1["length"] / this.page_length;
+			  if(this.recipesList1["length"] > (this.totalPage * this.page_length))
+			  this.totalPage = this.totalPage+1;
 			  this.counter(this.totalPage);
 			}
 		   console.log("totalPage " + this.totalPage);
