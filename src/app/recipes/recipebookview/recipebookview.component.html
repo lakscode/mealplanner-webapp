@@ -3,7 +3,7 @@
     <div class="row">
     <div class="col-12 col-md-12 col-lg-9">
         <div class="recipe-set submit-recipe-set">
-            <h2><a (click)="gotopage();"><i class="fa fa-chevron-left"></i></a>  Recipe Book <span *ngIf="searchRes.recipebook_name"> : <b>{{searchRes.recipebook_name}}</b></span></h2>
+            <h2><a (click)="gotopage();"><i class="fa fa-chevron-left"></i></a>  Recipe Book <!--<span *ngIf="searchRes.recipebook_name"> : <b>{{searchRes.recipebook_name}}</b></span>--></h2>
             <div class="createplanbtn">
 
                 <a class="copy-button" href="javascript:void(0)" (click)="downloadplan()" title="Download PDF"><i
@@ -18,9 +18,28 @@
                     
                     <div class="row" >
                         <div class="col-12 paddinglr0" >
+                            <div class="collection-item">
+                                <div class="image image-animate" >
                             <img src="{{searchRes.image}}"
-                            style="height:200px;width: 100%;     object-fit: cover; border-top-left-radius: 15px;
+                            style="height:250px;width: 100%;     object-fit: cover; border-top-left-radius: 15px;
                             border-top-right-radius: 15px;" />
+                             <div class="detail" style="bottom: 120px;
+                             /* left: 40%; */
+                             /* right: 40%; */
+                             width: auto;
+                             text-align: left;
+                             left: auto;
+                             /* right: auto; */
+                             min-width: 200px;
+                             min-height: 50px;font-size: 24px;
+    font-family: 'Lora';
+    font-weight: 700;">
+                                {{searchRes.recipebook_name}}
+                            </div>
+                            </div>
+                           
+                            </div>
+
                         </div>
 
                        
