@@ -778,6 +778,7 @@ transform(value: any) {
   welcomeMessage: any = "";
   errorMessage: any = "";
   mealTypeList: Array<any> = [];
+  planExpired: boolean = false;
 	loadDaysData(diff_days)
 	{
 	console.log(this.plan);
@@ -789,7 +790,13 @@ transform(value: any) {
 	  param_day_num = diff_days_ceil -1;
 	  this.errorMessage  = "";
 	  this.welcomeMessage= "Your <b>Day " + (diff_days_ceil) + "</b> Plan";
-  
+  if(diff_days_ceil > 7)
+  {
+	  	this.planExpired= true;
+		  this.loadMealPlan();
+  }
+  else
+  {
 	  if(typeof(this.plan["id"]) !== "undefined" && this.plan["id"] !== "")
 	  {
 		var params = {};
@@ -832,7 +839,7 @@ transform(value: any) {
 		 
 		}))
 	  }
-   
+	}
 	}
 	loadRecipes(idslist)
 	{

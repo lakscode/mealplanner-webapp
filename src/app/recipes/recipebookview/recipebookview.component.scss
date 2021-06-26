@@ -565,16 +565,22 @@ padding-right:11px;
     .detail
     {
       min-height:90px;
-      background-image:linear-gradient(
-                                rgba(0, 0, 0, 0.8),
-                                rgba(0, 0, 0, 0.8)
-                              );
+      background-image:linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6) );
       padding:10px; 
       position:absolute;
-      bottom:0;
-      left:0;
-      width:100%;
       color:#FFF;
+      bottom: 30px;
+      width: auto;
+      text-align: left;
+      left: auto;
+      min-width: 200px;
+      min-height: 50px;
+      font-size: 24px;
+      font-family: 'Lora';
+      font-weight: 700;
+      padding: 10px 30px;
+
+
       h4, a {color:#FFF;}
       
     }

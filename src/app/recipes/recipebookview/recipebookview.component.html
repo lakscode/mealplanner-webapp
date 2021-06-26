@@ -23,18 +23,9 @@
                             <img src="{{searchRes.image}}"
                             style="height:250px;width: 100%;     object-fit: cover; border-top-left-radius: 15px;
                             border-top-right-radius: 15px;" />
-                             <div class="detail" style="bottom: 120px;
-                             /* left: 40%; */
-                             /* right: 40%; */
-                             width: auto;
-                             text-align: left;
-                             left: auto;
-                             /* right: auto; */
-                             min-width: 200px;
-                             min-height: 50px;font-size: 24px;
-    font-family: 'Lora';
-    font-weight: 700;">
+                             <div class="detail" style="">
                                 {{searchRes.recipebook_name}}
+                                <p *ngIf="recipesList.length > 0">{{recipesList.length}} Recipes</p>
                             </div>
                             </div>
                            

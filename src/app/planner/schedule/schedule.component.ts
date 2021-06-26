@@ -179,7 +179,7 @@ export class ScheduleComponent implements OnInit {
 		}))
 	  }
 	}
-  
+	planExpired: boolean = false;
 	loadDaysData(diff_days)
 	{
 	//  this.loadingService.present();
@@ -191,7 +191,10 @@ export class ScheduleComponent implements OnInit {
 	  this.errorMessage  = "";
 	  //this.welcomeMessage= "Your <b>Day " + (diff_days_ceil) + "</b> Plan";
 	  this.welcomeMessage= "Day " + (diff_days_ceil) + "";
-  
+		if(diff_days_ceil > 7)
+		{
+			this.planExpired= true;
+			}
 	  if(typeof(this.plan["id"]) !== "undefined" && this.plan["id"] !== "")
 	  {
 		var params = {};
@@ -434,6 +437,9 @@ export class ScheduleComponent implements OnInit {
 	  this.dateObj["month"] = this.helpService.getMonth(new Date());
 	  this.dateObj["day"] = this.helpService.getDay(new Date());
 	  this.dateObj["date"] = new Date().getDate()
+	
+
+		this.dateObj = this.helpService.todayDate();
 		console.log(this.dateObj);
 	}
 	startPlan()

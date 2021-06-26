@@ -129,7 +129,7 @@ body.jw-modal-open {
 @media only screen and (max-width: 990px) {
     .width60, .width50, .width40, .width70, .width80, .width90
     {
-        width:100% !important;
+        width:90% !important;
     }
 }
 @media only screen and  (min-width: 991px) and (max-width: 1299px)  {
@@ -137,10 +137,7 @@ body.jw-modal-open {
     {
     font-size:13pt;
     }
-    .width60, .width50, .width40, .width70, .width80, .width90
-    {
-        width:100% !important;
-    }
+   
   }
 
 @media only screen and  (min-width: 1300px) and (max-width: 1399px)  {

@@ -18,7 +18,14 @@
             <div class="fixedtop recipes-home-body inner-page">
               <div class="container" style="margin:0 auto;padding-top:20px;padding-left:0px;padding-right:0px">
                   <div class="row">
-                  <div class="col-md-12 col-lg-12">
+                    <div class="col-md-12 col-lg-12" *ngIf="planExpired">
+                      <div class="recipe-set">         
+                          <h2>Your mealplan - <span style="font-size:16px;" *ngIf="plan.name">- {{setFLU(plan.name)}}</span> is completed.</h2>
+                          
+                      </div>
+                      </div>
+
+                  <div class="col-md-12 col-lg-12" *ngIf="!planExpired">
                       <div class="recipe-set">         
                           <h2>Your Today's Schedule <span style="font-size:16px;" *ngIf="plan.name">- {{setFLU(plan.name)}}</span> <span style="font-size:16px;" *ngIf="welcomeMessage !==''"> ({{welcomeMessage}})</span></h2>
                           
