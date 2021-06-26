@@ -35,6 +35,7 @@ export class FavouritesComponent implements OnInit {
 	animClass: any = "";
 	page_num: any = 0;
 	totalPage: any = 0;
+	page_length: any = 9;
 	displayList: Array<any> = [];
 	constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
 	
@@ -106,6 +107,7 @@ export class FavouritesComponent implements OnInit {
 		this.loadRecipes();
 	  this.totalPage = 1;
 	 this.page_num = 0;
+	 this.page_length = 9;
 	 
 	
 	}
@@ -135,7 +137,9 @@ export class FavouritesComponent implements OnInit {
 			this.recipesList1.push(invData["body"][i]);
 			this.ratingIds += invData["body"][i]["id"] + ",";
 		  }
-		  this.totalPage = this.recipesList1["length"] /10;
+		  this.totalPage = this.recipesList1["length"] /this.page_length;
+		  if(this.recipesList1["length"] > (this.totalPage * this.page_length))
+		  this.totalPage = this.totalPage+1;
 		  this.counter(this.totalPage);
 		  console.log(this.recipesList1);
 		 
@@ -149,7 +153,7 @@ export class FavouritesComponent implements OnInit {
 	}
 
 	counter(i: number) {
-		console.log(i);
+	
 		var num = Math.ceil(i);
 		return new Array(num);
 	}
@@ -181,8 +185,8 @@ export class FavouritesComponent implements OnInit {
 	{
 		
 		this.displayList=[];
-		var startIndex= this.page_num*10;
-		var endIndex = 10;
+		var startIndex= this.page_num*this.page_length;
+		var endIndex = this.page_length;
 
 		if(startIndex + endIndex > this.recipesList1["length"])
 		{
@@ -210,7 +214,7 @@ export class FavouritesComponent implements OnInit {
 		var params = {"limit": 100};
 	   
 		params["query"] = "SELECT count(rating) as totalcount, sum(rating) as totalrating, recipeid FROM `rating` where recipeid in (" + this.ratingIds + ") group by recipeid";
-		console.log(params);
+		//console.log(params);
 		var res =   this.dbService.getDatabyTablebyQuery("rating", params).subscribe(invData => setTimeout(() => {
 	
 		  if(invData !== null)
@@ -224,9 +228,9 @@ export class FavouritesComponent implements OnInit {
 				for(let i=0; i< temp["length"] ; i++)
 				{
 				  this.ratingsArr.push(temp[i])
-				  console.log(temp[i]);
+				//  console.log(temp[i]);
 				  var recIndex = this.recipesList1.findIndex(x1 => (x1.id === temp[i]["recipeid"]));
-				  console.log(recIndex);
+				//  console.log(recIndex);
 				  if(recIndex > -1)
 				  {
 					this.recipesList1[recIndex]["totalcount"] = temp[i]["totalcount"];
@@ -242,7 +246,7 @@ export class FavouritesComponent implements OnInit {
 
   
 				}
-				console.log(this.ratingsArr);
+			//	console.log(this.ratingsArr);
 		
 			  }
 			}

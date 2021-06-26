@@ -62,7 +62,7 @@
                         
                         <div  class="searchmorebar searchbaranim">
                             <div class="row mleft" >
-                                <div class="col-12 col-xs-12" style="margin-bottom:10px;margin-left:50px">
+                                <div class="col-12 col-lg-9 col-md-9" style="margin-bottom:10px;margin-left:0px;padding-top:0px;">
                                  
                                      <!--<ng-container *ngFor="let lab of searchFilterLabels; let l = index;">
                                             <a [ngClass]="lab.selected?'filterlabel active': 'filterlabel'" href="javascript:void(0)" (click)="showLabels(lab)">
@@ -227,12 +227,21 @@
                                     </div>
                                 </div>
                                 
-       
+                                <div class="col-12 col-lg-3 col-md-4" style="margin-bottom:10px;margin-left:0px;text-align: right;padding-right: 15px;">
+
+                                   
+                            <input  type="button"  (click)="loadCustomRecipes()" style="margin-bottom:10px;margin-top:0px;" 
+                            [ngClass]="' defaultbtn searchbtn  bg-orange'" id="header-submit-search-pro" name="submit" value="My Recipes">
+                            <input  type="button"  (click)="loadFavourites();" style="margin-bottom:10px;margin-top:0px;" 
+                            [ngClass]="' defaultbtn searchbtn  bg-orange'" id="header-submit-search-pro" name="submit" value="Favourites">
+
+                                 </div>
+
                 
-                                <div class="col-12 showonmobile">
+                                <!--<div class="col-12 showonmobile">
                                     <input type="button" (click)="searchFilters()" style="margin-bottom:10px;" class="defaultbtn searchbtn" id="header-submit-search-pro" name="submit" value="Search">
                 
-                                </div>
+                                </div>-->
                 
                             </div>
                             
@@ -298,7 +307,9 @@
                 <div class="recipe-set" *ngIf="!noResult">
                     <div class="recipes-horizontal divoverflowh">
 
-
+                        <div *ngIf="!recipesloading && recipesList.length == 0">
+                            No recipes
+                        </div>
                         <div class="listing-search"  *ngFor="let recipe1 of recipesList; let i = index;">
                             <div class="details">
                                 <div class="more" style="right: 10px;

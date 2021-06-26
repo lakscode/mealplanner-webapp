@@ -16,7 +16,7 @@
                     </div> -->
                     <h2>Favourite Recipes</h2>
                     <h3 *ngIf='displayList.length == 0' style="margin-bottom:20px">You have no favourites recipes yet. Please search recipes and set as favourite.</h3>
-                    <ul class="pagination" *ngIf="totalPage >= 10">
+                    <ul class="pagination" *ngIf="displayList.length > 0 && totalPage > 0">
                         <li (click)="currentPage(0)" class="">
                             <a href="javascript:void(0)">
                                 <i class="fa fa-angle-double-left"></i>
@@ -36,7 +36,7 @@
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         </li>
-                        <li (click)="currentPage(totalPage-1)" class="">
+                        <li (click)="currentPage(totalPage)" class="">
                             <a href="javascript:void(0)">
                                 <i class="fa fa-angle-double-right"></i>
                             </a>
@@ -72,35 +72,7 @@
                             </div>
                         </div>
 
-                        <div class="listing" *ngFor="let recipe2 of recipesList2; let i = index;">
-                            <div class="image">
-                                <a (click)="gotoRecipeDetails(recipe2.id)">
-                                    <img src="{{formatImage(recipe2.image, 'm')}}" alt="image">
-                                </a>
-                            </div>
-                            <div class="detail">
-                                <h4><a (click)="gotoRecipeDetails(recipe2.id)">{{recipe2.label}}</a></h4>
-                                <p innerHTML="{{limitTo(recipe2.s_instructions, 200)}}">
-
-                                </p>
-                                <div class="meta-listing">
-                                    <div style="display:inline-block;color: #5e676b;">
-                                        Calories: {{recipe2.calories}} Kcal
-                                    </div>
-                  
-                                    <div class="rating-box">
-                                        <span class="rating-icons" *ngFor="let item of [1,2,3,4,5]">
-                                            <i class="fa fa-star"></i>
-                                        </span>
-                                        <span class="rating-figure">{{recipe2.displayrating}}</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-
-                        <ul class="pagination" *ngIf="totalPage >= 10">
+                        <ul class="pagination" *ngIf="displayList.length > 0 &&  totalPage > 0">
                             <li (click)="currentPage(0)" class="">
                                 <a href="javascript:void(0)">
                                     <i class="fa fa-angle-double-left"></i>
@@ -120,7 +92,7 @@
                                     <i class="fa fa-angle-right"></i>
                                 </a>
                             </li>
-                            <li (click)="currentPage(totalPage-1)" class="">
+                            <li (click)="currentPage(totalPage)" class="">
                                 <a href="javascript:void(0)">
                                     <i class="fa fa-angle-double-right"></i>
                                 </a>

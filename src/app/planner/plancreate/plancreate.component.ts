@@ -375,29 +375,28 @@ this.loadColorCodes();
 		this.recipesloading = false;
 	 console.log(invData);
  var count = 0;
+
 	  if(invData !== null && typeof(invData["body"]) !== "undefined" && invData["body"] !== null && invData["body"]["length"] > 0)
 		{
-
+ 			this.loadCustom = false;
 			if(allFlag)
 			this.recipesList = [];
-			if( invData["body"]["length"] == 0)
-			{
-				this.splitcontent = true;
-				if(this.loopCount < 1){
+			
+	
+			this.splitcontent = false;
+			this.formatResult(invData);
+		
+		}
+		else
+		{
+			this.splitcontent = true;
+
+			if(this.loopCount < 1){
 				this.loopCount++;
 				this.loadRecipes();
 	
-				}
+			}
 				
-			}
-			else
-			{
-				this.splitcontent = false;
-				this.formatResult(invData);
-			}
-
-	
-		 
 		}
 		 
 	  }
@@ -690,11 +689,14 @@ this.loadColorCodes();
 	{
 	//  console.log(image);
 	  var retImage = image;
+	  if(!this.loadCustom )
+	  {
 	  if(image !== "" && type !== "")
 	  {
 		retImage = this.helpService.formatImage(image, type);
 		
 	  }
+	}
 	//  console.log(retImage);
 	  return retImage;
 	}
@@ -2111,6 +2113,52 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 
 
 }
+
+loadCustom:boolean = false;
+loadCustomRecipes()
+{
+	var params = {};
+	console.log(this.filtersParams);
+	params["returnfields"] = " id, label, image, cuisineType, mealType, healthLabels,ingredients,  dietLabels, totalNutrients, digest,calories, yield ";
+
+	 params["created_by"] = this.currentUser["id"];
+
+	 this.recipesloading = true;
+	var res =   this.dbService.getDatabyFields("recipes", params).subscribe(invData => setTimeout(() => {
+	   this.recipesloading = false;
+		console.log(invData);
+	 if(invData !== null && typeof(invData["body"]) !== "undefined" && invData["body"] !== null && invData["body"]["length"] > 0)
+	   {		 
+		  this.loadCustom = true;
+			this.recipesList = [];
+			   this.formatResult(invData);
+		   
+	   }
+	}));
+}
+
+loadFavourites()
+{
+	var params = {};
+	console.log(this.filtersParams);
+	params["query"] = "select id, label, image, cuisineType, mealType, healthLabels,ingredients,  dietLabels, totalNutrients, digest,calories, yield from recipes where id in (select recipeid from favourites where userid = " + this.currentUser["id"] + ")";
+
+	// params["created_by"] = this.currentUser["id"];
+
+	 this.recipesloading = true;
+	var res =   this.dbService.getDatabyTablebyQuery("recipes", params).subscribe(invData => setTimeout(() => {
+	   this.recipesloading = false;
+		console.log(invData);
+	 if(invData !== null && typeof(invData["body"]) !== "undefined" && invData["body"] !== null && invData["body"]["length"] > 0)
+	   {		 
+		this.loadCustom = true;
+			this.recipesList = [];
+			   this.formatResult(invData);
+		   
+	   }
+	}));
+}
+
 }
 
 	
