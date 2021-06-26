@@ -74,6 +74,7 @@ import { QuestionnaireModule } from './questionnaire/questionnaire.module';
 import { ProgressModule } from './progress/progress.module'; 
 import { RecipebooksModule } from './recipes/recipebooks/recipebooks.module'; 
 import { RecipebookModule } from './recipes/recipebook/recipebook.module';
+import { RecipebookviewModule } from './recipes/recipebookview/recipebookview.module';
 import { FaqsModule } from './faqs/faqs.module';  
 
 
@@ -154,6 +155,7 @@ import { AdminModule } from './admin/admin.module';
 	ProgressModule,
 	RecipebooksModule,
 	RecipebookModule,
+	RecipebookviewModule,
 	FaqsModule,
 	LazyLoadImageModule,
 	SocialLoginModule,

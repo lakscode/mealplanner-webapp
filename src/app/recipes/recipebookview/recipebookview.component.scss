@@ -1,34 +1,8 @@
 @import "../../../variables.scss";
 
-.py-3 {
-    padding-top: 1rem!important;
-    padding-bottom: 1rem!important;
+.recipe-set h2:after {
+  width: 72% !important;
 }
-
-.mb-0 {
-    margin-bottom: 0!important;
-}
-
-h5, .h5, .h5 {
-    font-size: 36px;
-}
-
-big, .big {
-    font-size: 18px;
-}
-.font-weight-semibold {
-    font-weight: 600!important;
-}
-.mt-1 {
-    margin-top: .25rem!important;
-}
-.d-block {
-    display: block!important;
-}
-a {
-    color:$text-gray;
-}
-
 a:hover {
     color: #ff642b;
         //text-decoration: underline;
@@ -47,114 +21,291 @@ a:hover {
 .btn {
     font-weight: 500;
 }
-.recipe-set h2:after {
-width:80%;
-}
-.rating
-{
-  color: #CCC;
-}
-.rating-h
-{
-  color: orange;
-}
-
-.boxshadow5
-{
-  box-shadow: 5px 5px 3px #aaaaaa;
- /* -moz-box-shadow:    3px 3px 5px 6px #ccc;
-  -webkit-box-shadow: 3px 3px 5px 6px #ccc;
-  box-shadow:         3px 3px 5px 6px #ccc;*/
-}
-
-  .listSection{
-           // border: solid 1px #888;
-            //border-radius: 4px;
-            padding: 5px 5px 0px 0px;
-           //width: 340px;
-            margin: 0 auto;
-            font-size: 10.5pt;
-            display: inline-block;
-            height: 24px;
-            margin-left: 6px;
-        }
-  
-
-    .round {
-    margin-left:20px;
-    margin-right:20px;
-    }
 
 
-.round label {
-  background-color: #ccc;
-  border: 1px solid #ddd;
-  border-radius: 50%;
-  cursor: pointer;
-  height: 24px;
-  left: 15px;
-  right:15px;
-   
+.list-sortable li {
  
-  top: 10px;
-  width: 24px;
-  margin-left:10px;
-
-}
-
-.round input {
- height: 28px;
-  
-}
-
-.checkboxText {
-  height:28px; width: 40px; position:absolute;vertical-align:middle;margin-top:5px;
+  margin-bottom: 0px;
 }
 
 
 
-.round {
-  /*position: relative; */
-}
-
-.round label {
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 50%;
+.container {
+  display: block;
+  position: relative;
+  padding-left: 30px;
+  margin-bottom: 12px;
   cursor: pointer;
-  height: 28px;
-  left: 0;
+  font-size: 16px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  font-weight:normal;
+}
+
+/* Hide the browser's default checkbox */
+.container input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+
+/* Create a custom checkbox */
+.checkmark {
   position: absolute;
   top: 0;
-  width: 28px;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: #FFF;
+   //border-radius: 50%;
+   border:1px solid $orange;
 }
 
-.round label:after {
-  border: 2px solid #fff;
-  border-top: none;
-  border-right: none;
-  content: "";
-  height: 6px;
-  left: 7px;
-  opacity: 0;
-  position: absolute;
-  top: 8px;
-  transform: rotate(-45deg);
-  width: 12px;
+/* On mouse-over, add a grey background color */
+.container:hover input[type="checkbox"] ~ .checkmark {
+  background-color: #FFF;
 }
 
-.round input[type="checkbox"] {
-  visibility: hidden;
-}
-
-.round input[type="checkbox"]:checked + label {
-  background-color: $orange;
+/* When the checkbox is checked, add a blue background */
+.container input[type="checkbox"]:checked ~ .checkmark {
+background-color: $orange;
   border:1px solid $orange;
+  //background-color: #66bb6a;
+  //border:1px solid #66bb6a;
 }
 
-.round input[type="checkbox"]:checked + label:after {
-  opacity: 1;
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
 }
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+  left: 7px;
+  top: 3px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+.recipe-label
+{
+  line-height: 23px;
+    margin-top: 0;
+    font-family: 'Lato', sans-serif;
+    font-weight: bold;
+    font-size: 18px;
+    text-transform: capitalize;
+    font-style: normal;
+    position: relative;
+    padding-bottom: 5px;
+    color:#fff;
+}
+.recipe-label1
+{
+  line-height: 18px;
+    margin-top: 0;
+    font-family: 'Lato', sans-serif;
+    font-weight: 900;
+    font-size: 16px;
+    text-transform: capitalize;
+    font-style: normal;
+    position: relative;
+    padding-bottom: 5px;
+    color:#fff;
+}
+/*
+.recipe-label {
+  text-transform: lowercase;
+}
+//, .recipe-label:first-line 
+
+.recipe-label:first-letter{
+  text-transform: uppercase;
+}
+*/
+.recipe-item
+{
+  border: solid 2px #fff;
+  box-shadow: 0 1rem 1.5rem rgb(0 0 0 / 25%);
+  border-radius:10px;
+  min-height:130px;
+  margin:10px;
+  padding:10px;
+}
+
+.recipe-item:hover
+{
+  box-shadow: 0 1rem 1.5rem rgb(255 145 0 / 25%);
+
+}
+
+.recipe-item1
+{
+  border: solid 2px #fff;
+  box-shadow: 0 1rem 1.5rem rgb(0 0 0 / 25%);
+  border-radius:10px;
+  min-height:100px;
+  margin:10px;
+  padding:10px;
+  background:#FFF;
+}
+
+.recipe-item1:hover
+{
+  box-shadow: 0 1rem 1.5rem rgb(255 145 0 / 25%);
+
+}
+
+.add-recipe-panel
+{
+  box-shadow: 0 1rem 1.5rem rgb(255 145 0 / 25%);
+  border:1px solid #CCC;
+  margin-bottom:20px;
+  background:#f1f2f2;
+  padding-bottom:20px;
+  padding-top:20px;
+}
+.add-recipe{
+  display: inline-block;
+  background: #f8f6f5;
+  background-color: #FFAF4F;
+  color: #FFF;
+  border-radius: 5px;
+  font-size: 16px;
+  z-index: 6666;
+  padding: 10px;
+}
+
+.recipe-add
+{
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  width: 20px;
+  text-align: center;
+  height: 22px;
+  background: #Eee;
+  color: #555;
+  font-size: 13px;
+  box-shadow: 3px 3px 3px 0px #ccc;
+  padding: 0px;
+  border-radius: 4px;
+  padding-top: 2px;
+  padding-left: 1px;
+  padding-bottom:2px;
+}
+
+.recipe-add:hover
+{
+  background:$orange;
+  color:#FFF;
+  width:150px;
+}
+
+
+.recipe-add:hover::after
+{
+  content:" Add to Recipe Book";  
+}
+
+.recipe-item1:hover .recipe-view
+{
+  display:block;
+}
+
+.recipe-view
+{
+  position: absolute;
+  right: 15px;
+  top: 45px;
+  width: 20px;
+  text-align: center;
+  height: 22px;
+  background: #Eee;
+  color: #555;
+  font-size: 13px;
+  box-shadow: 3px 3px 3px 0px #ccc;
+  padding: 0px;
+  border-radius: 4px;
+  padding-top: 2px;
+  padding-left: 1px;
+  padding-bottom:2px;
+  display:none;
+}
+
+
+.recipe-view:hover
+{
+  background:$orange;
+  color:#FFF;
+  width:100px;
+}
+
+
+.recipe-view:hover::after
+{
+  content:" View Recipe";  
+}
+
+
+
+.toggleremove .recipe-remove
+{
+  display:none;
+}
+.toggleremove:hover .recipe-remove
+{
+  display:block;
+}
+.recipe-remove
+{
+  position: absolute;
+  right: 15px;
+  top: 25px;
+  width: 60px;
+  text-align: center;
+  height: 22px;
+  background: #Eee;
+  color: #555;
+  font-size: 13px;
+  box-shadow: 3px 3px 3px 0px #ccc;
+  padding: 0px;
+  border-radius: 4px;
+  padding-top: 2px;
+  padding-left: 1px;
+  padding-bottom:2px;
+}
+
+.recipe-remove:hover
+{
+  background:$orange;
+  color:#FFF;
+  /*width:150px; */
+}
+
+/*
+.recipe-remove:hover::after
+{
+  content:" Recipe";  
+}
+*/
+
 
 .container {
   display: block;
@@ -259,7 +410,7 @@ padding-right:11px;
 
 .inputbox {
   border-radius: 4px;
-  width: calc(100% - 215px);
+  width: calc(100% - 215px) !important;
   min-width: 200px;
   padding: 8px 15px;
   background: #ffffff;
@@ -299,6 +450,7 @@ padding-right:11px;
   display: inline-block;
   margin-right: 10px;
 }
+
 
 
 .showonmobile {
@@ -374,53 +526,18 @@ padding-right:11px;
   outline: none;
   width:100%;
 }
-.bgcontext
-    {
-      background:#FFF;
-      border-radius:50%;
-      text-align:center;
-      box-shadow: 0 1rem 1.5rem rgb(0 0 0 / 25%);
-    }
 
-.paddinglr0
+.view-details
 {
-  padding-left: 0;
-  padding-right: 0;
-}
-.mineral-input {
-  width: 90%;
-  background: transparent;
-  border: 0;
-  border-bottom: 2px solid #CCC;
-  text-align: center;
-  outline: 0;
-}
-.maxmin {
-  font-size: 12px;
-  font-style: italic;
-  color: #CCC;
-  display:none;
+  margin-right:5px !important;
+  .head
+  {
+    font-weight:bold;
+  }
 }
 
-.create-book
-{
-  float: right;
-    display: inline-block;
-    background: #f8f6f5;
-    background-color: #FFAF4F;
-    color: #FFF;
-    overflow: hidden;
-    position: relative;
-    border-radius: 5px;
-    font-size: 16px;
-    z-index: 6666;
-    padding: 10px
-}
 
-.create-book:hover
-{
-  cursor: pointer;
-}
+
 
 
 .collection-item

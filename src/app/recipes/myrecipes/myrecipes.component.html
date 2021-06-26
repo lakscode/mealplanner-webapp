@@ -65,7 +65,7 @@
                         </div>
                     </div>
                     </div>-->
-                    <ul class="pagination" *ngIf="totalPage > 1">
+                    <!--<ul class="pagination" *ngIf="totalPage > 1">
                         <li (click)="currentPage(0)" class="">
                             <a href="javascript:void(0)">
                                 <i class="fa fa-angle-double-left"></i>
@@ -90,11 +90,11 @@
                                 <i class="fa fa-angle-double-right"></i>
                             </a>
                         </li>   
-                    </ul>
+                    </ul>-->
                     <div class="recipe-listing {{listorgrid.panel}}">
 
 
-                        <div class="listing" *ngFor="let recipe1 of displayList; let i = index;">
+                        <div class="listing" *ngFor="let recipe1 of recipesList1; let i = index;">
                                
                             <div class="image image-animate detail" style="margin-bottom:0px;">
                                 <a href="javascript:void(0)"  (click)="gotoRecipeDetails('recipedetails', recipe1.id)">
@@ -137,7 +137,7 @@
 
                        
                     </div>
-                    <ul class="pagination" *ngIf="totalPage > 1">
+                    <!--<ul class="pagination" *ngIf="totalPage > 1">
                         <li (click)="currentPage(0)" class="">
                             <a href="javascript:void(0)">
                                 <i class="fa fa-angle-double-left"></i>
@@ -162,7 +162,7 @@
                                 <i class="fa fa-angle-double-right"></i>
                             </a>
                         </li>   
-                    </ul>
+                    </ul>-->
                 </div>
             </div>
             <div class="col-md-4 col-lg-3">

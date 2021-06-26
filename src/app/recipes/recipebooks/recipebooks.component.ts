@@ -274,6 +274,23 @@ endIndex = startIndex+ endIndex;
 
 	  return retval;
   }
+
+  showhidecontent(recipe)
+{
+	recipe.showpopup = !recipe.showpopup
+	for(let r = 0; r < this.recipebooks.length; r++)
+	{
+		if(recipe.id !== this.recipebooks[r]["id"])
+		{
+			this.recipebooks[r]["showpopup"] = false;
+		}
+	}
+}
+
+deleteRecipebook(id)
+{
+	console.log("deleteRecipebook");
+}
 }
 
 	

@@ -1,0 +1,193 @@
+<div class="fixedtop recipes-home-body inner-page">
+    <div class="container"  style="padding-left:0px; padding-right:0px;">
+    <div class="row">
+    <div class="col-12 col-md-12 col-lg-9">
+        <div class="recipe-set submit-recipe-set">
+            <h2><a (click)="gotopage();"><i class="fa fa-chevron-left"></i></a>  Recipe Book <span *ngIf="searchRes.recipebook_name"> : <b>{{searchRes.recipebook_name}}</b></span></h2>
+            <div class="createplanbtn">
+
+                <a class="copy-button" href="javascript:void(0)" (click)="downloadplan()" title="Download PDF"><i
+                        class="fa fa-file-pdf-o" style="z-index:-1"></i> Export</a>
+                      &nbsp;
+            </div>
+
+            <p *ngIf="searchRes.description">{{searchRes.description}} </p>
+    
+            
+            <div class="submit-recipe-form">
+                    
+                    <div class="row" >
+                        <div class="col-12 paddinglr0" >
+                            <img src="{{searchRes.image}}"
+                            style="height:200px;width: 100%;     object-fit: cover; border-top-left-radius: 15px;
+                            border-top-right-radius: 15px;" />
+                        </div>
+
+                       
+                    </div>
+                    <div class="row" >
+                        <div style="margin-bottom:10px;padding-left:0px;min-height:220px;" class="col-12 col-lg-4 col-md-4 toggleremove " *ngFor="let recipe of recipesList; let i = index;">
+                            <div class="collection-item">
+                                <div class="image image-animate" >
+                                    <!--<div style="position:absolute; left:unset;top:10px;right:10px;z-index:1">
+                                        <a (click)="showhidecontent(recipe1)" href="javascript:void(0)" [ngClass]="recipe1.showpopup?'contextmenu-icon active bgcontext':'contextmenu-icon bgcontext'" style="text-align:center;"><i class="fa fa-ellipsis-v"></i></a>
+                                            <div *ngIf="recipe1.showpopup" class="contextmenu" style="left:unset;top:25px; right:0px;"><a  class="menu" href="javascript:void(0)"  (click)="gotopage('recipebookview', {'id':recipe1.id})" ><i class="fa fa-list"></i>View Recipebook</a>
+                                                <a *ngIf="recipe1.createdby == currentUser['id']" (click)="gotoRecipeDetails('recipebook', {'id':recipe1.id})" class="menu" href="javascript:void(0)"><i class="fa fa-pencil-square-o"></i>Edit Recipebook</a>
+                                                <a *ngIf="recipe1.createdby == currentUser['id']" (click)="deleteRecipebook(recipe1.id)" class="menu" href="javascript:void(0)"><i class="fa fa-trash"></i>Delete Recipebook</a>
+                                            </div>
+                                            </div>-->
+                                    <a  href='recipedetails/{{recipe.id}}' target="_blank">
+                                        <img *ngIf="recipe.image !== ''"  src="{{recipe.image}}"
+                                            alt="{{recipe.label}} image">
+                                        <img *ngIf="recipe.image == ''"  src="assets/notavailable.png" alt="{{recipe.label}} image">
+                                    </a>
+                                    <div class="detail">
+                                        <a href='recipedetails/{{recipe.id}}' target="_blank"><h3>{{recipe.label}}</h3></a>
+                                        <!--<p innerHTML="{{limitTo(recipe1.description, 200)}}">
+        
+                                        </p>  -->
+                                        <p *ngIf="recipe.calories > 0">Calories{{recipe.calories}}  </p>
+                                       
+                                      </div>
+                                </div>
+                            </div>
+                         </div>
+                    </div>
+
+                    <div class="row" style="display:none;">
+                        <!--<div class="col-12 paddinglr0">
+                            <label for="recipes">Recipes</label>
+                        </div>-->
+                        <div style="margin-bottom:10px;padding-left:0px;min-height:220px;" class="col-12 col-lg-4 col-md-4 toggleremove " *ngFor="let recipe of recipesList; let i = index;">
+                            <div class="recipe-item" style="background-size:cover;  background-position:center; width:auto; object-fit: cover;  height:100%; " [ngStyle]="{'background-image':'linear-gradient(
+                                rgba(0, 0, 0, 0.3),
+                                rgba(0, 0, 0, 0.3)
+                              ),url(' + recipe.image + ')'}">
+                                    <div>
+                                    <h1 class="recipe-label">{{recipe.label.toLowerCase()}}</h1>                                  
+                                    <p style="color:#fff"><b>Calories</b>: {{recipe.calories}}<br> <b>Servings</b>: {{recipe.yield}}</p>
+                                    <!--<p *ngIf="recipe.dietLabels" style="color:#fff">  <b>Diet Labels</b>: {{formatHiphen(recipe.dietLabels)}} </p>-->
+                                     <!--<p *ngIf="recipe.favcount && recipe.favcount> 0">{{recipe.favcount}} Members Saved</p>-->
+                                    <p class="favactive" style='    text-align: right;
+                                    position: absolute;
+                                    bottom: -9px;
+                                    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+                                    /* color: #FFF; */
+                                    /* width: 100%; */
+                                    left: 12px;
+                                    right: 12px;
+                                    padding-right: 10px;
+                                    border-bottom-left-radius: 15px;
+                                    border-bottom-right-radius: 15px;' (click)="toggleFav(recipe.id)" *ngIf="recipe.UserFavStatus"><i class="fa fa-heart"></i> <span *ngIf="recipe.favcount && recipe.favcount> 0" style='color:#FFF'>{{recipe.favcount}}</span></p>
+                                </div>
+
+                                <div class="morebtn"><a class="menu" (click)="toggleMoreMenu(recipe, i, 'viewlist')" href="javascript:void(0)"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></a>
+                                <div class="moremenu" *ngIf="recipe.expand">
+                                    <a href="javascript:void(0)" *ngIf="recipe.UserFavStatus" (click)="removeFavourite(recipe.id)" style="color:orange"><i class="fa fa-heart" aria-hidden="true"></i> Remove Favourite </a>
+                                     <a href="javascript:void(0)" *ngIf="!recipe.UserFavStatus" (click)="setFavourite(recipe.id)" ><i class="fa fa-heart" aria-hidden="true"></i> Set Favourite</a>
+
+                                    <!--<a href="javascript:void(0)" (click)="removeRecipe(recipe)"><i class="fa fa-trash" aria-hidden="true"></i> Remove Recipe</a>-->
+                                    <a href="recipedetails/{{recipe.id}}" target="_blank" ><i class="fa fa-list-ul" aria-hidden="true"></i> View Recipe</a>
+                                </div>
+                                </div>
+                             
+                           
+                           
+                        </div>
+                           
+
+                        </div>
+                    </div>
+                    <br>
+                    <label for="notes">Notes</label>
+                    <p>{{searchRes.notes}}</p>
+               
+            </div>
+        </div>
+    </div>
+    <div class="col-12  col-md-4 col-lg-3">
+    <aside>
+    <div class="side-bar">
+   
+    <!--popular recipes widget-->
+    <app-sidebar></app-sidebar>
+    <!--popular recipes widget ends-->
+    
+    </div>
+    </aside>
+    </div>
+    </div>
+    
+    </div>
+    </div>
+
+    <jw-modal id="viewrecipe">
+    
+    <form name="form"  #uf="ngForm" novalidate class="popup-panel">
+        <div class="modal-header">
+            <h2 style="margin:15px; ">
+                <span>View Recipe Details</span>           
+
+            </h2>
+            <button style="font-size: 30px;padding:5px;" type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeModal('viewrecipe');">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body" *ngIf="selectedRecipe">
+
+            <div class="row">
+                <div class='col-12 col-lg-12' style="max-height: 300px; overflow: auto;">
+                    <div class="row">
+                        <div class="col-12 col-lg-9">
+                            <div class="form-group">
+                                <h2>{{selectedRecipe.label}}</h2>
+                        
+                                <p style="display:inline-block; " class="view-details"><span class="head">Servings:</span> {{selectedRecipe.yield}}, </p>    
+                                <p style="display:inline-block; "  class="view-details"><span class="head">Calories:</span> {{selectedRecipe.calories}}, </p>  
+                                <p style="display:inline-block; "  class="view-details"><span class="head">Calories per Serving:</span> {{formatCalories(selectedRecipe.calories, selectedRecipe.yield)}}, </p>  
+                                                                
+                                <p style="display:inline-block; "  class="view-details"><span class="head">Total Weight:</span> {{formatLimit(selectedRecipe.totalWeight)}}, </p>  
+                               
+                                <p style="display:inline-block; " class="view-details"><span class="head"  *ngIf="selectedRecipe.dietLabels">Diet Labels:</span> {{formatlabels(selectedRecipe.dietLabels)}}, </p> 
+
+                                <p style="display:inline-block; " class="view-details"><span class="head" *ngIf="selectedRecipe.healthLabels">Health Labels:</span> {{formatlabels(selectedRecipe.healthLabels)}}</p> 
+
+        
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-3">
+                           <img src="{{selectedRecipe.image}}" width="90%" />
+                        </div>
+
+                        <div class="col-12 col-lg-6">
+                            <div class="form-group">
+                                <p class="view-details"><span class="head">Nutrients:</span> </p> 
+                                <p style="display:inline-block;" class="view-details" *ngFor="let nutrient of selectedRecipe.formatNutrients| keyvalue; "><span class="head">{{nutrient.value.label}}:</span> {{formatLimit(nutrient.value.quantity)}} {{formatUnit(nutrient.value.unit)}}, </p> 
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-6">
+                            <div class="form-group">
+                                <p class="view-details"><span class="head">Nutrients per Serving:</span> </p> 
+                                <p style="display:inline-block;" class="view-details" *ngFor="let nutrient of selectedRecipe.formatNutrients| keyvalue; "><span class="head">{{nutrient.value.label}}:</span> {{formatLimit(nutrient.value.quantity/selectedRecipe.yield)}} {{formatUnit(nutrient.value.unit)}}, </p> 
+        
+                            </div>
+                        </div>
+                    </div>
+                   
+                   
+
+                </div>
+               
+<!--
+                <div class='col-12'>
+                    <div class="form-group">
+                        <button class="defaultbtn" type="submit">Save</button>
+                    </div>
+                </div>-->
+            </div>
+
+        </div>
+
+    </form>
+</jw-modal>

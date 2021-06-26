@@ -282,7 +282,7 @@
                 <div *ngIf = "loadingData && !noResult">Loading data...</div>
                 <div class="recipe-set" *ngIf="!noResult">
 
-                    <ul class="pagination hidden-xs" *ngIf="totalPage > 1">
+                   <!-- <ul class="pagination hidden-xs" *ngIf="totalPage > 1">
                         <li (click)="currentPage(0)" class="">
                             <a href="javascript:void(0)">
                                 <i class="fa fa-angle-double-left"></i>
@@ -308,11 +308,11 @@
                                 <i class="fa fa-angle-double-right"></i>
                             </a>
                         </li>
-                    </ul>
+                    </ul>-->
                     <div class="row">
 
 
-                        <div class="col-12 col-lg-3 col-md-4" *ngFor="let recipe1 of displayList; let i = index;">
+                        <div class="col-12 col-lg-3 col-md-4" *ngFor="let recipe1 of recipesList1; let i = index;">
                             <div class="collection-item">
                     
                                 <div style="position:absolute; left:unset;top:10px;right:10px;z-index:1">
@@ -436,7 +436,7 @@
                     </div>
 
                     
-                    <ul class="pagination hidden-xs" *ngIf="totalPage > 1">
+                    <!--<ul class="pagination hidden-xs" *ngIf="totalPage > 1">
                         <li (click)="currentPage(0)" class="">
                             <a href="javascript:void(0)">
                                 <i class="fa fa-angle-double-left"></i>
@@ -462,7 +462,7 @@
                                 <i class="fa fa-angle-double-right"></i>
                             </a>
                         </li>
-                    </ul>
+                    </ul>-->
                 </div>
                 <div class="recipe-set" *ngIf="noResult">
                     <p> No Results</p>

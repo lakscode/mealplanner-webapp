@@ -6,14 +6,6 @@
                
                 <div style= 'width:100%'></div>
                 <div class="recipe-set">
-                     <!-- <div class="listing-buttons">
-                        <span (click)="setListorGrid('grid')"
-                            [ngClass]="listorgrid.menu == 'grid'?'grid current':'grid' "><i
-                                class="fa fa-th-large"></i></span>
-                        <span (click)="setListorGrid('grid')"
-                            [ngClass]="listorgrid.menu == 'list'?'list current':'list'"><i
-                                class="fa fa-bars"></i></span>
-                    </div>  -->
                    
                     <h2 style="width: 70%;">Recipe Books</h2>
                       <div class="createplanbtn" (click)="gotopage('recipebook');">
@@ -21,52 +13,27 @@
                          
                       </div>
 
-                    <!--<div class="row" style=" width:100%; text-align:right;margin-bottom:20px;">
-                        <div class="col-12">
-                            <div class="create-button anim-button btn-4" (click)="gotopage('recipebook');">
-                            <i class="fa fa-plus"></i>  Create New
-                        </div>
-                    </div>
-                    </div>-->
-                    <ul class="pagination" *ngIf="totalPage >= 10">
-                        <li (click)="currentPage(0)" class="">
-                            <a href="javascript:void(0)">
-                                <i class="fa fa-angle-double-left"></i>
-                            </a>
-                        </li>
-                        <li (click)="prevPage()" class="">
-                            <a href="javascript:void(0)">
-                                <i class="fa fa-angle-left"></i>
-                            </a>
-                        </li>
-                        
-                        <li (click)="currentPage(i)" [ngClass]="i == page_num?'current':''" *ngFor='let in of counter(totalPage) ;let i = index'>
-                            <a href="javascript:void(0)">{{i+1}}</a>
-                        </li>
-                        <li (click)="nextPage()" class="">
-                            <a href="javascript:void(0)">
-                                <i class="fa fa-angle-right"></i>
-                            </a>
-                        </li>
-                        <li (click)="currentPage(totalPage-1)" class="">
-                            <a href="javascript:void(0)">
-                                <i class="fa fa-angle-double-right"></i>
-                            </a>
-                        </li>   
-                    </ul>
+            
                     <div class="row">
 
 
                         <div class="col-12 col-lg-3 col-md-4" *ngFor="let recipe1 of recipebooks; let i = index;">
                             <div class="collection-item">
                             <div class="image image-animate" >
-                                <a (click)="gotopage('recipebook', {'id':recipe1.id});">
+                                <div style="position:absolute; left:unset;top:10px;right:10px;z-index:1">
+                                    <a (click)="showhidecontent(recipe1)" href="javascript:void(0)" [ngClass]="recipe1.showpopup?'contextmenu-icon active bgcontext':'contextmenu-icon bgcontext'" style="text-align:center;"><i class="fa fa-ellipsis-v"></i></a>
+                                        <div *ngIf="recipe1.showpopup" class="contextmenu" style="left:unset;top:25px; right:0px;"><a  class="menu" href="javascript:void(0)"  (click)="gotopage('recipebookview', {'id':recipe1.id})" ><i class="fa fa-list"></i>View Recipebook</a>
+                                            <a *ngIf="recipe1.createdby == currentUser['id']" (click)="gotoRecipeDetails('recipebook', {'id':recipe1.id})" class="menu" href="javascript:void(0)"><i class="fa fa-pencil-square-o"></i>Edit Recipebook</a>
+                                            <a *ngIf="recipe1.createdby == currentUser['id']" (click)="deleteRecipebook(recipe1.id)" class="menu" href="javascript:void(0)"><i class="fa fa-trash"></i>Delete Recipebook</a>
+                                        </div>
+                                        </div>
+                                <a (click)="gotopage('recipebookview', {'id':recipe1.id});">
                                     <img *ngIf="recipe1.image !== ''"  src="{{recipe1.image}}"
                                         alt="{{recipe1.recipebook_name}} image">
                                     <img *ngIf="recipe1.image == ''"  src="assets/notavailable.png" alt="{{recipe1.recipebook_name}} image">
                                 </a>
                                 <div class="detail">
-                                    <a (click)="gotopage('recipebook', {'id':recipe1.id});"><h3>{{recipe1.recipebook_name}}</h3></a>
+                                    <a (click)="gotopage('recipebookview', {'id':recipe1.id});"><h3>{{recipe1.recipebook_name}}</h3></a>
                                     <!--<p innerHTML="{{limitTo(recipe1.description, 200)}}">
     
                                     </p>  -->
@@ -79,56 +46,8 @@
                         </div>
                       
                     </div>
-                    <!--
-                    <div class="recipe-listing {{listorgrid.panel}}">
-
-
-                        <div class="listing boxshadow5" *ngFor="let recipe1 of recipebooks; let i = index;">
-                            <div class="image image-animate detail" style="height:160px">
-                                <a (click)="gotopage('recipebook', {'id':recipe1.id});">
-                                    <img style="max-height:140px;" *ngIf="recipe1.image !== ''"  src="{{recipe1.image}}"
-                                        alt="{{recipe1.recipebook_name}} image">
-                                    <img *ngIf="recipe1.image == ''"  src="assets/notavailable.png" alt="{{recipe1.recipebook_name}} image">
-                                </a>
-                            </div>
-                            <div class="detail" style="height:100px">
-                                <h4><a (click)="gotopage('recipebook', {'id':recipe1.id});">{{recipe1.recipebook_name}}</a></h4>
-                                <p innerHTML="{{limitTo(recipe1.description, 200)}}">
-
-                                </p>  
-                                <p>{{countrecipes(recipe1.recipes)}} Recipes </p>
-                               
-                              </div>
-                        </div>
-                      
-                    </div>
-                -->
-                    <ul class="pagination" *ngIf="totalPage >= 10">
-                        <li (click)="currentPage(0)" class="">
-                            <a href="javascript:void(0)">
-                                <i class="fa fa-angle-double-left"></i>
-                            </a>
-                        </li>
-                        <li (click)="prevPage()" class="">
-                            <a href="javascript:void(0)">
-                                <i class="fa fa-angle-left"></i>
-                            </a>
-                        </li>
-                        
-                        <li (click)="currentPage(i)" [ngClass]="i == page_num?'current':''" *ngFor='let in of counter(totalPage) ;let i = index'>
-                            <a href="javascript:void(0)">{{i+1}}</a>
-                        </li>
-                        <li (click)="nextPage()" class="">
-                            <a href="javascript:void(0)">
-                                <i class="fa fa-angle-right"></i>
-                            </a>
-                        </li>
-                        <li (click)="currentPage(totalPage-1)" class="">
-                            <a href="javascript:void(0)">
-                                <i class="fa fa-angle-double-right"></i>
-                            </a>
-                        </li>   
-                    </ul>
+                 
+                   
                 </div>
             </div>
             <div class="col-md-4 col-lg-3">

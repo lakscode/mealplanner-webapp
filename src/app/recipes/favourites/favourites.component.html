@@ -16,7 +16,7 @@
                     </div> -->
                     <h2>Favourite Recipes</h2>
                     <h3 *ngIf='displayList.length == 0' style="margin-bottom:20px">You have no favourites recipes yet. Please search recipes and set as favourite.</h3>
-                    <ul class="pagination" *ngIf="displayList.length > 0 && totalPage > 0">
+                   <!-- <ul class="pagination" *ngIf="displayList.length > 0 && totalPage > 0">
                         <li (click)="currentPage(0)" class="">
                             <a href="javascript:void(0)">
                                 <i class="fa fa-angle-double-left"></i>
@@ -41,11 +41,11 @@
                                 <i class="fa fa-angle-double-right"></i>
                             </a>
                         </li>   
-                    </ul>
+                    </ul>-->
                     <div class="recipe-listing {{listorgrid.panel}}">
 
 
-                        <div class="listing" *ngFor="let recipe1 of displayList; let i = index;">
+                        <div class="listing" *ngFor="let recipe1 of recipesList1; let i = index;">
                             <div class="image image-animate detail" style="background:#f8f8f8;">
                                 <a (click)="gotoRecipeDetails(recipe1.id)">
                                     <img style="max-width:200px; max-height:200px" src="{{formatImage(recipe1.image, 'm')}}"
@@ -72,7 +72,7 @@
                             </div>
                         </div>
 
-                        <ul class="pagination" *ngIf="displayList.length > 0 &&  totalPage > 0">
+                        <!--<ul class="pagination" *ngIf="displayList.length > 0 &&  totalPage > 0">
                             <li (click)="currentPage(0)" class="">
                                 <a href="javascript:void(0)">
                                     <i class="fa fa-angle-double-left"></i>
@@ -97,7 +97,7 @@
                                     <i class="fa fa-angle-double-right"></i>
                                 </a>
                             </li>   
-                        </ul>
+                        </ul>-->
                     </div>
                 </div>
             </div>

@@ -15,11 +15,11 @@ import { PDFService } from '../../services/pdf.service';
 import { ModalService } from '../../shared/modules/modal/modal.service';
 import { ToastrService } from 'ngx-toastr';
 @Component({
-	selector: 'app-recipebook',
-	templateUrl: './recipebook.component.html',
-	styleUrls: ['./recipebook.component.scss']
+	selector: 'app-recipebookview',
+	templateUrl: './recipebookview.component.html',
+	styleUrls: ['./recipebookview.component.scss']
 })
-export class RecipebookComponent implements OnInit, OnChanges {
+export class RecipebookviewComponent implements OnInit, OnChanges {
 	private onDestroy$: Subject<void> = new Subject<void>();
 	nutrientsList: Array<any> =[];
 	routeParams: any = {};
@@ -187,7 +187,7 @@ loadRecipes(idslist = "")
 	else if(this.searchparam.q !== "")
 	params["content"] = this.searchparam.q;
 
-	params["instructions"] = "notempty";
+	//params["instructions"] = "notempty";
 	params["returnfields"] = " id, label, image, healthLabels, dietLabels, calories, yield, totalWeight, totalNutrients, digest ";
   
   console.log(JSON.stringify(params));
