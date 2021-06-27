@@ -23,8 +23,8 @@
                             <img src="{{searchRes.image}}"
                             style="height:250px;width: 100%;     object-fit: cover; border-top-left-radius: 15px;
                             border-top-right-radius: 15px;" />
-                             <div class="detail" style="">
-                                {{searchRes.recipebook_name}}
+                             <div class="detail" style="bottom:30%;width:auto;min-height: 50px; padding:10px 30px;">
+                                <span style="font-size:20px;">{{searchRes.recipebook_name}}</span>
                                 <p *ngIf="recipesList.length > 0">{{recipesList.length}} Recipes</p>
                             </div>
                             </div>
@@ -109,9 +109,10 @@
                         </div>
                     </div>
                     <br>
+                    <div *ngIf="searchRes.notes">
                     <label for="notes">Notes</label>
                     <p>{{searchRes.notes}}</p>
-               
+                </div>
             </div>
         </div>
     </div>
