@@ -33,11 +33,11 @@
                                     <img *ngIf="recipe1.image == ''"  src="assets/notavailable.png" alt="{{recipe1.recipebook_name}} image">
                                 </a>
                                 <div class="detail">
-                                    <a (click)="gotopage('recipebookview', {'id':recipe1.id});"><h3>{{recipe1.recipebook_name}}</h3></a>
+                                    <a (click)="gotopage('recipebookview', {'id':recipe1.id});"><h3 style="font-size:16px">{{recipe1.recipebook_name}}</h3></a>
                                     <!--<p innerHTML="{{limitTo(recipe1.description, 200)}}">
     
                                     </p>  -->
-                                    <p *ngIf="recipe1.recipes > 0">{{countrecipes(recipe1.recipes)}} Recipes </p>
+                                    <p *ngIf="countrecipes(recipe1.recipes) > 0">{{countrecipes(recipe1.recipes)}} Recipes </p>
                                    
                                   </div>
                             </div>
