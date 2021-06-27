@@ -394,16 +394,23 @@ console.log(tempDt2);
 	gotoRecipes(id) {
 		this.router.navigate(['recipes', {dietLabels:id}]);
 	}
-	gotopage(page, id) {
-		if(page == "schedule")
+	gotopage(page, id = null) {
+		if(id !== null)
 		{
-			//console.log(this.planStatus[0]);
-			this.router.navigate([page, {id:id, mum_id:this.planStatus[0]["mum_id"], userid: this.currentUser["id"]}]);
+			if(page == "schedule")
+			{
+				//console.log(this.planStatus[0]);
+				this.router.navigate([page, {id:id, mum_id:this.planStatus[0]["mum_id"], userid: this.currentUser["id"]}]);
+			}
+			else
+			{
+			this.router.navigate([page, id]);
+			}	
 		}
 		else
 		{
-		this.router.navigate([page, id]);
-		}
+			this.router.navigate([page]);
+		}	
 	}
 	formatValue(str)
 {
