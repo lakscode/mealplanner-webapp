@@ -3,7 +3,7 @@
     <div class="row">
     <div class="col-12 col-md-12 col-lg-9">
         <div class="recipe-set submit-recipe-set">
-            <h2><a (click)="gotopage();"><i class="fa fa-chevron-left"></i></a>  Recipe Book</h2>
+            <h2 style="width:90%"><a (click)="gotopage();"><i class="fa fa-chevron-left"></i></a>  Recipe Book</h2>
             <div class="createplanbtn">
 
                 <a class="copy-button" href="javascript:void(0)" (click)="downloadplan()" title="Download PDF"><i
@@ -19,8 +19,9 @@
             
             <div class="submit-recipe-form">
                 <form action="#" method="post">
-                    <label for="title">Recipe book Title</label>
-                    <input type="text" name="title" id="title" [(ngModel)]="searchRes.recipebook_name">
+                    <label for="title">Recipe book Title <span
+                                class="mandatory">&#42;</span></label>
+                    <input type="text" name="title" id="title" [(ngModel)]="searchRes.recipebook_name" required>
                     <br>
                     <label for="description">Description</label>
                     <textarea class="short-text" name="description" [(ngModel)]='searchRes.description' id="description" cols="30" rows="10"></textarea>
@@ -30,7 +31,8 @@
                     
                     <div class="row" >
                         <div class="col-12 col-md-6 col-lg-6 paddinglr0" >
-                            <label  class='comment-label'>Upload Image&nbsp;&nbsp;</label>
+                            <label  class='comment-label'>Upload Image <span
+                                class="mandatory">&#42;</span>&nbsp;&nbsp;</label>
                             <button (click)="fileupload()" class="upload-comment">
                                <i class="fa fa-picture-o" aria-hidden="true"></i> Upload Image</button>
                            <div>
@@ -258,7 +260,7 @@
                     <label for="notes">Notes</label>
                     <textarea class="short-text" name="notes" [(ngModel)]='searchRes.notes' id="notes" cols="30" rows="10"></textarea>
                     <div class="text-center">
-                        <button type="submit" (click)="saveRecipebook()"  class="recipe-submit-btn">Save Your Recipe Book</button>
+                        <button type="submit" [disabled] = "searchRes.recipebook_name == '' && searchRes.image == ''" [ngClass]="searchRes.recipebook_name !== '' && searchRes.image !==''?'submit-comment active':'submit-comment'" (click)="saveRecipebook()"  >Save Your Recipe Book </button>
                     </div>
                 </form>
             </div>

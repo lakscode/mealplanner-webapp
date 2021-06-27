@@ -49,9 +49,13 @@ ngOnChanges()
 {
 	console.log("ngOnchanges");
 	this.loadDefaults();
+
 }
 	ngOnInit() {
 		this.loadDefaults();
+		this.recipesList = [];
+		
+		this.searchRes = {"recipebook_name":"", "image":"", "description":"","notes":""};
 	}
 loadDefaults()
 {
@@ -561,6 +565,7 @@ saveRecipebook()
 				console.log(recipeData);
 				this.toastr.success('Updated Recipe Book!', 'Recipe Book!');	
 				this.loadRecipebook(this.searchRes.id);
+				this.router.navigate(["recipebooks"]);   
 				
 			}));
 		}
@@ -575,6 +580,7 @@ saveRecipebook()
 				if(recipeData['inserted_id'] !== "undefined" && recipeData['inserted_id'] !== "")
 				{
 					this.loadRecipebook(recipeData['inserted_id']);	
+					this.router.navigate(["recipebooks"]);   
 				}
 			}));
 		}
