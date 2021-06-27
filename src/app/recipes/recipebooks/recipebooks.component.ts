@@ -40,7 +40,7 @@ export class RecipebooksComponent implements OnInit {
 	nutrientDbFields : Array<any> = [];
 	role: any = {};
 	showNutrientsFlag: boolean = false;
-
+	isAdmin: boolean = false;
 	constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
 	
 	}
@@ -83,7 +83,7 @@ export class RecipebooksComponent implements OnInit {
 		  this.currentUser["displayname"] = this.currentUser["username"];
 		  console.log( this.currentUser["displayname"]);
 		  this.role = this.helpService.getRoleStatus(this.currentUser);
-
+		  this.isAdmin = this.helpService.isAdmin(this.currentUser);
 		  
 		}
 		
@@ -101,69 +101,11 @@ export class RecipebooksComponent implements OnInit {
 	
 		
 		console.log(this.routeParams);
-	  this.searchProps();
+	  this.loadRecipeBooks();
 	 }); 
 
-//this.loadRecipes()
-	
-	}
 
-
-	
-	counter(i: number) {
-	//	console.log(i);
-		var num = Math.ceil(i);
-		return new Array(num);
 	}
-	prevPage()
-	{
-		if(this.page_num > 0)
-		{
-			this.page_num -= 1;
-		}
-		this.getDisplayList();
-	}
-	nextPage()
-	{
-		
-		if(this.page_num > 0 && this.page_num < this.totalPage-1)
-		{
-			this.page_num += 1;
-		}
-		this.getDisplayList();
-	}
-	currentPage(pagenum)
-	{
-	//	console.log(pagenum);
-		this.page_num = parseInt(pagenum);
-		this.getDisplayList();
-	}
-
-	getDisplayList()
-	{
-	//	console.log(this.recipesList1);
-	//	console.log(this.page_num);
-		this.displayList=[];
-		var startIndex= this.page_num*10;
-		var endIndex = 10;
-
-		if(startIndex + endIndex > this.recipesList1["length"])
-		{
-			endIndex = this.recipesList1["length"]-startIndex;
-		}
-
-	//	console.log(startIndex);
-	//	console.log(endIndex);
-endIndex = startIndex+ endIndex;
-		for(let i=startIndex; i < endIndex; i++)
-		{
-		this.displayList.push(this.recipesList1[i]);
-		
-		}
-	//	console.log(this.displayList);
-		window.scrollTo(0, 0);
-	}
-
 	
 
 	limitTo(str, num)
@@ -176,7 +118,6 @@ endIndex = startIndex+ endIndex;
 
 	formatImage(image, type)
 	{
-	//  console.log(image);
 	  var retImage = image;
 	  if(image !== "" && type !== "")
 	  {
@@ -209,7 +150,7 @@ endIndex = startIndex+ endIndex;
 
   /******** recipes api serach */
   recipebooks: Array<any> = [];
-	searchProps()
+  loadRecipeBooks()
 	{
 
 		this.recipebooks = [];
@@ -221,11 +162,8 @@ endIndex = startIndex+ endIndex;
 		  console.log(invData);
 		  if(invData !== null)
 		  {
-			var obj = invData["body"]["length"];
-			console.log(invData["body"]);
+
 			this.recipebooks = invData["body"];
-			
-			console.log(this.recipebooks);
 		  }
 		}));
 	
@@ -290,6 +228,13 @@ endIndex = startIndex+ endIndex;
 deleteRecipebook(id)
 {
 	console.log("deleteRecipebook");
+	var params = {};
+	params["id"] = id;
+	var res =   this.dbService.deleteDataByTable("recipebook", params).subscribe(rbookData => setTimeout(() => {
+		console.log("recipe book deleted");
+		this.loadRecipeBooks();
+	}));
+
 }
 }
 

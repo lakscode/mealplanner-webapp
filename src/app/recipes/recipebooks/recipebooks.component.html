@@ -24,7 +24,7 @@
                                     <a (click)="showhidecontent(recipe1)" href="javascript:void(0)" [ngClass]="recipe1.showpopup?'contextmenu-icon active bgcontext':'contextmenu-icon bgcontext'" style="text-align:center;"><i class="fa fa-ellipsis-v"></i></a>
                                         <div *ngIf="recipe1.showpopup" class="contextmenu" style="left:unset;top:25px; right:0px;"><a  class="menu" href="javascript:void(0)"  (click)="gotopage('recipebookview', {'id':recipe1.id})" ><i class="fa fa-list"></i>View Recipebook</a>
                                             <a *ngIf="recipe1.createdby == currentUser['id']" (click)="gotoRecipebook(recipe1.id)" class="menu" href="javascript:void(0)"><i class="fa fa-pencil-square-o"></i>Edit Recipebook</a>
-                                            <a *ngIf="recipe1.createdby == currentUser['id']" (click)="deleteRecipebook(recipe1.id)" class="menu" href="javascript:void(0)"><i class="fa fa-trash"></i>Delete Recipebook</a>
+                                            <a *ngIf="isAdmin || recipe1.createdby == currentUser['id']" (click)="recipe1.showpopup= false; deleteRecipebook(recipe1.id)" class="menu" href="javascript:void(0)"><i class="fa fa-trash"></i>Delete Recipebook</a>
                                         </div>
                                         </div>
                                 <a (click)="gotopage('recipebookview', {'id':recipe1.id});">
