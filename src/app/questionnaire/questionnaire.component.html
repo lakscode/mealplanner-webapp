@@ -1,64 +1,77 @@
 <div class="fixedtop  bg recipes-home-body inner-page">
-  
-  
- <div class="container" style="padding-left:0px">
- <div style="padding-top:40px; text-align:center;">
-        <h2>Take this questionnaire to let us know your choices!!!</h2>
+
+
+  <div class="container" style="padding-left:0px">
+    <div style="padding-top:40px; text-align:center;">
+      <h2>Take this questionnaire to let us know your choices!!!</h2>
     </div>
-</div>
+  </div>
 
 
-<div class="recipes-home-body inner-page">
+  <div class="recipes-home-body inner-page">
 
-  <div class="row w-1200" style="text-align:center; margin:0 auto;">
-    <div class="col-12">
-      <div id="wrapper">
-        <div class="questions-panel">
-          <div *ngIf="!processing">
-        
-        
-          <div class="q-panel " *ngFor="let question of questions; let currentQuestion = index;">
-          <div class="  wow animated bounceInRight">
-                <h2 class="question-text">{{getFLU(questions[currentQuestion].question)}}</h2>
-          
-            
-          
-            <div *ngIf="questions[currentQuestion]['type'] == 'text'" style="text-align:center;">
-          
-              <input style="display:inline-block;font-size:14px"  class="input-text" type="text" (keyup)="setAnswerText(questions[currentQuestion])" placeholder="Please enter value"  name = "question{{currentQuestion}}" [(ngModel)]="questions[currentQuestion]['answer']">
-              <span style='margin-left: 10px; font-size: 14px;' *ngIf="questions[currentQuestion].textlabel">{{questions[currentQuestion].textlabel}}</span>
-          
-              <div style="display:inline-block" class="opts" *ngIf="questions[currentQuestion] && questions[currentQuestion].options &&  questions[currentQuestion].options.length > 0">
-                <div (click)="toggleChoice(questions[currentQuestion], questions[currentQuestion].options, i)" [ngClass]="opt.selected?'opt sel':'opt'" *ngFor="let opt of questions[currentQuestion].options; let i = index;">{{opt.name}}</div>
-          
-              </div>
-             
-            </div>
-          <div style="width:100%; overflow-x:auto;">
-            <div class="options-panel" *ngIf="questions[currentQuestion]['type'] == 'option'">
-          
-              <div style="display:block; text-align:left; margin:0 auto;" *ngFor="let answer of questions[currentQuestion]['answers']; let a = index;">
+    <div class="row w-1200" style="text-align:center; margin:0 auto;">
+      <div class="col-12">
+        <div id="wrapper">
+          <div class="questions-panel">
+            <div *ngIf="!processing">
 
-             
-              <label class="container" style=""> {{getFLU(answer.text)}}
-                <span style="font-size:12px; color:#000" *ngIf="answer.subtext !== ''"> - {{getFLU(answer.subtext)}}</span>
-                <input  name="answer{{currentQuestion}}{{a}}"  [(ngModel)] = "answer.selected" (change)="setAnswer(answer, questions[currentQuestion]['type'])"  type="radio" checked="checked" name="radio">
-                <span class="checkmark"></span>
-              </label>
-            </div>
-             
-            </div>
-            <div class="options-panel" *ngIf="questions[currentQuestion]['type'] == 'checkbox'">
-          
-              <div style="display:block; text-align:left; margin:0 auto;" *ngFor="let answer of questions[currentQuestion]['answers']; let a = index;">
-              <label class="containerc" style=""> {{getFLU(answer.text)}}
-                <span style="font-size:12px; color:#000" *ngIf="answer.subtext !== ''"> - {{getFLU(answer.subtext)}}</span>
-                <input name="answer{{currentQuestion}}{{a}}" [(ngModel)] = "answer.selected" (click)="setAnswer(answer, questions[currentQuestion]['type'])" type="checkbox" checked="checked" name="checkbox">
-                <span class="checkmarkc"></span>
-              </label>
-            </div>
-              <!--<div style = "display: flex; justify-content: center;" *ngIf="questions[currentQuestion]['answers'] && questions[currentQuestion]['answers']['length'] > 0">
-                <div [ngClass]="answer['selected']?'btn-panel active':'btn-panel'" (click)="setAnswer(answer, questions[currentQuestion]['type'])" *ngFor="let answer of questions[currentQuestion]['answers']; let a = index;">
+
+              <div class="q-panel " *ngFor="let question of questions; let cq = index;">
+                <div class="  wow animated bounceInRight">
+                  <h2 class="question-text">{{getFLU(questions[cq].question)}}</h2>
+
+
+
+                  <div *ngIf="questions[cq]['type'] == 'text'" style="text-align:center;">
+
+                    <input style="display:inline-block;font-size:14px" class="input-text" type="text"
+                      (keyup)="setAnswerText(questions[cq], cq)" placeholder="Please enter value" name="question{{cq}}"
+                      [(ngModel)]="questions[cq]['answer']">
+                    <span style='margin-left: 10px; font-size: 14px;'
+                      *ngIf="questions[cq].textlabel">{{questions[cq].textlabel}}</span>
+
+                    <div style="display:inline-block" class="opts"
+                      *ngIf="questions[cq] && questions[cq].options &&  questions[cq].options.length > 0">
+                      <div (click)="toggleChoice(questions[cq], questions[cq].options, i)"
+                        [ngClass]="opt.selected?'opt sel':'opt'"
+                        *ngFor="let opt of questions[cq].options; let i = index;">{{opt.name}}</div>
+
+                    </div>
+
+                  </div>
+                  <div style="width:100%; overflow-x:auto;">
+                    <div class="options-panel" *ngIf="questions[cq]['type'] == 'option'">
+
+                      <div style="display:block; text-align:left; margin:0 auto;"
+                        *ngFor="let answer of questions[cq]['answers']; let a = index;">
+
+
+                        <label class="containerc" style=""> {{getFLU(answer.text)}}
+                          <span style="font-size:12px; color:#000" *ngIf="answer.subtext !== ''"> -
+                            {{getFLU(answer.subtext)}}</span>
+                          <input name="answer{{cq}}{{a}}" id="answer{{cq}}{{a}}" [(ngModel)]="answer.selected"
+                            (change)="setAnswer(answer, cq, questions[cq]['type'])" type="checkbox"
+                            [checked]="answer.selected">
+                          <span class="checkmarkc"></span>
+                        </label>
+                      </div>
+
+                    </div>
+                    <div class="options-panel" *ngIf="questions[cq]['type'] == 'checkbox'">
+
+                      <div style="display:block; text-align:left; margin:0 auto;"
+                        *ngFor="let answer of questions[cq]['answers']; let b = index;">
+                        <label class="containerc" style=""> {{getFLU(answer.text)}}
+                          <span style="font-size:12px; color:#000" *ngIf="answer.subtext !== ''"> -
+                            {{getFLU(answer.subtext)}}</span>
+                          <input name="answer{{cq}}" id="answer{{cq}}{{b}}" [(ngModel)]="answer.selected"
+                            (click)="setAnswer(answer, cq,  questions[cq]['type'])" type="checkbox" checked="checked">
+                          <span class="checkmarkc"></span>
+                        </label>
+                      </div>
+                      <!--<div style = "display: flex; justify-content: center;" *ngIf="questions[cq]['answers'] && questions[cq]['answers']['length'] > 0">
+                <div [ngClass]="answer['selected']?'btn-panel active':'btn-panel'" (click)="setAnswer(answer, questions[cq]['type'])" *ngFor="let answer of questions[cq]['answers']; let a = index;">
                   <div  class="answer-box" >
                     {{getFLU(answer.text)}}
                     <span style="font-size:12px; color:#000" *ngIf="answer.subtext !== ''"><br>{{getFLU(answer.subtext)}}</span>
@@ -67,24 +80,25 @@
                 </div>
             
               </div>-->
+                    </div>
+                  </div>
+
+                </div>
+              </div>
             </div>
+            <div class="submit-recipe-form" style="width:100%; margin:0 auto;text-align:center;">
+              <button [disabled]="answerCount == questions.length -1" class="recipe-submit-btn"
+                (click)="complete()">Submit Questionnaire</button>
             </div>
-          <div style="width:100%; margin:0 auto;text-align:center;">
-          
-          <!--<button [disabled] = "params['question'+ (currentQuestion+1)] == ''" *ngIf="currentQuestion < questions.length -1" [ngClass]="params['question'+ (currentQuestion+1)] !== ''?'btn-next active':'btn-next'" (click)="next()">Next</button>-->
-          <button [disabled] = "params['question'+ (currentQuestion+1)] == ''" *ngIf="currentQuestion == questions.length -1" class="btn-next" (click)="complete()">Complete</button>
-          </div>
-          </div>
-        </div>
-          </div>
+
             <div *ngIf="processing">
               <img class="rotate" src="assets/loading.png" />
-              
+
             </div>
           </div>
-        
-    </div>  
-  </div>
-</div>
 
-</div>
+        </div>
+      </div>
+    </div>
+
+  </div>

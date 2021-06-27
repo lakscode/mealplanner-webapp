@@ -1,22 +1,16 @@
-import { Component, OnInit,OnDestroy  } from '@angular/core';
+import { Component, OnInit, OnDestroy  } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd } from "@angular/router";
 import { UserService } from '../services/user.service';
-import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { DBService } from '../dbservices/db.service';
 import { HelpService } from '../services/help.service';
-
-import { environment } from './../../environments/environment';
-
 import { HttpClient } from '@angular/common/http';
-
-
-import { timeStamp } from 'console';
 import { data } from "../../assets/data/questionnaire";
+
 @Component({
 	selector: 'app-questionnaire',
 	templateUrl: './questionnaire.component.html',
 	styleUrls: ['./questionnaire.component.scss']
-
 })
 export class  QuestionnaireComponent implements OnInit {
 	questionsList: any;
@@ -58,7 +52,7 @@ export class  QuestionnaireComponent implements OnInit {
 	
 		}
 		
-this.processing= false;
+	this.processing= false;
     this.params = {};
     
     for(let i=1; i < 10; i++)
@@ -66,9 +60,8 @@ this.processing= false;
       this.params["question" + i] ="";
     }
     
-				this.questions =data;
-      
-    console.log(this.questions);
+	this.questions =data;
+
     this.routeParams = {};
     this.returnpath = "";
     this.returnparam1 = "";
@@ -78,13 +71,24 @@ this.processing= false;
     {
         this.router.navigate(["home"]);
     }
-
-   
-  // this.loadMealPlans();
+	this.loadQuestionnaire();
   }
 
+  loadQuestionnaire()
+  {
+	var params= {};
+	if(this.currentUser !== null && typeof(this.currentUser["id"]) !=="undefined")
+	{
+		params["userid"] = this.currentUser["id"];
+  	}  
+	var res =   this.dbService.getDataByTable("questionnaire", params).subscribe(invData => setTimeout(() => {
+       console.log(invData);
+	}));
+
+  }
   complete()
   {
+
     this.processing = true;
     console.log("complete");
     console.log(this.params);
@@ -121,40 +125,84 @@ this.processing= false;
     //  params["user_uniqueid"] = uniqueid;
       var res =   this.dbService.postDataByTable("questionnaire", params).subscribe(invData => setTimeout(() => {
         this.processing = false;
-        console.log(invData);
+
         localStorage.setItem("q_complete","true");
         localStorage.setItem("questions", JSON.stringify(params));
 
-        this.router.navigate(["pricing"]);
+		if( this.currentUser["id"] !== "")
+		{
+			this.router.navigate(["landing"]);
+		}
+		else
+		{
+        	this.router.navigate(["pricing"]);
+		}
 
       }));
 
     }
   }
-  currentQuestion : any = 0;
-  setAnswerText(answer)
+ 
+  setAnswerText(answer, cq)
   {
     var ans =  answer['answer'];
     if(typeof(answer.opt) !=="undefined" && answer.opt !== "")
     {
       ans += " " + answer.opt;
     }
-    this.questions[this.currentQuestion]["answer"] =answer['answer'];
-    console.log( this.questions[this.currentQuestion]);
-    this.params["question" + (this.currentQuestion+1)] = ans;
+    this.questions[cq]["answer"] =answer['answer'];
+    console.log( this.questions[cq]);
+    this.params["question" + (cq+1)] = ans;
 
   }
-  setAnswer(answer, type)
+  answerCount: any = 0;
+  CheckAnswers()
+  {
+	  this.answerCount = 0;
+	for(let o=0; o <  this.questions["length"]; o++)
+	{
+		for(let o=0; o <  this.questions[o]['answers']["length"]; o++)
+		{
+		  if(this.questions[o]['answer'] !== '')
+		  {
+			this.answerCount++;
+		  }
+		}  
+	}  
+
+	
+  }
+  setAnswer(answer, cq,  type)
   { 
-   // console.log(this.currentQuestion);
-   // console.log(answer);
+	  if(type == 'option')
+	  {
+		  for(let o=0; o <  this.questions[cq]['answers']["length"]; o++)
+		  {
+			if(this.questions[cq]['answers'][o]['text'] !== answer['text'])
+			{
+				this.questions[cq]['answers'][o]["selected"] = false;
+			}
+		  }
+
+		  if(this.questions[cq]["answer"].indexOf(answer['text']) == -1)
+		  {
+			  if(this.questions[cq]["answer"] !== "")
+			this.questions[cq]["answer"] = this.questions[cq]["answer"] + "," + answer['text'];
+			else
+			this.questions[cq]["answer"] = answer['text'];
+
+			this.params["question" + (cq+1)] = this.questions[cq]["answer"];
+		  }
+	  } 
+
    if(type == "checkbox")
-   answer["selected"] = !answer["selected"];
-    this.questions[this.currentQuestion]["answer"] = answer['text'];
+   {
+   		answer["selected"] = !answer["selected"];
+    	this.questions[cq]["answer"] = answer['text'];
 
-    this.params["question" + (this.currentQuestion+1)] = answer['text'];
-
-    console.log(this.questions);
+    	this.params["question" + (cq+1)] = answer['text'];
+   }
+   
   }
   toggleChoice(question, opts, index)
 	{
@@ -174,19 +222,7 @@ this.processing= false;
 			}
 		}
 	}
-  next()
-  {
-    
-    if(this.currentQuestion < this.questions.length-1)
-    {
-      console.log(this.params["question" + (this.currentQuestion+1)]);
-      if(typeof(this.params["question" + (this.currentQuestion+1)]) !== "undefined" && this.params["question" + (this.currentQuestion+1)] !== "")
-      {
-      this.currentQuestion++;
-      }
-    }
-  //  console.log(this.questions);
-  }
+ 
 
   
   
