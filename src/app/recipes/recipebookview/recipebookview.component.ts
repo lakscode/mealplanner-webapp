@@ -14,6 +14,7 @@ import { recipe } from '../../jsonfiles/recipestructure';
 import { PDFService } from '../../services/pdf.service';
 import { ModalService } from '../../shared/modules/modal/modal.service';
 import { ToastrService } from 'ngx-toastr';
+import { isUndefined } from 'util';
 @Component({
 	selector: 'app-recipebookview',
 	templateUrl: './recipebookview.component.html',
@@ -156,8 +157,11 @@ loadRecipebook(id)
 	  if(typeof(rbookData["body"]) !== "undefined" && rbookData["body"] !== null && rbookData["body"]["length"] > 0)
 	  {
 		this.searchRes = rbookData["body"][0];
+		if(this.searchRes["recipes"] !== "")
+		{
 		this.loadRecipes(this.searchRes["recipes"]);
 		this.getFavouriteStatus();
+		}
 	  }
 	
 
