@@ -69,11 +69,11 @@
               </div>-->
             </div>
             </div>
-          <!--<div style="width:100%; margin:0 auto;text-align:center;">
+          <div style="width:100%; margin:0 auto;text-align:center;">
           
-          <button [disabled] = "params['question'+ (currentQuestion+1)] == ''" *ngIf="currentQuestion < questions.length -1" [ngClass]="params['question'+ (currentQuestion+1)] !== ''?'btn-next active':'btn-next'" (click)="next()">Next</button>
-          <button [disabled] = "params['question'+ (currentQuestion+1)] == ''" *ngIf="currentQuestion == questions.length -1" [ngClass]="params['question'+ (currentQuestion+1)] !== ''?'btn-next active':'btn-next'" (click)="complete()">Complete</button>
-          </div>-->
+          <!--<button [disabled] = "params['question'+ (currentQuestion+1)] == ''" *ngIf="currentQuestion < questions.length -1" [ngClass]="params['question'+ (currentQuestion+1)] !== ''?'btn-next active':'btn-next'" (click)="next()">Next</button>-->
+          <button [disabled] = "params['question'+ (currentQuestion+1)] == ''" *ngIf="currentQuestion == questions.length -1" class="btn-next" (click)="complete()">Complete</button>
+          </div>
           </div>
         </div>
           </div>

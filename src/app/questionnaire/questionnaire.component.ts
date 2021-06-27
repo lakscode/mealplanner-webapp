@@ -1,5 +1,5 @@
 import { Component, OnInit,OnDestroy  } from '@angular/core';
-import { Router, ActivatedRoute } from "@angular/router";
+import { Router, ActivatedRoute, NavigationEnd } from "@angular/router";
 import { UserService } from '../services/user.service';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DBService } from '../dbservices/db.service';
@@ -32,7 +32,12 @@ export class  QuestionnaireComponent implements OnInit {
 	questions: any;
 	returnpath: any;
 	constructor(private router: Router, private route: ActivatedRoute, private httpClient: HttpClient, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
-	
+		this.router.events.subscribe((evt) => {
+			if (!(evt instanceof NavigationEnd)) {
+				return;
+			}
+			window.scrollTo(0, 0)
+		});
 	}
 
 	ngOnInit() {

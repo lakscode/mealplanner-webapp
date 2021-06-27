@@ -23,7 +23,7 @@
                                 <div style="position:absolute; left:unset;top:10px;right:10px;z-index:1">
                                     <a (click)="showhidecontent(recipe1)" href="javascript:void(0)" [ngClass]="recipe1.showpopup?'contextmenu-icon active bgcontext':'contextmenu-icon bgcontext'" style="text-align:center;"><i class="fa fa-ellipsis-v"></i></a>
                                         <div *ngIf="recipe1.showpopup" class="contextmenu" style="left:unset;top:25px; right:0px;"><a  class="menu" href="javascript:void(0)"  (click)="gotopage('recipebookview', {'id':recipe1.id})" ><i class="fa fa-list"></i>View Recipebook</a>
-                                            <a *ngIf="recipe1.createdby == currentUser['id']" (click)="gotoRecipeDetails('recipebook', {'id':recipe1.id})" class="menu" href="javascript:void(0)"><i class="fa fa-pencil-square-o"></i>Edit Recipebook</a>
+                                            <a *ngIf="recipe1.createdby == currentUser['id']" (click)="gotoRecipebook('recipebook', {'id':recipe1.id})" class="menu" href="javascript:void(0)"><i class="fa fa-pencil-square-o"></i>Edit Recipebook</a>
                                             <a *ngIf="recipe1.createdby == currentUser['id']" (click)="deleteRecipebook(recipe1.id)" class="menu" href="javascript:void(0)"><i class="fa fa-trash"></i>Delete Recipebook</a>
                                         </div>
                                         </div>
