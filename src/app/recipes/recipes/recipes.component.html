@@ -395,7 +395,7 @@
                            
                             <div class="detail">
                                
-                                <a title = "{{recipe1.label}}" (click)="gotoRecipeDetails(recipe1.id)"> <h3>{{limitTo(recipe1.label, 38)}}
+                                <a title = "{{recipe1.label}}" (click)="gotoRecipeDetails(recipe1.id)"> <h3 style="font-size:16px">{{limitTo(recipe1.label, 23)}}
 
                                 </h3></a>
 
@@ -409,7 +409,7 @@
 
                                 <p style="float:left;"> Per Serving: <span
                                     style="font-size:12px;">{{formatValuePServing(recipe1.calories,
-                                    recipe1.yield)}} Kcal</span></p>
+                                    recipe1.yield)}} Kcal &nbsp;&nbsp;&nbsp;</span></p>
                                     <div class="rating-box" style="padding:0px; float:right;width:unset;">
                                         <span class="rating-icons" *ngFor="let item of [1,2,3,4,5]">
                                             <i
