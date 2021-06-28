@@ -52,6 +52,8 @@ import { PlannerlistModule } from './planner/plannerlist/plannerlist.module';
 import { PlannercreateModule } from './planner/plannercreate/plannercreate.module'; 
 import { PlancreateModule } from './planner/plancreate/plancreate.module'; 
 import { PlancreatemModule } from './planner/plancreatem/plancreatem.module'; 
+import { PlanviewModule } from './planner/planview/planview.module';
+
 import { ScheduleModule } from './planner/schedule/schedule.module'; 
 import { TrendingModule } from './planner/trending/trending.module'; 
 
@@ -141,6 +143,7 @@ import { AdminModule } from './admin/admin.module';
 	PlannercreateModule,
 	PlancreateModule,
 	PlancreatemModule,
+	PlanviewModule,
 	ScheduleModule,
 	TrendingModule,
 	PricingModule,

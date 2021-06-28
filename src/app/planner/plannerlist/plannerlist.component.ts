@@ -310,7 +310,10 @@ this.loadPlans()
   //  }
 
   }
-
+  viewmealplan(id)
+  {
+    this.router.navigate(["planview", {id:id}]);
+  }
 }
 
     

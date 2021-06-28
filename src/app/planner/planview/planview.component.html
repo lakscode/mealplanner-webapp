@@ -1,0 +1,348 @@
+<div class="fixedtop recipes-home-body inner-page">
+    <div class="container" style="margin:0 auto;padding-top:20px;padding-left:0px;padding-right:0px">
+        <div class="row">
+        <div class="col-md-12 col-lg-12">
+            <div class="recipe-set">         
+                <h2>Meal Plan <span *ngIf="plan.name"> - {{plan.name}}</span></h2>
+            </div>
+            <div class="add2mealplan">
+                <a [ngClass]="showpopupflag?'menu active':'menu'"  (click)="showpopupflag = !showpopupflag" href="javascript:void(0)"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></a>
+                <div *ngIf='showpopupflag' class="add2mealplanmenu" style='height:120px'>
+                    <a (click)="showpopupflag = false; downloadplan() " href="javascript:void(0)">
+                        <i class="fa fa-file-pdf-o"></i> Export
+                    </a>
+                    <a (click)="showpopupflag = false; getIngredientsList();" href="javascript:void(0)">
+                        <i class="fa fa-download"></i>   Grocery List
+                    </a>
+                   
+                        
+                </div>
+              
+                 
+              </div>
+
+        </div>
+                               
+      
+        <div class="col-12">
+           
+
+            <div class="wrapper-search">
+                
+                <div class="col-12">
+                    <div style='text-align:right;margin-top:0px;'>
+                    <div class="row">
+                        <div class="col-12 col-lg-8">
+                            <label for="title" style="font-size:16px;margin-right:10px;font-weight:normal;">Calories per Day</label>
+                            <input style="width:100px;margin-bottom:5px;margin-top:0px;" class="inputbox " type="text" name="maxcaloryperday" id="maxcaloryperday" [(ngModel)]="maxcaloryperday"
+                                (blur)="saveMealPlan()" /> 
+                        </div> 
+                        <div class="col-12 col-lg-4">
+                       
+                                <div style="display:block; margin:0 auto;text-align:right;width: 100%">
+                                    
+                                    <label *ngIf="showNutrientsFlag" class="container" style=" text-align: left;
+                            display:inline-block;
+                            width: 160px;
+                            font-family: 'Lato', sans-serif;
+                            font-weight: 400;
+                            font-size: 16px;">Show Nutrients
+                                        <input class="showhidenut" id="showhidenut" (change)="showhidenutrients()"
+                                            [(ngModel)]='showhidenutrientsFlag' type="checkbox">
+                                        <span class="checkmark"></span>
+                                    </label>
+                
+                                    <div style="    display: inline-block;
+                            width: 140px;
+                            text-align: left;" *ngIf="showhidenutrientsFlag">
+                                        <label class="container" style=" text-align: left;
+                                        display: inline-block;
+                                        width: 140px;
+                                        font-family: 'Lato', sans-serif;
+                                        font-weight: 400;
+                                        font-size: 16px;">Per Serving
+                                                        <input (change)="toggleNutrients('perserving')"
+                                                            [(ngModel)]='showNutrientsPServing' type="checkbox">
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                      
+                                    </div>
+                                </div>
+                
+                
+                            </div>
+                        </div>
+                    </div>
+                   
+                </div>
+                </div>
+
+
+        </div>
+    </div>
+    <div *ngIf="plan.name" class="row" style="text-align:center; margin:0 auto;">
+
+        
+            <div class="col-12 col-lg-12 paddinglr0">
+
+            <div class="meal-plans-content">
+            
+                <div style="clear:both"></div>
+
+                <div class="meal-row-wrapper meal-row__week-days">
+                    <div style='width: 130px; display:inline-block;border-bottom:0px'></div>
+                    <div class="meal-plan-row row">
+                        <div [ngClass]="showNutrients || showNutrientsPServing?'meal-plan-col col mealplan-col ':'meal-plan-col col mealplan-col20'"
+                            *ngFor="let mealtype of mealsList; let d =index;">
+                            <div class="meal-day"><span>{{mealtype.name}}</span></div>
+                        </div>
+                        <div *ngIf="showNutrients || showNutrientsPServing" class="meal-plan-col col mealplan-col">
+                            <div class="meal-day"><span>Total</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="divoverflow" style='width:100%; '>
+                    <div class="meal-plan-row row">
+                <div class=" mealplan-col" style='width: 100px; display:inline-block;'>
+                    <ng-container *ngFor="let item of plan['days']; let r = index;">
+                          
+                        <div (click)="showDayData(r)" [ngClass]="item.expand?'dayname active':'dayname '"><span>{{item.name}}</span></div>
+                    </ng-container>
+                </div>
+                <div class=" mealplan-col" style='width: calc(100% - 100px); display:inline-block;'>
+                    <ng-container *ngFor="let item of plan['days']; let r = index;">
+                   
+                                <div class="meal-row-wrapper" >
+                            <div *ngIf="item.expand" class="meal-plan-column-container">
+                                <div class="meal-plan-row">
+
+                                    <div [ngClass]="showNutrients || showNutrientsPServing?'meal-plan-slot mealplan-col':'meal-plan-slot mealplan-col20'"
+                                        *ngFor="let meal of item.meals; let c= index;">
+                                        <div class="panelr" *ngIf="meal.recipe">
+                                            <div draggable="true">
+                                                <div class="recipe-image-wrapper ">
+                                                    <div class="recipe-image-card card">
+                                                        <div class="recipe-image-card-content card-body">
+                                                            <div class="image-card-container">
+                                                                <div class="morebtn"
+                                                                    style="margin-top:-15px;margin-right:-5px"><a
+                                                                        class="menu" (click)="toggleMoreMenu(meal, r,c)"
+                                                                        href="javascript:void(0)"><i
+                                                                            class="fa fa-ellipsis-v"
+                                                                            aria-hidden="true"></i></a>
+
+                                                                    <div class="moremenu" *ngIf="meal.recipe['expand']">
+
+
+                                                                        <a href="javascript:void(0)"
+                                                                            (click)="removeRecipe(r,c)"><i
+                                                                                class="fa fa-trash"
+                                                                                aria-hidden="true"></i> Remove</a>
+                                                                        <a href="javascript:void(0)"
+                                                                            (click)="meal.recipe['expand'] = false;viewRecipe(r,c)"><i
+                                                                                class="fa fa-list-ul"
+                                                                                aria-hidden="true"></i> Preview</a>
+                                                                    </div>
+                                                                </div>
+
+
+                                                                <div class="recipe-name-box">{{meal.recipe.label}}</div>
+                                                                <img *ngIf="showImages"
+                                                                    class="recipe-image-card recipe-image-card__img open-fist-cursor"
+                                                                    style="opacity: 1;"
+                                                                    id="picture-5c252abdb834861eec5388f3"
+                                                                    src="{{meal.recipe.image}}" alt="Recipe image">
+                                                            </div>
+
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div *ngIf='meal.recipe.calories > 0' class="calories-item">
+                                                <span *ngIf="showNutrients">
+                                                    <a href="javascript:void(0)"
+                                                        title="Calories : {{meal.recipe.calories}} Kcal">
+                                                        {{meal.recipe.calories}} cal </a><br>
+                                                    Servings {{meal.recipe.yield}}
+                                                </span>
+                                                <span *ngIf="showNutrientsPServing">
+                                                    <a href="javascript:void(0)"
+                                                        title="Calories per Serving : {{formatValPServing(meal.recipe.calories, meal.recipe.yield)}}">
+                                                        {{formatValPServing(meal.recipe.calories, meal.recipe.yield)}}
+                                                        cal </a>
+
+                                                </span>
+                                            </div>
+                                            <div class="minerals" *ngIf="showNutrients">
+
+
+                                                <ng-container *ngFor="let paramN of meal.recipe.minerals">
+
+                                                    <div *ngIf='paramN.value > 0'
+                                                        style='float:left; padding:2px; margin-right:5px;display:flex; align-items: center;'>
+                                                        <div [ngStyle]="{'background-color':getColorCode(paramN)}"
+                                                            style="display:inline-block; width:10px; height:10px;  margin-right:3px; ">
+                                                        </div>
+                                                        <a style="font-size:12px" href="javascript:void(0)"
+                                                            title="{{setFLU(paramN.name)}} {{paramN.value}} {{paramN.unit}}">{{formatVal(paramN.value,2)}}
+                                                            {{paramN.unit}} </a>
+
+                                                    </div>
+                                                </ng-container>
+                                            </div>
+
+                                            <div class="minerals" *ngIf="showNutrientsPServing">
+                                               
+
+                                                <ng-container *ngFor="let paramN of meal.recipe.minerals">
+
+                                                    <div *ngIf='paramN.value > 0'
+                                                        style='float:left; padding:2px; margin-right:5px;display:flex; align-items: center;'>
+                                                        <div [ngStyle]="{'background-color':getColorCode(paramN)}"
+                                                            style="display:inline-block; width:10px; height:10px;  margin-right:3px; ">
+                                                        </div>
+                                                        <a style="font-size:12px"  href="javascript:void(0)"
+                                                            title="Per Serving - {{setFLU(paramN.name)}} {{paramN.value}} {{paramN.unit}}">{{formatValPServing(paramN.value,meal.recipe.yield)}}
+                                                            {{paramN.unit}} </a>
+
+                                                    </div>
+                                                </ng-container>
+                                            </div>
+
+                                        </div>
+                                        <div style="min-height:130px" *ngIf="!meal.recipe" id="drop-{{r}}-{{c}}"
+                                            (drop)="drop($event, r, c)" (dragover)="allowDrop($event)">
+                                            <div id="image-placeholder-{{r}}-{{c}}"
+                                                class="recipe-image-placeholder card">
+                                                <div class="recipe-image-card-content  card-body"><img
+                                                        *ngIf="showImages" id="target-{{r}}-{{c}}"
+                                                        class="recipe-card-placeholder-image" src="{{addRecipeImage}}"
+                                                        alt="Recipe Image Card">
+                                                    <span *ngIf="!showImages">Add Image</span>
+                                                </div>
+                                            </div>
+                                            <div class="calories-slot-sum">0 Calories</div>
+                                        </div>
+                                    </div>
+                                    <div class="meal-plan-slot mealplan-col"
+                                        *ngIf="showNutrients || showNutrientsPServing">
+
+                                        <div class="minerals" *ngIf="showNutrients">
+                                            <div style="clear:both"></div>
+                                            <div style="display:block">
+                                                <p class="totalnutrientstitle">Total Nutrients<br>
+                                                    per day</p>
+                                            </div>
+                                            <div style="clear:both"></div>
+                                            <div style='float:left; padding:2px; margin-right:5px;display:flex; align-items: center;'
+                                                *ngFor="let totalM of calculateTotalNutrient(r) ">
+                                                <div [ngStyle]="{'background-color':getColorCode(totalM)}"
+                                                    style="display:inline-block; width:10px; height:10px;  margin-right:3px; ">
+                                                </div>
+                                                <a style="font-size:12px"  href="javascript:void(0)"
+                                                    title="Total {{setFLU(totalM.name)}} {{formatValue(totalM.value)}} {{totalM.unit}}">{{formatValue(totalM.value)}}
+                                                    {{totalM.unit}} </a>
+
+                                            </div>
+
+                                        </div>
+                                        <div class="minerals" *ngIf="showNutrientsPServing">
+                                            <div style="clear:both"></div>
+                                            <div style="display:block">
+                                                <p class="totalnutrientstitle">Total Nutrients <br>
+                                                    per Day <br>
+                                                    per serving</p>
+                                            </div>
+                                            <div style="clear:both"></div>
+                                            <div style='float:left; padding:2px; margin-right:5px;display:flex; align-items: center;'
+                                                *ngFor="let totalM1 of calculateTotalNutrientPServing(r) ">
+                                                <div [ngStyle]="{'background-color':getColorCode(totalM1)}"
+                                                    style="display:inline-block; width:10px; height:10px;  margin-right:3px; ">
+                                                </div>
+                                                <a style="font-size:12px"  href="javascript:void(0)"
+                                                    title="Total {{setFLU(totalM1.name)}} per Serving : {{formatValue(totalM1.value)}} {{totalM1.unit}}">{{formatValue(totalM1.value)}}
+                                                    {{totalM1.unit}} </a>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                    </ng-container>
+</div></div>
+                    
+
+                </div>
+
+                <div *ngIf="showNutrients || showNutrientsPServing" class="meal-row-wrapper meal-row__calories" style="display: block;
+                height: 100px;
+                text-align: left;
+                width: 100%;
+                margin-left: 100px;
+                margin-top: 10px;border-radius:10px;border:1px solid #FD815A;padding:10px">
+                <em>Note:</em> <br>
+                        <div style='float:left; padding:5px; margin-right:5px;display:flex; align-items: center;font-size:14px !important'
+                            *ngFor="let ccode of colorCodes | keyvalue;">
+                            <div [ngStyle]="{'background-color':ccode.value}"
+                                style="display:inline-block; width:20px; height:20px;  margin-right:5px;"></div>
+                            {{setFLU(ccode.key)}}
+    
+                        </div>                  
+
+                </div>
+
+            </div>
+           
+
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+
+
+
+
+<jw-modal id="popuppanel" style="display:none;" [width]="40">
+    <div class="" style="min-height:400px;padding:25px;">
+
+        <div style="border:1px solid #ccc; border-radius:15px; padding:15px">
+
+            <div class="modal-header" style="border-bottom:0px;">
+                <h4><b>Grocery List</b></h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                    (click)="closeModal('popuppanel');" style="font-size:40px;color:#555;opacity:1">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="border-bottom:0px;min-height: 430px;">
+                <div class="row">
+                    <div class="col-12 col-lg-12 col-xl-12 infoModal"
+                        style='max-height:400px; border:0px;margin-top:0px; text-align:center'>
+                        <ng-container *ngFor="let item of shoppingList; let i = index">
+                            <div class="items" *ngIf='item.quantity > 0' style="padding:10px;text-align:left;">
+                                <div style='float:left'>{{setFLU(item.name)}}</div>
+                                <div style='float:right'>
+                                    {{formatNumber(item.quantity)}} {{item.unit}}<br>
+                                    {{formatweight(item.weight)}} lbs<br>
+                                    {{item.weight.toFixed(2)}} grams<br>
+                                </div>
+                                <div style='clear:both'></div>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</jw-modal>
