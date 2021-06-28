@@ -222,7 +222,7 @@ loadRecipes(idslist = "")
 
 	//params["instructions"] = "notempty";
 //	params["query"] = " select id, label, image, healthLabels, dietLabels, calories, yield, totalWeight, totalNutrients, digest from recipes where id in (select recipe_id from recipe_mapping where collection_id = " + this.routeParams.id  + ")";
-	params["query"] = "select recipes.id, recipes.label, recipes.image, recipes.calories, recipes.healthLabels, recipes.dietLabels, recipes.yield, recipes.totalNutrients, users.email, users.firstname, users.lastname, users.username, recipe_mapping.created_at, users.id as userid from recipes join recipe_mapping on recipes.id = recipe_mapping.recipe_id join users on recipe_mapping.created_by = users.id where recipe_mapping.collection_id = " + this.routeParams.id  + "" ;
+	params["query"] = "select recipes.id, recipes.label, recipes.image, recipes.calories, recipes.healthLabels, recipes.dietLabels, recipes.yield, recipes.totalWeight, recipes.totalNutrients, users.email, users.firstname, users.lastname, users.username, recipe_mapping.created_at, users.id as userid from recipes join recipe_mapping on recipes.id = recipe_mapping.recipe_id join users on recipe_mapping.created_by = users.id where recipe_mapping.collection_id = " + this.routeParams.id  + "" ;
   console.log(JSON.stringify(params));
 
  var res =   this.dbService.getDatabyQuery("recipes", params).subscribe(invData => setTimeout(() => {
@@ -276,6 +276,7 @@ if(typeof(this.maxcalories) !== "undefined" && this.maxcalories > 0)
 
 }
 params["instructions"]="notempty";
+
 params["returnfields"] = " id, label, image, healthLabels, dietLabels, calories, yield, digest, totalNutrients, totalWeight";
 
  var dietlabels = "";
@@ -801,6 +802,7 @@ formatVal(str)
  
   viewRecipe(recipe)
   {
+	  recipe.expand = false;
 	  this.selectedRecipe = recipe;
 	  console.log(this.selectedRecipe);
 
