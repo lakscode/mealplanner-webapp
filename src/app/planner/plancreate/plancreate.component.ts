@@ -131,9 +131,9 @@ this.searchFilterLabels = [];
 
 		//this.healthlabelsList = constants.healthLabels;
 		this.healthlabelsList= [];
-		for(let h=0; h < constants.healthLabels.length; h++)
+		for(let h=0; h < constants.healthLabelsNew.length; h++)
 		{
-			this.healthlabelsList.push({"name":constants.healthLabels[h], "selected":false})
+			this.healthlabelsList.push({"name":constants.healthLabelsNew[h], "selected":false})
 		}
 
 		//this.mineralsLabelsList = constants.minerals;
@@ -1713,9 +1713,9 @@ limitTo(str, num)
 
 		
 		this.healthlabelsList= [];
-		for(let h=0; h < constants.healthLabels.length; h++)
+		for(let h=0; h < constants.healthLabelsNew.length; h++)
 		{
-			this.healthlabelsList.push({"name":constants.healthLabels[h], "selected":false})
+			this.healthlabelsList.push({"name":constants.healthLabelsNew[h], "selected":false})
 		}
 
 	

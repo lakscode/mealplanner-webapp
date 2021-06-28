@@ -1394,13 +1394,13 @@ export class PlancreatemComponent implements OnInit {
 				  }
 				}
 		
-				if(constants.healthLabels["length"] > 0)
+				if(constants.healthLabelsNew["length"] > 0)
 				{
 				  this.filters["healthLabels"] = {"label":"Health Labels", "expand":false, "data":[]}
 				  this.filters["healthLabels"]["data"] = [];
-				  for(let h = 0; h < constants.healthLabels["length"] ; h++)
+				  for(let h = 0; h < constants.healthLabelsNew["length"] ; h++)
 				  {
-					this.filters["healthLabels"]["data"].push({"name":constants.healthLabels[h], "selected":false});
+					this.filters["healthLabels"]["data"].push({"name":constants.healthLabelsNew[h], "selected":false});
 				  }
 				}
 		

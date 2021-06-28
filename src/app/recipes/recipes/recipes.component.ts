@@ -211,8 +211,8 @@ export class RecipesComponent implements OnInit {
 
 		//this.healthlabelsList = constants.healthLabels;
 		this.healthlabelsList = [];
-		for (let h = 0; h < constants.healthLabels.length; h++) {
-			this.healthlabelsList.push({ "name": constants.healthLabels[h], "selected": false })
+		for (let h = 0; h < constants.healthLabelsNew.length; h++) {
+			this.healthlabelsList.push({ "name": constants.healthLabelsNew[h], "selected": false })
 		}
 
 		//this.mineralsLabelsList = constants.minerals;
