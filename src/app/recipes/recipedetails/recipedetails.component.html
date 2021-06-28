@@ -53,8 +53,8 @@
                 <div class="outerbox">
                     <div class="innerbox">
                         <!--<p class="tag">Recipe Details</p>-->
-                        <p style="text-align:center;margin:10px 0px;">
-                            <a  class="label" href="javascript:void(0)">{{searchRes.label}}</a>
+                        <p  class="label" style="text-align:center;margin:10px 0px;">
+                            <a style="color:#FFF;" href="javascript:void(0)">{{searchRes.label}}</a>
                         </p>
                         <div class="short-separator" style="margin-top:10px"></div>
                         <div class="recipe-details-group">
@@ -112,7 +112,7 @@
     <p style="clear:both"></p>
   
         <div class="innerbox">
-    <div class="recipe-details" *ngIf="searchRes.dietLabels">
+    <!--<div class="recipe-details" *ngIf="searchRes.dietLabels">
         <p>Diet Labels:</p>
         <p style="display:block;">
             <ng-container *ngFor="let dlabel of formatLabels(searchRes.dietLabels)">
@@ -121,7 +121,7 @@
         </p>
     </div>
 
-    <p style="clear:both"></p>     
+    <p style="clear:both"></p>    --> 
     <div class="recipe-details" *ngIf="searchRes.healthLabels">
         <p>Health Labels:</p>
         <p style="display:inline-block;"  >
