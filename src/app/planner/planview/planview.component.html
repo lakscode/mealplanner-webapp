@@ -123,28 +123,8 @@
                                                 <div class="recipe-image-wrapper ">
                                                     <div class="recipe-image-card card">
                                                         <div class="recipe-image-card-content card-body">
-                                                            <div class="image-card-container">
-                                                                <div class="morebtn"
-                                                                    style="margin-top:-15px;margin-right:-5px"><a
-                                                                        class="menu" (click)="toggleMoreMenu(meal, r,c)"
-                                                                        href="javascript:void(0)"><i
-                                                                            class="fa fa-ellipsis-v"
-                                                                            aria-hidden="true"></i></a>
-
-                                                                    <div class="moremenu" *ngIf="meal.recipe['expand']">
-
-
-                                                                        <a href="javascript:void(0)"
-                                                                            (click)="removeRecipe(r,c)"><i
-                                                                                class="fa fa-trash"
-                                                                                aria-hidden="true"></i> Remove</a>
-                                                                        <a href="javascript:void(0)"
-                                                                            (click)="meal.recipe['expand'] = false;viewRecipe(r,c)"><i
-                                                                                class="fa fa-list-ul"
-                                                                                aria-hidden="true"></i> Preview</a>
-                                                                    </div>
-                                                                </div>
-
+                                                            <div class="image-card-container" (click)="viewRecipe(r,c)">
+                                                                
 
                                                                 <div class="recipe-name-box">{{meal.recipe.label}}</div>
                                                                 <img *ngIf="showImages"
@@ -283,11 +263,11 @@
 
                 <div *ngIf="showNutrients || showNutrientsPServing" class="meal-row-wrapper meal-row__calories" style="display: block;
                 height: 100px;
-                text-align: left;
-                width: 100%;
-                margin-left: 100px;
-                margin-top: 10px;border-radius:10px;border:1px solid #FD815A;padding:10px">
-                <em>Note:</em> <br>
+                text-align: left; 
+                width: 100%;               
+                margin-top: 10px;">
+                <div style='    width: calc(100% - 100px); height: 100px;padding:10px; margin-left:100px;border-radius:10px;border:1px solid #FD815A;'>
+                    <em>Note:</em> <br>
                         <div style='float:left; padding:5px; margin-right:5px;display:flex; align-items: center;font-size:14px !important'
                             *ngFor="let ccode of colorCodes | keyvalue;">
                             <div [ngStyle]="{'background-color':ccode.value}"
@@ -295,7 +275,7 @@
                             {{setFLU(ccode.key)}}
     
                         </div>                  
-
+                    </div>
                 </div>
 
             </div>
