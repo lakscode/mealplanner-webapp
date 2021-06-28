@@ -160,7 +160,7 @@
                                                 <ng-container *ngFor="let paramN of meal.recipe.minerals">
 
                                                     <div *ngIf='paramN.value > 0'
-                                                        style='float:left; padding:2px; margin-right:5px;display:flex; align-items: center;'>
+                                                        class='paramn'>
                                                         <div [ngStyle]="{'background-color':getColorCode(paramN)}"
                                                             style="display:inline-block; width:10px; height:10px;  margin-right:3px; ">
                                                         </div>
@@ -178,7 +178,7 @@
                                                 <ng-container *ngFor="let paramN of meal.recipe.minerals">
 
                                                     <div *ngIf='paramN.value > 0'
-                                                        style='float:left; padding:2px; margin-right:5px;display:flex; align-items: center;'>
+                                                        class='paramn'>
                                                         <div [ngStyle]="{'background-color':getColorCode(paramN)}"
                                                             style="display:inline-block; width:10px; height:10px;  margin-right:3px; ">
                                                         </div>
@@ -215,7 +215,7 @@
                                                     per day</p>
                                             </div>
                                             <div style="clear:both"></div>
-                                            <div style='float:left; padding:2px; margin-right:5px;display:flex; align-items: center;'
+                                            <div class='paramn'
                                                 *ngFor="let totalM of calculateTotalNutrient(r) ">
                                                 <div [ngStyle]="{'background-color':getColorCode(totalM)}"
                                                     style="display:inline-block; width:10px; height:10px;  margin-right:3px; ">
@@ -227,7 +227,7 @@
                                             </div>
 
                                         </div>
-                                        <div class="minerals" *ngIf="showNutrientsPServing">
+                                        <div class="minerals panelr" *ngIf="showNutrientsPServing">
                                             <div style="clear:both"></div>
                                             <div style="display:block">
                                                 <p class="totalnutrientstitle">Total Nutrients <br>
@@ -235,7 +235,7 @@
                                                     per serving</p>
                                             </div>
                                             <div style="clear:both"></div>
-                                            <div style='float:left; padding:2px; margin-right:5px;display:flex; align-items: center;'
+                                            <div class='paramn'
                                                 *ngFor="let totalM1 of calculateTotalNutrientPServing(r) ">
                                                 <div [ngStyle]="{'background-color':getColorCode(totalM1)}"
                                                     style="display:inline-block; width:10px; height:10px;  margin-right:3px; ">
