@@ -381,7 +381,7 @@ console.log(tempDt2);
 
 	gotoRecipeDetails(page, id){
 		console.log("in gotorecipedetails");
-		if(page == "collection")
+		if(page == "collection" || page == "recipebookview")
 		{
 			this.router.navigate([page, {id:id}]);
 		}
@@ -389,6 +389,7 @@ console.log(tempDt2);
 		{
 			this.router.navigate([page, id]);
 		}
+		
 	}
 
 	gotoRecipes(id) {
@@ -614,6 +615,8 @@ transform(value: any) {
 		  console.log(this.collectionsList);
 		  this.loaduserCount();
 		}
+
+		this.loadRecipeBooks();
 	  }));
   
 	  
@@ -899,6 +902,48 @@ console.log( this.plan);
 	
   }));
   }
+
+
+
+  /******** recipes api serach */
+  recipebooks: Array<any> = [];
+  loadRecipeBooks()
+	{
+		console.log("load recipebooks");
+		this.recipebooks = [];
+		//var params = {"limit": 100};
+	   // params["createdby"] = this.currentUser["id"];
+		
+		var params = {};
+	//	params["query"] = "select rb.*, u.username, u.firstname, u.lastname, u.email from recipebook rb, users u where rb.createdby = u.id";
+		params["query"] = "select * from recipebook";
+		console.log(params);
+		var res =   this.dbService.getDatabyQuery("recipes", params).subscribe(invData => setTimeout(() => {
+	
+		  console.log(invData);
+		  if(invData !== null)
+		  {
+
+			this.recipebooks = invData["body"];
+		  }
+		}));
+	
+		
+	}
+	recipecount(recipes)
+	{
+		var count = 0; 
+		if(recipes !== "")
+		{
+			var temp = recipes.split(",");
+			count = temp.length;
+		}
+		return count;
+
+
+	}
+
+
 }
 
 	
