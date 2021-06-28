@@ -56,6 +56,7 @@ export class CollectionsComponent implements OnInit {
 				this.listorgrid = {"menu":"grid", "panel":"listing-grid"};
 				this.apiUrl = environment.apiUrl;
 				this.collection = {};
+				this.collection = {"collection_name":"", "image":"", "description":""};
 
 
 
@@ -267,6 +268,7 @@ endIndex = startIndex+ endIndex;
     }
 
     createNew(){
+    	this.collection = {"collection_name":"", "image":"", "description":""};
       this.modalService.open('createNew');
 
     }

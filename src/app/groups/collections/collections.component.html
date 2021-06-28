@@ -143,7 +143,8 @@
     <form name="form"  #uf="ngForm" novalidate class="popup-panel" >
         <div class="modal-header">
             <h2 style="margin:15px; ">
-                <span>Add New Collection</span>           
+                <span *ngIf="collection.collection_name == ''">Add New Collection</span>   
+                  <span *ngIf="collection.collection_name !== ''">Update Collection</span>         
 
             </h2>
             <button style="font-size: 30px;padding:5px;" type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeModal('createNew');">
