@@ -358,7 +358,7 @@
                                         
                                     </div>
                                     </div>
-                                    <a hreaf="javascript:void(0)" title="Drag and Drop Recipe to add it to meal plan"><img style="width:90%; max-height:100px"  id="imagep_{{i}}"  draggable="true" (dragstart)="drag($event, i)" src="{{formatImage(recipe1.image, 'm')}}"
+                                    <a hreaf="javascript:void(0)" title="Drag and Drop Recipe to add it to meal plan"><img style="width:90%; max-height:100px"  id="imagep_{{i}}"  draggable="true" (dragstart)="drag($event, i)" src="{{formatImage(recipe1, 'm')}}"
                             alt="image">  </a><br/>
                                 <a title="{{recipe1.label}}"><span innerHTML="{{limitTo(recipe1.label, 20)}}" style="font-size:14px;padding-left:6px"></span></a>
                                 <p style="font-size:14px;padding-left:6px">Calories: <span style="font-size:12px;">{{recipe1.calories}} Kcal</span></p>
@@ -454,7 +454,7 @@
                                                                         <a href="javascript:void(0)"
                                                                             (click)="meal.recipe['expand'] = false;viewRecipe(r,c)"><i
                                                                                 class="fa fa-list-ul"
-                                                                                aria-hidden="true"></i> Details</a>
+                                                                                aria-hidden="true"></i> Preview</a>
                                                                     </div>
                                                                 </div>
 

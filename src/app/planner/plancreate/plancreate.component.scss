@@ -325,7 +325,7 @@ element {
   -moz-border-radius: 2px;
   border-radius: 2px;
   box-shadow: 0 2px 12px 0 rgba(166, 166, 166, 0.5);
-
+  object-fit: cover;
 }
 img {
 
@@ -1693,8 +1693,7 @@ width:100%;
     max-height: 50px;
     cursor: pointer;
     display:inline-block;
-    *display:inline;/* For IE7*/
-    *zoom:1;/* For IE7*/
+    object-fit: cover;
     vertical-align:top;
     
     }

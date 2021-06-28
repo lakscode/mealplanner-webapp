@@ -685,12 +685,15 @@ this.loadColorCodes();
   }
 
 
-	formatImage(image, type)
+	formatImage(recipe, type)
 	{
+
+		var image = recipe.image;
 	//  console.log(image);
 	  var retImage = image;
 	  if(!this.loadCustom )
 	  {
+		  if(recipe.created_by == -1)
 	  if(image !== "" && type !== "")
 	  {
 		retImage = this.helpService.formatImage(image, type);
