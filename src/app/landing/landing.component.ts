@@ -915,10 +915,10 @@ console.log( this.plan);
 	   // params["createdby"] = this.currentUser["id"];
 		
 		var params = {};
-	//	params["query"] = "select rb.*, u.username, u.firstname, u.lastname, u.email from recipebook rb, users u where rb.createdby = u.id";
-		params["query"] = "select * from recipebook";
+		params["query"] = "select rb.id, rb.recipebook_name, rb.image, rb.recipeslist, rb.createdby, rb.createdat, u.username, u.firstname, u.lastname, u.email from recipebook rb, users u where rb.createdby = u.id";
+	
 		console.log(params);
-		var res =   this.dbService.getDatabyQuery("recipes", params).subscribe(invData => setTimeout(() => {
+		var res =   this.dbService.getDatabyTablebyQuery("recipebook", params).subscribe(invData => setTimeout(() => {
 	
 		  console.log(invData);
 		  if(invData !== null)

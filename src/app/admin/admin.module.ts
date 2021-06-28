@@ -11,7 +11,8 @@ import { ManageenquiresModule } from './enquires/manageenquires.module';
 import { TestimonialsModule } from './testimonials/testimonials.module';
 import { AnnouncementsModule } from './announcements/announcements.module';
 import { BannersModule } from './banners/banners.module';
-import { ApproveModule } from './approve/approve.module';
+import { ApproverecipesModule } from './approve/recipes/approverecipes.module';
+import { ApprovecollectionsModule } from './approve/collections/approvecollections.module';
 import { NewsModule } from './news/news.module';
 
 import {DragDropModule} from '@angular/cdk/drag-drop';
@@ -37,7 +38,8 @@ import { AgGridModule } from 'ag-grid-angular';
 	NewsModule,
 
 	BannersModule,
-	ApproveModule
+	ApproverecipesModule,
+	ApprovecollectionsModule
 
   ],
   declarations: [AdminComponent, 

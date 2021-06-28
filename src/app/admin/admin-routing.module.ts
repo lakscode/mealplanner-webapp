@@ -13,8 +13,8 @@ import { AnnouncementsComponent } from './announcements/announcements.component'
 import { NewsComponent } from './news/news.component';
 
 import { BannersComponent } from './banners/banners.component';
-import { ApproveComponent } from './approve/approve.component';
-
+import { ApproverecipesComponent } from './approve/recipes/approverecipes.component';
+import { ApprovecollectionsComponent } from './approve/collections/approvecollections.component';
 const routes: Routes = [
 	{
 		path: '', component: AdminComponent, children: [
@@ -31,8 +31,8 @@ const routes: Routes = [
 			{  path: 'admin/requests', component: ManagerequestsComponent },
 			{  path: 'admin/enquires', component: ManageenquiresComponent },
 			{  path: 'admin/banners', component: BannersComponent },
-			{  path: 'admin/approve', component: ApproveComponent },			
-			
+			{  path: 'admin/approverecipes', component: ApproverecipesComponent },			
+			{  path: 'admin/approvecollections', component: ApprovecollectionsComponent },		
 		]
 	}
 ];

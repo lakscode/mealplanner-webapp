@@ -540,6 +540,7 @@ removeRecipe(recipe)
 addRecipe(recipe)
 {
 	console.log(recipe);
+	recipe.expand = false;
 	var fIndex = this.recipesList.findIndex(r =>(r.id == recipe.id));
 	console.log(fIndex);
 	console.log(this.recipesList);

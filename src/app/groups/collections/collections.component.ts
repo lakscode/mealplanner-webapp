@@ -45,7 +45,7 @@ export class CollectionsComponent implements OnInit {
 	role: any = {};
 	showNutrientsFlag: boolean = false;
 	apiUrl: any;
-
+	isAdmin: boolean = false;
 	constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder, private modalService: ModalService) {
 	this.collection = {};
 	}
@@ -95,7 +95,7 @@ export class CollectionsComponent implements OnInit {
 		  console.log( this.currentUser["displayname"]);
 		  this.role = this.helpService.getRoleStatus(this.currentUser);
 
-		  
+		  this.isAdmin = this.helpService.isAdmin(this.currentUser);
 		}
 		
 	
@@ -181,7 +181,13 @@ endIndex = startIndex+ endIndex;
 	{
 		var retVal = str;
 		if(typeof(str) !== "undefined" && str !== "")
-		retVal = this.helpService.limitTo(str, num) + "...";
+		{
+			retVal = this.helpService.limitTo(str, num) ;
+			if(str.length > num)
+			{
+				retVal += "...";
+			}
+		}
 		return retVal;
 	}
 
@@ -227,7 +233,13 @@ endIndex = startIndex+ endIndex;
 	   // var params = {"limit": 100};
 	   // params["createdby"] = this.currentUser["id"];
 		console.log(params);
-		var params = {"query": "SELECT c.*, COUNT(rm.id) AS recipecount, u.email, u.firstname, u.lastname FROM collection AS c LEFT JOIN recipe_mapping AS rm ON c.id = rm.collection_id LEFT JOIN users AS u ON c.created_by = u.id GROUP BY c.id"};
+
+		var params = {"query": "SELECT c.*, COUNT(rm.id) AS recipecount, u.email, u.firstname, u.lastname FROM collection AS c LEFT JOIN recipe_mapping AS rm ON c.id = rm.collection_id LEFT JOIN users AS u ON c.created_by = u.id "};
+		if(!this.isAdmin)
+		{
+			params["query"] += " where c.status = 1 ";
+		}
+		params["query"] += " GROUP BY c.id";
 
 		var res =   this.dbService.getDatabyTablebyQuery("collection", params).subscribe(invData => setTimeout(() => {
 	

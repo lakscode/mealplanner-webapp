@@ -28,7 +28,8 @@ extraItem: any;
 			//{"id":"users", "menu":"Users", "subtitle":"Manage Employees, Realtors", "link":"/admin/users", "active":false, "visible":true,"icon":"group"},
 			//{"id":"requests", "menu":"Enquiries",  "subtitle":"Manage Enquiries", "link":"/admin/enquires", "active":false, "visible":true, "icon":"tasks"},
 			//{"id":"testimonials", "menu":"Testimonials", "subtitle":"Manage Testimonials", "link":"/admin/testimonials", "active":false, "visible":true, "icon":"trophy"},
-			{"id":"approve", "menu":"Approve Recipes", "subtitle":"Manage approve", "link":"/admin/approve", "active":false, "visible":true, "icon":"file"}
+			{"id":"recipes", "menu":"Manage Recipes", "subtitle":"Manage approve", "link":"/admin/approverecipes", "active":false, "visible":true, "icon":"file"},
+			{"id":"collections", "menu":"Manage Collections", "subtitle":"Manage approve", "link":"/admin/approvecollections", "active":false, "visible":true, "icon":"file"}
 		
 		];
 

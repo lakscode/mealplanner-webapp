@@ -1,20 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { ApproveRoutingModule } from './approve-routing.module';
-import { ApproveComponent } from './approve.component';
+import { ApproverecipesRoutingModule } from './approverecipes-routing.module';
+import { ApproverecipesComponent } from './approverecipes.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {SidebarModule } from "../../shared/modules"
+import {SidebarModule } from "../../../shared/modules"
 @NgModule({
   imports: [
     CommonModule,
-    ApproveRoutingModule,
+    ApproverecipesRoutingModule,
     FlexLayoutModule,
 	FormsModule,
 	ReactiveFormsModule,
   SidebarModule
   ],
-  declarations: [ApproveComponent]
+  declarations: [ApproverecipesComponent]
 })
-export class ApproveModule { }
+export class ApproverecipesModule { }

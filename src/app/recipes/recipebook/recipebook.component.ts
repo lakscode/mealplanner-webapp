@@ -160,9 +160,9 @@ loadRecipebook(id)
 	  if(typeof(rbookData["body"]) !== "undefined" && rbookData["body"] !== null && rbookData["body"]["length"] > 0)
 	  {
 		this.searchRes = rbookData["body"][0];
-		if(this.searchRes["recipes"] !== "")
+		if(this.searchRes["recipeslist"] !== "")
 		{
-			this.loadRecipes(this.searchRes["recipes"]);
+			this.loadRecipes(this.searchRes["recipeslist"]);
 			this.getFavouriteStatus();
 		}
 	  }

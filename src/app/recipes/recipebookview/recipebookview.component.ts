@@ -157,9 +157,9 @@ loadRecipebook(id)
 	  if(typeof(rbookData["body"]) !== "undefined" && rbookData["body"] !== null && rbookData["body"]["length"] > 0)
 	  {
 		this.searchRes = rbookData["body"][0];
-		if(this.searchRes["recipes"] !== "")
+		if(this.searchRes["recipeslist"] !== "")
 		{
-		this.loadRecipes(this.searchRes["recipes"]);
+		this.loadRecipes(this.searchRes["recipeslist"]);
 		this.getFavouriteStatus();
 		}
 	  }
@@ -484,7 +484,7 @@ removeRecipe(recipe)
 	{
 		console.log(fIndex);
 		this.recipesList.splice(fIndex, 1);
-		this.searchRes["recipes"] ="";
+		this.searchRes["recipeslist"] ="";
 		var recipeids = "";
 		for(let r=0; r < this.recipesList.length; r++)
 		{
@@ -493,7 +493,7 @@ removeRecipe(recipe)
 		if(recipeids !== "")
 		{
 			recipeids = recipeids.substring(0, recipeids.length-1);	
-			this.searchRes["recipes"] = recipeids;
+			this.searchRes["recipeslist"] = recipeids;
 		}
 		console.log(this.recipesList);
 		console.log(this.searchRes);
@@ -509,7 +509,7 @@ addRecipe(recipe)
 	if(fIndex == -1)
 	{
 		this.recipesList.push(recipe);
-		this.searchRes["recipes"] ="";
+		this.searchRes["recipeslist"] ="";
 		var recipeids = "";
 		for(let r=0; r < this.recipesList.length; r++)
 		{
@@ -518,7 +518,7 @@ addRecipe(recipe)
 		if(recipeids !== "")
 		{
 			recipeids = recipeids.substring(0, recipeids.length-1);	
-			this.searchRes["recipes"] = recipeids;
+			this.searchRes["recipeslist"] = recipeids;
 		}
 		console.log(this.recipesList);
 		console.log(this.searchRes);
@@ -545,8 +545,8 @@ saveRecipebook()
 	if(this.searchRes["image"] !== "")
     params["image"] = this.searchRes["image"];
 
-    if(this.searchRes["recipes"] !== "")
-    params["recipes"] = this.searchRes["recipes"];
+    if(this.searchRes["recipeslist"] !== "")
+    params["recipeslist"] = this.searchRes["recipeslist"];
 
 	if(typeof(this.searchRes["createdby"]) =="undefined" || this.searchRes["createdby"] == "" || this.searchRes["createdby"] == "0")
     {

@@ -1,23 +1,23 @@
 import { Component, OnInit,OnDestroy  } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd } from "@angular/router";
-import { UserService } from '../../services/user.service';
+import { UserService } from '../../../services/user.service';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { DBService } from '../../dbservices/db.service';
-import { HelpService } from '../../services/help.service';
+import { DBService } from '../../../dbservices/db.service';
+import { HelpService } from '../../../services/help.service';
 import { ToastrService } from 'ngx-toastr';
-import { environment } from './../../../environments/environment';
+import { environment } from './../../../../environments/environment';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import * as $ from 'jquery';
-import { constants } from '../../jsonfiles/constants';
-//declare var $: any;
+import { constants } from '../../../jsonfiles/constants';
+
 
 @Component({
-	selector: 'app-approve',
-	templateUrl: './approve.component.html',
-	styleUrls: ['./approve.component.scss']
+	selector: 'app-approvecollections',
+	templateUrl: './approvecollections.component.html',
+	styleUrls: ['./approvecollections.component.scss']
 })
-export class ApproveComponent implements OnInit {
+export class ApprovecollectionsComponent implements OnInit {
 	recipesList: Array<any> = [];
 	recipesList1: Array<any> = [];
 	recipesList2: Array<any> = [];

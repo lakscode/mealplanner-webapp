@@ -610,6 +610,17 @@ export class HelpService {
 
 	}
 
+	/* roles 
+
+	1 - MASTERADMIN
+2 - ADMIN
+3 - FREE
+4 - PAID
+5 - MTC CLIENT
+6 - DIETITIAN
+7 - DIETITIAN MODERATOR
+
+*/
 	isAdmin(user)
 	{
 		var res = false;
@@ -617,7 +628,7 @@ export class HelpService {
 		{
 			if(typeof(user["role"] ) !== "undefined" && user["role"]  !== null)
 			{
-				if(user["role"] == "SUPERADMIN" || user["role"] == "MASTERADMIN"  || user["role"] == "SYSADMIN" || user["role"] == "DEVADMIN" || user["role"] == "ADMIN"  || user["isAdmin"] == 1  )
+				if(user["role"] == 1 || user["role"] == 2  || user["isAdmin"] == 1  )
 				res = true;
 			}
 		}
@@ -625,8 +636,51 @@ export class HelpService {
 
 	}
 
+	isDietician(user)
+	{
+		var res = false;
+		if(typeof(user) !== "undefined" && user !== null)
+		{
+			if(typeof(user["role"] ) !== "undefined" && user["role"]  !== null)
+			{
+				if(user["role"] == 1 || user["role"] == 2  || user["role"] == 6 || user["role"] == 7)
+				res = true;
+			}
+		}
+		return res;
 
+	}
+
+	isModerator(user)
+	{
+		var res = false;
+		if(typeof(user) !== "undefined" && user !== null)
+		{
+			if(typeof(user["role"] ) !== "undefined" && user["role"]  !== null)
+			{
+				if(user["role"] == 1 || user["role"] == 2  || user["role"] == 7)
+				res = true;
+			}
+		}
+		return res;
+
+	}
 	
+	isPaid(user)
+	{
+		var res = false;
+		if(typeof(user) !== "undefined" && user !== null)
+		{
+			if(typeof(user["role"] ) !== "undefined" && user["role"]  !== null)
+			{
+				if(user["role"] == 1 || user["role"] == 2 || user["role"] == 4 || user["role"] == 5 || user["role"] == 6 || user["role"] == 7)
+		
+				res = true;
+			}
+		}
+		return res;
+
+	}
 
 	formatStringDecode(str)
 {
