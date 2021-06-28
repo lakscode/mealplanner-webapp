@@ -7,15 +7,32 @@
       border-left-color: $gray;
       border-left-style: solid;
       border-left-width: 2px;
-  border-left: none;
-  border-bottom: none;
-  padding: 0 !important;
-  overflow-x: auto;
-  max-width: calc(100% - 310px) !important;
-  max-height: fit-content;
-  height: fit-content;
+      border-left: none;
+      border-bottom: none;
+      padding: 0 !important;
+      overflow-x: auto;
+      max-width: calc(100% - 310px) !important;
+      max-height: fit-content;
+      height: fit-content;
+}
+.paramn
+{
+  float:left; 
+  padding:2px; 
+  margin-right:5px;
+  display:flex; 
+  align-items: center;
+  width: calc(50% - 5px);
 }
 
+.panelr 
+{
+  border:1px solid #CCC;
+}
+.minerals
+{
+  padding:10px;
+}
 .recipe-remove
 {
   position: absolute;

@@ -3079,7 +3079,13 @@ ul {
     width: 100%;
   }
 
- 
+ .pl-5, .px-5 {
+     padding-left: 1rem !important; 
+	}
+
+	.pr-5, .px-5 {
+		padding-right: 1rem !important;
+	}
 }
 @media (max-width: 600px) {
   .recipe-box {
