@@ -235,10 +235,10 @@ endIndex = startIndex+ endIndex;
 		console.log(params);
 
 		var params = {"query": "SELECT c.*, COUNT(rm.id) AS recipecount, u.email, u.firstname, u.lastname FROM collection AS c LEFT JOIN recipe_mapping AS rm ON c.id = rm.collection_id LEFT JOIN users AS u ON c.created_by = u.id "};
-		if(!this.isAdmin)
-		{
+	//	if(!this.isAdmin)
+	//	{
 			params["query"] += " where c.status = 1 ";
-		}
+	//	}
 		params["query"] += " GROUP BY c.id";
 
 		var res =   this.dbService.getDatabyTablebyQuery("collection", params).subscribe(invData => setTimeout(() => {

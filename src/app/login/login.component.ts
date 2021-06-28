@@ -112,7 +112,7 @@ export class LoginComponent implements OnInit {
 				var userData = userDataObj['body'][0];
 			
 				var pass = this.helpService.decryptPass(userData["password"]);  //this.loginForm.value.passWord 
-				
+				console.log(pass);
 				if(pass == this.userObj.password.trim() || userData["password"] == this.userObj.password.trim() )
 				{
 					delete userData["password"];

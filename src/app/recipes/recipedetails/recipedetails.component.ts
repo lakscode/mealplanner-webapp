@@ -53,6 +53,8 @@ msg: any = "";
 labeltext: any = "";
 perServingFlag: boolean = true;
 isloggedIn : boolean = false;
+isUser: any = {};
+
 	constructor(private router: Router, private route: ActivatedRoute, private toastr: ToastrService,  private sanitize: DomSanitizer, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
 	
 	}
@@ -112,8 +114,8 @@ isloggedIn : boolean = false;
 		this.getFavouriteStatus();
 		this.getRating();
 		}
- 
-
+		this.isUser = this.helpService.setUserRoles(this.currentUser);
+		console.log(this.isUser);
 	}
 	
 	loadShareValue()

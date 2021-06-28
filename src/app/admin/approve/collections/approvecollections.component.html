@@ -58,7 +58,7 @@
                     </div>
                 <!-- <div style='height:15px; width:100%'></div> -->
                 <div style="width:100%">
-                <h3 style="font-weight:bold;margin-left:10px">{{setFLU(recordType)}} Recipes</h3>
+                <h3 style="font-weight:bold;margin-left:10px">{{setFLU(recordType)}} Collections</h3>
                 </div>
                 <div class="recipe-set" *ngIf="!noResult">
                    
@@ -66,87 +66,38 @@
 
 
                         <div class="listing" style="margin-bottom:0px;"
-                            *ngFor="let recipe1 of recipesList1; let i = index;">
+                            *ngFor="let data of dataList; let i = index;">
 
 
                             <div class="image image-animate detail"
                                 style="width: 100px; height:100px;background:#f8f8f8;padding:0px;">
 
-                                <img (click)="gotoRecipeDetails(recipe1.id)" style="width:100%; height:100%"
-                                    src="{{formatImage(recipe1.image, 'm')}}" alt="image">
+                                <img (click)="gotopage('collection',data.id)" style="object-fit:cover; width:100%; height:100%"
+                                    src="{{data.image}}" alt="image">
 
                             </div>
                             <div class="detail" style="width:100%;">
                                 
                                 <div class="row">
                                     <div class="col-10">
-                                        <h4><a (click)="gotoRecipeDetails(recipe1.id)">{{recipe1.rlabel}}</a>
+                                        <h4><a (click)="gotopage('collection',data.id)">{{data.collection_name}}</a>
 
                                         </h4>
-                                        <span *ngIf="recipe1.rdietLabels"
-                                        style="font-size:12px;"> <b style="font-size:13px">Diet Labels:</b> {{formatlabels(recipe1.rdietLabels)}}</span>
-
-                                 <span *ngIf="recipe1.rhealthLabels"
-                                        style="font-size:12px;">, <b style="font-size:13px">Health Labels:</b> {{formatlabels(recipe1.rhealthLabels)}}</span>
-                                        <span *ngIf="recipe1.rcuisineType" 
-                                        style="font-size:12px;">, <b style="font-size:13px">Cuisine Type:</b> {{formatlabels(recipe1.rcuisineType)}}</span>
-
+                                       <p>Submitted by {{data.firstname}} on {{data.created_at}}</p>
+                                       <p *ngIf="data.approved_by > 0 && data.status > 0">
+                                           <span *ngIf="data.status == 1">Approved</span> 
+                                           <span *ngIf="data.status == 2">Rejected</span> 
+                                           on {{data.approved_at}}</p>
                                     </div>
                                     <div class="col-2" >
-                                        <button class="create-button ng-star-inserted" style="padding:5px" (click)="recipe1.modify = !recipe1.modify">
-                                            View Changes
-                                        </button><br>
-                                        <span *ngIf="recipe1.status == 2">
-                                            Approved
-                                        </span>
-                                        <span *ngIf="recipe1.status == 3">
-                                            Rejected
-                                        </span>
+                                        <p>Actions</p>
+                                        <select  name = "collect{{i}}" [(ngModel)] = "data.opt" (change)="chooseactions(data)">
+                                            <option [selected] = "data.status == 1"  value = "1">Approve</option>
+                                            <option [selected] = "data.status == 2"  value = "2">Reject</option>
+
+                                        </select>
                                     </div>
 
-                                    <div class="col-12 modify-recipe-sec" *ngIf='recipe1.modify' style='border:1px solid #CCC; background:#f1f2f3;'>
-                                        <div class="row">
-                                        <p class="title" style="display:block;font-weight:700;text-align:center"> Modified Details </p>
-                                        <div class='col-12 item-section' style="width:100%">
-                                            <div *ngIf="recipe1.label"class="newsec">
-                                            <p class="lbl">Recipe Name</p>
-                                           <p>{{recipe1.label}}</p>
-                                           </div>
-
-                                         <div *ngIf="recipe1.s_instructions" class="newsec">
-                                             <p class="lbl">Instructions</p>
-                                            <p>{{recipe1.s_instructions}}</p>
-                                        </div>
-                                        <div *ngIf="recipe1.healthLabels" class="newsec">
-                                            <p class="lbl">Health Labels</p>
-                                            <p>{{recipe1.healthLabels}}</p>
-                                        </div>
-                                        <div *ngIf="recipe1.dietLabels" class="newsec">
-                                            <p class="lbl">Diet Labels</p>
-                                            <p>{{recipe1.dietLabels}}</p>
-                                        </div>
-                                        <div *ngIf="recipe1.cuisineType" class="newsec">
-                                            <p class="lbl">Cuisine Type</p>
-                                            <p>{{recipe1.cuisineType}}</p>
-                                        </div>
-                                        <div *ngIf="recipe1.mealType" class="newsec">
-                                            <p class="lbl">meal Type</p>
-                                            <p>{{recipe1.mealType}}</p>
-                                            </div>
-
-                                        </div>
-                                    
-                                    
-                                        <div class="col-12" *ngIf="recipe1.status == 1">
-                                            <a class="btnc" href="javascript:void(0)"(click)="approvechanges(recipe1);recipe1.modify =false;"> Approve</a>
-
-                                            <a class="btnc" href="javascript:void(0)"(click)="rejectchanges(recipe1);recipe1.modify =false;"> Reject</a>
-                                            
-                                            <a class="btnc" href="javascript:void(0)" (click)="recipe1.modify =false;"> Close</a>
-
-                                    </div>
-                                    </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>

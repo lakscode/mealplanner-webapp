@@ -326,7 +326,7 @@
                       
                 </div>
    
-                <div class="col-md-6">
+                <div class="col-md-6" *ngIf="isUser['paid']">
                     <label class='comment-label'>Upload Video</label>
                     <button (click)="uploadmedia('video')" class="upload-comment">
                         <i class="fa fa-file-video-o" aria-hidden="true"></i> Upload Video</button>
