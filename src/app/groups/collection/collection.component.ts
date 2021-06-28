@@ -242,6 +242,11 @@ loadRecipes(idslist = "")
 
 }
 
+searchenter(event)
+{
+	if(event.key == "Enter")
+	this.searchProps();
+}
 maxcalories:any = 0;
 recipesList1:Array<any>=[];
 searchProps()
@@ -268,9 +273,9 @@ if(typeof(this.maxcalories) !== "undefined" && this.maxcalories > 0)
 {
   params["caloriesto"] = this.maxcalories;
 }
-params["instructions"]="notempty";
-}
 
+}
+params["instructions"]="notempty";
 params["returnfields"] = " id, label, image, healthLabels, dietLabels, calories, yield, digest, totalNutrients, totalWeight";
 
  var dietlabels = "";
@@ -562,7 +567,7 @@ addRecipe(recipe)
 		console.log(this.recipesList);
 		console.log(this.collection);
 	}
-	this.toggleRecipeAdd = false;
+	//this.toggleRecipeAdd = false;
 	this.searchparam["q"] ="";
 	//this.toastr.success('Added Recipe to Recipe Book', 'Recipe Book!');	
 

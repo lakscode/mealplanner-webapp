@@ -162,11 +162,14 @@
                                                 <label class="searchicon ">
                                                     <i class="fa fa-search" aria-hidden="true"></i>
                                                 </label>
-                                                <input type="text" name="searchquery" [(ngModel)]="searchparam.q"
-                                                    class="inputbox" placeholder="Search Recipes..." />
+                                                <input type="text" (keyup)="searchenter($event)" name="searchquery" [(ngModel)]="searchparam.q"
+                                                    class="inputbox" placeholder="Search for Recipes..." />
                                                 <input type="button" (click)="searchProps()" style="margin-bottom:10px;"
                                                     [ngClass]="searchmorebar?'defaultbtn searchbtn hideonmobile bg-orange' :' defaultbtn searchbtn  bg-orange'"
                                                     id="header-submit-search-pro" name="submit" value="Search">
+                                                <input type="button" (click)="toggleRecipeAdd = false;" style="margin-bottom:10px;"
+                                                    [ngClass]="searchmorebar?'defaultbtn searchbtn hideonmobile bg-orange' :' defaultbtn searchbtn  bg-orange'"
+                                                    id="header-submit-search-pro" name="submit" value="Close">
                                             </div>
 
                                             <div *ngIf="searchmorebar && showNutrientsFlag" class="searchmorebar">
@@ -405,7 +408,7 @@
                                                             Add to Meal Plan</a>
                                                         <a class="menuitem" href="javascript:void(0)"
                                                             (click)="viewRecipe(recipe)"><i class="fa fa-list-ul"
-                                                                aria-hidden="true"></i> Details</a>
+                                                                aria-hidden="true"></i> Preview</a>
                                                         <a class="menuitem" href="javascript:void(0)"
                                                             *ngIf="recipe.UserFavStatus"
                                                             (click)="removeFavourite(recipe.id)"
