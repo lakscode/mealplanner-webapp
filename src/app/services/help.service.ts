@@ -32,7 +32,7 @@ export class HelpService {
 	{
 		var isMobile = false;
 		var innerWidth = window.innerWidth;
-		console.log("innerWidth " + innerWidth);
+		//console.log("innerWidth " + innerWidth);
 		if(innerWidth > 640)
 		{
 			isMobile = false;
@@ -357,11 +357,11 @@ export class HelpService {
 	FindSimilarCases(text)
 	{
 		
-		//    console.log(text);
+		//    //console.log(text);
 		   text = text.replace(/[&\/\\#, +()$~%.'":*?<>-_{}]/g, ' ');
 		   text = text.replace(/[0-9]/g, ' ');
 		   var textArr = text.split(" ");
-		//    console.log(textArr);
+		//    //console.log(textArr);
 		   var ignorewords = ignorewordsArr;
 
 		   for(let i= 0; i < textArr["length"]; i++)
@@ -379,7 +379,7 @@ export class HelpService {
 				params.push(textArr[i]);
 		   }
 
-  		//    console.log(params);
+  		//    //console.log(params);
 
 		   /*
 		   this.dbService.postData("investigations/similarcases", params).subscribe(invData => setTimeout(() => {  
@@ -424,7 +424,7 @@ export class HelpService {
 
 	formatImage(image, type)
 	{
-	//	console.log(image);
+	//	//console.log(image);
 	  var retImage = image;
 	 
 	  if(image !== "" && typeof(type) !== "undefined" && type !== "")
@@ -458,7 +458,7 @@ export class HelpService {
 		retImage = image;
 	  }
   	
-	//  console.log(retImage);
+	//  //console.log(retImage);
 
 	  return retImage;
 	}
@@ -468,12 +468,12 @@ export class HelpService {
 		var ret = 0;
 		if(typeof(dt) !== "undefined" && dt  !== null)
 				{
-					//console.log(dt);
-					//console.log(new Date())
+					////console.log(dt);
+					////console.log(new Date())
 					var Difference_In_Time = new Date().getTime() - new Date(dt).getTime(); 
 	
 					var diff_days = Difference_In_Time / (1000 * 3600 * 24); 
-					//console.log(diff_days);
+					////console.log(diff_days);
 					if(diff_days > 0)
 					ret= diff_days;
 				}
@@ -491,12 +491,12 @@ export class HelpService {
 			
 				if(typeof(user["created_time"] ) !== "undefined" && user["created_time"]  !== null)
 				{
-					console.log(user['created_time']);
-					console.log(new Date())
+					//console.log(user['created_time']);
+					//console.log(new Date())
 					var Difference_In_Time = new Date().getTime() - new Date(user['created_time']).getTime(); 
 	
 					var diff_days = Difference_In_Time / (1000 * 3600 * 24); 
-					console.log(diff_days);
+					//console.log(diff_days);
 					if(diff_days > 0)
 					res = true;
 				}
@@ -628,7 +628,7 @@ export class HelpService {
 		{
 			if(typeof(user["role"] ) !== "undefined" && user["role"]  !== null)
 			{
-				if(user["role"] == 1 || user["role"] == 2  || user["isAdmin"] == 1  )
+				if(user["role"] == 1 || user["role"] == 2 )
 				res = true;
 			}
 		}
@@ -665,6 +665,8 @@ export class HelpService {
 		return res;
 
 	}
+
+
 	
 	isPaid(user)
 	{
@@ -682,6 +684,29 @@ export class HelpService {
 
 	}
 
+	setUserRoles(user)
+	{
+		var userObj = {"admin" : false, "dietitian": false, "moderator": false, "paid": false };
+
+		//console.log(user);
+		if(typeof(user) !== "undefined" && user !== null)
+		{
+			if(this.isAdmin(user))
+			userObj["admin"]  = true;
+			
+			if(this.isDietician(user))
+			userObj["dietitian"]  = true;
+
+			if(this.isModerator(user))
+			userObj["moderator"]  = true;
+
+			if(this.isPaid(user))
+			userObj["paid"]  = true;
+		}
+		//console.log(userObj);
+		return userObj;
+	}
+
 	formatStringDecode(str)
 {
 	var retVal = str;
@@ -691,7 +716,7 @@ export class HelpService {
 	//	retVal = retVal.replace("&#39;", "'");
 		
 	}
-	//console.log(retVal);
+	////console.log(retVal);
 	return retVal;
 }
 formatStringEncode(str)
@@ -716,9 +741,9 @@ formatStringEncode(str)
 
 SendEmailPasswordReset(email,data) {
     var paramstoken = { "email": email, "resetdatetime": new Date() };
-	console.log(paramstoken);
+	//console.log(paramstoken);
     this.dbService.resettoken(paramstoken).subscribe(emailData1 => setTimeout(() => {   
-		console.log(emailData1);   
+		//console.log(emailData1);   
       if (emailData1) {      
 		  if(typeof(emailData1['status_code']) !== "undefined" && emailData1['status_code'] !== "")
 		  {
@@ -741,7 +766,7 @@ SendEmailPasswordReset(email,data) {
 					var IemailSubject = this.FormatEmailContent(data.emailSubject, data);
 					var IemailContent = this.FormatEmailContent(data.emailContent, data); 
 					let Emaildata: any = { "to": email,  "from": environment.fromname+environment.fromemail, "datetime": new Date(), "subject": IemailSubject, "content": IemailContent, "contenthtml": IemailContent };
-					 console.log(Emaildata);
+					 //console.log(Emaildata);
 					// send email     
 					
 					this.dbService.postData("email", Emaildata).subscribe(emailData => setTimeout(() => {
@@ -903,17 +928,17 @@ SendEmailPasswordReset(email,data) {
 		params["category"] =  category;
 		params["userid"] =  userid;
 		params["page"] = page;
-		console.log("adding");
-		console.log(params);
+		//console.log("adding");
+		//console.log(params);
 		var res =   this.dbService.getDataByTable("search_history", params).subscribe(recipeData => setTimeout(() => {
-			console.log(recipeData);
+			//console.log(recipeData);
 	
 		
 		}));		
 	}
 
 	scrape_recipe() {
-	console.log("scrape recipe");
+	//console.log("scrape recipe");
 	
 		
 	  }
@@ -946,7 +971,7 @@ SendEmailPasswordReset(email,data) {
 	 
 	  getIpaddress(user)
 	  {
-		console.log(user);
+		//console.log(user);
 
 		fetch("https://api.ipify.org/?format=json"),function(response) {
             alert(response.ip);
@@ -983,7 +1008,7 @@ SendEmailPasswordReset(email,data) {
 
 	todayDate()
 	{
-		console.log("in todayDate");
+		//console.log("in todayDate");
 		var d = new Date();
 	  var weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 	  var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]

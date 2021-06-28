@@ -40,12 +40,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
 	collapsed: boolean  = true;
 	planLink:any;
 	searchparam: any;
-	isAdmin: boolean = false;
+	isUser: any = {};
 	constructor(private router :Router, private socialAuthService: SocialAuthService, public userService: UserService, public helpService: HelpService,  private dbService: DBService, private location: Location) {
 
 	var currentUrl = this.router.url;
 	currentUrl = currentUrl.replace("/","");
-	////console.log(currentUrl);
+
 	var displayMenu =  true;
 		this.searchparam = "";
             if(window.screen.width > 768 || window.innerWidth > 768)
@@ -74,44 +74,35 @@ export class HeaderComponent implements OnInit, OnDestroy {
 				[
 					{"id":"home-aboutus", "menu":"About the Team", "link":"/ourteam", "display":displayMenu, "active":false},
 					{"id":"home-display", "menu":"FAQs", "link":"/faqs", "display":displayMenu, "active":false},
-					//{"id":"home-benefits", "menu":"Benefits", "link":"/benefits", "display":displayMenu, "active":false},
-				//	{"id":"blogs", "menu":"Blogs", "link":"/blogs", "display":displayMenu, "active":false},
-				//	{"id":"testimonials", "menu":"Testimonials", "link":"/testimonials", "display":displayMenu, "active":false}
-				{"id":"home-questionnaire", "menu":"Questionnaire", "link":"/questionnaire", "display":displayMenu, "active":false}
+					{"id":"home-questionnaire", "menu":"Questionnaire", "link":"/questionnaire", "display":displayMenu, "active":false}
 				]
 			},
 			{"id":"features", "menu":"Features", "link":"/features", "display":displayMenu, "active":false},
 			{"id":"pricing", "menu":"Pricing", "link":"/pricing", "display":displayMenu, "active":false},
-		//	{"id":"schedule", "menu":"Schedule Demo", "link":"/scheduledemo", "display":displayMenu, "active":false},
 			
 		];
 		this.menuItems1= [
-			{"id":"landing", "menu":"Home", "link":"/landing", "display":displayMenu, "active":false,
+			{"id":"landing", "menu":"Home", "link":"/landing", "display":displayMenu, "active":false, "show":true,
 				"children":
 				[
-				//	{"id":"howitworks", "menu":"How it works", "link":"/howitworks", "display":displayMenu, "active":false},
-				{"id":"landing", "menu":"Home", "link":"/landing", "display":displayMenu, "active":false},
-					{"id":"landing-aboutus", "menu":"Our Team", "link":"/ourteam", "display":displayMenu, "active":false},
-					{"id":"landing-benefits", "menu":"Benefits", "link":"/benefits", "display":displayMenu, "active":false},
-					{"id":"landing-display", "menu":"FAQs", "link":"/faqs", "display":displayMenu, "active":false},
-				//	{"id":"blogs", "menu":"Blogs", "link":"/blogs", "display":displayMenu, "active":false},
-				//	{"id":"testimonials", "menu":"Testimonials", "link":"/testimonials", "display":displayMenu, "active":false}
-					//{"id":"questionnaire", "menu":"Questionnaire", "link":"/questionnaire", "display":displayMenu, "active":false}
+					{"id":"landing", "menu":"Home", "link":"/landing", "display":displayMenu, "active":false, "show":true},
+					{"id":"landing-aboutus", "menu":"Our Team", "link":"/ourteam", "display":displayMenu, "active":false, "show":true},
+					{"id":"landing-benefits", "menu":"Benefits", "link":"/benefits", "display":displayMenu, "active":false, "show":true},
+					{"id":"landing-display", "menu":"FAQs", "link":"/faqs", "display":displayMenu, "active":false, "show":true}				
 				]
 			},
-			{"id":"recipes", "menu":"Recipes", "link":"/recipes", "display":displayMenu, "active":false,
+			{"id":"recipes", "menu":"Recipes", "link":"/recipes", "display":displayMenu, "active":false, "show":true,
 				"children":
 				[
 
-					{"id":"recipes-recipe-list", "menu":"Recipes", "link":"/recipes", "display":displayMenu, "active":false},
-					{"id":"recipes-favourites", "menu":"Favourites", "link":"/favourites", "display":displayMenu, "active":false},
-					{"id":"recipes-my-recipes", "menu":"My Recipes", "link":"/myrecipes", "display":displayMenu, "active":false},
-					{"id":"recipes-recipebooks", "menu":"Recipe Books", "link":"/recipebooks", "display":displayMenu, "active":false},
-				//	{"id":"recipes-communities", "menu":"Communities", "link":"/communities", "display":displayMenu, "active":false},
-					{"id":"recipes-recipe-submit", "menu":"Submit Recipe", "link":"/recipesubmit", "display":displayMenu, "active":false}
+					{"id":"recipes-recipe-list", "menu":"Recipes", "link":"/recipes", "display":displayMenu, "active":false, "show":true},
+					{"id":"recipes-favourites", "menu":"Favourites", "link":"/favourites", "display":displayMenu, "active":false, "show":true},
+					{"id":"recipes-my-recipes", "menu":"My Recipes", "link":"/myrecipes", "display":displayMenu, "active":false, "show":true},
+					{"id":"recipes-recipebooks", "menu":"Recipe Books", "link":"/recipebooks", "display":displayMenu, "active":false, "show":false},
+					{"id":"recipes-recipe-submit", "menu":"Submit Recipe", "link":"/recipesubmit", "display":displayMenu, "active":false, "show":true}
 				]
 			},
-			{"id":"planner", "menu":"Planner", "link":"/plans", "display":displayMenu, "active":false/*,
+			{"id":"planner", "menu":"Planner", "link":"/plans", "display":displayMenu, "active":false, "show":true /*,
 				"children":
 				[
 
@@ -120,7 +111,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 					
 				]*/
 			}	,
-			{"id":"collections", "menu":"Collections", "link":"/collections", "display":displayMenu, "active":false/*
+			{"id":"collections", "menu":"Collections", "link":"/collections", "display":displayMenu, "active":false, "show":true/*
 			,	"children":
 				[
 
@@ -145,8 +136,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 	isTrialExpired: boolean  = false;
 	mobilemenu(item)
 	{
-		//console.log("mobilemenu");
-		//console.log(item);
+
 		item.expand = !item.expand; 
 		this.gotopage(item.link);
 		if(typeof(item.children) == "undefined" || item.children.length == 0)
@@ -158,14 +148,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
 		//console.log("header ngOnInit");
 		this.companylogo = 'assets/logo-dark.png';
 	
-		
-		console.log("ngOninit");
 		this.setMenuActive();
 		this.userService.loggedinUser().subscribe(userdata => setTimeout(() => {
 			this.setIconMenu();
 			this.loggedIn = false;
-			
-			////console.log(userdata);
+		
 			if(typeof(userdata) !== "undefined" && userdata !== null)
 			{
 				this.currentUser = userdata;
@@ -175,15 +162,15 @@ export class HeaderComponent implements OnInit, OnDestroy {
 					this.userName = this.currentUser["firstname"];
 					this.userName = this.userName.charAt(0).toUpperCase() + this.userName.slice(1);
 
-				//	if(typeof(this.currentUser["lastname"]) !== "undefined")
-				//	{
-				//		var lastname = this.currentUser["lastname"].charAt(0).toUpperCase() + this.currentUser["lastname"].slice(1);
-				//	this.userName = this.userName + " " + lastname;
-				//	}
-
-				}
-				this.isAdmin = this.helpService.isAdmin(this.currentUser);
+					}
 				
+				
+				this.isUser = this.helpService.setUserRoles(this.currentUser);
+			
+				if(this.isUser["dietitian"])
+				{
+					this.menuItems1[1]["children"][3]['show'] = true;
+				}
 
 				 if(this.userName == "" && typeof(this.currentUser["username"]) !== "undefined") {
                 this.userName = this.currentUser["username"];

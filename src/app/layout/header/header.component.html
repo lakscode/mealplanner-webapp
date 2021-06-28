@@ -27,9 +27,11 @@
                                     <li  (click)="setMenuActive();" [ngClass]="menu1.active  == true?'active':''" *ngFor="let menu1 of menuItems1; let m = index">
                                         <a (click)="gotopage(menu1.link)">{{menu1.menu}}</a>
                                         <ul *ngIf="menu1.children && menu1.children.length > 0">
-                                            <li (click)="setMenuActive();" *ngFor="let submenu1 of menu1.children; let m = index">
+                                            <ng-container *ngFor="let submenu1 of menu1.children; let m = index">
+                                            <li *ngIf="submenu1.show" (click)="setMenuActive();" >
                                                 <a (click)="gotopage(submenu1.link)">{{submenu1.menu}}</a>
                                             </li>
+                                            </ng-container>
                                         </ul>
                                     </li>
 
@@ -69,7 +71,7 @@
                                       <a href="javascript:void(0);" (click)="setMenuActive();gotopage('progress')">Progress</a>
                                       <a href="javascript:void(0);" (click)="setMenuActive();gotopage('calculate')">Calculators</a>                                     
                                       <!--<a href="javascript:void(0);" (click)="gotopage('recipesmodify')">Modify Recipes</a>-->
-                                      <a *ngIf="isAdmin" href="javascript:void(0);" (click)="setMenuActive();gotopage('admin/approve')">Approve Recipes</a>
+                                      <a *ngIf="isUser && isUser['admin']" href="javascript:void(0);" (click)="setMenuActive();gotopage('admin/approve')">Approve Recipes</a>
                                       <a  (click)="logout()" href="javascript:void(0)">Logout</a>
                                     
 
@@ -119,11 +121,13 @@
                 <li *ngFor="let menu1 of menuItems1; let m = index">
                     <a (click)="mobilemenu(menu1)">{{menu1.menu}}</a>
                     <ul *ngIf="menu1.expand && menu1.children && menu1.children.length > 0">
-                        <li *ngFor="let submenu1 of menu1.children; let m = index">
+                        <ng-container  *ngFor="let submenu1 of menu1.children; let m = index">
+                        <li *ngIf="submenu1.show">
                            <!-- <a (click)="mobilemenu(submenu1)" *ngIf = "submenu1.menu == 'Create Plan'" class="hidden-xs">{{submenu1.menu}}</a>
                             <a *ngIf = "submenu1.menu != 'Create Plan'" (click)="mobilemenu(submenu1)">{{submenu1.menu}}</a>-->
                             <a (click)="mobilemenu(submenu1)">{{submenu1.menu}}</a>
                         </li>
+                        </ng-container>
                     </ul>
                 </li>
             
