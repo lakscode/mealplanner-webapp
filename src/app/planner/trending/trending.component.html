@@ -83,7 +83,7 @@
                   <div [ngClass]="showNutrientsFlag?'col-8':'col-9'">
                     <p class="meal-title " style="padding:5px"
                       (click)="gotopagedetails('recipedetails',itemday[mealtype])"
-                      *ngIf="itemday && itemday[mealtype].label"> {{SetFLU(limitTo(itemday[mealtype].label, 25))}}</p>
+                      *ngIf="itemday && itemday[mealtype].label"> {{SetFLU(limitTo(itemday[mealtype].label, 26))}}</p>
                   </div>
                   <div *ngIf="showNutrientsFlag" class="col-1" style="padding-right:0;text-align:right;"
                     (click)="showPerServingMeal[mealtype]= true; plan['days'][i][mealtype].expand = !plan['days'][i][mealtype].expand; shownut(itemday);">

@@ -484,14 +484,21 @@ export class TrendingComponent implements OnInit {
 		 console.log("goto page " + page);
 		 console.log(param);
 		 var params = {};
-		 if(param !== null)
+		
+		// params["returnpage"]= "trending";
+	//	 params["returnparam1"] = this.routeParams.id
+		 if(page == 'recipedetails')
 		 {
-		   params['id'] = param["id"];
+			this.router.navigate([page + "/" +  param["id"]]);
 		 }
-		 params["returnpage"]= "trending";
-		 params["returnparam1"] = this.routeParams.id
-
-	  this.router.navigate([page, params]);
+		 else
+		 {
+			if(param !== null)
+			{
+			  params['id'] = param["id"];
+			}
+	  		this.router.navigate([page]);
+		 }
 	}
 	getTodaysDate()
 	{
@@ -762,7 +769,11 @@ export class TrendingComponent implements OnInit {
 		  var retVal = str;
 		  
 		  if(typeof(str) !== "undefined" && str !== null && str !== "")
-		  retVal = this.helpService.limitTo(str, num) + "...";
+		  retVal = this.helpService.limitTo(str, num);
+		  if(str.length> num)
+		  {
+			  retVal += "...";
+		  }
 		  return retVal;
 	  }
   }

@@ -203,3 +203,34 @@
 /*-----------------------------------------------------------------------------------*/
 /* footer ends
 /*-----------------------------------------------------------------------------------*/
+
+
+.stickyfooter
+{
+  position: fixed;
+  right: 30px;
+  bottom: 30px;
+  width: 50px;
+  height:50px;
+  display:none;
+ background:#555;
+ border-radius: 50%;
+ z-index:1000;
+  a
+  {
+    display: inline-block;
+    text-decoration: none;
+    font-size: 25px;
+    line-height: 50px;
+    text-align: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    color:#FFF;
+  }
+}
+
+.showBtn
+{
+  display:block;
+}

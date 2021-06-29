@@ -10,14 +10,18 @@ import { Router, ActivatedRoute } from "@angular/router";
 export class FooterComponent implements OnInit {
   labels: any;
   subscribe: any = {};
+  rootElement: any;
+
+
   constructor(private helpService:HelpService, private dbService: DBService, private router: Router, private route: ActivatedRoute) {
     //console.log('Footer constructor called');
   }
 
   ngOnInit() {
+  
     this.subscribe["email"] ="";
     this.labels={"companyName":this.helpService.getConstants("companyName"), "copyright":this.helpService.getConstants("copyright"), "contactNo":this.helpService.getConstants("contactNo"), contactEmail:this.helpService.getConstants("contactEmail") };
-
+    document.addEventListener("scroll", this.handleScroll);
   }
   subscribeEmail()
   {
@@ -45,4 +49,30 @@ export class FooterComponent implements OnInit {
         this.router.navigate([page]);
     
     }
+
+    gotoTop()
+    {
+      console.log("goto top");
+      window.scrollTo(0, 0);
+    }
+
+    
+ 
+    handleScroll()
+    {
+
+      var scrollToTopBtn = document.getElementById("stickyfooter");
+
+      scrollToTopBtn.addEventListener("click", this.gotoTop)
+
+     var scrollTotal = document.documentElement.scrollTop;
+
+     if (scrollTotal > 100 ) {
+       // Show button
+       scrollToTopBtn.classList.add("showBtn");
+     } else {
+       // Hide button
+       scrollToTopBtn.classList.remove("showBtn");
+     }
+   }
 }

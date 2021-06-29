@@ -16,6 +16,11 @@
 @import "styles/common.scss";
 @import "styles/placeholder.scss";
 
+html {
+  scroll-behavior: smooth;
+}
+
+
 body
 {
 

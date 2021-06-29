@@ -89,7 +89,7 @@
                   </div>
 
                   <div class="col-md-8 col-lg-7">
-                     <div class="row">
+                     <div class="row animated wow bounceInRight">
                         <ng-container  *ngFor="let hLabel of healthLabels; let h=index;">
                         <div class="mb-5 col-6 col-lg-3 col-md-3"  *ngIf="h <8"> 
                            <div class=" px-sm-0">
@@ -125,7 +125,7 @@
                <div class="row" style="padding-left:0px; padding-right:0px; margin-bottom:15px !important" >
                    <ng-container  *ngFor="let cItem of collectionsList; let i = index;">
                   <div style="padding-left:0px; padding-right:0px;margin-top:15px;margin-bottom:15px" class="col-12 col-lg-3 col-md-4" >
-                      <div class="recipe-item" style="min-height:200px;background-size:cover;  background-position:center;  " (click)="gotoRecipeDetails('collection', cItem.id)" [ngStyle]="{'background-image':'linear-gradient(
+                      <div class="recipe-item animated wow flipInX" style="min-height:200px;background-size:cover;  background-position:center;  " (click)="gotoRecipeDetails('collection', cItem.id)" [ngStyle]="{'background-image':'linear-gradient(
                           rgba(0, 0, 0, 0.3),
                           rgba(0, 0, 0, 0.3)
                         ),url(' + cItem.image + ')'}">
