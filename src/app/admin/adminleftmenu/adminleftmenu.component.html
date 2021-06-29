@@ -1,12 +1,16 @@
 
 
-<div class="containeradmin" style="margin-bottom:15px;">
+<div class="containeradmin" style="margin-bottom:15px;
+min-height: 300px;
+background: #f1f2f3;
+border-radius: 15px;
+box-shadow: 0 1rem 1.5rem rgb(0 0 0 / 25%);">
 
 
 		<ul class="sidemenu">
 		  <li [ngClass]="aitem.active?' active ':' '"  *ngFor="let aitem of amenuItems; let i = index;">
 			  <a href="javascript:void(0);" (click)="setmenu(aitem)">
-			  	<i class="fa fa-{{aitem.icon}}"></i>
+			  	<!--<i class="fa fa-{{aitem.icon}}"></i>-->
 				  <strong> {{aitem.menu}} </strong> 
 				</a>
 
