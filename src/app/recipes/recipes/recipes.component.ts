@@ -50,7 +50,7 @@ export class RecipesComponent implements OnInit {
 	filterOpts: any;
 	sortType: any = "";
 	showFilters: boolean = false;
-	isAdmin: boolean = false;
+	isUser: any = {};
 	constructor(private router: Router, private toastr: ToastrService, private route: ActivatedRoute, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder, private modalService: ModalService) {
 
 	}
@@ -143,9 +143,9 @@ export class RecipesComponent implements OnInit {
 			this.showNutrientsFlag = this.helpService.showorhideNutritions(this.role);
 
 			console.log(this.showNutrientsFlag);
-			this.isAdmin = this.helpService.isAdmin(this.currentUser);
+			
 		}
-
+		this.isUser = this.helpService.setUserRoles(this.currentUser);
 
 		this.totalPage = 1;
 		this.page_num = 0;

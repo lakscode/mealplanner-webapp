@@ -656,3 +656,34 @@ ol.gradient-list {
     }
   }
 }
+
+
+
+.nutritionitems
+{
+  padding: 10px 0px;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+  .neitem
+  {
+    color: #000;
+    display: block;
+    padding: 10px 10px;
+    font-size:14px;
+    font-family: 'Lora', serif;
+    .itemname
+    {
+      display:inline-block;
+      width:50%
+    }
+    .itemqty
+    {
+      display:inline-block;
+      width:50%;
+    }
+  }
+  
+  .neitem:nth-child(2n) {
+    background-color: rgb(247, 250, 252);
+  }
+}

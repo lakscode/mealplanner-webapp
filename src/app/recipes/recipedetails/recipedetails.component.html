@@ -149,7 +149,8 @@
              </ul>
              <div style="height: 70px ; width:100%; display:block;"></div>
         </div>
-        <div class="nutritional ">
+        <div class="nutritional " style="background-color: transparent;
+        border-left: 1px solid #f1f2f3;">
             <h3>Nutrients</h3><p style="clear:both"></p>
             <div style="display:block">
                 <label class="container" style=" text-align: left;
@@ -162,20 +163,39 @@
                         <span class="checkmark"></span>
                 </label>
             </div>
-            <div class="newitems">
-            <ng-container *ngFor="let macro of paramMicro; let m=index; ">
-                <div class="nutrition-detail newitem">
-                    <div class="left-box">
-                        {{paramMicro[m].label}}
-                        <br>
-                        <span *ngIf="!perServingFlag">{{paramMicro[m].totalP}} {{paramMicro[m].unit}}</span>
-                        <span *ngIf="perServingFlag">{{(paramMicro[m].totalP/searchRes.yield).toFixed(1)}}&nbsp;{{paramMicro[m].unit}}</span>
-                        
+            <div class="newitems" *ngIf="!isUser['dietitian']">
+                <ng-container *ngFor="let macro of paramMicro; let m=index; ">
+                    <div class="nutrition-detail newitem">
+                        <div class="left-box">
+                            {{paramMicro[m].label}}
+                            <br>
+                            <span *ngIf="!perServingFlag">{{paramMicro[m].totalP}} {{paramMicro[m].unit}}</span>
+                            <span *ngIf="perServingFlag">{{(paramMicro[m].totalP/searchRes.yield).toFixed(1)}}&nbsp;{{paramMicro[m].unit}}</span>
+                            
+                        </div>
+                    
                     </div>
-                   
-                </div>
-            
-            </ng-container></div>
+                
+                </ng-container>
+            </div>
+
+            <div class="nutritionitems" *ngIf="isUser['dietitian']">
+                <ng-container *ngFor="let macro of paramMicro; let m=index; ">
+                    <div class="neitem">
+                        <div class="itemname">
+                            {{paramMicro[m].label}}
+                        </div>
+                        <div class="itemqty">
+                            <span *ngIf="!perServingFlag">{{paramMicro[m].totalP}} {{paramMicro[m].unit}}</span>
+                            <span *ngIf="perServingFlag">{{(paramMicro[m].totalP/searchRes.yield).toFixed(1)}}&nbsp;{{paramMicro[m].unit}}</span>
+                        </div>
+                       
+                    
+                    </div>
+                
+                </ng-container>
+            </div>
+
         </div>
     </div>
 

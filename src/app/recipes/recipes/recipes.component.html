@@ -331,7 +331,7 @@
                                         <a class="menu" href="javascript:void(0)"
                                             (click)="gotoRecipeDetails( recipe1.id)"><i class="fa fa-list"></i>View
                                             Recipe</a>
-                                        <a *ngIf="isAdmin" (click)="makeacopy(recipe1)" class="menu"
+                                        <a *ngIf="isUser['dietitian']" (click)="makeacopy(recipe1)" class="menu"
                                             href="javascript:void(0)"><i class="fa fa-clone"></i>Make a Copy</a>
                                         <a (click)="recipe1.showpopup = false; addCollectionsPopup(recipe1)"
                                             class="menu" href="javascript:void(0)"><i

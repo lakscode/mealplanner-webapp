@@ -114,6 +114,7 @@ isUser: any = {};
 		this.getFavouriteStatus();
 		this.getRating();
 		}
+		
 		this.isUser = this.helpService.setUserRoles(this.currentUser);
 		console.log(this.isUser);
 	}
