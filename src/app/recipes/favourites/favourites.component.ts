@@ -39,6 +39,8 @@ export class FavouritesComponent implements OnInit {
 	page_length: any = 9;
 	displayList: Array<any> = [];
 	showpopupflag: boolean = false;
+	loadingData: boolean = false;
+	noResult:boolean = false;
 	constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
 	
 	}
@@ -51,6 +53,7 @@ export class FavouritesComponent implements OnInit {
 		this.searchmorebar = false;
 	//	this.dietLabelsList = constants.dietLabels;
 		this.dietLabelsList= [];
+		this.loadingData =  false;
 		for(let d=0; d < constants.dietLabels.length; d++)
 		{
 			this.dietLabelsList.push({"name":constants.dietLabels[d], "selected":false})
@@ -118,6 +121,7 @@ export class FavouritesComponent implements OnInit {
 
 	loadRecipes()
 	{
+		this.loadingData = true;
 	  this.recipesList1 = [];
 	  this.recipesList2 = [];
 	 var params = {};
@@ -147,6 +151,13 @@ export class FavouritesComponent implements OnInit {
 		 
 		  this.getDisplayList();
 		  this.loadRatings();
+		  //this.loadingData = false;
+
+		
+		} else {
+		this.loadingData = false;
+		this.noResult =  true;
+
 		}
 	  }
 	
@@ -187,6 +198,7 @@ export class FavouritesComponent implements OnInit {
 	{
 		
 		this.displayList=[];
+		this.loadingData = true;
 		var startIndex= this.page_num*this.page_length;
 		var endIndex = this.page_length;
 
@@ -202,8 +214,21 @@ export class FavouritesComponent implements OnInit {
 		this.displayList.push(this.recipesList1[i]);
 		
 		}
+
+		if(this.displayList.length == 0){
+		this.noResult = true;
+		this.loadingData = false;
+		
+
+		}else {
+		this.noResult = false;
+		this.loadingData = false;
+		}
+		console.log(this.noResult);
+		console.log(this.loadingData);
 	
 		window.scrollTo(0, 0);
+
 	}
 
 	loadRatings()
