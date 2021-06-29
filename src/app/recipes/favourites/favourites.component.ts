@@ -37,6 +37,7 @@ export class FavouritesComponent implements OnInit {
 	totalPage: any = 0;
 	page_length: any = 9;
 	displayList: Array<any> = [];
+	showpopupflag: boolean = false;
 	constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
 	
 	}
@@ -279,6 +280,20 @@ export class FavouritesComponent implements OnInit {
 	//  console.log(retImage);
 	  return retImage;
 	}
+
+	
+
+	showhidecontent(recipe)
+{
+	recipe.showpopup = !recipe.showpopup
+	for(let r = 0; r < this.displayList.length; r++)
+	{
+		if(recipe.id !== this.displayList[r]["id"])
+		{
+			this.displayList[r]["showpopup"] = false;
+		}
+	}
+}
 
 	setListorGrid(opt)
 	{
