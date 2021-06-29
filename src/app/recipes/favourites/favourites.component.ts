@@ -25,6 +25,7 @@ export class FavouritesComponent implements OnInit {
 	currentUser: any;
 	searchparam: any ; 
 	ratingIds: any;
+	favStatus: any= null;
 	ratingsArr: Array<any> = [];
 	listorgrid: any = {};
 	private onDestroy$: Subject<void> = new Subject<void>();
@@ -37,6 +38,7 @@ export class FavouritesComponent implements OnInit {
 	totalPage: any = 0;
 	page_length: any = 9;
 	displayList: Array<any> = [];
+	showpopupflag: boolean = false;
 	constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
 	
 	}
@@ -279,6 +281,50 @@ export class FavouritesComponent implements OnInit {
 	//  console.log(retImage);
 	  return retImage;
 	}
+
+	removeFavourite(id)
+{
+ var params = {};
+  this.favStatus = null; 
+  if(typeof(this.currentUser["id"]) !== "undefined" && this.currentUser["id"] !== null && this.currentUser["id"] !== "")
+  {
+	params["userid"] = this.currentUser["id"];	
+	params["recipeid"] = id; 
+	var res =   this.dbService.getDataByTable("favourites", params).subscribe(invData => setTimeout(() => {
+	   if(invData !== null)
+	  {
+		if(invData["body"]['length'] > 0)
+		{
+		  this.favStatus = invData["body"][0];
+		  this.removeFav();
+		}
+	  }
+	}));
+  }
+}
+
+removeFav(){
+  var params1 = {};
+  if(typeof(this.favStatus["id"]) !== "undefined" && this.favStatus["id"] !== null && this.favStatus["id"] !== "")
+  {
+	params1["id"] = this.favStatus["id"];
+	var res =   this.dbService.deleteDataByTable("favourites", params1).subscribe(invData => setTimeout(() => {
+	 this.loadRecipes();
+	}));
+  }
+}
+
+	showhidecontent(recipe)
+{
+	recipe.showpopup = !recipe.showpopup
+	for(let r = 0; r < this.displayList.length; r++)
+	{
+		if(recipe.id !== this.displayList[r]["id"])
+		{
+			this.displayList[r]["showpopup"] = false;
+		}
+	}
+}
 
 	setListorGrid(opt)
 	{
