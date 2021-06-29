@@ -166,7 +166,7 @@
         <button class="closebtn" (click)="closeModal()">x
         </button>
         <div style="margin-top:0px;" class='item-heading' >Add {{getFLU(modalText)}}</div>
-        <div>
+        <div style="font-size: 14px;">
           <input type="checkbox" [(ngModel)]="planDay['forall'][modalText]"> For all remaining days {{getFLU(modalText)}}
         </div>
       
@@ -176,7 +176,7 @@
  
       </div>
       <div class="row">
-        <div class="col-4 ">
+        <div class="col-6 ">
           <div [ngClass]="filterFlag?'filters active':'filters'">
             <a href="javascript:void(0)" (click)="setFilters()">
                 <i class="fa fa-sliders" aria-hidden="true"></i> 
@@ -184,15 +184,15 @@
             </a>
           </div>
         </div>
-        <div class="col-4 paddinglr0">
+        <!--<div class="col-4 paddinglr0">
           <div class='filters'>
             <a href="javascript:void(0)" (click)="clearFilters()">
                 <i class="fa fa-times" aria-hidden="true"></i>
               My Recipes
             </a>
           </div>
-        </div>    
-        <div class="col-4 ">
+        </div> -->   
+        <div class="col-6 ">
           <div class='filters'>
             <a href="javascript:void(0)" (click)="clearFilters()">
                 <i class="fa fa-times" aria-hidden="true"></i>
