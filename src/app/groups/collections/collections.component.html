@@ -64,7 +64,7 @@
                                 </a>
 
                                 <div class="detail">
-                                    <a title="cItem.collection_name" (click)="gotopage('collection', {'id':cItem.id});"><h3 style="font-size:16px">{{limitTo(cItem.collection_name, 23)}}</h3></a>
+                                    <a title="{{cItem.collection_name}}" (click)="gotopage('collection', {'id':cItem.id});"><h3 style="font-size:16px">{{limitTo(cItem.collection_name, 23)}}</h3></a>
                                      
                                      <div class="ccount"><span style="font-size:14px" *ngIf="cItem.userscount > 0"><i class="fa fa-user"></i> {{cItem.userscount}} Members, </span>
                                    <span style="font-size:14px" *ngIf="cItem.recipecount > 0"><i class="fa fa-cutlery"></i> {{cItem.recipecount}} Recipes</span>

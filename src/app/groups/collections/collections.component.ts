@@ -45,7 +45,7 @@ export class CollectionsComponent implements OnInit {
 	role: any = {};
 	showNutrientsFlag: boolean = false;
 	apiUrl: any;
-	isAdmin: boolean = false;
+	isUser: any = {};
 	constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder, private modalService: ModalService) {
 	this.collection = {};
 	}
@@ -95,9 +95,10 @@ export class CollectionsComponent implements OnInit {
 		  console.log( this.currentUser["displayname"]);
 		  this.role = this.helpService.getRoleStatus(this.currentUser);
 
-		  this.isAdmin = this.helpService.isAdmin(this.currentUser);
-		}
+		  
 		
+		}
+		this.isUser = this.helpService.setUserRoles(this.currentUser);
 	
 	  this.totalPage = 1;
 	 this.page_num = 0;
@@ -235,10 +236,11 @@ endIndex = startIndex+ endIndex;
 		console.log(params);
 
 		var params = {"query": "SELECT c.*, COUNT(rm.id) AS recipecount, u.email, u.firstname, u.lastname FROM collection AS c LEFT JOIN recipe_mapping AS rm ON c.id = rm.collection_id LEFT JOIN users AS u ON c.created_by = u.id "};
-	//	if(!this.isAdmin)
-	//	{
-			params["query"] += " where c.status = 1 ";
-	//	}
+		
+		if(!this.isUser["dietitian"])
+		{
+			params["query"] += "  where (c.status =1 OR c.created_by = " + this.currentUser["id"] + ") ";
+		}
 		params["query"] += " GROUP BY c.id";
 
 		var res =   this.dbService.getDatabyTablebyQuery("collection", params).subscribe(invData => setTimeout(() => {
@@ -300,6 +302,12 @@ endIndex = startIndex+ endIndex;
 	console.log("saveRecipebook");
 	console.log(this.collection);
 	var params = {};
+	params["status"]  = 0;
+	
+	if(this.isUser["dietitian"])
+	{
+		params["status"]  = 1
+	}
 	
 	if(this.collection["collection_name"] !== "")
 	{
@@ -308,8 +316,6 @@ endIndex = startIndex+ endIndex;
 		if(typeof(this.collection["description"]) !== "undefined" && this.collection["description"] !== "")
 		params["description"] = this.collection["description"];
 
-		//if(typeof(this.collection["notes"]) !== "undefined" && this.collection["notes"] !== "")
-		params["notes"] = this.collection["notes"];
 
 		if(typeof(this.collection["image"]) !== "undefined" && this.collection["image"] !== "")
 		params["image"] = this.collection["image"];
@@ -322,6 +328,9 @@ endIndex = startIndex+ endIndex;
 		if(typeof(this.currentUser["id"]) !== "undefined" && this.currentUser["id"] !== "")
 		params["created_by"] = this.currentUser["id"];
 		}   
+
+		console.log(params);
+		
 		if(typeof(this.collection.id) !== "undefined"  && this.collection.id !== "")
 		{
 			console.log("updating");
@@ -360,6 +369,8 @@ endIndex = startIndex+ endIndex;
 			}));
 			 this.modalService.close('createNew');
 		}
+
+		
 	}	
 
 }
