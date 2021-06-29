@@ -304,7 +304,8 @@
     <div class="recipe-comments" *ngIf="isloggedIn && searchRes && searchRes.label && commentsList && commentsList.length">
         <h3 class="lined">Comments <span *ngIf="commentsCount">({{commentsCount}})</span></h3>
         <ul>
-            <li *ngFor="let comment of commentsList; let c = index;">
+            <ng-container *ngFor="let comment of commentsList; let c = index;">
+            <li *ngIf="comment.message !== '' || comment.image !== '' ">
                 <div class="avatar">
                     <a href="javascript:void(0)" *ngIf="comment.profileimage"><img  style="max-width: 50px" src="{{comment.profileimage}}" alt="avatar"></a>
                      <a href="javascript:void(0)" *ngIf="!comment.profileimage"><img style="max-width: 50px"  src="assets/user-icon.png" alt="avatar"></a>
@@ -315,11 +316,11 @@
                     <p>
                         {{comment.message}}
                     </p>
-                  
+                    <img *ngIf="comment.image !== '' " style="width:200px; height: 150px; object-fit: cover;" src="{{comment.image}}" />
                 </div>
     
             </li>
-
+            </ng-container>
         </ul>
     </div>
     
