@@ -59,9 +59,9 @@ constructor(private router: Router, private httpClient : HttpClient, private san
 
 		this.getPlanStatus();
 		this.count++;
-		this.defaultRecipeofTheDay();
-		if(this.RecipeoftheDay["length"] == 0)
-		this.checkRecipeoftheDay();
+	//	this.defaultRecipeofTheDay();
+	//	if(this.RecipeoftheDay["length"] == 0)
+	//	this.checkRecipeoftheDay();
 
 		this.loadHealthLabels();
 	
@@ -81,35 +81,7 @@ constructor(private router: Router, private httpClient : HttpClient, private san
 				this.defaultRecipeofTheDay();
 			  }
 			});  
-/*
-			var cuisineTypes = [];
-			var uniquerType = [];
-			this.httpClient.get('assets/data/cuisineTypes.json').subscribe(
-				cuisineTypesData => {        
-			
-					cuisineTypes = cuisineTypesData["body"];
-					uniquerType= [];
-				
-					for(let i =0 ; i < cuisineTypes.length; i++)
-					{
-						var temp = cuisineTypes[i]["cuisineType"];
-						if(temp !== "")
-						{
-							var temp1 = temp.split("~");
-							for(let j=0; j < temp1.length; j++)
-							{
-								var fIndex = uniquerType.findIndex(x=> (x.toLowerCase() === temp1[j].toLowerCase()));
-								if(fIndex == -1)
-								{
-									uniquerType.push(temp1[j]);
-								}
-							}
-						}
-					}
-					////console.log(uniquerType);
-				 
-				});  
-*/
+
 	}
 	loadRecommendedRecipes()
 	{

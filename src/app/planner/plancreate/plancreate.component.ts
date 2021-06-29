@@ -753,10 +753,13 @@ this.loadColorCodes();
 		for(let i=0; i <this.plan["days"][r]["meals"]["length"]; i++)
 		{
 			console.log(this.plan["days"][r]["meals"][i]);
-			if(typeof(this.plan["days"][r]["meals"][i]["calories"]) !== "undefined")
+			if(typeof(this.plan["days"][r]["meals"][i]["recipe"]) !== "undefined" && this.plan["days"][r]["meals"][i]["recipe"] !== null)
 			{
-				console.log( parseInt(this.plan["days"][r]["meals"][i]));
-				totalCals += parseInt(this.plan["days"][r]["meals"][i]["calories"]) / parseInt(this.plan["days"][r]["meals"][i]["yield"]);
+				if(typeof(this.plan["days"][r]["meals"][i]["recipe"]["calories"]) !== "undefined")
+				{
+					console.log( parseInt(this.plan["days"][r]["meals"][i]["recipe"]));
+					totalCals += parseInt(this.plan["days"][r]["meals"][i]["recipe"]["calories"]) / parseInt(this.plan["days"][r]["meals"][i]["recipe"]["yield"]);
+				}
 			}
 		}
 
