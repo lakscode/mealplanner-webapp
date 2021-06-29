@@ -421,10 +421,10 @@ loadMealPlan()
   {
     this.mealplans = [];
    // this.recipes = recipesList;
-    var params = {"query": "SELECT * FROM mealplan where status='1' ORDER BY RAND() LIMIT 1"};
+    var params = {"query": "SELECT * FROM mealplan where status=1 ORDER BY RAND() LIMIT 1"};
     // //////console.log(JSON.stringify(params));
     var res =   this.dbService.getDatabyTablebyQuery("mealplan", params).subscribe(invData => setTimeout(() => {
-  
+		console.log(invData);
      if(invData !== null && typeof(invData["body"]) !== "undefined" && invData["body"] !== null && invData["body"]["length"] > 0)
        {
          this.mealplans = [];
