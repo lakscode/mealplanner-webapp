@@ -35,7 +35,7 @@
                                         </div>
                              
                                  <a (click)="gotoRecipeDetails(recipe1.id)">
-                                    <img *ngIf="recipe1.image !== ''" src="{{recipe1.image}}"
+                                    <img *ngIf="recipe1.image !== ''" src="{{formatImage(recipe1, 'm')}}"
                                         alt="image">
                                      <img *ngIf="recipe1.image == ''"  src="assets/notavailable.png" alt="{{recipe1.label}}">
                                 </a>

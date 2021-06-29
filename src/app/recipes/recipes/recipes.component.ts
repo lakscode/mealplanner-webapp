@@ -376,12 +376,15 @@ export class RecipesComponent implements OnInit {
 		return retVal;
 	}
 
-	formatImage(image, type) {
+	formatImage(recipe, type) {
 		//  console.log(image);
-		var retImage = image;
-		if (image !== "" && type !== "") {
-			retImage = this.helpService.formatImage(image, type);
+		var retImage = recipe.image;
+		if(recipe.created_by == -1)
+		{
+		if (recipe.image !== "" && type !== "") {
+			retImage = this.helpService.formatImage(recipe.image, type);
 
+		}
 		}
 		//  console.log(retImage);
 		return retImage;
@@ -457,7 +460,7 @@ export class RecipesComponent implements OnInit {
 
 
 		// params["cuisineType"] = "american";
-		params["returnfields"] = " id, label, image, cuisineType, mealType, healthLabels, dietLabels, calories, yield";
+		params["returnfields"] = " id, label, image, cuisineType, mealType, healthLabels, dietLabels, calories, yield, created_by";
 
 		var dietlabels = "";
 		for (let m = 0; m < this.dietLabelsList.length; m++) {
@@ -572,7 +575,7 @@ export class RecipesComponent implements OnInit {
 
 			var params1 = {};
 
-			var query = "select id, label, image, cuisineType, healthLabels, mealType, dietLabels, calories, yield from recipes ";
+			var query = "select id, label, image, cuisineType, healthLabels, mealType, dietLabels, calories, yield,  created_by from recipes ";
 			var where = " where status = 1 AND totalNutrients != '' AND digest != ''  AND s_instructions != '' ";
 			if(!paramsAdded)
 			{

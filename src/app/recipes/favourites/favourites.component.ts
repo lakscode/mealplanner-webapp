@@ -123,7 +123,7 @@ export class FavouritesComponent implements OnInit {
 	 var params = {};
  
 	 
-	  params["query"] = "select id, label, image, healthLabels, s_instructions, dietLabels, calories,s_instructions  from recipes  where id in (select recipeid from favourites where userid ='" + this.currentUser["id"] + "')";
+	  params["query"] = "select id, label, image, healthLabels, dietLabels, calories, created_by  from recipes  where id in (select recipeid from favourites where userid ='" + this.currentUser["id"] + "')";
 	
 	  console.log(JSON.stringify(params));
 	 var res =   this.dbService.getDatabyQuery("recipes", params).subscribe(invData => setTimeout(() => {
@@ -269,17 +269,18 @@ export class FavouritesComponent implements OnInit {
 		return retVal;
 	}
 
-	formatImage(image, type)
-	{
-	//  console.log(image);
-	  var retImage = image;
-	  if(image !== "" && type !== "")
-	  {
-		retImage = this.helpService.formatImage(image, type);
-		
-	  }
-	//  console.log(retImage);
-	  return retImage;
+	formatImage(recipe, type) {
+		//  console.log(image);
+		var retImage = recipe.image;
+		if(recipe.created_by == -1)
+		{
+		if (recipe.image !== "" && type !== "") {
+			retImage = this.helpService.formatImage(recipe.image, type);
+
+		}
+		}
+		//  console.log(retImage);
+		return retImage;
 	}
 
 	removeFavourite(id)
