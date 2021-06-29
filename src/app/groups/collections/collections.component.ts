@@ -327,6 +327,8 @@ endIndex = startIndex+ endIndex;
 			console.log("updating");
 			params["id"] = this.collection.id;
 			console.log(params);
+			try
+			{
 			var res =   this.dbService.updateDataByTable("collection", params).subscribe(recipeData => setTimeout(() => {
 				console.log(recipeData);
 				//this.toastr.success('Updated Recipe Book!', 'Recipe Book!');	
@@ -334,7 +336,13 @@ endIndex = startIndex+ endIndex;
 				this.searchProps();
 				
 			}));
+			}
+			catch(error)
+			{
+				
+			}
 			 this.modalService.close('createNew');
+			 
 		}
 		else
 		{

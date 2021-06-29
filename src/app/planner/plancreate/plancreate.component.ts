@@ -1002,15 +1002,22 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 		params["id"]  =  this.plan["mealplanid"] 
 
 		console.log(params);
-		var res =   this.dbService.updateDataByTable("mealplan", params).subscribe(invData => setTimeout(() => {
-console.log(invData);
-			if(invData !== null)
-			{
-				this.updatingFlag = false;
-			//	this.toastr.success('Meal Plan has been saved!!!', 'Meal Plan!');
-			}
+		try
+		{
+			var res =   this.dbService.updateDataByTable("mealplan", params).subscribe(invData => setTimeout(() => {
+				console.log(invData);
+				if(invData !== null)
+				{
+					this.updatingFlag = false;
+				//	this.toastr.success('Meal Plan has been saved!!!', 'Meal Plan!');
+				}
 
-		}));
+			}));
+		}
+		catch(error)
+		{
+			
+		}
 		}
 
 			
@@ -1046,15 +1053,21 @@ limitTo(str, num)
 		if(typeof(this.plan["mealplanid"]) !== "undefined" && this.plan["mealplanid"] !== "")
 		{
 		params["id"]  =  this.plan["mealplanid"] 
-
-		var res =   this.dbService.updateDataByTable("mealplan", params).subscribe(invData => setTimeout(() => {
-
-			if(invData !== null)
+			try
 			{
-				this.updatingFlag = false;
-			}
+				var res =   this.dbService.updateDataByTable("mealplan", params).subscribe(invData => setTimeout(() => {
 
-		}));
+					if(invData !== null)
+					{
+						this.updatingFlag = false;
+					}
+
+				}));
+			}
+			catch(error)
+			{
+				
+			}
 		}
 		else
 		{
@@ -1250,21 +1263,27 @@ limitTo(str, num)
       {
 
         params["id"] = this.plan["days"][r]['dayid'];
-  
-        var res =   this.dbService.updateDataByTable("days", params).subscribe(dData => setTimeout(() => {
+		try
+		{
+			var res =   this.dbService.updateDataByTable("days", params).subscribe(dData => setTimeout(() => {
 
-          if(dData !== null)
-          {
-            if(dData["result"] !== null && dData["result"] !== "")
-            {
-        
-            }
-            else{
-           
-            }
-          }
-      
-        }));
+			if(dData !== null)
+			{
+				if(dData["result"] !== null && dData["result"] !== "")
+				{
+			
+				}
+				else{
+			
+				}
+			}
+		
+			}));
+		}
+		catch(error)
+		{
+			
+		}
       }
     }  
   }

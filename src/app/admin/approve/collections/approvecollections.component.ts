@@ -214,12 +214,19 @@ approvechanges(collection)
 		params["approved_by"] = this.currentUser["id"];
 		params["status"] = "1";
 		params["id"] = collection["id"];
+		try
+		{
 		var res =   this.dbService.updateDataByTable("collection", params).subscribe(invData => setTimeout(() => {
 			console.log("Modified collection");
 			this.toastr.success('Collection ' + collection["collection_name"]  + " has been approved.", 'Manage Collections!');
 			this.loadData();
 		}
 		));
+		}
+		catch(error)
+		{
+			
+		}
 	}
 	}
 }
@@ -238,11 +245,18 @@ rejectchanges(collection)
 			params["status"]= "2";
 			params["approved_by"] = this.currentUser["id"];
 			console.log(params);
+			try
+			{
 			var res =   this.dbService.updateDataByTable("collection", params).subscribe(invData => setTimeout(() => {
 				this.toastr.warning('Collection ' + collection["collection_name"]  + " has been rejected.", 'Manage Collections!');
 				console.log("Rejected the changes collection");
 				this.loadData();
 			}));
+			}
+			catch(error)
+			{
+				
+			}
 		}
 	}
 

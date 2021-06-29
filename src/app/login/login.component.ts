@@ -187,9 +187,16 @@ export class LoginComponent implements OnInit {
       
 						
 						console.log(paramsUpdate);
-           				var res =   this.dbService.updateDataByTable("users", paramsUpdate).subscribe(invData => setTimeout(() => {
-            				console.log("successfully updated");
-						}));
+						try
+						{
+							var res =   this.dbService.updateDataByTable("users", paramsUpdate).subscribe(invData => setTimeout(() => {
+								console.log("successfully updated");
+							}));
+						}
+						catch(error)
+						{
+							
+						}
             		}
             		sessionStorage.setItem("currentUser", JSON.stringify(userDataSocial));
 					let username = this.userService.setUser(userDataSocial);

@@ -219,6 +219,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
 	}
 	setUniqueid()
 	{
+		if(typeof(this.currentUser["id"]) !== "undefined" && this.currentUser["id"] == "")
+        {
 		if(typeof(this.currentUser["uniqueid"]) == "undefined" || this.currentUser["uniqueid"] == "")
         {
           var uniqueid =  localStorage.getItem("uniqueid");
@@ -228,11 +230,18 @@ export class HeaderComponent implements OnInit, OnDestroy {
             var params = {};
             params["id"] = this.currentUser["id"];
             params["uniqueid"] = uniqueid;
-   
-            var res =   this.dbService.updateDataByTable("users", params).subscribe(invData => setTimeout(() => 
-            {
+			try
+			{
+				var res =   this.dbService.updateDataByTable("users", params).subscribe(invData => setTimeout(() => 
+				{
 
-            }));
+				}));
+			}
+			catch(error)
+			{
+				console.log(error);
+				
+			}
           }
         }
         
@@ -245,14 +254,21 @@ export class HeaderComponent implements OnInit, OnDestroy {
             var params = {};
             params["id"] = this.currentUser["id"];
             params["user_ipaddress"] = ipaddress;
-      
-            var res =   this.dbService.updateDataByTable("users", params).subscribe(invData => setTimeout(() => 
-            {
+			try
+			{
+				
+				var res =   this.dbService.updateDataByTable("users", params).subscribe(invData => setTimeout(() => 
+				{
 
-            }));
+				}));
+			}
+			catch(error)
+			{
+				console.log(error);
+			}
           }
         }
-
+	}
 	}
 	setIconMenu()
 	{
@@ -295,9 +311,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
 	setMenuActive()
 	{
-		console.log("in setmenuactive");
-		console.log(this.router.url);
-
 		for(let i=0; i < this.menuItems.length; i++)
 		{
 			this.menuItems[i]["active"] = false;
@@ -337,9 +350,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
 				}
 			}	
 		}
-		
-		console.log(this.menuItems);
-		console.log(this.menuItems1);
 	}
 	
 	
@@ -368,27 +378,21 @@ export class HeaderComponent implements OnInit, OnDestroy {
 	navbarOpen = false;
 
 	toggleNavbar(aitem) {
-
 		this.navbarOpen = !this.navbarOpen;
-
 		if(typeof(aitem) !== "undefined" && aitem !== "")
 		this.setmenu(aitem);
-
 	}
 	
 	setmenu(aitem)
 	{
-
 		for(let i=0; i< this.menuItems.length; i++)
 		{
 			let tempItem = this.menuItems[i];
 			tempItem.active=false;
-		}
-		
+		}		
 
 		if(aitem !== "")
-		aitem.active = true;
-		
+		aitem.active = true;		
 	}
 
 	toggleNavbarCustom(item) {
@@ -431,7 +435,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 	}
 	searchparams()
 	{
-		console.log(this.searchparam);
+
 		if(this.searchparam !== "")
 		{
 			this.router.navigate(["searchresults", {param:this.searchparam}]);

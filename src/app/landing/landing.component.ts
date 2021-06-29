@@ -918,7 +918,16 @@ transform(value: any) {
 
 	}
 
-
+	setFLU(str)
+	{
+		var retValue = str;
+		if(str !== "")
+		{
+			retValue = this.helpService.setInputFirstToUppercase(str);
+		}
+		return retValue;
+	}
+	
 }
 
 	

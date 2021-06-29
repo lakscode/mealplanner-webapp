@@ -123,7 +123,7 @@ export class  QuestionnaireComponent implements OnInit {
 			}
 
 		}
-		console.log(this.questions[o]);
+		
 	}
   }
   complete()
@@ -131,8 +131,7 @@ export class  QuestionnaireComponent implements OnInit {
 
 	console.log(this.params);
     this.processing = true;
-    console.log("complete");
-    console.log(this.params);
+    
 	delete this.params["tablename"];
 
     var uniqueid =  localStorage.getItem("uniqueid");
@@ -146,12 +145,11 @@ export class  QuestionnaireComponent implements OnInit {
 	{
 		if(typeof(this.params["question" + p]) !== "undefined" && this.params["question" + p] !== "")
 		{
-			console.log("p " + p);
-			console.log(this.params["question"]  + p.toString());
+		
 			paramsr["question" + p.toString()] = this.params["question" + p.toString()];
 		}
 	}
-    //uniqueid = "1a15067e-ab63-a2ed-3582-220714793548";
+
     this.uniqueid = uniqueid;
     if(this.params["user_uniqueid"] == "" || (typeof(uniqueid) !== "undefined" && uniqueid !== null && uniqueid !== ""))
     {
@@ -176,26 +174,33 @@ export class  QuestionnaireComponent implements OnInit {
     if(typeof(this.currentUser["id"]) !== "undefined" || this.currentUser["id"] !== "" || (typeof(uniqueid) !== "undefined" && uniqueid !== null && uniqueid !== "") || (typeof(ipaddress) !== "undefined" && ipaddress !== null && ipaddress !== ""))
     {
     
-		console.log(paramsr);
+	
 		if(typeof(paramsr["id"] ) !== "undefined" && paramsr["id"] !== "")
 		{
 			console.log("updaitn gquesitons");
-			var res =   this.dbService.updateDataByTable("questionnaire", paramsr).subscribe(invData => setTimeout(() => {
-				this.processing = false;
+			try
+			{
+				var res =   this.dbService.updateDataByTable("questionnaire", paramsr).subscribe(invData => setTimeout(() => {
+					this.processing = false;
+			
+					localStorage.setItem("q_complete","true");
+					localStorage.setItem("questions", JSON.stringify(paramsr));
+			
+					if( this.currentUser["id"] !== "")
+					{
+						this.router.navigate(["landing"]);
+					}
+					else
+					{
+						this.router.navigate(["pricing"]);
+					}
 		
-				localStorage.setItem("q_complete","true");
-				localStorage.setItem("questions", JSON.stringify(paramsr));
-		
-				if( this.currentUser["id"] !== "")
-				{
-					this.router.navigate(["landing"]);
-				}
-				else
-				{
-					this.router.navigate(["pricing"]);
-				}
-		
-			  }));
+			  	}));
+			}
+			catch(error)
+			{
+				
+			}
 		}
 		else
 		{

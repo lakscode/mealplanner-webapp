@@ -81,9 +81,9 @@
                     <p class="mtype">{{SetFLU(mealtype)}} &nbsp;</p>
                   </div>
                   <div [ngClass]="showNutrientsFlag?'col-8':'col-9'">
-                    <p class="meal-title overflow-text" style="padding:5px"
+                    <p class="meal-title " style="padding:5px"
                       (click)="gotopagedetails('recipedetails',itemday[mealtype])"
-                      *ngIf="itemday && itemday[mealtype].label"> {{SetFLU(itemday[mealtype].label)}}</p>
+                      *ngIf="itemday && itemday[mealtype].label"> {{SetFLU(limitTo(itemday[mealtype].label, 25))}}</p>
                   </div>
                   <div *ngIf="showNutrientsFlag" class="col-1" style="padding-right:0;text-align:right;"
                     (click)="showPerServingMeal[mealtype]= true; plan['days'][i][mealtype].expand = !plan['days'][i][mealtype].expand; shownut(itemday);">
@@ -104,7 +104,7 @@
                     <div *ngIf="showTotal" class="quantity">{{itemday[mealtype].calories}}</div>
                     <div *ngIf="showPerServing" class="quantity">{{formatValuePServing(itemday[mealtype].calories,
                       itemday[mealtype].yield)}}</div>
-                    <div class="unit">Kcal</div>
+                    <div class="unit">&nbsp;Kcal</div>
                   </div>
 
                   <ng-container *ngFor="let mmicro of itemday[mealtype]['paramMicro']; let m = index;">
@@ -113,7 +113,7 @@
                       <div *ngIf="showTotal" class="quantity">{{mmicro.totalP}}</div>
                       <div *ngIf="showPerServing" class="quantity">{{formatValuePServing(mmicro.totalP,
                         itemday[mealtype].yield)}}</div>
-                      <div class="unit"> {{mmicro.unit}}</div>
+                      <div class="unit">&nbsp;{{mmicro.unit}}</div>
                     </div>
 
                   </ng-container>
@@ -126,7 +126,7 @@
                         <div *ngIf="showTotal" class="quantity">{{nutrient.value.quantity.toFixed(2)}}</div>
                         <div *ngIf="showPerServing" class="quantity">
                           {{formatValuePServing(nutrient.value.quantity,itemday[mealtype].yield) }}</div>
-                        <div class="unit"> {{nutrient.value.unit}}</div>
+                        <div class="unit">&nbsp; {{nutrient.value.unit}}</div>
                       </div>
 
                     </ng-container>

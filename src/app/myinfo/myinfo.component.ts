@@ -270,11 +270,18 @@ date: {year: number, month: number};
 	{
 	  console.log("In updateData");
 	  console.log(params);
-	  var res =   this.dbService.updateDataByTable("workouts",params).subscribe(invData => setTimeout(() => 
-	  {
-		  console.log(invData);
-		
-	  }));
+		try
+		{
+			var res =   this.dbService.updateDataByTable("workouts",params).subscribe(invData => setTimeout(() => 
+			{
+				console.log(invData);
+				
+			}));
+		}
+		catch(error)
+		{
+			
+		}
 	}
   
 	/************* uploading user image */

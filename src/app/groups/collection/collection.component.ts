@@ -625,12 +625,19 @@ saveRecipebook()
 			console.log("updating");
 			params["id"] = this.collection.id;
 			console.log(params);
-			var res =   this.dbService.updateDataByTable("collection", params).subscribe(recipeData => setTimeout(() => {
-				console.log(recipeData);
-				//this.toastr.success('Updated Recipe Book!', 'Recipe Book!');	
-				this.loadcollection(this.collection.id);
+			try
+			{
+				var res =   this.dbService.updateDataByTable("collection", params).subscribe(recipeData => setTimeout(() => {
+					console.log(recipeData);
+					//this.toastr.success('Updated Recipe Book!', 'Recipe Book!');	
+					this.loadcollection(this.collection.id);
+					
+				}));
+			}
+			catch(error)
+			{
 				
-			}));
+			}
 		}
 		else
 		{

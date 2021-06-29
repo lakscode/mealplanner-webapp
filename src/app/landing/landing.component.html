@@ -82,7 +82,7 @@
          <div class="col-12" *ngIf="healthLabels.length > 1">
             <div class="" style="display:flex; align-items: center;min-height:450px;padding-top:30px"> 
                <div class="row " >
-                  <div class="col-md-4 col-lg-5 pl-5" style="padding-left:0px !important; margin-bottom: 20px;">
+                  <div class="col-md-4 col-lg-5 pl-5 bgplan" style="padding-left:0px !important; margin-bottom: 20px;">
                      <h1 class="text-lg-left mb-4 title">Too busy to plan?</h1>
                      <p class="text-justify mb-5 description">Subscribe to our dietitian-prepared Specialty Meal Plans which offer balanced nutrition every week and can be easily customized to your personal tastes.</p>
                      <a href="javascript:void(0);" style="cursor:default; margin-bottom:20px;" class="leanmore">Learn More</a>
@@ -284,7 +284,7 @@
                               <p *ngIf="rRecipe.dietLabels" style="text-align:left;">Diet Labels: {{formatLabels(rRecipe.dietLabels)}}</p>
                               <br>
                               <div class="short-separator"></div>
-                              <a class="read-more" (click)="gotoRecipeDetails('recipedetails',rRecipe.id)">view more</a>
+                              <a class="read-more" style="font-size:14px" (click)="gotoRecipeDetails('recipedetails',rRecipe.id)">view more</a>
                            </div>
                         </div>
                      </div>

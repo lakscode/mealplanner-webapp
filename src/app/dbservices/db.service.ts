@@ -240,6 +240,7 @@ resettoken(input){
 			   };
 		 
 			input["tablename"]=path;
+			console.log(input);
 		   return this.httpService.post(tempUrl, JSON.stringify(input), options).pipe(
 			   map((res) => res)).pipe(share());
 	   }

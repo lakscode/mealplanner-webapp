@@ -488,7 +488,7 @@ export class TrendingComponent implements OnInit {
 		 {
 		   params['id'] = param["id"];
 		 }
-		 params["returnpage"]= "schedule";
+		 params["returnpage"]= "trending";
 		 params["returnparam1"] = this.routeParams.id
 
 	  this.router.navigate([page, params]);
@@ -757,7 +757,14 @@ export class TrendingComponent implements OnInit {
 	//    console.log(mMacro);
 	  return mMacro;
 	  }
-  
+	  limitTo(str, num)
+	  {
+		  var retVal = str;
+		  
+		  if(typeof(str) !== "undefined" && str !== null && str !== "")
+		  retVal = this.helpService.limitTo(str, num) + "...";
+		  return retVal;
+	  }
   }
   
 

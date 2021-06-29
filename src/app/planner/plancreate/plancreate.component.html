@@ -8,7 +8,7 @@
             <div class="add2mealplan">
                 <a [ngClass]="showpopupflag?'menu active':'menu'"  (click)="showpopupflag = !showpopupflag" href="javascript:void(0)"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></a>
                 <div *ngIf='showpopupflag' class="add2mealplanmenu" style='height:120px'>
-                    <a (click)="showpopupflag = false; downloadplan() " href="javascript:void(0)">
+                    <a *ngIf="CheckStatus()" (click)="showpopupflag = false; downloadplan() " href="javascript:void(0)">
                         <i class="fa fa-file-pdf-o"></i> Export
                     </a>
                     <a (click)="showpopupflag = false; getIngredientsList();" href="javascript:void(0)">
@@ -62,7 +62,7 @@
                         
                         <div  class="searchmorebar searchbaranim">
                             <div class="row mleft" >
-                                <div class="col-12 col-lg-9 col-md-9" style="margin-bottom:10px;margin-left:0px;padding-top:0px;">
+                                <div class="col-12 col-lg-8 col-md-8" style="margin-bottom:10px;margin-left:0px;padding-top:10px;">
                                  
                                      <!--<ng-container *ngFor="let lab of searchFilterLabels; let l = index;">
                                             <a [ngClass]="lab.selected?'filterlabel active': 'filterlabel'" href="javascript:void(0)" (click)="showLabels(lab)">
@@ -227,7 +227,7 @@
                                     </div>
                                 </div>
                                 
-                                <div class="col-12 col-lg-3 col-md-4" style="margin-bottom:10px;margin-left:0px;text-align: right;padding-right: 15px;">
+                                <div class="col-12 col-lg-4 col-md-4" style="margin-bottom:10px;margin-left:0px;text-align: right;padding-right: 15px;">
 
                                    
                             <input  type="button"  (click)="loadCustomRecipes()" style="margin-bottom:10px;margin-top:0px;" 
@@ -683,8 +683,8 @@
                                 <div style='float:left'>{{setFLU(item.name)}}</div>
                                 <div style='float:right'>
                                     {{formatNumber(item.quantity)}} {{item.unit}}<br>
-                                    {{formatweight(item.weight)}} lbs<br>
-                                    {{item.weight.toFixed(2)}} grams<br>
+                                  <!--  {{formatweight(item.weight)}} lbs<br>
+                                    {{item.weight.toFixed(2)}} grams<br>-->
                                 </div>
                                 <div style='clear:both'></div>
                             </div>
@@ -695,7 +695,7 @@
         </div>
     </div>
 </jw-modal>
-
+<!--
 <jw-modal id="searchFiltersPopup" [width]="70">
     <div class="" style="min-height:400px;padding:25px;">
 
@@ -727,8 +727,7 @@
                         <div *ngIf="searchFilterLabels[0]['selected']" class="col-12 paddinglr0">
                             <div class="filter-group">
 
-                                <!--<label class="filter-title">Health Labels </label>-->
-
+                           
                                 <ng-container *ngFor="let hlabel of healthlabelsList; let h = index">
                                     <div class="listSection  " id="healthLabels">
                                         <label class="container">{{hlabel.name}}
@@ -746,8 +745,6 @@
                             <div class="filter-group">
 
 
-                                <!--<label class="filter-title">Diet Labels</label> -->
-
 
                                 <ng-container *ngFor="let dlabel of dietLabelsList; let h = index">
                                     <div class="listSection  " id="diethLabels">
@@ -764,8 +761,6 @@
                         </div>
                         <div *ngIf="searchFilterLabels[2]['selected']" class="col-12  paddinglr0">
                             <div class="filter-group">
-
-                                <!--<label class="filter-title">Cuisine Type </label>-->
 
 
                                 <ng-container *ngFor="let clabel of cuisineTypeList; let c = index">
@@ -785,7 +780,7 @@
                         <div *ngIf="searchFilterLabels[3]['selected']" class="col-12  paddinglr0">
                             <div class="filter-group">
 
-                                <!--<label class="filter-title">Cuisine Type </label>-->
+
 
 
                                 <ng-container *ngFor="let mlabel of mealTypeList; let m = index">
@@ -804,7 +799,7 @@
 
                         <div *ngIf="searchFilterLabels[4]['selected']" class="col-12  paddinglr0">
                             <div class="filter-group" style="margin-left:30px">
-                                <!--<label class="filter-title">Nutrients</label> -->
+         
 
 
                                 <div class="row paddinglr0">
@@ -852,9 +847,9 @@
                         </div>
                         <div *ngIf="searchFilterLabels[5]['selected']" class="col-12 paddinglr0">
                             <div class="filter-group">
-                                <!--<label class="filter-title">Calories (Max)</label> -->
+      
                                 <div class="listSection" style="display:inline-block;margin:0px">
-                                    <!--  <span>Max calories</span> -->
+                     
                                     <input [(ngModel)]="maxcalories" placeholder="Enter maximum calories" type="text"
                                         class="inputbox" style="margin-top:0px;width:200px" />
 
@@ -883,3 +878,4 @@
         </div>
     </div>
 </jw-modal>
+-->
