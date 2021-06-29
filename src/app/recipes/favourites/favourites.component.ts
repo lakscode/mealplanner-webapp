@@ -25,6 +25,7 @@ export class FavouritesComponent implements OnInit {
 	currentUser: any;
 	searchparam: any ; 
 	ratingIds: any;
+	favStatus: any= null;
 	ratingsArr: Array<any> = [];
 	listorgrid: any = {};
 	private onDestroy$: Subject<void> = new Subject<void>();
@@ -281,7 +282,37 @@ export class FavouritesComponent implements OnInit {
 	  return retImage;
 	}
 
-	
+	removeFavourite(id)
+{
+ var params = {};
+  this.favStatus = null; 
+  if(typeof(this.currentUser["id"]) !== "undefined" && this.currentUser["id"] !== null && this.currentUser["id"] !== "")
+  {
+	params["userid"] = this.currentUser["id"];	
+	params["recipeid"] = id; 
+	var res =   this.dbService.getDataByTable("favourites", params).subscribe(invData => setTimeout(() => {
+	   if(invData !== null)
+	  {
+		if(invData["body"]['length'] > 0)
+		{
+		  this.favStatus = invData["body"][0];
+		  this.removeFav();
+		}
+	  }
+	}));
+  }
+}
+
+removeFav(){
+  var params1 = {};
+  if(typeof(this.favStatus["id"]) !== "undefined" && this.favStatus["id"] !== null && this.favStatus["id"] !== "")
+  {
+	params1["id"] = this.favStatus["id"];
+	var res =   this.dbService.deleteDataByTable("favourites", params1).subscribe(invData => setTimeout(() => {
+	 this.loadRecipes();
+	}));
+  }
+}
 
 	showhidecontent(recipe)
 {
