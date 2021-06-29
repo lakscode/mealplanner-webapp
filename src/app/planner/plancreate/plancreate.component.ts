@@ -13,6 +13,7 @@ import { environment} from "../../../environments/environment";
 import { ToastrService } from 'ngx-toastr';
 import { ModalService } from './../../shared/modules/modal/modal.service';
 import { type } from 'jquery';
+import { throws } from 'assert';
 @Component({
 	selector: 'app-plancreate',
 	templateUrl: './plancreate.component.html',
@@ -996,6 +997,8 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 	//this.toastr.error('Meal Plan has been saved!!!', 'Meal Plan!');
 		 this.updatingFlag = true;
 		var params = {};
+		params["status"] = "0";
+		if(this.CheckStatus())
 		params["status"] = "1";
 		if(typeof(this.plan["mealplanid"]) !== "undefined" && this.plan["mealplanid"] !== "")
 		{
