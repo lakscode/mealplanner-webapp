@@ -83,13 +83,13 @@ images: any;
 	loadCommunities()
 	{
 		 /******** recipes api serach */
-  
-   
+		console.log("in load communtieis");
+		
 		this.communitiesList = [];
 	   // var params = {"limit": 100};
 	   // params["createdby"] = this.currentUser["id"];
 		console.log(params);
-		var params = {"query": "SELECT c.*, COUNT(rm.id) AS recipecount, u.email, u.firstname, u.lastname FROM collection AS c LEFT JOIN recipe_mapping AS rm ON c.id = rm.collection_id LEFT JOIN users AS u ON c.created_by = u.id GROUP BY c.id limit 0, 4"};
+		var params = {"query": "SELECT c.*, COUNT(rm.id) AS recipecount, u.email, u.firstname, u.lastname FROM collection AS c LEFT JOIN recipe_mapping AS rm ON c.id = rm.collection_id LEFT JOIN users AS u ON c.created_by = u.id where c.status = 1 GROUP BY c.id limit 0, 4"};
   
 		var res =   this.dbService.getDatabyTablebyQuery("collection", params).subscribe(invData => setTimeout(() => {
 	
@@ -322,7 +322,7 @@ images: any;
 		}
 		return retValue;
 	}
-	
+
 }
 
 

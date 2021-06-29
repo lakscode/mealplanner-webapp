@@ -570,12 +570,12 @@ transform(value: any) {
 	  this.collectionsList = [];
 	 // var params = {"limit": 100};
 	 // params["createdby"] = this.currentUser["id"];
-	  //console.log(params);
-	  var params = {"query": "SELECT c.*, COUNT(rm.id) AS recipecount, u.email, u.firstname, u.lastname FROM collection AS c LEFT JOIN recipe_mapping AS rm ON c.id = rm.collection_id LEFT JOIN users AS u ON c.created_by = u.id GROUP BY c.id limit 1, 4"};
-
+	  
+	  var params = {"query": "SELECT c.*, COUNT(rm.id) AS recipecount, u.email, u.firstname, u.lastname FROM collection AS c LEFT JOIN recipe_mapping AS rm ON c.id = rm.collection_id LEFT JOIN users AS u ON c.created_by = u.id where c.status =1 GROUP BY c.id limit 1, 4"};
+	  console.log(params);
 	  var res =   this.dbService.getDatabyTablebyQuery("collection", params).subscribe(invData => setTimeout(() => {
   
-		//console.log(invData);
+		console.log(invData);
 		if(invData !== null)
 		{
 		  var obj = invData["body"]["length"];
@@ -927,7 +927,7 @@ transform(value: any) {
 		}
 		return retValue;
 	}
-	
+
 }
 
 	
