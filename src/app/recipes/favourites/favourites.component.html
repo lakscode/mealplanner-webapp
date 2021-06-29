@@ -15,7 +15,8 @@
                                 class="fa fa-bars"></i></span>
                     </div> -->
                     <h2>Favourite Recipes</h2>
-                    <h3 *ngIf='displayList.length == 0' style="margin-bottom:20px">You have no favourites recipes yet. Please search recipes and set as favourite.</h3>
+                    <h3 *ngIf='!loadingData && noResult' style="margin-bottom:20px">You have no favourites recipes yet. Please search recipes and set as favourite.</h3>
+                    <h3 *ngIf="loadingData && !noResult" >Loading... </h3>
                        </div>
 
 
