@@ -522,7 +522,8 @@ export class TrendingComponent implements OnInit {
 			console.log(invData);
 		if(invData !== null)
 		{
-			 this.router.navigate(["schedule", {id:this.routeParams.id}]);
+			this.router.navigate(["schedule", {id:this.routeParams.id, mum_id:invData["inserted_id"], userid: this.currentUser["id"]}]);
+			// this.router.navigate(["schedule", {id:this.routeParams.id}]);
 		}
 		}));
 	  }

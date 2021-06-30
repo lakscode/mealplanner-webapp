@@ -2161,6 +2161,49 @@ loadFavourites()
 	   }
 	}));
 }
+startPlan()
+	{
+		console.log("start Plan");
+	  var params = {};
+	  if(this.currentUser !== null && this.currentUser["id"] !== "")
+	  {
+		params["userid"] = this.currentUser["id"];
+		params["mealplanid"] = this.routeParams.id;
+		params["startdate"] = new Date();
+		params["status"] = 1;
+		console.log(params);
+		var res =   this.dbService.postDataByTable("mealplan_user_mapping", params).subscribe(invData => setTimeout(() => {
+			console.log(invData);
+		if(invData !== null)
+		{
+			this.router.navigate(["schedule", {id:this.routeParams.id, mum_id:invData["inserted_id"], userid: this.currentUser["id"]}]);
+		
+		}
+		}));
+	  }
+	}
+
+	getPlanStatus()
+	{
+	  var params = {};
+	  if(this.currentUser["id"] !== null && this.currentUser["id"] !== "")
+	  {
+		params["userid"] = this.currentUser["id"];
+		params["mealplanid"] = this.routeParams.id;
+		var res =   this.dbService.getDataByTable("mealplan_user_mapping", params).subscribe(invData => setTimeout(() => {
+   
+		if(invData !== null)
+		{
+		  console.log(invData);
+		  if(invData["body"]["length"] > 0)
+		  {
+			var planStatus = invData["body"][0];
+			this.router.navigate(["schedule", {id:this.routeParams.id, mum_id:planStatus["mum_id"], userid: this.currentUser["id"]}]);
+		  }
+		}
+		}));
+	  }
+	}
 
 }
 

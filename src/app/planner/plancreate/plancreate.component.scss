@@ -15,7 +15,14 @@
   max-height: fit-content;
   height: fit-content;
 }
-
+.a-disabled
+{
+  color:#CCC;
+}
+.a-enabled
+{
+  color:#555
+}
 .recipe-remove
 {
   position: absolute;

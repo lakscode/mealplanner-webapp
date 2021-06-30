@@ -7,15 +7,17 @@
             </div>
             <div class="add2mealplan">
                 <a [ngClass]="showpopupflag?'menu active':'menu'"  (click)="showpopupflag = !showpopupflag" href="javascript:void(0)"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></a>
-                <div *ngIf='showpopupflag' class="add2mealplanmenu" style='height:120px'>
-                    <a *ngIf="CheckStatus()" (click)="showpopupflag = false; downloadplan() " href="javascript:void(0)">
+                <div *ngIf='showpopupflag' class="add2mealplanmenu" style='height:180px'>
+                    <a [ngClass]="planCompleteStatus?'a-enabled':'a-disabled' " (click)="showpopupflag = false; downloadplan() " href="javascript:void(0)">
                         <i class="fa fa-file-pdf-o"></i> Export
                     </a>
                     <a (click)="showpopupflag = false; getIngredientsList();" href="javascript:void(0)">
                         <i class="fa fa-download"></i>   Grocery List
                     </a>
+                    <a [ngClass]="planCompleteStatus?'a-enabled':'a-disabled' "  (click)="showpopupflag = false; startPlan();" href="javascript:void(0)">
+                        <i class="fa fa-play"></i>   Start Plan
+                    </a>
                    
-                        
                 </div>
          
 
@@ -52,7 +54,7 @@
                             <label class="searchicon">
                                 <i class="fa fa-search" aria-hidden="true"></i>
                             </label>
-                            <input type="text" [(ngModel)]="searchparam.q" class="inputbox" placeholder="Search Recipes..." />
+                            <input type="text" [(ngModel)]="searchparam.q" (keyup.enter)="searchFilters()" class="inputbox" placeholder="Search Recipes..." />
                             <input  type="button"  (click)="searchFilters()" style="margin-bottom:10px;" 
                             [ngClass]="searchmorebar?'defaultbtn searchbtn hideonmobile bg-orange' :' defaultbtn searchbtn  bg-orange'" id="header-submit-search-pro" name="submit" value="Search">
                             <input  type="button"  (click)="clearFilters();loadRecipes();" style="margin-bottom:10px;" 

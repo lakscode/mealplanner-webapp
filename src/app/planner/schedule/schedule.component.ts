@@ -236,7 +236,7 @@ export class ScheduleComponent implements OnInit {
 			  params['status'] = 2;
 			  
 			  var res =   this.dbService.updateDataByTable("mealplan_user_mapping", params).subscribe(dData => setTimeout(() => {
-				console.log(dData);
+			//	console.log(dData);
 				if(dData !== null)
 				{
   
@@ -258,13 +258,13 @@ export class ScheduleComponent implements OnInit {
 	selectType()
 	{
 	  this.selCatValues = [];
-	  console.log(this.selCat);
+	//  console.log(this.selCat);
 	  this.selectedMealType = this.planDay[this.selType];
-	  console.log(this.selectedMealType);
+	 // console.log(this.selectedMealType);
 	}
 	loadRecipes(idslist)
 	{
-		console.log("loadRecipes");
+	//	console.log("loadRecipes");
 	  var params = {"limit": 100};
 	  if(idslist !== "")
 	  {
@@ -273,7 +273,7 @@ export class ScheduleComponent implements OnInit {
 	  }
   
   var res =   this.dbService.getDatabyFields("recipes", params).subscribe(invData => setTimeout(() => {
-	console.log(invData);
+//	console.log(invData);
 	if(invData !== null)
 	{
 	  if(typeof(invData["body"]) !== "undefined" && invData["body"] !== null && invData["body"]["length"] > 0)
@@ -295,7 +295,7 @@ export class ScheduleComponent implements OnInit {
   }
 	loadRecipesToDays()
 	{
-	console.log("loadRecipesToDays");
+//	console.log("loadRecipesToDays");
 	  for(let i=0; i < this.plan["days"]['length'] ; i++)
 	  {
 		var obj = this.plan["days"][i];
@@ -393,12 +393,12 @@ export class ScheduleComponent implements OnInit {
 		}
 	   
 	  }
-	  console.log(this.plan);
+//	  console.log(this.plan);
 	  this.selDay = this.plan["days"][0];
 	  this.selType = "breakfast";
 	  this.selectType();
 	  this.selectCat(0);
-      console.log(this.selDay);
+  //    console.log(this.selDay);
    //this.loadingService.dismiss();
 	}
   
@@ -485,7 +485,7 @@ export class ScheduleComponent implements OnInit {
 	selectCat(index)
 	{
 		this.chartIndex = index;
-	  console.log(this.selCat);
+	 // console.log(this.selCat);
 	  this.chartTitle = this.selCat.name;
 	  this.chartUnit = this.selCat.unit;
 	  this.selCatValues = [];
@@ -499,7 +499,7 @@ export class ScheduleComponent implements OnInit {
 	  {
 	   // console.log(this.selDay[this.mealTypeList[i]]);
 	   		var obj = this.selDay[this.mealTypeList[i]];
-			   console.log(obj);
+		//	   console.log(obj);
 		if(typeof(obj) !== "undefined" && obj !== null)
 		{
 		if(typeof(obj["calories"]) !== "undefined")

@@ -441,7 +441,7 @@ this.loadColorCodes();
 			  }
 		  }
 		}
-
+		this.CheckStatus();
 		this.calculateCaloryFlag = true;
 	
 	   this.clearFilterValues();
@@ -728,6 +728,7 @@ this.loadColorCodes();
 	{
 		this.plan["days"][r]["meals"][c]["recipe"] =  null;
 		this.SavePlanData(r, c);
+		this.CheckStatus();
 	}
 	viewRecipe(r, c)
 	{
@@ -805,7 +806,7 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 				}, 1000);
 			}
 		}
-		
+		this.CheckStatus();
 	  }
 	
 	  allowDrop(ev) {
@@ -1170,6 +1171,7 @@ limitTo(str, num)
 
   }
 
+  planCompleteStatus : boolean = false;
   CheckStatus()
   {
 //	  console.log("Check Status");
@@ -1177,6 +1179,7 @@ limitTo(str, num)
 	var retvalue = 0;
 	var mealcount = 0;
 	var recipecount = 0;
+	this.planCompleteStatus = false;
 	if(this.plan)
 	{
 		if(this.plan["days"] && this.plan["days"]["length"] > 0)
@@ -1200,7 +1203,10 @@ limitTo(str, num)
 //	console.log("mealcount " + mealcount);
 //	console.log("recipecount " +  recipecount);
 	if(mealcount == recipecount)
+	{
+		this.planCompleteStatus = true;
 	retvalue = 1;
+	}
 	  return retvalue;
 
   }
@@ -1491,23 +1497,30 @@ limitTo(str, num)
 
 	  downloadplan()
 	  {
-		if(typeof(this.plan["id"]) !== "undefined" && this.plan["id"] !== "")
+		if(!this.planCompleteStatus)
 		{
-		//	var path = "https://dentavacation.com/mobileapp/api/generate_pdf.php?id=" + this.plan["id"];
-			this.pdfService.createpdf(this.plan["id"]).subscribe(dData => setTimeout(() => {
-				if(dData !== null )
-				{
-				var mealPlan ={};
-				mealPlan["mealplan"] = this.plan["name"];
-				mealPlan["link"] = environment.apiUrl + "/" + dData["filename"];
-				var link = document.createElement('a');
-				link.href = mealPlan["link"];
-				link.target = "_blank";
-				link.click();
+			this.toastr.warning('Plan is not yet completed.', 'Meal Plan');
+		}
+		else
+		{
+			if(typeof(this.plan["id"]) !== "undefined" && this.plan["id"] !== "")
+			{
+			//	var path = "https://dentavacation.com/mobileapp/api/generate_pdf.php?id=" + this.plan["id"];
+				this.pdfService.createpdf(this.plan["id"]).subscribe(dData => setTimeout(() => {
+					if(dData !== null )
+					{
+					var mealPlan ={};
+					mealPlan["mealplan"] = this.plan["name"];
+					mealPlan["link"] = environment.apiUrl + "/" + dData["filename"];
+					var link = document.createElement('a');
+					link.href = mealPlan["link"];
+					link.target = "_blank";
+					link.click();
 
-				}
-			}));
-	  	}
+					}
+				}));
+			}
+		}
 	}
 	calculateTotalNutrient(col)
 	{
@@ -1847,7 +1860,7 @@ limitTo(str, num)
 
 	
 		this.loadRecipes('', true);
-		this.closeModal('searchFiltersPopup');
+		//this.closeModal('searchFiltersPopup');
 		//this.clearFilterValues();
 	}
 
@@ -2139,7 +2152,7 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 		
 	}
 
-
+	this.CheckStatus();
 }
 
 loadCustom:boolean = false;
@@ -2185,6 +2198,37 @@ loadFavourites()
 		   
 	   }
 	}));
+}
+
+
+startPlan()
+	{
+		if(this.planCompleteStatus)
+		{
+		console.log("start Plan");
+	  var params = {};
+	  if(this.currentUser !== null && this.currentUser["id"] !== "")
+	  {
+		params["userid"] = this.currentUser["id"];
+		params["mealplanid"] = this.routeParams.id;
+		params["startdate"] = new Date();
+		params["status"] = 1;
+		console.log(params);
+		var res =   this.dbService.postDataByTable("mealplan_user_mapping", params).subscribe(invData => setTimeout(() => {
+			console.log(invData);
+		if(invData !== null)
+		{
+			this.router.navigate(["schedule", {id:this.routeParams.id, mum_id:invData["inserted_id"], userid: this.currentUser["id"]}]);
+		
+		}
+		}));
+	  }
+	}
+	else
+	{
+		this.toastr.warning('Plan is not yet completed.', 'Meal Plan');
+		
+	}
 }
 
 }

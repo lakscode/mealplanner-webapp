@@ -578,3 +578,25 @@ padding-right:11px;
 
 
 
+
+
+  @media (max-width: 767px) {
+    .multi-select-lbl
+    {
+      display:block;
+    }
+    .multi-select
+    {
+      top: 80px;
+    }
+  }
+  @media (min-width: 768px) and (max-width: 1024px){
+    .multi-select-lbl
+    {
+      display:block;
+    }
+    .multi-select
+    {
+      top: 80px;
+    }
+  }
