@@ -1107,7 +1107,7 @@ export class ScheduleComponent implements OnInit {
 			responsive: {
 				rules: [{
 				  condition: {
-					maxWidth: 500
+					maxWidth: 400
 				  },
 				  chartOptions: {
 					legend: {
