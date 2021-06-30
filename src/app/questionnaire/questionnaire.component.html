@@ -36,7 +36,7 @@
 
                     <input style="display:inline-block;font-size:14px" class="input-text" type="text"
                       (keyup)="setAnswerText(questions[cq], cq)" placeholder="Please enter value" name="question{{cq}}"
-                      [(ngModel)]="questions[cq]['answer']">
+                      [(ngModel)]="questions[cq]['answer']">&nbsp;
                     <span style='margin-left: 10px; font-size: 14px;'
                       *ngIf="questions[cq].textlabel">{{questions[cq].textlabel}}</span>
 
