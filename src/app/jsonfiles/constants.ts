@@ -69,7 +69,7 @@ export const constants = {
     {"name":"FODMAP-Free","image":"assets/images/tick.png"}
   ],
   "colors":["#FF3155", "#FFAF42", "#FFED5E", "#49F770", "#2DAEFD", "#FF3155","#003f5c","#58508d","#f2f1f1", "#FFFFFF"],
-  "colorslist":[
+  "colorslist1":[
       ["#0D1F73", "#17469F", "#2969BA", "#3A89C0", "#4AA7B3", "#59C39B","#6ADC7F"],
       ["#FF3155", "#FFAF42", "#FFED5E", "#49F770", "#2DAEFD", "#FF3155","#003f5c"],
       ["#5899DA", "#E8743B", "#19A979", "#ED4A7B","#945ECF","#13A4B4","#525DF4"],
@@ -80,6 +80,16 @@ export const constants = {
       ["#1F77B4", "#FF7F0E", "#2CA02C", "#D62728","#9467BD","#8C564B","#E377C2"],
       ["#2CA02C", "#BCBD22", "#1F77B4", "#D62728","#9467BD","#F9CB9C","#FF9900"]
       ],
+      "colorslist":[
+      ["#63166D","#1A257F","#D12928","#E96429","#2F6765","E96429","FCFE05"],
+     ["#63166D","#1A257F","#D12928","#E96429","#2F6765","E96429","FCFE05"],
+       ["#63166D","#1A257F","#D12928","#E96429","#2F6765","E96429","FCFE05"],
+        ["#63166D","#1A257F","#D12928","#E96429","#2F6765","E96429","FCFE05"],
+         ["#63166D","#1A257F","#D12928","#E96429","#2F6765","E96429","FCFE05"],
+           ["#63166D","#1A257F","#D12928","#E96429","#2F6765","E96429","FCFE05"],
+             ["#63166D","#1A257F","#D12928","#E96429","#2F6765","E96429","FCFE05"],
+              ["#63166D","#1A257F","#D12928","#E96429","#2F6765","E96429","FCFE05"]
+              ],
   "cusineType":["american","british","caribbean","central europe","chinese","eastern europe","italian","korean","bulgogi","mediterranean","nordic","south american","south east asian","asian","central europe","indian","japanese","middle eastern","south east asian","french","greek","italian","mexican","kosher"],
  // "cusineTypeList":["american","asian","chinese","french","italian","indian","japanese","kosher","mexican","korean"],
  "cuisineTypeList":["american","asian","bibimbap","british","bulgogi","caribbean","central europe","chinese","eastern europe","french","greek", "indian","italian", "japanese","kimchi",  "korean","kosher",  "mediterranean","mexican",  "middle eastern","nordic", "south american", "south east asian"],
