@@ -270,14 +270,14 @@
                      <div style="padding-left:0px; padding-right:0px;margin-top:15px;margin-bottom:15px" class="col-12 col-lg-3 col-md-4" >
                      <div class="collection-item box-shadow">
                         <div class="image image-animate detail">
-                            <a (click)="gotoRecipes('q', dItem.name)">
+                            <a (click)="gotopage(startpage)">
                                 <img *ngIf="dItem.image !== ''" src="{{dItem.image}}"
                                     alt="{{dItem.name}} image">
                                 <img  *ngIf="dItem.image == ''"  src="assets/notavailable.png" alt="{{dItem.name}} image">
                             </a>
 
                             <div class="detail">
-                                <a title="{{dItem.name}}" (click)="gotoRecipes('q', dItem.name)"><h3 style="font-size:16px">{{dItem.name}}</h3></a>
+                                <a title="{{dItem.name}}" (click)="gotopage(startpage)"><h3 style="font-size:16px">{{dItem.name}}</h3></a>
                                  
                                  <div class="ccount">
                                <span style="font-size:14px" *ngIf="dItem.count > 0"><i class="fa fa-cutlery"></i> {{dItem.count}} Recipes</span>

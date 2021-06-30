@@ -64,7 +64,7 @@ startpage: any = "signup";
 		this.stepsList.push({"label":"Gather and Cook", "subtitle":"Prepare","image":"assets/new/prepare.jpg", "description":"For the meal plan of your choice, get a customized grocery shopping list. Gather the ingredients and prepare your healthy happy meal. Enjoy the delicacy while we help to keep a track of your daily calorie intake."});
 
 	}
-
+	
 	gotopage(page)
 	{
 		this.router.navigate([page]);	
