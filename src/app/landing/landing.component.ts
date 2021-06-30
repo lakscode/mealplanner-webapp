@@ -990,10 +990,10 @@ if( cals > 0)
 		//console.log("load dietRecipes");
 		this.dietRecipes = [];
 
-		this.dietRecipes.push({"name":"Delicious Soups & Purees", "count": "9995", "image":"assets/images/temp-images/soup.jpg"});
-		this.dietRecipes.push({"name":"Soft Diets", "count": "324", "image":"assets/images/temp-images/juice.jpg"});
-		this.dietRecipes.push({"name":"For Smoothie Lovers", "count": "1376", "image":"assets/images/temp-images/smoothie.jpg"})
-		this.dietRecipes.push({"name":"Salads", "count": "15184", "image":"assets/images/temp-images/steps-tab1.jpg"})
+		this.dietRecipes.push({"name":"Delicious Soups & Purees", "q":"soup puree", "count": "9995", "image":"assets/images/temp-images/soup.jpg"});
+		this.dietRecipes.push({"name":"Soft Diets", "q":"juice","count": "324", "image":"assets/images/temp-images/juice.jpg"});
+		this.dietRecipes.push({"name":"For Smoothie Lovers", "q":"smoothie", "count": "1376", "image":"assets/images/temp-images/smoothie.jpg"})
+		this.dietRecipes.push({"name":"Salads", "q":"salad", "count": "15184", "image":"assets/images/temp-images/steps-tab1.jpg"})
 	}
 	setFLU(str)
 	{
