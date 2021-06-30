@@ -309,7 +309,21 @@ export class  QuestionnaireComponent implements OnInit {
 	}
  
 
-  
+  gotopage(page)
+  {
+	  if(page == "signup")
+	  {
+		if(this.currentUser !== null  && typeof(this.currentUser["id"]) !== "undefined" && this.currentUser["id"] !== "")
+		{
+			this.router.navigate(['landing']); 
+		}
+		else
+		{
+			this.router.navigate([page]); 
+		}
+	  }
+
+  }
   
   getFLU(str)
   {

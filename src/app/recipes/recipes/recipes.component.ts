@@ -160,6 +160,10 @@ export class RecipesComponent implements OnInit {
 			if (typeof (this.routeParams.details) !== "undefined") {
 				console.log(this.routeParams.details);
 			}
+			if (typeof (this.routeParams.q) !== "undefined" && this.routeParams.q_complete !== "") {
+				this.searchparam["q"] = this.routeParams.q;
+			}
+
 			if (typeof (this.routeParams.dietLabels) !== "undefined" && this.routeParams.dietLabels !== "") {
 				this.searchparam["dietLabels"] = this.routeParams.dietLabels;
 			}

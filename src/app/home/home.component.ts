@@ -22,12 +22,14 @@ popupforquestions: boolean =false;
 isMobile: boolean = false;
 images: any;
 
+startpage: any = "signup";
   constructor(private router: Router, private dbService: DBService,  private modalService: ModalService,  private helpService: HelpService) {
 	this.labels={"companyName":this.helpService.getConstants("companyName")};
 
 	}
 
   	ngOnInit() {
+		  this.startpage = "questionnaire";
 		  this.images = {};
 		  this.images["appstore"]  = "assets/app-store.png"; 
 		  this.images["playstore"]  = "assets/play-store.png";
@@ -48,6 +50,7 @@ images: any;
 		  this.currentUser["displayname"] = this.currentUser["username"];
 		}
 		this.loadHealthLabels();
+		this.loadDietRecipes();
 	}
 
 	loadSteps()
@@ -323,6 +326,17 @@ images: any;
 		return retValue;
 	}
 
+	dietRecipes: Array<any> = [];
+	loadDietRecipes()
+	{
+		//console.log("load dietRecipes");
+		this.dietRecipes = [];
+
+		this.dietRecipes.push({"name":"Delicious Soups & Purees", "count": "9995", "image":"assets/images/temp-images/soup.jpg"});
+		this.dietRecipes.push({"name":"Soft Diets", "count": "324", "image":"assets/images/temp-images/juice.jpg"});
+		this.dietRecipes.push({"name":"For Smoothie Lovers", "count": "1376", "image":"assets/images/temp-images/smoothie.jpg"})
+		this.dietRecipes.push({"name":"Salads", "count": "15184", "image":"assets/images/temp-images/steps-tab1.jpg"})
+	}
 }
 
 

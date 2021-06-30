@@ -91,7 +91,7 @@
             </div>
             <div class="row">
                <div class="col-12" style="text-align:center;margin-top:20px;margin-bottom:20px;">
-                  <a href="javascript:void(0);" (click)="gotopage('signup')" class="getstarted">Get Started</a>
+                  <a href="javascript:void(0);" (click)="gotopage(startpage)" class="getstarted">Get Started</a>
                </div>
             </div>
          </div>
@@ -107,7 +107,7 @@
                   <div class="col-md-4 col-lg-5 pl-5" style="padding-left:0px !important; margin-bottom: 20px;">
                      <h1 class="text-lg-left mb-4 title">Too busy to plan?</h1>
                      <p class="text-justify mb-5 description">Subscribe to our dietitian-prepared Specialty Meal Plans which offer balanced nutrition every week and can be easily customized to your personal tastes.</p>
-                     <a (click)="gotopage('signup')" href="javascript:void(0);" style="cursor:default; margin-bottom:20px;" class="leanmore">Learn More</a>
+                     <a (click)="gotopage(startpage)" href="javascript:void(0);" style="cursor:default; margin-bottom:20px;" class="leanmore">Learn More</a>
 
                    <!--  <img class="animated wow flipInX" src="assets/images/landing-bg.png" style='width:100%' />-->
                   </div>
@@ -117,7 +117,7 @@
                         <ng-container  *ngFor="let hLabel of healthLabels; let h=index;">
                         <div class="mb-5 col-6 col-lg-3 col-md-3"  *ngIf="h <8"> 
                            <div class=" px-sm-0">
-                              <a (click)="gotopage('signup')"
+                              <a (click)="gotopage(startpage)"
                                  class="specialty"><img src="{{hLabel.image}}"
                                  srcset="{{hLabel.image}}"
                                  class="rounded-bg specialty-image w-100">
@@ -134,6 +134,29 @@
       </div>
    </div>
    <!--<div class="scallop-down"></div>-->
+
+
+   <div class="row subscribe-sec">
+      <div class="container">
+          <div class="col-12 text-center wow animated bounceInDown">
+              <div class="chefs-card-inner " style="margin-bottom:40px;margin-top:40px;padding: 20px 15px;">
+                  <h2>Are you ready to create customized meal plan? </h2>
+                  <div class="short-separator"></div>
+                  <p style="color:#FFF;">
+                     To add recipes to your weekly diet plan, use our meal planning tool. It's as easy as dragging and dropping the recipes.
+                   </p>
+                   <div class="row">
+                     <div class="col-12" style="text-align:center;margin-top:20px;margin-bottom:20px;">
+                        <a href="javascript:void(0);" style='background:#FFAF4F' (click)="gotopage(startpage)" class="getstarted">Get Started</a>
+                     </div>
+                  </div>
+
+                 
+              </div>
+          </div>
+      </div>
+    </div>
+
 <!--hottest recipes-->
 <section class="hot-recipes-var2" style="margin-bottom:30px;padding-bottom:0px;" *ngIf="communitiesList && communitiesList.length > 0">
    <div class="container">
@@ -150,7 +173,7 @@
                       <label for="recipes">Recipes</label>
                   </div>-->
                   <ng-container  *ngFor="let cItem of communitiesList; let i = index;">
-                  <div (click)="gotopage('signup')" style="padding-left:0px; padding-right:0px;margin-top:15px;margin-bottom:15px" class="col-12 col-lg-3 col-md-4">
+                  <div (click)="gotopage(startpage)" style="padding-left:0px; padding-right:0px;margin-top:15px;margin-bottom:15px" class="col-12 col-lg-3 col-md-4">
                       <div class="recipe-item  animated wow flipInX" style="min-height:200px;background-size:cover;  background-position:center;  " [ngStyle]="{'background-image':'linear-gradient(
                           rgba(0, 0, 0, 0.3),
                           rgba(0, 0, 0, 0.3)
@@ -231,7 +254,53 @@
    </div>
 
    </section>
-   
+   <!--- Diet recipes -->
+
+ <section class="hot-recipes-var2" *ngIf="dietRecipes && dietRecipes.length > 0">
+   <div class="container">
+       <div class="wrapper-hot-recipe-var2">
+          <div class="hot-recipes-bordered">
+               <div class="heading-var1 text-center animated wow flipInX">
+                   <h2><a href="javascript:void(0)">Learn about new diet recipes that you'll enjoy</a></h2>
+                 <span class="heading-bell"></span>
+                 <p>Fitaholic's recipes collections make it easy to share and discover recipes that suit your eating habits, limits, needs, and more.</p>
+               </div>
+               <div class="row" style="padding-left:0px; padding-right:0px; margin-bottom:15px !important" >
+                   <ng-container  *ngFor="let dItem of dietRecipes; let i = index;">
+                     <div style="padding-left:0px; padding-right:0px;margin-top:15px;margin-bottom:15px" class="col-12 col-lg-3 col-md-4" >
+                     <div class="collection-item box-shadow">
+                        <div class="image image-animate detail">
+                            <a (click)="gotoRecipes('q', dItem.name)">
+                                <img *ngIf="dItem.image !== ''" src="{{dItem.image}}"
+                                    alt="{{dItem.name}} image">
+                                <img  *ngIf="dItem.image == ''"  src="assets/notavailable.png" alt="{{dItem.name}} image">
+                            </a>
+
+                            <div class="detail">
+                                <a title="{{dItem.name}}" (click)="gotoRecipes('q', dItem.name)"><h3 style="font-size:16px">{{dItem.name}}</h3></a>
+                                 
+                                 <div class="ccount">
+                               <span style="font-size:14px" *ngIf="dItem.count > 0"><i class="fa fa-cutlery"></i> {{dItem.count}} Recipes</span>
+                                </div>
+                              
+                              </div>
+
+                        </div>
+                        
+                    </div>
+                  </div>
+               
+              </ng-container>
+              </div>
+
+             
+          </div>
+       </div>
+    </div>
+ </section>
+
+ <!--- Diet recipes -->
+
    <div class="row subscribe-sec">
       <div class="container">
           <div class="col-12 text-center wow animated bounceInDown">
@@ -298,7 +367,7 @@
             <p>
                Get a 15-day free trial of our app.<br/> Satisfied users choose from <br/>various affordable subscriptions. 
             </p>
-            <a class="read-more-bordered" (click)="gotopage('questionnaire')">Join Now</a>
+            <a class="read-more-bordered"  (click)="gotopage(startpage)">Join Now</a>
             <!--<a class="read-more-bordered" (click)="gotopage('signup')">Join Now</a>-->
             <!--<a class="read-more-bordered" (click)="openModal('popupforquestions')">Join Now</a>-->
         </div>

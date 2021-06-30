@@ -59,7 +59,7 @@
                                 <label class="searchicon">
                                     <i class="fa fa-search" aria-hidden="true"></i>
                                 </label>
-                                <input type="text" [(ngModel)]="searchparam.q" class="inputbox"
+                                <input type="text" (keyup.enter)="hideLabels();searchProps()" [(ngModel)]="searchparam.q" class="inputbox"
                                     placeholder="Search Recipes..." />
                                 <input type="button" (click)="hideLabels();searchProps()" style="margin-bottom:10px;"
                                     [ngClass]="searchmorebar?'defaultbtn searchbtn hideonmobile bg-orange' :' defaultbtn searchbtn  bg-orange'"
