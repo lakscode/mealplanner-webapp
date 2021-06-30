@@ -6,6 +6,7 @@ import { HelpService } from '../services/help.service';
 import {constants} from "../jsonfiles/constants"
 import { ModalService } from '../shared/modules/modal/modal.service';
 import { DBService } from '../dbservices/db.service';
+import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -21,14 +22,26 @@ testimonialsList: Array<any> = [];
 popupforquestions: boolean =false;
 isMobile: boolean = false;
 images: any;
-
+sliderList2: Array<any> = [];
 startpage: any = "signup";
-  constructor(private router: Router, private dbService: DBService,  private modalService: ModalService,  private helpService: HelpService) {
+  constructor(config: NgbCarouselConfig, private router: Router, private dbService: DBService,  private modalService: ModalService,  private helpService: HelpService) {
 	this.labels={"companyName":this.helpService.getConstants("companyName")};
+
+	config.interval = 3000;
+	config.showNavigationArrows = false;
+	 config.showNavigationIndicators = false;
+
 
 	}
 
   	ngOnInit() {
+
+	
+		this.sliderList2.push({"image":"assets/mtc1_s.jpg","image_small":"assets/mtc1_s.jpg",});
+    this.sliderList2.push({"image":"assets/mtc2_s.jpg","image_small":"assets/mtc2_s.jpg",});
+    this.sliderList2.push({"image":"assets/mtc3_s.jpg","image_small":"assets/mtc3_s.jpg",});
+
+
 		  this.startpage = "questionnaire";
 		  this.images = {};
 		  this.images["appstore"]  = "assets/app-store.png"; 

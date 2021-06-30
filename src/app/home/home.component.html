@@ -1,9 +1,9 @@
 <div class="fixedtop" >
 <div class="row">
-  <div class="col-12">
+  <!--<div class="col-12">
     <app-sliderpanel></app-sliderpanel>
-  </div>
- <section class="home-sec aboutus-sec"  style="padding-left:15px; padding-right:15px;" >
+  </div>-->
+ <section class="home-sec aboutus-sec"  style="padding-left:15px; padding-right:15px; padding-bottom:0px;" >
    <div class="container col-12">
       <div class="home-sec-box">
          <div class="text-side">
@@ -27,21 +27,33 @@
                   </div>
               </div>
          </div>
-         <!-- <div class="image-side  wow zoomIn animated desktoponly hidden-xs" style=" justify-content: center;   align-items: center; visibility: visible; animation-name: zoomIn; transform: rotate(5deg);" >
-            <div class="home-sec-image" style="border-width: 8px;
+          <div class="image-side  wow zoomIn animated desktoponly hidden-xs" style=" justify-content: center;   align-items: center; visibility: visible; animation-name: zoomIn; transform: rotate(5deg);" >
+            <div class="home-sec-image" style="border-width: 8px;     width: 300px;
+            margin: 30px auto;
     border-style: solid;
     border-color: #000;
     border-radius: 15px;
     background-color: #fff;
     box-shadow: 0px 15px 20px -10px rgb(0 0 0 / 15%), 0px 1px 4px -2px rgb(0 0 0 / 40%);">
-              <app-sliderpanel></app-sliderpanel>
+             
+             
+             <ngb-carousel *ngIf="sliderList2" style="width:100%; min-height: 210px;display: none">
+    <ng-template ngbSlide *ngFor="let item of sliderList2; let i=index">
+      <div class="picsum-img-wrapper" style='text-align:center;'>
+        <img *ngIf="!isMobile" class="desktoponly" [src]="item.image" alt="{{item.title}}"  style="width:100%;min-height: 200px;">
+       <img *ngIf="isMobile" class="mobileonly" [src]="item.image_small" alt="{{item.title}}"  style="width:100%;min-height: 200px;">
+      </div>
+         </ng-template>
+
+  </ngb-carousel>
+
             </div>
-         </div> -->
-         <div class="image-side  wow zoomIn animated desktoponly hidden-xs" style=" justify-content: center;   align-items: center; visibility: visible; " >
+         </div> 
+         <!--<div class="image-side  wow zoomIn animated desktoponly hidden-xs" style=" justify-content: center;   align-items: center; visibility: visible; " >
             <div class="home-sec-image">
             <img src="../assets/images/home1.png"/>
             </div>
-         </div>
+         </div>-->
       </div>
    </div>
    </section>
@@ -81,7 +93,7 @@
 <section class="home-sec" style="background:#fff;margin-bottom:0px">
    <div class="container">
       <div class="col-12">
-        <div class="" style="padding-top:0px;">
+        <div class="" style="padding-top:10px;">
          <span class="heading-small-1">How to start?</span>
                   <h2  class="heading-big-1" style="">Easy steps</h2>
            <div class="row secL">

@@ -27,7 +27,7 @@
                   <p class="plan-name">{{planStatus[0]["mpname"]}} </p>
                     <!--<p class="plan-tags">{{planStatus[0]["tags"]}} <br/>
                      </p>-->
-                     <div class="mealplan" *ngIf="plan && plan['days'] && plan['days']['length'] > 0">
+                     <div class="mealplan hidden-xs" *ngIf="plan && plan['days'] && plan['days']['length'] > 0">
                         <ul>
                            <ng-container *ngFor="let mtype of mealTypeList; let m = index">
                            <li [ngClass]="getStatus(mtype)?'mealtypetick':'mealtype'" *ngIf="plan['days'][0][mtype] && plan['days'][0][mtype]['label']">

@@ -1629,5 +1629,50 @@ export class PlancreatemComponent implements OnInit {
 		  }
 		  return retVal;
 		}
+
+		loadMyRecipes(prop)
+		{
+			console.log("in loadmy recipes");
+			this.isItemAvailable = false;
+			this.planDay['selected'] = prop;
+			var params = [];
+			params["query"] = "select id, label, image, healthLabels, dietLabels, calories, totalNutrients, digest from recipes where created_by = " + this.currentUser["id"];
+			this.isSearching = true;
+			console.log(params);
+			var res =   this.dbService.getDatabyTablebyQuery("recipes", params).subscribe(resData => setTimeout(() => {
+				console.log(resData);
+				if(resData && resData["body"]["length"] > 0)
+				{
+					this.isItemAvailable = true;
+					this.isSearching = false;
+					this.items =  resData["body"];
+				}
+			}));
+
+
+		}
+
+		loadFavourites(prop)
+		{
+			console.log("loadFavourites");
+			this.isItemAvailable = false;
+			this.planDay['selected'] = prop;
+			var params = [];
+			params["query"] = "select id, label, image, healthLabels, dietLabels, calories, totalNutrients, digest from recipes where id in (select recipeid from favourites where userid = " + this.currentUser["id"] + ")" ;
+			this.isSearching = true;
+			console.log(params);
+			var res =   this.dbService.getDatabyTablebyQuery("recipes", params).subscribe(resData => setTimeout(() => {
+				console.log(resData);
+				if(resData && resData["body"]["length"] > 0)
+				{
+					this.isItemAvailable = true;
+					this.isSearching = false;
+					this.items =  resData["body"];
+				}
+			}));
+
+
+		}
+
 }
 		

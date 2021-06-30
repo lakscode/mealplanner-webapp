@@ -187,7 +187,7 @@
 
       </div>
       <div class="row">
-        <div class="col-6 ">
+        <div class="col-4 ">
           <div [ngClass]="filterFlag?'filters active':'filters'">
             <a href="javascript:void(0)" (click)="setFilters()">
                 <i class="fa fa-sliders" aria-hidden="true"></i> 
@@ -197,13 +197,13 @@
         </div>
         <div class="col-4 paddinglr0">
           <div class='filters'>
-            <a href="javascript:void(0)" (click)="clearFilters()">
+            <a href="javascript:void(0)" (click)="loadMyRecipes(modalText)">
                 <i class="fa fa-times" aria-hidden="true"></i>
               My Recipes
             </a>
           </div>
         </div>    
-        <div class="col-6 ">
+        <div class="col-4 ">
           <div class='filters'>
             <a href="javascript:void(0)" (click)="clearFilters()">
                 <i class="fa fa-times" aria-hidden="true"></i>
@@ -364,22 +364,7 @@
                   </div>
               </div>
 
-               <!-- <div *ngFor="let mItem of filters['minerals']['data']; let m = index;">
-                  <div style="display:flex; align-items:center" size="5" >
-                    <input type="checkbox"  class="checkbox marginr10" name="filtersM[]" [(ngModel)]="mItem.selected"> <span (click)="selectDeselect(mItem)"  class="filteritem">{{mItem.name.label}}</span>
-                  </div>
-                  <div *ngIf="mItem.selected"  size="3" >
-                    <input class="mineral-input" type='text' name="minerals_{{m}}_min" [(ngModel)]="mItem.min" placeholder="min" />
-                    <span class="maxmin">{{formatVal(mItem.t_min, 0)}}</span>
-                  </div>
-                  <div  *ngIf="mItem.selected"  size="3" >
-                    <input class="mineral-input" type='text' name="minerals_{{m}}_max" [(ngModel)]="mItem.max" placeholder="max" />
-                    <span class="maxmin">{{formatVal(mItem.t_max, 0)}}</span>
-                  </div>
-                  <div style="padding-left: 0px; padding-right: 0px;" *ngIf="mItem.selected"  size="1" >
-                  {{mItem.name.unit}}
-                  </div>
-                </div>-->
+          
               </ng-container>
             </div>
          
@@ -402,7 +387,7 @@
                 <!--<span class="small_text"><span name="flame-outline"></span> {{item.calories}}</span> <br> -->
               </div>
             </div>
-          <
+         
         </div>
       
       

@@ -567,3 +567,143 @@ a {
     padding:10px;
     height:100%; */
 }
+
+
+
+
+
+.carousel-item {
+  display: block !important;
+  z-index: 1;
+  position: absolute;
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out, visibility 1s;
+  visibility: hidden;
+}
+/*.carousel-item.active {
+  position: relative;
+  opacity: 1;        
+  transition: opacity 1.5s ease-in-out, visibility 1s;
+  visibility: visible;
+  
+}*/
+
+
+.carousel-item.active {
+    -webkit-animation: flip-in-ver-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+            animation: flip-in-ver-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+.read-more-bordered:hover {
+   color: #FFF !important;
+}
+
+ @-webkit-keyframes flip-in-ver-left {
+    0% {
+      -webkit-transform: rotateY(80deg);
+              transform: rotateY(80deg);
+      opacity: 0;
+    }
+    100% {
+      -webkit-transform: rotateY(0);
+              transform: rotateY(0);
+      opacity: 1;
+    }
+  }
+  @keyframes flip-in-ver-left {
+    0% {
+      -webkit-transform: rotateY(80deg);
+              transform: rotateY(80deg);
+      opacity: 0;
+    }
+    100% {
+      -webkit-transform: rotateY(0);
+              transform: rotateY(0);
+      opacity: 1;
+    }
+  }
+
+  .carousel-caption
+  {
+    background: #ffffff;
+    padding: 16px;
+    width: 410px;
+ left:60%;
+  }
+
+.slide-detail-inner {
+    border: 1px solid #e4d9d1;
+    padding: 35px;
+    min-height:374px;
+    color:$text-gray;
+}
+
+.slide-detail-inner h2 {
+    font-size: 30px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 900;
+    font-style: normal;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+.slide-detail-inner p {
+font-family: 'Lato', sans-serif;
+}
+
+a:hover {
+  color:var(--green);
+}
+
+.desktoponly
+{
+  display:block;
+}
+.mobileonly
+{
+  display:none;
+}
+@media only screen and (max-width: 767px) {
+  .slide-detail-inner
+  {
+    min-height:100px;
+    padding:5px;
+    border:0px;
+  }
+  .carousel-caption
+  {
+    background: transparent; 
+      padding: 16px;
+      width: 100%;
+      left: 0%;
+    right: 0%;
+    bottom: 0px;
+    top: 0; 
+  }
+
+  .slide-detail-inner p
+  {
+   display:none; 
+  }
+
+  .slide-detail-inner h2
+  {
+    font-size: 20px;
+  }
+
+  .carousel-indicators
+  {
+    display:none;
+  }
+
+
+  .desktoponly
+{
+  display:none;
+}
+.mobileonly
+{
+  display:block;
+}
+}
+
+
