@@ -97,7 +97,7 @@
          <span class="heading-small-1">How to start?</span>
                   <h2  class="heading-big-1" style="">Easy steps</h2>
            <div class="row secL">
-               <div class="col-12 col-lg-4   wow zoomIn animated"  *ngFor="let step of stepsList; let i = index;">
+               <div class="col-12 col-lg-4 col-md-6  wow zoomIn animated"  *ngFor="let step of stepsList; let i = index;">
                   <div  class="sec">
                   <img alt="background image" [lazyLoad]="step.image" style=" height: 250px; max-width:100%; margin-bottom:10px;" class="rounded-bg specialty-image w-80">
               
@@ -134,7 +134,7 @@
                   <div class="col-md-8 col-lg-7">
                      <div class="row">
                         <ng-container  *ngFor="let hLabel of healthLabels; let h=index;">
-                        <div class="mb-5 col-6 col-lg-3 col-md-3"  *ngIf="h <8"> 
+                        <div class="mb-5 col-6 col-lg-3 col-md-4"  *ngIf="h <8"> 
                            <div class=" px-sm-0">
                               <a (click)="gotopage(startpage)"
                                  class="specialty"><img src="{{hLabel.image}}"
@@ -152,6 +152,31 @@
          </div>
       </div>
    </div>
+
+
+   <div class="site-section">
+      <div class="container" >
+         <div class="col-12" *ngIf="healthLabels.length > 1">
+            <div class="" style="display:flex; align-items: center;min-height:450px;padding-top:30px"> 
+               <div class="row " >
+                
+
+                  <div class="col-md-8 col-lg-7">
+                     <img class="wow zoomIn animated" src="assets/images/home1.png" style="width:100%; max-width: 500px; margin:0 auto">
+                  </div>
+                  <div class="col-md-4 col-lg-5 pl-5" style="padding-left:0px !important; margin-bottom: 20px;">
+                     <h1 class="text-lg-left mb-4 title">Create custom meal plans which fits your taste</h1>
+                     <p class="text-justify mb-5 description">Just drag and drop recipes to create your meal plan...</p>
+                     <a (click)="gotopage(startpage)" href="javascript:void(0);" style="cursor:default; margin-bottom:20px;" class="leanmore">Learn More</a>
+
+                 </div>
+
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+
    <!--<div class="scallop-down"></div>-->
 
 <!--
@@ -192,7 +217,7 @@
                       <label for="recipes">Recipes</label>
                   </div>-->
                   <ng-container  *ngFor="let cItem of communitiesList; let i = index;">
-                  <div (click)="gotopage(startpage)" style="padding-left:0px; padding-right:0px;margin-top:15px;margin-bottom:15px" class="col-12 col-lg-3 col-md-4">
+                  <div (click)="gotopage(startpage)" style="padding-left:0px; padding-right:0px;margin-top:15px;margin-bottom:15px" class="col-12 col-lg-3 col-md-6">
                       <div class="recipe-item  animated wow flipInX" style="min-height:200px;background-size:cover;  background-position:center;  " [ngStyle]="{'background-image':'linear-gradient(
                           rgba(0, 0, 0, 0.3),
                           rgba(0, 0, 0, 0.3)
