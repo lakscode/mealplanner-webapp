@@ -172,8 +172,19 @@
       
         <div *ngIf="planDay[modalText]">
       <p position="floating">Search Recipe</p>
+      <div class="row">
+        <div class="col-6 ">
       <input type="text"  class="inputbox"  id="{{modalText}}" (keyup.enter)="filterFlag= false; searchFilters($event, modalText)" [(ngModel)] = "planDay[modalText].label" />
- 
+          </div>
+          <div class="col-6 ">
+            <a href="javascript:void(0)" (click)="clearFilters()">
+              <i class="fa fa-times" aria-hidden="true"></i>
+            Clear
+          </a>
+            </div>
+
+          </div>
+
       </div>
       <div class="row">
         <div class="col-6 ">
@@ -184,19 +195,19 @@
             </a>
           </div>
         </div>
-        <!--<div class="col-4 paddinglr0">
+        <div class="col-4 paddinglr0">
           <div class='filters'>
             <a href="javascript:void(0)" (click)="clearFilters()">
                 <i class="fa fa-times" aria-hidden="true"></i>
               My Recipes
             </a>
           </div>
-        </div> -->   
+        </div>    
         <div class="col-6 ">
           <div class='filters'>
             <a href="javascript:void(0)" (click)="clearFilters()">
                 <i class="fa fa-times" aria-hidden="true"></i>
-              Clear
+             Favourites
             </a>
           </div>
         </div>
@@ -375,7 +386,7 @@
           </ng-container>
       
         </div>
-        <div size='12' *ngIf="filterFlag" style="text-align:right">
+        <div size='12' *ngIf="filterFlag" style="text-align:center">
           <button style="width: 100%;" class='search-button' (click)="filterFlag= false; searchFilters($event, modalText)" >Search</button>
         </div>
       

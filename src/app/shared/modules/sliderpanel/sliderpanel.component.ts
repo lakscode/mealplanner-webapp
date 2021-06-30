@@ -43,7 +43,7 @@ export class SliderpanelComponent implements OnInit, OnDestroy {
      }
      config.interval = 3000;
     config.showNavigationArrows = false;
-     config.showNavigationIndicators = false;
+     config.showNavigationIndicators = true;
      
     
      this.router.events.subscribe((evt) => {

@@ -578,9 +578,15 @@ font-size:13pt;
 
 .carousel-indicators
 {
-	display:block;
+//	display:block;
 }
-
+.carousel-indicators li
+{
+  border:0px;
+  width: 10px;
+  height: 10px;
+  border-radius:50%;
+}
 @media only screen and (max-width: 767px) {
 	.carousel-indicators
 	{
