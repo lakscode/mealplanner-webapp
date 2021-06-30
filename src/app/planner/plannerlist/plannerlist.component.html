@@ -28,9 +28,9 @@
           <p (click)="gotopage('plancreate', {'id':mplan.id});"  innerHTML = "{{mplan.tags}}" *ngIf="mplan.tags"></p>
           <p (click)="gotopage('plancreate', {'id':mplan.id});"  *ngIf="!mplan.tags">&nbsp;</p>
           <div  href="javascript:void(0)" >
-            <a (click)="editmealplan(mplan)" title="View meal plan {{mplan.name}}" class="editicon"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-            &nbsp;
-            <a *ngIf="mplan.created_by == currentUser['id']" (click)="viewmealplan(mplan.id)" class="editicon" title="Edit meal plan {{mplan.name}}" ><i class="fa fa-calendar" aria-hidden="true"></i></a>&nbsp;&nbsp;
+            <a (click)="editmealplan(mplan)" title="Edit Meal Plan - {{mplan.name}}" class="editicon"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+         
+          <!--   <a *ngIf="mplan.created_by == currentUser['id']" (click)="viewmealplan(mplan.id)" class="editicon" title="Edit meal plan {{mplan.name}}" ><i class="fa fa-calendar" aria-hidden="true"></i></a>&nbsp;&nbsp; -->
         </div> 
       </div>
 
