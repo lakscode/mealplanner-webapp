@@ -82,7 +82,7 @@
                   <div class="col-md-4 col-lg-5 pl-5 bgplan" style="padding-left:0px !important; margin-bottom: 20px;">
                      <h1 class="text-lg-left mb-4 title">Too busy to plan?</h1>
                      <p class="text-justify mb-5 description">Subscribe to our dietitian-prepared Specialty Meal Plans which offer balanced nutrition every week and can be easily customized to your personal tastes.</p>
-                     <a href="javascript:void(0);" style="cursor:default; margin-bottom:20px;" class="leanmore">Learn More</a>
+                     <a (click)="gotopage('plans')" style="cursor:default; margin-bottom:20px;" class="leanmore">Learn More</a>
                   </div>
 
                   <div class="col-md-8 col-lg-7">
@@ -90,7 +90,7 @@
                         <ng-container  *ngFor="let hLabel of healthLabels; let h=index;">
                         <div class="mb-5 col-6 col-lg-3 col-md-3"  *ngIf="h <8"> 
                            <div class=" px-sm-0">
-                              <a (click)="gotoRecipes('dietLabels', hLabel.label)"
+                              <a (click)="gotoRecipes('healthLabels', hLabel.label)"
                                  class="specialty"><img src="{{hLabel.image}}"
                                  srcset="{{hLabel.image}}"
                                  class="rounded-bg specialty-image w-100">
@@ -117,7 +117,7 @@
                <div class="heading-var1 text-center animated wow flipInX">
                    <h2><a href="javascript:void(0)">Learn about new meals that you'll enjoy</a></h2>
                  <span class="heading-bell"></span>
-                 <p>Fitaholic's recipe communities make it easy to share and discover recipes that suit your eating habits, limits, needs, and more.</p>
+                 <p>Fitaholic's recipe collections make it easy to share and discover recipes that suit your eating habits, limits, needs, and more.</p>
                </div>
                <div class="row" style="padding-left:0px; padding-right:0px; margin-bottom:15px !important" >
                    <ng-container  *ngFor="let cItem of collectionsList; let i = index;">

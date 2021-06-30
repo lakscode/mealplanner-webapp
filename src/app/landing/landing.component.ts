@@ -368,8 +368,8 @@ constructor(private router: Router, private httpClient : HttpClient, private san
 	}
 
 	gotoRecipes(type, name) {
-		if(type == "dietLabels")
-		this.router.navigate(['recipes', {dietLabels:name}]);
+		if(type == "healthLabels")
+		this.router.navigate(['recipes', {healthLabels:name}]);
 		if(type == "q")
 		this.router.navigate(['recipes', {q:name}]);
 
