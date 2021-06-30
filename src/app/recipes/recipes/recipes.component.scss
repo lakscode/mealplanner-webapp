@@ -587,7 +587,9 @@ padding-right:11px;
     }
     .multi-select
     {
-      top: 80px;
+      top: 0px;
+      position: unset; 
+      margin-bottom: 20px;
     }
   }
   @media (min-width: 768px) and (max-width: 1024px){
@@ -597,6 +599,8 @@ padding-right:11px;
     }
     .multi-select
     {
-      top: 80px;
+      top: 0px;
+      position: unset; 
+      margin-bottom: 20px;
     }
   }
