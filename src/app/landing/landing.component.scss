@@ -328,7 +328,7 @@ cursor: pointer;
   display:block;
   text-align: left;
 }
-.mealtype
+.mealtype, .mealtypetick
 {
   font-size:14px;
   text-align:left;
@@ -336,13 +336,13 @@ cursor: pointer;
   margin-bottom:5px;
 }
 
-.mealtype a
+.mealtype a, .mealtypetick a
 {
  color:#000;
  padding-left:10px;
  font-family: 'Lora', sans-serif;
 }
-.mealtype a:hover
+.mealtype a:hover, .mealtypetick a:hover
 {
   color: $orange1;
 
@@ -357,40 +357,35 @@ cursor: pointer;
   border-radius: 50%;
   background-color: #01B0F1;
 }
-.mealplan .mealtype span {
+
+.mealplan .mealtypetick::before {
+  content: '\2713';
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  font-weight:900;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+ color: $green; 
+}
+
+.mealplan .mealtype span, .mealplan .mealtypetick span {
   font-style:italic;
 }
-/*
-.mealplan .mealtype:nth-child(1) span {
-  color: #01B0F1;
-}
-.mealplan .mealtype:nth-child(2)  span {
-  color: #FFC000;
-}
-.mealplan .mealtype:nth-child(3)  span {
-  color: #C00000;
-}
 
-.mealplan .mealtype:nth-child(4)  span {
-  color: #00AF50;
-}
-
-.mealplan .mealtype:nth-child(5)  span {
-  color: #E46C0B;
-}
-*/
 
 .mealplan .mealtype:nth-child(1)::before {
   background-color: #E46C0B;
 }
-.mealplan .mealtype:nth-child(2)::before {
+.mealplan .mealtype:nth-child(2)::before{
   background-color: #FFC000;
 }
 .mealplan .mealtype:nth-child(3)::before {
   background-color: #C00000;
 }
 
-.mealplan .mealtype:nth-child(4)::before {
+.mealplan .mealtype:nth-child(4)::before{
   background-color: #00AF50;
 }
 

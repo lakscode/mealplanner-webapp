@@ -824,13 +824,56 @@ transform(value: any) {
 		  if(idslist !== "")
 		  {			
 			idslist = idslist.substring(0, idslist.length-1);
-			this.loadRecipes(idslist);
+			this.getCompleteStatus(idslist);
 		  }
 		 
 		}))
 	  }
 	}
 	}
+
+
+	completeStatus: any ;
+  mealtypes: any = [];
+  getCompleteStatus(idslist)
+  {
+    var currentUser = this.helpService.getCurrentUser();
+    var  params = {};
+    params["userid"] = currentUser["id"];
+    params["mealplanid"] =this.planStatus["id"];
+    params["dayid"] =this.plan["days"][0]["id"];
+ 
+    //console.log(params);
+   
+    this.planStatus["consumedcalories"] = 0;
+    var res =   this.dbService.getDataByTable("user_days_status", params).subscribe(invData => setTimeout(() => 
+    {
+        console.log(invData);
+        if(invData !== null && invData["body"]["length"] > 0)
+        {
+          this.mealtypes = ["breakfast","snack1","lunch","snack2","dinner"];
+          this.completeStatus = invData["body"][0];
+          //console.log("completestatus");
+          //console.log(this.completeStatus);
+          var idslist = "";
+          for(let m=0; m < this.mealtypes.length ; m++)
+          {
+			idslist +=  this.plan["days"][0][this.mealtypes[m]] + ",";
+			this.plan["days"][0][this.mealtypes[m] + "status"] = this.completeStatus[this.mealtypes[m]];
+          }
+         console.log(idslist);
+         if(typeof(idslist) !== "undefined" && idslist !== "")
+         {			
+          idslist = idslist.substring(0, idslist.length-1);
+          this.loadRecipes(idslist);
+         }
+
+        }
+
+    }));
+   
+  }
+
 	loadRecipes(idslist)
 	{
 		var recipesList = [];
@@ -858,6 +901,7 @@ transform(value: any) {
 		  }
 		}
 	  }
+	  var cals = 0;
 	  for(let i=0; i < this.plan["days"]['length'] ; i++)
 	  {
 		var obj = this.plan["days"][i];
@@ -866,7 +910,8 @@ transform(value: any) {
 		  var totalCals = 0;
 		  if(this.plan["days"][i][this.mealTypeList[j]] !== "")
 		  {
-  
+			
+
 			var bIndex = recipesList.findIndex(x => (x.id === this.plan["days"][i][this.mealTypeList[j]]));
   
 			if(bIndex > -1)
@@ -874,12 +919,29 @@ transform(value: any) {
 			  this.plan["days"][i][this.mealTypeList[j]] = recipesList[bIndex];
 
 			}
+			var item = this.plan["days"][i][this.mealTypeList[j]];
+			
+			if(this.plan["days"][i][this.mealTypeList[j] + "status"] == "1")
+			{
+			if(typeof(item["calories"]) !== "undefined" && item["calories"] !== "" && typeof(item["yield"]) !== "undefined" && item["yield"] !== "")
+            {
+              if(item["calories"] !== "0" && item["yield"] !== "0")
+              cals +=  parseInt(item["calories"]) / parseInt(item["yield"])
+            }
+			
 		}
 	}
 }
-//console.log( this.plan);
+
+if( cals > 0)
+{
+  console.log(cals);
+  this.planStatus["consumedcalories"] = cals.toFixed(2);
+}
+
 	}
-	
+}
+	console.log(this.plan);
   }));
   }
 
@@ -943,6 +1005,13 @@ transform(value: any) {
 		return retValue;
 	}
 
+	getStatus(type)
+	{
+		var ret = false;
+		if(this.plan['days'][0][type +'status'] == "1")
+		ret = true;
+		return ret;
+	}
 }
 
 	

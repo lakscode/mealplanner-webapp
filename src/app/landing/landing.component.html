@@ -29,12 +29,13 @@
                      </p>-->
                      <div class="mealplan" *ngIf="plan && plan['days'] && plan['days']['length'] > 0">
                         <ul>
-                           <li class="mealtype" *ngIf="plan['days'][0]['breakfast'] && plan['days'][0]['breakfast']['label']">
-                              <a  href="/recipedetails/{{plan['days'][0]['breakfast']['id']}}"  target="_blank"  title = "{{plan['days'][0]['breakfast']['label']}}" >
-                                 <span>Breakfast :</span> {{limitTo(plan['days'][0]['breakfast']['label'], 30)}}
+                           <ng-container *ngFor="let mtype of mealTypeList; let m = index">
+                           <li [ngClass]="getStatus(mtype)?'mealtypetick':'mealtype'" *ngIf="plan['days'][0][mtype] && plan['days'][0][mtype]['label']">
+                              <a  href="/recipedetails/{{plan['days'][0][mtype]['id']}}"  target="_blank"  title = "{{plan['days'][0][mtype]['label']}}" >
+                                 <span>{{setFLU(mtype)}} :</span> {{limitTo(plan['days'][0][mtype]['label'], 30)}}
                               </a>
                            </li>
-                           <li class="mealtype" *ngIf="plan['days'][0]['snack1'] && plan['days'][0]['snack1']['label']">
+                          <!--<li [ngClass]="plan['days'][0]['snack1tatus'] == '1'?'mealtypetick':'mealtype'" *ngIf="plan['days'][0]['snack1'] && plan['days'][0]['snack1']['label']">
                               <a href="/recipedetails/{{plan['days'][0]['snack1']['id']}}"  target="_blank"  title = "{{plan['days'][0]['snack1']['label']}}" >
                                 <span>Morning Snack :</span> {{limitTo(plan['days'][0]['snack1']['label'], 24)}}
                               </a>
@@ -58,16 +59,12 @@
                                  <span>Dinner :</span> {{limitTo(plan['days'][0]['dinner']['label'], 30)}}
                               </a>
 
-                           </li>
-                        </ul>
-                       
-
-                        
-
-                       
-                       
+                           </li>-->
+                        </ng-container>
+                        </ul>                      
                       </div>
                      <br>
+                     <p style="font-family: 'Lora', sans-serif; text-align:left" *ngIf="planStatus['consumedcalories']">You have consumed {{planStatus["consumedcalories"]}} calories so far today. </p>
                   <a class="read-more-bordered" (click)="gotopage('schedule', planStatus[0]['id'])" href="javascript:void(0)">View Details</a>
                </ng-container>
            </div>
