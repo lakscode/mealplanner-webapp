@@ -31,7 +31,6 @@
     border-radius: 15px;
     background-color: #fff;
     box-shadow: 0px 15px 20px -10px rgb(0 0 0 / 15%), 0px 1px 4px -2px rgb(0 0 0 / 40%);">
-              <!-- <img [lazyLoad]="images['goodfood']" alt="good food image">-->
               <app-sliderpanel></app-sliderpanel>
             </div>
          </div>
@@ -135,7 +134,7 @@
    </div>
    <!--<div class="scallop-down"></div>-->
 
-
+<!--
    <div class="row subscribe-sec">
       <div class="container">
           <div class="col-12 text-center wow animated bounceInDown">
@@ -156,7 +155,7 @@
           </div>
       </div>
     </div>
-
+   -->
 <!--hottest recipes-->
 <section class="hot-recipes-var2" style="margin-bottom:30px;padding-bottom:0px;" *ngIf="communitiesList && communitiesList.length > 0">
    <div class="container">
@@ -255,7 +254,7 @@
 
    </section>
    <!--- Diet recipes -->
-
+<!--
  <section class="hot-recipes-var2" *ngIf="dietRecipes && dietRecipes.length > 0">
    <div class="container">
        <div class="wrapper-hot-recipe-var2">
@@ -298,7 +297,7 @@
        </div>
     </div>
  </section>
-
+-->
  <!--- Diet recipes -->
 
    <div class="row subscribe-sec">
@@ -357,7 +356,7 @@
     </div>
  </section>-->
  <!--hottest recipes ends-->
- <div class="chefs-banner">
+<div class="chefs-banner">
   <div class="container">
       <div class="chefs-card text-center wow animated bounceInDown">
          <div class="chefs-card-inner">
@@ -368,14 +367,41 @@
                Get a 15-day free trial of our app.<br/> Satisfied users choose from <br/>various affordable subscriptions. 
             </p>
             <a class="read-more-bordered"  (click)="gotopage(startpage)">Join Now</a>
-            <!--<a class="read-more-bordered" (click)="gotopage('signup')">Join Now</a>-->
-            <!--<a class="read-more-bordered" (click)="openModal('popupforquestions')">Join Now</a>-->
-        </div>
+          </div>
       </div>
   </div>
 </div>
-     
-<!--<div class="chefs-banner">
+    
+<!--
+<div class="row "><div class=" ">
+   <div class="col-12 container">
+      <div class="row">
+   <div class="col-12 col-lg-6 col-md-6">
+  
+       <div class="chefs-card text-center wow animated bounceInDown">
+          <div class="chefs-card-inner">
+             <h2>we love our users, <br/>join us now</h2>
+             <div class="short-separator"></div>
+             
+             <p>
+                Get a 15-day free trial of our app.<br/> Satisfied users choose from <br/>various affordable subscriptions. 
+             </p>
+             <a class="read-more-bordered"  (click)="gotopage(startpage)">Join Now</a>
+           </div>
+       </div>
+   </div>
+
+<div class="col-12 col-lg-6 col-md-6">
+   <img style="width:100%;margin-top: 120px;
+   margin-bottom: 120px;" src = "assets/images/home.png" />
+   </div>
+</div>
+ </div>
+</div>
+</div>
+-->
+<!--
+<div class="chefs-banner">
    <div class="container">
       
        <div *ngIf= "!isMobile" class="chefs-card text-center wow animated bounceInDown" style="width:100%; max-width:100%;">
@@ -396,9 +422,9 @@
      </div>
 
    </div>
- </div>-->
+ </div>
 </div>
-
+-->
 <!--
 <div *ngIf='popupforquestions' id="popupforquestions" class="popupforquestions popupwidth">
 

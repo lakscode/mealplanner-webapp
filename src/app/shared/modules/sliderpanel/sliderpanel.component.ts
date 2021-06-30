@@ -75,10 +75,15 @@ export class SliderpanelComponent implements OnInit, OnDestroy {
      // this.sliderList.push({"title":"Weekly Meal Planner in your pocket!", "image":"assets/images/temp-images/full-slide-4.jpg","image_small":"assets/images/temp-images/full-slide-4_small.jpg","rating":"", "description":"Discover recipes that fit your lifestyle and customized meal plan to accommodate your schedule."});
     //  this.sliderList.push({"title":"pasto pizza with extra topping", "image":"assets/images/temp-images/full-slide-3.jpg","rating":"", "description":"Nam ornare arcu turpis, nec congues with us     <br/>Curabitur quis euismod mauris. Nulls<br/>eget semper vulputate."});
 
-    this.sliderList.push({"image":"assets/mtc1_s.jpg","image_small":"assets/mtc1_s.jpg",});
+   this.sliderList.push({"image":"assets/mtc1_s.jpg","image_small":"assets/mtc1_s.jpg",});
     this.sliderList.push({"image":"assets/mtc2_s.jpg","image_small":"assets/mtc2_s.jpg",});
     this.sliderList.push({"image":"assets/mtc3_s.jpg","image_small":"assets/mtc3_s.jpg",});
 
+ /*
+this.sliderList.push({"image":"assets/images/1.jpg","image_small":"assets/mtc1_s.jpg",});
+    this.sliderList.push({"image":"assets/images/2.jpg","image_small":"assets/mtc2_s.jpg",});
+    this.sliderList.push({"image":"assets/images/3.jpg","image_small":"assets/mtc3_s.jpg",});
+    this.sliderList.push({"image":"assets/images/4.jpg","image_small":"assets/mtc3_s.jpg",});*/
     }
 
     ngOnInit(): void {
