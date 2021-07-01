@@ -409,13 +409,11 @@ if(mQuery !== "")
   where += " AND id in (select recipeid from nutrients where " + mQuery +  ")";
 
   params1["query"] = query + where + " limit 0, 30";
-  console.log(params1);
+
 	var res =   this.dbService.getDatabyTablebyQuery("recipes", params1).subscribe(invData => setTimeout(() => {
-		console.log(invData);
-		
 
 		if (invData["body"]["length"] == 0) {
-			console.log("calling again searchprops");
+
 			this.splitcontent = true;
 			if (this.loopCount < 1) {
 				this.loopCount++;
@@ -440,12 +438,12 @@ if(mQuery !== "")
 	}
 	else
 	{
-		console.log(params);
+
 		params["limit"] = "20";
 	var res =   this.dbService.getDatabyFields("recipes", params).subscribe(invData => setTimeout(() => {
-		console.log(invData);
+
 		if (invData["body"]["length"] == 0) {
-			console.log("calling again searchprops");
+
 			this.splitcontent = true;
 			if (this.loopCount < 1) {
 				this.loopCount++;
