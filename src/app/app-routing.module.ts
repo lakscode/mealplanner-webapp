@@ -9,7 +9,7 @@ const routes: Routes = [
     redirectTo: '/home',
 	pathMatch: 'full' 
   },
- {
+ /*{
     path: 'home',
     component: HomeComponent
   }, 
@@ -137,7 +137,7 @@ loadChildren: './features/features.module#FeaturesModule'
 ];
 
 @NgModule({
-  imports: [FormsModule, RouterModule.forRoot(routes,{ useHash: true, scrollPositionRestoration:top, enableTracing: false, onSameUrlNavigation:"reload"})],
+  imports: [FormsModule, RouterModule.forRoot(routes,{ useHash: true,scrollPositionRestoration: 'top', enableTracing: false, onSameUrlNavigation:"reload"})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
