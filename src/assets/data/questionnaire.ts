@@ -26,8 +26,8 @@ export const data =[{
         "question": "Sensivitives/Allergies?", "answers":[
         {"name":"q8", "value":"c1", "text":"Milk", "subtext":""},
         {"name":"q8", "value":"c2", "text":"Egg", "subtext":""},
-        {"name":"q8", "value":"c3", "text":"Tree Nuts", "subtext":""},
-        {"name":"q8", "value":"c4", "text":"Pea Nut", "subtext":""},
+        {"name":"q8", "value":"c3", "text":"Tree-Nut", "subtext":""},
+        {"name":"q8", "value":"c4", "text":"Peanut", "subtext":""},
 		{"name":"q8", "value":"c5", "text":"Shellfish", "subtext":""},
 		{"name":"q8", "value":"c6", "text":"Wheat", "subtext":""},
 		{"name":"q8", "value":"c7", "text":"Soy", "subtext":""},

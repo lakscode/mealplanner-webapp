@@ -62,6 +62,7 @@ startpage: any = "signup";
 		  this.currentUser["displayname"] = this.currentUser["firstname"];
 		  else if( this.currentUser["username"] !== "")
 		  this.currentUser["displayname"] = this.currentUser["username"];
+		  this.helpService.loadQuestionnaire();
 		}
 		this.loadHealthLabels();
 		this.loadDietRecipes();

@@ -163,7 +163,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 					this.userName = this.userName.charAt(0).toUpperCase() + this.userName.slice(1);
 
 					}
-				
+				this.helpService.loadQuestionnaire();
 				
 				this.isUser = this.helpService.setUserRoles(this.currentUser);
 			

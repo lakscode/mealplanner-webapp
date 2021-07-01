@@ -891,4 +891,82 @@ SendEmailPasswordReset(email,data) {
 	   }
 	   return retval;
 	}
+
+	loadQuestionnaire()
+	{
+		var params= {};
+ 
+		var currentUser = this.getCurrentUser();
+	  var uniqueid =  localStorage.getItem("uniqueid");
+	 var ipaddress =  localStorage.getItem("ipaddress");
+	  var where = "";
+	  if(typeof(uniqueid) !== "undefined" && uniqueid !== null && uniqueid !== "")
+	  {
+		where += " user_uniqueid = '" + uniqueid + "' ";
+	  }
+
+	  if(typeof(ipaddress) !== "undefined" && ipaddress !== null && ipaddress !== "")
+	  {
+		  	if(where !== "")
+				where += " OR user_ipaddress = '" + ipaddress + "' ";	
+			else
+				where = " user_ipaddress = '" + ipaddress + "' ";
+	  }
+
+	  if(typeof(currentUser) !== "undefined" && currentUser !== null && typeof(currentUser["id"]) !=="undefined")
+	  {
+		  	if(where !== "")
+				where += " OR userid = '" + currentUser["id"] + "' ";	
+			else
+				where = " userid = '" + currentUser["id"] + "' ";
+	  }
+	  if(where !== "")
+	  {
+	  params["query"] = "select * from questionnaire where" + where;
+
+		var res =   this.dbService.getDatabyTablebyQuery("questionnaire", params).subscribe(qData => setTimeout(() => {
+		console.log(qData);
+		if(qData["body"] && qData["body"]["length"] > 0)
+		{
+			var ddata = qData["body"][0];
+	//	sessionStorage.setItem("questionnaire", JSON.stringify(ddata));
+		console.log(qData["body"][0]);
+			if(ddata["question4"] !== "")
+			{
+			//	sessionStorage.setItem("dontinclude", ddata["question4"]);
+
+				var t1 = ddata["question4"].split(",");
+				var c = "";
+				var d  = "";
+				for(let i=0; i < t1.length; i++)
+				{
+					c += "label NOT LIKE '%" + t1[i] + "%' AND ";
+
+					d += "healthLabels LIKE '%" + t1[i] + "-Free%' AND ";
+				}
+				if(c !== "")
+				c = c.slice(0, -4);
+				sessionStorage.setItem("labels", c);
+				if(d !== "")
+				d = d.slice(0, -4);
+				sessionStorage.setItem("healthLabels", d);
+
+			}
+			if(ddata["question5"] !== "")
+			{
+				var t1 = ddata["question5"].split(",");
+				var c = "";
+				for(let i=0; i < t1.length; i++)
+				{
+					c += "dietLabels LIKE '%" + t1[i] + "%' OR ";
+				}
+				if(c !== "")
+				c = c.slice(0, -3);
+				sessionStorage.setItem("dietLabels", c);
+			}
+			
+		}
+		}));
+		}
+	}
 }

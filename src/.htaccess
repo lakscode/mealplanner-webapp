@@ -49,3 +49,6 @@ RewriteRule ^ index.html [L]
     Header set Cache-Control "max-age=1, private, must-revalidate"
   </filesMatch>
 </ifModule>
+
+Header unset Cookie
+Header unset Set-Cookie

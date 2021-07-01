@@ -83,16 +83,30 @@ constructor(private router: Router, private httpClient : HttpClient, private san
 
 	  this.recommendedRecipes = [];
   
-	  var params = {"limit": "4"};
+	  var params = {};
 
 	  var query = "select id, label, image, calories, yield, source, dietLabels, healthLabels from recipes  ";
 	  var qWhere = " where s_instructions != '' AND label != '' AND image != '' ";
+/*
+	  if(sessionStorage.getItem("healthLabels"))
+	  {
+		qWhere  += " AND (" + sessionStorage.getItem("healthLabels") + ") ";
+	  }
+	 */
 
+	  if(sessionStorage.getItem("dietLabels"))
+	  {
+		qWhere  += " AND (" + sessionStorage.getItem("dietLabels") + ") ";
+	  }
+
+	  /*
 	  if(typeof(this.userPref) !== "undefined" && this.userPref !== null && typeof(this.userPref["dietLabels"]) !== "undefined" && this.userPref["dietLabels"] !== null && this.userPref["dietLabels"] !== "")
 	  {
 		qWhere += " AND dietLabels = '" + this.userPref["dietLabels"] + "' AND dietLabels != ''  ";
 	  }
-	  params["query"]= query + qWhere + "  group by healthLabels order by rand() limit 0, 4";
+	  */
+	  params["query"]= query + qWhere + " order by rand() limit 0, 4";
+
 
 	  var res =   this.dbService.getDatabyQuery("recipes", params).subscribe(invData => setTimeout(() => {
      
@@ -716,7 +730,8 @@ transform(value: any) {
 		  if(idslist !== "")
 		  {			
 			idslist = idslist.substring(0, idslist.length-1);
-			this.getCompleteStatus(idslist);
+			this.loadRecipes(idslist);
+			this.getCompleteStatus();
 		  }
 		 
 		}))
@@ -727,7 +742,7 @@ transform(value: any) {
 
 	completeStatus: any ;
   mealtypes: any = [];
-  getCompleteStatus(idslist)
+  getCompleteStatus()
   {
     var currentUser = this.helpService.getCurrentUser();
     var  params = {};
@@ -749,15 +764,9 @@ transform(value: any) {
           var idslist = "";
           for(let m=0; m < this.mealtypes.length ; m++)
           {
-			idslist +=  this.plan["days"][0][this.mealtypes[m]] + ",";
 			this.plan["days"][0][this.mealtypes[m] + "status"] = this.completeStatus[this.mealtypes[m]];
           }
-         console.log(idslist);
-         if(typeof(idslist) !== "undefined" && idslist !== "")
-         {			
-          idslist = idslist.substring(0, idslist.length-1);
-          this.loadRecipes(idslist);
-         }
+        
 
         }
 
