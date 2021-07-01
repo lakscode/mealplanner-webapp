@@ -235,7 +235,8 @@ export class HelpService {
 		"bgcontext",
 		"menu",
 		"contextmenu",
-		"fa fa-ellipsis-v"
+		"fa fa-ellipsis-v",
+		"left130"
 				];
 
 		return ignoreClassesList;		

@@ -754,6 +754,7 @@ console.log(args);
 				this.recipesList1[r]["showpopup"] = false;
 
 				this.recipesList1[r]["showAdd2MP"] = false;
+				this.recipesList1[r]["showAdd2C"] = false;
 			}
 		}
 
@@ -863,11 +864,12 @@ console.log(args);
 	selectedRecipe2Add2Collection: any;
 	addCollectionsPopup(recipe) {
 
-
+		console.log(recipe);
+	
 		this.loadCollectionNames();
 		this.selectedRecipe2Add2Collection = recipe;
 		recipe.showAdd2C = !recipe.showAdd2C;
-
+		this.showhidecontent(recipe);
 	}
 	collectionsList: Array<any> = [];
 	collection: any = { "id": '', "day": "", "mealType": "" };
