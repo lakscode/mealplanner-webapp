@@ -25,16 +25,16 @@
           <div class="questions-panel">
             <div *ngIf="!processing">
 
-
+              
               <div class="q-panel " *ngFor="let question of questions; let cq = index;">
                 <div class="  wow animated bounceInRight">
                   <h2 class="question-text">{{getFLU(questions[cq].question)}}</h2>
 
 
 
-                  <div *ngIf="questions[cq]['type'] == 'text'" style="text-align:center;">
+                  <div *ngIf="questions[cq]['type'] == 'text'" style="text-align:left;">
 
-                    <input style="display:inline-block;font-size:14px" class="input-text" type="text"
+                    <input style="display:inline-block;font-size:14px; padding:5px 10px; border-radius:5px; outline:0;" class="input-text" type="text"
                       (keyup)="setAnswerText(questions[cq], cq)" placeholder="Please enter value" name="question{{cq}}"
                       [(ngModel)]="questions[cq]['answer']">&nbsp;
                     <span style='margin-left: 10px; font-size: 14px;'

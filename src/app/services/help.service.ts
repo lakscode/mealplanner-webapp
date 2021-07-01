@@ -931,11 +931,11 @@ SendEmailPasswordReset(email,data) {
 			var ddata = qData["body"][0];
 	//	sessionStorage.setItem("questionnaire", JSON.stringify(ddata));
 		console.log(qData["body"][0]);
-			if(ddata["question4"] !== "")
+			if(ddata["question5"] !== "")
 			{
 			//	sessionStorage.setItem("dontinclude", ddata["question4"]);
 
-				var t1 = ddata["question4"].split(",");
+				var t1 = ddata["question5"].split(",");
 				var c = "";
 				var d  = "";
 				for(let i=0; i < t1.length; i++)
@@ -952,9 +952,9 @@ SendEmailPasswordReset(email,data) {
 				sessionStorage.setItem("healthLabels", d);
 
 			}
-			if(ddata["question5"] !== "")
+			if(ddata["question6"] !== "")
 			{
-				var t1 = ddata["question5"].split(",");
+				var t1 = ddata["question6"].split(",");
 				var c = "";
 				for(let i=0; i < t1.length; i++)
 				{

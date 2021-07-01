@@ -320,8 +320,9 @@ export class  QuestionnaireComponent implements OnInit {
 
    if(type == "checkbox")
    {
+
    		answer["selected"] = !answer["selected"];
-    	if(typeof(this.questions[cq]["answer"]) == "undefined" || this.questions[cq]["answer"] == null)
+    	if(typeof(this.questions[cq]["answer"]) == "undefined" || this.questions[cq]["answer"] == null || this.questions[cq]["answer"] == "")
 		{
 			this.questions[cq]["answer"] = answer['text'];
   

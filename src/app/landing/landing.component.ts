@@ -87,8 +87,8 @@ constructor(private router: Router, private httpClient : HttpClient, private san
 
 	  var query = "select id, label, image, calories, yield, source, dietLabels, healthLabels from recipes  ";
 	  var qWhere = " where s_instructions != '' AND label != '' AND image != '' ";
-/*
-	  if(sessionStorage.getItem("healthLabels"))
+
+	/*  if(sessionStorage.getItem("healthLabels"))
 	  {
 		qWhere  += " AND (" + sessionStorage.getItem("healthLabels") + ") ";
 	  }
@@ -118,7 +118,7 @@ constructor(private router: Router, private httpClient : HttpClient, private san
 			 this.recommendedRecipes.push(invData["body"][i]);
 			
 		   }
-		
+		   console.log(this.recommendedRecipes)
 		 }
 
 	   }

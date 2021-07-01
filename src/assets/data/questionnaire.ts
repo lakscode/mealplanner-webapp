@@ -1,12 +1,17 @@
-export const data =[{
-        "id":"1","type":"option",
+export const data =[
+	{
+        "id":"1", "type":"text",  "answer":"", "opt":"",  "textlabel":"", 
+        "question": "What's your name?", "answers":[]
+    },
+	{
+        "id":"2","type":"option",
         "question": "Please choose gender", "answer":"", "answers":[
         {"name":"q1", "value":"c1", "text":"Male", "subtext":"", },
         {"name":"q1", "value":"c2", "text":"Female", "subtext":""}
         ]
     },
     {
-        "id":"2","type":"option",
+        "id":"3","type":"option",
         "question": "What is your goal?", "answer":"", "answers":[
         {"name":"q2", "value":"c1", "text":"Loose Weight", "subtext":""},
         {"name":"q2", "value":"c2", "text":"Gain Weight", "subtext":""},
@@ -14,7 +19,7 @@ export const data =[{
         ]
     },
     {
-        "id":"3","type":"option",
+        "id":"4","type":"option",
         "question": "How active you are?", "answer":"","answers":[
         {"name":"q3", "value":"c1", "text":"Sedentary", "subtext":"fewer than 5,000 steps a day"},
         {"name":"q3", "value":"c2", "text":"Moderate", "subtext":"between 7,500 and 10,000 steps"},
@@ -22,7 +27,7 @@ export const data =[{
         ]
     },
     {
-        "id":"8","type":"checkbox", "answer":"",
+        "id":"5","type":"checkbox", "answer":"",
         "question": "Sensivitives/Allergies?", "answers":[
         {"name":"q8", "value":"c1", "text":"Milk", "subtext":""},
         {"name":"q8", "value":"c2", "text":"Egg", "subtext":""},
@@ -35,7 +40,7 @@ export const data =[{
         ]
     },
     {
-        "id":"9","type":"checkbox",
+        "id":"6","type":"checkbox",
         "question": "What's your recommended diet?", "answers":[
         {"name":"q9", "value":"c1", "text":"Balanced", "subtext":"Protein/Fat/Carb values in 15/35/50 ratio"},
         {"name":"q9", "value":"c2", "text":"High-Fiber", "subtext":"More than 5g fiber per serving"},
@@ -46,15 +51,15 @@ export const data =[{
         ]
     },
     {
-        "id":"4", "type":"text",  "answer":"", "opt":"Years",  "textlabel":"Years", 
+        "id":"7", "type":"text",  "answer":"", "opt":"Years",  "textlabel":"Years", 
         "question": "What's your age?", "answers":[]
     },
     {
-        "id":"5", "type":"text", "answer":"", "opt":"Inch", "options":[{"name":"Inch", "selected":true},{"name":"Cm", "selected":false}], 
+        "id":"8", "type":"text", "answer":"", "opt":"Inch", "options":[{"name":"Inch", "selected":true},{"name":"Cm", "selected":false}], 
         "question": "What's your height?", "answers":[]
     },
     {
-        "id":"6", "type":"text",  "answer":"","opt":"Kg", "options":[{"name":"Kg", "selected":true},{"name":"Lbs", "selected":false}], 
+        "id":"9", "type":"text",  "answer":"","opt":"Kg", "options":[{"name":"Kg", "selected":true},{"name":"Lbs", "selected":false}], 
         "question": "What's your weight?", "answers":[]
     }
     ]
