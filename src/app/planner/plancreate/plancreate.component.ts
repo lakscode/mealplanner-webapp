@@ -406,12 +406,17 @@ console.log(params);
 		}
 		else
 		{
+			if(typeof(this.searchparam["q"]) !== "undefined" && this.searchparam["q"] !== null && this.searchparam["q"] !== "")
+			{
 			this.splitcontent = true;
 
 			if(this.loopCount < 1){
 				this.loopCount++;
 				this.loadRecipes();
-	
+	 
+			}
+			} else {
+			this.recipesList = [];
 			}
 				
 		}
@@ -419,6 +424,7 @@ console.log(params);
 	  }
 	
 	 ));
+			
 	}
 	else
 	{
