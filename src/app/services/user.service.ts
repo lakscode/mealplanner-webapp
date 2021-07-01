@@ -49,3 +49,4 @@ export class User
   uniqueid: string = "";
   user_ipaddress: string = "";
 }
+

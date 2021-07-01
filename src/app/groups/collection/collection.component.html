@@ -5,59 +5,8 @@
                 <div class="recipe-set submit-recipe-set">
                     <h2> <a (click)="gotopage();"><i class="fa fa-chevron-left"></i></a> Collection</h2>
 
-                    <!-- <div style="width:100%; text-align:right">
-                <a class="copy-button" (click)="downloadplan()" title="Download PDF"><i class="fa fa-download"></i> Download</a>
-            </div>    -->
                     <div class="submit-recipe-form">
-                        <!--<form action="#" method="post">-->
-
-                       <!--       <div class="row" *ngIf="collectionOwner" style="display:none">
-
-                                <div class="col-12 collection_panel">
-
-                                    <img *ngIf="collection.image" class="collection_img" src="{{collection.image}}"
-                                        style="height:200px;width: 100%;     object-fit: cover;" />
-                                    <img *ngIf="!collection.image" class="collection_img" src="assets/notavailable1.jpg"
-                                        style="height:200px;width: 100%;     object-fit: cover;" />
-
-                                    <div class="collection_details">
-                                        <input id="inputuploadrecipe" hidden type="file" name="inputuploadrecipe"
-                                            (change)="onFileSelect($event)" />
-                                        <button style="float:right; background:transparent; border:0px; outline:0;"
-                                            *ngIf="collection.image" (click)="fileupload()" class="upload-comment">
-                                            <i class="fa fa-picture-o" aria-hidden="true"></i></button>
-                                        <input class="trans-input" type="text" name="title" id="title"
-                                            placeholder="Type collection name..."
-                                            [(ngModel)]="collection.collection_name">
-                                        <textarea class="short-text trans-input" name="description"
-                                            placeholder="Type description" [(ngModel)]='collection.description'
-                                            id="description" cols="30" rows="10"></textarea>
-                                        <br>
-
-                                    </div>
-                                </div>
-
-
-                               <div class="col-12 col-md-6 col-lg-6">
-                    <label for="title">collection Title</label>
-                    <input type="text" name="title" id="title" [(ngModel)]="collection.collection_name">
-                    <br>
-                    <label for="description">Description</label>
-                    <textarea class="short-text" name="description" [(ngModel)]='collection.description' id="description" cols="30" rows="10"></textarea>
- 
-                   </div>
-
-
-
-                                <div class="text-center">
-                                    <button type="submit" (click)="saveRecipebook()" class="recipe-submit-btn">Save
-                                    </button>
-                                </div>
-                            </div>
--->
-
-                            <!--  <div class="row" *ngIf="!collectionOwner && collection.image"  > -->
-                            <div class="row" *ngIf="collection.image">
+                                   <div class="row" *ngIf="collection.image">
                                 <div class="col-12 collection_panel animated wow flipInX">
 
                                     <img class="collection_img " src="{{collection.image}}"
@@ -83,40 +32,12 @@
                                                         member<span
                                                             *ngIf="collection.joinedcount > 1">s</span></span></a>
                                             </p>
-                                            <!--<div class="userslist" *ngIf="usersList.length > 0">
-                                <ng-container *ngFor="let user of usersList; let u=index">
-                                    <div style="display:block; margin-bottom:10px;">
-                                        <img src="{{user.image}}" class="profileimage"><span class="username">{{user.firstname}}</span>
-                                    </div>
-                                </ng-container>
-                               </div>-->
+                                          
 
                                         </div>
 
                                         <div class="onlydesktop" style="position:absolute; bottom:0px; right:0px;">
-                                            <!--<div class="component-bg" style="display:inline-block;">
-                                <div class="share-recipe">
-                                  Share :  
-                              
-                              
-                                  <div class="fb-share-button social-icon fb" 
-                                  data-href="https://developers.facebook.com/docs/plugins/" data-layout="button" data-size="large">
-                                  <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?quote={{msg}}&u={{urlShare}}/" class=" fa fa-facebook"></a>
-                                  </div>
-                                  <div class="social-icon twitter">
-                                    <a href="{{urlTweet}}" target="_blank" class=" fa fa-twitter"></a>
-                                  </div>
-                              
-                                  <div class="social-icon whatsapp">
-                                    <a href="https://api.whatsapp.com/send?text={{urlShare}}" target="_blank" data-action="share/whatsapp/share" class=" fa fa-whatsapp"></a>
-                                  </div>
-                              
-                                  <div class="social-icon print">
-                                    <a href="javascript:void()" target="_blank" class=" fa fa-print"></a>
-                                  </div>
-                                </div>
-                              </div>-->
-                                            <!--<button *ngIf="showActions['invite']" class="create-button anim-button btn-4">Invite</button>-->
+                                          
                                             <button (click)="joincollection()" *ngIf="showActions['join'] "
                                                 class="create-button anim-button btn-4">Join</button>
                                             <button class="create-button anim-button btn-4" (click)="addNew()">Add
@@ -321,21 +242,14 @@
                                                             <p style='color:#FFF'><b><em>Calories</em></b>:
                                                                 {{recipe.calories}} Kcal, <b><em>Servings</em></b>:
                                                                 {{recipe.yield}}</p>
-                                                            <!--<p><b><em>Diet Labels</em></b>: {{recipe.dietLabels}} </p>-->
-
-                                                            <!--<div style='color:#000' class="recipe-add" (click)="addRecipe(recipe)"><i class="fa fa-plus" aria-hidden="true"></i></div>
-
-                                            <div style='color:#000' class="recipe-view" (click)="viewRecipe(recipe)"><i class="fa fa-eye" aria-hidden="true"></i></div> -->
-                                                        </div>
+                                                                   </div>
                                                         <div class="morebtn">
                                                             <a class="menu"
                                                                 (click)="toggleMoreMenu(recipe, i, 'addlist')"
                                                                 href="javascript:void(0)"><i class="fa fa-ellipsis-v"
                                                                     aria-hidden="true"></i></a>
                                                             <div class="moremenu" *ngIf="recipe.expand">
-                                                                <!-- <a href="javascript:void(0)" (click)="setFavourite(recipe.id)"><i class="fa fa-heart" aria-hidden="true"></i> Set Favourite</a> -->
-
-                                                                <a href="javascript:void(0)"
+                                                                    <a href="javascript:void(0)"
                                                                     (click)="addRecipe(recipe)"><i class="fa fa-plus"
                                                                         aria-hidden="true"></i> Add Recipe</a>
                                                                 <a href="javascript:void(0)"
@@ -355,9 +269,7 @@
 
                             </div>
                             <div class="row" style="padding-left:0px; padding-right:0px;">
-                                <!--<div class="col-12" *ngIf="collection.collection_name">
-                            <label for="recipes">Recipes</label>
-                        </div>-->
+                            
                                 <ng-container *ngFor="let recipe of recipesList; let i = index;">
                                     <div style="padding-left:0px; padding-right:0px;margin-top:15px;margin-bottom:15px"
                                         class="col-12 col-lg-3 col-md-4">
@@ -392,10 +304,7 @@
                                                     <p><b>Calories</b>: {{recipe.calories}} Kcal</p>
                                                     <p><b>Servings</b>: {{recipe.yield}}</p>
 
-                                                    <!-- <p *ngIf="recipe.dietLabels"><b>Diet Labels</b>: {{recipe.dietLabels}} </p>-->
-                                                    <!-- <p *ngIf="recipe.favcount && recipe.favcount> 0">{{recipe.favcount}} Members Saved</p>
-                                    <p class="favactive" style='text-align:right;' (click)="toggleFav(recipe.id)" *ngIf="recipe.UserFavStatus"><i class="fa fa-heart"></i></p>-->
-
+                                                  
                                                 </div>
                                                 <div class="morebtn"><a (click)="toggleMoreMenu(recipe, i, 'viewlist')"
                                                         class="menu" href="javascript:void(0)"><i
@@ -431,30 +340,7 @@
                                     padding-right: 0px;" href="javascript:void(0)"
                                                         (click)="recipe.showAdd2MP = false;"><i class="fa fa-close"
                                                             aria-hidden="true"></i> </a>
-                                                    <p class="title"> Add Recipe to Meal Plan</p>
-                                                    <p>Choose Meal Plan</p>
-                                                    <select name="planid" [(ngModel)]="plan.id">
-                                                        <option value="{{plan.id}}"
-                                                            *ngFor='let plan of plansList; let i = index'>{{plan.name}}
-                                                        </option>
-                                                    </select>
-                                                    <p>Choose Day</p>
-                                                    <select name="planday" [(ngModel)]="plan.day">
-                                                        <option value="{{day.id}}"
-                                                            *ngFor='let day of daysList; let i = index'>{{day.name}}
-                                                        </option>
-                                                    </select>
-                                                    <p>Choose Meal Type</p>
-                                                    <select name="planmealtype" [(ngModel)]="plan.mealType">
-                                                        <option value="{{mealtype.code}}"
-                                                            *ngFor='let mealtype of mealTypesList; let i = index'>
-                                                            {{mealtype.name}}</option>
-                                                    </select>
-                                                    <a class="btn" href="javascript:void(0)" (click)="add2Plan()"> Add
-                                                        to Plan</a>
-
-                                                    <!--<a href="javascript:void(0)" (click)="addRecipe(recipe)"><i class="fa fa-plus" aria-hidden="true"></i> Add Recipe</a>-->
-
+                                                            <app-add2plan (returnData)= "recipe.showAdd2MP = false;" [planid]="recipe.id"></app-add2plan>
                                                 </div>
                                             </div>
 
@@ -464,32 +350,18 @@
                                                 *ngIf="recipe.firstname">{{recipe.firstname}} {{recipe.lastname}}</span>
                                             <span *ngIf="!recipe.firstname">{{recipe.email}}</span>
                                             <span *ngIf="!recipe.firstname && !recipe.email">{{recipe.username}}</span>
-                                            <!--  <span style="margin-left:10px" *ngIf="recipe.created_at"> {{formatDays(recipe.created_at)}} days ago </span> -->
+                                           
                                         </p>
                                     </div>
 
                                 </ng-container>
                             </div>
                             <br>
-                            <!--<label for="notes">Notes</label>
-                    <textarea class="short-text" name="notes" [(ngModel)]='collection.notes' id="notes" cols="30" rows="10"></textarea>-->
-
-                        <!--</form>-->
+                         
                     </div>
                 </div>
             </div>
-            <!---
-    <div class="col-12  col-md-4 col-lg-3">
-    <aside>
-    <div class="side-bar">
-   
- 
-    <app-sidebar></app-sidebar>
- 
-    
-    </div>
-    </aside>
-    </div>-->
+          
         </div>
 
     </div>
@@ -573,7 +445,7 @@
 
                 <div class='col-12'>
                     <div class="form-group">
-                        <!--<button class="defaultbtn" (click)="gotodetails(selectedRecipe.id)">View More</button>-->
+                      
                         <a href="recipedetails/{{selectedRecipe.id}}" class="defaultbtn"  target="_blank">View More</a>
                     </div>
                 </div>

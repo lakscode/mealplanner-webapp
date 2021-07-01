@@ -16,8 +16,6 @@ import { RouterModule } from '@angular/router';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 
-/*import { AngularFontAwesomeModule } from 'angular-font-awesome';*/
-
 import { HttpClientModule } from '@angular/common/http';
 
 import {ToastrModule } from 'ngx-toastr';
@@ -29,8 +27,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { LoginModule } from './login/login.module';
 
 import { SignupModule } from './signup/signup.module'; 
-
-/*import { HighchartsChartModule } from 'highcharts-angular';*/
 
 import { HomeModule } from './home/home.module'; 
 import { FeaturesModule } from './features/features.module'; 
@@ -83,18 +79,13 @@ import { FaqsModule } from './faqs/faqs.module';
 import { CollectionsModule } from './groups/collections/collections.module'; 
 import { CollectionModule } from './groups/collection/collection.module';
 
-import { GroupsModule } from './groups/groups/groups.module'; 
-import { GroupModule } from './groups/group/group.module';
-
-
 import { PrivacyModule } from './privacy/privacy.module';
 import { TermsModule } from './terms/terms.module';
 
-
 import { LazyLoadImageModule } from 'ng-lazyload-image'; 
 
-import { SocialLoginModule, SocialAuthServiceConfig, FacebookLoginProvider } from 'angularx-social-login';
-import { GoogleLoginProvider } from 'angularx-social-login';
+import { SocialLoginModule, SocialAuthServiceConfig, FacebookLoginProvider, GoogleLoginProvider } from 'angularx-social-login';
+
 import {environment} from "../environments/environment";
 
 import { AdminModule } from './admin/admin.module'; 
@@ -164,8 +155,7 @@ import { AdminModule } from './admin/admin.module';
 	SocialLoginModule,
 	CollectionsModule,
 	CollectionModule,
-	GroupsModule,
-	GroupModule,
+
 	PrivacyModule,
 	TermsModule,
 	CalculateModule,
@@ -182,15 +172,11 @@ import { AdminModule } from './admin/admin.module';
           {
             id: GoogleLoginProvider.PROVIDER_ID,
             provider: new GoogleLoginProvider(environment.google_clientId
-            //  '933469234487-bqim9o4ts1ce5lujmpthvd370qhe7iir.apps.googleusercontent.com'
             )
           },
            {
     		id: FacebookLoginProvider.PROVIDER_ID,
-			provider: new FacebookLoginProvider(environment.facebook_appid)
-    		//provider: new FacebookLoginProvider('286839523118020')
-    		//provider: new FacebookLoginProvider('541089030229736')
-    		
+			provider: new FacebookLoginProvider(environment.facebook_appid)    		
   			}
         ]
       } as SocialAuthServiceConfig,

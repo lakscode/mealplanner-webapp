@@ -10,7 +10,8 @@ RewriteRule ^ index.html [L]
 
 
 # Enable Compression
-<IfModule mod_deflate.c>  
+<IfModule mod_deflate.c>
+  # Compress HTML, CSS, JavaScript, Text, XML and fonts
   AddOutputFilterByType DEFLATE application/javascript
   AddOutputFilterByType DEFLATE application/rss+xml
   AddOutputFilterByType DEFLATE application/vnd.ms-fontobject
@@ -31,7 +32,15 @@ RewriteRule ^ index.html [L]
   AddOutputFilterByType DEFLATE text/html
   AddOutputFilterByType DEFLATE text/javascript
   AddOutputFilterByType DEFLATE text/plain
-</IfModule>  
+  AddOutputFilterByType DEFLATE text/xml  
+
+  # Remove browser bugs (only needed for ancient browsers)
+  BrowserMatch ^Mozilla/4 gzip-only-text/html
+  BrowserMatch ^Mozilla/4\.0[678] no-gzip
+  BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
+  Header append Vary User-Agent
+</IfModule>
+
 <IfModule mod_gzip.c>  
   mod_gzip_on Yes
   mod_gzip_dechunk Yes
@@ -72,3 +81,24 @@ RewriteRule ^ index.html [L]
   Header set Cache-Control "max-age=2678400, private"
   </filesmatch>
 </IfModule>  
+
+## EXPIRES HEADER CACHING ##
+<IfModule mod_expires.c>
+ExpiresActive On
+ExpiresByType image/jpg "access 1 year"
+ExpiresByType image/jpeg "access 1 year"
+ExpiresByType image/gif "access 1 year"
+ExpiresByType image/png "access 1 year"
+ExpiresByType image/svg "access 1 year"
+ExpiresByType text/css "access 1 month"
+ExpiresByType application/pdf "access 1 month"
+ExpiresByType application/javascript "access 1 month"
+ExpiresByType application/x-javascript "access 1 month"
+ExpiresByType application/x-shockwave-flash "access 1 month"
+ExpiresByType image/x-icon "access 1 year"
+ExpiresDefault "access 2 days"
+</IfModule>
+## EXPIRES HEADER CACHING ##
+
+Header unset Cookie
+Header unset Set-Cookie

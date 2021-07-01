@@ -5,7 +5,7 @@ import { RecipedetailsRoutingModule } from './recipedetails-routing.module';
 import { RecipedetailsComponent } from './recipedetails.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {SidebarModule, ListpanelModule } from "../../shared/modules";
+import {SidebarModule, ListpanelModule, Add2planModule } from "../../shared/modules";
 @NgModule({
   imports: [
     CommonModule,
@@ -14,7 +14,8 @@ import {SidebarModule, ListpanelModule } from "../../shared/modules";
 	FormsModule,
 	ReactiveFormsModule,
   SidebarModule,
-  ListpanelModule
+  ListpanelModule,
+  Add2planModule
   ],
   declarations: [RecipedetailsComponent]
 })

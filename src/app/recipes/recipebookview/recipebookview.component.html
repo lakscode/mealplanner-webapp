@@ -66,50 +66,7 @@
                          </div>
                     </div>
 
-                    <div class="row" style="display:none;">
-                        <!--<div class="col-12 paddinglr0">
-                            <label for="recipes">Recipes</label>
-                        </div>-->
-                        <div style="margin-bottom:10px;padding-left:0px;min-height:220px;" class="col-12 col-lg-4 col-md-4 toggleremove " *ngFor="let recipe of recipesList; let i = index;">
-                            <div class="recipe-item" style="background-size:cover;  background-position:center; width:auto; object-fit: cover;  height:100%; " [ngStyle]="{'background-image':'linear-gradient(
-                                rgba(0, 0, 0, 0.3),
-                                rgba(0, 0, 0, 0.3)
-                              ),url(' + recipe.image + ')'}">
-                                    <div>
-                                    <h1 class="recipe-label">{{recipe.label.toLowerCase()}}</h1>                                  
-                                    <p style="color:#fff"><b>Calories</b>: {{recipe.calories}}<br> <b>Servings</b>: {{recipe.yield}}</p>
-                                    <!--<p *ngIf="recipe.dietLabels" style="color:#fff">  <b>Diet Labels</b>: {{formatHiphen(recipe.dietLabels)}} </p>-->
-                                     <!--<p *ngIf="recipe.favcount && recipe.favcount> 0">{{recipe.favcount}} Members Saved</p>-->
-                                    <p class="favactive" style='    text-align: right;
-                                    position: absolute;
-                                    bottom: -9px;
-                                    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
-                                    /* color: #FFF; */
-                                    /* width: 100%; */
-                                    left: 12px;
-                                    right: 12px;
-                                    padding-right: 10px;
-                                    border-bottom-left-radius: 15px;
-                                    border-bottom-right-radius: 15px;' (click)="toggleFav(recipe.id)" *ngIf="recipe.UserFavStatus"><i class="fa fa-heart"></i> <span *ngIf="recipe.favcount && recipe.favcount> 0" style='color:#FFF'>{{recipe.favcount}}</span></p>
-                                </div>
-
-                                <div class="morebtn"><a class="menu" (click)="toggleMoreMenu(recipe, i, 'viewlist')" href="javascript:void(0)"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></a>
-                                <div class="moremenu" *ngIf="recipe.expand">
-                                    <a href="javascript:void(0)" *ngIf="recipe.UserFavStatus" (click)="removeFavourite(recipe.id)" style="color:orange"><i class="fa fa-heart" aria-hidden="true"></i> Remove Favourite </a>
-                                     <a href="javascript:void(0)" *ngIf="!recipe.UserFavStatus" (click)="setFavourite(recipe.id)" ><i class="fa fa-heart" aria-hidden="true"></i> Set Favourite</a>
-
-                                    <!--<a href="javascript:void(0)" (click)="removeRecipe(recipe)"><i class="fa fa-trash" aria-hidden="true"></i> Remove Recipe</a>-->
-                                    <a href="recipedetails/{{recipe.id}}" target="_blank" ><i class="fa fa-list-ul" aria-hidden="true"></i> View Recipe</a>
-                                </div>
-                                </div>
-                             
-                           
-                           
-                        </div>
-                           
-
-                        </div>
-                    </div>
+                   
                     <br>
                     <div *ngIf="searchRes.notes">
                     <label for="notes">Notes</label>
@@ -118,16 +75,7 @@
             </div>
         </div>
     </div>
-    <!--<div class="col-12  col-md-4 col-lg-3">
-    <aside>
-    <div class="side-bar">
-  
-    <app-sidebar></app-sidebar>
-  
-    
-    </div>
-    </aside>
-    </div>-->
+   
     </div>
     
     </div>
@@ -190,13 +138,7 @@
                    
 
                 </div>
-               
-<!--
-                <div class='col-12'>
-                    <div class="form-group">
-                        <button class="defaultbtn" type="submit">Save</button>
-                    </div>
-                </div>-->
+
             </div>
 
         </div>

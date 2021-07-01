@@ -3,30 +3,7 @@
   
           <p class="title-black ion-header-center">Create Plan</p>
         
-          <!--
-        <ion-fab  vertical="bottom" horizontal="end" slot="fixed">
-          <ion-fab-button> 
             
-            <img src="assets/more_light.png" width="30px" />
-          </ion-fab-button>
-          <ion-fab-list side="top" style="width: 100px; --border-radius: 5px;">
-            
-          <div *ngIf="showNutrientsFlag && plan['created_by'] == currentUser['id']" (click)="updateMealPlanStatus()" class="fablistbtn right">
-            <span name="cloud-upload-outline"></span> <p class="fab-icon">Update Status</p>
-          </div>
-          <div *ngIf="showNutrientsFlag"  (click)="getIngredientsList()" class="fablistbtn right">
-            <span name="cart"></span> <p class="fab-icon">Grocery List</p>
-          </div>
-          <div  (click)="downloadPlan()" class="fablistbtn right">
-            <span name="download"></span> <p class="fab-icon">Download Plan</p>
-          </div>
-          <div  (click)="showSharePanel()" class="fablistbtn right">
-            <span name="share"></span> <p class="fab-icon">Share Plan</p>
-          </div>
-          </ion-fab-list>
-      
-        </ion-fab>-->
-      
       
         <div *ngIf="plan">
       
@@ -148,8 +125,7 @@
       
       
         </div>
-      
-        <!--<div class="mealtype-separator"></div>-->
+
           </ng-container> 
       
           </div>
@@ -226,8 +202,7 @@
               <div class="right" >
                 <img src="assets/menu/arrow-down.png" *ngIf="!filters['dietLabels']['expand']" />
                 <img src="assets/menu/arrow-up.png" *ngIf="filters['dietLabels']['expand']" />
-                <!--<span *ngIf="!filters['dietLabels']['expand']" name="arrow-down"></span>
-                <span *ngIf="filters['dietLabels']['expand']" name="arrow-up"></span>-->
+
               </div>
           </div>
           <div style="clear:both"></div>
@@ -248,11 +223,6 @@
              
           </div>
 
-                <!--<div>
-                  <div style="display:flex; align-items:center" size="6" *ngFor="let dItem of filters['dietLabels']['data']; let h = index;">
-                    <input type="checkbox"  class="checkbox marginr10" name="filterD[]" [(ngModel)]="dItem.selected"> <div style="display:inline-block" (click)="selectDeselect(dItem)" class="filteritem">{{dItem.name}}</div>
-                  </div>
-                </div>-->
               </ng-container>
             </div>
          
@@ -271,8 +241,7 @@
               <div class="right" >
                 <img src="assets/menu/arrow-down.png" *ngIf="!filters['healthLabels']['expand']" />
                 <img src="assets/menu/arrow-up.png" *ngIf="filters['healthLabels']['expand']" />
-                <!--<span *ngIf="!filters['healthLabels']['expand']" name="arrow-down"></span>
-                <span *ngIf="filters['healthLabels']['expand']" name="arrow-up"></span>-->
+
               </div>
           </div>
            <div style="clear:both"></div>
@@ -293,11 +262,6 @@
                
             </div>
 
-                <!--<div>
-                  <div style="display:flex; align-items:center" size="6" *ngFor="let hItem of filters['healthLabels']['data']; let h = index;">
-                    <input type="checkbox"  class="checkbox marginr10" name="filtersH[]" [(ngModel)]="hItem.selected"> <span (click)="selectDeselect(hItem)"  class="filteritem">{{hItem.name}}</span>
-                  </div>
-                </div>-->
               </ng-container>
             </div>
          
@@ -313,8 +277,7 @@
                   {{filters['minerals']['label']}} 
                 </div>
                 <div class="right">
-                  <!--<span *ngIf="!filters['minerals']['expand']"  name="arrow-down"></span>
-                  <span *ngIf="filters['minerals']['expand']"  name="arrow-up"></span>-->
+               
                   <img src="assets/menu/arrow-down.png" *ngIf="!filters['minerals']['expand']" />
                   <img src="assets/menu/arrow-up.png" *ngIf="filters['minerals']['expand']" />
                 </div>
@@ -326,7 +289,7 @@
 
                 
                 <div class="filter-group">
-                  <!--<label class="filter-title">Nutrients</label> -->
+              
                            <div class="row " style="margin-left:0px ;margin-right:0px;">
                               <ng-container *ngFor="let mlabel of filters['minerals']['data']; let m = index">
                                  
@@ -384,7 +347,7 @@
               
               </div>
               <div  class="recipe-label-s" style="">{{item.label}} 
-                <!--<span class="small_text"><span name="flame-outline"></span> {{item.calories}}</span> <br> -->
+               
               </div>
             </div>
          
@@ -400,7 +363,7 @@
         <div style="text-align:right; width:100%; position:absolute;">
             <div style="font-size:28px;margin-top: 10px;
             margin-right: 10px;" (click)="showSharePanel()">
-            <!--<span  class="bxshadow1" name="close-outline"></span>-->
+
             <h1 style="margin-top:0px;"> X </h1>
           </div>
         </div>

@@ -1268,137 +1268,17 @@ showusers()
 } 
 }
 
-
-
 /************** add to mean plan */
 
 
 selectedRecipe2Add2plan: any;
 addtoMealPlan(recipe)
 {
-	this.loadPlanNames();
+//	this.loadPlanNames();
 this.selectedRecipe2Add2plan= recipe;
 recipe.showAdd2MP = !recipe.showAdd2MP; 
 
 }
-plansList:Array<any>=[];
-daysList: Array<any> = [];
-mealTypesList : Array<any> = [];
-plan: any = {"id":'', "day":"", "mealType":""};
-showAdd2MP: boolean = false;
-loadPlanNames()
-{
-	if(this.currentUser && this.currentUser["id"])
-	{
-	this.plansList = [];
-
-	var params = {};
-	//params["created_by"]  = this.currentUser["id"];
-	console.log(params);
-	params ['query'] = "select id, name from mealplan where created_by = " + this.currentUser["id"];
-	var res =   this.dbService.getDatabyTablebyQuery("mealplan", params).subscribe(invData => setTimeout(() => {
-
-	  console.log(invData);
-	  if(invData !== null)
-	  {
-		var obj = invData["body"]["length"];
-		this.plansList = invData["body"];
-	  }
-	  this.loadOptions();
-
-	}));
-	}
-}
-loadOptions()
-{
-	this.mealTypesList = [];
-	this.daysList = [];
-	for(let d=0; d < 7; d++)
-	{
-		this.daysList.push({"id":d, "name":"Day " + (d+1)});
-	}
-
-	this.mealTypesList.push({"code":"breakfast", "name":"Breakfast"});
-	this.mealTypesList.push({"code":"snack1", "name":"Pre-lunch Snack"});
-	this.mealTypesList.push({"code":"lunch", "name":"Lunch"});
-	this.mealTypesList.push({"code":"snack2", "name":"Evening Snack"});
-	this.mealTypesList.push({"code":"dinner", "name":"Dinner"});
-
-}
-add2Plan()
-{
-	this.showAdd2MP= false;
-	console.log(this.plan);
-
-	var params = {};
-	//params["created_by"]  = this.currentUser["id"];
-	console.log(params);
-	params ['query'] = "select * from days where meal_plan_id = " + this.plan["id"] + " AND day_num = " + this.plan["day"];
-	var res =   this.dbService.getDatabyTablebyQuery("days", params).subscribe(invData => setTimeout(() => {
-
-	  console.log(invData);
-	  if(invData !== null && invData["body"]["length"] > 0)
-	  {
-		var selectedDay = invData["body"][0];
-		if(selectedDay[this.plan["mealType"]] == "")
-		{
-			this.updateMealType();
-		}
-		else
-		{
-			this.toastr.warning('Another Recipe has been already added to selected meal type of the plan!!!', 'Add to Meal Plan');
-		}
-	  }
-	  else
-	  {
-		var params = {};
-		   
-		params["meal_plan_id"] = this.plan["id"];
-		params["day_num"] = this.plan["day"];
-		params["name"] = "Day " + (this.plan["day"] +1);
-
-		params["breakfast"] = "";
-		params["snack1"] = "";
-		params["lunch"] = "";
-		params["snack2"] = "";
-		params["dinner"] = "";
-		params[this.plan["mealType"]] = this.selectedRecipe2Add2plan["id"];
-		params["created_by"] = "";
-		params["created_at"] = new Date();
-		params["status"] = 1;
-
- 
-	
-		var res =   this.dbService.postDataByTable("days", params).subscribe(dData => setTimeout(() => {
-		//	alert("New day record created for plan");
-			this.toastr.success('Recipe has been added to the selected meal type of the plan!!!', 'Add to Meal Plan');
-	
-		}));
-
-	  }
-	}));
-
-}
-
-updateMealType()
-{
-	//alert("add recipe");
-	var params1 = {};
-	params1 ['query'] = "update days set " + this.plan["mealType"] + " = " + this.selectedRecipe2Add2plan["id"] + " where meal_plan_id = " + this.plan["id"] + " AND day_num = " + this.plan["day"];
-	var res =   this.dbService.getDatabyTablebyQuery("days", params1).subscribe(invData => setTimeout(() => {
-		this.toastr.success('Recipe has been added to the selected meal type of the plan!!!', 'Add to Meal Plan');
-	
-
-		var recipeindex = this.recipesList.findIndex(x=>(x.id == this. selectedRecipe2Add2plan.id));
-		if(recipeindex  >-1)
-		{
-			this.recipesList[recipeindex].showAdd2MP = false;
-		}
-	}));
-}
-
-
-
 /**************** import recipe from url  */
 
 
@@ -1406,11 +1286,9 @@ recipeurl: any = "";
 checkrecipeexists()
 {
 	var params1 = {};
-	console.log(this.recipeurl);
+
 	params1["url"] =  this.recipeurl;
-	//params1["url"]="http://www.myrecipes.com/recipe/black-cardamom-beef-sliders";
-   // this.importrecipe(params1["url"]);
-console.log(params1);
+
   var res =   this.dbService.getDatabyFields("recipes", params1).subscribe(resData => setTimeout(() => {
 	  console.log(resData);
 	  if(resData !== null && resData['body']['length'] > 0)
@@ -1435,13 +1313,12 @@ importrecipe(url)
   this.instructionCount= 0;
   params1["url"]=url;
   var apiurl = environment.scrapeurl;
-  console.log("apiurl " + apiurl);
+
   var res =   this.dbService.postLocalData(apiurl, params1).subscribe(resData => setTimeout(() => {
 	  console.log(resData);
 	  if(resData && resData["result"] && resData["result"] == "Error")
 	  {
 		  this.toastr.error('Unable to import this url at present. Please try existing recipes.', 'Save Recipe from URL!');
-		  //alert("unable to import this url at present. Please try existing recipes ")
 		  this.helpService.import_url_save(this.currentUser["id"],url,"collection_d");
 	  }
 	  else{
@@ -1474,10 +1351,6 @@ createrecipe(data, url)
 	  this.new_recipe["totalTime"] = data["time"]["total"];
   }
 
-//  for(let i=0; i < data["ingredients"].length; i++)
-// {
-//	  this.ingredientsImport.push({'text':data["ingredients"][i]});
- // }
   var ingr = [];
 	for(let i=0; i < data["ingredients"].length; i++)
 	{
@@ -1487,7 +1360,6 @@ createrecipe(data, url)
 	}
 
   this.instructionCount = 0;
-//  this.getNutrients(this.ingredientsImport[0])
 
 this.getNutrientsConsolidated(ingr);
 }
@@ -1532,18 +1404,6 @@ getNutrientsConsolidated(ingr)
   this.SaveRecipe();
 
 
-	   // item["nutrients"] = recipeData;
-		
-		
-	  //  if(this.instructionCount < this.ingredients.length-1)
-	  //  {
-		  //  this.instructionCount++;
-			//this.getNutrients(this.ingredients[this.instructionCount]);
-	   // }
-	  //  else
-	  //  {
-	  //	  this.formatIngredients();
-	   // }
 	}));
 
 }
@@ -1552,18 +1412,14 @@ getNutrientsConsolidated(ingr)
 
 getNutrients(item)
 {
-
-
-  console.log(item);
   var api_id = environment.edamameId;
   var api_key = environment.edamameKey;
 
-  console.log(api_id);
-  console.log(api_key);
+
 
   var apiURL = constants.edamam_nutrient_api   +"?app_id="+ api_id + "&app_key=" + api_key + "&ingr=" + item["text"];
 
-  console.log(apiURL);
+
   var res =   this.dbService.getLocalData(apiURL).subscribe(recipeData => setTimeout(() => {
 	  console.log(recipeData);
 	  item["nutrients"] = recipeData;
@@ -1584,10 +1440,9 @@ getNutrients(item)
 
 SaveRecipe()
 {
-  console.log(this.new_recipe);
-  console.log(JSON.stringify(this.new_recipe));
+  
+
 	var res =   this.dbService.postDataByTable("recipes", this.new_recipe).subscribe(recipeData => setTimeout(() => {
-	  console.log(recipeData);
   
 	  if(recipeData['inserted_id'] !== "undefined" && recipeData['inserted_id'] !== "" && recipeData['inserted_id'] !== "0" && recipeData['inserted_id'] !== 0)
 	  {
@@ -1595,7 +1450,7 @@ SaveRecipe()
 		  this.new_recipe["id"] = recipeData['inserted_id'];
 		  this.recipesList.push(this.new_recipe);
 		  this.addRecipe(this.new_recipe);
-		//  this.searchProps();
+
 	  }
 	  else
 	  {
@@ -1612,7 +1467,7 @@ if(str !== "")
   if(str.indexOf("'") > -1)
   {
   retVal = retVal.replaceAll("'","");
-  console.log(retVal);
+
   }
 }
 return retVal;
@@ -1623,7 +1478,7 @@ total_weight: any = 0;
 labels: any = {};
 formatIngredients()
 {
-  console.log(this.ingredientsImport);
+
   var temp = "";
   var totalNutrients = {};
   this.cons_Nutrients= {};
@@ -1645,14 +1500,13 @@ formatIngredients()
   //this.new_recipe["ingredientLines"] = temp;
   this.new_recipe["totalNutrients"] = JSON.stringify(this.cons_Nutrients);
   this.new_recipe["calories"] = this.total_calories;
-  console.log(this.new_recipe);
+
   this.SaveRecipe();
 }
 
 formatLabels(item)
 {
-//	console.log("Formatlabels");
-//	console.log(item);
+
   if(typeof(item) !== "undefined" && item !== null)
   {
   
@@ -1716,10 +1570,9 @@ formatLabels(item)
 	  }
 	  this.new_recipe["healthLabels"] = this.labels["healthLabels"];
   }
-//	console.log(this.labels);
+
   }
-//	console.log(this.labels);
-//	console.log(this.new_recipe);
+
 }
 
 consolidateNutrients(item)
@@ -1752,7 +1605,7 @@ consolidateNutrients(item)
 			}
 		
 		}
-	//	console.log(this.cons_Nutrients); 
+
 	}
 }
 

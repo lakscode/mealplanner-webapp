@@ -350,7 +350,8 @@
                                         padding-right: 0px;" href="javascript:void(0)"
                                             (click)="recipe1.showAdd2MP = false;"><i class="fa fa-close"
                                                 aria-hidden="true"></i> </a>
-                                        <p class="title" style="display:block"> Add Recipe to Meal Plan</p>
+                                                <app-add2plan (returnData)= "recipe1.showAdd2MP = false;" [planid]="selectedRecipe2Add2plan.id"></app-add2plan>
+                                        <!--<p class="title" style="display:block"> Add Recipe to Meal Plan</p>
                                         <p style="display:block" *ngIf="!plansList || plansList.length == 0">You haven't
                                             created a meal plan yet.</p>
                                         <ng-container *ngIf="plansList.length > 0">
@@ -375,7 +376,7 @@
                                             </select>
                                             <a class="btn" href="javascript:void(0)" (click)="add2Plan()"> Add to
                                                 Plan</a>
-                                        </ng-container>
+                                        </ng-container>-->
                                     </div>
                                     <div *ngIf='recipe1.showAdd2C'
                                         [ngClass]="i == 0? 'add2mealplanmenu left130':'add2mealplanmenu leftunset'"

@@ -10,7 +10,7 @@
             <div class="heading" style="width:100%">
                 <!--<h2>{{searchRes.label}}</h2>-->
                 <h2><!--<a (click)="gotopage();"><i class="fa fa-chevron-left"></i></a>-->  Recipe Details</h2>
-                <div class="add2mealplan" *ngIf="isloggedIn && plansList.length > 0">
+                <div class="add2mealplan" *ngIf="isloggedIn">
                     <a [ngClass]="showpopupflag?'menu active':'menu'"  (click)="showhidepopup()" href="javascript:void(0)"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></a>
                     <div *ngIf='showpopupflag' class="add2mealplanmenu" style='height:120px'>
                         <a (click)="showpopupflag = false; showAdd2MP = true " href="javascript:void(0)">
@@ -23,22 +23,9 @@
 
                     <div *ngIf='showAdd2MP' class="add2mealplanmenu" style="top:0px; height:360px;">
                         <a style="float:right;font-size:24px;padding:0;" href="javascript:void(0)" (click)="showAdd2MP = false;"><i class="fa fa-close" aria-hidden="true"></i> </a>
-                        <p class="title"> Add Recipe to Meal Plan</p>
-                        <p class="lbl">Choose Meal Plan</p>
-                        <select [(ngModel)] ="plan.id">
-                            <option value="{{plan.id}}" *ngFor='let plan of plansList; let i = index'>{{plan.name}}</option>
-                        </select>
-                        <p class="lbl">Choose Day</p>
-                        <select [(ngModel)] ="plan.day">
-                            <option value="{{day.id}}" *ngFor='let day of daysList; let i = index'>{{day.name}}</option>
-                        </select>
-                        <p class="lbl">Choose Meal Type</p>
-                        <select [(ngModel)] ="plan.mealType">
-                            <option value="{{mealtype.code}}" *ngFor='let mealtype of mealTypesList; let i = index'>{{mealtype.name}}</option>
-                        </select>
-                        <a class="btn" href="javascript:void(0)" (click)="add2Plan()"> Add to Plan</a>
 
-                        <!--<a href="javascript:void(0)" (click)="addRecipe(recipe)"><i class="fa fa-plus" aria-hidden="true"></i> Add Recipe</a>-->
+                        <app-add2plan (returnData)= "showAdd2MP = false;" [planid]="searchRes['id']"></app-add2plan>
+
                         
                     </div>
                     </div>

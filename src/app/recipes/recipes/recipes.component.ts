@@ -856,118 +856,11 @@ export class RecipesComponent implements OnInit {
 
 	selectedRecipe2Add2plan: any;
 	addtoMealPlan(recipe) {
-		this.loadPlanNames();
+		//this.loadPlanNames();
 		this.selectedRecipe2Add2plan = recipe;
 		recipe.showAdd2MP = !recipe.showAdd2MP;
 
 	}
-	plansList: Array<any> = [];
-	daysList: Array<any> = [];
-	mealTypesList: Array<any> = [];
-	plan: any = { "id": '', "day": "", "mealType": "" };
-	showAdd2MP: boolean = false;
-	loadPlanNames() {
-		if (this.currentUser && this.currentUser["id"]) {
-			if (this.plansList.length == 0) {
-				this.plansList = [];
-
-				var params = {};
-				//params["created_by"]  = this.currentUser["id"];
-				console.log(params);
-				params['query'] = "select id, name from mealplan where created_by = " + this.currentUser["id"];
-				var res = this.dbService.getDatabyTablebyQuery("mealplan", params).subscribe(invData => setTimeout(() => {
-
-					console.log(invData);
-					if (invData !== null) {
-						var obj = invData["body"]["length"];
-						this.plansList = invData["body"];
-					}
-					this.loadOptions();
-
-				}));
-			}
-
-		}
-	}
-	loadOptions() {
-		this.mealTypesList = [];
-		this.daysList = [];
-		for (let d = 0; d < 7; d++) {
-			this.daysList.push({ "id": d, "name": "Day " + (d + 1) });
-		}
-
-		this.mealTypesList.push({ "code": "breakfast", "name": "Breakfast" });
-		this.mealTypesList.push({ "code": "snack1", "name": "Pre-lunch Snack" });
-		this.mealTypesList.push({ "code": "lunch", "name": "Lunch" });
-		this.mealTypesList.push({ "code": "snack2", "name": "Evening Snack" });
-		this.mealTypesList.push({ "code": "dinner", "name": "Dinner" });
-
-	}
-	add2Plan() {
-		this.showAdd2MP = false;
-		console.log(this.plan);
-
-		var params = {};
-		//params["created_by"]  = this.currentUser["id"];
-		console.log(params);
-		params['query'] = "select * from days where meal_plan_id = " + this.plan["id"] + " AND day_num = " + this.plan["day"];
-		var res = this.dbService.getDatabyTablebyQuery("days", params).subscribe(invData => setTimeout(() => {
-
-			console.log(invData);
-			if (invData !== null && invData["body"]["length"] > 0) {
-				var selectedDay = invData["body"][0];
-				if (selectedDay[this.plan["mealType"]] == "") {
-					this.updateMealType();
-				}
-				else {
-					this.toastr.warning('Another Recipe has been already added to selected meal type of the plan!!!', 'Add to Meal Plan');
-				}
-			}
-			else {
-				var params = {};
-
-				params["meal_plan_id"] = this.plan["id"];
-				params["day_num"] = this.plan["day"];
-				params["name"] = "Day " + (this.plan["day"] + 1);
-
-				params["breakfast"] = "";
-				params["snack1"] = "";
-				params["lunch"] = "";
-				params["snack2"] = "";
-				params["dinner"] = "";
-				params[this.plan["mealType"]] = this.selectedRecipe2Add2plan["id"];
-				params["created_by"] = "";
-				params["created_at"] = new Date();
-				params["status"] = 1;
-
-
-
-				var res = this.dbService.postDataByTable("days", params).subscribe(dData => setTimeout(() => {
-					//	alert("New day record created for plan");
-					this.toastr.success('Recipe has been added to the selected meal type of the plan!!!', 'Add to Meal Plan');
-
-				}));
-
-			}
-		}));
-
-	}
-
-	updateMealType() {
-		//alert("add recipe");
-		var params1 = {};
-		params1['query'] = "update days set " + this.plan["mealType"] + " = " + this.selectedRecipe2Add2plan["id"] + " where meal_plan_id = " + this.plan["id"] + " AND day_num = " + this.plan["day"];
-		var res = this.dbService.getDatabyTablebyQuery("days", params1).subscribe(invData => setTimeout(() => {
-			this.toastr.success('Recipe has been added to the selected meal type of the plan!!!', 'Add to Meal Plan');
-
-
-			var recipeindex = this.recipesList.findIndex(x => (x.id == this.selectedRecipe2Add2plan.id));
-			if (recipeindex > -1) {
-				this.recipesList[recipeindex].showAdd2MP = false;
-			}
-		}));
-	}
-
 
 	/**************************** Make copy of recipe  */
 
@@ -1092,8 +985,8 @@ export class RecipesComponent implements OnInit {
 	}
 
 	add2Collection(recipe) {
-		this.showAdd2MP = false;
-		console.log(this.plan);
+	//	this.showAdd2MP = false;
+	//	console.log(this.plan);
 
 		var paramsr = {};
 		paramsr["collection_id"] = this.collection["id"];

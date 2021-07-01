@@ -59,58 +59,8 @@ extraItem: any;
 			this.currentUser = userdata;
 		}
 
-		for(let io=0; io < this.amenuItems.length; io++)
-		{
-			var ioItem = this.amenuItems[io];
-			ioItem["visible"] = false;
-			switch(ioItem.id)
-			{
-			
-				case "users": 
-							if(this.currentUser["role"]  == "SUPERADMIN" || this.currentUser["role"]  == "ADMIN")
-							{
-								this.amenuItems[io]["visible"] = true;
-							}
-							break;
-				case "requests": 
-							if(this.currentUser["role"]  == "SUPERADMIN" || this.currentUser["role"].toString().toUpperCase()  == "EMPLOYEE")
-							{
-								this.amenuItems[io]["visible"] = true;
-							}
-							break;
-				case "testimonials": 
-							if(this.currentUser["role"]  == "SUPERADMIN" || this.currentUser["role"].toString().toUpperCase()  == "EMPLOYEE")
-							{
-								this.amenuItems[io]["visible"] = true;
-							}
-							break;
-			
-				case "announcements": 
-							if(this.currentUser["role"]  == "SUPERADMIN" || this.currentUser["role"].toString().toUpperCase()  == "EMPLOYEE")
-							{
-								this.amenuItems[io]["visible"] = true;
-							}
-							break;
-			
-				case "news": 
-							if(this.currentUser["role"]  == "SUPERADMIN" || this.currentUser["role"].toString().toUpperCase()  == "EMPLOYEE")
-							{
-								this.amenuItems[io]["visible"] = true;
-							}
-							break;
-			
-				case "banners": 
-							if(this.currentUser["role"]  == "SUPERADMIN" || this.currentUser["role"].toString().toUpperCase()  == "EMPLOYEE")
-							{
-								this.amenuItems[io]["visible"] = true;
-							}
-							break;
-							
-				
-			}
-		}
+		
 
-		//console.log(this.amenuItems);
 
 
 	}

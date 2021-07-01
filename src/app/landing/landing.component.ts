@@ -6,7 +6,7 @@ import { HelpService } from '../services/help.service';
 import { HttpClient } from '@angular/common/http';
 import { DomSanitizer } from '@angular/platform-browser';
 import {constants} from "../jsonfiles/constants"
-//import {ingredients} from "../jsonfiles/ingredients"
+
 @Component({
 	selector: 'app-landing',
 	templateUrl: './landing.component.html',
@@ -29,7 +29,7 @@ constructor(private router: Router, private httpClient : HttpClient, private san
 	}
 
 	ngOnInit() {
-		//console.log("landing ngOnInit");
+	
 		this.currentUser =this.helpService.getCurrentUser();
 		
 		if(this.currentUser !== null)
@@ -55,17 +55,12 @@ constructor(private router: Router, private httpClient : HttpClient, private san
 
 		this.greetings = this.helpService.getGreetings();
 	
-	//	this.helpService.scrape_recipe();
 
 		this.getPlanStatus();
 		this.count++;
-	//	this.defaultRecipeofTheDay();
-	//	if(this.RecipeoftheDay["length"] == 0)
-	//	this.checkRecipeoftheDay();
 
 		this.loadHealthLabels();
 	
-	//	this.loadRecommendedRecipes();
 	this.loadIngredients();
 	}
 
@@ -76,7 +71,7 @@ constructor(private router: Router, private httpClient : HttpClient, private san
 			  if(recipeoftheday){
 				this.RecipeoftheDay = [];
 				this.RecipeoftheDay.push(recipeoftheday);
-				////console.log(this.RecipeoftheDay);
+
 			  }else{
 				this.defaultRecipeofTheDay();
 			  }
@@ -85,7 +80,7 @@ constructor(private router: Router, private httpClient : HttpClient, private san
 	}
 	loadRecommendedRecipes()
 	{
-		//console.log("recommendedRecipes");
+
 	  this.recommendedRecipes = [];
   
 	  var params = {"limit": "4"};
@@ -93,7 +88,6 @@ constructor(private router: Router, private httpClient : HttpClient, private san
 	  var query = "select id, label, image, calories, yield, source, dietLabels, healthLabels from recipes  ";
 	  var qWhere = " where s_instructions != '' AND label != '' AND image != '' ";
 
-	  ////console.log(this.userPref);
 	  if(typeof(this.userPref) !== "undefined" && this.userPref !== null && typeof(this.userPref["dietLabels"]) !== "undefined" && this.userPref["dietLabels"] !== null && this.userPref["dietLabels"] !== "")
 	  {
 		qWhere += " AND dietLabels = '" + this.userPref["dietLabels"] + "' AND dietLabels != ''  ";
@@ -101,9 +95,7 @@ constructor(private router: Router, private httpClient : HttpClient, private san
 	  params["query"]= query + qWhere + "  group by healthLabels order by rand() limit 0, 4";
 
 	  var res =   this.dbService.getDatabyQuery("recipes", params).subscribe(invData => setTimeout(() => {
-   
-	  //console.log(invData);
-   
+     
 	   if(invData !== null && typeof(invData["body"]) !== "undefined" && invData["body"] !== null && invData["body"]["length"] > 0)
 		 {
 		   this.recommendedRecipes = [];
@@ -114,7 +106,7 @@ constructor(private router: Router, private httpClient : HttpClient, private san
 		   }
 		
 		 }
-	//	 ////console.log(this.recommendedRecipes);
+
 	   }
 	 
 	  ));
@@ -125,13 +117,10 @@ constructor(private router: Router, private httpClient : HttpClient, private san
 	{
 	
 	  var params = {};
-	 // var d = new Date();
-	 // var weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
-	  var tempDt2 =  this.helpService.todayDate();  //{ year: d.getFullYear(), month: d.getMonth() + 1, day: d.getDate(), dayname: weekdays[d.getDay()] };
+		  var tempDt2 =  this.helpService.todayDate();  
 	  var tempDt ="";
 	  tempDt = tempDt2.month + "-" + tempDt2.day + "-"  + tempDt2.year ;
-//console.log(tempDt2);
-    //params["query"] = "select id, image, label, dietLabels, s_instructions from recipes where s_instructions != '' order by rand() limit 1";
+
 	params["query"] = "select * from recipeoftheday where datetime = '" + tempDt + "'";
 		////console.log(params["query"]);
 	 var res =   this.dbService.getDatabyTablebyQuery("recipes", params).subscribe(invData => setTimeout(() => {
@@ -146,18 +135,16 @@ constructor(private router: Router, private httpClient : HttpClient, private san
 		{
 			this.loadRecipeoftheDay("");
 		}
-   	////console.log(this.RecipeoftheDay);
+   
 	 }));
   
 	}
 	loadRecipeoftheDay(id="")
 	{
-		////console.log("loadRecipeoftheDay");
-		////console.log("id-" + id + "-");
+
 	  this.RecipeoftheDay = [];
 	  var params = {};
-	 
-    //params["query"] = "select id, image, label, dietLabels, s_instructions from recipes where s_instructions != '' order by rand() limit 1";
+	
 	if(id == "")
 	params["query"] = "select id, label, image, healthLabels, dietLabels, calories, totalWeight, yield from recipes where s_instructions != '' order by rand() limit 1";
 	else
@@ -172,7 +159,7 @@ constructor(private router: Router, private httpClient : HttpClient, private san
 		  	if(id == "") 
 			  this.setRecipeoftheDay(this.RecipeoftheDay[0]);
 		}
-   		////console.log(this.RecipeoftheDay);
+
 	 }));
   
 	}
@@ -239,15 +226,7 @@ constructor(private router: Router, private httpClient : HttpClient, private san
 				 {
 				   for(let l=0; l < arrLabel.length; l++)
 				   {
-					
-
-				
-						
-					 //   ////console.log(img);
 					  this.healthLabels.push({"label":arrLabel[l]["name"], "image":arrLabel[l]["image"]});
-					  
-					
-					
 				   }
 				 }
 			  
@@ -256,16 +235,13 @@ constructor(private router: Router, private httpClient : HttpClient, private san
 	loadHealthLabelsfromDB()
 	{
 	  this.healthLabels = [];
-	 // this.recipes = recipesList;
+
 	  var params = {};
 	  
 	  params["returnfields"]=" healthLabels ";
-	  // ////console.log(JSON.stringify(params));
-	  //params["instructions"] = "notempty";
+	
   
 	  var res =   this.dbService.getDatabyFields("recipes", params).subscribe(invData => setTimeout(() => {
-	 
-	  // ////console.log(invData);
    
 	   if(invData !== null && typeof(invData["body"]) !== "undefined" && invData["body"] !== null && invData["body"]["length"] > 0)
 		 {
@@ -283,7 +259,6 @@ constructor(private router: Router, private httpClient : HttpClient, private san
 				 {
 				   for(let l=0; l < arrLabel.length; l++)
 				   {
-					//////console.log(arrLabel[l].toString().toLowerCase());
 					 var indexLbl = this.healthLabels.findIndex(x=> x.label == arrLabel[l])
 			   
 					 if(indexLbl == -1)
@@ -313,7 +288,6 @@ constructor(private router: Router, private httpClient : HttpClient, private san
 						{
 						  img = "assets/menu/balanced-diet.png";
 						}
-					 //   ////console.log(img);
 					  this.healthLabels.push({"label":arrLabel[l], "image":img, "count":1});
 					  
 					 }
@@ -329,7 +303,7 @@ constructor(private router: Router, private httpClient : HttpClient, private san
 			 
 		   }
 		 }
-		 ////console.log(this.healthLabels);
+
 	   }
    
 	  ));
@@ -343,19 +317,19 @@ constructor(private router: Router, private httpClient : HttpClient, private san
 
 	formatImage(image, type)
 	{
-	//  ////console.log(image);
+
 	  var retImage = image;
 	  if(image !== "" && type !== "")
 	  {
 		retImage = this.helpService.formatImage(image, type);
 		
 	  }
-	//  ////console.log(retImage);
+
 	  return retImage;
 	}
 
 	gotoRecipeDetails(page, id){
-		//console.log("in gotorecipedetails");
+
 		if(page == "collection" || page == "recipebookview")
 		{
 			this.router.navigate([page, {id:id}]);
@@ -379,7 +353,6 @@ constructor(private router: Router, private httpClient : HttpClient, private san
 		{
 			if(page == "schedule")
 			{
-				////console.log(this.planStatus[0]);
 				this.router.navigate([page, {id:id, mum_id:this.planStatus[0]["mum_id"], userid: this.currentUser["id"]}]);
 			}
 			else
@@ -394,18 +367,18 @@ constructor(private router: Router, private httpClient : HttpClient, private san
 	}
 	formatValue(str)
 {
-//	////console.log(str);
+
 	var retValue = str;
 	if(str !== "")
 	{
 		retValue = parseFloat(str).toFixed(2);
 	}
-//	////console.log(retValue);
+
 	return retValue;
 }
 formatLabels(str)
 {
-//	////console.log(str);
+
 	var retArr = [];
 	retArr.push(str);
 	if(str !== "")
@@ -417,7 +390,7 @@ formatLabels(str)
 }
 
 
-/************ new functions  */
+
 mealplans: Array<any> = [];
 
 
@@ -426,16 +399,15 @@ loadMealPlan()
     this.mealplans = [];
    // this.recipes = recipesList;
     var params = {"query": "SELECT * FROM mealplan where status=1 ORDER BY RAND() LIMIT 1"};
-    // //////console.log(JSON.stringify(params));
+
     var res =   this.dbService.getDatabyTablebyQuery("mealplan", params).subscribe(invData => setTimeout(() => {
-		console.log(invData);
+
      if(invData !== null && typeof(invData["body"]) !== "undefined" && invData["body"] !== null && invData["body"]["length"] > 0)
        {
          this.mealplans = [];
          for(let i=0; i < invData["body"]["length"] ; i++)
          {
            this.mealplans.push(invData["body"][i]);
-           ////console.log(  this.mealplans);
          }
        }
      }
@@ -448,24 +420,22 @@ loadMealPlan()
   plan: any;
 getPlanStatus()
 {
-	////console.log("in getPlanstatus");
-	////console.log(this.currentUser);
- // var params = {};
+
   if(this.currentUser && this.currentUser["id"] !== null && this.currentUser["id"] !== "")
   {
 
 	var params = {"query": "SELECT mum.id mum_id, mum.startdate startdate,mp.id id, mp.name mpname, mp.tags FROM mealplan_user_mapping mum, mealplan mp where mum.userid = " + this.currentUser["id"] + " AND mp.id = mum.mealplanid AND mp.status=1 AND mum.status = 1 "};
 
-	////console.log(params);
+
 	  var res =   this.dbService.getDatabyTablebyQuery("mealplan_user_mapping", params).subscribe(invData => setTimeout(() => {
-		//console.log(invData);
+
 	if(invData !== null)
 	{
 	 
 	  if(invData["body"]["length"] > 0)
 	  {
 		this.planStatus = invData["body"];
-	  	////console.log(this.planStatus);
+
 		this.plan = invData["body"][0];
 		  var Difference_In_Time = new Date().getTime() - new Date(this.planStatus[0]["startdate"] ).getTime(); 
    
@@ -561,29 +531,26 @@ getUserPreferences()
 }
 
 transform(value: any) {
-	//console.log(value);
+
 	var retvalue = this.sanitizer.bypassSecurityTrustHtml(value);
-	//console.log(retvalue);
+
     return retvalue;
   }
   collectionsList: Array<any> = [];
   loadcollections()
   {
-	   /******** recipes api serach */
+
  
 	  this.collectionsList = [];
-	 // var params = {"limit": 100};
-	 // params["createdby"] = this.currentUser["id"];
-	  
+
 	  var params = {"query": "SELECT c.*, COUNT(rm.id) AS recipecount, u.email, u.firstname, u.lastname FROM collection AS c LEFT JOIN recipe_mapping AS rm ON c.id = rm.collection_id LEFT JOIN users AS u ON c.created_by = u.id where c.status =1 GROUP BY c.id limit 1, 4"};
-	  console.log(params);
+
 	  var res =   this.dbService.getDatabyTablebyQuery("collection", params).subscribe(invData => setTimeout(() => {
-  
-		console.log(invData);
+
 		if(invData !== null)
 		{
 		  var obj = invData["body"]["length"];
-		  //console.log(invData["body"]);
+
 		  this.collectionsList = invData["body"];
 		  for(let o=0; o <  this.collectionsList.length; o++)
 		{
@@ -591,11 +558,10 @@ transform(value: any) {
 			this.collectionsList[o]["image"] =encodeURI( this.collectionsList[o]["image"]);
 		}
 
-		  //console.log(this.collectionsList);
 		  this.loaduserCount();
 		}
 
-		//this.loadRecipeBooks();
+
 		this.loadDietRecipes();
 	  }));
   
@@ -605,8 +571,6 @@ transform(value: any) {
   
   loaduserCount()
   {
-
-	//console.log("in loadusercount");
 
 	var params = {"query": "SELECT c.id, COUNT(cj.id) AS usercount 	FROM collection AS c LEFT JOIN  collection_join AS cj ON c.id = cj.collection_id GROUP BY c.id, cj.collection_id LIMIT 0, 4"};
 
@@ -622,9 +586,9 @@ transform(value: any) {
 			
 			if(fIndex > -1)
 			{
-			//	//console.log(obj[o]["usercount"])
+
 				this.collectionsList[fIndex]["userscount"] = obj[o]["usercount"];
-			//	//console.log(this.communitiesList[fIndex]["userscount"] );
+
 			}
 		}
 
@@ -635,15 +599,7 @@ transform(value: any) {
   }
   loaduserJoinedStatus()
   {
-	  /*
-	SELECT c.id, COUNT(cj.id) AS usercount
-	FROM community AS c
-	LEFT JOIN community_join AS cj ON c.id = cj.community_id
-	GROUP BY c.id, cj.community_id
 
-	*/
-
-	//console.log("in loaduserJoinedStatus");
 	var params = {"query": "SELECT id, collection_id from collection_join where userid = " + this.currentUser["id"] };
 
 	var res =   this.dbService.getDatabyTablebyQuery("collection", params).subscribe(invData => setTimeout(() => {
@@ -659,9 +615,9 @@ transform(value: any) {
 			
 			if(fIndex > -1)
 			{
-			//	//console.log(obj[o]["usercount"])
+
 				this.collectionsList[fIndex]["userjoined"] = true;
-			//	//console.log(this.communitiesList[fIndex]["userscount"] );
+
 			}
 		}
 
@@ -673,12 +629,9 @@ transform(value: any) {
   joincollection(id)
   {
 	var params = {};
-	//params["created_by"]  = this.currentUser["id"];
-	//console.log(params);
+
 	params ['query'] = "select * from collection_join where collection_id = " + id + " AND userid = " + this.currentUser["id"];
 	var res =   this.dbService.getDatabyTablebyQuery("collection_join", params).subscribe(invData => setTimeout(() => {
-
-	  //console.log(invData);
 	  if(invData !== null && invData["body"]["length"] > 0)
 	  {
 		
@@ -701,68 +654,7 @@ transform(value: any) {
   food: any = {};
   loadIngredients()
   {
-	  /*
-	  //console.log(ingredients);
-	  //console.log(ingredients.length);
-	  this.foodCategory ={};
-	  this.measure={};
-
-	  this.food = {};
-	for(let i= 0; i < ingredients.length; i++)
-	{
-
-		//console.log("i " + i);
-		//console.log(item);
-
-		if(ingredients[i]["ingredients"])
-		{
-			try
-			{
- 			var item = JSON.parse(ingredients[i]["ingredients"]);
-			 //console.log(item);
-			 for(let j=0; j < item.length; j++)
-			 {
-				 if(item[j]["foodCategory"] !== "")
-				 this.foodCategory[item[j]["foodCategory"]] = item[j]["foodCategory"];
-
-				 if(item[j]["measure"] !== "")
-				 this.measure[item[j]["measure"]] = item[j]["measure"];
-
-				 if(item[j]["food"] !== "")
-				 this.food[item[j]["food"]] = item[j]["food"];
-			 }
-			}
-			catch(error)
-			{
-				//console.log(error);
-			}
-			 
-		}
-	}
-	//console.log(this.foodCategory);
-	var text = "";
-	for (let x in this.foodCategory) {
-		text += "'" + x + "', ";
-	  }
-	  //console.log(text);
-	//console.log(this.measure);
-	var text1 = "";
-	for (let x in this.measure) {
-		text1 += "'" + x + "', ";
-	  }
-
-	  //console.log(text1);
-	  //console.log(this.food);
-	  var text2 = "";
-	  var foodcount = 0;
-	  for (let x in this.food) {
-		text2 += "'" + x + "', ";
-		foodcount++;
-		}
-  
-		//console.log(text2);
-		//console.log("foodcount " + foodcount);
-*/
+	
   }
 
   welcomeMessage: any = "";
@@ -796,7 +688,7 @@ transform(value: any) {
 		  this.mealTypeList = ["breakfast", "snack1", "lunch", "snack2", "dinner"];
   
 		var res =   this.dbService.getDataByTable("days", params).subscribe(dData => setTimeout(() => {
-		  //console.log(dData);
+
 		  if(dData !== null)
 		  {
 			if(dData["body"] !== null && dData["body"]['length'] > 0)
@@ -811,12 +703,12 @@ transform(value: any) {
 				  if(t !== "")
 				  idslist += t + ",";
 				}
-				//this.planDay = this.plan['days'][i];
+		
 				
 			  }
 			  
 			 
-			 // this.getCompleteStatus();
+
 			
 			}
 			
@@ -843,7 +735,7 @@ transform(value: any) {
     params["mealplanid"] =this.planStatus["id"];
     params["dayid"] =this.plan["days"][0]["id"];
  
-    //console.log(params);
+
    
     this.planStatus["consumedcalories"] = 0;
     var res =   this.dbService.getDataByTable("user_days_status", params).subscribe(invData => setTimeout(() => 
@@ -853,8 +745,7 @@ transform(value: any) {
         {
           this.mealtypes = ["breakfast","snack1","lunch","snack2","dinner"];
           this.completeStatus = invData["body"][0];
-          //console.log("completestatus");
-          //console.log(this.completeStatus);
+ 
           var idslist = "";
           for(let m=0; m < this.mealtypes.length ; m++)
           {
@@ -877,7 +768,7 @@ transform(value: any) {
 	loadRecipes(idslist)
 	{
 		var recipesList = [];
-		//console.log("loadRecipes");
+
 	  var params = {"limit": 100};
 	  if(idslist !== "")
 	  {
@@ -941,7 +832,7 @@ if( cals > 0)
 
 	}
 }
-	console.log(this.plan);
+
   }));
   }
 
@@ -951,18 +842,15 @@ if( cals > 0)
   recipebooks: Array<any> = [];
   loadRecipeBooks()
 	{
-		//console.log("load recipebooks");
+
 		this.recipebooks = [];
-		//var params = {"limit": 100};
-	   // params["createdby"] = this.currentUser["id"];
+
 		
 		var params = {};
 		params["query"] = "select rb.id, rb.recipebook_name, rb.image, rb.recipeslist, rb.createdby, rb.createdat, u.username, u.firstname, u.lastname, u.email from recipebook rb, users u where rb.createdby = u.id";
-	
-		//console.log(params);
+
 		var res =   this.dbService.getDatabyTablebyQuery("recipebook", params).subscribe(invData => setTimeout(() => {
-	
-		  //console.log(invData);
+
 		  if(invData !== null)
 		  {
 
@@ -987,7 +875,7 @@ if( cals > 0)
 	dietRecipes: Array<any> = [];
 	loadDietRecipes()
 	{
-		//console.log("load dietRecipes");
+	
 		this.dietRecipes = [];
 
 		this.dietRecipes.push({"name":"Delicious Soups & Purees", "q":"soup puree", "count": "9995", "image":"assets/images/temp-images/soup.jpg"});

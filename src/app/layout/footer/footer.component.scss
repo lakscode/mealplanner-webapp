@@ -25,11 +25,9 @@
   opacity: 1;
 }
 .footer-boxed .footer-inner {
-  //background-image: url("../images/temp-images/footer-bg.jpg");
+
 }
 .footer-fluid {
- // background-image: url("../images/temp-images/footer-bg-full.jpg");
- // background-size: cover;
  background-color: #000;
 }
 .footer-inner {
@@ -216,6 +214,7 @@
  background:#555;
  border-radius: 50%;
  z-index:1000;
+ box-shadow: 0 1rem 1.5rem rgb(0 0 0 / 25%);
   a
   {
     display: inline-block;
@@ -233,4 +232,9 @@
 .showBtn
 {
   display:block;
+}
+
+.stickyfooter:hover
+{
+  box-shadow: 0 1rem 1.5rem rgb(0 0 0 / 50%);
 }

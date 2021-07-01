@@ -162,21 +162,18 @@
   background: #69C401; 
   font-size: 2.5rem;
   color:#FFF;
-
   border-color: #5fa138;
-  box-shadow: 0 0 5px 0 #77c14b;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   border-radius: 1rem !important;
-
   padding: 1rem 2rem !important;
-
 }
 .getstarted:hover
 {
-  box-shadow: 0 0 15px 0 #77c14b;
+  text-decoration:none;
+  color:#FFF;
+ 
 }
 
-/*testimonial slider */
 
 section {
 	width: 60%;
@@ -270,9 +267,6 @@ section {
   display: inline-block;
   left: 0;
   bottom:4px;
-  //top: 10px;
- // min-height: 55px;
-  //line-height:45px;
 }
 .home-sec-list li a {
   display: inline-block;
@@ -517,15 +511,20 @@ a {
   border: 1px solid #dee2e6;
   background-color: #65ab3b;
   border-color: #5fa138;
-  box-shadow: 0 0 5px 0 #77c14b;
-  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   padding: 1rem 2rem !important;
     font-size: 1.25rem !important;
 
-
-
 }
+
+.leanmore:hover
+{
+  color: #fff;
+  text-decoration:none;
+}
+
+
+
 .leanmore:hover{
   box-shadow: 0 0 15px 0 #77c14b;
 }
@@ -536,8 +535,19 @@ a {
     background-size: cover;
     padding: 30px 0px;
 }
+.bg-halfwhite
+{
+  background: $white-half1;
+    background-size: cover;
+    padding: 30px 0px;
+}
 
-
+.bg-white
+{
+  background: #FFF;
+    background-size: cover;
+    padding: 30px 0px;
+}
 /*----------------*/
 /*  SCALLOP down  */
 /*----------------*/

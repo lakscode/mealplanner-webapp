@@ -35,8 +35,7 @@ export const constants = {
         "water","energy","saturated","monounsaturated","polyunsaturated","fiber","sugars","sugars_added"],
   edamam_nutrient_api :"https://api.edamam.com/api/nutrition-data",
   edamam_nutrient_api_details :"https://api.edamam.com/api/nutrition-details",
-  /*healthLabelsNew: ["Vegetarian","Pescatarian","Egg-Free","Peanut-Free", "Tree-Nut-Free","Soy-Free","Fish-Free","Shellfish-Free","Pork-Free","Red-Meat-Free","Crustacean-Free","Celery-Free","Mustard-Free", "Sesame-Free","Lupine-Free","Mollusk-Free","Alcohol-Free", "Kosher","Kidney-Friendly","Gluten-Free", "Wheat-Free","Vegan","Dairy-Free","Sugar-Conscious", "Immuno-Supportive","No oil added","Low Potassium", "Keto-Friendly","FODMAP-Free"],*/
- healthLabelsNew: 
+  healthLabelsNew: 
   [
     "Alcohol-Free",
     "Celery-Free",

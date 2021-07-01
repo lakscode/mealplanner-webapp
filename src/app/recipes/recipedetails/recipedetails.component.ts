@@ -1,7 +1,7 @@
 import { Component, OnInit,OnDestroy  } from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
 import { UserService } from '../../services/user.service';
-import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { DBService } from '../../dbservices/db.service';
 import { HelpService } from '../../services/help.service';
 
@@ -10,7 +10,6 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { constants } from './../../jsonfiles/constants';
 import { HttpHeaders } from '@angular/common/http';
-import { env } from 'process';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ToastrService } from 'ngx-toastr';
 @Component({
@@ -79,14 +78,14 @@ isUser: any = {};
 		this.ratingObj= {"totalcount":0, "totalrating":0, "displayrating":0}
 		this.routeParams = {};
 		this.route.params.pipe(takeUntil(this.onDestroy$)).subscribe(params => {
-	 //  console.log(params);   
+  
 		this.routeParams = params;     
 		if (typeof (this.routeParams.id) !== "undefined") {
-		//	console.log(this.routeParams.id);
+
 		}  
 
 	
-	//	console.log(this.routeParams);
+
 		
 		this.loadRecipe(this.routeParams.id);
 		
@@ -100,7 +99,7 @@ isUser: any = {};
 		this.currentUser["displayname"]  = this.currentUser["firstname"];
 		else if( this.currentUser["username"] !== "")
 		this.currentUser["displayname"]  = this.currentUser["username"];
-	//	console.log(this.currentUser);
+
 			this.isloggedIn = true;
 		this.comment['userid'] = this.currentUser["id"];
 
@@ -109,14 +108,12 @@ isUser: any = {};
 
 		this.showNutrientsFlag = this.helpService.showorhideNutritions(this.role);
 
-	//	console.log(this.showNutrientsFlag);
-
 		this.getFavouriteStatus();
 		this.getRating();
 		}
 		
 		this.isUser = this.helpService.setUserRoles(this.currentUser);
-		console.log(this.isUser);
+
 	}
 	
 	loadShareValue()
@@ -136,11 +133,9 @@ isUser: any = {};
 	}
 loadRecipe(id)
 {
-  console.log("In load Recipe");
+
   this.loading++;
-//  console.log(this.loading);
- // if(this.loading ==1)
-  //{
+
   this.searchRes = [];
  var params = {}
  if(id)
@@ -148,14 +143,11 @@ loadRecipe(id)
  params["id"] = id;
  }
 
-//  console.log(this.searchparam);
- //console.log(params);
- //this.searchRes["image"]="assets/images/temp-images/slide-recipe2-detail.jpg";
+
  if(this.loading)
   {
   var res =   this.dbService.getDatabyParam("recipes", params).subscribe(recipeData => setTimeout(() => {
 
-	console.log(recipeData);
 	this.searchRes["ingredients"] =[];
 
 
@@ -235,7 +227,7 @@ loadRecipe(id)
 					this.searchRes["ingredients"].push({"text":temp[t]})
 				  }
 			  }
-			  console.log(this.searchRes["s_instructions"]);
+
 			  this.searchRes["instructions"] = this.searchRes["s_instructions"];
 
 
@@ -248,8 +240,7 @@ loadRecipe(id)
 			  }
 			  else
 			  {
-				/*temp1 = this.searchRes["s_instructions"].split(". ");
-				this.searchRes["instructions"]  = temp1; */
+				
 				this.searchRes["instructions"] = [];
 				this.searchRes["instructions"].push(this.searchRes["s_instructions"]);
 			  }
@@ -266,7 +257,7 @@ loadRecipe(id)
 				  if(fIndex > -1)
 				  {
 					var fIndex1 = this.paramMicro.findIndex(x1=> (x1.label.toLowerCase() === mmicro.label.toLowerCase()));
-				//	console.log(fIndex1);
+	
 					if(fIndex1 == -1)
 					{
 					mmicro.totalP = mmicro.total.toFixed(1);
@@ -279,16 +270,16 @@ loadRecipe(id)
 
 			  if(tempNutrients)
 			  {
-			//	console.log(tempNutrients);
+
 				for (let x in tempNutrients) {
-				//	console.log(tempNutrients[x]);
+
 					var mmicro = tempNutrients[x];
-				//	console.log(mmicro);
+
 					var fIndex = this.mineralsList.findIndex(x=> (x === mmicro.label.toLowerCase()));
 					if(fIndex > -1)
 					{
 						var fIndex1 = this.paramMicro.findIndex(x1=> (x1.label.toLowerCase() === mmicro.label.toLowerCase()));
-					//	console.log(fIndex1);
+
 						if(fIndex1 == -1)
 						{
 							mmicro.totalP = mmicro.quantity.toFixed(1);
@@ -303,20 +294,18 @@ loadRecipe(id)
 
 		}
 	  }
-	console.log(this.searchRes);
-//	console.log(this.paramMicro);
+
 this.paramMicro = this.paramMicro.sort(this.sortArrayAsc);
 this.updated++;
 this.listParams= {};
 this.listParams["dietLabels"] = this.searchRes['dietLabels'];
-	  console.log(this.listParams);
 
 	  this.loadShareValue();
 
 	}
   }));
   }
-//}
+
 }
 
 sortArrayAsc(a, b) {
@@ -331,7 +320,6 @@ sortArrayAsc(a, b) {
 }
 getFavouriteStatus()
 {
-  console.log("get FavouriteStatus");
 
   var params = {};
   this.favStatus = null;
@@ -346,8 +334,6 @@ getFavouriteStatus()
 		if(invData["body"]['length'] > 0)
 		{
 		  this.favStatus = invData["body"][0];
-		  console.log("favStatus ");
-		  console.log(this.favStatus);
 		  this.setFav = true;
 		}
 	  }
@@ -358,7 +344,7 @@ getFavouriteStatus()
 	var parent = this;
 	setTimeout(function(){ 
 		parent.getFavouriteStatus(); 
-	}, 1000);
+	}, 2000);
   }
 
 }
@@ -373,10 +359,9 @@ toggleFav()
 		this.setFavourite();
 	}
 }
-
+showAdd2MP: boolean = false;
 setFavourite()
 {
-  console.log("set Favourites");
   var params = {};
   if(typeof(this.currentUser["id"]) !== "undefined" && this.currentUser["id"] !== null && this.currentUser["id"] !== "" && typeof(this.routeParams.id) !== "undefined" && this.routeParams.id !== null && this.routeParams.id !== "")
   {
@@ -397,7 +382,6 @@ setFavourite()
 
 removeFavourite()
 {
-  console.log("set Favourites");
   var params = {};
   if(typeof(this.favStatus["id"]) !== "undefined" && this.favStatus["id"] !== null && this.favStatus["id"] !== "")
   {
@@ -434,8 +418,7 @@ rate(index)
   if(typeof(this.searchRes['rating']) !== "undefined" && this.searchRes["rating"] !== "")
   rating += parseInt(this.searchRes["rating"]);
   this.rating = rating;
- console.log(index);
- console.log(this.rating);
+
  this.setRating();
 }
 
@@ -452,17 +435,15 @@ showRating()
 }
 getTotalRating()
 {
-  console.log("getTotalRating");
-  console.log(this.rating);    
+   
   var params = {};
   this.ratingObj= {"totalcount":0, "totalrating":0, "displayrating":0}
   if(typeof(this.routeParams.id) !== "undefined" && this.routeParams.id !== null && this.routeParams.id !== "")
   {
 	params["query"]="SELECT count(rating) as totalcount, sum(rating) as totalrating FROM rating WHERE recipeid=" + this.routeParams.id;
-  console.log(JSON.stringify(params));
-  var res =   this.dbService.getDatabyTablebyQuery("rating", params).subscribe(rtData => setTimeout(() => {
 
-	  console.log(rtData);     
+  var res =   this.dbService.getDatabyTablebyQuery("rating", params).subscribe(rtData => setTimeout(() => {
+    
 	  if(rtData !== null)
 	  {
 	  
@@ -475,8 +456,7 @@ getTotalRating()
 		  if( this.ratingObj["totalrating"] > 0 &&  this.ratingObj["totalcount"] > 0 )
 		  {
 			this.ratingObj["displayrating"] = Math.ceil((this.ratingObj["totalrating"]/ this.ratingObj["totalcount"]));
-			console.log("displayrating");
-			console.log(this.ratingObj["displayrating"]);
+
 		  }
 		}
 	  }
@@ -485,27 +465,26 @@ getTotalRating()
 }
 getRating()
 {
-  console.log("getRating");
-  console.log(this.rating);    
+   
   var params = {};
   this.ratingRecord= null;
   if(typeof(this.currentUser["id"]) !== "undefined" && this.currentUser["id"] !== null && this.currentUser["id"] !== "" && typeof(this.routeParams.id) !== "undefined" && this.routeParams.id !== null && this.routeParams.id !== "")
   {
 	params["userid"] = this.currentUser["id"];
 	params["recipeid"] = this.routeParams.id;
-	console.log(params);
+
 	var res =   this.dbService.getDataByTable("rating", params).subscribe(rData => setTimeout(() => {
-	  console.log(rData);     
+  
 	  if(rData !== null)
 	  {
 	  
 		if(rData["body"]["length"] > 0)
 		{
 		  this.ratingRecord = rData["body"][0];
-		  console.log(this.ratingRecord);
+
 	   
 		  this.rating = this.ratingRecord["rating"];
-		  console.log(this.rating);
+
 		}
 	  }
 	}));
@@ -514,9 +493,7 @@ getRating()
 
 setRating()
 {
-  console.log(this.rating);
 
-  console.log("setRating");
  
 	var params = {};
 	if(typeof(this.currentUser["id"]) !== "undefined" && this.currentUser["id"] !== null && this.currentUser["id"] !== "" && typeof(this.routeParams.id) !== "undefined" && this.routeParams.id !== null && this.routeParams.id !== "")
@@ -540,9 +517,9 @@ setRating()
 		if(typeof(this.ratingRecord["id"]) !== "undefined" && this.ratingRecord["id"] !== "")
 		{
 		  params["id"] = this.ratingRecord["id"];
-		  console.log(params);
+		
 		  var res =   this.dbService.updateDataByTable("rating", params).subscribe(invData => setTimeout(() => {
-			console.log(invData);
+		
 			if(invData !== null)
 			{
 				this.getRating();     
@@ -556,12 +533,12 @@ setRating()
 }
 formatObj(obj)
 {
-//	console.log(obj);
+
 	return JSON.stringify(obj);
 }
 formatDietLabels()
 {
-//	console.log('format dietlabels');
+
 	var arr = [];
 	arr.push(this.searchRes.dietLabels);
 	if(typeof(this.searchRes.dietLabels) !== "undefined" && this.searchRes.dietLabels !== "")
@@ -571,24 +548,24 @@ formatDietLabels()
 		arr = temp;
 
 	}
-//	console.log(arr);
+
 	return arr;
 }
 
 formatValue(str)
 {
-//	console.log(str);
+
 	var retValue = str;
 	if(str !== "")
 	{
 		retValue = parseFloat(str).toFixed(2);
 	}
-//	console.log(retValue);
+
 	return retValue;
 }
 formatLabels(str)
 {
-//	console.log(str);
+
 	var retArr = [];
 	retArr.push(str);
 	if(str !== "")
@@ -601,7 +578,7 @@ formatLabels(str)
 
 newRecipe()
 {
-	console.log("new recipe");
+
 		this.router.navigate(['recipesubmit', {'draft':this.routeParams.id}]);
 
 }
@@ -610,23 +587,11 @@ newRecipe()
 loadComments()
 {
 	 this.commentsList = [];
-	console.log("loadComments");
-/*	var params = {};
-	params["recipeid"] = this.routeParams.id;
-	console.log(params);
-	var res =   this.dbService.getDataByTable("comments", params).subscribe(rData => setTimeout(() => {
-	  console.log(rData);     
-	  if(rData !== null)
-	  {
-		  if(rData['body']['length'] > 0)
-		  this.commentsList = rData['body'];
-	  }
-	}));
-	*/
+
 	var params = {};
 	params["query"] = "select c.*, u.firstname, u.lastname, u.username, u.email, u.image as profileimage from comments c,  users u where u.id = c.userid  and c.recipeid =" + this.routeParams.id;
 	var res =   this.dbService.getDatabyTablebyQuery("comments", params).subscribe(rData => setTimeout(() => {
-		console.log(rData);     
+    
 		if(rData !== null)
 		{
 			if(rData['body']['length'] > 0)
@@ -643,7 +608,7 @@ loadComments()
 			this.commentsCount = rData['body']['length'];
 		}
 
-		this.loadPlanNames();
+
 	  }));
 
 }
@@ -652,7 +617,7 @@ commentSubmitMsg: any = "";
 submitcomment()
 {
 
-	console.log(this.comment);
+
 	var params = {};
 	params["recipeid"] = this.routeParams.id;
 	params["userid"] = this.currentUser["id"];
@@ -660,10 +625,10 @@ submitcomment()
 	params["image"] = this.comment["image"];
 	params["video"] = this.comment["video"];
 
-	console.log(JSON.stringify(params));
+
 
 	var res =   this.dbService.postDataByTable("comments", params).subscribe(rData => setTimeout(() => {
-	  console.log(rData);     
+   
 	  if(rData !== null)
 	  {
 		this.loadComments();
@@ -679,16 +644,15 @@ showResponse(msg)
 {
 	this.comment = {"userid":"", "message":"", "image":"", "video":"", "status":"0", "created_time": new Date()};
 	
-	setTimeout(() => {
+//	setTimeout(() => {
 		this.commentSubmitMsg = "";
-	}, 2000);
+//	}, 2000);
 }
 formatApiUrl(path)
 {
-	console.log(path);
+
 	var urlapi = this.apiUrl.replace("/api","");
-	console.log(urlapi);
-	console.log(urlapi + path);
+
 	return urlapi + path;
 }
 formatName(comment)
@@ -737,15 +701,11 @@ onFileSelect(event) {
 	const file = event.target.files[0];
 	this.getBase64(file).then(
 	  data => {
-	//	console.log(data);
-
 
 		var options = {
 		  headers : new HttpHeaders({"Content-Type": "application/json"})
 		  };
 
-
-	//	this.comment.image = data.toString();
 		
 
 		var imgData = data.toString().replace("data:image/jpeg;base64,","");
@@ -757,9 +717,9 @@ onFileSelect(event) {
 		params["image"]= data.toString();
 
 		params["name"]= this.currentUser["id"] + "_" + new Date().getTime() + "_"  + file.name;
-		console.log(JSON.stringify(params));
+
 		this.dbService.uploadMedia(params).subscribe(resultData => setTimeout(() => {
-		  console.log(resultData);
+	
 		  if(typeof(resultData) !== "undefined" && resultData !== null)
 		  {
 			if(typeof(resultData["name"]) !== "undefined" && resultData["name"] !== null && resultData["name"] !== "")
@@ -767,8 +727,7 @@ onFileSelect(event) {
 				var urlapi = this.apiUrl.replace("/api","");
 
 			  this.comment[type] = urlapi + resultData["name"];
-			console.log(type);	
-			  console.log(this.comment)
+		
 			}
 		  }
 		}));
@@ -816,115 +775,6 @@ gotoRecipes(label, type) {
 	}
 	
 }
-plansList:Array<any>=[];
-daysList: Array<any> = [];
-mealTypesList : Array<any> = [];
-plan: any = {"id":'', "day":"", "mealType":""};
-showAdd2MP: boolean = false;
-loadPlanNames()
-{
-	if(this.currentUser && this.currentUser["id"])
-	{
-	this.plansList = [];
-
-	var params = {};
-	//params["created_by"]  = this.currentUser["id"];
-	console.log(params);
-	params ['query'] = "select id, name from mealplan where created_by = " + this.currentUser["id"];
-	var res =   this.dbService.getDatabyTablebyQuery("mealplan", params).subscribe(invData => setTimeout(() => {
-
-	  console.log(invData);
-	  if(invData !== null)
-	  {
-		var obj = invData["body"]["length"];
-		this.plansList = invData["body"];
-	  }
-	  this.loadOptions();
-
-	}));
-	}
-}
-loadOptions()
-{
-	this.mealTypesList = [];
-	this.daysList = [];
-	for(let d=0; d < 7; d++)
-	{
-		this.daysList.push({"id":d, "name":"Day " + (d+1)});
-	}
-
-	this.mealTypesList.push({"code":"breakfast", "name":"Breakfast"});
-	this.mealTypesList.push({"code":"snack1", "name":"Pre-lunch Snack"});
-	this.mealTypesList.push({"code":"lunch", "name":"Lunch"});
-	this.mealTypesList.push({"code":"snack2", "name":"Evening Snack"});
-	this.mealTypesList.push({"code":"dinner", "name":"Dinner"});
-
-}
-add2Plan()
-{
-	this.showAdd2MP= false;
-	console.log(this.plan);
-
-	var params = {};
-	//params["created_by"]  = this.currentUser["id"];
-	console.log(params);
-	params ['query'] = "select * from days where meal_plan_id = " + this.plan["id"] + " AND day_num = " + this.plan["day"];
-	var res =   this.dbService.getDatabyTablebyQuery("days", params).subscribe(invData => setTimeout(() => {
-
-	  console.log(invData);
-	  if(invData !== null && invData["body"]["length"] > 0)
-	  {
-		var selectedDay = invData["body"][0];
-		if(selectedDay[this.plan["mealType"]] == "")
-		{
-			this.updateMealType();
-		}
-		else
-		{
-			this.toastr.warning('Another Recipe has been already added to selected meal type of the plan!!!', 'Add to Meal Plan');
-		}
-	  }
-	  else
-	  {
-		var params = {};
-		   
-		params["meal_plan_id"] = this.plan["id"];
-		params["day_num"] = this.plan["day"];
-		params["name"] = "Day " + (this.plan["day"] +1);
-
-		params["breakfast"] = "";
-		params["snack1"] = "";
-		params["lunch"] = "";
-		params["snack2"] = "";
-		params["dinner"] = "";
-		params[this.plan["mealType"]] = this.searchRes["id"];
-		params["created_by"] = "";
-		params["created_at"] = new Date();
-		params["status"] = 1;
-
- 
-	
-		var res =   this.dbService.postDataByTable("days", params).subscribe(dData => setTimeout(() => {
-		//	alert("New day record created for plan");
-			this.toastr.success('Recipe has been added to the selected meal type of the plan!!!', 'Add to Meal Plan');
-	
-		}));
-
-	  }
-	}));
-
-}
-
-updateMealType()
-{
-	//alert("add recipe");
-	var params1 = {};
-	params1 ['query'] = "update days set " + this.plan["mealType"] + " = " + this.searchRes["id"] + " where meal_plan_id = " + this.plan["id"] + " AND day_num = " + this.plan["day"];
-	var res =   this.dbService.getDatabyTablebyQuery("days", params1).subscribe(invData => setTimeout(() => {
-		this.toastr.success('Recipe has been added to the selected meal type of the plan!!!', 'Add to Meal Plan');
-	
-	}));
-}
 showpopupflag: boolean = false;
 
 showhidepopup()
@@ -945,9 +795,9 @@ formatString(str)
     if(str.indexOf("'") > -1)
     {
     
-    //retVal = str.replace(/'/g, "\'");
+
     retVal = retVal.replaceAll("'","");
-    ////console.log(retVal);
+  
     }
   }
   return retVal;
@@ -955,7 +805,7 @@ formatString(str)
 
 makeacopy()
 {
-	console.log("make a copy")
+
 
 	var new_copy = JSON.parse(JSON.stringify(this.searchRes));
 	delete new_copy["id"];
@@ -969,7 +819,7 @@ makeacopy()
 	
 	var pQuery = {"query":"select max(id) as maxid from recipes"};
 	var res =   this.dbService.getDatabyTablebyQuery("recipes", pQuery).subscribe(recipeData => setTimeout(() => {
-	 console.log(recipeData);
+
   
 	  if(recipeData !== null && typeof(recipeData['body']) !== "undefined" && recipeData['body']['length'] >0)
 	  {
@@ -986,7 +836,7 @@ makeacopy()
 		  new_copy["shareAs"] = environment.appUrl + "/recipedetails/" + newid;
 		  new_copy["source"] = environment.appname + "_" + this.searchRes["id"];
 		  new_copy["s_servings"] = new_copy["yield"];
-		  console.log(JSON.stringify(new_copy));
+
 		  this.createNewRecipe(new_copy, newid);
 		  
 		}
@@ -1000,7 +850,7 @@ makeacopy()
   createNewRecipe(new_copy, newid)
   {
 	var res =   this.dbService.postDataByTable("recipes", new_copy).subscribe(recipeData => setTimeout(() => {
-	  console.log(recipeData);
+
   
 	  if(recipeData['inserted_id'] !== "undefined" && recipeData['inserted_id'] !== "" && recipeData['inserted_id'] !== "0" && recipeData['inserted_id'] !== 0)
 	  {
@@ -1019,8 +869,7 @@ makeacopy()
   }
   updaterecipe(newid)
   {
-	console.log("in updatereicpe");
-	console.log(newid);
+
 	var new_copy = {};
 	new_copy["id"] = newid;
 	new_copy["url"] = environment.appUrl + "/recipedetails/" + newid;

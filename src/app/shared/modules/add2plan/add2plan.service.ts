@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({ providedIn: 'root' })
-export class CommentService {
+export class Add2planService {
     private modals: any[] = [];
 	//console.log("In ModalService");
 	

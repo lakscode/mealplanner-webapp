@@ -16,8 +16,11 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [FormsModule, RouterModule.forRoot(routes,{scrollPositionRestoration: 'enabled', useHash: true, enableTracing: false, onSameUrlNavigation:"reload"})],
+  imports: [FormsModule, RouterModule.forRoot(routes,{ useHash: true, enableTracing: false, onSameUrlNavigation:"reload"})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
 
+/* 
+scrollPositionRestoration: 'enabled',
+*/

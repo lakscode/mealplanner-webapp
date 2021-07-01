@@ -3,8 +3,8 @@
 <ngb-carousel *ngIf="sliderList" style="width:100%; min-height: 210px;">
     <ng-template ngbSlide *ngFor="let item of sliderList; let i=index">
       <div class="picsum-img-wrapper">
-        <img *ngIf="!isMobile" class="desktoponly" [src]="item.image" alt="{{item.title}}"  style="width:100%;min-height: 200px;">
-        <img *ngIf="isMobile" class="mobileonly" [src]="item.image_small" alt="{{item.title}}"  style="width:100%;min-height: 200px;">
+        <img *ngIf="!isMobile" class="desktoponly" [lazyLoad]="item.image" alt="{{item.title}}"  style="width:100%;min-height: 200px;">
+        <img *ngIf="isMobile" class="mobileonly" [lazyLoad]="item.image_small" alt="{{item.title}}"  style="width:100%;min-height: 200px;">
       </div>
       <div class="carousel-caption">
         <div class="container custom-container-slide">

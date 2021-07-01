@@ -1,20 +1,4 @@
 
-    <!--<div class="fixedtop recipes-home-body inner-page" *ngIf="plan">
-        <div class="row page-max-width" style="margin:0 auto;">
-            <div class="recipe-set">         
-                <h2>Your Today's Schedule - <span *ngIf="plan.name">{{setFLU(plan.name)}}</span></h2>
-            </div>
-            <div class="add2mealplan">
-              <a [ngClass]="showpopupflag?'menu active':'menu'"  (click)="showpopupflag = !showpopupflag" href="javascript:void(0)"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></a>
-              <div *ngIf='showpopupflag' class="add2mealplanmenu" style='height:120px'>
-                  <a (click)="showpopupflag = false; downloadplan() " href="javascript:void(0)">
-                      <i class="fa fa-file-pdf-o"></i> Export
-                  </a>
-                  <a (click)="showpopupflag = false; getIngredientsList();" href="javascript:void(0)">
-                      <i class="fa fa-download"></i>   Grocery List
-                  </a>
-              </div>      
-            </div>-->
             <div class="fixedtop recipes-home-body inner-page">
               <div class="container" style="margin:0 auto;padding-top:20px;padding-left:0px;padding-right:0px">
                   <div class="row">
@@ -49,24 +33,7 @@
          </div>
   <div *ngIf= "!errorMessage && plan && categories">
     <div class="row">
-      <!--<div class="col-12 col-lg-8 col-md-8">
-        <div class="left">
-          <p> <span innerHtml = "{{welcomeMessage}}"></span> </p>  
-        </div>
-      </div>
-      <div class="col-12  col-lg-4 col-md-4" style="text-align:right;">
-        <ul class="menu-options-sc" style="float:right;">
-  
-          <li class="menu-option" (click)="loadDefaults(); toggleMore();">Reload</li>
-      
-          <li class="menu-option" (click)="getIngredientsList(); toggleMore();">Grocery List</li>          
-           
-          <li *ngIf="plan && plan['days'] && plan['days']['length'] > 0 && plan['days'][0]['day_num'] == 6" class="menu-option" (click)=" toggleMore();">Set Plan Complete</li>    
-         
-
-        </ul>
-      </div>-->
-      
+    
         <div class="col-12 col-md-2 col-lg-2">
     <div style='width:100%;' *ngIf="categories.length > 0 && selCat">
       <ng-container  *ngFor="let itemday of categories; let i = index ">
@@ -133,7 +100,7 @@
               <a *ngIf="completeStatus[itemcat.name] == '1'" href="javascript:void(0)">Completed</a>
             </div>
           <p  (click)="gotopagedetails('recipedetails',itemcat)" style="display:block; margin-top:0px;color:#AAA;text-align:left">{{setFLU(itemcat.name)}} 
-            <!--<span style="float:right;margin-right:5px;"><b>Total Weight:</b> {{formatValue(itemcat.totalWeight)}} gms</span>-->
+        
         </p>
           <p  (click)="gotopagedetails('recipedetails',itemcat)" class="meal-title"  *ngIf="itemcat.label">  {{setFLU(itemcat.label)}}</p>
           <p class="plaintext" (click)="gotopagedetails('recipedetails',itemcat)" > Servings : <span *ngIf="itemcat.yield !== ''">{{itemcat.yield}}</span>

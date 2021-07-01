@@ -67,12 +67,19 @@ export class FooterComponent implements OnInit {
 
      var scrollTotal = document.documentElement.scrollTop;
 
+     var headersecd = document.getElementById("headersecd");
      if (scrollTotal > 100 ) {
        // Show button
        scrollToTopBtn.classList.add("showBtn");
+
+       if(headersecd !== null)
+       headersecd.classList.add('header-shadow');
+
      } else {
        // Hide button
        scrollToTopBtn.classList.remove("showBtn");
+       if(headersecd !== null)
+       headersecd.classList.remove('header-shadow');
      }
    }
 }

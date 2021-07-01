@@ -330,7 +330,10 @@ margin-right:10px;
   text-align:center;
   background: $orange;
   color:#FFF;
-  margin: 0 auto;
+  margin: 10px auto;
+  outline:0;
+  border:0;
+  max-width: 200px;
 }
 .recipeRes
 {
@@ -342,9 +345,9 @@ margin-right:10px;
   width:100%;
   padding:10px;
   background:transparent;
-  font-size: 20px;
-  line-height: 24px;
-  height: 50px;
+  font-size: 18px;
+  line-height: 22px;
+
   .left{
     width: 10%;
     float:left;

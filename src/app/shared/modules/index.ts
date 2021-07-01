@@ -6,5 +6,5 @@ export * from './popular/popular.module';
 export * from './sidebar/sidebar.module';
 export * from './listpanel/listpanel.module';
 export * from "./questions/questions.module";
-export * from "./comment/comment.module";
-export * from "./customize/customize.module";
+
+export * from "./add2plan/add2plan.module";

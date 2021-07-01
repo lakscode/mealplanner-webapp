@@ -3,12 +3,12 @@ import { CommonModule } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CommentComponent } from './comment.component';
+import { Add2planComponent } from './add2plan.component';
 
  import { Routes, RouterModule } from '@angular/router';
 @NgModule({
     imports: [CommonModule, NgbModule,  FormsModule, ReactiveFormsModule,  RouterModule.forRoot([])],
-    declarations: [CommentComponent],
-    exports: [CommentComponent]
+    declarations: [Add2planComponent],
+    exports: [Add2planComponent]
 })
-export class CommentModule { }
+export class Add2planModule { }

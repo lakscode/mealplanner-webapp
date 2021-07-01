@@ -6,7 +6,7 @@ import { HomeComponent } from './home.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {SliderpanelModule, QuestionsModule, ModalModule, CustomizeModule } from "../shared/modules"
+import {SliderpanelModule, QuestionsModule, ModalModule } from "../shared/modules"
 import { LazyLoadImageModule } from 'ng-lazyload-image'; 
 @NgModule({
   imports: [
@@ -18,8 +18,7 @@ import { LazyLoadImageModule } from 'ng-lazyload-image';
   SliderpanelModule,
   QuestionsModule,
   ModalModule,
-  LazyLoadImageModule,
-  CustomizeModule
+  LazyLoadImageModule
   ],
   declarations: [HomeComponent]
 })

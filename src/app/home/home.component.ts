@@ -37,6 +37,7 @@ startpage: any = "signup";
   	ngOnInit() {
 
 	
+		this.isMobile = this.helpService.isMobile();
 		this.sliderList2.push({"image":"assets/mtc1_s.jpg","image_small":"assets/mtc1_s.jpg",});
     this.sliderList2.push({"image":"assets/mtc2_s.jpg","image_small":"assets/mtc2_s.jpg",});
     this.sliderList2.push({"image":"assets/mtc3_s.jpg","image_small":"assets/mtc3_s.jpg",});
@@ -51,7 +52,7 @@ startpage: any = "signup";
 
 		this.loadSteps(); 
 		this.loadCommunities();
-		this.isMobile = this.helpService.isMobile();
+	
 
 		this.currentUser =this.helpService.getCurrentUser();
 		if(this.currentUser !== null)
@@ -139,14 +140,8 @@ startpage: any = "signup";
 				 {
 				   for(let l=0; l < arrLabel.length; l++)
 				   {
-					
-
-				
-						
-					 //   //console.log(img);
+	
 					  this.healthLabels.push({"label":arrLabel[l]["name"], "image":arrLabel[l]["image"]});
-					  
-					
 					
 				   }
 				 }

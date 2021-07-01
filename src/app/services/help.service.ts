@@ -13,17 +13,17 @@ import { constants } from '../jsonfiles/constants.js';
 
 import { ignorewordsArr } from '../jsonfiles/ignorewords.js';
 import * as CryptoJS from 'crypto-js';
-import { AES, enc } from "crypto-js";
 
 @Injectable({ providedIn: 'root' })
 export class HelpService {
 	adalConfig: any;
-	private interviwerEmailContent: any;
-	private interviweeEmailContent: any;	
+
 	constants: any;	
 	accesstoken = environment.accessToken;
 	emailContents: any;
 	secretCode : any = "MTC_2021"
+
+
 	constructor(private httpService: HttpClient, private router: Router, private route: ActivatedRoute, private dbService: DBService, private userService: UserService, private modalservice: ModalService) {
 
 	}
@@ -32,7 +32,7 @@ export class HelpService {
 	{
 		var isMobile = false;
 		var innerWidth = window.innerWidth;
-		//console.log("innerWidth " + innerWidth);
+
 		if(innerWidth > 640)
 		{
 			isMobile = false;
@@ -46,7 +46,7 @@ export class HelpService {
 	GenerateUniqueId(idlength) {
 		var result = '';
 		var characters= 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-	//	var characters = '1234567890';
+
 		var charactersLength = characters.length;
 		for (var i = 0; i < idlength; i++) {
 			if (i !== 0) {
@@ -103,9 +103,7 @@ export class HelpService {
 	{
 		return constants[str];
 	}
-	gotoPage(page) {
-		this.router.navigate(["investigation/" + page]);
-	}
+	
 	
 	CheckModuleEnabled(moduleName) {
 		var data = localStorage.getItem("menuitems");		
@@ -156,7 +154,7 @@ export class HelpService {
 		var tempDt = "";
 		tempDt = tempDt2.month + "-" + tempDt2.day + "-"  + tempDt2.year ;
 		var tempTm = "";
-		//tempTm = ('0' + tempTm2.hour).slice(-2) + ":" + ('0' + tempTm2.minute).slice(-2);
+
 		tempTm = ('0' + hours).slice(-2) + ":" + ('0' + tempTm2.minute).slice(-2) + " " +am_pm;
 		return tempDt + " " + tempTm;
 	}
@@ -168,14 +166,6 @@ export class HelpService {
 		}, 0));
 	}
 	
-
-
-	sortArraybyCreatedAt(a, b) {
-		return new Date(b.createdat).getTime() - new Date(a.createdat).getTime();
-	}
-	sortArraybyLastModified(a, b) {
-		return new Date(b.lastModified).getTime() - new Date(a.lastModified).getTime();
-	}
 	sortArraybyIndex(a, b) {
 		if ( a[0] < b[0] ){
 			return -1;
@@ -186,58 +176,12 @@ export class HelpService {
 		  return 0;
 	}
 
-	sortArraybyCompany(a, b) {
-		if ( a["company"] < b["company"] ){
-			return -1;
-		  }
-		  if ( a["company"] > b["company"] ){
-			return 1;
-		  }
-		  return 0;
-	}
-	sortArraybyLoc(a, b) {
-		if ( a["location"] < b["location"] ){
-			return -1;
-		  }
-		  if ( a["location"] > b["location"] ){
-			return 1;
-		  }
-		  return 0;
-	}
-	sortArraybyLocation(a, b) {
-		if ( a.location.toLowerCase() < b.location.toLowerCase() ){
-			return -1;
-		  }
-		  if ( a.location.toLowerCase() > b.location.toLowerCase() ){
-			return 1;
-		  }
-		  return 0;
-	}
 
-
-	sortArraybyFirstname(a, b) {
-		if ( a.firstname < b.firstname ){
-			return -1;
-		  }
-		  if ( a.firstname > b.firstname ){
-			return 1;
-		  }
-		  return 0;
-	}
 	capitalize(s){
 		if (typeof s !== 'string') return ''
 		return s.charAt(0).toUpperCase() + s.slice(1)
 	  }
 
-	sortArraybyFirstnameI(a, b) {
-		if ( a.firstname.toLowerCase() < b.firstname.toLowerCase() ){
-			return -1;
-		  }
-		  if ( a.firstname.toLowerCase() > b.firstname.toLowerCase() ){
-			return 1;
-		  }
-		  return 0;
-	}
 
 	setInputFirstToUppercase(str:string){
 		if (!str) return str;
@@ -247,8 +191,7 @@ export class HelpService {
 
 	setFirstLetterToUppercase(str:string){
 		if (!str) return str;
-  		//return str[0].toUpperCase() + str.substr(1).toLowerCase();
-		//return str.charAt(0).toUpperCase() + str.slice(1);
+  	
 		str = this.replaceSpecialCharacters(str);
 		var newString = str.replace(/(^\s*\w|[\.\!\?]\s+\w)/g,function(c){return c.toUpperCase()});
 		return newString;
@@ -256,8 +199,7 @@ export class HelpService {
 	  }
 	  setFirstLetterToLowecase(str:string){
 		if (!str) return str;
-  		//return str[0].toUpperCase() + str.substr(1).toLowerCase();
-		//return str.charAt(0).toUpperCase() + str.slice(1);
+  		
 		str = this.replaceSpecialCharacters(str);
 		var newString = str.replace(/(^\s*\w|[\.\!\?]\s+\w)/g,function(c){return c.toLowerCase()});
 		return newString;
@@ -313,20 +255,6 @@ export class HelpService {
 		return ignoreClassesList;		
 	}
 
-	LockUrl(data)
-	{
-		if(typeof(data["_id"]) !== "undefined")
-		{
-			return this.dbService.putData("lockurls/" + data["_id"], data).pipe(
-			map((res) => res)).pipe(share());
-		}
-		else
-		{
-			return this.dbService.postData("lockurls", data).pipe(
-				map((res) => res)).pipe(share());
-		}
-	}
-
 
 	public getBrowserName() {
 		if(typeof(window) !== "undefined" && typeof(window.navigator) !== "undefined")
@@ -354,46 +282,11 @@ export class HelpService {
 			return "unknown";
 		}
 	}
-	FindSimilarCases(text)
-	{
-		
-		//    //console.log(text);
-		   text = text.replace(/[&\/\\#, +()$~%.'":*?<>-_{}]/g, ' ');
-		   text = text.replace(/[0-9]/g, ' ');
-		   var textArr = text.split(" ");
-		//    //console.log(textArr);
-		   var ignorewords = ignorewordsArr;
-
-		   for(let i= 0; i < textArr["length"]; i++)
-		   {
-				if(ignorewords.indexOf(textArr[i]) > -1 || textArr[i]["length"] < 3)
-				{
-					textArr[i] = "";
-				}
-		   }
-		  
-		   var params = [];
-		   for(let i= 0; i < textArr["length"]; i++)
-		   {
-			   if(textArr[i] !== "")
-				params.push(textArr[i]);
-		   }
-
-  		//    //console.log(params);
-
-		   /*
-		   this.dbService.postData("investigations/similarcases", params).subscribe(invData => setTimeout(() => {  
-
-		   }));
-
-		   */
-
-		
-	}	
+	
 	isValidDate(d) {
 		if (Object.prototype.toString.call(d) === "[object Date]") {
-			// it is a date
-			if (isNaN(d.getTime())) {  // d.valueOf() could also work
+	
+			if (isNaN(d.getTime())) { 
 			  return false;
 			} else {
 			  return true;
@@ -403,28 +296,12 @@ export class HelpService {
 		  }
 	  }
 
-	CatchErrorModule(obj)
-	{
-		var params = {"company": obj.company, 
-		"caseid": obj.caseid,
-		"module": obj.module, 
-		"error": obj.error, 
-		"details":obj.details,
-		"createdbyname": obj.createdname,
-		"createdby":obj.userid,
-		"createdat": new Date()}
-
-
-		this.dbService.postData("logevents", params).subscribe(invData => setTimeout(() => {  
-
-		}));
-	}
 
 
 
 	formatImage(image, type)
 	{
-	//	//console.log(image);
+
 	  var retImage = image;
 	 
 	  if(image !== "" && typeof(type) !== "undefined" && type !== "")
@@ -457,8 +334,6 @@ export class HelpService {
 	  {
 		retImage = image;
 	  }
-  	
-	//  //console.log(retImage);
 
 	  return retImage;
 	}
@@ -468,12 +343,11 @@ export class HelpService {
 		var ret = 0;
 		if(typeof(dt) !== "undefined" && dt  !== null)
 				{
-					////console.log(dt);
-					////console.log(new Date())
+
 					var Difference_In_Time = new Date().getTime() - new Date(dt).getTime(); 
 	
 					var diff_days = Difference_In_Time / (1000 * 3600 * 24); 
-					////console.log(diff_days);
+	
 					if(diff_days > 0)
 					ret= diff_days;
 				}
@@ -491,12 +365,11 @@ export class HelpService {
 			
 				if(typeof(user["created_time"] ) !== "undefined" && user["created_time"]  !== null)
 				{
-					//console.log(user['created_time']);
-					//console.log(new Date())
+
 					var Difference_In_Time = new Date().getTime() - new Date(user['created_time']).getTime(); 
 	
 					var diff_days = Difference_In_Time / (1000 * 3600 * 24); 
-					//console.log(diff_days);
+
 					if(diff_days > 0)
 					res = true;
 				}
@@ -713,10 +586,10 @@ export class HelpService {
 	if(str !== "")
 	{
 		retVal = unescape(str);
-	//	retVal = retVal.replace("&#39;", "'");
+
 		
 	}
-	////console.log(retVal);
+
 	return retVal;
 }
 formatStringEncode(str)
@@ -725,14 +598,7 @@ formatStringEncode(str)
 	if(str !== "")
 	{
 		retVal = escape(str);
-/*
-		retVal = str.replace(/’/g, ' ');
-		retVal = retVal.replace(/“/g, ' ');
-		retVal = retVal.replace(/”/g, ' ');
-		retVal = retVal.replace(/‘/g, '&#39;');
-		retVal = retVal.replace(/’/g, '&#39;');
-		retVal = retVal.replace(/'/g, '&#39;');
-*/
+
 
 	}
 
@@ -741,9 +607,9 @@ formatStringEncode(str)
 
 SendEmailPasswordReset(email,data) {
     var paramstoken = { "email": email, "resetdatetime": new Date() };
-	//console.log(paramstoken);
+
     this.dbService.resettoken(paramstoken).subscribe(emailData1 => setTimeout(() => {   
-		//console.log(emailData1);   
+
       if (emailData1) {      
 		  if(typeof(emailData1['status_code']) !== "undefined" && emailData1['status_code'] !== "")
 		  {
@@ -759,15 +625,15 @@ SendEmailPasswordReset(email,data) {
 
 					if(data == null)
 					data = {};
-					// var apiUrl = window.location.origin;
+				
 					var resetLink = environment.appUrl + "/resetpassword;token=" + encodeURIComponent(temp) + ";email=" + email;
 					data['resetLink'] = resetLink;
 					data['email'] = email;
 					var IemailSubject = this.FormatEmailContent(data.emailSubject, data);
 					var IemailContent = this.FormatEmailContent(data.emailContent, data); 
 					let Emaildata: any = { "to": email,  "from": environment.fromname+environment.fromemail, "datetime": new Date(), "subject": IemailSubject, "content": IemailContent, "contenthtml": IemailContent };
-					 //console.log(Emaildata);
-					// send email     
+			
+				 
 					
 					this.dbService.postData("email", Emaildata).subscribe(emailData => setTimeout(() => {
 					if (emailData) {
@@ -834,17 +700,14 @@ SendEmailPasswordReset(email,data) {
 
 			if(data.verifycode)
 			formattedContent = formattedContent.replace(/<verifycode>/gi, data.verifycode);
-			
 
-			formattedContent = formattedContent.replace(/<location>/gi, data.location);
 			formattedContent = formattedContent.replace(/<role>/gi, data.role);
 			formattedContent = formattedContent.replace(/<url>/gi, data.appUrl);
 			formattedContent = formattedContent.replace(/<logiurl>/gi, data.loginUrl);
 			formattedContent = formattedContent.replace(/<workemail>/gi, data.workemail);
 	
 			formattedContent = formattedContent.replace(/<usertype>/gi, data.usertype);			
-			formattedContent = formattedContent.replace(/<companyname>/gi, environment.companyname);			
-				
+					
 			return formattedContent;			
 		}
 	
@@ -928,8 +791,7 @@ SendEmailPasswordReset(email,data) {
 		params["category"] =  category;
 		params["userid"] =  userid;
 		params["page"] = page;
-		//console.log("adding");
-		//console.log(params);
+	
 		var res =   this.dbService.getDataByTable("search_history", params).subscribe(recipeData => setTimeout(() => {
 			//console.log(recipeData);
 	
@@ -938,7 +800,6 @@ SendEmailPasswordReset(email,data) {
 	}
 
 	scrape_recipe() {
-	//console.log("scrape recipe");
 	
 		
 	  }
@@ -971,8 +832,7 @@ SendEmailPasswordReset(email,data) {
 	 
 	  getIpaddress(user)
 	  {
-		//console.log(user);
-
+	
 		fetch("https://api.ipify.org/?format=json"),function(response) {
             alert(response.ip);
         };

@@ -128,21 +128,34 @@
   text-decoration:none;
   border-radius:5px;
   margin-left:10px;
+  box-shadow: 0 1rem 1.5rem rgb(0 0 0 / 15%);
 }
 .getapp
 {
 background:$green;
 color:#FFF;
+
+}
+.getapp:hover
+{
+  box-shadow: 0 1rem 1.5rem rgb(0 0 0 / 35%);
 }
 .signin
 {
   border:1px solid $green;
   color:$text-gray;
+
+}
+
+.header-shadow
+{
+  box-shadow: 0 1rem 1.5rem rgb(0 0 0 / 15%);
 }
 .signin:hover
 {
 background-color: $green;
 color:#FFF;
+box-shadow: 0 1rem 1.5rem rgb(0 0 0 / 35%);
 }
 .dropbtn1 {
   border: 1px solid #78C04A;

@@ -10,15 +10,13 @@
             <div class="home-sec-intro">
                <span class="heading-small">Download for Free</span>
                   <h2>Specialized Meal Plans, Exercise & more for a healthier you...</h2>
-                  <!--<span class="desc">Get access to a diet that was planned by keeping your comfort in mind. Build a healthy, personalized meal plan with our easy-to-navigate platform. This one-stop destination offers comparable benefits for a price lower than what a Dietitian may cost you!</span>-->
                   <span class="desc">Build a healthy, personalized meal plan with our easy-to-navigate platform. </span>
                   <ul class="home-sec-list">
                       <li><span style="font-size:24px"> <i class="fa fa-clock-o" aria-hidden="true"></i></span><a href="javascript:void(0)">Save Planning Time</a></li>
                       <li><span style="font-size:24px">  <i class="fa fa-cutlery" aria-hidden="true"></i></span><a href="javascript:void(0)">Personalize Your Diet</a></li>
                       <li><span style="font-size:24px"> <i class="fa fa-list" aria-hidden="true"></i></span><a href="javascript:void(0)">Tailor Grocery List</a></li>
                   </ul>
-                <!--  <a class="buttonGreen video-button swipebox" href="javascript:void(0)">Watch our Video</a> -->
-                 <!--  <a class="buttonGreen" (click)="gotopage('pricing')" href="javascript:void(0)">Know more About Us</a> -->
+            
                  <div  class="storeImgDiv" >
                      <a href="javascript:void(0)" style="margin-right:8px">
                         <img [lazyLoad]="images['appstore']" alt="Download on the App Store" class="storeImg"></a>
@@ -27,7 +25,7 @@
                   </div>
               </div>
          </div>
-          <div class="image-side  wow zoomIn animated desktoponly hidden-xs" style=" justify-content: center;   align-items: center; visibility: visible; animation-name: zoomIn; transform: rotate(5deg);" >
+          <div *ngIf="!isMobile" class="image-side  wow zoomIn animated desktoponly hidden-xs" style=" justify-content: center;   align-items: center; visibility: visible; animation-name: zoomIn; transform: rotate(5deg);" >
             <div class="home-sec-image" style="border-width: 8px;     width: 300px;
             margin: 30px auto;
     border-style: solid;
@@ -40,8 +38,8 @@
              <ngb-carousel *ngIf="sliderList2" style="width:100%; min-height: 210px;display: none">
     <ng-template ngbSlide *ngFor="let item of sliderList2; let i=index">
       <div class="picsum-img-wrapper" style='text-align:center;'>
-        <img *ngIf="!isMobile" class="desktoponly" [src]="item.image" alt="{{item.title}}"  style="width:100%;min-height: 200px;">
-       <img *ngIf="isMobile" class="mobileonly" [src]="item.image_small" alt="{{item.title}}"  style="width:100%;min-height: 200px;">
+        <img *ngIf="!isMobile" class="desktoponly" [lazyLoad]="item.image" alt="{{item.title}}"  style="width:100%;min-height: 200px;">
+       <img *ngIf="isMobile" class="mobileonly" [lazyLoad]="item.image_small" alt="{{item.title}}"  style="width:100%;min-height: 200px;">
       </div>
          </ng-template>
 
@@ -57,40 +55,7 @@
       </div>
    </div>
    </section>
-<!--
-   <section class="home-sec" style="background:#fff;margin-bottom:0px">
-      <div class="container">
-         <div class="col-12">
-	        <div class="" style="padding-top:30px;">
-            <span class="heading-small-1">How to start?</span>
-                     <h2  class="heading-big-1" style="">Easy steps</h2>
-	           <div class="row secL" *ngFor="let step of stepsList; let i = index;">
-		            <div class="col-12 col-lg-6">
-			            <h1 class="text-lg-left mb-4 title">{{step.label}}</h1>
-			            <h3 class="subtitle">{{step.subtitle}}</h3>
-			            <p class="text-justify mb-5 description"  style=" direction: ltr;">{{step.description}}</p>
-			            <div *ngIf="i %2 ==0"  class="arrowimg" style="text-align:right;">
-			               <img alt="arrow image right" style=" height: 150px" src="assets/images/temp-images/arrow-right.svg" />
-			            </div>
-			            <div *ngIf="i %2 ==1" class="arrowimg" style="text-align:left">
-			               <img alt="arrow image left" style=" height: 150px" src="assets/images/temp-images/arrow-left.svg" />
-			            </div>
-		            </div>
-		            <div class="col-12 col-lg-6 wow zoomIn animated" style="text-align:center;">
-				         <img alt="background image" [lazyLoad]="step.image" style=" height: 250px; max-width:100%" class="rounded-bg specialty-image w-80">
-		             </div>
-	            </div>
-	            <div class="row">
-		            <div class="col-12" style="text-align:center;margin-top:20px;margin-bottom:20px;">
-			            <a href="javascript:void(0);" (click)="gotopage('signup')" class="getstarted">Get Started</a>
-		            </div>
-	            </div>
-            </div>
-         </div>
-      </div>
-   </section>
--->
-<section class="home-sec" style="background:#fff;margin-bottom:0px">
+<section class="home-sec bg-halfwhite" style="margin-bottom:0px">
    <div class="container">
       <div class="col-12">
         <div class="" style="padding-top:10px;">
@@ -110,7 +75,7 @@
             </div>
             <div class="row">
                <div class="col-12" style="text-align:center;margin-top:20px;margin-bottom:20px;">
-                  <a href="javascript:void(0);" (click)="gotopage(startpage)" class="getstarted">Get Started</a>
+                  <a href="javascript:void(0);" (click)="gotopage(startpage)" class="getstarted bxshadow">Get Started</a>
                </div>
             </div>
          </div>
@@ -118,7 +83,7 @@
    </div>
 </section>
 <!--<div class="scallop-up"></div>-->
-   <div class="site-section sitesection-bg">
+   <div class="site-section bg-white">
       <div class="container" >
          <div class="col-12" *ngIf="healthLabels.length > 1">
             <div class="" style="display:flex; align-items: center;min-height:450px;padding-top:30px"> 
@@ -126,7 +91,7 @@
                   <div class="col-md-4 col-lg-5 pl-5" style="padding-left:0px !important; margin-bottom: 20px;">
                      <h1 class="text-lg-left mb-4 title">Discover new recipes you’ll love!!!</h1>
                      <p class="text-justify mb-5 description">Subscribe to get recipes which offer balanced nutrition and to create customized  meal plan to your personal tastes...</p>
-                     <a (click)="gotopage(startpage)" href="javascript:void(0);" style="cursor:default; margin-bottom:20px;" class="leanmore">Learn More</a>
+                     <a (click)="gotopage(startpage)" href="javascript:void(0);" style="cursor:default; margin-bottom:20px;" class="leanmore bxshadow">Learn More</a>
 
                    <!--  <img class="animated wow flipInX" src="assets/images/landing-bg.png" style='width:100%' />-->
                   </div>
@@ -137,8 +102,7 @@
                         <div class="mb-5 col-6 col-lg-3 col-md-4"  *ngIf="h <8"> 
                            <div class=" px-sm-0">
                               <a (click)="gotopage(startpage)"
-                                 class="specialty"><img src="{{hLabel.image}}"
-                                 srcset="{{hLabel.image}}"
+                                 class="specialty"><img [lazyLoad]="hLabel.image"
                                  class="rounded-bg specialty-image w-100">
                               <div class="p-3 bg-white rounded-lg border specialty-label">{{hLabel.label}}</div>
                               </a>
@@ -153,57 +117,8 @@
       </div>
    </div>
 
-<!--
-   <div class="site-section">
-      <div class="container" >
-         <div class="col-12" *ngIf="healthLabels.length > 1">
-            <div class="" style="display:flex; align-items: center;min-height:450px;padding-top:30px"> 
-               <div class="row " >
-                
-
-                  <div class="col-md-8 col-lg-7">
-                     <img class="wow zoomIn animated" src="assets/images/home1.png" style="width:100%; max-width: 500px; margin:0 auto">
-                  </div>
-                  <div class="col-md-4 col-lg-5 pl-5" style="padding-left:0px !important; margin-bottom: 20px;">
-                     <h1 class="text-lg-left mb-4 title">Create custom meal plans which fits your taste</h1>
-                     <p class="text-justify mb-5 description">Just drag and drop recipes to create your meal plan...</p>
-                     <a (click)="gotopage(startpage)" href="javascript:void(0);" style="cursor:default; margin-bottom:20px;" class="leanmore">Learn More</a>
-
-                 </div>
-
-               </div>
-            </div>
-         </div>
-      </div>
-   </div>
--->
-
-   <!--<div class="scallop-down"></div>-->
-
-<!--
-   <div class="row subscribe-sec">
-      <div class="container">
-          <div class="col-12 text-center wow animated bounceInDown">
-              <div class="chefs-card-inner " style="margin-bottom:40px;margin-top:40px;padding: 20px 15px;">
-                  <h2>Are you ready to create customized meal plan? </h2>
-                  <div class="short-separator"></div>
-                  <p style="color:#FFF;">
-                     To add recipes to your weekly diet plan, use our meal planning tool. It's as easy as dragging and dropping the recipes.
-                   </p>
-                   <div class="row">
-                     <div class="col-12" style="text-align:center;margin-top:20px;margin-bottom:20px;">
-                        <a href="javascript:void(0);" style='background:#FFAF4F' (click)="gotopage(startpage)" class="getstarted">Get Started</a>
-                     </div>
-                  </div>
-
-                 
-              </div>
-          </div>
-      </div>
-    </div>
-   -->
 <!--hottest recipes-->
-<section class="hot-recipes-var2" style="margin-bottom:30px;padding-bottom:0px;" *ngIf="communitiesList && communitiesList.length > 0">
+<section class="hot-recipes-var2 bg-halfwhite" style="margin-bottom:30px;padding-bottom:0px;" *ngIf="communitiesList && communitiesList.length > 0">
    <div class="container">
        <div class="wrapper-hot-recipe-var2">
           <div class="hot-recipes-bordered">
@@ -214,32 +129,20 @@
                </div>
  
                <div class="row" style="padding-left:0px; padding-right:0px; margin-bottom:15px !important" >
-                  <!--<div class="col-12" *ngIf="collection.collection_name">
-                      <label for="recipes">Recipes</label>
-                  </div>-->
+             
                   <ng-container  *ngFor="let cItem of communitiesList; let i = index;">
                   <div (click)="gotopage(startpage)" style="padding-left:0px; padding-right:0px;margin-top:15px;margin-bottom:15px" class="col-12 col-lg-3 col-md-6">
                       <div class="recipe-item  animated wow flipInX" style="min-height:200px;background-size:cover;  background-position:center;  " [ngStyle]="{'background-image':'linear-gradient(
                           rgba(0, 0, 0, 0.3),
                           rgba(0, 0, 0, 0.3)
                         ),url(' + cItem.image + ')'}">
-                        <!--<p class="favactive" style='    text-align: right;
-                        position: absolute;
-                        bottom: -9px;
-                        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
-                        left: 12px;
-                        right: 12px;
-                        padding-right: 10px;
-                        border-bottom-left-radius: 15px;
-                        border-bottom-right-radius: 15px;'><span><i class="fa fa-cutlery"></i> {{cItem.recipecount}} recipes</span></p>-->
+                   
                       <div class='row toggleremove' style='color:#FFF;'>
 
                           <div class="col-12" style="padding-left:0px; padding-right:0px">
                               
                           <h1 class="recipe-label" style="font-size:20px; line-height: 32px;padding:10px;">{{cItem.collection_name}}</h1>
-                          <!--<p *ngIf="cItem.recipecount && cItem.recipecount >0" style="text-align:left;"><i class="fa fa-cutlery"></i> {{cItem.recipecount}} recipes</p>
-                          <br>
-                          <p *ngIf="cItem.userscount && cItem.userscount > 0" style="text-align:left;"><i class="fa fa-user"></i> {{cItem.userscount}} members</p>-->
+                       
                        
                           </div>
 
@@ -251,9 +154,9 @@
                      <span style='float:right;margin-right:20px' *ngIf="cItem.userscount && cItem.userscount > 0" ><i class="fa fa-user"></i> {{cItem.userscount}} Members </span>
                   </p>
          
-                  <!--<p *ngIf="cItem.userscount && cItem.userscount > 0" style="text-align:left;"></p> -->
+               
                   <p style="padding-left:15px; font-size:12px;margin-bottom:15px">Created by : <span *ngIf="cItem.firstname">{{cItem.firstname}} {{cItem.lastname}}</span><span *ngIf="!cItem.firstname">{{cItem.email}}</span>
-                    <!--  <span style="margin-left:10px" *ngIf="recipe.created_at"> {{formatDays(recipe.created_at)}} days ago </span> --> </p>
+                
                   </div>
                 
               </ng-container>
@@ -263,7 +166,7 @@
     </div>
  </section>
  <!--hottest recipes ends--> 
-<section class="home-sec"  style="background:#FFF;padding-bottom: 30px; margin-bottom:0px;padding-top:30px;display:none">
+<section class="home-sec bg-white"  style="padding-bottom: 30px; margin-bottom:0px;padding-top:30px;display:none">
    <div class="container col-12">
       <div class="home-sec-box">
          <div class="text-side">
@@ -284,72 +187,19 @@
             <div class="home-sec-image ">
                <img [lazyLoad]="images['mobilescreens']"  style="width:610px;height:425px" alt="mobile screen">
                </div>
-            <!--<div class="home-sec-image image-outer">
-               <img src="assets/mtc1_s.jpg" style="width:210px;height:425px" alt="image">
-           </div>&nbsp;&nbsp;&nbsp;
-               <div class="home-sec-image image-outer">               
-               <img src="assets/mtc2_s.jpg" style="width:210px;height:425px" alt="image">
-            </div>&nbsp;&nbsp;&nbsp;
-            <div class="home-sec-image image-outer">               
-               <img src="assets/mtc3_s.jpg" style="width:210px;height:425px" alt="image">
-            </div>-->
+         
          </div>
       </div>
       
    </div>
 
    </section>
-   <!--- Diet recipes -->
-<!--
- <section class="hot-recipes-var2" *ngIf="dietRecipes && dietRecipes.length > 0">
-   <div class="container">
-       <div class="wrapper-hot-recipe-var2">
-          <div class="hot-recipes-bordered">
-               <div class="heading-var1 text-center animated wow flipInX">
-                   <h2><a href="javascript:void(0)">Learn about new diet recipes that you'll enjoy</a></h2>
-                 <span class="heading-bell"></span>
-                 <p>Fitaholic's recipes collections make it easy to share and discover recipes that suit your eating habits, limits, needs, and more.</p>
-               </div>
-               <div class="row" style="padding-left:0px; padding-right:0px; margin-bottom:15px !important" >
-                   <ng-container  *ngFor="let dItem of dietRecipes; let i = index;">
-                     <div style="padding-left:0px; padding-right:0px;margin-top:15px;margin-bottom:15px" class="col-12 col-lg-3 col-md-4" >
-                     <div class="collection-item box-shadow">
-                        <div class="image image-animate detail">
-                            <a (click)="gotopage(startpage)">
-                                <img *ngIf="dItem.image !== ''" src="{{dItem.image}}"
-                                    alt="{{dItem.name}} image">
-                                <img  *ngIf="dItem.image == ''"  src="assets/notavailable.png" alt="{{dItem.name}} image">
-                            </a>
-
-                            <div class="detail">
-                                <a title="{{dItem.name}}" (click)="gotopage(startpage)"><h3 style="font-size:16px">{{dItem.name}}</h3></a>
-                                 
-                                 <div class="ccount">
-                               <span style="font-size:14px" *ngIf="dItem.count > 0"><i class="fa fa-cutlery"></i> {{dItem.count}} Recipes</span>
-                                </div>
-                              
-                              </div>
-
-                        </div>
-                        
-                    </div>
-                  </div>
-               
-              </ng-container>
-              </div>
-
-             
-          </div>
-       </div>
-    </div>
- </section>
--->
- <!--- Diet recipes -->
+ 
 
    <div class="row subscribe-sec">
       <div class="container">
           <div class="col-12 text-center wow animated bounceInDown">
-              <div class="chefs-card-inner " style="margin-bottom:40px;margin-top:40px;padding: 20px 15px;">
+              <div class="chefs-card-inner " style="margin-bottom:40px;margin-top:40px;padding: 20px 15px; ">
                   <h2> Subscribe to our newsletter</h2>
                   <div class="short-separator"></div>
                   <p style="color:#FFF;">
@@ -357,7 +207,7 @@
                    </p>
                    <div class="email-field subscribe">
                      <input class="inputtext" type="email" [(ngModel)] ="subscribe.email" name="email" placeholder="Enter your email address"/>
-                     <button (click)="subscribeEmail()"><i class="fa fa-paper-plane-o"></i></button>
+                     <button class="bxshadow" (click)="subscribeEmail()"><i class="fa fa-paper-plane-o"></i></button>
                  </div>
 
                  
@@ -366,45 +216,9 @@
       </div>
     </div>
 
-<!--hottest recipes-->
-<!--<section class="hot-recipes-var2">
-   <div class="container">
-       <div class="wrapper-hot-recipe-var2">
-          <div class="hot-recipes-bordered">
-               <div class="heading-var1 text-center animated wow flipInX">
-                   <h2><a href="javascript:void(0)">Recommended Recipes</a></h2>
-                 <span class="heading-bell"></span>
-               </div>
- 
-               <div class="hot-row">
-                   <div class="split-images-var2 col-size text-center" *ngFor="let rRecipe of recommendedRecipes; let r=index;">
-                      <div class="image-first inner-split">
-                         <div class="image image-animate common-split animated wow flipInY animation-delay{{r+1*100}}ms">
-                            <a style="cursor:pointer" (click)="gotoRecipeDetails('signup',rRecipe.id)"><img src="{{formatImage(rRecipe.image, 'm')}}" alt="image"/></a>
-                         </div>
-                         <div class="intro common-split animated wow flipInY animation-delay{{r+2*100}}ms">
-                            <div class="intro-inner ">
-                               <h3><a style="cursor:pointer" (click)="gotoRecipeDetails('signup',rRecipe.id)">{{rRecipe.label}}</a></h3>
-                               <div class="short-separator"></div>
-                               <p style="text-align:left;">Calories: {{rRecipe.calories}}</p>
-                               <br>
-                               <p *ngIf="rRecipe.dietLabels" style="text-align:left;">Diet Labels: {{formatLabels(rRecipe.dietLabels)}}</p>
-                               <br>
-                               <div class="short-separator"></div>
-                               <a class="read-more" (click)="gotoRecipeDetails('signup',rRecipe.id)">view more</a>
-                            </div>
-                         </div>
-                      </div>
-                   </div>
-                </div>
-          </div>
-       </div>
-    </div>
- </section>-->
- <!--hottest recipes ends-->
 <div class="chefs-banner">
   <div class="container">
-      <div class="chefs-card text-center wow animated bounceInDown">
+      <div class="chefs-card bxshadow text-center wow animated bounceInDown">
          <div class="chefs-card-inner">
             <h2>we love our users, <br/>join us now</h2>
             <div class="short-separator"></div>
@@ -412,88 +226,8 @@
             <p>
                Get a 15-day free trial of our app.<br/> Satisfied users choose from <br/>various affordable subscriptions. 
             </p>
-            <a class="read-more-bordered"  (click)="gotopage(startpage)">Join Now</a>
+            <a class="read-more-bordered bxshadow"  (click)="gotopage(startpage)">Join Now</a>
           </div>
       </div>
   </div>
 </div>
-    
-<!--
-<div class="row "><div class=" ">
-   <div class="col-12 container">
-      <div class="row">
-   <div class="col-12 col-lg-6 col-md-6">
-  
-       <div class="chefs-card text-center wow animated bounceInDown">
-          <div class="chefs-card-inner">
-             <h2>we love our users, <br/>join us now</h2>
-             <div class="short-separator"></div>
-             
-             <p>
-                Get a 15-day free trial of our app.<br/> Satisfied users choose from <br/>various affordable subscriptions. 
-             </p>
-             <a class="read-more-bordered"  (click)="gotopage(startpage)">Join Now</a>
-           </div>
-       </div>
-   </div>
-
-<div class="col-12 col-lg-6 col-md-6">
-   <img style="width:100%;margin-top: 120px;
-   margin-bottom: 120px;" src = "assets/images/home.png" />
-   </div>
-</div>
- </div>
-</div>
-</div>
--->
-<!--
-<div class="chefs-banner">
-   <div class="container">
-      
-       <div *ngIf= "!isMobile" class="chefs-card text-center wow animated bounceInDown" style="width:100%; max-width:100%;">
-           <div class="chefs-card-inner">
-               <h2>PERSONALIZE YOUR EXPERIENCE , <br/>join us now
-               <div class="short-separator"></div>
-               
-               <app-customize></app-customize>
-           </div>
-       </div>
-       <div *ngIf= "isMobile" class="chefs-card text-center wow animated bounceInDown" style="width:100%; max-width:100%;">
-         <div class="chefs-card-inner">
-             <h2>PERSONALIZE YOUR EXPERIENCE , <br/>join us now</h2>
-             <div class="short-separator"></div>
-             
-             <app-questions></app-questions>
-         </div>
-     </div>
-
-   </div>
- </div>
-</div>
--->
-<!--
-<div *ngIf='popupforquestions' id="popupforquestions" class="popupforquestions popupwidth">
-
-
-     <button type="button" class="close" 
-       (click)="popupforquestions=false;" style="font-size:40px;color:$text-gray;opacity:1">
-       <span aria-hidden="true">&times;</span>
-     </button>
- 
-   <div style="border-bottom:0px;min-height: 550px;">
-     <div class="row" >
-       <div class="col-12 col-lg-12 col-xl-12 infoModal" style='max-height:500px; border:0px;margin-top:0px; text-align:center'>
-         <div class="row">
-            <div class="col-12 col-lg-3 col-md-2">
-               
-            </div>
-            <div class="col-12 col-lg-9 col-md-10">
-               <app-questions></app-questions>
-            </div>
-         </div>
-       </div>
-     </div>
-   </div>
-
-</div>
--->
