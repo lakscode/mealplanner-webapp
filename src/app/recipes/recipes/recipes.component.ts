@@ -462,8 +462,6 @@ export class RecipesComponent implements OnInit {
 		}
 		params["instructions"] = "notempty";
 
-
-		// params["cuisineType"] = "american";
 		params["returnfields"] = " id, label, image, cuisineType, mealType, healthLabels, dietLabels, calories, yield, created_by";
 
 		var dietlabels = "";

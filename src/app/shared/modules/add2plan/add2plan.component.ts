@@ -30,7 +30,7 @@ export class Add2planComponent implements OnInit, OnDestroy {
    tempTm : any;
    elementId : any;
    date: any; 
-   
+   loadingData: boolean = false;
     constructor(private add2planService: Add2planService,private toastr: ToastrService, private el: ElementRef, private dbService: DBService, private helpService: HelpService, private router: Router, private route: ActivatedRoute) {
     this.element = el.nativeElement;
     //this.showhideTime = true;  
@@ -94,7 +94,7 @@ export class Add2planComponent implements OnInit, OnDestroy {
 	showAdd2MP: boolean = false;
   currentUser: any; 
 	loadPlanNames() {
-
+this.loadingData = true;
     this.currentUser = this.helpService.getCurrentUser();
 
 		if (this.currentUser && this.currentUser["id"]) {
@@ -112,6 +112,7 @@ export class Add2planComponent implements OnInit, OnDestroy {
 						var obj = invData["body"]["length"];
 						this.plansList = invData["body"];
 					}
+					this.loadingData = false;
 					this.loadOptions();
 
 				}));

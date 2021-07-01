@@ -1,7 +1,8 @@
 
 <p class="title" style="display:block"> Add Recipe to Meal Plan</p>
-<p style="display:block" *ngIf="!plansList || plansList.length == 0">You haven't
+<p style="display:block" *ngIf="!loadingData && (!plansList || plansList.length == 0)">You haven't
     created a meal plan yet.</p>
+    <p style="display:block" *ngIf="loadingData ">Loading... Please wait...</p>    
 <ng-container *ngIf="plansList.length > 0">
     <p *ngIf="plansList.length > 0" style="display:block;text-align:left">Choose
         Meal Plan</p>

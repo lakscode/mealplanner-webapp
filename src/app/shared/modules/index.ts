@@ -1,10 +1,6 @@
 
 export * from './modal/modal.module';
-export * from './tabspanel/tabspanel.module';
 export * from './sliderpanel/sliderpanel.module';
-export * from './popular/popular.module';
 export * from './sidebar/sidebar.module';
 export * from './listpanel/listpanel.module';
-export * from "./questions/questions.module";
-
 export * from "./add2plan/add2plan.module";

@@ -249,20 +249,45 @@ searchenter(event)
 }
 maxcalories:any = 0;
 recipesList1:Array<any>=[];
+splitcontent: boolean = false;
+loopCount: any = 0;
+loadingData: boolean = false;
 searchProps()
 {
 
 console.log('searchProps');
 
+if(!this.loadingData)
+{
 
+	this.loadingData= true;
 var params = {}
-if(this.searchparam.q)
+/*if(this.searchparam.q)
 {
 //params["content"] = this.searchparam.q;
 var words = this.searchparam.q.replace(" ", "~");
 params["words"] = words;
 this.helpService.saveSearchHistory(this.searchparam.q, "text", "recipebook", this.currentUser["id"]);
 }
+*/
+
+if (this.searchparam.q) {
+	console.log(" this.splitcontent " + this.splitcontent);
+	if (this.splitcontent) {
+		params["content"] = this.searchparam.q.split(" ").join(",");
+		console.log(params['content']);
+		this.helpService.saveSearchHistory(this.searchparam.q, "text", "collection", this.currentUser["id"]);
+		
+	}
+	else {
+		this.loopCount = 0;
+		var words = this.searchparam.q.replaceAll(" ", "~");
+		params["words"] = words;
+		this.helpService.saveSearchHistory(this.searchparam.q, "text", "collection", this.currentUser["id"]);
+	}
+
+}
+
 if(typeof(this.searchparam.range) !== "undefined")
 {
 if(typeof(this.searchparam.range.lower) !== "undefined")
@@ -387,7 +412,30 @@ if(mQuery !== "")
   console.log(params1);
 	var res =   this.dbService.getDatabyTablebyQuery("recipes", params1).subscribe(invData => setTimeout(() => {
 		console.log(invData);
-		this.formatResult(invData);
+		
+
+		if (invData["body"]["length"] == 0) {
+			console.log("calling again searchprops");
+			this.splitcontent = true;
+			if (this.loopCount < 1) {
+				this.loopCount++;
+				this.searchProps();
+
+			}
+			else
+			{
+				this.loadingData = false;
+				this.splitcontent = false;
+			}
+			
+		}
+		else {
+			this.loadingData = false;
+			this.splitcontent = false;
+			this.formatResult(invData);
+
+		}
+
 	}));
 	}
 	else
@@ -396,10 +444,37 @@ if(mQuery !== "")
 		params["limit"] = "20";
 	var res =   this.dbService.getDatabyFields("recipes", params).subscribe(invData => setTimeout(() => {
 		console.log(invData);
-		this.formatResult(invData);
+		if (invData["body"]["length"] == 0) {
+			console.log("calling again searchprops");
+			this.splitcontent = true;
+			if (this.loopCount < 1) {
+				this.loopCount++;
+				this.searchProps();
+
+			}
+			else
+			{
+				this.loadingData = false;
+				this.splitcontent = false;
+			}
+			
+		}
+		else {
+			this.loadingData = false;
+			this.splitcontent = false;
+			this.formatResult(invData);
+
+		}
 	}));
 	}
+}
+else
+{
+	setTimeout(() => {
+		this.searchProps();
+	}, 1000);
 	
+}
 }
 
 // id, collection_id , userid, created_at - collection_join

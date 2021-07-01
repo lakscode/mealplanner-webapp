@@ -162,28 +162,14 @@
                                         rgba(0, 0, 0, 0.3),
                                         rgba(0, 0, 0, 0.3)
                                       ), url(' + recipe.image + ')'}">
-                                        <!--
-
-                                            background-image: linear-gradient(
-            rgba(0, 0, 0, 0.5),
-            rgba(0, 0, 0, 0.5)
-          ),
-                                        -->
-                                        <!-- <div class="recipe-add" (click)="addRecipe(recipe)"><i class="fa fa-plus" aria-hidden="true"></i></div>
-
-                                        <div class="recipe-view" (click)="viewRecipe(recipe)"><i class="fa fa-eye" aria-hidden="true"></i></div>  -->
-                                        <div>
+                                          <div>
                                             <h1 class="recipe-label1" style='color:#FFF'>{{recipe.label.toLowerCase()}}</h1>                                  
                                             <p style="color:#fff"><b><em>Calories</em></b>: {{recipe.calories}} Kcal, <b><em>Servings</em></b>: {{recipe.yield}}</p>
-                                            <!--<p><b><em>Diet Labels</em></b>: {{recipe.dietLabels}} </p>-->
-
-                                          
+                                                        
                                         </div>  
                                          <div class="morebtn"><a class="menu" (click)="toggleMoreMenu(recipe, i, 'addlist')" href="javascript:void(0)"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></a>
                                             <div class="moremenu" *ngIf="recipe.expand">
-                                                <!-- <a href="javascript:void(0)" (click)="setFavourite(recipe)"><i class="fa fa-heart" aria-hidden="true"></i> Set Favourite</a> -->
-            
-                                                <a href="javascript:void(0)" (click)="addRecipe(recipe)"><i class="fa fa-plus" aria-hidden="true"></i> Add Recipe</a>
+                                                            <a href="javascript:void(0)" (click)="addRecipe(recipe)"><i class="fa fa-plus" aria-hidden="true"></i> Add Recipe</a>
                                                 <a href="javascript:void(0)" (click)="viewRecipe(recipe)"><i class="fa fa-list-ul" aria-hidden="true"></i> Details</a>
                                             </div>
                                             </div>                                     
@@ -207,18 +193,8 @@
                                 rgba(0, 0, 0, 0.3),
                                 rgba(0, 0, 0, 0.3)
                               ),url(' + recipe.image + ')'}">
-                                <!--<div style="position:absolute; width:calc(100% - 60px); height: 150px; background:#f1f2f3; opacity: 0.5"></div>-->
-                          
-                               
-                                <!--<div class="col-4">
-                                    <img style="width:100%" src="{{recipe.image}}" />
-                                </div>-->
-                               <!--  <div class="recipe-remove" (click)="removeRecipe(recipe)">Remove</div>
-                                <div class="recipe-remove" style="right:85px" (click)="viewRecipe(recipe)">Details</div> -->
-
                              
-                                <!--   <div style='position:absolute; bottom:10px; width:90%; left:25px'> -->
-                                    <div>
+                                     <div>
                                     <h1 class="recipe-label">{{recipe.label.toLowerCase()}}</h1>                                  
                                     <p style="color:#fff"><b>Calories</b>: {{recipe.calories}}<br> <b>Servings</b>: {{recipe.yield}}</p>
                                     <!--<p *ngIf="recipe.dietLabels" style="color:#fff">  <b>Diet Labels</b>: {{formatHiphen(recipe.dietLabels)}} </p>-->
@@ -238,7 +214,6 @@
 
                                 <div class="morebtn"><a class="menu" (click)="toggleMoreMenu(recipe, i, 'viewlist')" href="javascript:void(0)"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></a>
                                 <div class="moremenu" *ngIf="recipe.expand">
-                                    <!-- <a href="javascript:void(0)" (click)="setFavouriteRecipe(recipe)"><i class="fa fa-heart" aria-hidden="true"></i> Set Favourite</a> -->
                                     <a href="javascript:void(0)" *ngIf="recipe.UserFavStatus" (click)="removeFavourite(recipe.id)" style="color:orange"><i class="fa fa-heart" aria-hidden="true"></i> Remove Favourite </a>
                                      <a href="javascript:void(0)" *ngIf="!recipe.UserFavStatus" (click)="setFavourite(recipe.id)" ><i class="fa fa-heart" aria-hidden="true"></i> Set Favourite</a>
 

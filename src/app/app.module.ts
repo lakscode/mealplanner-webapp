@@ -39,7 +39,7 @@ import { MyRecipesModule } from './recipes/myrecipes/myrecipes.module';
 import { FavouritesModule } from './recipes/favourites/favourites.module'; 
 import { RecipedetailsModule } from './recipes/recipedetails/recipedetails.module'; 
 import { RecipesubmitModule } from './recipes/recipesubmit/recipesubmit.module'; 
-import { RecipesmodifyModule } from './recipes/recipesmodify/recipesmodify.module'; 
+
 import { SearchresultsModule } from './searchresults/searchresults.module'; 
 
 import { TestimonialsModule } from './testimonials/testimonials.module'; 
@@ -126,7 +126,6 @@ import { AdminModule } from './admin/admin.module';
 	LandingModule,
 	FeaturesModule,
 	RecipesModule,
-	RecipesmodifyModule,
 	MyRecipesModule,
 	FavouritesModule,
 	RecipedetailsModule,

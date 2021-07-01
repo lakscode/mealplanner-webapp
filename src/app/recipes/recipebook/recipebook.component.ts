@@ -176,13 +176,17 @@ loadRecipebook(id)
 }
 
 recipesList: Array<any> = [];
+splitcontent: boolean = false;
+loopCount: any = 0;
+loadingData: boolean = false;
 loadRecipes(idslist = "")
 {
 	console.log(idslist);
 	this.recipesList = [];
   var params = {};
-
-
+if(!this.loadingData)
+{
+	this.loadingData = true;
 
 	if(idslist !== "")
 	{
@@ -192,7 +196,26 @@ loadRecipes(idslist = "")
 
 	}
 	else if(this.searchparam.q !== "")
-	params["content"] = this.searchparam.q;
+	{
+	//	params["content"] = this.searchparam.q;
+		if (this.searchparam.q) {
+			console.log(" this.splitcontent " + this.splitcontent);
+			if (this.splitcontent) {
+				params["content"] = this.searchparam.q.split(" ").join(",");
+				console.log(params['content']);
+				this.helpService.saveSearchHistory(this.searchparam.q, "text", "recipes", this.currentUser["id"]);
+				
+			}
+			else {
+				this.loopCount = 0;
+				var words = this.searchparam.q.replaceAll(" ", "~");
+				params["words"] = words;
+				this.helpService.saveSearchHistory(this.searchparam.q, "text", "recipes", this.currentUser["id"]);
+			}
+
+		}
+
+	}
 
 	params["instructions"] = "notempty";
 	params["returnfields"] = " id, label, image, healthLabels, dietLabels, calories, yield, totalWeight, totalNutrients, digest ";
@@ -203,17 +226,37 @@ loadRecipes(idslist = "")
 	console.log(invData);
   if(invData !== null && typeof(invData["body"]) !== "undefined" && invData["body"] !== null && invData["body"]["length"] > 0)
 	{
+		this.loadingData = false;
 		this.recipesList = [];
 
-		this.recipesList = invData["body"];
-	//	console.log(this.recipesList);
+	
+		if (invData["body"]["length"] == 0) {
+			console.log("calling again searchprops");
+			this.splitcontent = true;
+			if (this.loopCount < 1) {
+				this.loopCount++;
+				this.loadRecipes(idslist);
+
+			}
+		}
+		else {
+			this.loadingData = false;
+			this.splitcontent = false;
+			this.recipesList = invData["body"];
+		}
 	
 	}
 	 
   }
 
  ));
-
+}
+else
+{
+	setTimeout(() => {
+		this.loadRecipes(idslist);
+	}, 1000);
+}
 }
 
 maxcalories:any = 0;
