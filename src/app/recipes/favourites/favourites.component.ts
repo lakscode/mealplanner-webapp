@@ -1,16 +1,13 @@
 import { Component, OnInit,OnDestroy  } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd } from "@angular/router";
 import { UserService } from '../../services/user.service';
-import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {  FormBuilder } from '@angular/forms';
 import { DBService } from '../../dbservices/db.service';
 import { HelpService } from '../../services/help.service';
 
-import { environment } from './../../../environments/environment';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 import * as $ from 'jquery';
 import { constants } from '../../jsonfiles/constants';
-//declare var $: any;
 
 @Component({
 	selector: 'app-favourites',
@@ -51,7 +48,6 @@ export class FavouritesComponent implements OnInit {
 	}
 	ngOnInit() {
 		this.searchmorebar = false;
-	//	this.dietLabelsList = constants.dietLabels;
 		this.dietLabelsList= [];
 		this.loadingData =  false;
 		for(let d=0; d < constants.dietLabels.length; d++)
@@ -59,38 +55,16 @@ export class FavouritesComponent implements OnInit {
 			this.dietLabelsList.push({"name":constants.dietLabels[d], "selected":false})
 		}
 
-		//this.healthlabelsList = constants.healthLabels;
 		this.healthlabelsList= [];
 		for(let h=0; h < constants.healthLabels.length; h++)
 		{
 			this.healthlabelsList.push({"name":constants.healthLabels[h], "selected":false})
 		}
-
-		//this.mineralsLabelsList = constants.minerals;
 		this.mineralsLabelsList= [];
 		for(let m=0; m <constants.minerals.length; m++)
 		{
 			this.mineralsLabelsList.push({"name":constants.minerals[m], "selected":false})
 		}
-
-
-		this.listorgrid = {"menu":"grid", "panel":"listing-grid"}
-	 $('.listing-buttons span').on("click",function(){
-        $('.listing-buttons span').removeClass("current");
-        if( $(this).hasClass("grid")){
-            $(this).addClass("current");
-            if($(".recipe-listing").hasClass("listing-list")){
-                $(".recipe-listing").removeClass("listing-list").addClass("listing-grid");
-            }
-
-        }
-        if( $(this).hasClass("list")){
-            $(this).addClass("current");
-            $(".recipe-listing").removeClass("listing-grid").addClass("listing-list");
-
-        }
-    });
-
 
 		this.router.events.subscribe((evt) => {
             if (!(evt instanceof NavigationEnd)) {
@@ -129,10 +103,9 @@ export class FavouritesComponent implements OnInit {
 	 
 	  params["query"] = "select id, label, image, healthLabels, dietLabels, calories, created_by  from recipes  where id in (select recipeid from favourites where userid ='" + this.currentUser["id"] + "')";
 	
-	  console.log(JSON.stringify(params));
 	 var res =   this.dbService.getDatabyQuery("recipes", params).subscribe(invData => setTimeout(() => {
   
-	  console.log(invData);
+
 		this.ratingIds = "";
 	  if(invData !== null && typeof(invData["body"]) !== "undefined" && invData["body"] !== null && invData["body"]["length"] > 0)
 		{
@@ -295,7 +268,7 @@ export class FavouritesComponent implements OnInit {
 	}
 
 	formatImage(recipe, type) {
-		//  console.log(image);
+		
 		var retImage = recipe.image;
 		if(recipe.created_by == -1)
 		{
@@ -351,14 +324,6 @@ removeFav(){
 		}
 	}
 }
-
-	setListorGrid(opt)
-	{
-		//		this.listorgrid = {"menu":"", "panel":"listing-grid"}
-		console.log(this.listorgrid);
-		this.listorgrid["menu"] = opt;
-		this.listorgrid["panel"] = "listing-" + opt;
-	}
 
 	searchPanelDisplay(){
 	 var searchId = document.getElementById('searchPanel');

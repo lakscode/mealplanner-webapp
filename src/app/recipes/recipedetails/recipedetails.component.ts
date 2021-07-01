@@ -160,7 +160,7 @@ loadRecipe(id)
 		{
 				
 			  this.searchRes =temp[0];
-
+console.log(this.searchRes);
 			  var tempDigest = this.searchRes["digest"];
 			  
 			  if(typeof(this.searchRes["digest"]) !== "undefined" && this.searchRes["digest"] !== "")

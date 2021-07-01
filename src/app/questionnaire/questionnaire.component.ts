@@ -22,6 +22,7 @@ export class  QuestionnaireComponent implements OnInit {
 	params: any;
 	routeParams: any;
 	uniqueid: any;
+	ipaddress: any; 
 	returnparam1: any;
 	questions: any;
 	returnpath: any;
@@ -77,21 +78,48 @@ export class  QuestionnaireComponent implements OnInit {
   loadQuestionnaire()
   {
 	var params= {};
-	if(this.currentUser !== null && typeof(this.currentUser["id"]) !=="undefined")
-	{
-		params["userid"] = this.currentUser["id"];
-  	}  
-	var res =   this.dbService.getDataByTable("questionnaire", params).subscribe(invData => setTimeout(() => {
-       console.log(invData);
-	   if(invData["body"] && invData["body"]["length"] > 0)
-	   {
-		this.questionnaire  = [];
-		this.questionnaire.push(invData["body"][0]);
-		this.params["id"] = invData["body"][0]["id"];
-		this.loadData();
+ 
 
-	   }
-	}));
+	  this.uniqueid =  localStorage.getItem("uniqueid");
+	  this.ipaddress =  localStorage.getItem("ipaddress");
+	  var where = "";
+	  if(typeof(this.uniqueid) !== "undefined" && this.uniqueid !== null && this.uniqueid !== "")
+	  {
+		where += " user_uniqueid = '" + this.uniqueid + "' ";
+	  }
+
+	  if(typeof(this.ipaddress) !== "undefined" && this.ipaddress !== null && this.ipaddress !== "")
+	  {
+		  	if(where !== "")
+				where += " OR user_ipaddress = '" + this.ipaddress + "' ";	
+			else
+				where = " user_ipaddress = '" + this.ipaddress + "' ";
+	  }
+
+	  if(typeof(this.currentUser) !== "undefined" && this.currentUser !== null && typeof(this.currentUser["id"]) !=="undefined")
+	  {
+		  	if(where !== "")
+				where += " OR userid = '" + this.currentUser["id"] + "' ";	
+			else
+				where = " userid = '" +this.currentUser["id"] + "' ";
+	  }
+	  if(where !== "")
+	  {
+	  params["query"] = "select * from questionnaire where" + where;
+
+		var res =   this.dbService.getDatabyTablebyQuery("questionnaire", params).subscribe(invData => setTimeout(() => {
+		console.log(invData);
+		if(invData["body"] && invData["body"]["length"] > 0)
+		{
+			this.questionnaire  = [];
+			this.questionnaire.push(invData["body"][0]);
+			this.params["id"] = invData["body"][0]["id"];
+			this.loadData();
+
+		}
+		}));
+		}
+		
 
   }
 
@@ -116,6 +144,9 @@ export class  QuestionnaireComponent implements OnInit {
 
 			if(this.questions[o]["type"] == "checkbox")
 			{
+				console.log(this.questionnaire[0]["question"+(o+1)]);
+				console.log(this.questions[o]['answers'][p]["text"]);
+
 				if(this.questionnaire[0]["question"+(o+1)].indexOf(this.questions[o]['answers'][p]["text"]) !== -1 )
 				{
 					this.questions[o]['answers'][p]["selected"]  = true;
@@ -134,8 +165,6 @@ export class  QuestionnaireComponent implements OnInit {
     
 	delete this.params["tablename"];
 
-    var uniqueid =  localStorage.getItem("uniqueid");
-
     var paramsr = {};
 	if(typeof(this.params["id"]) !== "undefined" &&this.params["id"] !== null && this.params["id"] !== "")
     {
@@ -150,16 +179,16 @@ export class  QuestionnaireComponent implements OnInit {
 		}
 	}
 
-    this.uniqueid = uniqueid;
-    if(this.params["user_uniqueid"] == "" || (typeof(uniqueid) !== "undefined" && uniqueid !== null && uniqueid !== ""))
+
+    if(this.params["user_uniqueid"] == "" || (typeof(this.uniqueid) !== "undefined" && this.uniqueid !== null && this.uniqueid !== ""))
     {
-      paramsr["user_uniqueid"] = uniqueid;
+      paramsr["user_uniqueid"] = this.uniqueid;
     }
     else
     {
-      var uniqueid = this.helpService.GenerateUniqueId(20);
-      paramsr["user_uniqueid"] = uniqueid;
-      localStorage.setItem("uniqueid",uniqueid);
+		this.uniqueid = this.helpService.GenerateUniqueId(20);
+      paramsr["user_uniqueid"] = this.uniqueid;
+      localStorage.setItem("uniqueid",this.uniqueid);
     }
 
     var ipaddress =  localStorage.getItem("ipaddress");
@@ -167,19 +196,25 @@ export class  QuestionnaireComponent implements OnInit {
     {
       paramsr["user_ipaddress"] = ipaddress;
     }
-    if(this.params["userid"] == "" && this.currentUser !== null && typeof(this.currentUser["id"]) !=="undefined")
+    if((this.params["userid"] == "" || this.params["userid"] == "0") && this.currentUser !== null && typeof(this.currentUser["id"]) !=="undefined")
 		{
       paramsr["userid"] = this.currentUser["id"];
     }
-    if(typeof(this.currentUser["id"]) !== "undefined" || this.currentUser["id"] !== "" || (typeof(uniqueid) !== "undefined" && uniqueid !== null && uniqueid !== "") || (typeof(ipaddress) !== "undefined" && ipaddress !== null && ipaddress !== ""))
+
+	if(this.currentUser !== null && this.currentUser["id"] !== "")
+	paramsr["userid"] = this.currentUser["id"];
+
+    if((typeof(this.uniqueid) !== "undefined" && this.uniqueid !== null && this.uniqueid !== "") || (typeof(ipaddress) !== "undefined" && ipaddress !== null && ipaddress !== ""))
     {
-    
-	
+		console.log(paramsr);
+		delete paramsr["tablename"];
 		if(typeof(paramsr["id"] ) !== "undefined" && paramsr["id"] !== "")
 		{
 			console.log("updaitn gquesitons");
 			try
 			{
+			
+
 				var res =   this.dbService.updateDataByTable("questionnaire", paramsr).subscribe(invData => setTimeout(() => {
 					this.processing = false;
 			
@@ -199,7 +234,18 @@ export class  QuestionnaireComponent implements OnInit {
 			}
 			catch(error)
 			{
-				
+				localStorage.setItem("q_complete","true");
+				localStorage.setItem("questions", JSON.stringify(paramsr));
+		
+				if( this.currentUser["id"] !== "")
+				{
+					this.router.navigate(["landing"]);
+				}
+				else
+				{
+					this.router.navigate(["pricing"]);
+				}
+	
 			}
 		}
 		else
@@ -211,7 +257,7 @@ export class  QuestionnaireComponent implements OnInit {
 				localStorage.setItem("q_complete","true");
 				localStorage.setItem("questions", JSON.stringify(paramsr));
 
-				if( this.currentUser["id"] !== "")
+				if( this.currentUser !== null && this.currentUser["id"] !== "")
 				{
 					this.router.navigate(["landing"]);
 				}
@@ -275,9 +321,17 @@ export class  QuestionnaireComponent implements OnInit {
    if(type == "checkbox")
    {
    		answer["selected"] = !answer["selected"];
-    	
-		if(this.questions[cq]["answer"].indexOf(answer['text']) == -1)
+    	if(typeof(this.questions[cq]["answer"]) == "undefined" || this.questions[cq]["answer"] == null)
+		{
+			this.questions[cq]["answer"] = answer['text'];
+  
+			this.params["question" + (cq+1)] = this.questions[cq]["answer"];
+		}
+		 else if(this.questions[cq]["answer"] && this.questions[cq]["answer"].indexOf(answer['text']) == -1)
 			{
+				console.log(answer);
+				console.log(this.questions[cq]);
+
 				if(this.questions[cq]["answer"] !== "")
 			  this.questions[cq]["answer"] = this.questions[cq]["answer"] + "," + answer['text'];
 			  else
@@ -285,6 +339,7 @@ export class  QuestionnaireComponent implements OnInit {
   
 			  this.params["question" + (cq+1)] = this.questions[cq]["answer"];
 			}
+			console.log(this.params["question" + (cq+1)]);
 
    }
    

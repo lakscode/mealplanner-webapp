@@ -94,11 +94,14 @@
 
                 </div>
               </div>
+
+              <div class="submit-recipe-form" style="width:100%; margin:0 auto;text-align:center;background:transparent;">
+                <button [disabled]="answerCount == questions.length -1" class="recipe-submit-btn"
+                  (click)="complete()">Submit Questionnaire</button>
+              </div>
+              
             </div>
-            <div class="submit-recipe-form" style="width:100%; margin:0 auto;text-align:center;background:transparent;">
-              <button [disabled]="answerCount == questions.length -1" class="recipe-submit-btn"
-                (click)="complete()">Submit Questionnaire</button>
-            </div>
+            
 
             <div *ngIf="processing">
              <h3>Processing</h3>
