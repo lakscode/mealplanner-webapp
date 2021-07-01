@@ -292,6 +292,7 @@ this.loadColorCodes();
 	recipesloading: boolean = false;
 	loadRecipes(idslist = "", allFlag = true)
 	{
+		console.log("in Loadrecipes");
 		if(this.recipesloading == false)
 		{
 	  this.recipesloading = true;
@@ -314,11 +315,11 @@ this.loadColorCodes();
 		}
 		else if(typeof(this.searchparam["q"]) !== "undefined" && this.searchparam["q"] !== null && this.searchparam["q"] !== "")
 	  {
-		params["content"] = this.searchparam["q"];
-		this.helpService.saveSearchHistory(this.searchparam["q"], "content", "plan", this.currentUser["id"]);
+		//params["content"] = this.searchparam["q"];
+	//	this.helpService.saveSearchHistory(this.searchparam["q"], "content", "plan", this.currentUser["id"]);
 
-		console.log(" this.splitcontent " + this.splitcontent);
-	   if(this.splitcontent)
+	//	console.log(" this.splitcontent " + this.splitcontent);
+	/*   if(this.splitcontent)
 	   {
 		params["content"] = this.searchparam.q.split(" ").join(",");
 		console.log(params['content']);
@@ -331,12 +332,27 @@ this.loadColorCodes();
 		params["content"] = this.searchparam.q;
 		this.helpService.saveSearchHistory(this.searchparam.q, "text", "recipes", this.currentUser["id"]);
 	   }
+*/
+	   if (this.splitcontent) {
+		params["content"] = this.searchparam.q.split(" ").join(",");
+		console.log(params['content']);
+		this.helpService.saveSearchHistory(this.searchparam.q, "text", "plancreate", this.currentUser["id"]);
 
+	}
+	else {
+		this.loopCount = 0;
+		var words = this.searchparam.q.replaceAll(" ", "~");
+		params["words"] = words;
+		this.helpService.saveSearchHistory(this.searchparam.q, "text", "plancreate", this.currentUser["id"]);
+
+	}
+	console.log(this.searchparam);
+console.log(params);
 	  }
   
 	 
 
-	//  params["instructions"] = "notempty";
+	  params["instructions"] = "notempty";
 	console.log(this.filtersParams);
 	 params["returnfields"] = " id, label, image, cuisineType, mealType, healthLabels,ingredients,  dietLabels, totalNutrients, digest,calories, yield ";
 	 if(typeof(this.filtersParams.dietlabels) !== "undefined" && this.filtersParams.dietlabels  !== "")
@@ -365,7 +381,7 @@ this.loadColorCodes();
 	 {
 	  params["calories"] = this.filtersParams.calories;
 	 }  
-	  
+	
 	  
 	  console.log(JSON.stringify(params));
 	  this.calculateCaloryFlag = false;

@@ -649,6 +649,7 @@ export class RecipesComponent implements OnInit {
 			{
 				params["cuisineType"] = "american"
 			}
+			console.log(params);
 			var res = this.dbService.getDatabyFields("recipes", params).subscribe(invData => setTimeout(() => {
 				console.log(invData);
 				if (invData["body"]["length"] == 0) {
