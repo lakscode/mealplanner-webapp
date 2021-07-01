@@ -1771,8 +1771,8 @@ limitTo(str, num)
 		console.log("in searchFilters");
 		var dietlabels = "";
 	
-		if(typeof(this.searchparam.calories) !== "undefined" && this.searchparam.calories !== ""){
-		 this.filtersParams["calories"] = this.searchparam.calories;
+		if(typeof(this.maxcalories) !== "undefined" && this.maxcalories !== ""){
+		 this.filtersParams["calories"] = this.maxcalories;
 		}
 		for(let m=0; m <this.dietLabelsList.length; m++)
 		{
