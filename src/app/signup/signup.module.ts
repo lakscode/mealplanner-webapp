@@ -6,13 +6,13 @@ import { SignupRoutingModule } from './signup-routing.module';
 
 import { SignupComponent } from './signup.component';
 
-import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
+//import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     SignupRoutingModule,
-    SocialLoginModule
+   // SocialLoginModule
   ],
   declarations: [SignupComponent]
 })

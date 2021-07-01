@@ -104,11 +104,7 @@ import { AdminModule } from './admin/admin.module';
 	RouterModule.forRoot([]),
     AppRoutingModule,
 	FlexLayoutModule,
-	LayoutModule,
-    LoginModule,
-	SignupModule,
-    BenefitsModule,
-	LandingModule,
+
 	ToastrModule.forRoot({
 		timeOut:5000,
 		positionClass: 'toast-top-full-width',
@@ -118,13 +114,19 @@ import { AdminModule } from './admin/admin.module';
 
 //	AngularFontAwesomeModule,
 	HttpClientModule,
-	NgbModule.forRoot(),	
+	NgbModule.forRoot(),
+	LazyLoadImageModule,
+	SocialLoginModule,	
 	//HighchartsChartModule,
 	HomeModule,
+	LayoutModule,
+    LoginModule,
+	SignupModule,
+    BenefitsModule,
+	LandingModule,
 	FeaturesModule,
 	RecipesModule,
 	RecipesmodifyModule,
-//	ApproveModule,
 	MyRecipesModule,
 	FavouritesModule,
 	RecipedetailsModule,
@@ -144,15 +146,13 @@ import { AdminModule } from './admin/admin.module';
 	AutherizeModule,
 	PasslostModule, 
 	ResetpassModule,
-	//HighchartsChartModule,
 	QuestionnaireModule,
 	ProgressModule,
 	RecipebooksModule,
 	RecipebookModule,
 	RecipebookviewModule,
 	FaqsModule,
-	LazyLoadImageModule,
-	SocialLoginModule,
+
 	CollectionsModule,
 	CollectionModule,
 
@@ -161,7 +161,7 @@ import { AdminModule } from './admin/admin.module';
 	CalculateModule,
 	AdminModule,
 	PreferencesModule,
-	SearchresultsModule
+	SearchresultsModule 
   ],
   schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
   providers: [{

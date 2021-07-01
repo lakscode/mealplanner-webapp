@@ -19,7 +19,7 @@ testimonialsList: Array<any> = [];
 
 
   constructor(private router: Router, private route: ActivatedRoute, private config: NgbCarouselConfig) {
-	 
+	 console.log("feature consturctor");
 	}
 
   	ngOnInit() {
