@@ -6,12 +6,7 @@ import { DBService } from '../dbservices/db.service';
 import { UserService, User } from './user.service';
 import { ModalService } from '../shared/modules/modal/modal.service';
 import { environment } from '../../environments/environment';
-import { map } from 'rxjs/operators';
-import { share } from 'rxjs/operators';
 import { constants } from '../jsonfiles/constants.js';
-
-
-import { ignorewordsArr } from '../jsonfiles/ignorewords.js';
 import * as CryptoJS from 'crypto-js';
 
 @Injectable({ providedIn: 'root' })
@@ -225,32 +220,23 @@ export class HelpService {
 	  }
 	getDateIgnoreClassList()
 	{
-		var ignoreClassesList = ["ngb-tp-input",
-				"chevron ngb-tp-chevron bottom",
-				"chevron ngb-tp-chevron",
-				"btn-light ng-star-inserted bg-primary text-white",
-				"btn-light text-muted outside ng-star-inserted",
-				"btn-light ng-star-inserted",
-				"ngb-dp-day",
-				"ngb-dp-weekday",
-				"ngb-dp-weekday small ng-star-inserted",
-				"ngb-dp-navigation-chevron",
-				"ngb-dp-arrow", 
-				"ngb-dp-arrow-btn",
-				"ngb-dp-header bg-light",
-				"ng-star-inserted",
-				"popup-datetime",
-				"custom-select",
-				"ngb-tp-meridian",
-				"btn btn-outline-primary",
-				"btn btn-link ng-star-inserted",
-				"ngb-dp-week",
-				"calclose",
-				"ngb-tp",
-				"ngb-tp-meridian",
-				"ngb-tp-input-container",
-				"ngb-tp-input-container ngb-tp-minute",
-				"ngb-tp-input-container ngb-tp-hour"];
+		var ignoreClassesList = ["filterlabel",
+		"listSection",
+		"filter-group",
+		"multi-select",
+		"multi-select-lbl",
+		"container",
+		"checkmark",
+		"ng-untouched",
+		"ng-pristine",
+		"ng-valid",
+		"add2mealplanmenu",
+		"contextmenu-icon",
+		"bgcontext",
+		"menu",
+		"contextmenu",
+		"fa fa-ellipsis-v"
+				];
 
 		return ignoreClassesList;		
 	}

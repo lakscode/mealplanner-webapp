@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd } from "@angular/router";
 import { UserService } from '../../services/user.service';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -51,7 +51,39 @@ export class RecipesComponent implements OnInit {
 	sortType: any = "";
 	showFilters: boolean = false;
 	isUser: any = {};
+	@HostListener('document:click', ['$event'])
+  	clickout(args) {
+		this.callhideFunct(args);
+  }
+
 	constructor(private router: Router, private toastr: ToastrService, private route: ActivatedRoute, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder, private modalService: ModalService) {
+
+	}
+
+	callhideFunct(args)
+	{
+		var classlist = this.helpService.getDateIgnoreClassList();
+console.log(args);
+			var matchFlag = 0;
+			for (let ip = 0; ip < classlist.length; ip++) {
+				if (args.srcElement.className.indexOf(classlist[ip]) !== -1) {
+					matchFlag = 1;
+				}
+			}
+			if (matchFlag == 0) {
+				for (let l = 0; l < this.searchFilterLabels.length; l++) {
+						this.searchFilterLabels[l]['selected'] = false;
+				}
+
+				for (let j = 0; j < this.recipesList1.length; j++) {
+					this.recipesList1[j]['showpopup'] = false;
+					this.recipesList1[j]['showAdd2MP'] = false;
+				//	this.recipesList1[j]['showAdd2C'] = false;
+				}
+
+				
+
+			}
 
 	}
 	toggleMore() {
@@ -105,24 +137,7 @@ export class RecipesComponent implements OnInit {
 
 		this.loadDDList();
 		this.loadNutrientsMaxMin();
-		this.listorgrid = { "menu": "grid", "panel": "listing-grid" }
-		$('.listing-buttons span').on("click", function () {
-			$('.listing-buttons span').removeClass("current");
-			if ($(this).hasClass("grid")) {
-				$(this).addClass("current");
-				if ($(".recipe-listing").hasClass("listing-list")) {
-					$(".recipe-listing").removeClass("listing-list").addClass("listing-grid");
-				}
-
-			}
-			if ($(this).hasClass("list")) {
-				$(this).addClass("current");
-				$(".recipe-listing").removeClass("listing-grid").addClass("listing-list");
-
-			}
-		});
-
-
+	
 		this.router.events.subscribe((evt) => {
 			if (!(evt instanceof NavigationEnd)) {
 				return;
@@ -226,100 +241,6 @@ export class RecipesComponent implements OnInit {
 		}
 	}
 
-	/*
-	
-		loadRecipes()
-		{
-		  this.recipesList1 = [];
-		  this.recipesList2 = [];
-		// this.recipes = recipesList;
-		 var params = {"limit": "100"};
-	   //  params["caloriesfrom"] = this.searchparam.range.lower;
-		// params["caloriesto"] = this.searchparam.range.upper;
-		 console.log(this.searchparam);
-		
-		  if(typeof(this.routeParams["dietLabels"]) !== "undefined" && this.routeParams["dietLabels"] !== null && this.routeParams["dietLabels"] !== "")
-		  {
-			params["content"] = this.routeParams["dietLabels"];
-			this.helpService.saveSearchHistory(params["content"], "text", "recipes", this.currentUser["id"]);
-		  }
-	  
-		  params["instructions"] = "notempty";
-	
-		 // params["cuisineType"] = "american";
-		  params["returnfields"] = " id, label, image, healthLabels,  dietLabels, calories ";
-		  console.log(JSON.stringify(params));
-		 var res =   this.dbService.getDatabyFields("recipes", params).subscribe(invData => setTimeout(() => {
-	  
-		  console.log(invData);
-	  
-		  if(invData !== null && typeof(invData["body"]) !== "undefined" && invData["body"] !== null && invData["body"]["length"] > 0)
-			{
-			  this.recipesList1 = [];
-	
-			  for(let i=0; i < invData["body"]["length"] ; i++)
-			  {
-				this.recipesList1.push(invData["body"][i]);
-				this.ratingIds += invData["body"][i]["id"] + ",";
-			  }
-			  this.totalPage = this.recipesList1["length"] / this.page_length;
-			  this.counter(this.totalPage);
-			  console.log(this.recipesList1);
-			 
-			  this.getDisplayList();
-			  this.loadRatings();
-			}
-		  }
-		
-		 ));
-	  
-		}
-		*/
-	counter(i: number) {
-		//	console.log(i);
-		var num = Math.ceil(i);
-		return new Array(num);
-	}
-	prevPage() {
-		if (this.page_num > 0) {
-			this.page_num -= 1;
-		}
-		this.getDisplayList();
-	}
-	nextPage() {
-
-		if (this.page_num >= 0 && this.page_num < this.totalPage - 1) {
-			this.page_num += 1;
-		}
-		this.getDisplayList();
-	}
-	currentPage(pagenum) {
-		//	console.log(pagenum);
-		this.page_num = parseInt(pagenum);
-		this.getDisplayList();
-	}
-
-	getDisplayList() {
-		//	console.log(this.recipesList1);
-		//	console.log(this.page_num);
-		this.displayList = [];
-		var startIndex = this.page_num * this.page_length;
-		var endIndex = this.page_length;
-
-		if (startIndex + endIndex > this.recipesList1["length"]) {
-			endIndex = this.recipesList1["length"] - startIndex;
-		}
-
-		//	console.log(startIndex);
-		//	console.log(endIndex);
-		endIndex = startIndex + endIndex;
-		for (let i = startIndex; i < endIndex; i++) {
-			this.displayList.push(this.recipesList1[i]);
-
-		}
-		//	console.log(this.displayList);
-		window.scrollTo(0, 0);
-	}
 
 	loadRatings() {
 		if (typeof (this.ratingIds) !== "undefined" && this.ratingIds !== "") {
@@ -330,7 +251,7 @@ export class RecipesComponent implements OnInit {
 
 		params["query"] = "SELECT count(rating) as totalcount, sum(rating) as totalrating, recipeid FROM `rating` where recipeid in (" + this.ratingIds + ") group by recipeid";
 		var res = this.dbService.getDatabyTablebyQuery("rating", params).subscribe(invData => setTimeout(() => {
-			//	console.log(invData);
+	;
 			if (invData !== null) {
 				if (typeof (invData["body"]) !== "undefined" && invData["body"] !== null && invData["body"]["length"] > 0) {
 					var temp = invData["body"];
@@ -338,9 +259,9 @@ export class RecipesComponent implements OnInit {
 						this.ratingsArr = [];
 						for (let i = 0; i < temp["length"]; i++) {
 							this.ratingsArr.push(temp[i])
-							//  console.log(temp[i]);
+					
 							var recIndex = this.recipesList1.findIndex(x1 => (x1.id === temp[i]["recipeid"]));
-							//  console.log(recIndex);
+				
 							if (recIndex > -1) {
 								this.recipesList1[recIndex]["totalcount"] = temp[i]["totalcount"];
 								this.recipesList1[recIndex]["totalrating"] = temp[i]["totalrating"];
@@ -354,7 +275,7 @@ export class RecipesComponent implements OnInit {
 
 
 						}
-						//	console.log(this.ratingsArr);
+
 
 					}
 				}
@@ -394,12 +315,6 @@ export class RecipesComponent implements OnInit {
 		return retImage;
 	}
 
-	setListorGrid(opt) {
-		//		this.listorgrid = {"menu":"", "panel":"listing-grid"}
-		console.log(this.listorgrid);
-		this.listorgrid["menu"] = opt;
-		this.listorgrid["panel"] = "listing-" + opt;
-	}
 
 	searchPanelDisplay() {
 		var searchId = document.getElementById('searchPanel');
@@ -699,15 +614,12 @@ export class RecipesComponent implements OnInit {
 					}
 					this.totalPage = this.recipesList1["length"] / this.page_length;
 
-					if (this.recipesList1["length"] > (this.totalPage * this.page_length))
-						this.totalPage = this.totalPage + 1;
-
-					this.counter(this.totalPage);
+					
 				}
 				console.log("totalPage " + this.totalPage);
 			}
 
-			this.getDisplayList();
+	
 			this.loadRatings();
 
 		} else {
@@ -837,11 +749,11 @@ export class RecipesComponent implements OnInit {
 	}
 	showhidecontent(recipe) {
 		recipe.showpopup = !recipe.showpopup
-		for (let r = 0; r < this.displayList.length; r++) {
-			if (recipe.id !== this.displayList[r]["id"]) {
-				this.displayList[r]["showpopup"] = false;
+		for (let r = 0; r < this.recipesList1.length; r++) {
+			if (recipe.id !== this.recipesList1[r]["id"]) {
+				this.recipesList1[r]["showpopup"] = false;
 
-				this.displayList[r]["showAdd2MP"] = false;
+				this.recipesList1[r]["showAdd2MP"] = false;
 			}
 		}
 
@@ -858,7 +770,7 @@ export class RecipesComponent implements OnInit {
 		//this.loadPlanNames();
 		this.selectedRecipe2Add2plan = recipe;
 		recipe.showAdd2MP = !recipe.showAdd2MP;
-
+		this.showhidecontent(recipe);
 	}
 
 	/**************************** Make copy of recipe  */
@@ -1173,19 +1085,19 @@ export class RecipesComponent implements OnInit {
 
 			this.recipesList1 = this.recipesList1.sort(this.sortArraybyLabelAsc);
 			console.log(this.recipesList1);
-			this.getDisplayList();
+			
 		}
 
 		if (opt == "desc") {
 			console.log("sort descending");
 
 			this.recipesList1 = this.recipesList1.sort(this.sortArraybyLabelDesc);
-			this.getDisplayList();
+			
 		}
 
 		if (opt == "calories") {
 			this.recipesList1 = this.recipesList1.sort(this.sortArraybyLabelCalories);
-			this.getDisplayList();
+			
 		}
 
 	}

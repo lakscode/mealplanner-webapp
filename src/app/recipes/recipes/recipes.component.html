@@ -351,32 +351,7 @@
                                             (click)="recipe1.showAdd2MP = false;"><i class="fa fa-close"
                                                 aria-hidden="true"></i> </a>
                                                 <app-add2plan (returnData)= "recipe1.showAdd2MP = false;" [planid]="selectedRecipe2Add2plan.id"></app-add2plan>
-                                        <!--<p class="title" style="display:block"> Add Recipe to Meal Plan</p>
-                                        <p style="display:block" *ngIf="!plansList || plansList.length == 0">You haven't
-                                            created a meal plan yet.</p>
-                                        <ng-container *ngIf="plansList.length > 0">
-                                            <p *ngIf="plansList.length > 0" style="display:block;text-align:left">Choose
-                                                Meal Plan</p>
-                                            <select name="planid" [(ngModel)]="plan.id">
-                                                <option value="{{plan.id}}"
-                                                    *ngFor='let plan of plansList; let i = index'>
-                                                    {{plan.name}}</option>
-                                            </select>
-                                            <p style="display:block;text-align:left">Choose Day</p>
-                                            <select name="planday" [(ngModel)]="plan.day">
-                                                <option value="{{day.id}}" *ngFor='let day of daysList; let i = index'>
-                                                    {{day.name}}</option>
-                                            </select>
-                                            <p style="display:block;text-align:left">Choose Meal Type</p>
-                                            <select name="planmealtype" [(ngModel)]="plan.mealType">
-                                                <option value="{{mealtype.code}}"
-                                                    *ngFor='let mealtype of mealTypesList; let i = index'>
-                                                    {{mealtype.name}}
-                                                </option>
-                                            </select>
-                                            <a class="btn" href="javascript:void(0)" (click)="add2Plan()"> Add to
-                                                Plan</a>
-                                        </ng-container>-->
+                                        
                                     </div>
                                     <div *ngIf='recipe1.showAdd2C'
                                         [ngClass]="i == 0? 'add2mealplanmenu left130':'add2mealplanmenu leftunset'"

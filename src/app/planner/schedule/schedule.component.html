@@ -96,8 +96,8 @@
         <div class="col-12" [ngClass]="i%2 == 0?'colv plan-seperator-left' : 'colv plan-seperator-right'" >
           <div class="panel-box" style="text-align:left;">
             <div [ngClass]="completeStatus[itemcat.name] == '1'?'nutriitemright green':'nutriitemright '">
-              <a *ngIf="completeStatus[itemcat.name] !== '1'" href="javascript:void(0)" (click)="setComplete(itemcat)">Set Complete</a>
-              <a *ngIf="completeStatus[itemcat.name] == '1'" href="javascript:void(0)">Completed</a>
+              <a *ngIf="completeStatus[itemcat.name] !== '1'" href="javascript:void(0)" (click)="setComplete(itemcat, '1')">Set Complete</a>
+              <a *ngIf="completeStatus[itemcat.name] == '1'" href="javascript:void(0)" (click)="setComplete(itemcat, '0')">Completed</a>
             </div>
           <p  (click)="gotopagedetails('recipedetails',itemcat)" style="display:block; margin-top:0px;color:#AAA;text-align:left">{{setFLU(itemcat.name)}} 
         

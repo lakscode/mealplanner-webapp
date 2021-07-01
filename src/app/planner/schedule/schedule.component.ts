@@ -1008,7 +1008,7 @@ export class ScheduleComponent implements OnInit {
 	 // this.gotopage('grocerylist', { "returnpath":"planadd", "returnparam1": this.plan["mealplanid"]})
 	}
   
-	setComplete(item)
+	setComplete(item, status)
 	{
 	  var currentUser = this.helpService.getCurrentUser();
 	  console.log(currentUser);
@@ -1021,7 +1021,7 @@ export class ScheduleComponent implements OnInit {
 	  params["dayid"] =this.plan["days"][0]["id"];
 	  if(typeof(item["name"]) !== "undefined" && item["name"] !== "")
 	  {
-		params[item["name"]] = "1";
+		params[item["name"]] = status;
 	  }
   
   /*
@@ -1051,7 +1051,7 @@ export class ScheduleComponent implements OnInit {
 	  }));
 	}
 	}
-  
+	
 	getCompleteStatus()
 	{
 	  var currentUser = this.helpService.getCurrentUser();

@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } 
 import { DBService } from '../dbservices/db.service';
 import { HelpService } from '../services/help.service';
 
-import { data} from "../jsonfiles/questionnaire"
+import { data } from "../../assets/data/questionnaire";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 
