@@ -281,7 +281,7 @@
                
                 <div *ngIf="loadingData && !noResult">Loading data...</div>
                 <div *ngIf="!loadingData">
-                    <h2 style="width:100%;font-weight: 900">Recipes {{recipesList1.length}}
+                    <h2 style="width:100%;font-weight: 900">Recipes ({{recipesList1.length}})
                         <div style="float:right;text-align:right; background:#FFF;"> <a href="javascript:void(0)" style="font-size:12px;" (click)="gotopage('recipes')">
                            View More
                         </a>
@@ -485,8 +485,8 @@
 
 
                 <div style='height:40px; width:100%'></div>
-                <div *ngIf="!loadingData">
-                    <h2 style="font-weight: 900">Collections</h2>
+                <div *ngIf="!loadingData && communitiesList.length >0">
+                    <h2 style="font-weight: 900">Collections </h2>
                 </div>
 
                 <div class="recipe-set" *ngIf="!noResult">
