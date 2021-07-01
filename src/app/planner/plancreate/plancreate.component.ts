@@ -75,6 +75,7 @@ export class PlancreateComponent implements OnInit {
 	searchmorebar: boolean = false;
 	animClass: any = "";
 	splitcontent : boolean = false;
+	message: any ="";
 
 
 	constructor(private router: Router, private toastr: ToastrService,  private route: ActivatedRoute, private modalService: ModalService, private pdfService: PDFService, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
@@ -285,6 +286,7 @@ this.loadColorCodes();
 	this.filtersOpt = false;
 	this.filtersParams = [];
 	this.loadRecipes();
+	this.searchparam.q="";
 
 	}
 	noResult: boolean = false;
@@ -416,6 +418,7 @@ console.log(params);
 	 
 			}
 			} else {
+			this.message = "No Recipes found. Please refine your search filters and try again..";
 			this.recipesList = [];
 			}
 				
@@ -2196,6 +2199,9 @@ loadCustomRecipes()
 			this.recipesList = [];
 			   this.formatResult(invData);
 		   
+	   } else {
+	   this.message = "No Custom recipes found...";
+	   	this.recipesList = [];
 	   }
 	}));
 }
@@ -2218,6 +2224,9 @@ loadFavourites()
 			this.recipesList = [];
 			   this.formatResult(invData);
 		   
+	   } else {
+	 		this.recipesList = [];
+	 		this.message = "No Favourite recipes found...";
 	   }
 	}));
 }

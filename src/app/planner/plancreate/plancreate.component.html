@@ -275,7 +275,7 @@
                     <div class="recipes-horizontal divoverflowh">
 
                         <div *ngIf="!recipesloading && recipesList.length == 0" style="background:#f8f8f8;padding:5px">
-                            No Recipes found. Please refine your search filters and try again.
+                            {{message}}
                         </div>
                         <div class="listing-search"  *ngFor="let recipe1 of recipesList; let i = index;">
                             <div class="details">
