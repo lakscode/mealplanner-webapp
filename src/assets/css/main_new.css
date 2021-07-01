@@ -880,8 +880,8 @@ ul {
   height: 1px;
   background: #e7e3e1;
   position: absolute;
-  top: 50%;
-  margin-top: 3px;
+  top: 20%;
+  //margin-top: 3px;
 }
 .all-chefs .wrapper-head-chef {
   position: relative;
