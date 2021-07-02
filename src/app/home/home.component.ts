@@ -7,6 +7,7 @@ import { constants } from '../../assets/data/constants';
 import { ModalService } from '../shared/modules/modal/modal.service';
 import { DBService } from '../dbservices/db.service';
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
+import { environment } from "../../environments/environment";
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -24,13 +25,14 @@ isMobile: boolean = false;
 images: any;
 sliderList2: Array<any> = [];
 startpage: any = "signup";
+playstoreUrl: any = "";
   constructor(config: NgbCarouselConfig, private router: Router, private dbService: DBService,  private modalService: ModalService,  private helpService: HelpService) {
 	this.labels={"companyName":this.helpService.getConstants("companyName")};
 
 	config.interval = 3000;
 	config.showNavigationArrows = false;
 	 config.showNavigationIndicators = false;
-
+	this.playstoreUrl= environment.playstoreUrl;
 
 	}
 

@@ -6,7 +6,7 @@ import { HelpService } from '../services/help.service';
 import { HttpClient } from '@angular/common/http';
 import { DomSanitizer } from '@angular/platform-browser';
 import { constants } from '../../assets/data/constants';
-
+import { environment } from "../../environments/environment";
 @Component({
 	selector: 'app-landing',
 	templateUrl: './landing.component.html',
@@ -22,16 +22,21 @@ export class LandingComponent implements OnInit {
 	showNutrientsFlag: boolean = false;
 	role: any = {"isTrialExpired":false, "isPremium":false, "isProfessional":false};
 	greetings: any = "";
-
+	playstoreUrl: any = "";
 	isUser: any = {};
+	images: any;
 constructor(private router: Router, private httpClient : HttpClient, private sanitizer: DomSanitizer , public dbService: DBService, public helpService: HelpService) {
 	this.RecipeoftheDay = [];
 	}
 
 	ngOnInit() {
-	
+		this.images = {};
+		this.images["appstore"]  = "assets/app-store.png"; 
+		this.images["playstore"]  = "assets/play-store.png";
+		this.images["mobilescreens"] ="assets/mtc_s.jpg";
+		this.images['goodfood']  = "assets/images/temp-images/good-food.jpg";
 		this.currentUser =this.helpService.getCurrentUser();
-		
+		this.playstoreUrl= environment.playstoreUrl;
 		if(this.currentUser !== null)
 		{
 		  if( this.currentUser["firstname"] !== "")
