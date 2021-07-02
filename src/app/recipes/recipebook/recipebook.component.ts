@@ -979,7 +979,8 @@ var res =   this.dbService.getDatabyTablebyQuery("favourites", params).subscribe
 	var res =   this.dbService.postDataByTable("favourites", params1).subscribe(invData => setTimeout(() => {
 		if(invData !== null)
 		{
-			alert("favourite has been set");
+			//alert("favourite has been set");
+			this.toastr.success('Recipe has been set as Favourite', 'Recipe Book!')
 			//this.getFavouriteStatus();
 			var fIndex = this.recipesList.findIndex(x=>(x["id"] === id));
 			if(fIndex > -1)
