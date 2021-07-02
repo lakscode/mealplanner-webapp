@@ -2182,6 +2182,10 @@ resultSearch(event)
 			{
 				data["body"] = event;
 				this.formatResult(data);
+				this.noResult = false;
+			}
+			else{
+				this.noResult = true;
 			}
 		}
 	}
