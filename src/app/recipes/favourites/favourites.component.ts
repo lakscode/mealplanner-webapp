@@ -347,6 +347,15 @@ removeFav(){
 	gotoRecipeDetails(id){
 	this.router.navigate(['recipedetails', id]);
 	}
+
+
+	selectedRecipe2Add2plan: any;
+	addtoMealPlan(recipe) {
+		//this.loadPlanNames();
+		this.selectedRecipe2Add2plan = recipe;
+		recipe.showAdd2MP = !recipe.showAdd2MP;
+		this.showhidecontent(recipe);
+	}
 }
 
 	

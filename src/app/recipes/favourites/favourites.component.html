@@ -20,12 +20,28 @@
 
                         <div class="col-12 col-lg-4 col-md-4" *ngFor="let recipe1 of recipesList1; let i = index;">
                             <div class="collection-item">
-                            <div class="image image-animate" >
+                            <div class="image" >
                                 <div style="position:absolute; left:unset;top:10px;right:10px;z-index:1">
                                     <a (click)="showhidecontent(recipe1)" href="javascript:void(0)" [ngClass]="recipe1.showpopup?'contextmenu-icon active bgcontext':'contextmenu-icon bgcontext'" style="text-align:center;"><i class="fa fa-ellipsis-v"></i></a>
                                         <div *ngIf="recipe1.showpopup" class="contextmenu" style="left:unset;top:25px; right:0px;"><a  class="menu" href="javascript:void(0)"  (click)="gotoRecipeDetails(recipe1.id)" ><i class="fa fa-list"></i>View Recipe</a>
                                            <a class="menu" (click)="removeFavourite(recipe1.id)" href="javascript:void(0)"><i class="fa fa-heart"></i>Remove Favourite</a>
+                                            <a class="menu" href="javascript:void(0)"
+                                            (click)=" addtoMealPlan(recipe1)"><i
+                                                class="fa fa-calendar-plus-o" aria-hidden="true"></i> Add to Meal
+                                            Plan</a>
                                         </div>
+
+                                        
+                                    <div *ngIf='recipe1.showAdd2MP'
+                                        [ngClass]="i == 0? 'add2mealplanmenu left130':'add2mealplanmenu leftunset'"
+                                        style="top:0px;background-color: #f8f8f8 ">
+                                        <a style="float:right;font-size:24px;padding-top: 0px;
+                                        padding-right: 0px;" href="javascript:void(0)"
+                                            (click)="recipe1.showAdd2MP = false;"><i class="fa fa-close"
+                                                aria-hidden="true"></i> </a>
+                                                <app-add2plan (returnData)= "recipe1.showAdd2MP = false;" [planid]="selectedRecipe2Add2plan.id"></app-add2plan>
+                                        
+                                    </div>
                                         </div>
                              
                                  <a (click)="gotoRecipeDetails(recipe1.id)">

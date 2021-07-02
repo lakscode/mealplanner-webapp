@@ -30,8 +30,8 @@ a {
 }
 
 a:hover {
-    color: #ff642b;
-        //text-decoration: underline;
+    //color: #ff642b;
+        text-decoration: none;
 
         }
 
@@ -500,6 +500,7 @@ padding-right:11px;
   text-shadow: 0px -1px 0px rgb(0 0 0 / 40%);
   box-shadow: inset 0 0 0 1px rgb(0 0 0 / 25%);
 }
+
 .header-more-search-btn{
   width: 100%;
   margin: 0 auto;
