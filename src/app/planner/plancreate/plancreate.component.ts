@@ -1,7 +1,7 @@
-import { Component, OnInit,OnDestroy  } from '@angular/core';
+import { Component, OnInit  } from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
 import { UserService } from '../../services/user.service';
-import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {  FormBuilder } from '@angular/forms';
 import { DBService } from '../../dbservices/db.service';
 import { HelpService } from '../../services/help.service';
 import { PDFService } from '../../services/pdf.service';
@@ -12,8 +12,7 @@ import { Subject } from 'rxjs';
 import { environment} from "../../../environments/environment";
 import { ToastrService } from 'ngx-toastr';
 import { ModalService } from './../../shared/modules/modal/modal.service';
-import { type } from 'jquery';
-import { throws } from 'assert';
+
 @Component({
 	selector: 'app-plancreate',
 	templateUrl: './plancreate.component.html',
@@ -100,6 +99,7 @@ export class PlancreateComponent implements OnInit {
 			 this.pageCount= 5;
 			 this.filtersOpt = false;
 			 this.showNutrients= false;
+			 this.recipesloading = false;
 	 this.page_num = 1;
 this.loadedPlan = false;
 
@@ -188,7 +188,7 @@ this.addRecipeImage = "assets/images/add-recipe.png"
 		 
 	   });  
 
-
+this.recipesloading = false;
 this.loadRecipes("", true)
 this.loadWeekDays();
 this.loadColorCodes();
@@ -295,46 +295,25 @@ this.loadColorCodes();
 	loadRecipes(idslist = "", allFlag = true)
 	{
 		console.log("in Loadrecipes");
+		console.log(this.recipesloading);
 		if(this.recipesloading == false)
 		{
 	  this.recipesloading = true;
+	  console.log(this.recipesloading);
 		this.ratingIds = "";
 	// this.recipes = recipesList;
-	  var params = {"limit": "30"}; //{"limit": "10"};
-   //  params["caloriesfrom"] = this.searchparam.range.lower;
-	// params["caloriesto"] = this.searchparam.range.upper;
+	  var params = {"limit": "30"};
 	 console.log(this.searchparam);
 
-	 if(idslist == "")
-	 {
-//params["limit"] =  "10";
-
-	 }
+	 var paramsAdded = false;
 		if(idslist !== "")
 		{
 		params["idslist"] = idslist;
-
+			paramsAdded = true;
 		}
 		else if(typeof(this.searchparam["q"]) !== "undefined" && this.searchparam["q"] !== null && this.searchparam["q"] !== "")
 	  {
-		//params["content"] = this.searchparam["q"];
-	//	this.helpService.saveSearchHistory(this.searchparam["q"], "content", "plan", this.currentUser["id"]);
-
-	//	console.log(" this.splitcontent " + this.splitcontent);
-	/*   if(this.splitcontent)
-	   {
-		params["content"] = this.searchparam.q.split(" ").join(",");
-		console.log(params['content']);
-		this.helpService.saveSearchHistory(this.searchparam.q, "text", "recipes", this.currentUser["id"]);
-
-	   }
-	   else
-	   {
-	   this.loopCount = 0;
-		params["content"] = this.searchparam.q;
-		this.helpService.saveSearchHistory(this.searchparam.q, "text", "recipes", this.currentUser["id"]);
-	   }
-*/
+		paramsAdded = true;
 	   if (this.splitcontent) {
 		params["content"] = this.searchparam.q.split(" ").join(",");
 		console.log(params['content']);
@@ -360,35 +339,44 @@ console.log(params);
 	 if(typeof(this.filtersParams.dietlabels) !== "undefined" && this.filtersParams.dietlabels  !== "")
 	 {
 	  params["dietLabels"] = this.filtersParams.dietlabels;
+	  paramsAdded = true;
 	 } 
   
 	 if(typeof(this.filtersParams.healthlabels ) !== "undefined" && this.filtersParams.healthlabels !== "")
 	 {
 	  params["healthLabels"] = this.filtersParams.healthlabels;
+	  paramsAdded = true;
 	 } 
 	 if(typeof(this.filtersParams.mealtypes ) !== "undefined" && this.filtersParams.mealtypes !== "")
 	 {
 	  params["mealType"] = this.filtersParams.mealtypes;
+	  paramsAdded = true;
 	 } 
 	 if(typeof(this.filtersParams.cuisinetypes ) !== "undefined" && this.filtersParams.cuisinetypes !== "")
 	 {
 	  params["cuisineType"] = this.filtersParams.cuisinetypes;
+	  paramsAdded = true;
 	 } 
 	 if(typeof(this.filtersParams.mineralsquery ) !== "undefined" && this.filtersParams.mineralsquery !== "")
 	 {
 	  params["nutrients"] = this.filtersParams.mineralsquery;
+	  paramsAdded = true;
 	 }
 
 	 if(typeof(this.filtersParams.calories ) !== "undefined" && this.filtersParams.calories !== "")
 	 {
 	  params["calories"] = this.filtersParams.calories;
+	  paramsAdded = true;
 	 }  
 	
 	  
 	  console.log(JSON.stringify(params));
 	  this.calculateCaloryFlag = false;
 
-	
+	  if(!paramsAdded)
+	  {
+		  params["cusineType"] = constants.defaultCuisinetype;
+	  }
 	  
 	 var res =   this.dbService.getDatabyFields("recipes", params).subscribe(invData => setTimeout(() => {
 		this.recipesloading = false;
@@ -470,88 +458,10 @@ console.log(params);
 		this.calculateCaloryFlag = true;
 	
 	   this.clearFilterValues();
-		this.page_num = 1;
-   this.totalPage = this.recipesList["length"] /this.pageCount;
-   console.log(this.totalPage);
-		this.getDisplayList();
-		this.counter();
-	}
-	counter() {
-	//	console.log("pagenum " + this.page_num);
-		if(this.totalPage > 3)
-		this.pageNosList = [1,2,3];
-		else
-		if(this.totalPage == 2)
-		this.pageNosList = [1,2];
-		if(this.page_num > 1)
-		{
-			this.pageNosList =[];
-			if(this.page_num < this.totalPage-1)
-			{
-			this.pageNosList.push(this.page_num-1);
-			}
-			else
-			{
-				this.pageNosList.push(this.page_num-2);
-				this.pageNosList.push(this.page_num-1);
-			}
-			this.pageNosList.push(this.page_num);
-			if(this.page_num < this.totalPage-1)
-			this.pageNosList.push(this.page_num+1);
 
-		}
-	//	console.log(this.pageNosList);
-		return this.pageNosList;
+	
 	}
-	prevPage()
-	{
-	//	console.log("prevPage");
-		if(this.page_num > 1)
-		{
-			this.page_num -= 1;
-		}
-		this.counter();
-		this.getDisplayList();
-	}
-	nextPage()
-	{
-	//	console.log("nextPage");
-		if(this.page_num >= 0 && this.page_num < this.totalPage-1)
-		{
-			this.page_num += 1;
-		}
-		this.counter();
-		this.getDisplayList();
-	}
-	currentPage(pagenum)
-	{
-	//	console.log("currentPage");
-
-	//	console.log("pagenum " + pagenum);
-		this.page_num = parseInt(pagenum);
-		this.counter();
-		this.getDisplayList();
-	}
-
-	getDisplayList()
-	{
-	//	console.log(this.page_num);
-		this.displayList=[];
-		var startIndex= (this.page_num-1)*this.pageCount;
-		var endIndex = this.pageCount;
-
-		if(startIndex + endIndex > this.recipesList["length"])
-		{
-			endIndex = this.recipesList["length"]-startIndex;
-		}
-		endIndex = startIndex+ endIndex;
-		for(let i=startIndex; i < endIndex; i++)
-		{
-		this.displayList.push(this.recipesList[i]);
-		
-		}
-		window.scrollTo(0, 0);
-	}
+	
 
 	loadRatings()
 	{
@@ -887,11 +797,8 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 		  {
 			this.recipesList.push(invData["body"][i]);
 		  }
-		  this.totalPage = this.recipesList["length"] /10;
-		  this.counter();
-		  console.log(this.recipesList);
-		 
-		  this.getDisplayList();
+		
+	
 		 
 		}
 

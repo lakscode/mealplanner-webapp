@@ -10,7 +10,7 @@
                                 <div class="col-12 collection_panel animated wow flipInX">
 
                                     <img class="collection_img " src="{{collection.image}}"
-                                        style="height:200px;width: 100%;     object-fit: cover;" />
+                                        style="height:300px;width: 100%;     object-fit: cover;" />
                                     <div class="collection_details" style="position: absolute;
                        top: 0px;background-size:cover;  background-position:center;  height:100%; " [ngStyle]="{'background-image':'linear-gradient(
                                 rgba(0, 0, 0, 0.3),
@@ -230,7 +230,7 @@
                                                     *ngFor="let recipe of recipesList1; let i = index;" style="margin-bottom:10px;    padding-left: 0px;
                                 padding-right: 0px;">
                                                     <div class="recipe-item1"
-                                                        style="margin-bottom:10px; background-size:cover;  background-position:center; height:100%; "
+                                                        style="margin-bottom:10px; background-size:cover;  object-fit:cover; background-position:center; height:100%; "
                                                         [ngStyle]="{'background-image':'linear-gradient(
                                         rgba(0, 0, 0, 0.3),
                                         rgba(0, 0, 0, 0.3)
@@ -274,13 +274,13 @@
                                     <div style="padding-left:0px; padding-right:0px;margin-top:15px;margin-bottom:15px"
                                         class="col-12 col-lg-3 col-md-4">
                                         <div class="recipe-item"
-                                            style="background-size:cover;  background-position:center;  height:100%; "
+                                            style="background-size:cover;  background-position:center;  height:100%;  object-fit:cover;  "
                                             [ngStyle]="{'background-image':'linear-gradient(
                                 rgba(0, 0, 0, 0.3),
                                 rgba(0, 0, 0, 0.3)
                               ),url(' + recipe.image + ')'}">
                                             <p class="favactive" style='    text-align: right;
-                              position: absolute;
+                              position: absolute; 
                               bottom: -9px;
                               background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
                               /* color: #FFF; */

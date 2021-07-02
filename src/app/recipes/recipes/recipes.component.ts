@@ -496,7 +496,7 @@ console.log(args);
 			var where = " where status = 1 AND totalNutrients != '' AND digest != ''  AND s_instructions != '' ";
 			if(!paramsAdded)
 			{
-				where += " AND cuisineType LIKE '%american%' "
+				where += " AND cuisineType LIKE '%" + constants.defaultCuisinetype + "%' "
 			}
 			if (this.maxcalories > 0)
 				where += " AND calories <= " + this.maxcalories;
