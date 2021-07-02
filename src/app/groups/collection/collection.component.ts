@@ -45,7 +45,7 @@ export class CollectionComponent implements OnInit, OnChanges {
 	collectionOwner: boolean  = false;
 	setFav: boolean = false;
 	showActions: any = {};
-
+	noresult : boolean = false;
 	urlShare : any = "";
 urlTweet : any;
 urlWhatsApp: any;
@@ -1702,6 +1702,30 @@ formatimage(image)
     }
   }
   return ret;
+}
+
+formatValPServing(str, serving)
+{
+  
+  var retVal = this.helpService.formatValuePServing(str, serving);
+  return retVal;
+}
+
+resultSearch(event)
+{
+	if(typeof(event) !== "undefined")
+	{
+		if(event.length> 0)
+		{
+			this.recipesList1= event;
+			this.noresult= false;
+		}
+		else
+		{
+			this.noresult = true;
+		}
+		
+	}
 }
 }
 

@@ -5,7 +5,7 @@ import { CollectionRoutingModule } from './collection-routing.module';
 import { CollectionComponent } from './collection.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {SidebarModule, Add2planModule } from "../../shared/modules";
+import {SidebarModule, Add2planModule, SearchModule } from "../../shared/modules";
 import { ModalModule} from '../../shared/modules/modal/modal.module';
 @NgModule({
   imports: [
@@ -16,7 +16,8 @@ import { ModalModule} from '../../shared/modules/modal/modal.module';
 	ReactiveFormsModule,
   SidebarModule,
   ModalModule,
-  Add2planModule
+  Add2planModule,
+  SearchModule
   ],
   declarations: [CollectionComponent]
 })

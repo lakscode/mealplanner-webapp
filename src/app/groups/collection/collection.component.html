@@ -5,7 +5,7 @@
                 <div class="recipe-set submit-recipe-set">
                     <h2> <a (click)="gotopage();"><i class="fa fa-chevron-left"></i></a> Collection</h2>
 
-                    <div class="submit-recipe-form">
+                    <div class="">
                                    <div class="row" *ngIf="collection.image">
                                 <div class="col-12 collection_panel animated wow flipInX">
 
@@ -79,150 +79,12 @@
                                 <div class="col-12 add-recipe-panel" *ngIf="toggleRecipeAdd">
                                     <div class="row">
                                         <div class="col-12 " style="margin:0; padding-left:0px; padding-right:0px;">
-                                            <div style="padding-left: 10px; padding-right: 10px;">
-                                                <label class="searchicon ">
-                                                    <i class="fa fa-search" aria-hidden="true"></i>
-                                                </label>
-                                                <input type="text" (keyup)="searchenter($event)" name="searchquery" [(ngModel)]="searchparam.q"
-                                                    class="inputbox" placeholder="Search for Recipes..." />
-                                                <input type="button" (click)="searchProps()" style="margin-bottom:10px;"
-                                                    [ngClass]="searchmorebar?'defaultbtn searchbtn hideonmobile bg-orange' :' defaultbtn searchbtn  bg-orange'"
-                                                    id="header-submit-search-pro" name="submit" value="Search">
-                                                <input type="button" (click)="toggleRecipeAdd = false;" style="margin-bottom:10px;"
-                                                    [ngClass]="searchmorebar?'defaultbtn searchbtn hideonmobile bg-orange' :' defaultbtn searchbtn  bg-orange'"
-                                                    id="header-submit-search-pro" name="submit" value="Close">
-                                            </div>
+                                            <app-search (returnData) = "resultSearch($event)" [isPlan] = "isPlan"></app-search>
+                   
 
-                                            <div *ngIf="searchmorebar && showNutrientsFlag" class="searchmorebar">
-                                                <div class="row">
-                                                    <div class="col-12 col-md-6 col-lg-3 paddinglr0">
-                                                        <div class="form-group">
-
-                                                            <label class="form-control-placeholder fcs">Health Labels
-                                                            </label>
-                                                            <div class="listSection" id="healthLabels"
-                                                                style="display:inline-block;">
-
-                                                                <ng-container
-                                                                    *ngFor="let hlabel of healthlabelsList; let h = index">
-                                                                    <label class="container"
-                                                                        style="font-size:12px">{{hlabel.name}}
-                                                                        <input [(ngModel)]="hlabel.selected"
-                                                                            type="checkbox"
-                                                                            [checked]="h == 0?'checked':''">
-                                                                        <span class="checkmark"></span>
-                                                                    </label>
-                                                                </ng-container>
-
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12 col-md-6  col-lg-3 paddinglr0">
-                                                        <div class="form-group">
-                                                            <label class="form-control-placeholder fcs">Diet
-                                                                Labels</label>
-                                                            <div class="listSection" id="diethLabels"
-                                                                style="display:inline-block;">
-
-                                                                <ng-container
-                                                                    *ngFor="let dlabel of dietLabelsList; let h = index">
-                                                                    <label class="container"
-                                                                        style="font-size:12px">{{dlabel.name}}
-                                                                        <input [(ngModel)]="dlabel.selected"
-                                                                            type="checkbox"
-                                                                            [checked]="h == 0?'checked':''">
-                                                                        <span class="checkmark"></span>
-                                                                    </label>
-                                                                </ng-container>
-
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-12  col-md-6 col-lg-3 paddinglr0">
-                                                        <div class="form-group">
-                                                            <label
-                                                                class="form-control-placeholder fcs">Nutrients</label>
-                                                            <div class="listSection"
-                                                                style="display:inline-block; height:145px; width: 90%; max-height:145px; overflow:auto;">
-                                                                <ng-container
-                                                                    *ngFor="let mlabel of mineralsLabelsList; let m = index">
-                                                                    <div class="row paddinglr0">
-                                                                        <div class="col-12 paddinglr0">
-                                                                            <label class="container"
-                                                                                style="font-size:12px">{{setFLU(mlabel.name)}}
-                                                                                <input [(ngModel)]='mlabel.selected'
-                                                                                    type="checkbox"
-                                                                                    [checked]="m == 0?'checked':''">
-                                                                                <span class="checkmark"></span>
-                                                                            </label>
-                                                                        </div>
-                                                                        <div class="col-5 paddinglr0"
-                                                                            *ngIf="mlabel.selected">
-
-                                                                            <input class="mineral-input" type='text'
-                                                                                name="minerals_{{m}}_min"
-                                                                                [(ngModel)]="mlabel.min"
-                                                                                placeholder="min" />
-                                                                            <span
-                                                                                class="maxmin">{{formatVal(mlabel.t_min)}}</span>
-
-                                                                        </div>
-                                                                        <div class="col-5 paddinglr0"
-                                                                            *ngIf="mlabel.selected">
-                                                                            <input class="mineral-input" type='text'
-                                                                                name="minerals_{{m}}_max"
-                                                                                [(ngModel)]="mlabel.max"
-                                                                                placeholder="max" />
-                                                                            <span
-                                                                                class="maxmin">{{formatVal(mlabel.t_max)}}</span>
-
-                                                                        </div>
-                                                                        <div class="col-2 paddinglr0"
-                                                                            *ngIf="mlabel.selected"> {{mlabel.unit}}
-                                                                        </div>
-                                                                    </div>
-
-
-                                                                </ng-container>
-
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12 col-lg-3 paddinglr0">
-                                                        <div class="form-group">
-                                                            <label class="form-control-placeholder fcs">Calories</label>
-                                                            <div class="listSection" style="display:inline-block;">
-                                                                <span>Max calories</span>
-                                                                <input [(ngModel)]="maxcalories" type="text"
-                                                                    class="inputbox-fullwidth" />
-
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-
-                                                    <div class="col-12 showonmobile">
-                                                        <input type="button" (click)="searchProps()"
-                                                            style="margin-bottom:10px;" class="defaultbtn searchbtn"
-                                                            id="header-submit-search-pro" name="submit" value="Search">
-
-                                                    </div>
-
-                                                </div>
-
-
-
-                                            </div>
-
-                                            <div *ngIf='showNutrientsFlag' class="header-more-search-btn">
-                                                <i *ngIf="!searchmorebar" class="fa fa-chevron-down"
-                                                    aria-hidden="true"></i>
-                                                <i *ngIf="searchmorebar" class="fa fa-chevron-up"
-                                                    aria-hidden="true"></i>
-                                            </div>
-
-
+                                        </div>
+                                        <div class="col-12" *ngIf="noresult">
+                                            No resultes. please refine your search.
                                         </div>
                                         <div class="col-12" *ngIf="recipesList1 && recipesList1.length > 0">
                                             <div class="row divoverflow" style="max-height:300px; overflow:auto;">
@@ -303,7 +165,7 @@
                                                         {{recipe.label}}</h1>
                                                     <p><b>Calories</b>: {{recipe.calories}} Kcal</p>
                                                     <p><b>Servings</b>: {{recipe.yield}}</p>
-                                                    <p *ngIf="recipe.formatNutrients && recipe.formatNutrients['PROCNT']"><b>Protein</b>: {{recipe.formatNutrients['PROCNT']['quantity'].toFixed(2)}} recipe.formatNutrients['PROCNT']['unit']</p>
+                                                    <p *ngIf="recipe.formatNutrients && recipe.formatNutrients['PROCNT']"><b>Protein</b>: {{formatValPServing(recipe.formatNutrients['PROCNT']['quantity'], recipe.yield)}} {{recipe.formatNutrients['PROCNT']['unit']}}</p>
                                                   
                                                 </div>
                                                 <div class="morebtn"><a (click)="toggleMoreMenu(recipe, i, 'viewlist')"
