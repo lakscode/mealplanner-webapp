@@ -50,8 +50,7 @@
                         </div>
                     </div>
                 </div>
-
-                <app-search (returnData) = "resultSearch($event)"></app-search>
+                <app-search *ngIf="update" (returnData) = "resultSearch($event)" [param] = "searchparam.param" [healthLabels] = "searchparam.healthLabels" [dietLabels] = "searchparam.dietLabels"></app-search>
                 <!--<div class="wrapper-search">
 
                     <div class="row">

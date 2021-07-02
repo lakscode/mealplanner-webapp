@@ -1,9 +1,12 @@
 import { Component, ElementRef, Input, Output, OnInit, OnDestroy, EventEmitter, HostListener } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import { NavigationEnd, Router, ActivatedRoute } from '@angular/router';
 import { SearchService } from './search.service';
 import { HelpService } from './../../../services/help.service';
 import { DBService } from './../../../dbservices/db.service';
 import { constants } from '../../../../assets/data/constants';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
@@ -12,9 +15,12 @@ import { constants } from '../../../../assets/data/constants';
 export class SearchComponent implements OnInit, OnDestroy {
 	
     @Input() id: string;
-    @Input() setDate: any;
-    @Input() minDate: any;
-    @Input() showhidetime: any = true;
+    @Input() inputParams: any;
+    @Input() update: any = 0;
+    @Input() showhide: any = true;
+    @Input() param: any = "";
+    @Input() dietLabels: any = "";
+    @Input() healthLabels: any = "";
 
     sliderList: Array<any> = [];
      element: any;
@@ -23,20 +29,13 @@ export class SearchComponent implements OnInit, OnDestroy {
     @Output() returnData: EventEmitter<any> = new EventEmitter();
 	
     @Output() closeDT: EventEmitter<any> = new EventEmitter();
-    meridian: any;
-
-	 dt : any = {"date":"", "time":""};
-   tempDt: any;
-   maxDt: any;
-   minDt :any;
+   
    tempTm : any;
    elementId : any;
-   date: any; 
-   images: any;
+ 
 
-  routeParams: any = {};
   sub: any;
-
+	private onDestroy$: Subject<void> = new Subject<void>();
   list: any;
   returnpath: any;
   returnparam1: any;
@@ -53,7 +52,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   clickout(args) {
   this.callhideFunct(args);
 }
-    constructor(private router: Router, private dbService: DBService,  private helpService: HelpService, private searchService: SearchService, private el: ElementRef) {
+    constructor(private router: Router,private route: ActivatedRoute, private dbService: DBService,  private helpService: HelpService, private searchService: SearchService, private el: ElementRef) {
       this.router.routeReuseStrategy.shouldReuseRoute = function(){
         return false;
      }
@@ -71,8 +70,15 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.element = el.nativeElement;
     //this.showhideTime = true;  
     this.id = "";
-    this.dt = {"date":"", "time":""};
-    this.meridian = true;
+    console.log(this.param);
+    console.log(this.dietLabels);
+    console.log(this.healthLabels);
+
+    this.searchparam = { "q": "", "param":"", "random":true, "dietLabels": "", "healthLabels": "" }
+
+   
+   
+    console.log( this.searchparam);
     this.showhideTimeFlag = true;
     }
 
@@ -85,9 +91,39 @@ export class SearchComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
       this.processing = false;
         // customize default values of carousels used by this component tree
-        this.setDefaults();
+        this.loadRouteParams()
     }
+    ngOnChanges() {
+      console.log("on changes");
+      this.processing = false;
+      
+      this.loadRouteParams()
+  }
+  routeParams: any;
+  loadRouteParams()
+  {
+    this.searchparam = {"q":"", "param":"", "maxcalories":""}
+    this.routeParams = {};
+		this.route.params.pipe(takeUntil(this.onDestroy$)).subscribe(params => {
+      this.routeParams = params;
+			if (typeof (this.routeParams.param) !== "undefined" && this.routeParams.param !== "") {
+				this.searchparam["param"] = this.routeParams.param;
+				this.searchparam["random"] = false;
+			}
+      if (typeof (this.routeParams.q) !== "undefined" && this.routeParams.qData !== "") {
+				this.searchparam["q"] = this.routeParams.q;
+			}
+			if (typeof (this.routeParams.dietLabels) !== "undefined" && this.routeParams.dietLabels !== "") {
+				this.searchparam["dietLabels"] = this.routeParams.dietLabels;
+			}
+			if (typeof (this.routeParams.healthLabels) !== "undefined" && this.routeParams.healthLabels !== "") {
+				this.searchparam["healthLabels"] = this.routeParams.healthLabels;
+			}
+      console.log(this.searchparam);
+        this.setDefaults();
+    });
 
+  }
     ngAfterViewInit()
     {
 	 
@@ -104,13 +140,8 @@ export class SearchComponent implements OnInit, OnDestroy {
         this.element.style.display = 'block';
         document.body.classList.add('dt-modal-open');
 
-		var d = new Date();
-		
-		this.tempDt = {year: d.getFullYear(), month: d.getMonth()+1, day: d.getDate()};
-		this.tempTm = {hour: d.getHours(), minute: d.getMinutes(), second: d.getSeconds()};
-		
-		this.dt = {"date":this.tempDt, "time":this.tempTm};
-		this.returnData.emit(this.dt);
+	
+		this.returnData.emit(this.recipesList1);
 		this.searchService.add(this);
     }
 
@@ -131,7 +162,7 @@ export class SearchComponent implements OnInit, OnDestroy {
 	closeCal()
 	{
 
-		this.closeDT.emit(this.dt);
+		this.closeDT.emit(this.recipesList1);
 	}	
 
   callhideFunct(args)
@@ -180,7 +211,7 @@ console.log(args);
   setDefaults()
   {
 
-  	this.searchparam = {"q":"", "param":"", "maxcalories":""}
+  	
 		this.currentUser =this.helpService.getCurrentUser();
 		if(this.currentUser !== null)
 		{
@@ -294,12 +325,9 @@ console.log(args);
 			}
 
 		}
-
-		if (typeof (this.maxcalories) !== "undefined" && this.maxcalories > 0) {
-			params["caloriesto"] = this.maxcalories;
-			paramsAdded = true;
-		}
-		if (typeof (this.searchparam["param"]) !== "undefined" && this.searchparam["param"] !== "") {
+    else if (typeof (this.searchparam["param"]) !== "undefined" && this.searchparam["param"] !== "") {
+      params["content"] = "";
+      params["words"] ="";
 			params["random"] = "false";
 			var words = this.searchparam["param"].replaceAll(" ", "~");
 			params["words"] = words;
@@ -307,6 +335,12 @@ console.log(args);
 			paramsAdded = true;
 			this.searchparam["param"] = "";
 		}
+
+		if (typeof (this.maxcalories) !== "undefined" && this.maxcalories > 0) {
+			params["caloriesto"] = this.maxcalories;
+			paramsAdded = true;
+		}
+		
 		
 		params["instructions"] = "notempty";
 

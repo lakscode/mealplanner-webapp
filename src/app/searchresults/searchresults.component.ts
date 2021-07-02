@@ -1037,15 +1037,8 @@ gotopage(page, id = null){
  {
 
 	 this.communitiesList = [];
-	// var params = {"limit": 100};
-	// params["createdby"] = this.currentUser["id"];
-	//this.searchparam["param"] = "";
-
-
+	
 	 var params = {"query": "SELECT c.*, COUNT(rm.id) AS recipecount, u.email, u.firstname, u.lastname FROM collection AS c LEFT JOIN recipe_mapping AS rm ON c.id = rm.collection_id LEFT JOIN users AS u ON c.created_by = u.id"};
-	 
-	// var params = {"query": "SELECT c.*,  u.email, u.firstname, u.lastname FROM collection AS c LEFT JOIN users AS u ON c.created_by = u.id"};
-	 
 	 
 	 if(this.searchparam["param"] !== "")
 	 {
@@ -1054,19 +1047,18 @@ gotopage(page, id = null){
 	 params["query"] +=  " GROUP BY c.id ";
 	 console.log(params);
 	 var res =   this.dbService.getDatabyTablebyQuery("collection", params).subscribe(invData => setTimeout(() => {
- 
-	   console.log(invData);
+
 	   if(invData !== null)
 	   {
 		 var obj = invData["body"]["length"];
-		 console.log(invData["body"]);
+
 		 this.communitiesList = invData["body"];
 		 for(let o=0; o < this.communitiesList.length; o++)
 		 {
 		 this.communitiesList[o]["image"] =encodeURI( this.communitiesList[o]["image"]);
 		 }
 
-		 console.log(this.communitiesList);
+
 		 this.loaduserCount();
 	   }
 	 }));
