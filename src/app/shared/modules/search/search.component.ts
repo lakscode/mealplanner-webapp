@@ -399,13 +399,15 @@ export class SearchComponent implements OnInit, OnDestroy {
 			var item = this.mineralsLabelsList[m];
 			// console.log(item);
 			if (this.mineralsLabelsList[m]["selected"])
+      {
 				minerals += this.mineralsLabelsList[m]["name"] + "~";
-			if (typeof (item["min"]) !== "undefined" && item["min"] !== "" && item["min"] > 0) {
-				mQuery += " " + item["name"].toLowerCase() + "/recipes.yield >= " + item["min"] + " AND ";
-			}
-			if (typeof (item["max"]) !== "undefined" && item["max"] !== "" && item["max"] > 0) {
-				mQuery += " " + item["name"].toLowerCase() + "/recipes.yield <= " + item["max"] + " AND ";
-			}
+        if (typeof (item["min"]) !== "undefined" && item["min"] !== "" && item["min"] > 0) {
+          mQuery += " " + item["name"].toLowerCase() + "/recipes.yield >= " + item["min"] + " AND ";
+        }
+        if (typeof (item["max"]) !== "undefined" && item["max"] !== "" && item["max"] > 0) {
+          mQuery += " " + item["name"].toLowerCase() + "/recipes.yield <= " + item["max"] + " AND ";
+        }
+      }
 
 		}
 
