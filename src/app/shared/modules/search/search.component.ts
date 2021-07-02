@@ -19,7 +19,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     @Input() update: any = 0;
     @Input() showhide: any = true;
     @Input() isPlan: any = "";
-
+    @Input() random: any = false;
     searchmorebar: boolean = false;
     sliderList: Array<any> = [];
      element: any;
@@ -71,9 +71,9 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.id = "";
     console.log(this.isPlan);
 
-    this.searchparam = { "q": "", "param":"", "random":true, "dietLabels": "", "healthLabels": "" }
+    this.searchparam = { "q": "", "param":"", "random":false, "dietLabels": "", "healthLabels": "" }
 
-   
+
    
     console.log( this.searchparam);
     this.showhideTimeFlag = true;
@@ -304,7 +304,7 @@ export class SearchComponent implements OnInit, OnDestroy {
 			paramsAdded = true;
 
 		}
-    params["random"] = "true";
+    params["random"] = "false"; //if random recipes needed then random parameter should be true
 		if (this.searchparam.q) {
 			
 			console.log(" this.splitcontent " + this.splitcontent);
