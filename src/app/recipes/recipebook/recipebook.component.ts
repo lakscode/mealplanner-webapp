@@ -42,6 +42,7 @@ export class RecipebookComponent implements OnInit, OnChanges {
 	addItem: boolean = false;
 	showNutrientsFlag: boolean = false;
 	setFav: boolean = false;
+	noResult:boolean = false;
 	constructor(private router: Router, private route: ActivatedRoute, private toastr: ToastrService, private pdfService: PDFService, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder, private modalService: ModalService) {
 	
 	}
@@ -1129,6 +1130,10 @@ getFavouriteStatusForCurrentUser(idslist)
 				var data = {};
 				data["body"] = event;
 				this.formatResult(data);
+				this.noResult = false;
+			} else {
+			this.noResult = true;
+			this.recipesList1 = [];
 			}
 		}
 	}
