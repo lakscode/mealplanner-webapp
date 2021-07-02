@@ -411,6 +411,7 @@ if(mQuery !== "")
 ratingIds: any;
 formatResult(invData)
 {
+	console.log("formatResult");
 	if(invData !== null)
 	{
 	  if(typeof(invData["body"]) !== "undefined" && invData["body"] !== null && invData["body"]["length"] > 0)
@@ -1118,7 +1119,19 @@ getFavouriteStatusForCurrentUser(idslist)
 
 }
 
-
+	resultSearch(event)
+	{
+		console.log(event);
+		if(event !== null )
+		{
+			if(event.length > 0)
+			{
+				var data = {};
+				data["body"] = event;
+				this.formatResult(data);
+			}
+		}
+	}
 }
 
 	

@@ -15,19 +15,21 @@
        
 
             
-            <div class="submit-recipe-form">
+            <div class="">
                 <form action="#" method="post">
+                    <div class="row" >
+                        <div class="col-12 col-md-6 col-lg-6 paddinglr0" >
                     <label for="title">Recipe book Title <span
                                 class="mandatory">&#42;</span></label>
-                    <input type="text" name="title" id="title" [(ngModel)]="searchRes.recipebook_name" required>
+                    <input class="input" type="text" name="title" id="title" [(ngModel)]="searchRes.recipebook_name" required>
                     <br>
-                    <label for="description">Description</label>
-                    <textarea class="short-text" name="description" [(ngModel)]='searchRes.description' id="description" cols="30" rows="10"></textarea>
+                    <label for="description">Description</label> <br>
+                    <textarea class="textarea" name="description" [(ngModel)]='searchRes.description' id="description" cols="30" rows="4"></textarea>
  
                    
-                 
+                 </div>
                     
-                    <div class="row" >
+                    
                         <div class="col-12 col-md-6 col-lg-6 paddinglr0" >
                             <label  class='comment-label'>Upload Image <span
                                 class="mandatory">&#42;</span>&nbsp;&nbsp;</label>
@@ -36,7 +38,7 @@
                            <div>
                                <input id="inputuploadrecipe" hidden type="file" name="inputuploadrecipe" (change)="onFileSelect($event)" />
                              </div>
-                             <img *ngIf="searchRes.image" src="{{searchRes.image}}"  style="width: 90%; max-width: 200px;" />
+                             <img *ngIf="searchRes.image" src="{{searchRes.image}}"  style="width: 90%; max-width: 300px;" />
                      
                              
                           </div>
@@ -49,7 +51,11 @@
                         </div>
                         <div class="col-12 add-recipe-panel" *ngIf="toggleRecipeAdd">
                             <div class="row">
-                        <div class="col-12 " style="margin:0; padding-left:0px; padding-right:0px;">
+                                <div class="col-12">
+                                    <app-search (returnData) = "resultSearch($event)"></app-search>
+                                </div>
+
+                        <!--<div class="col-12 " style="margin:0; padding-left:0px; padding-right:0px;">
                                 <div style="padding-left: 10px; padding-right: 10px;">
                                     <label class="searchicon hidden-xs">
                                         <i class="fa fa-search" aria-hidden="true"></i>
@@ -154,7 +160,7 @@
                                 </div>
                         
                         
-                            </div>
+                            </div>-->
                             <div class="col-12" style="padding-left:0px; padding-right:0px;"  *ngIf="recipesList1 && recipesList1.length > 0">
                                 <div class="row divoverflow" style="max-height:300px; overflow:auto;">
                                 <div style="padding-left:0px; padding-right:0px;" class="col-12 col-lg-4 col-md-4" *ngFor="let recipe of recipesList1; let i = index;">

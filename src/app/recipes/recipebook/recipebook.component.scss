@@ -531,18 +531,30 @@ padding-right:11px;
    -ms-animation: slide 1s ease 3.5s forwards;
     animation: slide 1s ease 3.5s forwards;
 }
-
-.inputbox-fullwidth {
-  border-radius: 5px;
-  padding: 5px;
-  margin: 10px 0;
-  font-size: 17px;
-  font-weight: 400;
-  border: 1px solid #ccc;
-  outline: none;
-  width:100%;
+ label {
+  font-family: 'Lato', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: #514b49;
+  margin-bottom: 10px;
 }
 
+.input {
+  width: 100%;
+  height: 40px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.input, .textarea {
+  outline: none;
+  border: 1px solid #e4d9d1;
+  margin-bottom: 30px;
+  font-size: 14px;
+  padding-right: 20px;
+  padding-left: 20px;
+  width: 100%;
+}
 .view-details
 {
   margin-right:5px !important;
