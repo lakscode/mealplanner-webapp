@@ -18,9 +18,8 @@ export class SearchComponent implements OnInit, OnDestroy {
     @Input() inputParams: any;
     @Input() update: any = 0;
     @Input() showhide: any = true;
-    @Input() param: any = "";
-    @Input() dietLabels: any = "";
-    @Input() healthLabels: any = "";
+    @Input() isPlan: any = "";
+
 
     sliderList: Array<any> = [];
      element: any;
@@ -70,9 +69,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.element = el.nativeElement;
     //this.showhideTime = true;  
     this.id = "";
-    console.log(this.param);
-    console.log(this.dietLabels);
-    console.log(this.healthLabels);
+    console.log(this.isPlan);
 
     this.searchparam = { "q": "", "param":"", "random":true, "dietLabels": "", "healthLabels": "" }
 
@@ -344,8 +341,14 @@ export class SearchComponent implements OnInit, OnDestroy {
 		
 		params["instructions"] = "notempty";
 
+    if(this.isPlan)
+    {
+     params["returnfields"] = " id, label, image, cuisineType, mealType, healthLabels,ingredients,  dietLabels, totalNutrients, digest,calories, yield ";
+    }
+    else
+    {
 		params["returnfields"] = " id, label, image, cuisineType, mealType, healthLabels, dietLabels, calories, yield, created_by";
-
+    }
 		var dietlabels = "";
 		for (let m = 0; m < this.dietLabelsList.length; m++) {
 			if (this.dietLabelsList[m]["selected"])
@@ -459,6 +462,13 @@ export class SearchComponent implements OnInit, OnDestroy {
 			var params1 = {};
 
 			var query = "select id, label, image, cuisineType, healthLabels, mealType, dietLabels, calories, yield,  created_by from recipes ";
+
+
+      if(this.isPlan)
+      {
+        query = "select id, label, image, cuisineType, mealType, healthLabels,ingredients,  dietLabels, totalNutrients, digest,calories, yield, created_by from recipes  ";
+      }
+
 			var where = " where status = 1 AND totalNutrients != '' AND digest != ''  AND s_instructions != '' ";
 			if(!paramsAdded)
 			{

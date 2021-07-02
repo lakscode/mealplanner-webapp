@@ -28,7 +28,12 @@
 
             <div class="wrapper-search">
                    
-                <div class="row" >
+                <div class="row">
+                    <div class="col-12">
+                        <app-search (returnData) = "resultSearch($event)" [isPlan] = "isPlan"></app-search>
+                    </div>
+                </div>
+                <!--<div class="row" >
                     <div class="col-12 "  style="background:#FFF;  margin:0;  padding-bottom:20px;padding-left:0px; padding-right:0px;">
                         <div style="padding-left: 10px; padding-right: 10px;" class="col-12">
                             <label class="searchicon">
@@ -221,7 +226,7 @@
                         
                         
                 
-                </div>
+                </div>-->
                 <div class="col-12">
                     <div style='text-align:right;margin-top:0px;'>
                     <div class="row">

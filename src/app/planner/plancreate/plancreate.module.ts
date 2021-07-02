@@ -5,7 +5,7 @@ import { PlancreateRoutingModule } from './plancreate-routing.module';
 import { PlancreateComponent } from './plancreate.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {SidebarModule, ModalModule } from "../../shared/modules"
+import {SidebarModule, ModalModule, SearchModule } from "../../shared/modules"
 import {ToastrModule } from 'ngx-toastr';
 @NgModule({
   imports: [
@@ -16,7 +16,8 @@ import {ToastrModule } from 'ngx-toastr';
 	ReactiveFormsModule,
   SidebarModule,
   ModalModule,
-  ToastrModule
+  ToastrModule,
+  SearchModule
   ],
   declarations: [PlancreateComponent]
 })

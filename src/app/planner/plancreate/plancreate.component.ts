@@ -76,7 +76,7 @@ export class PlancreateComponent implements OnInit {
 	splitcontent : boolean = false;
 	message: any ="";
 
-
+	isPlan: boolean = true;
 	constructor(private router: Router, private toastr: ToastrService,  private route: ActivatedRoute, private modalService: ModalService, private pdfService: PDFService, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
 	
 	}
@@ -429,12 +429,15 @@ console.log(params);
 
 	formatResult(invData)
 	{
+		console.log(invData);
 		for(let i=0; i < invData["body"]["length"] ; i++)
 		{
 		  var recIndex = this.recipesList.findIndex(x1 => (x1.id === invData["body"][i]["id"]));
 			  if(recIndex == -1)
 			  {
-				  this.recipesList.push(invData["body"][i]);
+				  //this.recipesList.push(invData["body"][i]);
+
+				  this.recipesList.splice(0, 0, invData["body"][i]);
 			  }	
 		}
 		for(let p =0 ; p < this.plan['days']['length']; p++)
@@ -2168,7 +2171,20 @@ startPlan()
 		
 	}
 }
-
+resultSearch(event)
+	{
+		console.log(event);
+		if(typeof(event) !== "undefined" && event !== null )
+		{
+			var data = {};
+		
+			if(event.length > 0)
+			{
+				data["body"] = event;
+				this.formatResult(data);
+			}
+		}
+	}
 }
 
 	
