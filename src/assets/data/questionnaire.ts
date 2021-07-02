@@ -5,7 +5,7 @@ export const data =[
     },
 	{
         "id":"2","type":"option",
-        "question": "Please choose gender", "answer":"", "answers":[
+        "question": "Gender", "answer":"", "answers":[
         {"name":"q1", "value":"c1", "text":"Male", "subtext":"", },
         {"name":"q1", "value":"c2", "text":"Female", "subtext":""}
         ]
@@ -28,7 +28,7 @@ export const data =[
     },
     {
         "id":"5","type":"checkbox", "answer":"",
-        "question": "Sensivitives/Allergies?", "answers":[
+        "question": "Sensitivities/Allergies?", "answers":[
         {"name":"q8", "value":"c1", "text":"Milk", "subtext":""},
         {"name":"q8", "value":"c2", "text":"Egg", "subtext":""},
         {"name":"q8", "value":"c3", "text":"Tree-Nut", "subtext":""},
