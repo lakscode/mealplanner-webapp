@@ -151,7 +151,7 @@ export class SearchComponent implements OnInit, OnDestroy {
 	
 	save()
 	{
-    console.log(this.recipesList1);
+  //  console.log(this.recipesList1);
     this.returnData.emit(this.recipesList1);
 
 	}	
@@ -304,8 +304,9 @@ export class SearchComponent implements OnInit, OnDestroy {
 			paramsAdded = true;
 
 		}
+    params["random"] = "true";
 		if (this.searchparam.q) {
-			params["random"] = "true";
+			
 			console.log(" this.splitcontent " + this.splitcontent);
 			if (this.splitcontent) {
 				params["content"] = this.searchparam.q.split(" ").join(",");
