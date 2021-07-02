@@ -4,7 +4,7 @@ import { UserService } from '../services/user.service';
 import {  FormBuilder } from '@angular/forms';
 import { DBService } from '../dbservices/db.service';
 import { HelpService } from '../services/help.service';
-import { constants } from '../jsonfiles/constants';
+import { constants } from '../../assets/data/constants';
 
 import * as Highcharts from 'highcharts';
 

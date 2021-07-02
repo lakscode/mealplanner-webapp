@@ -8,7 +8,7 @@ import { HelpService } from '../../services/help.service';
 import { environment } from './../../../environments/environment';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { constants } from '../../jsonfiles/constants';
+import { constants } from '../../../assets/data/constants';
 
 @Component({
 	selector: 'app-trending',

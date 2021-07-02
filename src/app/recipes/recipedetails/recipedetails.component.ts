@@ -8,7 +8,7 @@ import { HelpService } from '../../services/help.service';
 import { environment } from './../../../environments/environment';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-import { constants } from './../../jsonfiles/constants';
+import { constants } from '../../../assets/data/constants';
 import { HttpHeaders } from '@angular/common/http';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ToastrService } from 'ngx-toastr';

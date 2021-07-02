@@ -6,8 +6,8 @@ import { DBService } from '../../dbservices/db.service';
 import { HelpService } from '../../services/help.service';
 
 import { Subject } from 'rxjs';
-import * as $ from 'jquery';
-import { constants } from '../../jsonfiles/constants';
+
+import { constants } from '../../../assets/data/constants';
 
 @Component({
 	selector: 'app-favourites',

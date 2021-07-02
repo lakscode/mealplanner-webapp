@@ -1,12 +1,12 @@
 import { Component, OnInit,OnDestroy, OnChanges  } from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
 import { UserService } from '../../services/user.service';
-import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { DBService } from '../../dbservices/db.service';
 import { HelpService } from '../../services/help.service';
 
 import { environment } from '../../../environments/environment';
-import { constants } from '../../jsonfiles/constants';
+import { constants } from '../../../assets/data/constants';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { HttpHeaders } from '@angular/common/http';
@@ -88,7 +88,7 @@ loadDefaults()
 	this.collectionOwner = false;
 	this.showActions = {"join": true, "invite":false};
 	
-	this.getNutrientsMaxMin(); 
+	//this.getNutrientsMaxMin(); 
 
 		this.dietLabelsList= [];
 		for(let d=0; d < constants.dietLabels.length; d++)
@@ -232,6 +232,10 @@ loadRecipes(idslist = "")
 		this.recipesList = [];
 
 		this.recipesList = invData["body"];
+		for(let i=0 ; i < this.recipesList.length; i++)
+		{
+			this.recipesList[i]["formatNutrients"] = JSON.parse(this.recipesList[i].totalNutrients);
+		}
 		console.log(this.recipesList);
 		this.getFavouriteStatus();
 	}
@@ -261,6 +265,7 @@ if(!this.loadingData)
 {
 
 	this.loadingData= true;
+	var whereadded = false;
 var params = {}
 /*if(this.searchparam.q)
 {
@@ -272,6 +277,7 @@ this.helpService.saveSearchHistory(this.searchparam.q, "text", "recipebook", thi
 */
 
 if (this.searchparam.q) {
+	whereadded = true;
 	console.log(" this.splitcontent " + this.splitcontent);
 	if (this.splitcontent) {
 		params["content"] = this.searchparam.q.split(" ").join(",");
@@ -288,18 +294,14 @@ if (this.searchparam.q) {
 
 }
 
-if(typeof(this.searchparam.range) !== "undefined")
-{
-if(typeof(this.searchparam.range.lower) !== "undefined")
-{
-  params["caloriesfrom"] = this.searchparam.range.lower;
-}
+
 if(typeof(this.maxcalories) !== "undefined" && this.maxcalories > 0)
 {
+	whereadded = true;
   params["caloriesto"] = this.maxcalories;
 }
 
-}
+
 params["instructions"]="notempty";
 
 params["returnfields"] = " id, label, image, healthLabels, dietLabels, calories, yield, digest, totalNutrients, totalWeight";
@@ -360,14 +362,16 @@ var checkMinerals = false;
 
 if(typeof(dietlabels) !== "undefined" && dietlabels  !== "")
 {
-params["dietLabels"] = dietlabels
+params["dietLabels"] = dietlabels;
 this.helpService.saveSearchHistory(dietlabels, "dietLabels",  "recipebook",this.currentUser["id"]);
+whereadded = true;
 } 
 
 if(typeof(healthlabels ) !== "undefined" && healthlabels !== "")
 {
-params["healthLabels"] = healthlabels
+params["healthLabels"] = healthlabels;
 this.helpService.saveSearchHistory(healthlabels, "healthLabels", "recipebook", this.currentUser["id"]);
+whereadded = true;
 } 
 
 if(typeof(minerals ) !== "undefined" && minerals  !== "")
@@ -376,7 +380,7 @@ params["totalNutrientsne"]="notempty";
 params["digestne"]="notempty";
 checkMinerals = true;
 //console.log(minerals);
-
+whereadded = true;
 } 
 
  //console.log(params);
@@ -405,6 +409,8 @@ if(mQuery !== "")
 		  where +=  " AND healthLabels LIKE '%" + t1[i] + "%'" 
 	  }
   }
+  if(!whereadded)
+  where +=  " AND cuisineType LIKE '%" +  constants.defaultCuisinetype + "%'" ;
 
   where += " AND id in (select recipeid from nutrients where " + mQuery +  ")";
 
@@ -438,7 +444,8 @@ if(mQuery !== "")
 	}
 	else
 	{
-
+		if(!whereadded)
+		params["cuisineType"]= constants.defaultCuisinetype;
 		params["limit"] = "20";
 	var res =   this.dbService.getDatabyFields("recipes", params).subscribe(invData => setTimeout(() => {
 
@@ -886,7 +893,7 @@ formatVal(str)
 	  this.selectedRecipe = recipe;
 	  console.log(this.selectedRecipe);
 
-	  this.selectedRecipe["formatNutrients"] = JSON.parse(this.selectedRecipe.totalNutrients);
+	 // this.selectedRecipe["formatNutrients"] = JSON.parse(this.selectedRecipe.totalNutrients);
 	  console.log(this.selectedRecipe);
 	 this.modalService.open('viewrecipe');
 	  console.log("view details");

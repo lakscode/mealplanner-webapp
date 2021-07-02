@@ -5,7 +5,7 @@ import { DBService } from '../dbservices/db.service';
 import { HelpService } from '../services/help.service';
 import { HttpClient } from '@angular/common/http';
 import { DomSanitizer } from '@angular/platform-browser';
-import {constants} from "../jsonfiles/constants"
+import { constants } from '../../assets/data/constants';
 
 @Component({
 	selector: 'app-landing',

@@ -6,7 +6,7 @@ import { DBService } from '../../dbservices/db.service';
 import { HelpService } from '../../services/help.service';
 import { PDFService } from '../../services/pdf.service';
 
-import { constants } from '../../jsonfiles/constants';
+import { constants } from '../../../assets/data/constants';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { environment} from "../../../environments/environment";

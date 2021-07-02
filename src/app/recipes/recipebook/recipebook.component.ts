@@ -6,11 +6,11 @@ import { DBService } from '../../dbservices/db.service';
 import { HelpService } from '../../services/help.service';
 
 import { environment } from './../../../environments/environment';
-import { constants } from './../../jsonfiles/constants';
+import { constants } from '../../../assets/data/constants';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { HttpHeaders } from '@angular/common/http';
-import { recipe } from '../../jsonfiles/recipestructure';
+import { recipe } from '../../../assets/data/recipestructure';
 import { PDFService } from '../../services/pdf.service';
 import { ModalService } from '../../shared/modules/modal/modal.service';
 import { ToastrService } from 'ngx-toastr';

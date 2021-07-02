@@ -9,7 +9,7 @@ import { environment } from './../../../environments/environment';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 declare var $: any;
-import {constants} from "../../jsonfiles/constants"
+import { constants } from '../../../assets/data/constants';
 import * as Highcharts from 'highcharts';
 
 require('highcharts/modules/exporting')(Highcharts);  

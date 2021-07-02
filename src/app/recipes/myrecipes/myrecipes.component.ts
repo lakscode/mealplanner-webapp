@@ -8,8 +8,7 @@ import { HelpService } from '../../services/help.service';
 import { environment } from './../../../environments/environment';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import * as $ from 'jquery';
-import { constants } from '../../jsonfiles/constants';
+import { constants } from '../../../assets/data/constants';
 import { ToastrService } from 'ngx-toastr';
 @Component({
 	selector: 'app-myrecipes',

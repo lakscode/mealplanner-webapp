@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { HelpService } from '../services/help.service';
-import {constants} from "../jsonfiles/constants"
+import { constants } from '../../assets/data/constants';
 import { ModalService } from '../shared/modules/modal/modal.service';
 import { DBService } from '../dbservices/db.service';
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';

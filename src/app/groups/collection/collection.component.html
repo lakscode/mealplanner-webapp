@@ -303,7 +303,7 @@
                                                         {{recipe.label}}</h1>
                                                     <p><b>Calories</b>: {{recipe.calories}} Kcal</p>
                                                     <p><b>Servings</b>: {{recipe.yield}}</p>
-
+                                                    <p *ngIf="recipe.formatNutrients && recipe.formatNutrients['PROCNT']"><b>Protein</b>: {{recipe.formatNutrients['PROCNT']['quantity'].toFixed(2)}} recipe.formatNutrients['PROCNT']['unit']</p>
                                                   
                                                 </div>
                                                 <div class="morebtn"><a (click)="toggleMoreMenu(recipe, i, 'viewlist')"

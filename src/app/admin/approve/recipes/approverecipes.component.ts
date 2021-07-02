@@ -1,15 +1,13 @@
 import { Component, OnInit,OnDestroy  } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd } from "@angular/router";
 import { UserService } from '../../../services/user.service';
-import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { DBService } from '../../../dbservices/db.service';
 import { HelpService } from '../../../services/help.service';
 import { ToastrService } from 'ngx-toastr';
-import { environment } from './../../../../environments/environment';
+
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import * as $ from 'jquery';
-import { constants } from '../../../jsonfiles/constants';
 
 
 @Component({

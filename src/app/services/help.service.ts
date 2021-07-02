@@ -6,7 +6,7 @@ import { DBService } from '../dbservices/db.service';
 import { UserService, User } from './user.service';
 import { ModalService } from '../shared/modules/modal/modal.service';
 import { environment } from '../../environments/environment';
-import { constants } from '../jsonfiles/constants.js';
+import { constants } from '../../assets/data/constants';
 import * as CryptoJS from 'crypto-js';
 
 @Injectable({ providedIn: 'root' })
