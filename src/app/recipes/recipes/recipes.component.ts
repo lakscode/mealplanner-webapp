@@ -703,11 +703,11 @@ export class RecipesComponent implements OnInit {
 
 	resultSearch(event)
 	{
-console.log(event);
-if(event !== null )
-{
-	this.recipesList1 = event;
-}
+		//console.log(event);
+		if(event !== null )
+		{
+			this.recipesList1 = event;
+		}
 	}
 }
 

@@ -168,7 +168,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   callhideFunct(args)
 	{
 		var classlist = this.helpService.getDateIgnoreClassList();
-console.log(args);
+
 			var matchFlag = 0;
 			for (let ip = 0; ip < classlist.length; ip++) {
 				if (args.srcElement.className.indexOf(classlist[ip]) !== -1) {
@@ -415,8 +415,7 @@ console.log(args);
 			paramsAdded = true;
 			this.helpService.saveSearchHistory(mQuery, "nutrients", "recipes", this.currentUser["id"]);
 		}
-		//	 console.log("mQuery");
-		//	 console.log(mQuery);
+
 		var checkMinerals = false;
 
 		if (typeof (dietlabels) !== "undefined" && dietlabels !== "") {
@@ -449,11 +448,11 @@ console.log(args);
 			params["totalNutrientsne"] = "notempty";
 			params["digestne"] = "notempty";
 			checkMinerals = true;
-			console.log(minerals);
+
 			paramsAdded = true;
 
 		}
-		console.log(params);
+
 		if (mQuery !== "") {
 
 
@@ -499,8 +498,7 @@ console.log(args);
 			params1["query"] = query + where + " limit 0, 30";
 			console.log(params1);
 			var res = this.dbService.getDatabyTablebyQuery("recipes", params1).subscribe(invData => setTimeout(() => {
-				console.log(invData);
-				console.log(invData["body"]["length"]);
+	
 				if (invData["body"]["length"] == 0) {
 					console.log("calling again searchprops");
 					this.splitcontent = true;
@@ -524,14 +522,14 @@ console.log(args);
 
 			params["status"] = "1";
 			params["limit"] = "100";
-			console.log(params);
+
 			if(!paramsAdded)
 			{
 				params["cuisineType"] = "american"
 			}
 			console.log(params);
 			var res = this.dbService.getDatabyFields("recipes", params).subscribe(invData => setTimeout(() => {
-				console.log(invData);
+		
 				if (invData["body"]["length"] == 0) {
 					this.splitcontent = true;
 					if (this.loopCount < 1) {
