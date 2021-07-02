@@ -79,9 +79,6 @@ console.log(args);
 					this.recipesList1[j]['showAdd2MP'] = false;
 					this.recipesList1[j]['showAdd2C'] = false;
 				}
-
-				
-
 			}
 
 	}
@@ -164,7 +161,7 @@ console.log(args);
 		this.totalPage = 1;
 		this.page_num = 0;
 		this.page_length = 12;
-		this.searchparam = { "q": "", "range": {}, "dietLabels": "", "healthLabels": "" }
+		this.searchparam = { "q": "", "param":"", "random":true,"range": {}, "dietLabels": "", "healthLabels": "" }
 
 
 		this.routeParams = {};
@@ -174,8 +171,9 @@ console.log(args);
 			if (typeof (this.routeParams.details) !== "undefined") {
 				console.log(this.routeParams.details);
 			}
-			if (typeof (this.routeParams.q) !== "undefined" && this.routeParams.q_complete !== "") {
-				this.searchparam["q"] = this.routeParams.q;
+			if (typeof (this.routeParams.param) !== "undefined" && this.routeParams.param !== "") {
+				this.searchparam["param"] = this.routeParams.param;
+				this.searchparam["random"] = false;
 			}
 
 			if (typeof (this.routeParams.dietLabels) !== "undefined" && this.routeParams.dietLabels !== "") {
@@ -336,8 +334,10 @@ console.log(args);
 	loopCount: any = 0;
 	loadingData: boolean = false;
 	searchProps() {
-
+		this.searchparam["random"] = "true";
+		
 		console.log('searchProps');
+
 		this.loadingData = true;
 		var paramsAdded = false;
 		var params = {}
@@ -353,6 +353,7 @@ console.log(args);
 
 		}
 		if (this.searchparam.q) {
+			params["random"] = "true";
 			console.log(" this.splitcontent " + this.splitcontent);
 			if (this.splitcontent) {
 				params["content"] = this.searchparam.q.split(" ").join(",");
@@ -374,6 +375,15 @@ console.log(args);
 			params["caloriesto"] = this.maxcalories;
 			paramsAdded = true;
 		}
+		if (typeof (this.searchparam["param"]) !== "undefined" && this.searchparam["param"] !== "") {
+			params["random"] = "false";
+			var words = this.searchparam["param"].replaceAll(" ", "~");
+			params["words"] = words;
+			this.helpService.saveSearchHistory(this.searchparam["param"], "text", "recipes", this.currentUser["id"]);
+			paramsAdded = true;
+			this.searchparam["param"] = "";
+		}
+		
 		params["instructions"] = "notempty";
 
 		params["returnfields"] = " id, label, image, cuisineType, mealType, healthLabels, dietLabels, calories, yield, created_by";

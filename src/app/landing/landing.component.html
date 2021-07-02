@@ -6,14 +6,9 @@
    <div class="container">
        <div class="trendings-card text-center wow animated bounceInDown" style="margin-top:50px;margin-bottom:50px">
          
-          <div class="chefs-card-inner">
-            <!--<img *ngIf="mealplans.length > 0" class="badget" src="assets/bg/ribbon2.png" />-->
-            <!--<img *ngIf="planStatus.length > 0" class="badge-right" src="assets/bg/schedule.png" />-->
-            <!--<div *ngIf="planStatus.length > 0" class="cover-ribbon">
-               <div class="cover-ribbon-inside">Today</div>
-            </div>-->
+          <div class="chefs-card-inner">            
                <h4>Hello<span *ngIf="currentUser['displayname']"> {{currentUser["displayname"]}}</span>, {{greetings}}</h4>
-               <h2 *ngIf="mealplans.length > 0" style="    padding-top: 20px;">Meal Plan for YOU</h2>
+               <h2 *ngIf="mealplans.length > 0" style=" padding-top: 20px;">Meal Plan for YOU</h2>
                <h2 *ngIf="planStatus.length > 0" style="    padding-top: 20px;">Your Meal Plan for Today</h2>
 
                <div class="short-separator"></div>
@@ -25,8 +20,7 @@
                </ng-container>
                <ng-container *ngIf="planStatus.length > 0">
                   <p class="plan-name">{{planStatus[0]["mpname"]}} </p>
-                    <!--<p class="plan-tags">{{planStatus[0]["tags"]}} <br/>
-                     </p>-->
+
                      <div class="mealplan hidden-xs" *ngIf="plan && plan['days'] && plan['days']['length'] > 0">
                         <ul>
                            <ng-container *ngFor="let mtype of mealTypeList; let m = index">
@@ -35,31 +29,7 @@
                                  <span>{{setFLU(mtype)}} :</span> {{limitTo(plan['days'][0][mtype]['label'], 30)}}
                               </a>
                            </li>
-                          <!--<li [ngClass]="plan['days'][0]['snack1tatus'] == '1'?'mealtypetick':'mealtype'" *ngIf="plan['days'][0]['snack1'] && plan['days'][0]['snack1']['label']">
-                              <a href="/recipedetails/{{plan['days'][0]['snack1']['id']}}"  target="_blank"  title = "{{plan['days'][0]['snack1']['label']}}" >
-                                <span>Morning Snack :</span> {{limitTo(plan['days'][0]['snack1']['label'], 24)}}
-                              </a>
-                           </li>
-                           <li class="mealtype" *ngIf="plan['days'][0]['lunch'] && plan['days'][0]['lunch']['label']">
-                              <a href="/recipedetails/{{plan['days'][0]['lunch']['id']}}" target="_blank" title = "{{plan['days'][0]['lunch']['label']}}" >
-                                 <span>Lunch :</span> {{limitTo(plan['days'][0]['lunch']['label'], 30)}}
-                              </a>
-
-                           </li>
-
-                           <li class="mealtype" *ngIf="plan['days'][0]['snack2'] && plan['days'][0]['snack2']['label']">
-                              <a href="/recipedetails/{{plan['days'][0]['snack2']['id']}}"  target="_blank"  title = "{{plan['days'][0]['snack2']['label']}}" >
-                                 <span>Evening Snack :</span> {{limitTo(plan['days'][0]['snack2']['label'], 25)}}
-                              </a>
-
-                           </li>
-
-                           <li class="mealtype" *ngIf="plan['days'][0]['dinner'] && plan['days'][0]['dinner']['label']">
-                              <a href="/recipedetails/{{plan['days'][0]['dinner']['id']}}"  target="_blank"  title = "{{plan['days'][0]['dinner']['label']}}" >
-                                 <span>Dinner :</span> {{limitTo(plan['days'][0]['dinner']['label'], 30)}}
-                              </a>
-
-                           </li>-->
+                        
                         </ng-container>
                         </ul>                      
                       </div>

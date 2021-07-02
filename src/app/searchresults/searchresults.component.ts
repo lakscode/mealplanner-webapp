@@ -1023,7 +1023,7 @@ gotopage(page, id = null){
 		var param = {};
 		if( typeof(this.searchparam["param"]) !== "undefined" && this.searchparam["param"] !== null && this.searchparam["param"] !== "")
 		{
-			param["q"] =  this.searchparam["param"];
+			param["param"] =  this.searchparam["param"];
 		}
 		this.router.navigate([page, param]);    
 	}
