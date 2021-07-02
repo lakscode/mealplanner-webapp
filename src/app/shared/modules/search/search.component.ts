@@ -615,7 +615,9 @@ console.log(args);
 
 	}
 
-	
+	formatVal(str) {
+		return this.helpService.formatValue(str);
+	}
   setFLU(str) {
 		var retValue = str;
 		if (str !== "") {
