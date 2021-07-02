@@ -1,0 +1,237 @@
+<div class="wrapper-search">
+
+  <div class="row">
+      <div class="col-12 "
+          style="background:#FFF;  margin:0;  padding-bottom:20px;padding-left:0px; padding-right:0px;">
+          <div style="padding-left: 10px; padding-right: 10px;" class="col-12">
+              <label class="searchicon">
+                  <i class="fa fa-search" aria-hidden="true"></i>
+              </label>
+              <input type="text" (keyup.enter)="hideLabels();searchProps()" [(ngModel)]="searchparam.q" class="inputbox"
+                  placeholder="Search Recipes..." />
+              <input type="button" (click)="hideLabels();searchProps()" style="margin-bottom:10px;"
+                  [ngClass]="searchmorebar?'defaultbtn searchbtn hideonmobile bg-orange' :' defaultbtn searchbtn  bg-orange'"
+                  id="header-submit-search-pro" name="submit" value="Search">
+              <input type="button" (click)="hideLabels();clearFilters()" style="margin-bottom:10px;"
+                  [ngClass]="searchmorebar?'defaultbtn searchbtn hideonmobile bg-orange' :' defaultbtn searchbtn  bg-orange'"
+                  id="header-submit-search-pro" name="submit" value="Clear">
+          </div>
+
+
+          <div class="searchmorebar searchbaranim">
+              <div class="row mleft">
+
+                  <div class="col-12 col-xs-12" style="margin-bottom:10px;">
+
+
+                      <div class="multi-select-lbl">
+                          <a [ngClass]="searchFilterLabels[0].selected?'filterlabel active': 'filterlabel'"
+                              href="javascript:void(0)" (click)="showLabels(searchFilterLabels[0])">
+                              {{searchFilterLabels[0].label}} <i class="fa fa-angle-down"
+                                  aria-hidden="true"></i>
+                          </a>
+
+                          <div *ngIf="searchFilterLabels[0]['selected']" class="col-12 multi-select">
+                              <div class="filter-group">
+                                  <ng-container
+                                      *ngFor="let hlabel of healthlabelsList; let h = index">
+                                      <div class="listSection " id="healthLabels">
+                                          <label class="container">{{hlabel.name}}
+                                              <input [(ngModel)]="hlabel.selected" type="checkbox"
+                                                  [checked]="h == 0?'checked':''">
+                                              <span class="checkmark"></span>
+                                          </label>
+                                      </div>
+                                  </ng-container>
+
+
+                              </div>
+                          </div>
+                      </div>
+                      <div class="multi-select-lbl">
+                          <a [ngClass]="searchFilterLabels[1].selected?'filterlabel active': 'filterlabel'"
+                              href="javascript:void(0)" (click)="showLabels(searchFilterLabels[1])">
+                              {{searchFilterLabels[1].label}} <i class="fa fa-angle-down"
+                                  aria-hidden="true"></i>
+                          </a>
+                          <div *ngIf="searchFilterLabels[1]['selected']" class="col-12 multi-select">
+                              <div class="filter-group">
+                                  <ng-container *ngFor="let dlabel of dietLabelsList; let h = index">
+                                      <div class="listSection  " id="diethLabels">
+                                          <label class="container">{{dlabel.name}}
+                                              <input [(ngModel)]="dlabel.selected" type="checkbox"
+                                                  [checked]="h == 0?'checked':''">
+                                              <span class="checkmark"></span>
+                                          </label>
+                                      </div>
+                                  </ng-container>
+
+
+                              </div>
+                          </div>
+                      </div>
+                      <div class="multi-select-lbl">
+                          <a [ngClass]="searchFilterLabels[2].selected?'filterlabel active': 'filterlabel'"
+                              href="javascript:void(0)" (click)="showLabels(searchFilterLabels[2])">
+                              {{searchFilterLabels[2].label}} <i class="fa fa-angle-down"
+                                  aria-hidden="true"></i>
+                          </a>
+                          <div *ngIf="searchFilterLabels[2]['selected']" class="col-12  multi-select">
+                              <div class="filter-group">
+
+
+
+                                  <ng-container *ngFor="let clabel of cuisineTypeList; let c = index">
+                                      <div class="listSection " id="cuisineType">
+                                          <label class="container">{{setFLU(clabel.name)}}
+                                              <input [(ngModel)]="clabel.selected" type="checkbox"
+                                                  [checked]="c == 0?'checked':''">
+                                              <span class="checkmark"></span>
+                                          </label>
+                                      </div>
+                                  </ng-container>
+
+
+                              </div>
+                          </div>
+                      </div>
+                      <div class="multi-select-lbl">
+                          <a [ngClass]="searchFilterLabels[3].selected?'filterlabel active': 'filterlabel'"
+                              href="javascript:void(0)" (click)="showLabels(searchFilterLabels[3])">
+                              {{searchFilterLabels[3].label}} <i class="fa fa-angle-down"
+                                  aria-hidden="true"></i>
+                          </a>
+                          <div *ngIf="searchFilterLabels[3]['selected']" class="col-12  multi-select">
+                              <div class="filter-group">
+
+
+                                  <ng-container *ngFor="let mlabel of mealTypeList; let m = index">
+                                      <div class="listSection " id="mealType">
+                                          <label class="container">{{setFLU(mlabel.name)}}
+                                              <input [(ngModel)]="mlabel.selected" type="checkbox"
+                                                  [checked]="m == 0?'checked':''">
+                                              <span class="checkmark"></span>
+                                          </label>
+                                      </div>
+                                  </ng-container>
+
+
+                              </div>
+                          </div>
+                      </div>
+                      <div class="multi-select-lbl">
+                          <a [ngClass]="searchFilterLabels[4].selected?'filterlabel active': 'filterlabel'"
+                              href="javascript:void(0)" (click)="showLabels(searchFilterLabels[4])">
+                              {{searchFilterLabels[4].label}} <i class="fa fa-angle-down"
+                                  aria-hidden="true"></i>
+                          </a>
+                          <div *ngIf="searchFilterLabels[4]['selected']" class="col-12  multi-select">
+                              <div class="filter-group">
+
+                                  <div class="row " style="margin-left:0px ;margin-right:0px;">
+                                      <ng-container
+                                          *ngFor="let mlabel of mineralsLabelsList; let m = index">
+
+                                          <div class="col-12 paddinglr0">
+                                              <div class="row">
+
+
+                                                  <div class="col-12 ">
+                                                      <label class="container">{{setFLU(mlabel.name)}}
+                                                          <input [(ngModel)]='mlabel.selected'
+                                                              type="checkbox"
+                                                              [checked]="m == 0?'checked':''">
+                                                          <span class="checkmark"></span>
+                                                      </label>
+                                                  </div>
+                                                  <div class="col-5 paddinglr0"
+                                                      style="margin-bottom:15px;"
+                                                      *ngIf="mlabel.selected">
+
+                                                      <input class="mineral-input" type='text'
+                                                          name="minerals_{{m}}_min"
+                                                          [(ngModel)]="mlabel.min"
+                                                          placeholder="min" />
+                                                      <span
+                                                          class="maxmin">{{formatVal(mlabel.t_min)}}</span>
+
+                                                  </div>
+                                                  <div class="col-5 paddinglr0"
+                                                      style="margin-bottom:15px;"
+                                                      *ngIf="mlabel.selected">
+                                                      <input class="mineral-input" type='text'
+                                                          name="minerals_{{m}}_max"
+                                                          [(ngModel)]="mlabel.max"
+                                                          placeholder="max" />
+                                                      <span
+                                                          class="maxmin">{{formatVal(mlabel.t_max)}}</span>
+
+                                                  </div>
+                                                  <div class="col-2 paddinglr0"
+                                                      style="margin-bottom:15px;"
+                                                      *ngIf="mlabel.selected"> {{mlabel.unit}}</div>
+                                              </div>
+                                          </div>
+
+                                      </ng-container>
+
+
+
+
+
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="multi-select-lbl">
+                          <a [ngClass]="searchFilterLabels[5].selected?'filterlabel active': 'filterlabel'"
+                              href="javascript:void(0)" (click)="showLabels(searchFilterLabels[5])">
+                              {{searchFilterLabels[5].label}} <i class="fa fa-angle-down"
+                                  aria-hidden="true"></i>
+                          </a>
+                          <div *ngIf="searchFilterLabels[5]['selected']" class="col-12 multi-select"
+                              style="height:65px">
+                              <div class="filter-group">
+
+                                  <div class="listSection" style="display:block;margin:0px">
+                                      <input [(ngModel)]="maxcalories"
+                                          placeholder="Enter maximum calories" type="text"
+                                          class="inputbox" style="margin-top:0px;width:180px" />
+
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="multi-select-lbl">
+                          <input type="button" (click)="searchProps()" style="margin-bottom:10px;"
+                          class="defaultbtn searchbtn" id="header-submit-search-pro" name="submit"
+                          value="Apply filters">
+
+                      </div>
+
+                  </div>
+
+
+
+                  <div class="col-12 showonmobile">
+                      <input type="button" (click)="searchProps()" style="margin-bottom:10px;"
+                          class="defaultbtn searchbtn" id="header-submit-search-pro" name="submit"
+                          value="Search">
+
+                  </div>
+
+              </div>
+
+
+
+          </div>
+
+
+
+      </div>
+
+
+
+  </div>
+
+</div>

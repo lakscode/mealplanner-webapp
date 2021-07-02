@@ -50,7 +50,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="wrapper-search">
+
+                <app-search (returnData) = "resultSearch($event)"></app-search>
+                <!--<div class="wrapper-search">
 
                     <div class="row">
                         <div class="col-12 "
@@ -286,7 +288,7 @@
 
                     </div>
 
-                </div>
+                </div>-->
                 <!--<div style='height:20px; width:100%'></div>-->
                 <div *ngIf="loadingData && !noResult">Loading data...</div>
                 <div class="recipe-set" *ngIf="!noResult">

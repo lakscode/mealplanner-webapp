@@ -184,7 +184,7 @@ console.log(args);
 			}
 			console.log(this.routeParams);
 			this.splitcontent = false;
-			this.searchProps();
+		//	this.searchProps();
 		});
 
 		//this.loadRecipes()
@@ -1178,6 +1178,15 @@ console.log(args);
 			}
 		}
 		console.log(this.newRecipe);
+	}
+
+	resultSearch(event)
+	{
+console.log(event);
+if(event !== null )
+{
+	this.recipesList1 = event;
+}
 	}
 }
 
