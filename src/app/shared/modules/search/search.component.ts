@@ -538,7 +538,7 @@ export class SearchComponent implements OnInit, OnDestroy {
 
 			if(!paramsAdded)
 			{
-				params["cuisineType"] = "american"
+			//	params["cuisineType"] = "american"
 			}
 			console.log(params);
 			var res = this.dbService.getDatabyFields("recipes", params).subscribe(invData => setTimeout(() => {
