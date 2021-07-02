@@ -291,7 +291,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 	gotoLogin()
 	{
 	var str = this.location.path();	
-
+	
 		if(!this.loggedIn && str.indexOf("resetpassword") == -1 && str.indexOf("index") == -1 && str.indexOf("home") == -1 && str.indexOf("signup") == -1 && str.indexOf("pricing") == -1 && str.indexOf("features") == -1 && str.indexOf("recipedetails") == -1  && str.indexOf("group") == -1 && str.indexOf("privacy") == -1 && str.indexOf("benefits") == -1 && str.indexOf("calculate") == -1  && str.indexOf("recipesubmit") == -1  && str.indexOf("plancreate") == -1 && str.indexOf("recipesmodify") == -1 && str.indexOf("approve") == -1 && str.indexOf("admin") == -1 && str.indexOf("searchresults") == -1  && str.indexOf("recipebookview") == -1 && str.indexOf("questionnaire") == -1)
 		{
 			var params = {};
@@ -439,6 +439,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 		if(this.searchparam !== "")
 		{
 			this.router.navigate(["searchresults", {param:this.searchparam}]);
+			this.searchparam = "";
 		}
 	}
   
