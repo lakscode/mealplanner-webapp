@@ -40,9 +40,9 @@ playstoreUrl: any = "";
 
 	
 		this.isMobile = this.helpService.isMobile();
-		this.sliderList2.push({"image":"assets/mtc1_s.jpg","image_small":"assets/mtc1_s.jpg",});
-    this.sliderList2.push({"image":"assets/mtc2_s.jpg","image_small":"assets/mtc2_s.jpg",});
-    this.sliderList2.push({"image":"assets/mtc3_s.jpg","image_small":"assets/mtc3_s.jpg",});
+		this.sliderList2.push({"title":"mobile app image", "image":"assets/mtc1_s.jpg","image_small":"assets/mtc1_s.jpg",});
+    this.sliderList2.push({"title":"mobile app image", "image":"assets/mtc2_s.jpg","image_small":"assets/mtc2_s.jpg",});
+    this.sliderList2.push({"title":"mobile app image", "image":"assets/mtc3_s.jpg","image_small":"assets/mtc3_s.jpg",});
 
 
 		  this.startpage = "questionnaire";
