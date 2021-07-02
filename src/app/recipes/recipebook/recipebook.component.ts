@@ -42,6 +42,7 @@ export class RecipebookComponent implements OnInit, OnChanges {
 	addItem: boolean = false;
 	showNutrientsFlag: boolean = false;
 	setFav: boolean = false;
+	noResult:boolean = false;
 	constructor(private router: Router, private route: ActivatedRoute, private toastr: ToastrService, private pdfService: PDFService, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder, private modalService: ModalService) {
 	
 	}
@@ -832,7 +833,8 @@ var res =   this.dbService.getDatabyTablebyQuery("favourites", params).subscribe
 	var res =   this.dbService.postDataByTable("favourites", params1).subscribe(invData => setTimeout(() => {
 		if(invData !== null)
 		{
-			alert("favourite has been set");
+			//alert("favourite has been set");
+			this.toastr.success('Recipe has been set as Favourite', 'Recipe Book!')
 			//this.getFavouriteStatus();
 			var fIndex = this.recipesList.findIndex(x=>(x["id"] === id));
 			if(fIndex > -1)
@@ -983,6 +985,10 @@ getFavouriteStatusForCurrentUser(idslist)
 				var data = {};
 				data["body"] = event;
 				this.formatResult(data);
+				this.noResult = false;
+			} else {
+			this.noResult = true;
+			this.recipesList1 = [];
 			}
 		}
 	}
