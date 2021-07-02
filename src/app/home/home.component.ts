@@ -190,13 +190,7 @@ startpage: any = "signup";
 	}
 	loaduserJoinedStatus()
 	{
-		/*
-	  SELECT c.id, COUNT(cj.id) AS usercount
-	  FROM collection AS c
-	  LEFT JOIN collection_join AS cj ON c.id = cj.collection_id
-	  GROUP BY c.id, cj.collection_id
-  
-	  */
+	
 		if( typeof( this.currentUser) !== "undefined" && this.currentUser !== null && typeof( this.currentUser["id"]) !== "undefined" && this.currentUser["id"] !== null )
 		{
 	  console.log("in loaduserJoinedStatus");

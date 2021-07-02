@@ -78,7 +78,7 @@ console.log(args);
 				for (let j = 0; j < this.recipesList1.length; j++) {
 					this.recipesList1[j]['showpopup'] = false;
 					this.recipesList1[j]['showAdd2MP'] = false;
-				//	this.recipesList1[j]['showAdd2C'] = false;
+					this.recipesList1[j]['showAdd2C'] = false;
 				}
 
 				
@@ -430,10 +430,10 @@ console.log(args);
 			if (this.mineralsLabelsList[m]["selected"])
 				minerals += this.mineralsLabelsList[m]["name"] + "~";
 			if (typeof (item["min"]) !== "undefined" && item["min"] !== "" && item["min"] > 0) {
-				mQuery += " " + item["name"].toLowerCase() + " >= " + item["min"] + " AND ";
+				mQuery += " " + item["name"].toLowerCase() + "/recipes.yield >= " + item["min"] + " AND ";
 			}
 			if (typeof (item["max"]) !== "undefined" && item["max"] !== "" && item["max"] > 0) {
-				mQuery += " " + item["name"].toLowerCase() + " <= " + item["max"] + " AND ";
+				mQuery += " " + item["name"].toLowerCase() + "/recipes.yield <= " + item["max"] + " AND ";
 			}
 
 		}

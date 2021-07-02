@@ -58,6 +58,15 @@
   background: $orange1;
   display:block;
 }
+.paramn
+{
+  float:left; 
+  padding:2px; 
+  margin-right:5px;
+  display:flex; 
+  align-items: center;
+  width: calc(50% - 5px);
+}
 
 .meal-plans-content {
   width: 100%;

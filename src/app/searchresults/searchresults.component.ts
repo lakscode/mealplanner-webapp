@@ -1021,7 +1021,12 @@ gotopage(page, id = null){
 	}
 	else if(page == "recipes")
 	{
-		this.router.navigate([page]);    
+		var param = {};
+		if( typeof(this.searchparam["param"]) !== "undefined" && this.searchparam["param"] !== null && this.searchparam["param"] !== "")
+		{
+			param["q"] =  this.searchparam["param"];
+		}
+		this.router.navigate([page, param]);    
 	}
  }
 /*********** for collections  */
