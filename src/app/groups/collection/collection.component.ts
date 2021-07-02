@@ -1723,10 +1723,9 @@ resultSearch(event)
 		else
 		{
 			this.noresult = true;
+			this.recipesList1 = [];
 		}
 		
 	}
 }
 }
-
-	
