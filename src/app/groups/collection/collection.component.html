@@ -40,10 +40,10 @@
                                           
                                             <button (click)="joincollection()" *ngIf="showActions['join'] "
                                                 class="create-button anim-button btn-4">Join</button>
-                                            <button class="create-button anim-button btn-4" (click)="addNew()">Add
+                                            <button class="create-button anim-button btn-4" (click)="addNew()" *ngIf="isAdmin || collectionOwner">Add
                                                 Recipe</button>
                                             <button class="create-button anim-button btn-4"
-                                                (click)="toggleRecipeAddURL = !toggleRecipeAddURL">Save from
+                                                (click)="toggleRecipeAddURL = !toggleRecipeAddURL" *ngIf="isAdmin || collectionOwner">Save from
                                                 URL</button>
 
 

@@ -50,6 +50,8 @@ export class CollectionComponent implements OnInit, OnChanges {
 urlTweet : any;
 urlWhatsApp: any;
 msg: any = "";
+isAdmin : boolean = false;
+userDetails: any ={};
 
 	constructor(private router: Router, private sanitize: DomSanitizer, private route: ActivatedRoute, private toastr: ToastrService, private pdfService: PDFService, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder, private modalService: ModalService) {
 	
@@ -117,6 +119,13 @@ loadDefaults()
 	this.ispublic = false;
 	this.apiUrl = environment.apiUrl;
 	this.currentUser =this.helpService.getCurrentUser();
+		this.userDetails = this.helpService.setUserRoles(this.currentUser);
+				if(this.userDetails["dietitian"] || this.userDetails["admin"] || this.userDetails["moderator"] ){
+					this.isAdmin =  true;
+				}else {
+					this.isAdmin = false;
+				}
+			console.log(this.isAdmin);
 	if(this.currentUser !== null)
 	{
 	  if( this.currentUser["firstname"] !== "")
