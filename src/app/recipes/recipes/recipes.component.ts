@@ -707,6 +707,10 @@ export class RecipesComponent implements OnInit {
 		if(event !== null )
 		{
 			this.recipesList1 = event;
+			if(this.recipesList1.length == 0)
+			this.noResult = true;
+			else
+			this.noResult = false;
 		}
 	}
 }

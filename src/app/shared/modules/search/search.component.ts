@@ -541,6 +541,7 @@ export class SearchComponent implements OnInit, OnDestroy {
 			console.log(params);
 			var res = this.dbService.getDatabyFields("recipes", params).subscribe(invData => setTimeout(() => {
 		
+        console.log(invData);
 				if (invData["body"]["length"] == 0) {
 					this.splitcontent = true;
 					if (this.loopCount < 1) {
@@ -548,6 +549,12 @@ export class SearchComponent implements OnInit, OnDestroy {
 						this.searchProps();
 
 					}
+          else
+          {
+            console.log("No result");
+            this.recipesList1 = [];
+            this.save();
+          }
 					this.noResult = true;
 				}
 				else {
