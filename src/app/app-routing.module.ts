@@ -13,25 +13,26 @@ const routes: Routes = [
     path: 'home',
     component: HomeComponent
   }, 
- /* {
+  {
     path: "home",
     loadChildren: "./home/home.module#HomeModule"
   },
-  { 
+  /*{ 
     path: 'autherize', 
     loadChildren: './autherize/autherize.module#AutherizeModule'
-  },
+  }, */
   { 
     path: 'benefits',   
-    loadChildren: './benefits/benefits.module#BenefitsModule'
-
+    //loadChildren: './benefits/benefits.module#BenefitsModule'
+    loadChildren: () => import('./benefits/benefits.module').then(m => m.BenefitsModule)
   },
-    { 
+   { 
     path: 'faqs', 
-    loadChildren: './faqs/faqs.module#FaqsModule'
+   // loadChildren: './faqs/faqs.module#FaqsModule',
+    loadChildren: () => import('./faqs/faqs.module').then(m => m.FaqsModule)
 
   },
-   { path: 'features', 
+  /*  { path: 'features', 
 loadChildren: './features/features.module#FeaturesModule'
 },
 { 

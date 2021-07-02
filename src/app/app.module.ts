@@ -122,7 +122,7 @@ import { AdminModule } from './admin/admin.module';
 	LayoutModule,
     LoginModule,
 	SignupModule,
-    BenefitsModule,
+   // BenefitsModule,
 	LandingModule,
 	FeaturesModule,
 	RecipesModule,
@@ -150,7 +150,7 @@ import { AdminModule } from './admin/admin.module';
 	RecipebooksModule,
 	RecipebookModule,
 	RecipebookviewModule,
-	FaqsModule,
+	//FaqsModule,
 
 	CollectionsModule,
 	CollectionModule,
