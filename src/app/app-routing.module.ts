@@ -13,14 +13,14 @@ const routes: Routes = [
     path: 'home',
     component: HomeComponent
   }, 
-  {
+/*  {
     path: "home",
     loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
   },
-  /*{ 
+  { 
     path: 'autherize', 
     loadChildren: './autherize/autherize.module#AutherizeModule'
-  }, */
+  }, 
   { 
     path: 'benefits',   
     //loadChildren: './benefits/benefits.module#BenefitsModule'
@@ -32,7 +32,7 @@ const routes: Routes = [
     loadChildren: () => import('./faqs/faqs.module').then(m => m.FaqsModule)
 
   },
-  /*  { path: 'features', 
+   { path: 'features', 
 loadChildren: './features/features.module#FeaturesModule'
 },
 { 

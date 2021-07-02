@@ -4,7 +4,7 @@ import { BenefitsComponent } from './benefits.component';
 
 const routes: Routes = [
   { 
-    path: '', 
+    path: 'benefits', 
     component: BenefitsComponent,
     data: { showSidebar: false } 
   }

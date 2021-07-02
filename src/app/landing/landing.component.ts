@@ -443,6 +443,8 @@ getPlanStatus()
 
 	  var res =   this.dbService.getDatabyTablebyQuery("mealplan_user_mapping", params).subscribe(invData => setTimeout(() => {
 
+
+		
 	if(invData !== null)
 	{
 	 
@@ -451,11 +453,14 @@ getPlanStatus()
 		this.planStatus = invData["body"];
 
 		this.plan = invData["body"][0];
-		  var Difference_In_Time = new Date().getTime() - new Date(this.planStatus[0]["startdate"] ).getTime(); 
-   
-			  var diff_days = Difference_In_Time / (1000 * 3600 * 24); 
-  
-			  this.loadDaysData(diff_days);
+		var temp = this.plan["startdate"].split("T");
+		this.plan["startdate"] = temp[0];
+
+			var Difference_In_Time = new Date().getTime() - new Date(this.plan["startdate"] ).getTime(); 
+				
+		var diff_days = Difference_In_Time / (1000 * 3600 * 24); 
+
+		this.loadDaysData(diff_days);
 
 	  }
 	  else
@@ -700,7 +705,7 @@ transform(value: any) {
 		  params["meal_plan_id"] = this.plan["id"];
 		  params["day_num"] = param_day_num;
 		  this.mealTypeList = ["breakfast", "snack1", "lunch", "snack2", "dinner"];
-  
+		console.log(params);
 		var res =   this.dbService.getDataByTable("days", params).subscribe(dData => setTimeout(() => {
 
 		  if(dData !== null)

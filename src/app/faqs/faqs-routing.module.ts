@@ -4,7 +4,7 @@ import { FaqsComponent } from './faqs.component';
 
 const routes: Routes = [
   { 
-    path: '', 
+    path: 'faqs', 
     component: FaqsComponent,
     data: { showSidebar: false } 
   }

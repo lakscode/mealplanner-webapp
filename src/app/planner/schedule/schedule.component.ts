@@ -168,10 +168,11 @@ export class ScheduleComponent implements OnInit {
 			  this.plan["totalweeks"] = mpData["body"][0]["totalweeks"];
 			  this.plan["mealplanid"] = mpData["body"][0]["id"];
 			  this.plan["days"] = [];
+			 
 			  var Difference_In_Time = new Date().getTime() - new Date(this.plan["startdate"] ).getTime(); 
-   
+				
 			  var diff_days = Difference_In_Time / (1000 * 3600 * 24); 
-  
+		
 			  this.loadDaysData(diff_days);
 			}
 		  }
@@ -198,11 +199,11 @@ export class ScheduleComponent implements OnInit {
 	  if(typeof(this.plan["id"]) !== "undefined" && this.plan["id"] !== "")
 	  {
 		var params = {};
-		 
+		 	
 		  params["meal_plan_id"] = this.plan["id"];
 		  params["day_num"] = param_day_num;
   
-  
+		console.log(params);
 		var res =   this.dbService.getDataByTable("days", params).subscribe(dData => setTimeout(() => {
 		  console.log(dData);
 		  if(dData !== null)
