@@ -6,7 +6,7 @@ import { UserService } from '../services/user.service';
 
 import {DBService} from "../dbservices/db.service";
 import { SocialAuthService, GoogleLoginProvider, SocialUser, FacebookLoginProvider } from 'angularx-social-login'
-
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -28,7 +28,7 @@ role: any;
 sub: any;
   errorPassMatch: any;
   socialUser: SocialUser;
-  constructor(private router: Router, private route: ActivatedRoute, private helpService: HelpService, private dbService: DBService, private socialAuthService: SocialAuthService, private userService: UserService) { 
+  constructor(private router: Router, private toastr: ToastrService, private route: ActivatedRoute, private helpService: HelpService, private dbService: DBService, private socialAuthService: SocialAuthService, private userService: UserService) { 
     this.role = "FREE";
     this.errorMessage = "";
     this.successMessage = "";
@@ -56,7 +56,7 @@ sub: any;
     this.username = "";
     this.pass = "";
   
-    this.userObj = {"username":"", "email":"", "password":"", "confirmpass":""}
+    this.userObj = {"username":"", "email":"", "password":"","role":1, "confirmpass":""}
 
     this.routeParams = {};
     this.sub = this.route.params.subscribe(params => {
@@ -151,15 +151,16 @@ else if(this.userObj.password !== "")
           {
             if(typeof(invData["result"]) !== "undefined" && invData["result"] == "success")
             {
-              this.successMessage = "User has been created. ";
+              //this.successMessage = "User has been created. ";
+              this.toastr.success("User has been created.", "Sign Up!!!");
               var parent = this;
                 setTimeout(function(){ 
                   parent.gotologin();
-                }, 3000);
+                }, 2000);
             }
           }
         }));
-
+        
       }
     }
      

@@ -42,7 +42,7 @@ export class RecipesComponent implements OnInit {
 	showNutrientsFlag: boolean = false;
 	cuisineTypeList: Array<any> = [];
 	noResult: boolean = false;
-
+	loadingData: boolean = false;
 	searchFilterLabels: Array<any> = [];
 	modifyFilterLabels: Array<any> = [];
 	splitcontent: boolean = false;
@@ -58,7 +58,11 @@ export class RecipesComponent implements OnInit {
 	constructor(private router: Router, private toastr: ToastrService, private route: ActivatedRoute, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder, private modalService: ModalService) {
 
 	}
-
+	hideModifyLabels() {
+		for (let l = 0; l < this.modifyFilterLabels.length; l++) {
+			this.modifyFilterLabels[l]['selected'] = false;
+		}
+	}
 	callhideFunct(args)
 	{
 		var classlist = this.helpService.getDateIgnoreClassList();

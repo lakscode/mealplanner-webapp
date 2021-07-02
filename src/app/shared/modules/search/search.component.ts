@@ -20,7 +20,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     @Input() showhide: any = true;
     @Input() isPlan: any = "";
 
-
+    searchmorebar: boolean = false;
     sliderList: Array<any> = [];
      element: any;
      showhideTimeFlag: any;
