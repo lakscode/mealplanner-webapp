@@ -52,7 +52,7 @@ urlWhatsApp: any;
 msg: any = "";
 isAdmin : boolean = false;
 userDetails: any ={};
-
+allowModify: boolean = false;
 	constructor(private router: Router, private sanitize: DomSanitizer, private route: ActivatedRoute, private toastr: ToastrService, private pdfService: PDFService, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder, private modalService: ModalService) {
 	
 	}
@@ -122,10 +122,14 @@ loadDefaults()
 		this.userDetails = this.helpService.setUserRoles(this.currentUser);
 				if(this.userDetails["dietitian"] || this.userDetails["admin"] || this.userDetails["moderator"] ){
 					this.isAdmin =  true;
+					this.allowModify = true;
 				}else {
 					this.isAdmin = false;
+					this.allowModify = false;
 				}
 			console.log(this.isAdmin);
+
+			
 	if(this.currentUser !== null)
 	{
 	  if( this.currentUser["firstname"] !== "")
@@ -145,7 +149,7 @@ loadDefaults()
 		  }    
 		  else
 		  {
-			this.collectionOwner = true;
+			//this.collectionOwner = true;
 			  this.setDefaults();
 		   
 	   
@@ -153,7 +157,7 @@ loadDefaults()
 		  if (typeof (this.routeParams.draft) !== "undefined") {
 		   console.log(this.routeParams.draft);
 		   this.loadcollection(this.routeParams.draft);
-		   this.collectionOwner = true;
+		   //this.collectionOwner = true;
 		 }  
 		   console.log(this.routeParams);
 	}); 
@@ -187,13 +191,13 @@ loadcollection(id)
  }
 
  console.log(params);
- 
+ this.collectionOwner = false;
  if(this.loading)
   {
 	 var res =   this.dbService.getDataByTable("collection", params).subscribe(rbookData => setTimeout(() => {
 
 	console.log(rbookData);
-	this.collectionOwner = false;
+	
 	 
 	if(rbookData !== null)
 	{
@@ -201,10 +205,18 @@ loadcollection(id)
 	  {
 		this.collection = rbookData["body"][0];
 		if(this.currentUser['id'] == this.collection['created_by'])
-	  	this.collectionOwner = true;
+	  	{
+			  this.collectionOwner = true;
+			  this.allowModify = true;
+		}
+		if(this.currentUser['id'] == this.collection['created_by'] && this.currentUser["id"] == 2)
+	  	{
+			this.allowModify = true;
+		}
+
 		
-		  if(this.collectionOwner)
-		  this.showActions["join"] = false;
+		if(this.collectionOwner)
+		this.showActions["join"] = false;
 		this.loadRecipes();
 	  }
  
