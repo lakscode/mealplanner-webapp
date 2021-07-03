@@ -44,7 +44,51 @@
  
  <!--trending plan-->
 
-   <div class="site-section">
+
+ 
+<section class="hot-recipes-var2 bg-white "   *ngIf="!isMobile && healthLabels && healthLabels.length > 0" style="margin-bottom:30px;padding-bottom:0px;">
+   <div class="container">
+       <div class="wrapper-hot-recipe-var2">
+          <div class="hot-recipes-bordered">
+               <div class="heading-var1 text-center animated wow flipInX">
+                   <h2><a href="javascript:void(0)">Discover new recipes you’ll love!!!</a></h2>
+                 <span class="heading-bell"></span>
+                 <p>Subscribe to get recipes which offer balanced nutrition and to create customized  meal plan to your personal tastes...</p>
+               </div>
+
+
+               <div class="row " >
+               <div class="col-12">
+                  <div class="circle-items" >
+                     <div class="row">
+                        <div class="col-4">
+                           <ng-container  *ngFor="let item of healthLabels; let i = index">
+                              <div *ngIf="i < 4">
+                                 <div [ngClass] = "currentHIndex == i ? 'circle-item right active ':'circle-item right'"  (click)="setCurrentImg(item, i)" class=""><a href="javascript:void(0)" title="{{item.label}}"> {{item.label}}</a></div>
+                              </div>
+                           </ng-container>
+                         </div>
+                        <div class="col-4" style="text-align:center;">
+                           <img alt="{{currentItem['label']}}" class="himg {{currentItem['class']}}" src="{{currentItem['image']}}" />
+                        </div>
+                        <div class="col-4">
+                           <ng-container  *ngFor="let item2 of healthLabels; let j= index">
+                              <div (click)="setCurrentImg(item2, j)"  *ngIf="j > 3  && j < 8" >
+                                 <div [ngClass] = "currentHIndex == j? 'circle-item left active':'circle-item left'"  class=""><a href="javascript:void(0)" title="{{item2.label}}">{{item2.label}}</a></div>
+                              </div>
+                           </ng-container>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</section>
+
+
+   <div class="site-section"  *ngIf="isMobile">
       <div class="container" >
          <div class="col-12" *ngIf="healthLabels.length > 1">
             <div class="" style="display:flex; align-items: center;min-height:450px;padding-top:30px"> 
