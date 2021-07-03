@@ -87,12 +87,10 @@ export class SearchComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
       this.processing = false;
-        // customize default values of carousels used by this component tree
         this.loadRouteParams()
     }
     ngOnChanges() {
-      console.log("on changes");
-      this.processing = false;
+         this.processing = false;
       
       this.loadRouteParams()
   }
@@ -151,8 +149,7 @@ export class SearchComponent implements OnInit, OnDestroy {
 	
 	save()
 	{
-  //  console.log(this.recipesList1);
-    this.returnData.emit(this.recipesList1);
+     this.returnData.emit(this.recipesList1);
 
 	}	
 	
