@@ -25,11 +25,13 @@ export class LandingComponent implements OnInit {
 	playstoreUrl: any = "";
 	isUser: any = {};
 	images: any;
+	isMobile: boolean  = false;
 constructor(private router: Router, private httpClient : HttpClient, private sanitizer: DomSanitizer , public dbService: DBService, public helpService: HelpService) {
 	this.RecipeoftheDay = [];
 	}
 
 	ngOnInit() {
+		this.isMobile = this.helpService.isMobile();
 		this.images = {};
 		this.images["appstore"]  = "assets/app-store.png"; 
 		this.images["playstore"]  = "assets/play-store.png";
@@ -240,7 +242,8 @@ constructor(private router: Router, private httpClient : HttpClient, private san
 	{
 	  this.healthLabels = [];
 	
-				 var arrLabel = constants.healthLabelsWithImages;
+				 //var arrLabel = constants.healthLabelsWithImages;
+				 var arrLabel = constants.hLabelsWithImages;
 				 if(arrLabel.length > 0)
 				 {
 				   for(let l=0; l < arrLabel.length; l++)
@@ -249,8 +252,32 @@ constructor(private router: Router, private httpClient : HttpClient, private san
 				   }
 				 }
 			  
-   
+				 this.currentItem = this.healthLabels[0];
+				 this.setIndexHLabel();
 	}
+
+	currentItem : any  = "";
+	currentHIndex: any = 0;
+	setCurrentImg(item, index)
+	{
+		this.currentHIndex = index;
+		this.currentItem = item;	
+		this.currentItem["class"] = "wow zoomIn";
+	}
+	setIndexHLabel()
+	{
+		this.currentItem = this.healthLabels[this.currentHIndex];
+		console.log(this.currentItem);
+		this.currentItem["class"] = "wow zoomIn "
+		setTimeout(() => {
+			this.currentHIndex++;
+			if(this.currentHIndex > 7 )
+			this.currentHIndex = 0;
+			this.setIndexHLabel();
+
+		},4000);
+	}
+
 	loadHealthLabelsfromDB()
 	{
 	  this.healthLabels = [];
