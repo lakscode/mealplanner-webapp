@@ -703,56 +703,6 @@ a:hover {
   display:block;
 }
 }
-.circle-items
-{
-  
-  width:100%;
-}
-.circle-items .circle-item
-{
-display:block;
- font-size:20px;
-
- color:#000;
- margin:40px 20px;
- 
-}
-.circle-items .himg
-{
-  width:90%; 
-  margin:0 auto;
-  border-radius:50%;
-  box-shadow: 0 1rem 1.5rem rgb(0 0 0 / 45%);
-  border:10px solid $green;
-}
-.circle-items .circle-item a
-{
-  font-size:20px;
-  color:#000;
-  padding:10px;
-  background:#FFF;
-  border-radius:5px;
-  box-shadow: 0px 15px 20px -10px rgb(0 0 0 / 15%), 0px 1px 4px -2px rgb(0 0 0 / 20%);
-  border: 1px solid #dee2e6 !important;
-  width:auto;
-  font-family: 'Lato', sans-serif;
-  
-  font-weight:bold; 
-}
-.circle-items .active a
-{
-  font-weight: 900;
-  color:$green;
-  box-shadow: 0px 15px 20px -10px rgb(0 0 0 / 15%), 0px 1px 4px -2px rgb(0 0 0 / 40%);
-}
-.right
-{
-  text-align:right;
-}
-.left
-{
-  text-align:left;
-}
 /*
 .circle-items
 {
