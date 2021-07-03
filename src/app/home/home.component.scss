@@ -724,7 +724,7 @@ display:block;
 }
 .circle-items .circle-item a
 {
-  font-size:24px;
+  font-size:20px;
   color:#000;
   padding:10px;
   background:#FFF;
@@ -732,10 +732,13 @@ display:block;
   box-shadow: 0px 15px 20px -10px rgb(0 0 0 / 15%), 0px 1px 4px -2px rgb(0 0 0 / 20%);
   border: 1px solid #dee2e6 !important;
   width:auto;
+  font-family: 'Lato', sans-serif;
+  
+  font-weight:bold; 
 }
 .circle-items .active a
 {
-  font-weight:bold; 
+  font-weight: 900;
   color:$green;
   box-shadow: 0px 15px 20px -10px rgb(0 0 0 / 15%), 0px 1px 4px -2px rgb(0 0 0 / 40%);
 }
