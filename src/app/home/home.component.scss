@@ -719,8 +719,11 @@ display:block;
 }
 .circle-items .himg
 {
-  width:100%; margin:0 auto;
+  width:90%; 
+  margin:0 auto;
   border-radius:50%;
+  box-shadow: 0 1rem 1.5rem rgb(0 0 0 / 45%);
+  border:10px solid $green;
 }
 .circle-items .circle-item a
 {
