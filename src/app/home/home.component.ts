@@ -35,7 +35,7 @@ playstoreUrl: any = "";
 	this.playstoreUrl= environment.playstoreUrl;
 
 	}
-
+	
   	ngOnInit() {
 
 	
@@ -133,12 +133,15 @@ playstoreUrl: any = "";
 		
   
 	}
+
+	
+
 	healthLabels: Array<any> = [];
 	loadHealthLabels()
 	{
 	  this.healthLabels = [];
 	
-				 var arrLabel = constants.healthLabelsWithImages;
+				 var arrLabel = constants.hLabelsWithImages;
 				 if(arrLabel.length > 0)
 				 {
 				   for(let l=0; l < arrLabel.length; l++)
@@ -149,7 +152,29 @@ playstoreUrl: any = "";
 				   }
 				 }
 			  
-   
+   		this.currentItem = this.healthLabels[0];
+		   this.setIndexHLabel();
+	}
+	currentItem : any  = "";
+	currentHIndex: any = 0;
+	setCurrentImg(item, index)
+	{
+		this.currentHIndex = index;
+		this.currentItem = item;	
+		this.currentItem["class"] = "wow zoomIn";
+	}
+	setIndexHLabel()
+	{
+		this.currentItem = this.healthLabels[this.currentHIndex];
+		console.log(this.currentItem);
+		this.currentItem["class"] = "wow zoomIn "
+		setTimeout(() => {
+			this.currentHIndex++;
+			if(this.currentHIndex > 7 )
+			this.currentHIndex = 0;
+			this.setIndexHLabel();
+
+		},4000);
 	}
 	loaduserCount()
 	{
@@ -342,6 +367,8 @@ playstoreUrl: any = "";
 		this.dietRecipes.push({"name":"For Smoothie Lovers", "count": "1376", "image":"assets/images/temp-images/smoothie.jpg"})
 		this.dietRecipes.push({"name":"Salads", "count": "15184", "image":"assets/images/temp-images/steps-tab1.jpg"})
 	}
+
+	
 }
 
 

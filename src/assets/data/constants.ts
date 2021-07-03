@@ -129,7 +129,38 @@ export const constants = {
    "measureList":['<unit>', 'cup', 'tablespoon', 'teaspoon', 'ounce', 'pint', 'pinch', 'pound', 'roll', 'gram', 'slice','inch', 'piece', 'handful','bowl', 'stick', 'milliliter', 'bunch', 'package', 'kilogram', 'drop', 'can', 'cube', 'fluid ounce', 'pack', 'root', 'half', 'liter', 'quart', 'bag'],
 
    "foodCategoryList":[ 'Eggs', 'sugars', 'chocolate', 'Condiments and sauces', 'Dairy', 'fruit', 'bread, rolls and tortillas', 'sugar syrups', 'vegetables', 'plant-based protein', 'Oils', 'grains', 'condiments and sauces', 'meats', 'canned vegetables', 'yogurt', '100% juice', 'water', 'Cheese', 'canned soup', 'mixed grains', 'Milk', 'null', 'Vegan products', 'quick breads and pastries', 'flavored water', 'Poultry', 'seafood', 'beer', 'ready-to-eat cereals', 'non-dairy beverages', 'savory snacks', 'candy', 'poultry', 'milk', 'wines', 'coffee and tea', 'frozen grained based', 'Plant-based protein', 'sweetened beverages', 'Cured meats', 'canned fruit', 'sugar jam', 'cocktails and liquors', 'liquors and cocktails', 'cured meats', 'pastries', 'oils', 'pizza', 'protein and nutritional powders', 'frozen treats', 'cheese', 'canned seafood', 'crackers', 'salads', 'canned grains', 'bov', 'mexican', 'mixed soup', 'cooked grains', 'canned meats'],
-   "defaultCuisinetype":"american"
+   "defaultCuisinetype":"american",
+    "hLabelsWithImages": [
+    {"name":"Vegetarian", "image":"assets/images/vegetarian.png"},
+    {"name":"Pescatarian", "image":"assets/images/pescatarian.png"},
+    {"name":"Egg-Free", "image":"assets/images/free-egg.png"},
+    {"name":"Peanut-Free", "image":"assets/images/peanut-free.png"},
+    {"name":"Vegan","image":"assets/images/vegan.png"},
+    {"name":"Tree-Nut-Free", "image":"assets/images/free-nut.png"},
+    {"name":"Dairy-Free","image":"assets/images/free-dairy.png"},
+    {"name":"Keto-Friendly","image":"assets/new/keto.jpg"},
+    {"name":"Gluten-Free", "image":"assets/images/free-gluten.png"},   
+    {"name":"Alcohol-Free", "image":"assets/menu/alcoholfree.png"},     
+    {"name":"Soy-Free","image":"assets/images/tick.png"},
+    {"name":"Fish-Free","image":"assets/images/tick.png"},
+    {"name":"Shellfish-Free","image":"assets/images/tick.png"},
+    {"name":"Pork-Free","image":"assets/images/tick.png"},
+    {"name":"Red-Meat-Free","image":"assets/images/tick.png"},
+    {"name":"Crustacean-Free","image":"assets/images/tick.png"},
+    {"name":"Celery-Free","image":"assets/images/tick.png"},
+    {"name":"Mustard-Free", "image":"assets/images/tick.png"},
+    {"name":"Sesame-Free","image":"assets/images/tick.png"},
+    {"name":"Lupine-Free","image":"assets/images/tick.png"},
+    {"name":"Mollusk-Free","image":"assets/images/tick.png"},
+    {"name":"Kosher","image":"assets/images/tick.png"},
+    {"name":"Kidney-Friendly","image":"assets/images/tick.png"},
+    {"name":"Wheat-Free","image":"assets/images/tick.png"},   
+    {"name":"Sugar-Conscious", "image":"assets/images/tick.png"},
+    {"name":"Immuno-Supportive","image":"assets/images/tick.png"},
+    {"name":"No oil added","image":"assets/images/tick.png"},
+    {"name":"Low Potassium", "image":"assets/images/tick.png"}, 
+    {"name":"FODMAP-Free","image":"assets/images/tick.png"}
+  ]
 };
 
 
