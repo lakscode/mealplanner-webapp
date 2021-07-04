@@ -636,16 +636,16 @@ color:#FFF;
 }
 
 .trans-input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-  color: $orange1;
+  color: $text-gray;
   opacity: 1; /* Firefox */
 }
 
 .trans-input:-ms-input-placeholder { /* Internet Explorer 10-11 */
-  color: $orange1;
+  color: $text-gray;
 }
 
 .trans-input::-ms-input-placeholder { /* Microsoft Edge */
-  color: $orange1;
+  color: $text-gray;
 }
 
 .ribbon-container-left
