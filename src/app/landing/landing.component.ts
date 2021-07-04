@@ -125,7 +125,7 @@ constructor(private router: Router, private httpClient : HttpClient, private san
 			 this.recommendedRecipes.push(invData["body"][i]);
 			
 		   }
-		   console.log(this.recommendedRecipes)
+	//	   console.log(this.recommendedRecipes)
 		 }
 
 	   }
@@ -267,7 +267,7 @@ constructor(private router: Router, private httpClient : HttpClient, private san
 	setIndexHLabel()
 	{
 		this.currentItem = this.healthLabels[this.currentHIndex];
-		console.log(this.currentItem);
+	//	console.log(this.currentItem);
 		this.currentItem["class"] = "wow zoomIn "
 		setTimeout(() => {
 			this.currentHIndex++;
@@ -737,7 +737,7 @@ transform(value: any) {
 		  params["meal_plan_id"] = this.plan["id"];
 		  params["day_num"] = param_day_num;
 		  this.mealTypeList = ["breakfast", "snack1", "lunch", "snack2", "dinner"];
-		console.log(params);
+//console.log(params);
 		var res =   this.dbService.getDataByTable("days", params).subscribe(dData => setTimeout(() => {
 
 		  if(dData !== null)
@@ -792,7 +792,7 @@ transform(value: any) {
     this.planStatus["consumedcalories"] = 0;
     var res =   this.dbService.getDataByTable("user_days_status", params).subscribe(invData => setTimeout(() => 
     {
-        console.log(invData);
+     //   console.log(invData);
         if(invData !== null && invData["body"]["length"] > 0)
         {
           this.mealtypes = ["breakfast","snack1","lunch","snack2","dinner"];
@@ -872,7 +872,7 @@ transform(value: any) {
 
 if( cals > 0)
 {
-  console.log(cals);
+ // console.log(cals);
   this.planStatus["consumedcalories"] = cals.toFixed(2);
 }
 

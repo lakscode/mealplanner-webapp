@@ -1,0 +1,57 @@
+@import "../../../../variables.scss";
+
+.detail a {
+
+    text-transform: capitalize;
+}
+
+.overflow-text {
+	max-width:20ch;
+}
+
+.adpanel
+{
+    font-family: 'Lato', sans-serif;
+    font-weight: bold;
+    padding-top:30px;
+    
+    padding: 10px 20px;
+    min-height: 100px;
+    background-size:cover; 
+    background-position:center; 
+    min-height:150px;
+    padding-bottom:10px;
+}
+
+.adtitle
+{
+    font-size:20px;
+    line-height: 28px;
+    font-family: 'Lora', sans-serif;
+    color:#FFF;
+    font-weight:bold;
+}
+
+.adsubtitle
+{
+    margin-top:10px;
+    font-size:16px;
+    line-height: 20px;
+    font-family: 'Lato', sans-serif;
+    color:#FFF;
+}
+
+.adbutton
+{
+    background: #FFF;
+    color:$orange1;
+    border-radius:10px;
+    padding:10px 15px;
+    margin-bottom:20px;
+}
+.adbutton:hover
+{
+ 
+ font-weight:bold;
+    color:$orange;
+}

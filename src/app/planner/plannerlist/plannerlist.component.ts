@@ -20,6 +20,7 @@ export class PlannerlistComponent implements OnInit {
     weekDays: Array<any> = [];
     mealsList: Array<any> = [];
     maxcaloryperday: any ="";
+    loadingData: boolean = false;
     constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private dbService: DBService, private helpService: HelpService, private modalService: ModalService) {
     
     }
@@ -50,6 +51,7 @@ this.loadPlans()
 
     loadPlans()
     {
+      this.loadingData = true;
         this.mealPlans = [];
         var params = {"limit": 20};
         params["created_by"]  = this.currentUser["id"];
@@ -62,7 +64,7 @@ this.loadPlans()
             var obj = invData["body"]["length"];
             this.mealPlans = invData["body"];
           }
-  
+          this.loadingData = false;
         }));
     }
 

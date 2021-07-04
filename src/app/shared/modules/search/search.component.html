@@ -230,8 +230,12 @@
 
       </div>
 
-
-
+      <div *ngIf="loadingData && (recipesList1 && recipesList1.length == 0) " class='col-12'>
+          <p>Loading recipes... </p>
+      </div>
+      <div *ngIf="!loadingData && (recipesList1 && recipesList1.length == 0) " class='col-12'>
+        <p>No results. Please refine your filters... </p>
+    </div>
   </div>
 
 </div>

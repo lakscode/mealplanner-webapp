@@ -20,7 +20,8 @@
 
   <div class="recipe-listing listing-list" style="background:#FFF;padding-top:15px;">
   
-  
+  <p *ngIf='loadingData && (mealPlans && mealPlans.length == 0)'>Loading meal plans...</p>
+  <p *ngIf='!loadingData && (mealPlans && mealPlans.length == 0)'>You haven't created mealplans...</p>
   <div class="listing col-12 col-lg-4 col-md-4 "style='height:160px' *ngFor="let mplan of mealPlans; let i = index;">
      
       <div class="detail"  style="width:100%">

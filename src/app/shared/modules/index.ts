@@ -5,3 +5,4 @@ export * from './sidebar/sidebar.module';
 export * from './listpanel/listpanel.module';
 export * from "./add2plan/add2plan.module";
 export * from "./search/search.module";
+export * from "./add2collection/add2collection.module";

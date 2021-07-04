@@ -1,0 +1,15 @@
+<p class="title" style="display:block"> Add Recipe to Collections</p>
+<p style="display:block" *ngIf="loadingData && (!collectionsList || collectionsList.length == 0)">Loading collections...</p>
+
+<p style="display:block" *ngIf="!loadingData && (!collectionsList || collectionsList.length == 0)">You haven't created a meal plan yet.</p>
+
+        
+<ng-container *ngIf="collectionsList.length > 0">
+    <p style="display:block;text-align:left">Choose Collection</p>
+    <select name="collectionid" [(ngModel)]="collection.id">
+        <option value="{{collection.id}}" *ngFor='let collection of collectionsList; let i = index'>
+            {{collection.collection_name}}</option>
+    </select>
+
+    <a class="btn" style="width:100%" href="javascript:void(0)" (click)="add2Collection()"> Add to Collection</a>
+</ng-container>

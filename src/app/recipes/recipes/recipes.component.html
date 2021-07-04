@@ -50,7 +50,7 @@
                         </div>
                     </div>
                 </div>
-                <app-search (returnData) = "resultSearch($event)"></app-search>
+                <app-search (returnData) = "resultSearch($event)" ></app-search>
                 <!--<div class="wrapper-search">
 
                     <div class="row">
@@ -289,7 +289,7 @@
 
                 </div>-->
                 <!--<div style='height:20px; width:100%'></div>-->
-                <div *ngIf="loadingData && !noResult">Loading data...</div>
+                <!--<div *ngIf="loadingData && !noResult">Loading data...</div>-->
                 <div class="recipe-set" *ngIf="!noResult">
 
                                        <div class="row">
@@ -341,7 +341,8 @@
                                         padding-right: 0px;" href="javascript:void(0)"
                                             (click)="recipe1.showAdd2C = false;"><i class="fa fa-close"
                                                 aria-hidden="true"></i> </a>
-                                        <p class="title" style="display:block"> Add Recipe to Collections</p>
+                                                <app-add2collection (returnCData)="recipe1.showAdd2C = false; resultAdd2Collection($event)" [recipeid] ="recipe1.id" ></app-add2collection>
+                                        <!--<p class="title" style="display:block"> Add Recipe to Collections</p>
                                         <p style="display:block"
                                             *ngIf="!collectionsList || collectionsList.length == 0">You haven't created
                                             a meal plan yet.</p>
@@ -355,7 +356,7 @@
 
                                             <a class="btn" style="width:100%" href="javascript:void(0)"
                                                 (click)="add2Collection(recipe1)"> Add to Collection</a>
-                                        </ng-container>
+                                        </ng-container>-->
                                     </div>
                                 </div>
 
@@ -372,13 +373,6 @@
 
                                             </h3>
                                         </a>
-
-
-                                        <!--<p *ngIf="recipe1.dietLabels">
-                                    Diet Labels: <span
-                                        style="font-size:12px;">{{formatlabels(recipe1.dietLabels)}}</span>
-                                </p>-->
-
                                         <p>Calories: <span style="font-size:12px;">{{recipe1.calories}} Kcal</span></p>
 
                                         <p style="float:left;"> Per Serving: <span
@@ -411,37 +405,10 @@
                     </div>
 
 
-                    <!--<ul class="pagination hidden-xs" *ngIf="totalPage > 1">
-                        <li (click)="currentPage(0)" class="">
-                            <a href="javascript:void(0)">
-                                <i class="fa fa-angle-double-left"></i>
-                            </a>
-                        </li>
-                        <li (click)="prevPage()" class="">
-                            <a href="javascript:void(0)">
-                                <i class="fa fa-angle-left"></i>
-                            </a>
-                        </li>
-
-                        <li (click)="currentPage(i)" [ngClass]="i == page_num?'current':''"
-                            *ngFor='let in of counter(totalPage) ;let i = index'>
-                            <a href="javascript:void(0)">{{i+1}}</a>
-                        </li>
-                        <li (click)="nextPage()" class="">
-                            <a href="javascript:void(0)">
-                                <i class="fa fa-angle-right"></i>
-                            </a>
-                        </li>
-                        <li (click)="currentPage(totalPage)" class="">
-                            <a href="javascript:void(0)">
-                                <i class="fa fa-angle-double-right"></i>
-                            </a>
-                        </li>
-                    </ul>-->
                 </div>
-                <div class="recipe-set" *ngIf="noResult">
+                <!--<div class="recipe-set" *ngIf="noResult">
                     <p> No Results</p>
-                </div>
+                </div>-->
             </div>
             <!--   <div class="col-md-4 col-lg-3">
                 <aside>

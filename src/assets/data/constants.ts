@@ -160,7 +160,8 @@ export const constants = {
     {"name":"No oil added","image":"assets/images/tick.png"},
     {"name":"Low Potassium", "image":"assets/images/tick.png"}, 
     {"name":"FODMAP-Free","image":"assets/images/tick.png"}
-  ]
+  ],
+  "userids":"2,3,31,8"
 };
 
 

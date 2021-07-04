@@ -47,6 +47,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   recipesList1: Array<any>= [];
   modifyFilterLabels: Array<any>= [];
   searchparam: any;
+  loadingData: boolean = false;
   @HostListener('document:click', ['$event'])
   clickout(args) {
   this.callhideFunct(args);
@@ -280,7 +281,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   /******** recipes api serach */
 	maxcalories: any = "";
 	loopCount: any = 0;
-	loadingData: boolean = false;
+
   splitcontent: boolean = false;
 	searchProps() {
 		this.searchparam["random"] = "true";
@@ -554,6 +555,7 @@ export class SearchComponent implements OnInit, OnDestroy {
             this.recipesList1 = [];
             this.save();
           }
+		  this.loadingData = false;
 					this.noResult = true;
 				}
 				else {
@@ -591,6 +593,7 @@ export class SearchComponent implements OnInit, OnDestroy {
 			if (typeof (invData["body"]) !== "undefined" && invData["body"] !== null && invData["body"]["length"] > 0) {
 				this.recipesList1 = [];
 				this.ratingIds = "";
+				this.loadingData = false;
 				var temp = invData["body"];
 				if (temp["length"] > 0) {
 					for (let i = 0; i < temp["length"]; i++) {
@@ -610,6 +613,7 @@ export class SearchComponent implements OnInit, OnDestroy {
 		} else {
 			this.recipesList1 = [];
 			this.noResult = true;
+			this.loadingData = false;
       console.log("Calling save");
       this.save();
 		}

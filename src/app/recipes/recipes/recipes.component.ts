@@ -717,6 +717,14 @@ export class RecipesComponent implements OnInit {
 			this.noResult = false;
 		}
 	}
+
+	resultAdd2Collection(event)
+	{
+		console.log("In resultAdd2Collection");
+		console.log(event);
+			this.loadingData = false;
+	}
+
 }
 
 

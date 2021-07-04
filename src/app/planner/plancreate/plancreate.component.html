@@ -320,14 +320,15 @@
                                     <div *ngIf='recipe1.showAdd2C' class="add2mealplanmenu" style="top:0px;width:300px; z-index: 100; height:220px;">
                                         <a style="float:right;font-size:24px;padding-top: 0px;
                                         padding-right: 0px;" href="javascript:void(0)" (click)="recipe1.showAdd2C = false;"><i class="fa fa-close" aria-hidden="true"></i> </a>
-                                        <p class="title" style="display:block"> Add Recipe to Collections</p>
+                                         <!--<app-add2collection (returnCData)="recipe1.showAdd2C = false; " [recipeid] ="recipe1.id" ></app-add2collection>-->
+                                        <!--<p class="title" style="display:block"> Add Recipe to Collections</p>
                                         <p class="lbl">Choose Collection</p>
                                         <select name="collectionid" [(ngModel)] ="collection.id">
                                             <option value="{{collection.id}}" *ngFor='let collection of collectionsList; let i = index'>{{collection.collection_name}}</option>
                                         </select>
                                      
                                         <a class="btn" style="width:100%;display:block;" href="javascript:void(0)" (click)="add2Collection(recipe1)"> Add to Collection</a>
-                                        
+                                    -->
                                     </div>
                                     </div>
                                     <a hreaf="javascript:void(0)" title="Drag and Drop Recipe to add it to meal plan"><img style="width:90%; max-height:100px"  id="imagep_{{i}}"  draggable="true" (dragstart)="drag($event, i)" src="{{formatImage(recipe1, 'm')}}"

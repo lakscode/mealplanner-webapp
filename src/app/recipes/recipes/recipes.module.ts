@@ -6,7 +6,7 @@ import { RecipesComponent } from './recipes.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {SidebarModule } from "../../shared/modules"
-import { ModalModule, Add2planModule, SearchModule } from '../../shared/modules/';
+import { ModalModule, Add2planModule, Add2collectionModule, SearchModule } from '../../shared/modules/';
 
 @NgModule({
   imports: [
@@ -18,6 +18,7 @@ import { ModalModule, Add2planModule, SearchModule } from '../../shared/modules/
   SidebarModule,
   ModalModule,
   Add2planModule,
+  Add2collectionModule,
   SearchModule
   ],
   declarations: [RecipesComponent]
