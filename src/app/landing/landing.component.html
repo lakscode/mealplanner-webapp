@@ -9,7 +9,7 @@
           <div class="chefs-card-inner">            
                <h4>Hello<span *ngIf="currentUser['displayname']"> {{currentUser["displayname"]}}</span>, {{greetings}}</h4>
                <h2 *ngIf="mealplans.length > 0" style=" padding-top: 20px;">Meal Plan for YOU</h2>
-               <h2 *ngIf="planStatus.length > 0" style="    padding-top: 20px;">Your Meal Plan for Today</h2>
+               <h2 *ngIf="planStatus && planStatus.length > 0" style="    padding-top: 20px;">Your Meal Plan for Today</h2>
 
                <div class="short-separator"></div>
    
@@ -18,7 +18,7 @@
                     <p class="plan-tags">{{mealplans[0]["tags"]}} <br/>
                   <a class="read-more-bordered" (click)="gotopage('trending', mealplans[0]['id'])" href="javascript:void(0)">View More</a>
                </ng-container>
-               <ng-container *ngIf="planStatus.length > 0">
+               <ng-container *ngIf="planStatus && planStatus.length > 0">
                   <p class="plan-name">{{planStatus[0]["mpname"]}} </p>
 
                      <div class="mealplan hidden-xs" *ngIf="plan && plan['days'] && plan['days']['length'] > 0">

@@ -483,7 +483,7 @@ getPlanStatus()
 	  if(invData["body"]["length"] > 0)
 	  {
 		this.planStatus = invData["body"];
-
+		console.log(this.planStatus);
 		this.plan = invData["body"][0];
 		var temp = this.plan["startdate"].split("T");
 		this.plan["startdate"] = temp[0];
@@ -726,6 +726,7 @@ transform(value: any) {
   if(diff_days_ceil > 7)
   {
 	  	this.planExpired= true;
+		  this.planStatus = null;
 		  this.loadMealPlan();
   }
   else
