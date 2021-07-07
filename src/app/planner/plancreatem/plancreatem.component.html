@@ -165,26 +165,26 @@
       <div class="row">
         <div class="col-4 ">
           <div [ngClass]="filterFlag?'filters active':'filters'">
-            <a href="javascript:void(0)" (click)="setFilters()">
-                <i class="fa fa-sliders" aria-hidden="true"></i> 
+            <button (click)="setFilters()">
+                <!--<i class="fa fa-sliders" aria-hidden="true"></i> -->
               Filters
-            </a>
+            </button>
           </div>
         </div>
         <div class="col-4 paddinglr0">
           <div class='filters'>
-            <a href="javascript:void(0)" (click)="loadMyRecipes(modalText)">
-                <i class="fa fa-times" aria-hidden="true"></i>
+            <button (click)="loadMyRecipes(modalText)">
+                <!--<i class="fa fa-times" aria-hidden="true"></i>-->
               My Recipes
-            </a>
+            </button>
           </div>
         </div>    
         <div class="col-4 ">
           <div class='filters'>
-            <a href="javascript:void(0)" (click)="clearFilters()">
-                <i class="fa fa-times" aria-hidden="true"></i>
+            <button (click)="clearFilters()">
+                <!--<i class="fa fa-times" aria-hidden="true"></i>-->
              Favourites
-            </a>
+            </button>
           </div>
         </div>
     

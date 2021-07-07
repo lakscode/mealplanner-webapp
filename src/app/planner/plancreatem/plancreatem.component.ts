@@ -197,8 +197,8 @@ export class PlancreatemComponent implements OnInit {
 			  //  params["meal_plan_id"] = this.plan["id"];
 			  params["query"] = "select * from days where meal_plan_id = " + this.plan["id"] + " order by day_num";
 			  var res =   this.dbService.getDatabyQuery("recipes", params).subscribe(dData => setTimeout(() => {
-		
-				console.log(JSON.stringify(dData));
+				console.log(dData);
+			//	console.log(JSON.stringify(dData));
 				if(dData !== null)
 				{
 				  if(dData["body"] !== null && dData["body"]['length'] > 0)
@@ -657,6 +657,7 @@ export class PlancreatemComponent implements OnInit {
 		console.log(val);
 		
 		params["instructions"] = "notempty";
+		params['status'] = "1";
 		params["returnfields"] = " id, label, image, healthLabels, dietLabels, calories, totalNutrients, digest";
 		this.isSearching = true;
 		console.log(params);
@@ -1630,14 +1631,20 @@ export class PlancreatemComponent implements OnInit {
 
 		loadMyRecipes(prop)
 		{
+			if(!this.isSearching)
+			{
 			console.log("in loadmy recipes");
 			this.isItemAvailable = false;
 			this.planDay['selected'] = prop;
-			var params = [];
-			params["query"] = "select id, label, image, healthLabels, dietLabels, calories, totalNutrients, digest from recipes where created_by = " + this.currentUser["id"];
+			var params = {};
+			params["query"] = "select id, label, image, healthLabels, dietLabels, calories, totalNutrients, digest from recipes where created_by = '" + this.currentUser["id"] + "'";
 			this.isSearching = true;
+		
+		//	params['created_by'] =  this.currentUser["id"] ;
 			console.log(params);
 			var res =   this.dbService.getDatabyTablebyQuery("recipes", params).subscribe(resData => setTimeout(() => {
+			
+		//	var res =   this.dbService.getDatabyQuery("recipes", params).subscribe(resData => setTimeout(() => {
 				console.log(resData);
 				if(resData && resData["body"]["length"] > 0)
 				{
@@ -1645,8 +1652,15 @@ export class PlancreatemComponent implements OnInit {
 					this.isSearching = false;
 					this.items =  resData["body"];
 				}
-			}));
+			})); 
+		}
+		else
+		{
+			setTimeout(() => {
+				this.loadMyRecipes(prop);
+			}, 1000)
 
+		}
 
 		}
 

@@ -204,13 +204,14 @@ resettoken(input){
 	
 	  }
 	  getDatabyTablebyQuery(path, params){
-
+		console.log(path);
+		console.log(params);
 		var tempUrl = this.apiUrl + '/common/read_by_query.php'; 
 		params["tablename"]=path;
 		var options = {
 			headers : new HttpHeaders({"Content-Type": "application/json"})
 			};
-
+			console.log(JSON.stringify(params));
 		return this.httpService.post(tempUrl, JSON.stringify(params), options).pipe(
 		map((res) => res)).pipe(share());
 
