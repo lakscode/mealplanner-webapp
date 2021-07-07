@@ -62,7 +62,7 @@
                                            <a  (click)="gotoRecipeDetails('recipesubmit', recipe1.id)" class="menu" href="javascript:void(0)"><i class="fa fa-pencil-square-o"></i>Edit Recipe</a>
                                         </div>
                                         </div>
-                                <a (click)="gotoRecipeDetails('recipedetails', {'id':recipe1.id});">
+                                <a (click)="gotoRecipeDetails('recipedetails', recipe1.id);">
                                     <img *ngIf="recipe1.image !== ''"  src="{{recipe1.image}}"
                                         alt="{{recipe1.label}}">
                                     <img *ngIf="recipe1.image == ''"  src="assets/notavailable.png" alt="{{recipe1.label}}">

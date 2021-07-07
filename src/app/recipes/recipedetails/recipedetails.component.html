@@ -224,7 +224,9 @@
                 <div> Source: {{searchRes.source}}</div>
                 <div class="details-tags" *ngIf="searchRes.dietLabels"> 
                     <ul>
-                        <li *ngFor="let tag of formatDietLabels(); let t= index;"><a href="javascript:void(0)">{{tag}}</a></li>
+                        <ng-container  *ngFor="let tag of formatDietLabels(); let t= index;">
+                        <li *ngIf="tag !== ''"><a href="javascript:void(0)">{{tag}}</a></li>
+                        </ng-container>
                     </ul>
                 </div>
             </div>

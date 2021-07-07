@@ -4,7 +4,7 @@ import { UserService } from '../../services/user.service';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DBService } from '../../dbservices/db.service';
 import { HelpService } from '../../services/help.service';
-import { IngredientsService } from '../../services/ingredients.service';
+//import { IngredientsService } from '../../services/ingredients.service';
 import { environment } from './../../../environments/environment';
 import { constants } from '../../../assets/data/constants';
 import { takeUntil } from 'rxjs/operators';
@@ -38,7 +38,7 @@ export class RecipesubmitComponent implements OnInit, OnChanges {
 		this.callhideFunct(args);
   }
   
-	constructor(private router: Router, private httpClient: HttpClient,  private toastr: ToastrService, private ingredientsService: IngredientsService, private route: ActivatedRoute, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
+	constructor(private router: Router, private httpClient: HttpClient,  private toastr: ToastrService, private route: ActivatedRoute, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder) {
 	
 	}
 ngOnChanges()
@@ -47,7 +47,7 @@ ngOnChanges()
 	this.loadDefaults();
 }
 	ngOnInit() {
-		this.ingredientsService.getList(30000);
+		//this.ingredientsService.getList(30000);
 		this.loadDefaults();
 	}
 loadDefaults()
@@ -494,7 +494,7 @@ formatIngredients()
 	}
 	if(temp !== '')
 	temp=  temp.slice(0, -1);
-
+	
 	this.searchRes["ingredientLines"] = temp;
 	this.searchRes["totalNutrients"] = JSON.stringify(this.cons_Nutrients);
 	this.searchRes["calories"] = this.total_calories;
@@ -735,13 +735,13 @@ saveRecipe()
 			params["uri"] = environment.appUrl + "/recipedetails/" + this.searchRes.id;
 		
 			console.log(params);
-			var res =   this.dbService.updateDataByTable("recipes", params).subscribe(recipeData => setTimeout(() => {
+			 var res =   this.dbService.updateDataByTable("recipes", params).subscribe(recipeData => setTimeout(() => {
 				console.log(recipeData);	
 				this.toastr.success('Recipe has been updated!!!', 'Submit Recipe!');
 				this.loadRecipe(this.searchRes.id);
 				this.gotopage();
 				
-			}));
+			})); 
 		}
 		else
 		{
@@ -758,6 +758,7 @@ saveRecipe()
 					this.gotopage();
 				}
 			}));
+			
 		}
 	
 
@@ -919,7 +920,21 @@ callhideFunct(args)
 		this.httpClient.get('assets/data/ing/' + fname + '.json').subscribe(
 			data => {
 				console.log(data);
-				this.displayListImages = data["ingredients"];
+				//this.displayListImages = data["ingredients"];
+				this.displayListImages = [];
+				if(data["ingredients"]["length"] > 0)
+				{
+					for(let i=0; i < data["ingredients"]["length"]; i++)
+					{
+						let dIndex = this.displayListImages.findIndex(x=> (x["food"].toLowerCase() == data["ingredients"][i]["food"].toLowerCase()));
+						if(dIndex == -1)
+						{
+							this.displayListImages.push(data["ingredients"][i]);
+						}
+					}
+					this.displayListImages = this.displayListImages.sort(this.sortArraybyIndex);
+					console.log(this.displayListImages);
+				}
 			});
 		}
 		catch(error)
@@ -927,6 +942,15 @@ callhideFunct(args)
 
 		}
 		}
+	}
+	sortArraybyIndex(a, b) {
+		if ( a["food"].toLowerCase() < b["food"].toLowerCase() ){
+			return -1;
+		  }
+		  if ( a["food"].toLowerCase() > b["food"].toLowerCase() ){
+			return 1;
+		  }
+		  return 0;
 	}
 
 setValue(item, key, value, index)
