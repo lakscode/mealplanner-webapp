@@ -164,24 +164,24 @@
       </div>
       <div class="row">
         <div class="col-4 ">
-          <div [ngClass]="filterFlag?'filters active':'filters'">
-            <button (click)="setFilters()">
+          <div [ngClass]="filterFlag['filters']?'filters active':'filters'">
+            <button (click)="setFilters('filters')">
                 <!--<i class="fa fa-sliders" aria-hidden="true"></i> -->
               Filters
             </button>
           </div>
         </div>
         <div class="col-4 paddinglr0">
-          <div class='filters'>
-            <button (click)="loadMyRecipes(modalText)">
+          <div [ngClass]="filterFlag['myrecipes']?'filters active':'filters'">
+            <button (click)="setFilters('myrecipes'); loadMyRecipes(modalText)">
                 <!--<i class="fa fa-times" aria-hidden="true"></i>-->
               My Recipes
             </button>
           </div>
         </div>    
         <div class="col-4 ">
-          <div class='filters'>
-            <button (click)="clearFilters()">
+          <div [ngClass]="filterFlag['favourites']?'filters active':'filters'">
+            <button (click)="setFilters('favourites');loadFavourites(modalText)">
                 <!--<i class="fa fa-times" aria-hidden="true"></i>-->
              Favourites
             </button>
@@ -189,9 +189,9 @@
         </div>
     
 
-        <div style="max-height: calc(100vh - 280px);
+        <div *ngIf="filterFlag['filters']" style="max-height: calc(100vh - 280px);
         overflow: auto;">
-          <ng-container *ngIf="filterFlag && filters && filters['dietLabels'] && filters['dietLabels']['data'] && filters['dietLabels']['data']['length'] > 0">
+          <ng-container *ngIf="filters && filters['dietLabels'] && filters['dietLabels']['data'] && filters['dietLabels']['data']['length'] > 0">
             <div class="custom-item" (click)="filters['dietLabels']['expand'] = !filters['dietLabels']['expand']">
               <div class="left">
                 <span> <i class="fa fa-cutlery"></i></span>
@@ -230,7 +230,7 @@
          
       
       
-          <ng-container *ngIf="filterFlag && filters && filters['healthLabels'] && filters['healthLabels']['data'] && filters['healthLabels']['data']['length'] > 0">
+          <ng-container *ngIf="filters && filters['healthLabels'] && filters['healthLabels']['data'] && filters['healthLabels']['data']['length'] > 0">
             <div class="custom-item" (click)="filters['healthLabels']['expand'] = !filters['healthLabels']['expand']">
               <div class="left">
                 <span> <i class="fa fa-cutlery"></i></span>
@@ -334,8 +334,8 @@
           </ng-container>
       
         </div>
-        <div size='12' *ngIf="filterFlag" style="text-align:center">
-          <button style="width: 100%;" class='search-button' (click)="filterFlag= false; searchFilters($event, modalText)" >Search</button>
+        <div size='12' *ngIf="filterFlag['filters']" style="text-align:center">
+          <button style="width: 100%;" class='search-button' (click)="filterFlag['filters']= false; searchFilters($event, modalText)" >Search</button>
         </div>
       
       </div>

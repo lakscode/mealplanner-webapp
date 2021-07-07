@@ -606,6 +606,7 @@ export class PlancreatemComponent implements OnInit {
 		console.log("selectedRecipeName " + this.selectedRecipeName);
 		console.log("val " + val);
 		var checkMinerals = false;
+		this.items = [];
 		var params = {};
 		var filterExists = false;
 		if( this.selectedRecipeName !== val)
@@ -1364,13 +1365,13 @@ export class PlancreatemComponent implements OnInit {
 		}
 		
 		/****  for filters */
-		filterFlag : boolean = false;
+		filterFlag : any = {};
 		filters: any = {};
 		nutrientDbFields : Array<any> = [];
 		advanceFilters: any;
 		loadFilters()
 			  {
-		
+					this.filterFlag = {"filters":false, "myrecipes":false, "favourites":false};
 				this.filters = {};
 				if(constants.minerals["length"] > 0)
 				{
@@ -1406,28 +1407,26 @@ export class PlancreatemComponent implements OnInit {
 		
 			  }
 			 
-			  setFilters()
+			  setFilters(opt)
 			  {
-				this.filterFlag= !this.filterFlag;
-			   // console.log(this.filters);
-			   
+				this.filterFlag = {"filters":false, "myrecipes":false, "favourites":false};
+
+				this.filterFlag[opt]= !this.filterFlag[opt];
+			 			   
 			  }
 			
 			  clearFilters()
 			  {
-				this.filterFlag= false;
+				this.filterFlag = {"filters":false, "myrecipes":false, "favourites":false};
 				this.loadFilters();
 			  }
 			  loadNutrientsMaxMin()
 			  {
-			 //   console.log("loadNutrientsMaxMin");
-			//    console.log(this.filters["minerals"]["data"]);
-			//    console.log(this.nutrientDbFields);
+			
 			
 				if(this.filters["minerals"]["data"]["length"] > 0 && this.nutrientDbFields["length"] > 0)
 				{
-			 //     console.log(this.filters["minerals"]["data"]);
-			 //     console.log(this.nutrientDbFields);
+
 				  for(let m =0; m < this.filters["minerals"]["data"]["length"]; m++)
 				  {
 					  if(typeof(this.filters["minerals"]["data"][m]["name"]["label"]) !== "undefined")
@@ -1631,13 +1630,15 @@ export class PlancreatemComponent implements OnInit {
 
 		loadMyRecipes(prop)
 		{
+			console.log("in LoadMyRecipes");
 			if(!this.isSearching)
 			{
 			console.log("in loadmy recipes");
 			this.isItemAvailable = false;
 			this.planDay['selected'] = prop;
+			this.items = [];
 			var params = {};
-			params["query"] = "select id, label, image, healthLabels, dietLabels, calories, totalNutrients, digest from recipes where created_by = '" + this.currentUser["id"] + "'";
+			params["query"] = "select id, label, image, healthLabels, dietLabels, calories, totalNutrients, digest from recipes where (digest != '' OR totalNutrients != '') AND created_by = '" + this.currentUser["id"] + "'";
 			this.isSearching = true;
 		
 		//	params['created_by'] =  this.currentUser["id"] ;
@@ -1649,9 +1650,10 @@ export class PlancreatemComponent implements OnInit {
 				if(resData && resData["body"]["length"] > 0)
 				{
 					this.isItemAvailable = true;
-					this.isSearching = false;
 					this.items =  resData["body"];
 				}
+
+				this.isSearching = false;
 			})); 
 		}
 		else
@@ -1666,23 +1668,33 @@ export class PlancreatemComponent implements OnInit {
 
 		loadFavourites(prop)
 		{
-			console.log("loadFavourites");
-			this.isItemAvailable = false;
-			this.planDay['selected'] = prop;
-			var params = [];
-			params["query"] = "select id, label, image, healthLabels, dietLabels, calories, totalNutrients, digest from recipes where id in (select recipeid from favourites where userid = " + this.currentUser["id"] + ")" ;
-			this.isSearching = true;
-			console.log(params);
-			var res =   this.dbService.getDatabyTablebyQuery("recipes", params).subscribe(resData => setTimeout(() => {
-				console.log(resData);
-				if(resData && resData["body"]["length"] > 0)
-				{
-					this.isItemAvailable = true;
+			if(!this.isSearching)
+			{
+				console.log("loadFavourites");
+				this.isItemAvailable = false;
+				this.planDay['selected'] = prop;
+				this.items = [];
+				var params = {};
+				params["query"] = "select id, label, image, healthLabels, dietLabels, calories, totalNutrients, digest from recipes where id in (select recipeid from favourites where userid = '" + this.currentUser["id"] + "')" ;
+				this.isSearching = true;
+				console.log(params);
+				var res =   this.dbService.getDatabyTablebyQuery("recipes", params).subscribe(resData => setTimeout(() => {
+					console.log(resData);
+					if(resData && resData["body"]["length"] > 0)
+					{
+						this.isItemAvailable = true;						
+						this.items =  resData["body"];
+					}
 					this.isSearching = false;
-					this.items =  resData["body"];
-				}
-			}));
+				}));
+			}
+			else
+			{
+				setTimeout(() => {
+					this.loadFavourites(prop);
+				}, 1000)
 
+			}
 
 		}
 
