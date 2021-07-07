@@ -160,6 +160,18 @@ loadRecipe(id)
 		{
 				
 			  this.searchRes =temp[0];
+
+			  if(this.searchRes["yield"] == "")
+			  {
+				  if(typeof(this.searchRes["s_servings"]) !== "undefined" && this.searchRes["s_servings"] !== "")
+				  {
+					  this.searchRes["yield"] = this.searchRes["s_servings"];
+				  }
+				  else
+				  {
+					this.searchRes["yield"]  = 1;
+				  }
+			  }
 console.log(this.searchRes);
 			  var tempDigest = this.searchRes["digest"];
 			  
@@ -183,7 +195,14 @@ console.log(this.searchRes);
 				} 
 				else
 				{
-				  tempNutrients = JSON.parse(this.searchRes["totalNutrients"]);
+				  try
+				  {
+					  tempNutrients = JSON.parse(this.searchRes["totalNutrients"]);
+				  }
+				  catch(error)
+				  {
+
+				  }
 				}
 			  }
 
