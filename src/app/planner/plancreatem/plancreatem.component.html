@@ -142,7 +142,7 @@
         <button class="closebtn" (click)="closeModal()">x
         </button>
         <div style="margin-top:0px;" class='item-heading' >Add {{getFLU(modalText)}}</div>
-        <div style="font-size: 14px;">
+        <div style="font-size: 16px;">
           <input type="checkbox" [(ngModel)]="planDay['forall'][modalText]"> For all remaining days {{getFLU(modalText)}}
         </div>
       
@@ -152,8 +152,8 @@
         <div class="col-6 ">
       <input type="text"  class="inputbox"  id="{{modalText}}" (keyup.enter)="filterFlag= false; searchFilters($event, modalText)" [(ngModel)] = "planDay[modalText].label" />
           </div>
-          <div class="col-6 ">
-            <a href="javascript:void(0)" (click)="clearFilters()">
+          <div class="col-6 " style="padding-top:10px">
+            <a href="javascript:void(0)" style="padding: 10px 20px; background: #f1f2f3; border-radius: 15px;" (click)="clearFilters()">
               <i class="fa fa-times" aria-hidden="true"></i>
             Clear
           </a>
