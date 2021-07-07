@@ -3022,7 +3022,8 @@ ul {
     width: 100%;
   }
  .ingredients-checkbox .nutritional {
-    height: 400px;
+    min-height: 400px;
+	    background-image: none;
 }
   .steps-list .step-image {
     float: none;

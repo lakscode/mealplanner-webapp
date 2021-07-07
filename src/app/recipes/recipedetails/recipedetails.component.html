@@ -98,18 +98,8 @@
     <div class="separator-post"></div>
     <p style="clear:both"></p>
   
-        <div class="innerbox">
-    <!--<div class="recipe-details" *ngIf="searchRes.dietLabels">
-        <p>Diet Labels:</p>
-        <p style="display:block;">
-            <ng-container *ngFor="let dlabel of formatLabels(searchRes.dietLabels)">
-             <a *ngIf="dlabel" (click)="gotoRecipes(dlabel, 'diet')" href="javascript:void(0)"  class="hlabel" >{{dlabel}}</a> 
-            </ng-container>
-        </p>
-    </div>
-
-    <p style="clear:both"></p>    --> 
-    <div class="recipe-details" *ngIf="searchRes.healthLabels">
+        <div class="innerbox"  *ngIf="searchRes.healthLabels && searchRes.healthLabels.length > 0">
+      <div class="recipe-details">
         <p>Health Labels:</p>
         <p style="display:inline-block;"  >
             <ng-container *ngFor="let hlabel of formatLabels(searchRes.healthLabels)">
