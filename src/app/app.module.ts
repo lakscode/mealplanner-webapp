@@ -150,7 +150,7 @@ import { AdminModule } from './admin/admin.module';
 	RecipebooksModule,
 	RecipebookModule,
 	RecipebookviewModule,
-	//FaqsModule,
+	FaqsModule,
 
 	CollectionsModule,
 	CollectionModule,

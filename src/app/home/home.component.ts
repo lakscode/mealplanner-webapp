@@ -26,6 +26,7 @@ images: any;
 sliderList2: Array<any> = [];
 startpage: any = "signup";
 playstoreUrl: any = "";
+featuresList: Array<any> = [];
   constructor(config: NgbCarouselConfig, private router: Router, private dbService: DBService,  private modalService: ModalService,  private helpService: HelpService) {
 	this.labels={"companyName":this.helpService.getConstants("companyName")};
 
@@ -54,7 +55,7 @@ playstoreUrl: any = "";
 
 		this.loadSteps(); 
 		this.loadCommunities();
-	
+		this.loadfeaturesList();
 
 		this.currentUser =this.helpService.getCurrentUser();
 		if(this.currentUser !== null)
@@ -113,17 +114,17 @@ playstoreUrl: any = "";
   
 		var res =   this.dbService.getDatabyTablebyQuery("collection", params).subscribe(invData => setTimeout(() => {
 	
-		  console.log(invData);
+		//  console.log(invData);
 		  if(invData !== null)
 		  {
 			var obj = invData["body"]["length"];
-			console.log(invData["body"]);
+		//	console.log(invData["body"]);
 			this.communitiesList = invData["body"];
 			for(let o=0; o <  this.communitiesList.length; o++)
 		  {
 			  this.communitiesList[o]["userjoined"] = false;
 		  }
-			console.log(this.communitiesList);
+		//	console.log(this.communitiesList);
 			this.loaduserCount();
 		  }
 
@@ -166,7 +167,7 @@ playstoreUrl: any = "";
 	setIndexHLabel()
 	{
 		this.currentItem = this.healthLabels[this.currentHIndex];
-		console.log(this.currentItem);
+	//	console.log(this.currentItem);
 		this.currentItem["class"] = "wow zoomIn "
 		setTimeout(() => {
 			this.currentHIndex++;
@@ -368,7 +369,35 @@ playstoreUrl: any = "";
 		this.dietRecipes.push({"name":"Salads", "count": "15184", "image":"assets/images/temp-images/steps-tab1.jpg"})
 	}
 
-	
+	loadfeaturesList()
+	{
+		this.featuresList = [];
+		this.featuresList.push(
+			{	
+				"title":"Meal Plan", 
+				"image":"assets/new/step1.png",
+				"desc":" You can create your meal plans by drag dropping the recipes to your plans."
+			})
+		this.featuresList.push(
+			{	
+				"title":"Recipes", 
+				"image":"assets/new/step2.png",
+				"desc":"Create your own recipes. Don't have the time to create recipes? You have 2M+ recipes in our database"
+			});
+		this.featuresList.push(
+			{	
+				"title":"Recipe Books", 
+				"image":"assets/new/step3.png",
+				"desc":"Create Recipe books to list all your favourite recipes. Create your own and share them with friends and family with easy steps."
+			});		
+		this.featuresList.push(
+			{	
+				"title":"Shopping List", 
+				"image":"assets/new/step4.png",
+				"desc":"MealPlanner was created with a hectic lifestyle in mind. You can customise your meal plans by adding as much or as little information as you choose."
+			});		
+							
+	}	
 }
 
 

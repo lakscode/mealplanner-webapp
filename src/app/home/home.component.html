@@ -118,6 +118,8 @@
       </div>
    </div>
 
+  
+
 <!--hottest recipes-->
 <section class="hot-recipes-var2 bg-halfwhite" style="margin-bottom:30px;padding-bottom:0px;" *ngIf="communitiesList && communitiesList.length > 0">
    <div class="container">
@@ -125,7 +127,7 @@
           <div class="hot-recipes-bordered">
                <div class="heading-var1 text-center animated wow flipInX">
                    <h2><a href="javascript:void(0)">You're in a good company</a></h2>
-                 <span class="heading-bell"></span>
+                   <div class="short-separator"></div>
                  <p>Join people who are already using Fitaholic to help their clients.</p>
                </div>
  
@@ -167,6 +169,40 @@
     </div>
  </section>
  <!--hottest recipes ends--> 
+
+ <section class="hot-recipes-var2 bg-white" style="margin-bottom:30px;padding-bottom:0px;">
+   <div class="container">
+       <div class="wrapper-hot-recipe-var2">
+          <div class="hot-recipes-bordered">
+               <div class="heading-var1 text-center">
+               <h2 style="color:#000">  Features</h2>
+               <div class="short-separator"></div>
+               <p style="color:#000;">
+                  It was created to be an easy and intuitive method to plan meals, save recipes, and make shopping lists.
+               </p>
+               
+               <div class="row" >
+                  <div class="col-12 col-lg-3 col-md-3  animated wow bounceInRight" *ngFor="let item of featuresList; let f = index;">
+                     <div class="feature-item bxshadow">
+                        <img src="{{item.image}}">
+                        <h1>{{item.title}}</h1>
+                        <p>{{item.desc}}</p>
+                        
+                       
+                      
+                       
+                     </div>
+
+                  </div>
+               </div>
+
+              
+           </div>
+       </div>
+   </div>
+   </div>
+</section>
+
 <section class="home-sec bg-white"  style="padding-bottom: 30px; margin-bottom:0px;padding-top:30px;display:none">
    <div class="container col-12">
       <div class="home-sec-box">

@@ -518,7 +518,11 @@ export class SearchComponent implements OnInit, OnDestroy {
 						this.searchProps();
 
 					}
+					else
+					{
 					this.noResult = true;
+					this.helpService.updateNoRecordsQuery(params);
+					}
 				}
 				else {
 					this.loadingData = false;
@@ -553,6 +557,7 @@ export class SearchComponent implements OnInit, OnDestroy {
           {
             console.log("No result");
             this.recipesList1 = [];
+			this.helpService.updateNoRecordsQuery(params);
             this.save();
           }
 		  this.loadingData = false;

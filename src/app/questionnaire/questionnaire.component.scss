@@ -3,6 +3,13 @@
 {
   background-color: #f1f2f3;
 }
+
+.bg-sec
+{
+  background:linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url("../../assets/new/bg1.webp");
+  background-size:cover;
+}
+
 h2 {
     margin: 5px 0;
     font-family:'Lora', serif;

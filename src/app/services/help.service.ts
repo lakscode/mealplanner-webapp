@@ -774,18 +774,27 @@ SendEmailPasswordReset(email,data) {
 	saveSearchHistory(searchwords, category, page, userid)
 	{
 		var params = {};
-		params["text"] =  searchwords;
+		params["text"] =  searchwords.trim();
 		params["category"] =  category;
 		params["userid"] =  userid;
 		params["page"] = page;
-	
+		if(searchwords !== "")
+		{
 		var res =   this.dbService.getDataByTable("search_history", params).subscribe(recipeData => setTimeout(() => {
 			//console.log(recipeData);
 	
 		
 		}));		
+		}
 	}
 
+	updateNoRecordsQuery(params)
+	{
+		console.log("updateNoRecordsQuery");
+		console.log(params);
+		console.log(params["content"]);
+		console.log(params["words"]);
+	}
 	scrape_recipe() {
 	
 		

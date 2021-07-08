@@ -80,59 +80,9 @@ export class SearchresultsComponent implements OnInit {
 		console.log("ngOnInit");
 		this.searchmorebar = false;
 	//	this.dietLabelsList = constants.dietLabels;
-		this.getNutrientsMaxMin(); 
-
-		this.filterOpts = {};
-		this.filterOpts = {"asc":false, "desc": false, "calories":false, "all":false}
-		this.sortType = "";
-
-		this.searchFilterLabels = [];
-		this.searchFilterLabels.push({"label":"Health Labels", "selected":false});
-		this.searchFilterLabels.push({"label":"Diet Labels", "selected":false});
-		this.searchFilterLabels.push({"label":"Cuisine Type", "selected":false});
-		this.searchFilterLabels.push({"label":"Meal Type", "selected":false});
-		this.searchFilterLabels.push({"label":"Nutrients", "selected":false});
-		this.searchFilterLabels.push({"label":"Calories", "selected":false});
-
-		this.cuisineTypeList = [];
-		for(let c=0; c < constants.cuisineTypeList.length; c++)
-		{
-			this.cuisineTypeList.push({"name":constants.cuisineTypeList[c], "selected":false})
-		}
-
-		this.dietLabelsList= [];
-		for(let d=0; d < constants.dietLabels.length; d++)
-		{
-			this.dietLabelsList.push({"name":constants.dietLabels[d], "selected":false})
-		}
-
-		
-		this.mealTypeList= [];
-		for(let d=0; d < constants.mealTypeList.length; d++)
-		{
-			this.mealTypeList.push({"name":constants.mealTypeList[d], "selected":false})
-		}
-
-
-		//this.healthlabelsList = constants.healthLabels;
-		this.healthlabelsList= [];
-		for(let h=0; h < constants.healthLabels.length; h++)
-		{
-			this.healthlabelsList.push({"name":constants.healthLabels[h], "selected":false})
-		}
-
-		//this.mineralsLabelsList = constants.minerals;
-		this.mineralsLabelsList= [];
-		for(let m=0; m <constants.minerals.length; m++)
-		{
-			this.mineralsLabelsList.push({"name":constants.minerals[m], "selected":false,  "unit":"",  "min":"", "max":"", "t_min":"", "t_max":""})
-		}
-
-		this.loadNutrientsMaxMin();
-		this.listorgrid = {"menu":"grid", "panel":"listing-grid"}
 	
 
-
+	
 		this.router.events.subscribe((evt) => {
             if (!(evt instanceof NavigationEnd)) {
                 return;
@@ -149,23 +99,17 @@ export class SearchresultsComponent implements OnInit {
 		  else if( this.currentUser["username"] !== "")
 		  this.currentUser["displayname"] = this.currentUser["username"];
 		  console.log( this.currentUser["displayname"]);
-		  this.role = this.helpService.getRoleStatus(this.currentUser);
-
-		  this.showNutrientsFlag = this.helpService.showorhideNutritions(this.role);
-  
+ 
 		  console.log(this.showNutrientsFlag);
 		}
 		
-	
-	  this.totalPage = 1;
-	 this.page_num = 0;
-	 this.page_length= 12;
+
 	  this.searchparam = {"q":"", "range":{}, "param":""}
 	
   
 	  this.routeParams = {};
 	 	this.route.params.pipe(takeUntil(this.onDestroy$)).subscribe(params => {
-  
+			console.log("loading routeParams");
 		this.routeParams = params;     
 		if (typeof (this.routeParams.param) !== "undefined") {
 		  this.searchparam["param"] = this.routeParams.param;
@@ -181,55 +125,6 @@ export class SearchresultsComponent implements OnInit {
 	}
 
 	
-
-	loadRatings()
-	{
-	  if(typeof(this.ratingIds ) !== "undefined" && this.ratingIds !== "")
-	  {			
-	   this.ratingIds = this.ratingIds.substring(0, this.ratingIds.length-1);
-	  }
-	 
-		var params = {};
-	   
-		params["query"] = "SELECT count(rating) as totalcount, sum(rating) as totalrating, recipeid FROM `rating` where recipeid in (" + this.ratingIds + ") group by recipeid";
-		var res =   this.dbService.getDatabyTablebyQuery("rating", params).subscribe(invData => setTimeout(() => {
-		  if(invData !== null)
-		  {
-			if(typeof(invData["body"]) !== "undefined" && invData["body"] !== null && invData["body"]["length"] > 0)
-			{
-			  var temp = invData["body"];
-			  if(temp["length"] > 0)
-			  {
-				this.ratingsArr = [];
-				for(let i=0; i< temp["length"] ; i++)
-				{
-				  this.ratingsArr.push(temp[i])
-		
-				  var recIndex = this.recipesList1.findIndex(x1 => (x1.id === temp[i]["recipeid"]));
-	
-				  if(recIndex > -1)
-				  {
-					this.recipesList1[recIndex]["totalcount"] = temp[i]["totalcount"];
-					this.recipesList1[recIndex]["totalrating"] = temp[i]["totalrating"];
-  
-					if( temp[i]["totalrating"] > 0 &&  temp[i]["totalcount"] > 0 )
-					{
-					  this.recipesList1[recIndex]["displayrating"] = Math.ceil((temp[i]["totalrating"]/ temp[i]["totalcount"]));
-					 }
-  
-				  }
-
-				}
-	
-			  }
-			}
-	
-		  }
-		}));
-	 
-	  
-	  
-	}
 
 
 	limitTo(str, num)
@@ -326,7 +221,11 @@ export class SearchresultsComponent implements OnInit {
 			this.searchProps();
 
 			}
-			this.noResult =  true;
+			else
+			{
+				this.noResult =  true;
+				this.helpService.updateNoRecordsQuery(params);
+			}
 		}
 		else
 		{
@@ -380,7 +279,7 @@ export class SearchresultsComponent implements OnInit {
 		  }
 		 
 	
-		  this.loadRatings();
+		 // this.loadRatings();
   
 		} else {
 			this.recipesList1 = [];
@@ -392,73 +291,7 @@ export class SearchresultsComponent implements OnInit {
 	this.router.navigate(['recipedetails', id]);
 	}
 
-	loadNutrientsMaxMin()
-  {
 
-
-    if(this.mineralsLabelsList["length"] > 0 && this.nutrientDbFields["length"] > 0)
-    {
-
-      for(let m =0; m < this.mineralsLabelsList["length"]; m++)
-      {
-        var lbl = this.mineralsLabelsList[m]["name"].toLowerCase();
-        if(lbl.indexOf(" ") > -1)
-        {
-          lbl = lbl.replace(" ", "_");
-        }
-        
-        if(typeof(this.nutrientDbFields[0]["min"+lbl]) !== "undefined" && this.nutrientDbFields[0]["min"+lbl] !== "")
-        {
-          this.mineralsLabelsList[m]["t_min"] = this.nutrientDbFields[0]["min"+lbl];
-        }
-
-        if(typeof(this.nutrientDbFields[0]["max"+lbl]) !== "undefined" && this.nutrientDbFields[0]["max"+lbl] !== "")
-        {
-          this.mineralsLabelsList[m]["t_max"] = this.nutrientDbFields[0]["max"+lbl];
-        }
-
-      }
-
-    }
-    else
-    {
-      setTimeout(() => {
-        
-        this.loadNutrientsMaxMin();
-
-      },1000);
-    }
-  }
-
-  getNutrientsMaxMin()
-  {
-    console.log("getNutrientsMaxMin");
-    var params1 = {};
-    var nutrientFields = constants.nutrientDbFields;
-  //  console.log( params1["query"])
-    var query = "";
-    for(let i=0; i < nutrientFields.length; i++)
-    {
-      var lbl = nutrientFields[i];
-     
-      query += " min(" + lbl + ") min" + lbl +", ";
-      query += " max(" + lbl + ") max" + lbl + ", ";
-    }
-  //  console.log(query);
-    query = query.slice(0, -2);
-    params1["query"] = "Select " + query + " from nutrients";
- //   console.log(params1);
-   var res =   this.dbService.getDatabyQuery("recipes", params1).subscribe(invData => setTimeout(() => {
-
-//	console.log(invData);
-    if(invData["body"]["length"] > 0)
-    {
-      this.nutrientDbFields = invData["body"];
-  //    console.log(this.nutrientDbFields);
-    }
-   }))
-  
-  }
   formatVal(str)
   {
 	return this.helpService.formatValue(str);
