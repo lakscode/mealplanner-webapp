@@ -156,7 +156,7 @@
                      <span style='float:right;margin-right:20px' *ngIf="cItem.userscount && cItem.userscount > 0" ><i class="fa fa-user"></i> {{cItem.userscount}} Members </span>
                   </p>
          
-                    <p style="padding-left:15px; font-size:12px;margin-bottom:15px">Added by : <span *ngIf="cItem.firstname">{{cItem.firstname}} {{cItem.lastname}}</span><span *ngIf="!cItem.firstname">{{cItem.email}}</span></p>
+                    <p style="padding-left:15px; font-size:12px;margin-bottom:15px">Added by : <a  class="linktext" href="/searchresults;author={{cItem.id}}"><span *ngIf="cItem.firstname">{{cItem.firstname}} {{cItem.lastname}}</span><span *ngIf="!cItem.firstname">{{cItem.email}}</span></a></p>
 
                       </div>
                 

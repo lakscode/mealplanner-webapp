@@ -49,6 +49,7 @@ export class SearchresultsComponent implements OnInit {
 	sortType: any = "";
 	showFilters: boolean = false;
 	addtoplan: any;
+	userid: any = "";
 	constructor(private router: Router, private toastr: ToastrService, private route: ActivatedRoute, private userService: UserService, private dbService: DBService, private helpService: HelpService, private formBuilder: FormBuilder, private modalService: ModalService) {
 	
 	}
@@ -81,7 +82,7 @@ export class SearchresultsComponent implements OnInit {
 		this.searchmorebar = false;
 	//	this.dietLabelsList = constants.dietLabels;
 	
-
+		this.userid = "";
 	
 		this.router.events.subscribe((evt) => {
             if (!(evt instanceof NavigationEnd)) {
@@ -114,7 +115,9 @@ export class SearchresultsComponent implements OnInit {
 		if (typeof (this.routeParams.param) !== "undefined") {
 		  this.searchparam["param"] = this.routeParams.param;
 		}    
-		 
+		if (typeof (this.routeParams.author) !== "undefined") {
+			this.searchparam["author"] = this.routeParams.author;
+		  }    
 		console.log(this.routeParams);
 		this.splitcontent = false;
 	  this.searchProps();
@@ -146,14 +149,20 @@ export class SearchresultsComponent implements OnInit {
 	formatImage(image, type)
 	{
 
-	  var retImage = image;
-	  if(image !== "" && type !== "")
-	  {
-		retImage = this.helpService.formatImage(image, type);
-		
-	  }
+	  	var retImage = image;
+	   
+			if(image !== "" && type !== "")
+			{
+				retImage = this.helpService.formatImage(image, type);
+				
+			}
+		if(this.searchparam["author"])
+		{
+			retImage = image;
+		}
 	  return retImage;
 	}
+
 
 
 
@@ -200,6 +209,12 @@ export class SearchresultsComponent implements OnInit {
 
    }
    
+   if(this.searchparam["author"])
+   {
+	params["created_by"] = this.searchparam["author"];
+
+	this.loadUserInfo(this.searchparam["author"]);
+   }
     params["instructions"]="notempty";
   
    
@@ -574,7 +589,9 @@ loadCollectionNames()
 
 	var params = {};
 	console.log(params);
+
 	params ['query'] = "select id, collection_name from collection where created_by = " + this.currentUser["id"];
+	
 	var res =   this.dbService.getDatabyTablebyQuery("collection", params).subscribe(invData => setTimeout(() => {
 
 	  console.log(invData);
@@ -877,6 +894,12 @@ gotopage(page, id = null){
 	 {
 		params["query"] += " where c.collection_name like '%" + this.searchparam["param"] + "%' "
 	 } 
+
+	 if(this.searchparam["author"])
+	 {
+	  params["query"] += "where created_by = " + this.searchparam["author"];
+	 }
+
 	 params["query"] +=  " GROUP BY c.id ";
 	 console.log(params);
 	 var res =   this.dbService.getDatabyTablebyQuery("collection", params).subscribe(invData => setTimeout(() => {
@@ -935,6 +958,27 @@ gotopage(page, id = null){
    }));
 
  }
+
+
+ userInfo: any; 
+	loadUserInfo(id)
+	{
+		console.log("in loadUserInfo");
+		var params = {"id":id};
+		var res =   this.dbService.getDatabyParam("users", params).subscribe(userData => setTimeout(() => {
+			console.log(userData);
+			if(userData !== null)
+			{
+				if(userData["body"]["length"] > 0)
+				{
+					this.userInfo = userData["body"][0];
+
+					console.log(this.userInfo);
+				}
+			}
+		}));
+
+	}
 
 }
 

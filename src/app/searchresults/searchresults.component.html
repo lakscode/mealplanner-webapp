@@ -4,7 +4,9 @@
         <div class="row">
             <div class="col-md-12 col-lg-12 col-xs-12">
                 <div class="recipe-set">
-                    <h2 style="width:75%">Search Results for <b>{{searchparam["param"]}}</b></h2>
+                    <h2 style="width:75%">Search Results for <b>{{searchparam["param"]}}</b>
+                    <span *ngIf="userInfo"><b>{{userInfo.firstname}} {{userInfo.lastname}}</b></span>
+                    </h2>
                     <!--  <a href="javascript:void(0)" style="font-size:20px;" (click)="showFilters = !showFilters">
                         <i class="fa fa-sort-amount-asc" aria-hidden="true"></i>
                     </a> -->
@@ -344,7 +346,7 @@
                                     </div>
                                     <a  (click)="gotopage('recipedetails', recipe1.id)" href="javascript:void(0)" title="{{recipe1.label}}"><img style="width:90%; max-height:150px;object-fit: cover;"  id="imagep_{{i}}"   src="{{formatImage(recipe1.image, 'm')}}"
                             alt="image">  </a><br/>
-                                <a title="{{recipe1.label}}"><span innerHTML="{{limitTo(recipe1.label, 25)}}" style="font-size:14px;padding-left:6px"></span></a>
+                                <a (click)="gotopage('recipedetails', recipe1.id)" href="javascript:void(0)" title="{{recipe1.label}}"><span innerHTML="{{limitTo(recipe1.label, 25)}}" style="font-size:14px;padding-left:6px"></span></a>
                                 <p style="font-size:14px;padding-left:6px">Calories: <span style="font-size:12px;">{{recipe1.calories}} Kcal</span></p>
                                 <div class="meta-listing">                                   
                                     <div *ngIf="showNutrientsFlag" style="display:inline-block;color: #5e676b;font-size:13px">

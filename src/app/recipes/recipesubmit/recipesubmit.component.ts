@@ -224,7 +224,10 @@ loadRecipe(id)
 				}
 			 }
 		
-			
+			 if(!tempDigest && !tempNutrients)
+			  {
+				  this.getConsolidatedNutrients();
+			  }
 			
 			console.log(this.searchRes);
 			console.log("this.searchRes");
@@ -449,6 +452,42 @@ formatLabel()
 		}
 	}
 }
+
+getConsolidatedNutrients()
+{
+	console.log(this.ingredients);
+	for(let i=0; i < this.ingredients.length; i++)
+	{
+		if(this.ingredients[i]["text"] !== "")
+		{
+			console.log(this.ingredients[i]);
+			this.getNutrientsAll(this.ingredients[i]);
+		}
+		
+		//
+	}
+	console.log(this.searchRes);
+}
+
+getNutrientsAll(item)
+{
+	console.log(item);
+	var api_id = environment.edamameId;
+	var api_key = environment.edamameKey;
+	console.log(api_id);
+	console.log(api_key);
+	var apiURL = constants.edamam_nutrient_api   +"?app_id="+ api_id + "&app_key=" + api_key + "&ingr=" + item.quantity + " " + item.text;
+
+	console.log(apiURL);
+	var res =   this.dbService.getLocalData(apiURL).subscribe(recipeData => setTimeout(() => {
+		console.log(recipeData);
+		item["nutrients"] = recipeData;
+		this.formatIngredients();
+	}));
+
+}
+
+
 getNutrients(item)
 {
 	console.log(item);
@@ -726,6 +765,11 @@ saveRecipe()
 		params["totalNutrients"] =this.searchRes["totalNutrients"];
 	//	params["digest"] =this.searchRes["totalNutrients"];
 	}
+	if(typeof(this.searchRes.notes) !== "undefined"  &&  this.searchRes.notes !== "")
+	{
+		params["notes"] =this.searchRes.notes;
+	}
+
 	params["source"] =  "fitaholic";
 	params["created_by"] =  this.currentUser["id"];
 		if(typeof(this.searchRes.id) !== "undefined"  && this.searchRes.id !== "")

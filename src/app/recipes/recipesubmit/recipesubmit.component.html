@@ -177,6 +177,15 @@
                             </fieldset>
                             <br />
                             <div class="row">
+                                <div class="col-12" style="padding-left:0px;">
+                                    <label for="notes">Notes</label>
+                                    <textarea class="short-text"
+                                    [(ngModel)]="searchRes.notes" name="notes" id="notes"
+                                        cols="30" rows="10">    </textarea> <br>
+                                </div>
+                            
+                            </div>
+                            <div class="row">
                                 <div class="col-12 col-lg-4" style="padding-left:0px;">
                                     <label for="servings">Servings</label>
                                     <input type="text" name="s_servings" id="s_servings"

@@ -965,4 +965,12 @@ SendEmailPasswordReset(email,data) {
 		}));
 		}
 	}
+
+	checkImageType(url)
+	{
+		if(url)
+		{
+			
+		}
+	}
 }

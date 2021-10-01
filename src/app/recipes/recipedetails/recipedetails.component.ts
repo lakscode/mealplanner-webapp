@@ -310,7 +310,7 @@ console.log(this.searchRes);
 				  }
 		
 			  } 
-
+			  this.getUser(this.searchRes.created_by);
 		}
 	  }
 
@@ -909,6 +909,26 @@ makeacopy()
 			retValue = this.helpService.setInputFirstToUppercase(str);
 		}
 		return retValue;
+	}
+
+	userInfo: any; 
+	getUser(id)
+	{
+		console.log("in getuser");
+		var params = {"id":id};
+		var res =   this.dbService.getDatabyParam("users", params).subscribe(userData => setTimeout(() => {
+			console.log(userData);
+			if(userData !== null)
+			{
+				if(userData["body"]["length"] > 0)
+				{
+					this.userInfo = userData["body"][0];
+
+					console.log(this.userInfo);
+				}
+			}
+		}));
+
 	}
 }
 
