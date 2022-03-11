@@ -348,7 +348,7 @@ if(mQuery !== "")
 
   params1["query"] = query + where + " limit 0, 100";
   console.log(params1);
-	var res =   this.dbService.getDatabyTablebyQuery("recipes", params1).subscribe(invData => setTimeout(() => {
+	var res =   this.dbService.getDatabyTablebyQuery("common", params1).subscribe(invData => setTimeout(() => {
 		console.log(invData);
 		this.formatResult(invData);
 	}));
@@ -704,7 +704,7 @@ formatVal(str)
     query = query.slice(0, -2);
     params1["query"] = "Select " + query + " from nutrients";
  //   console.log(params1);
-   var res =   this.dbService.getDatabyQuery("recipes", params1).subscribe(invData => setTimeout(() => {
+   var res =   this.dbService.getDatabyTablebyQuery("common", params1).subscribe(invData => setTimeout(() => {
 
 //	console.log(invData);
     if(invData["body"]["length"] > 0)

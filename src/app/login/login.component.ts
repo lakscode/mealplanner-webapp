@@ -107,16 +107,17 @@ export class LoginComponent implements OnInit {
 		var params = {'username':  this.userObj.username, 'emailphone':this.userObj.username}
 
 		this.dbService.checkIfExists("users", params).subscribe(userDataObj => setTimeout(() => {
-			//console.log(userDataObj);
+			console.log(userDataObj);
 			if (userDataObj['body']['length'] > 0) {
 				var userData = userDataObj['body'][0];
-			
+				userData["loggedIn"] = true;
 				var pass = this.helpService.decryptPass(userData["password"]);  //this.loginForm.value.passWord 
 				console.log(pass);
 				if(pass == this.userObj.password.trim() || userData["password"] == this.userObj.password.trim() )
 				{
 					delete userData["password"];
 					sessionStorage.setItem("currentUser", JSON.stringify(userData));
+					localStorage.setItem("currentUser", JSON.stringify(userData));
 					let username = this.userService.setUser(userData);
 				}	
 				else 
@@ -169,6 +170,7 @@ export class LoginComponent implements OnInit {
         }
 
 		sessionStorage.setItem("socialLogin", this.socialUser.provider);
+		localStorage.setItem("socialLogin", this.socialUser.provider);
         console.log(params);
         var params1 = {'email':  this.socialUser.email};
 
@@ -199,6 +201,7 @@ export class LoginComponent implements OnInit {
 						}
             		}
             		sessionStorage.setItem("currentUser", JSON.stringify(userDataSocial));
+					localStorage.setItem("currentUser", JSON.stringify(userDataSocial));
 					let username = this.userService.setUser(userDataSocial);
 					this.gotopage("landing");
             } else {
@@ -210,6 +213,7 @@ export class LoginComponent implements OnInit {
               				var parent = this;
                 			
                 				sessionStorage.setItem("currentUser", JSON.stringify(invData));
+								localStorage.setItem("currentUser", JSON.stringify(invData));
 								let username = this.userService.setUser(invData); 
                   				this.gotopage("landing");
                 		

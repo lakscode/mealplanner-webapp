@@ -113,7 +113,7 @@ export class ApproverecipesComponent implements OnInit {
 	  var retImage = image;
 	  if(image !== "" && type !== "")
 	  {
-		retImage = this.helpService.formatImage(image, type);
+	//	retImage = this.helpService.formatImage(image, type);
 		
 	  }
 	//  console.log(retImage);
@@ -170,13 +170,13 @@ export class ApproverecipesComponent implements OnInit {
 	this.noResult =  false;
   
    var params1 ={};
-	  params1["query"] = "SELECT rm.*, r.image, r.label as rlabel, r.cuisineType as rcuisineType, r.dietLabels as rdietLabels, r.healthLabels as rhealthLabels,r.mealType as rmealType,  r.s_instructions as rs_instructions FROM `recipes_modify` rm, recipes r WHERE rm.recipeid = r.id";
+	  params1["query"] = "SELECT rm.*, r.image, r.label as rlabel, r.cuisineType as rcuisineType, r.dietLabels as rdietLabels, r.healthLabels as rhealthLabels,r.mealType as rmealType,  r.notes as rnotes, r.s_instructions as rs_instructions FROM `recipes_modify` rm, recipes r WHERE rm.recipeid = r.id";
 	  if(status !== "")
 	  {
 		params1["query"]  +=  " AND " + status;
 	  }
 	  console.log(params1);
-    var res =   this.dbService.getDatabyTablebyQuery("recipes", params1).subscribe(invData => setTimeout(() => {
+    var res =   this.dbService.getDatabyTablebyQuery("common", params1).subscribe(invData => setTimeout(() => {
 		console.log(invData);
 		console.log(invData["body"]["length"]);
 		if(invData["body"]["length"] > 0)
@@ -253,6 +253,11 @@ updateNewRecipe(recipe1, id)
 
 			if(typeof(recipe1["newrecipe"]["mealType"]) !== "undefined" && recipe1["newrecipe"]["mealType"] !== "")
 			paramsr["mealType"]= recipe1["newrecipe"]["mealType"];
+
+			if(typeof(recipe1["newrecipe"]["notes"]) !== "undefined" && recipe1["newrecipe"]["notes"] !== "")
+			paramsr["notes"]= recipe1["newrecipe"]["notes"];
+
+
 	console.log(paramsr);
 			var res =   this.dbService.updateDataByTable("recipes_modify", paramsr).subscribe(invData => setTimeout(() => {
 				this.toastr.success("Recipe has been modifed.","Modify Recipe");
@@ -296,7 +301,10 @@ approvechanges(recipe)
 		{
 			params["cuisineType"] = recipe.cuisineType;
 		}
-		
+		if(recipe.notes !== "" && recipe.rnotes !== recipe.notes)
+		{
+			params["notes"] = recipe.notes;
+		}
 	
 		console.log(params);
 		var res =   this.dbService.updateDataByTable("recipes", params).subscribe(invData => setTimeout(() => {

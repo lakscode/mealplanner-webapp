@@ -38,7 +38,7 @@
                                       <div class="listSection " id="healthLabels">
                                           <label class="container">{{hlabel.name}}
                                               <input [(ngModel)]="hlabel.selected" type="checkbox"
-                                                  [checked]="h == 0?'checked':''">
+                                                  [checked]="hlabel.selected">
                                               <span class="checkmark"></span>
                                           </label>
                                       </div>
@@ -230,9 +230,9 @@
 
       </div>
 
-      <div *ngIf="loadingData && (recipesList1 && recipesList1.length == 0) " class='col-12'>
-          <p>Loading recipes... </p>
-      </div>
+      <!--<div *ngIf="loadingData && (recipesList1 && recipesList1.length == 0) " class='col-12'>
+          <p>Loading recipes... {{recipesList1.length}}</p>
+      </div>-->
       <div *ngIf="!loadingData && (recipesList1 && recipesList1.length == 0) " class='col-12'>
         <p>No results. Please refine your filters... </p>
     </div>

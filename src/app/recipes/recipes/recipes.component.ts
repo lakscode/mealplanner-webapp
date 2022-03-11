@@ -333,7 +333,7 @@ export class RecipesComponent implements OnInit {
 				delete new_copy["id"];
 
 				var pQuery = { "query": "select max(id) as maxid from recipes" };
-				var res = this.dbService.getDatabyTablebyQuery("recipes", pQuery).subscribe(recipeData => setTimeout(() => {
+				var res = this.dbService.getDatabyTablebyQuery("common", pQuery).subscribe(recipeData => setTimeout(() => {
 					console.log(recipeData);
 
 					if (recipeData !== null && typeof (recipeData['body']) !== "undefined" && recipeData['body']['length'] > 0) {
@@ -470,7 +470,7 @@ export class RecipesComponent implements OnInit {
 		this.newRecipe["healthLabels"] = ""; //this.selectedRecipe["healthLabels"];
 		this.newRecipe["cuisineType"] = ""; //this.selectedRecipe["cuisineType"];
 		this.newRecipe["mealType"] = ""; //this.selectedRecipe["mealType"];
-
+		this.newRecipe["notes"] = "";
 		console.log(this.selectedRecipe);
 
 		var params = {};
@@ -537,6 +537,9 @@ export class RecipesComponent implements OnInit {
 
 				if (typeof (this.newRecipe["mealType"]) !== "undefined" && this.newRecipe["mealType"] !== "")
 					paramsr["mealType"] = this.newRecipe["mealType"];
+				
+				if (typeof (this.newRecipe["notes"]) !== "undefined" && this.newRecipe["notes"] !== "")
+					paramsr["notes"] = this.newRecipe["notes"];
 
 				console.log(paramsr);
 				paramsr["status"] = 1;
@@ -577,6 +580,10 @@ export class RecipesComponent implements OnInit {
 
 		if (typeof (this.newRecipe["mealType"]) !== "undefined" && this.newRecipe["mealType"] !== "")
 			paramsr["mealType"] = this.newRecipe["mealType"];
+
+		if (typeof (this.newRecipe["notes"]) !== "undefined" && this.newRecipe["notes"] !== "")
+			paramsr["notes"] = this.newRecipe["notes"];		
+
 		console.log(paramsr);
 		paramsr["status"] = 1;
 		var res = this.dbService.updateDataByTable("recipes_modify", paramsr).subscribe(invData => setTimeout(() => {
@@ -596,7 +603,7 @@ export class RecipesComponent implements OnInit {
 
 		paramsr["dietLabels"] = this.selectedRecipe["dietLabels"];
 		paramsr["healthLabels"] = this.selectedRecipe["healthLabels"];
-
+		paramsr["notes"] = this.selectedRecipe["notes"];
 		paramsr["cuisineType"] = this.selectedRecipe["cuisineType"];
 		paramsr["mealType"] = this.selectedRecipe["mealType"];
 		paramsr["recipeid"] = this.selectedRecipe["id"];

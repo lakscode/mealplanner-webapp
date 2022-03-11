@@ -40,7 +40,7 @@
                 <div class="outerbox">
                     <div class="innerbox">
                         <!--<p class="tag">Recipe Details</p>-->
-                        <p  class="label" style="text-align:center;margin:10px 0px;">
+                        <p  class="recipetitle" style="text-align:center;margin:10px 0px;">
                             <a style="color:#FFF;" href="javascript:void(0)">{{searchRes.label}}</a>
                         </p>
                         <div class="short-separator" style="margin-top:10px"></div>
@@ -140,7 +140,7 @@
                         <span class="checkmark"></span>
                 </label>
             </div>
-            <div class="newitems" *ngIf="!isUser['dietitian']">
+       <!--     <div class="newitems" *ngIf="!isUser['dietitian']">
                 <ng-container *ngFor="let macro of paramMicro; let m=index; ">
                     <div class="nutrition-detail newitem">
                         <div class="left-box">
@@ -155,8 +155,9 @@
                 
                 </ng-container>
             </div>
-
-            <div class="nutritionitems" *ngIf="isUser['dietitian']">
+        -->
+            <!--<div class="nutritionitems" *ngIf="isUser['dietitian']">-->
+                <div class="nutritionitems">
                 <ng-container *ngFor="let macro of paramMicro; let m=index; ">
                     <div class="neitem">
                         <div class="itemname">

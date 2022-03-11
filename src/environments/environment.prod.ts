@@ -1,6 +1,7 @@
 export const environment = {
   production: true,
-  apiUrl:"https://www.dentavacation.com/mobileapp/api",
+//  apiUrl:"https://www.dentavacation.com/mobileapp/api",
+apiUrl:"https://mealplannerapi-otkcj.ondigitalocean.app/api",
   appUrl:"https://www.fitaholic.com",
   //playstoreUrl: "https://play.google.com/store/apps/details?id=com.mtc.mob",
   playstoreUrl: "",

@@ -300,7 +300,7 @@ featuresList: Array<any> = [];
 	
 	  params["query"]= query + qWhere + "  group by healthLabels order by rand() limit 0, 4";
 
-	  var res =   this.dbService.getDatabyQuery("recipes", params).subscribe(invData => setTimeout(() => {
+	  var res =   this.dbService.getDatabyTablebyQuery("common", params).subscribe(invData => setTimeout(() => {
    
 	  console.log(invData);
    

@@ -339,7 +339,7 @@ export class MyRecipesComponent implements OnInit {
     query = query.slice(0, -2);
     params1["query"] = "Select " + query + " from nutrients";
 
-   var res =   this.dbService.getDatabyQuery("recipes", params1).subscribe(invData => setTimeout(() => {
+   var res =   this.dbService.getDatabyTablebyQuery("common", params1).subscribe(invData => setTimeout(() => {
 
     if(invData["body"]["length"] > 0)
     {

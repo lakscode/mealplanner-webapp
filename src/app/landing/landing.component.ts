@@ -115,7 +115,7 @@ constructor(private router: Router, private httpClient : HttpClient, private san
 	  params["query"]= query + qWhere + " order by rand() limit 0, 4";
 
 
-	  var res =   this.dbService.getDatabyQuery("recipes", params).subscribe(invData => setTimeout(() => {
+	  var res =   this.dbService.getDatabyTablebyQuery("common", params).subscribe(invData => setTimeout(() => {
      
 	   if(invData !== null && typeof(invData["body"]) !== "undefined" && invData["body"] !== null && invData["body"]["length"] > 0)
 		 {
@@ -144,7 +144,7 @@ constructor(private router: Router, private httpClient : HttpClient, private san
 
 	params["query"] = "select * from recipeoftheday where datetime = '" + tempDt + "'";
 		////console.log(params["query"]);
-	 var res =   this.dbService.getDatabyTablebyQuery("recipes", params).subscribe(invData => setTimeout(() => {
+	 var res =   this.dbService.getDatabyTablebyQuery("common", params).subscribe(invData => setTimeout(() => {
    
 	  if(invData !== null && typeof(invData["body"]) !== "undefined" && invData["body"] !== null && invData["body"]["length"] > 0)
 		{
@@ -171,7 +171,7 @@ constructor(private router: Router, private httpClient : HttpClient, private san
 	else
 	params["query"] = "select id, label, image, healthLabels, dietLabels, calories, totalWeight, yield from recipes where id= " + id + "";
 
-	 var res =   this.dbService.getDatabyTablebyQuery("recipes", params).subscribe(invData => setTimeout(() => {
+	 var res =   this.dbService.getDatabyTablebyQuery("common", params).subscribe(invData => setTimeout(() => {
    
 	  if(invData !== null && typeof(invData["body"]) !== "undefined" && invData["body"] !== null && invData["body"]["length"] > 0)
 		{
@@ -197,7 +197,7 @@ constructor(private router: Router, private httpClient : HttpClient, private san
 
 	  	params["query"] = "select * from recipeoftheday where datetime = '" + tempDt + "'";
 		  ////console.log(params["query"]);
-	   var res =   this.dbService.getDatabyTablebyQuery("recipes", params).subscribe(invData => setTimeout(() => {
+	   var res =   this.dbService.getDatabyTablebyQuery("common", params).subscribe(invData => setTimeout(() => {
 
 		if(invData !== null && typeof(invData["body"]) !== "undefined" && invData["body"] !== null && invData["body"]["length"] > 0)
 		  {
@@ -216,7 +216,7 @@ constructor(private router: Router, private httpClient : HttpClient, private san
 		  params1["query"] = "INSERT into recipeoftheday (recipeid, datetime) values(" + recipe["id"] + ", '" + tempDt + "')";
 			  ////console.log(params1['query']);
 	  
-		   var res =   this.dbService.getDatabyTablebyQuery("recipes", params1).subscribe(invData => setTimeout(() => {
+		   var res =   this.dbService.getDatabyTablebyQuery("common", params1).subscribe(invData => setTimeout(() => {
 			  
 				  if(invData !== null && typeof(invData["body"]) !== "undefined" && invData["body"] !== null && invData["body"]["length"] > 0)
 				  {
@@ -467,6 +467,8 @@ loadMealPlan()
 getPlanStatus()
 {
 
+	console.log("getPlanStatus");
+
   if(this.currentUser && this.currentUser["id"] !== null && this.currentUser["id"] !== "")
   {
 
@@ -556,7 +558,7 @@ getUserPreferences()
 	  {
 		params1["query"] += " where " + qWhere;
 	  }
-	  var res =   this.dbService.getDatabyTablebyQuery("recipes", params1 ).subscribe(qData => setTimeout(() => {
+	  var res =   this.dbService.getDatabyTablebyQuery("common", params1 ).subscribe(qData => setTimeout(() => {
 
 	  if(qData !== null && qData["body"] && qData["body"]["length"] > 0)
 	  {

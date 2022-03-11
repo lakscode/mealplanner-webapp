@@ -777,7 +777,7 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 		var params ={};
 
 		params["query"] = "select id, label, image, healthLabels, ingredients, dietLabels, calories, yield from recipes  where id in (select recipeid from favourites where userid ='" + this.currentUser["id"] + "')";
-		 var res =   this.dbService.getDatabyQuery("recipes", params).subscribe(invData => setTimeout(() => {
+		 var res =   this.dbService.getDatabyTablebyQuery("common", params).subscribe(invData => setTimeout(() => {
 	  	
 	  if(invData !== null && typeof(invData["body"]) !== "undefined" && invData["body"] !== null && invData["body"]["length"] > 0)
 		{
@@ -1799,7 +1799,7 @@ console.log(invData);
     query = query.slice(0, -2);
     params1["query"] = "Select " + query + " from nutrients";
 
-   var res =   this.dbService.getDatabyQuery("recipes", params1).subscribe(invData => setTimeout(() => {
+   var res =   this.dbService.getDatabyTablebyQuery("common", params1).subscribe(invData => setTimeout(() => {
 
 
     if(invData["body"]["length"] > 0)

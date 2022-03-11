@@ -151,7 +151,7 @@ export class SearchComponent implements OnInit, OnDestroy {
 	save()
 	{
      this.returnData.emit(this.recipesList1);
-
+		
 	}	
 	
 	closeCal()
@@ -266,7 +266,10 @@ export class SearchComponent implements OnInit, OnDestroy {
 		//this.healthlabelsList = constants.healthLabels;
 		this.healthlabelsList = [];
 		for (let h = 0; h < constants.healthLabelsNew.length; h++) {
-			this.healthlabelsList.push({ "name": constants.healthLabelsNew[h], "selected": false })
+			var selected = false;
+			if(this.searchparam["healthLabels"] == constants.healthLabelsNew[h])
+			selected = true;
+			this.healthlabelsList.push({ "name": constants.healthLabelsNew[h], "selected": selected })
 		}
 
 		//this.mineralsLabelsList = constants.minerals;
@@ -508,7 +511,7 @@ export class SearchComponent implements OnInit, OnDestroy {
 
 			params1["query"] = query + where + " limit 0, 30";
 			console.log(params1);
-			var res = this.dbService.getDatabyTablebyQuery("recipes", params1).subscribe(invData => setTimeout(() => {
+			var res = this.dbService.getDatabyTablebyQuery("common", params1).subscribe(invData => setTimeout(() => {
 	
 				if (invData["body"]["length"] == 0) {
 					console.log("calling again searchprops");
@@ -730,4 +733,14 @@ export class SearchComponent implements OnInit, OnDestroy {
 
 	}
 
+	checkFilter(index, value, param)
+	{
+		var retValue = false;
+	if(index == 0)
+	retValue = true;
+	else if(value == this.searchparam[param])
+	retValue = true;
+
+	return retValue; 
+	}
 }

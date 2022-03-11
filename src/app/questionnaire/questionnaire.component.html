@@ -34,7 +34,7 @@
 
                   <div *ngIf="questions[cq]['type'] == 'text'" style="text-align:left;">
 
-                    <input style="display:inline-block;font-size:14px; padding:5px 10px; border-radius:5px; outline:0;" class="input-text" type="text"
+                    <input class="input-text" type="text"
                       (keyup)="setAnswerText(questions[cq], cq)" placeholder="Please enter value" name="question{{cq}}"
                       [(ngModel)]="questions[cq]['answer']">&nbsp;
                     <span style='margin-left: 10px; font-size: 14px;'

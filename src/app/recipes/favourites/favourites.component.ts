@@ -103,7 +103,7 @@ export class FavouritesComponent implements OnInit {
 	 
 	  params["query"] = "select id, label, image, healthLabels, dietLabels, calories, created_by  from recipes  where id in (select recipeid from favourites where userid ='" + this.currentUser["id"] + "')";
 	
-	 var res =   this.dbService.getDatabyQuery("recipes", params).subscribe(invData => setTimeout(() => {
+	 var res =   this.dbService.getDatabyTablebyQuery("common", params).subscribe(invData => setTimeout(() => {
   
 
 		this.ratingIds = "";

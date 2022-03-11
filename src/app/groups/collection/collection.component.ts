@@ -246,7 +246,7 @@ loadRecipes(idslist = "")
 	params["query"] = "select recipes.id, recipes.label, recipes.image, recipes.calories, recipes.healthLabels, recipes.dietLabels, recipes.yield, recipes.totalWeight, recipes.totalNutrients, users.email, users.firstname, users.lastname, users.username, recipe_mapping.created_at, users.id as userid from recipes join recipe_mapping on recipes.id = recipe_mapping.recipe_id join users on recipe_mapping.created_by = users.id where recipe_mapping.collection_id = " + this.routeParams.id  + "" ;
   console.log(JSON.stringify(params));
 
- var res =   this.dbService.getDatabyQuery("recipes", params).subscribe(invData => setTimeout(() => {
+ var res =   this.dbService.getDatabyTablebyQuery("common", params).subscribe(invData => setTimeout(() => {
 	console.log(invData);
   if(invData !== null && typeof(invData["body"]) !== "undefined" && invData["body"] !== null && invData["body"]["length"] > 0)
 	{
@@ -437,7 +437,7 @@ if(mQuery !== "")
 
   params1["query"] = query + where + " limit 0, 30";
 
-	var res =   this.dbService.getDatabyTablebyQuery("recipes", params1).subscribe(invData => setTimeout(() => {
+	var res =   this.dbService.getDatabyTablebyQuery("common", params1).subscribe(invData => setTimeout(() => {
 
 		if (invData["body"]["length"] == 0) {
 
@@ -879,7 +879,7 @@ formatVal(str)
     query = query.slice(0, -2);
     params1["query"] = "Select " + query + " from nutrients";
  //   console.log(params1);
-   var res =   this.dbService.getDatabyQuery("recipes", params1).subscribe(invData => setTimeout(() => {
+   var res =   this.dbService.getDatabyTablebyQuery("common", params1).subscribe(invData => setTimeout(() => {
 
 //	console.log(invData);
     if(invData["body"]["length"] > 0)
@@ -1355,7 +1355,7 @@ showusers()
 
   params["query"] ="select id, username, firstname, lastname, email, image from users where id in (select userid from collection_join where collection_id = " + this.collection["id"] + ")"; 
 
-  var res =   this.dbService.getDatabyTablebyQuery("recipes", params).subscribe(invData => setTimeout(() => {
+  var res =   this.dbService.getDatabyTablebyQuery("common", params).subscribe(invData => setTimeout(() => {
 
    
     if(invData !== null && invData["body"]["length"] > 0)

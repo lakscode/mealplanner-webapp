@@ -76,7 +76,8 @@ export class HelpService {
    getCurrentUser()
    {
 	  var currentUser = null;
-	  var temp = sessionStorage.getItem("user");
+	  //var temp = sessionStorage.getItem("user");
+	  var temp = localStorage.getItem("user");
 	  if(typeof(temp) !== "undefined")
 	   currentUser =JSON.parse(temp);
    return currentUser;

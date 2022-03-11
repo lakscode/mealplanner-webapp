@@ -295,10 +295,16 @@ padding-right:11px;
     background: #f1f1f2;
     border: 1px solid #eee;
     border-radius: 1px;
-    margin-right:5;
-    line-height:3;
+    margin-right:5px;
+    line-height:1.5;
+    width: 100%;
+    display: block;
+    margin-bottom: 10px;
 }
-
+.filterlabel i
+{ 
+float:right;
+}
 .mleft {
   margin-left:0px;
 }

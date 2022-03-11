@@ -121,10 +121,10 @@ export class ManageUsersComponent implements OnInit, OnDestroy {
 		this.users = [];
 		this.companyData = [];
 		this.dropdownSettings = { "idField": "id", "textField": "locationname" };
-		this.userAccess.push({ "role": "ADMIN", "rolename": "Administrator" });
-		this.userAccess.push({ "role": "EMPLOYEE", "rolename": "Employee" });
-		this.userAccess.push({ "role": "REALTOR", "rolename": "Realtor" });
-		this.userAccess.push({ "role": "CUSTOMER", "rolename": "Customer" });
+		this.userAccess.push({ "role": "ADMIN", "rolename": "Administrator", "roleid":1 });
+		this.userAccess.push({ "role": "EDITOR", "rolename": "Editor", "roleid":2 });
+		this.userAccess.push({ "role": "User", "rolename": "User", "roleid":4 });
+		this.userAccess.push({ "role": "CONTENT", "rolename": "Content", "roleid":3 });
 		this.attachphotosList = [];
 		this.selectedUser = null;
 		this.apiUrl = environment.apiUrl;

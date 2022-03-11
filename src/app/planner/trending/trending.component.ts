@@ -149,7 +149,7 @@ export class TrendingComponent implements OnInit {
 		 // params["day_num"] = this.selDayIndex;
 	   //   console.log(params);
 		params['query'] = "select * from days where meal_plan_id = " + this.plan["id"] + " order by day_num";
-		var res =   this.dbService.getDatabyTablebyQuery("recipes", params).subscribe(dData => setTimeout(() => {
+		var res =   this.dbService.getDatabyTablebyQuery("common", params).subscribe(dData => setTimeout(() => {
   
 	   //   console.log(dData);
 		  if(dData !== null)

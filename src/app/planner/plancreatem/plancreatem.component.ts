@@ -196,7 +196,7 @@ export class PlancreatemComponent implements OnInit {
 			   
 			  //  params["meal_plan_id"] = this.plan["id"];
 			  params["query"] = "select * from days where meal_plan_id = " + this.plan["id"] + " order by day_num";
-			  var res =   this.dbService.getDatabyQuery("recipes", params).subscribe(dData => setTimeout(() => {
+			  var res =   this.dbService.getDatabyTablebyQuery("common", params).subscribe(dData => setTimeout(() => {
 				console.log(dData);
 			//	console.log(JSON.stringify(dData));
 				if(dData !== null)
@@ -1477,7 +1477,7 @@ export class PlancreatemComponent implements OnInit {
 				query = query.slice(0, -2);
 				params1["query"] = "Select " + query + " from nutrients";
 				
-			   var res =   this.dbService.getDatabyQuery("recipes", params1).subscribe(invData => setTimeout(() => {
+			   var res =   this.dbService.getDatabyTablebyQuery("common", params1).subscribe(invData => setTimeout(() => {
 			
 				  
 				if(invData["body"]["length"] > 0)
@@ -1643,9 +1643,9 @@ export class PlancreatemComponent implements OnInit {
 		
 		//	params['created_by'] =  this.currentUser["id"] ;
 			console.log(params);
-			var res =   this.dbService.getDatabyTablebyQuery("recipes", params).subscribe(resData => setTimeout(() => {
+			var res =   this.dbService.getDatabyTablebyQuery("common", params).subscribe(resData => setTimeout(() => {
 			
-		//	var res =   this.dbService.getDatabyQuery("recipes", params).subscribe(resData => setTimeout(() => {
+		//	var res =   this.dbService.getDatabyTablebyQuery("common", params).subscribe(resData => setTimeout(() => {
 				console.log(resData);
 				if(resData && resData["body"]["length"] > 0)
 				{
@@ -1678,7 +1678,7 @@ export class PlancreatemComponent implements OnInit {
 				params["query"] = "select id, label, image, healthLabels, dietLabels, calories, totalNutrients, digest from recipes where id in (select recipeid from favourites where userid = '" + this.currentUser["id"] + "')" ;
 				this.isSearching = true;
 				console.log(params);
-				var res =   this.dbService.getDatabyTablebyQuery("recipes", params).subscribe(resData => setTimeout(() => {
+				var res =   this.dbService.getDatabyTablebyQuery("common", params).subscribe(resData => setTimeout(() => {
 					console.log(resData);
 					if(resData && resData["body"]["length"] > 0)
 					{

@@ -458,7 +458,7 @@ cursor:pointer;
 
 .createplanbtn
 {
-  margin-right:0px; float:right;   margin-right: 25px;
+  margin-right:0px; float:right;   margin-right: 0px;
   float: right;
   margin-top: -55px;
   background: #FFF;
@@ -552,4 +552,10 @@ color:$orange1;
   {
     margin-top: -55px;
   }
+}
+
+.input-text 
+{
+  border-radius:15px;
+  font-size:14px; padding:5px 10px; border:1px solid #CCC; outline:0;
 }

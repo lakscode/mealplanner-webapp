@@ -14,7 +14,8 @@
 @import "styles/placeholder.scss";
 //@import "styles/popup.scss";
 //@import "styles/toastr.scss";
-
+@import "~ag-grid-community/dist/styles/ag-grid.css";
+@import "~ag-grid-community/dist/styles/ag-theme-balham.css";
 html {
   scroll-behavior: smooth;
 }

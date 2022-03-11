@@ -332,8 +332,10 @@ console.log(params);
 	  }
   
 	 
-
+	  if(idslist == "")
+	  {
 	  params["instructions"] = "notempty";
+	  }
 	console.log(this.filtersParams);
 	 params["returnfields"] = " id, label, image, cuisineType, mealType, healthLabels,ingredients,  dietLabels, totalNutrients, digest,calories, yield ";
 	 if(typeof(this.filtersParams.dietlabels) !== "undefined" && this.filtersParams.dietlabels  !== "")
@@ -790,7 +792,7 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 		var params ={};
 
 		params["query"] = "select id, label, image, healthLabels, ingredients, dietLabels, calories, yield from recipes  where id in (select recipeid from favourites where userid ='" + this.currentUser["id"] + "')";
-		 var res =   this.dbService.getDatabyQuery("recipes", params).subscribe(invData => setTimeout(() => {
+		 var res =   this.dbService.getDatabyTablebyQuery("common", params).subscribe(invData => setTimeout(() => {
 	  	
 	  if(invData !== null && typeof(invData["body"]) !== "undefined" && invData["body"] !== null && invData["body"]["length"] > 0)
 		{
@@ -810,18 +812,22 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
 	  }
 
 
-	  loadDaysData()
-  {
+loadDaysData()
+{
 
+	console.log("loadDaysData");
     if(typeof(this.plan["id"]) !== "undefined" && this.plan["id"] !== "")
     {
-      var params = {};
+      	var params = {};
        
         params["meal_plan_id"] = this.plan["id"];
 
-      var res =   this.dbService.getDataByTable("days", params).subscribe(dData => setTimeout(() => {
+		console.log(params);
 
-   		//	 console.log(dData);
+        var res =   this.dbService.getDataByTable("days", params).subscribe(dData => setTimeout(() => {
+
+   		console.log(dData);
+
         if(dData !== null)
         {
 			var idslist = ""; 
@@ -926,9 +932,9 @@ this.plan["days"][r]["meals"][c]["recipe"] =  this.formatRecipe(recipeItem);
       }))
     }
  
-  }
- saveMealPlanStatus()
- {
+}
+saveMealPlanStatus()
+{
 	this.toastr.success('Meal Plan has been saved!!!', 'Meal Plan!');
 	//this.toastr.error('Meal Plan has been saved!!!', 'Meal Plan!');
 		 this.updatingFlag = true;
@@ -1109,7 +1115,7 @@ limitTo(str, num)
   planCompleteStatus : boolean = false;
   CheckStatus()
   {
-//	  console.log("Check Status");
+//	console.log("Check Status");
 //	console.log(this.plan);
 	var retvalue = 0;
 	var mealcount = 0;
@@ -1135,16 +1141,18 @@ limitTo(str, num)
 			}
 		}
 	}
-//	console.log("mealcount " + mealcount);
-//	console.log("recipecount " +  recipecount);
+
+	
 	if(mealcount == recipecount)
 	{
 		this.planCompleteStatus = true;
-	retvalue = 1;
+		retvalue = 1;
 	}
-	  return retvalue;
+	
+	return retvalue;
 
   }
+
   SavePlanData(r, c)
   {
 
@@ -1856,7 +1864,7 @@ limitTo(str, num)
     query = query.slice(0, -2);
     params1["query"] = "Select " + query + " from nutrients";
 
-   var res =   this.dbService.getDatabyQuery("recipes", params1).subscribe(invData => setTimeout(() => {
+   var res =   this.dbService.getDatabyTablebyQuery("common", params1).subscribe(invData => setTimeout(() => {
 
 
     if(invData["body"]["length"] > 0)
@@ -2125,7 +2133,7 @@ loadFavourites()
 	// params["created_by"] = this.currentUser["id"];
 
 	 this.recipesloading = true;
-	var res =   this.dbService.getDatabyTablebyQuery("recipes", params).subscribe(invData => setTimeout(() => {
+	var res =   this.dbService.getDatabyTablebyQuery("common", params).subscribe(invData => setTimeout(() => {
 	   this.recipesloading = false;
 		console.log(invData);
 	 if(invData !== null && typeof(invData["body"]) !== "undefined" && invData["body"] !== null && invData["body"]["length"] > 0)

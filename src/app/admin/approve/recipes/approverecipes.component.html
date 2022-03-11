@@ -72,7 +72,7 @@
                             <div class="image image-animate detail"
                                 style="width: 100px; height:100px;background:#f8f8f8;padding:0px;">
 
-                                <img (click)="gotoRecipeDetails(recipe1.id)" style="width:100%; height:100%"
+                                <img (click)="gotoRecipeDetails(recipe1.recipeid)" style="width:100%; height:100%"
                                     src="{{formatImage(recipe1.image, 'm')}}" alt="image">
 
                             </div>
@@ -80,7 +80,7 @@
                                 
                                 <div class="row">
                                     <div class="col-10">
-                                        <h4><a (click)="gotoRecipeDetails(recipe1.id)">{{recipe1.rlabel}}</a>
+                                        <h4><a (click)="gotoRecipeDetails(recipe1.recipeid)">{{recipe1.rlabel}}</a>
 
                                         </h4>
                                         <span *ngIf="recipe1.rdietLabels"
@@ -113,10 +113,17 @@
                                            <p>{{recipe1.label}}</p>
                                            </div>
 
-                                         <div *ngIf="recipe1.s_instructions" class="newsec">
+                                        <div *ngIf="recipe1.s_instructions" class="newsec">
                                              <p class="lbl">Instructions</p>
                                             <p>{{recipe1.s_instructions}}</p>
                                         </div>
+
+                                        <div *ngIf="recipe1.notes" class="newsec">
+                                            <p class="lbl">Notes</p>
+                                           <p>{{recipe1.notes}}</p>
+                                       </div>
+
+
                                         <div *ngIf="recipe1.healthLabels" class="newsec">
                                             <p class="lbl">Health Labels</p>
                                             <p>{{recipe1.healthLabels}}</p>

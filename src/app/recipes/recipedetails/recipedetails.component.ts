@@ -150,7 +150,7 @@ loadRecipe(id)
 
 	this.searchRes["ingredients"] =[];
 
-
+	console.log(recipeData);
 	if(recipeData !== null)
 	{
 	  if(typeof(recipeData["body"]) !== "undefined" && recipeData["body"] !== null && recipeData["body"]["length"] > 0)
@@ -837,7 +837,7 @@ makeacopy()
 	delete new_copy["nutrientsArr"];
 	
 	var pQuery = {"query":"select max(id) as maxid from recipes"};
-	var res =   this.dbService.getDatabyTablebyQuery("recipes", pQuery).subscribe(recipeData => setTimeout(() => {
+	var res =   this.dbService.getDatabyTablebyQuery("common", pQuery).subscribe(recipeData => setTimeout(() => {
 
   
 	  if(recipeData !== null && typeof(recipeData['body']) !== "undefined" && recipeData['body']['length'] >0)

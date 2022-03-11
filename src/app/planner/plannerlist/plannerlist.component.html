@@ -1,6 +1,6 @@
 <div class="fixedtop recipes-home-body inner-page">
   <div class="container" style="padding-left:0; padding-right:0">
-  <div class="row">
+  <div class="row"  style="padding-left:0; padding-right:0">
   <div class="col-12">
   <div class="recipe-set">
   <!--<div style="margin-right:0px" class="create-button anim-button btn-4" (click)="gotopage('plan-create');">
@@ -21,14 +21,33 @@
   <div class="recipe-listing listing-list" style="background:#FFF;padding-top:15px;">
   
   <p *ngIf='loadingData && (mealPlans && mealPlans.length == 0)'>Loading meal plans...</p>
-  <p *ngIf='!loadingData && (mealPlans && mealPlans.length == 0)'>You haven't created mealplans...</p>
-  <div class="listing col-12 col-lg-4 col-md-4 "style='height:160px' *ngFor="let mplan of mealPlans; let i = index;">
+
+  <h2 *ngIf="mealPlansDietician && mealPlansDietician.length > 0">Meal Plans by Nutritionists</h2>
+  <div class="listing col-12 col-lg-4 col-md-4 "style='height:200px' *ngFor="let mplan of mealPlansDietician; let i = index;">
+     
+    <div class="detail"  style="width:100%">
+        <h4 *ngIf="mplan['created_by'] == currentUser['id']" (click)="gotopage('plancreate', {'id':mplan.id});" ><a style="width:90%" href="javascript:void(0)">{{mplan.name}}</a></h4>
+        <h4 *ngIf="mplan['created_by'] !== currentUser['id']" >{{mplan.name}}</h4>
+        <p  innerHTML = "{{mplan.tags}}" *ngIf="mplan.tags"></p>
+        <p *ngIf="!mplan.tags">&nbsp;</p>
+        <p class="createdby" *ngIf="mplan.firstname">Created by: {{mplan.firstname}} {{mplan.lastname}}</p>
+        <div  href="javascript:void(0)" >
+          <a (click)="copymealplan(mplan)" title="Make a Copy - {{mplan.name}}" class="editicon"><i class="fa fa-files-o" aria-hidden="true"></i></a>
+       
+             </div> 
+    </div>
+
+</div>
+<p *ngIf='!loadingData && (mealPlans && mealPlans.length == 0)'>You haven't created mealplans...</p>
+
+  <div class="listing col-12 col-lg-4 col-md-4 "style='height:200px' *ngFor="let mplan of mealPlans; let i = index;">
      
       <div class="detail"  style="width:100%">
           <h4 (click)="gotopage('plancreate', {'id':mplan.id});" ><a style="width:90%" href="javascript:void(0)">{{mplan.name}}</a></h4>
           <p (click)="gotopage('plancreate', {'id':mplan.id});"  innerHTML = "{{mplan.tags}}" *ngIf="mplan.tags"></p>
           <p (click)="gotopage('plancreate', {'id':mplan.id});"  *ngIf="!mplan.tags">&nbsp;</p>
-          <div  href="javascript:void(0)" >
+          <p class="createdby" *ngIf="mplan.firstname">Created by: {{mplan.firstname}} {{mplan.lastname}}</p>
+          <div  *ngIf="mplan['created_by'] == currentUser['id']" href="javascript:void(0)" >
             <a (click)="editmealplan(mplan)" title="Edit Meal Plan - {{mplan.name}}" class="editicon"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
          
                </div> 

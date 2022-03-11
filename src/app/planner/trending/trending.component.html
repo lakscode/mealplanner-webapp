@@ -80,12 +80,12 @@
                   <div class="col-3 plan-seperator" style="padding-left:0;">
                     <p class="mtype">{{SetFLU(mealtype)}} &nbsp;</p>
                   </div>
-                  <div [ngClass]="showNutrientsFlag?'col-8':'col-9'">
-                    <p class="meal-title " style="padding:5px"
+                  <div style="padding-right:0px" [ngClass]="showNutrientsFlag?'col-8':'col-9'">
+                    <p class="meal-title " style="padding:5px 0px;"
                       (click)="gotopagedetails('recipedetails',itemday[mealtype])"
-                      *ngIf="itemday && itemday[mealtype].label"> {{SetFLU(limitTo(itemday[mealtype].label, 26))}}</p>
+                      *ngIf="itemday && itemday[mealtype].label"> {{SetFLU(limitTo(itemday[mealtype].label, 30))}}</p>
                   </div>
-                  <div *ngIf="showNutrientsFlag" class="col-1" style="padding-right:0;text-align:right;"
+                  <div *ngIf="showNutrientsFlag" class="col-1" style="padding-left:0px; padding-right:0;text-align:right;"
                     (click)="showPerServingMeal[mealtype]= true; plan['days'][i][mealtype].expand = !plan['days'][i][mealtype].expand; shownut(itemday);">
                     <span style="font-size:20px">
                       <i *ngIf="!plan['days'][i][mealtype].expand" class="fa fa-caret-down"></i>
@@ -110,7 +110,7 @@
                   <ng-container *ngFor="let mmicro of itemday[mealtype]['paramMicro']; let m = index;">
                     <div class="nutrient-item">
                       <div class="label">{{mmicro.label}}</div>
-                      <div *ngIf="showTotal" class="quantity">{{mmicro.totalP}}</div>
+                      <div *ngIf="showTotal" class="quantity">{{mmicro.totalP.toFixed(2)}}</div>
                       <div *ngIf="showPerServing" class="quantity">{{formatValuePServing(mmicro.totalP,
                         itemday[mealtype].yield)}}</div>
                       <div class="unit">&nbsp;{{mmicro.unit}}</div>

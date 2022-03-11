@@ -500,7 +500,7 @@ if(recipeData1 !== null && recipeData1["body"]["length"]> 0)
 	delete new_copy["id"];
 
 	var pQuery = {"query":"select max(id) as maxid from recipes"};
-	var res =   this.dbService.getDatabyTablebyQuery("recipes", pQuery).subscribe(recipeData => setTimeout(() => {
+	var res =   this.dbService.getDatabyTablebyQuery("common", pQuery).subscribe(recipeData => setTimeout(() => {
 	 console.log(recipeData);
   
 	  if(recipeData !== null && typeof(recipeData['body']) !== "undefined" && recipeData['body']['length'] >0)

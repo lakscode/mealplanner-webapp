@@ -89,7 +89,7 @@ import { SocialLoginModule, SocialAuthServiceConfig, FacebookLoginProvider, Goog
 import {environment} from "../environments/environment";
 
 import { AdminModule } from './admin/admin.module'; 
-
+import { UtilityModule } from './utility/utility.module'; 
 
 //import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 @NgModule({
@@ -160,7 +160,8 @@ import { AdminModule } from './admin/admin.module';
 	CalculateModule,
 	AdminModule,
 	PreferencesModule,
-	SearchresultsModule 
+	SearchresultsModule,
+	UtilityModule
   ],
   schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
   providers: [{

@@ -150,14 +150,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
 	
 		this.setMenuActive();
 		this.userService.loggedinUser().subscribe(userdata => setTimeout(() => {
-			this.setIconMenu();
+			
 			this.loggedIn = false;
-		
+			console.log(userdata);
 			if(typeof(userdata) !== "undefined" && userdata !== null)
 			{
 				this.currentUser = userdata;
 				this.userName= "";
-				if(typeof(this.currentUser["firstname"]) !== "undefined")
+				if(typeof(this.currentUser["firstname"]) !== "undefined" && this.currentUser["firstname"] !== null)
 				{
 					this.userName = this.currentUser["firstname"];
 					this.userName = this.userName.charAt(0).toUpperCase() + this.userName.slice(1);
@@ -197,6 +197,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
 				this.helpService.getIpaddress(this.currentUser);
 			}
+			this.setIconMenu();
 			
 		//	//console.log(this.loggedIn);
 		}, 0));
@@ -283,6 +284,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 			}
 			else
 			{
+				console.log("goto login");
 				this.gotoLogin();
 			}
 
@@ -291,8 +293,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
 	gotoLogin()
 	{
 	var str = this.location.path();	
-	
-		if(!this.loggedIn && str.indexOf("resetpassword") == -1 && str.indexOf("index") == -1 && str.indexOf("home") == -1 && str.indexOf("signup") == -1 && str.indexOf("pricing") == -1 && str.indexOf("features") == -1 && str.indexOf("recipedetails") == -1  && str.indexOf("group") == -1 && str.indexOf("privacy") == -1 && str.indexOf("benefits") == -1 && str.indexOf("calculate") == -1  && str.indexOf("recipesubmit") == -1  && str.indexOf("plancreate") == -1 && str.indexOf("recipesmodify") == -1 && str.indexOf("approve") == -1 && str.indexOf("admin") == -1 && str.indexOf("searchresults") == -1  && str.indexOf("recipebookview") == -1 && str.indexOf("questionnaire") == -1)
+	console.log("gotoLogin");
+	console.log(str);
+		if(!this.loggedIn && str.indexOf("resetpassword") == -1 && str.indexOf("index") == -1 && str.indexOf("landing") == -1 && str.indexOf("home") == -1 && str.indexOf("signup") == -1 && str.indexOf("pricing") == -1 && str.indexOf("features") == -1 && str.indexOf("recipedetails") == -1  && str.indexOf("group") == -1 && str.indexOf("privacy") == -1 && str.indexOf("benefits") == -1 && str.indexOf("calculate") == -1  && str.indexOf("recipesubmit") == -1  && str.indexOf("plancreate") == -1 && str.indexOf("recipesmodify") == -1 && str.indexOf("approve") == -1 && str.indexOf("admin") == -1 && str.indexOf("searchresults") == -1  && str.indexOf("recipebookview") == -1 && str.indexOf("questionnaire") == -1 && str.indexOf("utility") == -1)
 		{
 			var params = {};
 			if( this.router.url.indexOf("login") > -1)
@@ -304,6 +307,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 		//		params = {"redirecturl":this.router.url}
 			}
 		//	this.router.navigate(["login", params]);	
+		console.log("Going to login");
 		this.router.navigate(["login"]);			
 		}
 	}
@@ -363,9 +367,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
 		this.loggedIn = false;
 		sessionStorage.removeItem("user");
+		localStorage.removeItem("user");
 		let username = this.userService.logout();
 
 		sessionStorage.setItem('currentUser', "");
+		localStorage.setItem('currentUser', "");
 		
 		var socialLogin = sessionStorage.getItem("socialLogin")
 		if(socialLogin !== "")

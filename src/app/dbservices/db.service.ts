@@ -104,7 +104,8 @@ getRecipesbycontent(params){
 }
 
 	getDatabyQuery(path, params){
-
+		console.log(path);
+		console.log(params);
 		var tempUrl = this.apiUrl + '/' + path + '/read_by_query.php'; 
 
 		var options = {
@@ -204,8 +205,8 @@ resettoken(input){
 	
 	  }
 	  getDatabyTablebyQuery(path, params){
-	//	console.log(path);
-	//	console.log(params);
+		console.log(path);
+		console.log(params);
 		var tempUrl = this.apiUrl + '/common/read_by_query.php'; 
 		params["tablename"]=path;
 		var options = {

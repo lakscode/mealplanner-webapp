@@ -35,7 +35,7 @@ export class IngredientsService {
 		} 
 
 
-		this.dbService.getDatabyTablebyQuery("recipes", params).subscribe(resData => setTimeout(() => {  
+		this.dbService.getDatabyTablebyQuery("common", params).subscribe(resData => setTimeout(() => {  
 		//	console.log(resData);
 			if(resData["body"]["length"]  > 0)
 			{

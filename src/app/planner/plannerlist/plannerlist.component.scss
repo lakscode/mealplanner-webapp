@@ -10,7 +10,7 @@
 }.detail:hover
 {
   box-shadow: rgb(245 145 0 / 20%) 0px 16px 26px;
-  cursor: pointer;
+  /*cursor: pointer; */
 }
 
 
@@ -32,6 +32,12 @@
 visibility: visible;
 
 
+}
+
+.detail .createdby
+{
+  font-size: 10px;
+  
 }
 .listing-list .listing:nth-child(1n) .detail {
   background-image: url(../../../assets/images/cherry-icon-small.png);

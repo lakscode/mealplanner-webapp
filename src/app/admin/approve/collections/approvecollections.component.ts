@@ -151,7 +151,7 @@ export class ApprovecollectionsComponent implements OnInit {
    
 	 
 	  console.log(params);
-    var res =   this.dbService.getDatabyTablebyQuery("recipes", params).subscribe(invData => setTimeout(() => {
+    var res =   this.dbService.getDatabyTablebyQuery("common", params).subscribe(invData => setTimeout(() => {
 		console.log(invData);
 		console.log(invData["body"]["length"]);
 		if(invData["body"]["length"] > 0)

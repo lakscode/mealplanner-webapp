@@ -138,7 +138,7 @@ query += " AND " + dietLabels + ") ";
 query += " order by rand() limit 6";
  params["query"] = query;
 
- var res =   this.dbService.getDatabyTablebyQuery("recipes", params).subscribe(invData => setTimeout(() => {
+ var res =   this.dbService.getDatabyTablebyQuery("common", params).subscribe(invData => setTimeout(() => {
  
   if(invData !== null && typeof(invData["body"]) !== "undefined" && invData["body"] !== null && invData["body"]["length"] > 0)
   {

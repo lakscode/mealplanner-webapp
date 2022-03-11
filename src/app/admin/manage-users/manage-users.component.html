@@ -167,48 +167,7 @@
 						<!-- <div *ngIf="newUserWoEmail.mobile && newUserWoEmail.mobile!==''" class="alert alert-danger displaynone" id="mobileval">Please enter valid Phone Number format like xxx-xxx-xxxx</div> -->
 					</div>
 				</div>
-				<div class='{{popupCols}}'>
-					<div class="input-group">
-						<label [ngClass]="'inputlabel'" for="instagram">Instagram </label>
-
-						<input type="text" autocomplete="off" id="instagram" name="instagram" class="form-control "
-							[disabled]="viewMode" [(ngModel)]="newUserWoEmail.instagram" #instagram="ngModel">
-					</div>
-				</div>
-				<div class='{{popupCols}}'>
-					<div class="input-group">
-						<label [ngClass]="'inputlabel'" for="twitter">Twitter </label>
-
-						<input type="text" autocomplete="off" id="twitter" name="twitter" class="form-control "
-							[disabled]="viewMode" [(ngModel)]="newUserWoEmail.twitter" #twitter="ngModel">
-					</div>
-				</div>
-				<div class='{{popupCols}}'>
-					<div class="input-group">
-						<label [ngClass]="'inputlabel'" for="facebook">Facebook </label>
-
-						<input type="text" autocomplete="off" id="facebook" name="facebook" class="form-control "
-							[disabled]="viewMode" [(ngModel)]="newUserWoEmail.facebook" #facebook="ngModel">
-					</div>
-				</div>
-				<div class='{{popupCols}}'>
-					<div class="input-group">
-						<label [ngClass]="'inputlabel'" for="linkedin">Linkedin </label>
-
-						<input type="text" autocomplete="off" id="linkedin" name="linkedin" class="form-control "
-							[disabled]="viewMode" [(ngModel)]="newUserWoEmail.linkedin" #linkedin="ngModel">
-					</div>
-				</div>
-
-				<div class='{{popupCols}}'>
-					<div class="input-group">
-						<label [ngClass]="'inputlabel'" for="region">Region</label>
-
-						<input type="text" autocomplete="off" id="region" name="region" class="form-control "
-							[disabled]="viewMode" [(ngModel)]="newUserWoEmail.region" #region="ngModel">
-					</div>
-				</div>
-
+	
 				<div class='{{popupCols}}'>
 					<div class="input-group">
 						<label [ngClass]="'inputlabel'">Location <span class="mandatory">&#42;</span></label>
@@ -253,7 +212,7 @@
 								class="form-control-select round" name="userrole" id="userrole" #userrole="ngModel"
 								required>
 								<option value="" disabled selected hidden>{{chooseOption}}</option>
-								<option [ngValue]="uaItem.role" *ngFor="let uaItem of userAccess; let i = index">
+								<option [ngValue]="uaItem.roleid" *ngFor="let uaItem of userAccess; let i = index">
 									{{uaItem.rolename}}
 									<!-- - {{uaItem.role}}-->
 								</option>
